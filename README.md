@@ -22,11 +22,9 @@
 
 Пример наименование ветки: enhancement-14-index-page
 
-enhancement - префикс
-
-14 - id задачи
-
-index-page - краткое описание
+- enhancement - префикс
+- 14 - id задачи
+- index-page - краткое описание
 
 Префиксы веток описаны тут: https://github.com/marketplace/actions/prefix-pr-labeler#release-drafter-category-settings
 
