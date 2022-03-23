@@ -4,6 +4,7 @@
 ## Стек:
 - React
 - Javascript
+- PropTypes
 - Css module
 
 ## Наименование файлов и папок:
