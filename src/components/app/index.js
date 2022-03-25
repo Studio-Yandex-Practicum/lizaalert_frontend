@@ -5,7 +5,6 @@ function App() {
     <div className={styles.app}>
       <p>Компонент App</p>
     </div>
-    //Лишний комментарий
   );
 }
 
