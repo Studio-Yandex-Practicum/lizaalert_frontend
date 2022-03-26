@@ -1,8 +1,8 @@
-import './App.css';
+import appStyles from './app.module.scss'
 
 function App() {
   return (
-    <div className="App">
+    <div className={appStyles.wrapper}>
       hello word)
     </div>
   );
