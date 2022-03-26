@@ -1,0 +1,5 @@
+/.git
+/.vscode
+/.idea
+node_modules
+public
