@@ -9,6 +9,7 @@
 ## Стек:
 - React
 - Javascript
+- react-router-dom v6
 - PropTypes
 - Css module
 
