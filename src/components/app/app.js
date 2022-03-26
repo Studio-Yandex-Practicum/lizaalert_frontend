@@ -1,7 +1,7 @@
-import appStyles from './app.module.scss';
+import Router from '../../router/Router';
 
 function App() {
-  return <div className={appStyles.wrapper}>hello word)</div>;
+  return <Router />;
 }
 
 export default App;
