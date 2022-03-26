@@ -6,21 +6,26 @@ import {
   NotFound,
   Login,
   Register,
+  Lesson,
 } from '../components/pages';
 import Layout from '../components/templates/Layout/Layout';
+import routes from '../config/routes';
 
 function Router() {
+  const { courses, profile, register, login, notFound } = routes;
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={courses.path} element={<Layout />}>
           <Route index element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path=":courseId/:lessonId" element={<Lesson />} />
+          <Route path={profile.path} element={<Profile />} />
         </Route>
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={register.path} element={<Register />} />
+        <Route path={login.path} element={<Login />} />
+        <Route path={notFound.path} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
