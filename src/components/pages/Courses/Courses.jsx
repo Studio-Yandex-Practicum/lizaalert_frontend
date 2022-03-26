@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Courses() {
   return (
     <div>
