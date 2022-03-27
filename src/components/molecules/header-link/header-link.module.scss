@@ -1,0 +1,31 @@
+.link {
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  color: #212329;
+  cursor: pointer;
+
+  &_active {
+    color: #F06000;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+
+    &_active {
+      
+      path {
+        fill: #F06000;
+      }
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
