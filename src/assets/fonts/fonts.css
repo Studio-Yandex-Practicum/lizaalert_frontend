@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'GolosTextRegular';
+  src: url('Golos-Text_Regular.woff2') format('woff2'),
+    url('Golos-Text_Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GolosTextMedium';
+  src: url('Golos-Text_Medium.woff2') format('woff2'),
+    url('Golos-Text_Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GolosTextBold';
+  src: url('Golos-Text_Bold.woff2') format('woff2'),
+    url('Golos-Text_Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
