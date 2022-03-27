@@ -8,7 +8,7 @@ import {
   Register,
   Lesson,
 } from '../components/pages';
-import Layout from '../components/templates/Layout/Layout';
+import Layout from '../components/templates/layout/layout';
 import routes from '../config/routes';
 
 function Router() {
