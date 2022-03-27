@@ -1,7 +1,11 @@
 import appStyles from './app.module.scss';
+import Header from '../templates/Header/Header'
 
 function App() {
-  return <div className={appStyles.wrapper}>hello word)</div>;
+  return <div className={appStyles.wrapper}>
+    <Header />
+    hello word)
+  </div>;
 }
 
 export default App;
