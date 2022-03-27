@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './card.module.scss';
 
-function Card({ children, nopadding }) {
+function Card({ className, children, nopadding }) {
   return (
     <div
-      className={`${styles.card}${nopadding ? ` ${styles.cardNoPadding}` : ''}`}
+      className={`${styles.card}${nopadding ? ` ${styles.cardNoPadding}` : ''}${
+        className.length > 0 ? ` ${className}` : ''
+      }`}
     >
       {children}
     </div>
@@ -13,15 +15,17 @@ function Card({ children, nopadding }) {
 }
 
 Card.defaultProps = {
+  className: '',
   nopadding: false,
 };
 
 Card.propTypes = {
+  className: PropTypes.string,
+  nopadding: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  nopadding: PropTypes.bool,
 };
 
 export default Card;
