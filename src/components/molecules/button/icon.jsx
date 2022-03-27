@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
-export default function Icon({ id }) {
+const Icon = function ({ id }) {
   switch (id) {
     case 'back': {
       return (
@@ -38,7 +38,7 @@ export default function Icon({ id }) {
     default:
       return <svg />;
   }
-}
+};
 
 Icon.propTypes = {
   id: PropTypes.string,
@@ -47,3 +47,5 @@ Icon.propTypes = {
 Icon.defaultProps = {
   id: '',
 };
+
+export default Icon;
