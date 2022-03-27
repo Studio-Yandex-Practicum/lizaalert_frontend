@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './card.module.scss';
 
-function Card({ className, children, nopadding }) {
+function Card({ className, children, nopadding, ...props }) {
   return (
     <div
       className={`${styles.card}${nopadding ? ` ${styles.cardNoPadding}` : ''}${
         className.length > 0 ? ` ${className}` : ''
       }`}
+      {...props}
     >
       {children}
     </div>
