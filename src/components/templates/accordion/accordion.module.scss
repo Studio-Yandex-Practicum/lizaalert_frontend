@@ -1,0 +1,32 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.open {
+  .btn.icon {
+    transform: rotate(180deg);
+  }
+}
+
+.handle {
+  display: flex;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn {
+  margin-left: auto;
+}
+
+.icon {
+  transition: transform 0.3s ease;
+}
+
+.content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
