@@ -21,12 +21,13 @@ function Icon({ type, maxWidth, height, maxHeight, className }) {
   if (height !== 'inherit') inlineStyle = { ...inlineStyle, height };
   if (maxHeight !== 'inherit') inlineStyle = { ...inlineStyle, maxHeight };
 
-  if (icons[type])
+  if (icons[type]) {
     return (
       <span className={classNames} style={inlineStyle}>
         {icons[type]}
       </span>
     );
+  }
 
   return null;
 }
