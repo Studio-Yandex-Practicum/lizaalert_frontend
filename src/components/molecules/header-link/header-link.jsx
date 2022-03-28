@@ -1,30 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import Icon from '../../atoms/icon/icon';
 
 import styles from './header-link.module.scss';
 
-import IconUser from '../../atoms/icon-user';
-import IconLibrary from '../../atoms/icon-library';
-import IconCourses from '../../atoms/icon-courses';
-import IconProfile from '../../atoms/icon-profile';
-
 function HeaderLink({ text, isActive, link }) {
-  const classNameLink = `${styles.link} ${
-    isActive ? `${styles.link_active}` : ''
-  }`;
+  const classNameLink = classNames(styles.link, {
+    [styles.link_active]: isActive,
+  });
 
-  const classNameIcon = `${styles.link__icon} ${
-    isActive ? `${styles.link__icon_active}` : ''
-  }`;
+  const classNameIcon = classNames(styles.link__icon, {
+    [styles.link__icon_active]: isActive,
+  });
 
   return (
-    <a className={classNameLink} href={link}>
-      {text === 'Пользователи' && <IconUser className={classNameIcon} />}
-      {text === 'Библиотека' && <IconLibrary className={classNameIcon} />}
-      {text === 'Курсы' && <IconCourses className={classNameIcon} />}
-      {text === 'Профиль' && <IconProfile className={classNameIcon} />}
+    <NavLink className={classNameLink} to={link}>
+      {text === 'Пользователи' && (
+        <Icon type="users" className={classNameIcon} />
+      )}
+      {text === 'Библиотека' && (
+        <Icon type="library" className={classNameIcon} />
+      )}
+      {text === 'Курсы' && <Icon type="course" className={classNameIcon} />}
+      {text === 'Профиль' && (
+        <Icon type="userCircle" className={classNameIcon} />
+      )}
       <p className={styles.link__text}>{text}</p>
-    </a>
+    </NavLink>
   );
 }
 
