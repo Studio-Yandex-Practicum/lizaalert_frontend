@@ -38,7 +38,9 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "off",
+    "react/jsx-props-no-spreading": ["error", {
+      "custom": "ignore"
+    }],
     "no-use-before-define": [
       "error",
       {
