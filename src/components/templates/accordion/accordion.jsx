@@ -1,8 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
-
 import PropTypes from 'prop-types';
+import Icon from '../../atoms/icon/icon';
 import styles from './accordion.module.scss';
+
+/**
+ * @description Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
+ *
+ * - title - string - заголовок аккордеона
+ * - children - содержимое, которое будет скрываться (JSX или Компонент)
+ * - button - "icon" | "text" - необязательный проп, отвечающий за дополнительную кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть"
+ * - className - string - необязательный проп - дополнительный css класс (для стилизации ручки аккордеона через вложенность или задания внешних отступов)
+ */
 
 function Accordion({ children, className, title, button }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,14 +35,19 @@ function Accordion({ children, className, title, button }) {
     setHeight(isOpen ? '0px' : `${contentRef.current.scrollHeight}px`);
   };
 
-  const renderButton = (type) => (
-    <span
-      className={classnames(styles.btn, { [styles.icon]: type === 'icon' })}
-    >
-      {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-      {type === 'icon' && '+'}
-    </span>
-  );
+  const renderButton = (type) => {
+    if (type === '') {
+      return null;
+    }
+    return (
+      <span
+        className={classnames(styles.btn, { [styles.icon]: type === 'icon' })}
+      >
+        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+        {type === 'icon' && <Icon type="arrowDown" maxHeight={7} />}
+      </span>
+    );
+  };
 
   const classesList = classnames(styles.accordion, className, {
     [styles.open]: isOpen,
@@ -58,13 +72,13 @@ function Accordion({ children, className, title, button }) {
 
 Accordion.defaultProps = {
   className: '',
-  button: 'icon',
+  button: '',
 };
 
 Accordion.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
-  button: PropTypes.oneOf(['text', 'icon']),
+  button: PropTypes.oneOf(['', 'text', 'icon']),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
