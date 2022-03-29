@@ -1,0 +1,39 @@
+@import 'src/styles/color-variables';
+
+.personalData {
+  max-width: 648px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: $dark-primary;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: calc( 28 / 24 );
+  margin: 0;
+}
+
+//TODO стили для заглушек, удалить потом
+.inputSection {
+  color: $dark-primary;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 32px 0 0 0;
+  padding: 12px 16px;
+  border: 1.2px solid $borders-divider-disabled-bg;
+  border-radius: 10px;
+}
+
+.submitButton {
+  margin-top: 32px;
+  color: gray;
+  border: 2px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 246px;
+  align-self: center;
+  padding: 12px 24px;
+}
