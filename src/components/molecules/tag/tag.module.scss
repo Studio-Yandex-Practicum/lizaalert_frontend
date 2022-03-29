@@ -1,16 +1,16 @@
+@import 'src/styles/color-variables';
+
 .tag {
   display: flex;
-  align-self: flex-start;
-  flex: 0 0 fit-content;
-  box-sizing: border-box;
+  max-width: fit-content;
+  align-items: center;
   height: 24px;
-  background-color: #E6E7EB;
+  background-color: $borders-divider-disabled-bg;
   border-radius: 16px;
   padding: 0 2px 0 8px;
 }
 
 .text {
-  width: fit-content;
   max-width: 250px;
   text-overflow: ellipsis;
   margin: 0 6px 0 0;
@@ -26,11 +26,9 @@
   border: none;
   border-radius: 50%;
   padding: 0;
-  align-self: center;
-  background-color: #E6E7EB;
   cursor: pointer;
 }
 
 .icon {
-  color: #9397A3;
+  color: $dark-secondary;
 }
