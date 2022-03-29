@@ -21,6 +21,7 @@
   &:focus {
     outline: none;
   }
+
 }
 
 .primary {
@@ -30,6 +31,7 @@
   &:hover {
     background-color: #f06000;
   }
+
 
   &:disabled {
     cursor: auto;
@@ -75,4 +77,5 @@
 
 .back {
   padding-left: 28px;
+
 }
