@@ -1,12 +1,14 @@
+@import '../../../styles/color-variables.scss';
+
 .link {
   display: flex;
   gap: 8px;
   text-decoration: none;
-  color: #212329;
+  color: $dark-primary;
   cursor: pointer;
 
   &_active {
-    color: #F06000;
+    color: $color-hover;
   }
 
   &__icon {
@@ -16,7 +18,7 @@
     &_active {
       
       path {
-        fill: #F06000;
+        fill: $color-hover;
       }
     }
   }
