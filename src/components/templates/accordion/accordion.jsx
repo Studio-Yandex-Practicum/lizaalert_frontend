@@ -9,8 +9,8 @@ import styles from './accordion.module.scss';
  *
  * - title - string - заголовок аккордеона
  * - children - содержимое, которое будет скрываться (JSX или Компонент)
- * - button - "icon" | "text" - необязательный проп, отвечающий за дополнительную кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть"
- * - className - string - необязательный проп - дополнительный css класс (для стилизации ручки аккордеона через вложенность или задания внешних отступов)
+ * - button - "icon" | "text" - проп, отвечающий за кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть"
+ * - className - string - необязательный проп - дополнительный css класс для стилизации ручки аккордеона через вложенность или задания внешних отступов (CSS-селектор: .classname > button {...})
  */
 
 function Accordion({ children, className, title, button }) {
@@ -35,19 +35,17 @@ function Accordion({ children, className, title, button }) {
     setHeight(isOpen ? '0px' : `${contentRef.current.scrollHeight}px`);
   };
 
-  const renderButton = (type) => {
-    if (type === '') {
-      return null;
-    }
-    return (
-      <span
-        className={classnames(styles.btn, { [styles.icon]: type === 'icon' })}
-      >
-        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === 'icon' && <Icon type="arrowDown" maxHeight={7} />}
-      </span>
-    );
-  };
+  const renderButton = (type) => (
+    <span
+      className={classnames(styles.btn, {
+        [styles.icon]: type === 'icon',
+        [styles.text]: type === 'text',
+      })}
+    >
+      {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+      {type === 'icon' && <Icon type="arrowDown" maxHeight={7} />}
+    </span>
+  );
 
   const classesList = classnames(styles.accordion, className, {
     [styles.open]: isOpen,
@@ -56,7 +54,7 @@ function Accordion({ children, className, title, button }) {
   return (
     <div className={classesList}>
       <button type="button" className={styles.handle} onClick={toggleAccordion}>
-        <span>{title}</span>
+        {title}
         {renderButton(button)}
       </button>
       <div
@@ -72,13 +70,13 @@ function Accordion({ children, className, title, button }) {
 
 Accordion.defaultProps = {
   className: '',
-  button: '',
+  button: 'icon',
 };
 
 Accordion.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
-  button: PropTypes.oneOf(['', 'text', 'icon']),
+  button: PropTypes.oneOf(['text', 'icon']),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

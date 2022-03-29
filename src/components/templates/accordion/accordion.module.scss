@@ -23,8 +23,15 @@
   margin-left: auto;
 }
 
+.text {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
 .icon {
   transition: transform 0.3s ease;
+  padding: 7px;
 }
 
 .content {
