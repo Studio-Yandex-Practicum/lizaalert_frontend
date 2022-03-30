@@ -17,14 +17,14 @@ function Header() {
         <ul className={styles.headerLinks}>
           <li>
             <HeaderLink
-              text="Курсы"
+              text={routes.courses.title}
               link={routes.courses.path}
               isActive={splitLocation[1] === '' && true}
             />
           </li>
           <li>
             <HeaderLink
-              text="Профиль"
+              text={routes.profile.title}
               link={routes.profile.path}
               isActive={splitLocation[1] === 'profile' && true}
             />
