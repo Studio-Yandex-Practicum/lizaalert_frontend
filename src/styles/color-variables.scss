@@ -16,3 +16,9 @@ $warning-bg: rgba(255, 0, 0, 0.12);
 $success: #008000;
 $success-border: rgba(0, 128, 0, 0.6);
 $success-bg: rgba(0, 128, 0, 0.12);
+
+:export {
+  dark-primary: $dark-primary;
+  dark-secondary: $dark-secondary;
+  warning: $warning;
+}
