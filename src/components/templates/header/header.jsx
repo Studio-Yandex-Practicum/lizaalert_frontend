@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import HeaderLink from '../../molecules/header-link/header-link';
+import routes from '../../../config/routes';
 import styles from './header.module.scss';
 
 function Header() {
@@ -7,7 +8,7 @@ function Header() {
 
   const { pathname } = location;
 
-  const stplitLocation = pathname.split('/');
+  const splitLocation = pathname.split('/');
 
   return (
     <header className={styles.header}>
@@ -17,15 +18,15 @@ function Header() {
           <li>
             <HeaderLink
               text="Курсы"
-              link="/"
-              isActive={stplitLocation[1] === '' && true}
+              link={routes.courses.path}
+              isActive={splitLocation[1] === '' && true}
             />
           </li>
           <li>
             <HeaderLink
               text="Профиль"
-              link="/profile"
-              isActive={stplitLocation[1] === 'profile' && true}
+              link={routes.profile.path}
+              isActive={splitLocation[1] === 'profile' && true}
             />
           </li>
         </ul>
