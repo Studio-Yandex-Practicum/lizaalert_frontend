@@ -1,4 +1,5 @@
 @import 'src/styles/color-variables';
+@import 'src/styles/font-variables';
 
 .checkbox {
   position: relative;
@@ -10,7 +11,7 @@
   font-family: $mainFont;
   color: $dark-primary;
   font-weight: 400;
-  font-size: 18px;
+  font-size: $font-size-m;
   line-height: 1.3;
 
   &:hover {
