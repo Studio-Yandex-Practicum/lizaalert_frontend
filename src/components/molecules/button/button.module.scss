@@ -1,3 +1,5 @@
+@import '../../../styles/color-variables.scss';
+
 .button {
   min-width: 72px;
   min-height: 48px;
@@ -25,49 +27,49 @@
 }
 
 .primary {
-  background-color: #ff6600;
-  color: #ffffff;
+  background-color: $color-primary;
+  color: $bg-primary;
 
   &:hover {
-    background-color: #f06000;
+    background-color: $color-hover;
   }
 
 
   &:disabled {
     cursor: auto;
-    background-color: #E6E7EB;
-    color: #9397A3;
+    background-color: $borders-divider-disabled-bg;
+    color: $dark-secondary;
   }
 }
 
 .secondary {
-  background-color: #ffffff;
-  color: #ff6600;
-  border: 1.2px solid #E6E7EB;
+  background-color: $bg-primary;
+  color: $color-primary;
+  border: 1.2px solid $borders-divider-disabled-bg;
 
   &:hover {
-    color: #f06000;
-    box-shadow: 0px 4px 8px 0px #E7E8EB99;
+    color: $color-hover;
+    box-shadow: 0px 4px 8px 0px $drop-shadow-small;
   }
 
   &:disabled {
     cursor: auto;
-    background-color: #E6E7EB;
-    color: #9397A3;
+    background-color: $borders-divider-disabled-bg;
+    color: $dark-secondary;
     box-shadow: none;
   }
 }
 
 .text {
-  color: #212329;
+  color: $dark-primary;
 
   &:hover {
-    color: #f06000;
+    color: $color-hover;
   }
 
   &:disabled {
     cursor: auto;
-    color: #9397A3;
+    color: $dark-secondary;
   }
 }
 
