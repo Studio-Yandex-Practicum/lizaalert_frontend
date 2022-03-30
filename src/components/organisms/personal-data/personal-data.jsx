@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-// import { useState } from 'react';
+import { useState } from 'react';
 import Card from '../../templates/card/card';
 import styles from './personal-data.module.scss';
 
@@ -11,25 +11,37 @@ function PersonalData({
   userAvatar,
 }) {
   // изменение с false на true при внесении изменений в данные
-  // const [isEdited, setIsEdited] = useState(false);
+  const [isInputChanged, setIsInputChanged] = useState(false);
+  const [inputsValues, setInputsValues] = useState({
+    name: userName,
+    dateOfBirth: userDateOfBirth,
+    region: userRegion,
+    nickname: userNickname,
+    avatar: userAvatar,
+  });
 
-  // функцию для изменения значений инпутов
-  // function onChange() {
-  //   setIsEdited(true);
-  // }
+  // функция на событие onChange для инпутов
+  const onInputValuesChange = (e) => {
+    if (e.target.value !== inputsValues[e.target.name]) {
+      setIsInputChanged(true);
+      setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+    }
+  };
 
   return (
     <Card className={styles.personalData}>
       <h2 className={styles.title}>Личные данные</h2>
 
-      <div className={styles.inputSection}>{userName}</div>
-      <div className={styles.inputSection}>{userDateOfBirth}</div>
-      <div className={styles.inputSection}>{userRegion}</div>
-      <div className={styles.inputSection}>{userNickname}</div>
-      <div className={styles.inputSection}>{userAvatar}</div>
+      <form name="personalData" className={styles.form}>
+        <div className={styles.inputSection}>{userName}</div>
+        <div className={styles.inputSection}>{userDateOfBirth}</div>
+        <div className={styles.inputSection}>{userRegion}</div>
+        <div className={styles.inputSection}>{userNickname}</div>
+        <div className={styles.inputSection}>{userAvatar}</div>
 
-      {/* Кнопку потом использовать с disabled={!isEdited} */}
-      <div className={styles.submitButton}>Сохранить изменения</div>
+        {/* Кнопку потом использовать с disabled={!isInputChanged} */}
+        <div className={styles.submitButton}>Сохранить изменения</div>
+      </form>
     </Card>
   );
 }
@@ -39,15 +51,15 @@ PersonalData.defaultProps = {
   userDateOfBirth: '01.01.1990',
   userRegion: 'г. Санкт-Петербург',
   userNickname: 'Белка',
-  userAvatar: 'photo.jpg',
+  userAvatar: '',
 };
 
 PersonalData.propTypes = {
   userName: PropTypes.string,
-  userDateOfBirth: PropTypes.string, // неуверена что string ?
+  userDateOfBirth: PropTypes.string,
   userRegion: PropTypes.string,
   userNickname: PropTypes.string,
-  userAvatar: PropTypes.string, // неуверена что string ?
+  userAvatar: PropTypes.string,
 };
 
 export default PersonalData;

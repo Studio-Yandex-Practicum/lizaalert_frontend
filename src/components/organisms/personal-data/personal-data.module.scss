@@ -15,6 +15,11 @@
   margin: 0;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
 //TODO стили для заглушек, удалить потом
 .inputSection {
   color: $dark-primary;
