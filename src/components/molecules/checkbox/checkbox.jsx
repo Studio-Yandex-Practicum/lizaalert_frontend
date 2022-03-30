@@ -1,13 +1,36 @@
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './checkbox.module.scss';
 
-function Checkbox({ name, value, isRadio, checked, labelText, onChange }) {
+/**
+ * @description Компонент чекбокса или радио с текстом-лейблом.
+ *
+ * - name - string, required - имя группы чекбоксов/радио
+ * - value - string, required - значение чекбокса
+ * - isRadio - boolean - флаг, является ли компонент радио-инпутом
+ * - checked - boolean - флаг, отмечен ли чекбокс по-умолчанию (при загрузке)
+ * - labelText - string - текст лейбла, всегда справа
+ * - onChange - function, required - функция-коллбек события изменения значения чекбокса
+ * - className - string - класс-миксин
+ */
+
+function Checkbox({
+  name,
+  value,
+  isRadio,
+  checked,
+  labelText,
+  onChange,
+  className,
+}) {
   const checkboxId = `checkbox-${name}-${value}`;
-  const iconStyle = isRadio ? styles.pseudoRadio : styles.pseudoCheckbox;
 
   return (
-    <label className={styles.checkbox} htmlFor={checkboxId}>
+    <label
+      className={classnames(styles.checkbox, className)}
+      htmlFor={checkboxId}
+    >
       <input
         id={checkboxId}
         className={styles.input}
@@ -17,7 +40,10 @@ function Checkbox({ name, value, isRadio, checked, labelText, onChange }) {
         defaultChecked={checked}
         onChange={onChange}
       />
-      <Icon className={iconStyle} type={isRadio ? 'radio' : 'checkbox'} />
+      <Icon
+        className={isRadio ? styles.pseudoRadio : styles.pseudoCheckbox}
+        type={isRadio ? 'radio' : 'checkbox'}
+      />
       <p className={styles.labelText}>{labelText}</p>
     </label>
   );
@@ -30,12 +56,14 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   labelText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 Checkbox.defaultProps = {
   isRadio: false,
   checked: false,
   labelText: '',
+  className: '',
 };
 
 export default Checkbox;
