@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from '../../templates/card/card';
 import styles from './account-data.module.scss';
+import Button from '../../molecules/button/button';
 
 function AccountData({ userPhoneNumber, userEmail, userPassword }) {
   const [isInputsEdited, setIsInputsEdited] = useState(false);
@@ -26,10 +27,14 @@ function AccountData({ userPhoneNumber, userEmail, userPassword }) {
       <h2 className={styles.title}>Аккаунт</h2>
 
       <form name="accountData" className={styles.form}>
-        <div className={styles.inputSection}>{userPhoneNumber}</div>
+        <div className={styles.inputSection} onChange={onInputValuesChange}>
+          {userPhoneNumber}
+        </div>
         <div className={styles.inputSection}>{userEmail}</div>
         <div className={styles.inputSection}>{userPassword}</div>
-        <div className={styles.submitButton}>Сохранить изменения</div>
+        <Button type="submit" disabled className={styles.submitButton}>
+          Сохранить изменения
+        </Button>
       </form>
     </Card>
   );
