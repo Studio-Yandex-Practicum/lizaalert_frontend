@@ -22,6 +22,8 @@
 
 .input {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 1px;
   height: 1px;
   overflow: hidden;
@@ -29,6 +31,7 @@
 }
 
 @mixin pseudo {
+  align-self: flex-start;
   transition: color $trans-300;
 
   path {

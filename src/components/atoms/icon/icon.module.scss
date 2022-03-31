@@ -1,6 +1,9 @@
 .icon {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   max-height: inherit;
   max-width: inherit;
   height: inherit;
+  flex-shrink: 0;
 }
