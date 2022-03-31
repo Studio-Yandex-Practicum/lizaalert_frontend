@@ -1,0 +1,34 @@
+@import '../../../styles/color-variables.scss';
+
+.link {
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  color: $dark-primary;
+  cursor: pointer;
+
+  &_active {
+    color: $color-hover;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+
+    &_active {
+      
+      path {
+        fill: $color-hover;
+      }
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-family: 'GolosTextMedium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
