@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from '../../templates/card/card';
 import styles from './personal-data.module.scss';
+import Button from '../../molecules/button/button';
 
 function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
   // изменение с false на true при внесении изменений в данные
@@ -25,14 +26,15 @@ function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
   return (
     <Card className={styles.personalData}>
       <h2 className={styles.title}>Личные данные</h2>
-      <form name="personalData" className={styles.form}>
+      <form name="personalData" className={styles.form} onSubmit={() => null}>
         <div className={styles.inputSection}>{userName}</div>
         <div className={styles.inputSection}>{userDateOfBirth}</div>
         <div className={styles.inputSection}>{userRegion}</div>
         <div className={styles.inputSection}>{userNickname}</div>
         <div className={styles.inputSection} />
-        {/* Кнопку потом использовать с disabled={!isInputChanged} */}
-        <div className={styles.submitButton}>Сохранить изменения</div>
+        <Button minWidth={246} disabled={!isInputChanged} type="submit">
+          Сохранить изменения
+        </Button>
       </form>
     </Card>
   );
