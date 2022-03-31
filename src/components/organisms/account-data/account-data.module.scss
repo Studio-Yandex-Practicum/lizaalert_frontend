@@ -1,0 +1,47 @@
+@import 'src/styles/color-variables';
+
+.accountData {
+  max-width: 648px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+  color: $dark-primary;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: calc(28 / 24);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSection {
+  margin: 32px 0 0 0;
+  padding: 12px 16px;
+  border: 1.2px solid $borders-divider-disabled-bg;
+  border-radius: 16px;
+  color: $dark-primary;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+
+  &[disabled] {
+    color: $dark-secondary;
+  }
+}
+
+.submitButton {
+  max-width: 246px;
+  margin-top: 32px;
+  padding: 12px 24px;
+  align-self: center;
+  background-color: $borders-divider-disabled-bg;
+  color: $dark-secondary;
+  border-radius: 16px;
+  text-align: center;
+}
