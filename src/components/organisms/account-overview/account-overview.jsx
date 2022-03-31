@@ -3,6 +3,7 @@ import Card from '../../templates/card/card';
 import styles from './account-overview.module.scss';
 import DefaultImg from '../../../assets/images/profile.jpg';
 import TextWithIcon from '../../molecules/text-with-icon/text-with-icon';
+import Button from '../../molecules/button/button';
 
 function AccountOverview({
   avatar,
@@ -31,7 +32,14 @@ function AccountOverview({
           />
         </li>
       </ul>
-      <div className={styles.exit}>Выйти из аккаунта</div>
+      <Button
+        view="secondary"
+        iconName="logout"
+        iconPosition="back"
+        className={styles.logout}
+      >
+        Выйти из аккаунта
+      </Button>
     </Card>
   );
 }
