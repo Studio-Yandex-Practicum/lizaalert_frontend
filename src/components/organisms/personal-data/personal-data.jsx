@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Card from '../../templates/card/card';
 import styles from './personal-data.module.scss';
 import Button from '../../molecules/button/button';
+import Input from '../../molecules/input/input';
 
 function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
   // изменение с false на true при внесении изменений в данные
@@ -32,6 +33,13 @@ function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
         <div className={styles.inputSection}>{userRegion}</div>
         <div className={styles.inputSection}>{userNickname}</div>
         <div className={styles.inputSection} />
+        <Input
+          labelName="Фото"
+          type="file"
+          inputName="avatar"
+          value={inputsValues.avatar}
+          onChange={onInputValuesChange}
+        />
         <Button
           disabled={!isInputChanged}
           type="submit"

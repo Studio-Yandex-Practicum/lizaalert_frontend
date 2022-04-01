@@ -14,9 +14,10 @@ import { Icon } from '../../atoms';
  * - inputName - string - имя инпута и id
  * - value - string - значение инпута
  * - onChange - func - обработчик изменения значения инпута
+ * - accept - string - необязательный prop, в котором указаны возможные форматы файла
  */
 
-function Input({ labelName, type, inputName, value, onChange }) {
+function Input({ labelName, type, inputName, value, onChange, accept }) {
   const inputRef = React.useRef();
 
   function focus() {
@@ -25,8 +26,20 @@ function Input({ labelName, type, inputName, value, onChange }) {
 
   return (
     <div className={styles.container}>
-      <label htmlFor={inputName} className={styles.label}>
+      <label
+        htmlFor={inputName}
+        className={classNames(styles.label, {
+          [styles.label_flex]: type === 'file',
+        })}
+      >
         {labelName}
+        {type === 'file' ? (
+          <Icon type="attachment" className={styles.icon} />
+        ) : (
+          type !== 'tel' && (
+            <Icon type="edit" className={styles.icon} onClick={() => focus()} />
+          )
+        )}
       </label>
       <input
         id={inputName}
@@ -39,20 +52,16 @@ function Input({ labelName, type, inputName, value, onChange }) {
         className={classNames(styles.input, {
           [styles.input_hidden]: type === 'file',
         })}
+        accept={accept}
       />
-      {type === 'file' ? (
-        <>
-          <span className={styles.input}>{value}</span>
-          <Icon type="attachment" className={styles.icon} />
-        </>
-      ) : (
-        type !== 'tel' && (
-          <Icon type="edit" className={styles.icon} onClick={() => focus()} />
-        )
-      )}
+      {type === 'file' && <span className={styles.input}>{value}</span>}
     </div>
   );
 }
+
+Input.defaultProps = {
+  accept: null,
+};
 
 Input.propTypes = {
   labelName: PropTypes.string.isRequired,
@@ -61,6 +70,7 @@ Input.propTypes = {
   inputName: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  accept: PropTypes.string,
 };
 
 export default Input;
