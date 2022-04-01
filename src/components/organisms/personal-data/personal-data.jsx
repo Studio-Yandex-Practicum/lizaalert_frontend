@@ -32,7 +32,11 @@ function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
         <div className={styles.inputSection}>{userRegion}</div>
         <div className={styles.inputSection}>{userNickname}</div>
         <div className={styles.inputSection} />
-        <Button minWidth={246} disabled={!isInputChanged} type="submit">
+        <Button
+          disabled={!isInputChanged}
+          type="submit"
+          className={styles.submitButton}
+        >
           Сохранить изменения
         </Button>
       </form>
