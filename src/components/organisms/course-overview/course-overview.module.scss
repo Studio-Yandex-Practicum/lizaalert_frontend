@@ -1,0 +1,51 @@
+.course {
+  &Overview {
+    max-width: 424px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &Image {
+    object-fit: cover;
+    object-position: center;
+    &Container {
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+  }
+
+  &Meta {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    padding: 0 32px 0 34px;
+    box-sizing: border-box;
+    margin: 0 0 32px;
+
+    &Item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &Alert {
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+    margin-bottom: 32px;
+  }
+
+  &Enroll {
+    width: 100%;
+    max-width: calc(100% - 64px);
+    margin: 0 0 32px;
+    box-sizing: border-box;
+  }
+}
