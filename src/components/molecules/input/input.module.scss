@@ -49,6 +49,10 @@
   width: 24px;
   height: 24px;
   z-index: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .input:disabled {

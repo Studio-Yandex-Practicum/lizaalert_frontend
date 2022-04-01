@@ -6,17 +6,34 @@ import styles from './input.module.scss';
 
 import { Icon } from '../../atoms';
 
-function Input({ id, labelName, type, inputName, value, onChange }) {
+/**
+ * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
+ *
+ * - labelName - string - заголовок инпута
+ * - type - string - тип инпута
+ * - inputName - string - имя инпута и id
+ * - value - string - значение инпута
+ * - onChange - func - обработчик изменения значения инпута
+ */
+
+function Input({ labelName, type, inputName, value, onChange }) {
+  const inputRef = React.useRef();
+
+  function focus() {
+    inputRef.current.focus();
+  }
+
   return (
     <div className={styles.container}>
-      <label htmlFor={id} className={styles.label}>
+      <label htmlFor={inputName} className={styles.label}>
         {labelName}
       </label>
       <input
-        id={id}
+        id={inputName}
         type={type}
         name={inputName}
         value={value}
+        ref={inputRef}
         onChange={onChange}
         disabled={type === 'tel'}
         className={classNames(styles.input, {
@@ -29,16 +46,18 @@ function Input({ id, labelName, type, inputName, value, onChange }) {
           <Icon type="attachment" className={styles.icon} />
         </>
       ) : (
-        type !== 'tel' && <Icon type="edit" className={styles.icon} />
+        type !== 'tel' && (
+          <Icon type="edit" className={styles.icon} onClick={() => focus()} />
+        )
       )}
     </div>
   );
 }
 
 Input.propTypes = {
-  id: PropTypes.string.isRequired,
   labelName: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
+    .isRequired,
   inputName: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
