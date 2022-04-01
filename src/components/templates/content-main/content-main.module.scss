@@ -1,0 +1,12 @@
+@import '../../../styles/size-variables.scss';
+
+.container {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: calc($content-max-width + 2 * $content-margin)) {
+  .container {
+    margin: 0 $content-margin;
+  }
+}
