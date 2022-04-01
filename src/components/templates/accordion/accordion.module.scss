@@ -1,3 +1,5 @@
+@use '../../../styles/font-variables';
+
 .accordion {
   display: flex;
   flex-direction: column;
@@ -17,6 +19,7 @@
   background-color: transparent;
   cursor: pointer;
   padding: 0;
+  font-family: font-variables.$mainFont;
 }
 
 .btn {
