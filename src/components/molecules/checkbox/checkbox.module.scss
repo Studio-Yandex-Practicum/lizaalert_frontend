@@ -1,0 +1,90 @@
+@import 'src/styles/color-variables';
+@import 'src/styles/font-variables';
+
+.checkbox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: fit-content;
+  gap: 10px;
+  font-family: $mainFont;
+  color: $dark-primary;
+  font-weight: 400;
+  font-size: $font-size-m;
+  line-height: 1.3;
+
+  &:hover {
+    color: $color-hover;
+    cursor: pointer;
+  }
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@mixin pseudo {
+  align-self: flex-start;
+  transition: color $trans-300;
+
+  path {
+    opacity: 0;
+    transform-origin: center;
+    transition: transform $trans-300, opacity $trans-300;
+  }
+
+  /* Граница-рамка */
+  path:last-child {
+    opacity: 1;
+  }
+}
+
+.pseudoRadio {
+  @include pseudo;
+  max-width: 22px;
+  max-height: 22px;
+
+  path:nth-child(1), path:nth-child(2) {
+    transform: scale(0);
+  }
+}
+
+.pseudoCheckbox {
+  @include pseudo;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.labelText {
+  margin: 0;
+  transition: color $trans-300;
+}
+
+/* Регулировки вкл/выкл чекбокса */
+.input:checked + .pseudoCheckbox {
+  color: $color-hover;
+
+  path {
+    opacity: 1;
+  }
+}
+
+.input:checked + .pseudoRadio {
+  color: $color-hover;
+
+  path:nth-child(1), path:nth-child(2) {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.input:checked ~ .labelText {
+  color: $color-hover;
+}

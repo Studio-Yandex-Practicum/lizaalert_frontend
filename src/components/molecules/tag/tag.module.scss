@@ -1,0 +1,34 @@
+@import 'src/styles/color-variables';
+
+.tag {
+  display: flex;
+  max-width: fit-content;
+  align-items: center;
+  height: 24px;
+  background-color: $borders-divider-disabled-bg;
+  border-radius: 16px;
+  padding: 0 2px 0 8px;
+}
+
+.text {
+  max-width: 250px;
+  text-overflow: ellipsis;
+  margin: 0 6px 0 0;
+  overflow: hidden;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.button {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon {
+  color: $dark-secondary;
+}
