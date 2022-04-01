@@ -10,8 +10,9 @@ import icons from './icons';
  * - height - string | number - фиксированная высота иконки, с осторожностью, по умолчанию наследуется
  * - maxHeight - string | number - максимальная высота иконки, по умолчанию наследуется
  * - className - string - css-класс, присваивается `span`у
+ * - onClick - func - необязательный props, функция, которая срабатывает при клике
  */
-function Icon({ type, maxWidth, height, maxHeight, className }) {
+function Icon({ type, maxWidth, height, maxHeight, className, onClick }) {
   const classNames = `${styles.icon} ${className}`.trim();
 
   // инлайновые стили для большей гибкости компонента
@@ -23,7 +24,14 @@ function Icon({ type, maxWidth, height, maxHeight, className }) {
 
   if (icons[type]) {
     return (
-      <span className={classNames} style={inlineStyle}>
+      <span
+        className={classNames}
+        style={inlineStyle}
+        onClick={onClick}
+        onKeyDown={onClick}
+        role="button"
+        tabIndex={0}
+      >
         {icons[type]}
       </span>
     );
@@ -38,6 +46,7 @@ Icon.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Icon.defaultProps = {
@@ -45,6 +54,7 @@ Icon.defaultProps = {
   height: 'inherit',
   maxHeight: 'inherit',
   className: '',
+  onClick: () => {},
 };
 
 export default Icon;
