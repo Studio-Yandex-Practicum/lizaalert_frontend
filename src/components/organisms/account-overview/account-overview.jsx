@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import Card from '../../templates/card/card';
 import styles from './account-overview.module.scss';
 import DefaultImg from '../../../assets/images/profile.jpg';
-import ProfileMeta from '../../molecules/profile-meta/profile-meta';
+import TextWithIcon from '../../molecules/text-with-icon/text-with-icon';
+import Button from '../../molecules/button/button';
 
 function AccountOverview({
   avatar,
@@ -18,11 +19,27 @@ function AccountOverview({
       </div>
       <p className={styles.personalData}>{userName}</p>
       <ul className={styles.accountMeta}>
-        <ProfileMeta text={userStatus} />
-        <ProfileMeta text={userOccupation} />
-        <ProfileMeta text={`Пройдено ${coursesFinished} курса`} />
+        <li className={styles.accountMetaItem}>
+          <TextWithIcon text={userStatus} iconType="rank" />
+        </li>
+        <li className={styles.accountMetaItem}>
+          <TextWithIcon text={userOccupation} iconType="role" />
+        </li>
+        <li className={styles.accountMetaItem}>
+          <TextWithIcon
+            text={`Пройдено ${coursesFinished} курса`}
+            iconType="course"
+          />
+        </li>
       </ul>
-      <div className={styles.exit}>Выйти из аккаунта</div>
+      <Button
+        view="secondary"
+        iconName="logout"
+        iconPosition="back"
+        className={styles.logout}
+      >
+        Выйти из аккаунта
+      </Button>
     </Card>
   );
 }

@@ -7,8 +7,8 @@ import { ReactComponent as ArrowUp } from '../../../assets/icons/arrow-up.svg';
 import { ReactComponent as Attachment } from '../../../assets/icons/attachment.svg';
 import { ReactComponent as Calendar } from '../../../assets/icons/calendar.svg';
 import { ReactComponent as Check } from '../../../assets/icons/check.svg';
-import { ReactComponent as CheckSmall } from '../../../assets/icons/check-small.svg';
 import { ReactComponent as CheckSolid } from '../../../assets/icons/check-solid.svg';
+import { ReactComponent as Checkbox } from '../../../assets/icons/checkbox.svg';
 import { ReactComponent as Course } from '../../../assets/icons/course.svg';
 import { ReactComponent as Cycle } from '../../../assets/icons/cycle.svg';
 import { ReactComponent as Document } from '../../../assets/icons/document.svg';
@@ -28,6 +28,7 @@ import { ReactComponent as Logout } from '../../../assets/icons/logout.svg';
 import { ReactComponent as Notification } from '../../../assets/icons/notification.svg';
 import { ReactComponent as Play } from '../../../assets/icons/play.svg';
 import { ReactComponent as Plus } from '../../../assets/icons/plus.svg';
+import { ReactComponent as Radio } from '../../../assets/icons/radio.svg';
 import { ReactComponent as Rank } from '../../../assets/icons/rank.svg';
 import { ReactComponent as Retry } from '../../../assets/icons/retry.svg';
 import { ReactComponent as Role } from '../../../assets/icons/role.svg';
@@ -67,8 +68,8 @@ const icons = {
   attachment: <Attachment {...defaultAttributes} />,
   calendar: <Calendar {...defaultAttributes} />,
   check: <Check {...defaultAttributes} />,
-  checkSmall: <CheckSmall {...defaultAttributes} />,
   checkSolid: <CheckSolid {...defaultAttributes} />,
+  checkbox: <Checkbox {...defaultAttributes} />,
   course: <Course {...defaultAttributes} />,
   cycle: <Cycle {...defaultAttributes} />,
   document: <Document {...defaultAttributes} />,
@@ -88,6 +89,7 @@ const icons = {
   notification: <Notification {...defaultAttributes} />,
   play: <Play {...defaultAttributes} />,
   plus: <Plus {...defaultAttributes} />,
+  radio: <Radio {...defaultAttributes} />,
   rank: <Rank {...defaultAttributes} />,
   retry: <Retry {...defaultAttributes} />,
   role: <Role {...defaultAttributes} />,

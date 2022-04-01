@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  transition: $trans-300;
 
   &:focus {
     outline: none;
@@ -62,6 +63,9 @@
 
 .text {
   color: $dark-primary;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
 
   &:hover {
     color: $color-hover;

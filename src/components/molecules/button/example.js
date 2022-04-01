@@ -26,6 +26,7 @@ export default function Example() {
         Сохранить изменения
       </Button>
       <Button minWidth={360}>Записаться</Button>
+      <Button view="text">Очистить</Button>
     </div>
   );
 }
