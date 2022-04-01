@@ -38,6 +38,7 @@ function Checkbox({
         name={name}
         value={value}
         defaultChecked={checked}
+        checked={checked}
         onChange={onChange}
       />
       <Icon

@@ -23,3 +23,21 @@
     color: color-variables.$color-hover;
   }
 }
+
+.checkbox {
+  margin-bottom: 20px;
+}
+
+.filters {
+  margin-bottom: 32px;
+}
+
+.selection {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}

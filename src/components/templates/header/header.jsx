@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerContainer}>
+      <div className={`container ${styles.headerContainer}`}>
         <NavLink to={routes.courses.path} className={styles.headerTextLink}>
           <h1 className={styles.headerText}>Учебная платформа</h1>
         </NavLink>
