@@ -1,7 +1,9 @@
+import Filter from '../../organisms/filter/filter';
+
 function Courses() {
   return (
     <div>
-      <p>Courses page</p>
+      <Filter />
     </div>
   );
 }
