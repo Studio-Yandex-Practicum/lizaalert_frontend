@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import styles from './course-preview.module.scss';
 import { Button, Tag, TextWithIcon } from '../../molecules';
-import getDeclensionOf from '../../../utils/getDeclension';
+import getDeclensionOf from '../../../utils/getDeclensionOf';
+import styles from './course-preview.module.scss';
 
 function CoursePreview({ course }) {
   const navigate = useNavigate();
