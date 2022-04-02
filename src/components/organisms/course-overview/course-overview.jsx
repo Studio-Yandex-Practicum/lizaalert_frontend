@@ -29,17 +29,17 @@ function CourseOverview({ imgLink, userStatus, lessonQuantity, startDate }) {
           64 ч
         </li>
         <li className={styles.courseMetaItem}>
-          <TextWithIcon text="Старт занятий:" iconType="date" />
+          <TextWithIcon text="Старт занятий:" iconType="calendar" />
           {startDate} г
         </li>
+        <li className={styles.courseMetaItem}>
+          <TextWithIcon
+            text="Внимание! Количество попыток прохождения курса ограничено"
+            iconType="exclamationMark"
+            color="warning"
+          />
+        </li>
       </ul>
-      <div className={styles.courseAlert}>
-        <TextWithIcon
-          text="Внимание! Количество попыток прохождения курса ограничено"
-          iconType="exclamationMark"
-          color="warning"
-        />
-      </div>
       <Button className={styles.courseEnroll}>Записаться</Button>
     </Card>
   );
