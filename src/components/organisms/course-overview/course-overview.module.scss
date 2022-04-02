@@ -9,6 +9,8 @@
   &Image {
     object-fit: cover;
     object-position: center;
+    display: block;
+    width: 100%;
     &Container {
       overflow: hidden;
       border-radius: 16px;
@@ -18,7 +20,6 @@
 
   &Meta {
     list-style: none;
-    padding: 0;
     width: 100%;
     padding: 0 32px 0 34px;
     box-sizing: border-box;
@@ -30,7 +31,7 @@
       justify-content: space-between;
       margin-bottom: 16px;
       &:last-child {
-        margin: 32px 0 0;
+        margin-bottom: 0;
       }
     }
   }
@@ -47,5 +48,9 @@
     max-width: calc(100% - 64px);
     margin: 0 0 32px;
     box-sizing: border-box;
+  }
+
+  &Alert {
+    margin-bottom: 32px;
   }
 }
