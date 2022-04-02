@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import styles from './tag.module.scss';
 import Icon from '../../atoms/icon/icon';
 
-function Tag({ text, onClick }) {
+function Tag({ text, onClick, className }) {
+  const classNames = classnames(styles.tag, className);
+
   if (onClick) {
     return (
-      <div className={styles.tag}>
+      <div className={classNames}>
         <p className={styles.text}>{text}</p>
         <button className={styles.button} type="button" onClick={onClick}>
           <Icon
@@ -20,19 +23,21 @@ function Tag({ text, onClick }) {
   }
 
   return (
-    <div className={styles.tag}>
+    <div className={classNames}>
       <p className={styles.text}>{text}</p>
     </div>
   );
 }
 
 Tag.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Tag.defaultProps = {
   onClick: null,
+  className: '',
 };
 
 export default Tag;
