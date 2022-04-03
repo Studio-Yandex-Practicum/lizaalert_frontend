@@ -10,25 +10,28 @@ import styles from './input.module.scss';
  * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
  *
  * - labelName - string - заголовок инпута, необязательный prop, не должен быть пустой строкой
- * - type - string - тип инпута
  * - inputName - string - имя инпута и id
- * - placeholder - string - текст подсказки поля ввода
+ * - type - string - тип инпута
  * - value - string - значение инпута
- * - onChange - func - обработчик изменения значения инпута
  * - accept - string - необязательный prop, в котором указаны возможные форматы файла
+ * - placeholder - string - текст подсказки поля ввода
+ * - error - string - текст ошибки валидации, необязательный prop
+ * - disabled - bool - контроль возможности изменения инпута
+ * - onChange - func - обработчик изменения значения инпута
  * - className - string - css-класс для стилизации компонента родителя (div)
  */
 
 function Input({
   labelName,
-  type,
   inputName,
+  type,
   value,
-  onChange,
   accept,
   placeholder,
-  className,
+  error,
   disabled,
+  onChange,
+  className,
 }) {
   return (
     <div className={classNames(styles.container, className)}>
@@ -49,39 +52,44 @@ function Input({
       </label>
       <input
         id={inputName}
-        type={type}
         name={inputName}
-        placeholder={placeholder}
+        type={type}
         value={value}
-        onChange={onChange}
+        accept={accept}
+        placeholder={placeholder}
         disabled={disabled}
+        onChange={onChange}
         className={classNames(styles.input, {
           [styles.input_hidden]: type === 'file',
+          [styles.input_warned]: error,
         })}
-        accept={accept}
       />
       {type === 'file' && <span className={styles.input}>{value}</span>}
+      {/* когда будет настроена валидация, будет условие isValid, вместо error */}
+      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 }
 
 Input.defaultProps = {
-  accept: null,
   labelName: null,
+  accept: null,
+  error: null,
   disabled: false,
 };
 
 Input.propTypes = {
   labelName: PropTypes.string,
+  inputName: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
     .isRequired,
-  inputName: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
   accept: PropTypes.string,
-  className: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  error: PropTypes.string,
   disabled: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Input;
