@@ -16,6 +16,8 @@ function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
   });
 
   // функция на событие onChange для инпутов
+  // TODO: onInputValuesChange is not used. remove eslint exception
+  // eslint-disable-next-line
   const onInputValuesChange = (e) => {
     if (e.target.value !== inputsValues[e.target.name] && isInputChanged) {
       setIsInputChanged(true);

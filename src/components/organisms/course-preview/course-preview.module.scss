@@ -1,11 +1,8 @@
 .article {
-  width: 984px;
   height: 240px;
   display: grid;
-  grid-template-columns: 200px 24px 448px 56px 224px 32px;
+  grid-template-columns: 200px 24px auto 56px 224px 32px;
   grid-template-rows: 32px 28px 16px 24px 24px auto 32px;
-  box-shadow: 0 0 4px rgba(231, 232, 235, 0.6), 0 4px 16px rgba(231, 232, 235, 0.6);
-  border-radius: 16px;
 }
 
 .cover {

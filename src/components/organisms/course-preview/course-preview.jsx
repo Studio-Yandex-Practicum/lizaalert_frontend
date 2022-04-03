@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Tag, TextWithIcon } from '../../molecules';
 import getDeclensionOf from '../../../utils/getDeclensionOf';
 import styles from './course-preview.module.scss';
+import Card from '../../templates/card/card';
 
 function CoursePreview({ course }) {
   const navigate = useNavigate();
@@ -18,30 +19,32 @@ function CoursePreview({ course }) {
   } = course;
 
   return (
-    <article className={styles.article}>
-      <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
-      <Tag className={styles.level} text={level.name} />
-      <TextWithIcon
-        className={styles.duration}
-        text={`${duration} ч`}
-        iconType="duration"
-      />
-      <TextWithIcon
-        className={styles.lessons}
-        text={`${lessonsCount} ${getDeclensionOf.lessons(lessonsCount)}`}
-        iconType="lessons"
-      />
-      <Button
-        className={styles.button}
-        disabled={status.slug === 'finished' || status.slug === 'inactive'}
-        view={status.slug === 'booked' ? 'primary' : 'secondary'}
-        onClick={() => navigate(`/${id}`)}
-      >
-        {status.buttonName}
-      </Button>
-      <img src={image} alt={title} className={styles.cover} />
-    </article>
+    <Card noPadding>
+      <article className={styles.article}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.description}>{description}</p>
+        <Tag className={styles.level} text={level.name} />
+        <TextWithIcon
+          className={styles.duration}
+          text={`${duration} ч`}
+          iconType="duration"
+        />
+        <TextWithIcon
+          className={styles.lessons}
+          text={`${lessonsCount} ${getDeclensionOf.lessons(lessonsCount)}`}
+          iconType="lessons"
+        />
+        <Button
+          className={styles.button}
+          disabled={status.slug === 'finished' || status.slug === 'inactive'}
+          view={status.slug === 'booked' ? 'primary' : 'secondary'}
+          onClick={() => navigate(`/${id}`)}
+        >
+          {status.buttonName}
+        </Button>
+        <img src={image} alt={title} className={styles.cover} />
+      </article>
+    </Card>
   );
 }
 
@@ -51,8 +54,7 @@ CoursePreview.propTypes = {
     level: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      slug: PropTypes.oneOf(['novice', 'experienced', 'professional'])
-        .isRequired,
+      slug: PropTypes.string.isRequired,
     }).isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -63,8 +65,7 @@ CoursePreview.propTypes = {
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       buttonName: PropTypes.string.isRequired,
-      slug: PropTypes.oneOf(['active', 'inactive', 'booked', 'finished'])
-        .isRequired,
+      slug: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

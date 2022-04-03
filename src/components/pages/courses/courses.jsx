@@ -1,4 +1,4 @@
-import CoursePreview from '../../organisms/course-preview/course-preview';
+import { CoursePreview } from '../../organisms';
 import mockCourses from '../../../services/mock/courses.json';
 
 function Courses() {

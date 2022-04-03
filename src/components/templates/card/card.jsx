@@ -1,26 +1,23 @@
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import styles from './card.module.scss';
 
-function Card({ className, children, nopadding }) {
-  return (
-    <div
-      className={`${styles.card}${nopadding ? ` ${styles.cardNoPadding}` : ''}${
-        className.length > 0 ? ` ${className}` : ''
-      }`}
-    >
-      {children}
-    </div>
-  );
+function Card({ className, children, noPadding }) {
+  const classNames = classnames(styles.card, className, {
+    [styles.cardNoPadding]: noPadding,
+  });
+
+  return <div className={classNames}>{children}</div>;
 }
 
 Card.defaultProps = {
   className: '',
-  nopadding: false,
+  noPadding: false,
 };
 
 Card.propTypes = {
   className: PropTypes.string,
-  nopadding: PropTypes.bool,
+  noPadding: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
