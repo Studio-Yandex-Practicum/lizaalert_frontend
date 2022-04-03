@@ -41,8 +41,8 @@
 .section {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (auto)[2];
-      grid-template-columns: repeat(2, auto);
+  -ms-grid-columns: auto fit-content(100%);
+      grid-template-columns: auto fit-content(100%);
   gap: 24px;
 }
 

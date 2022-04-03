@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import AccountData from '../../organisms/account-data/account-data';
 import AccountOverview from '../../organisms/account-overview/account-overview';
 import PersonalData from '../../organisms/personal-data/personal-data';
@@ -6,13 +5,9 @@ import routes from '../../../config/routes';
 import styles from './profile.module.scss';
 
 function Profile() {
-  const location = useLocation();
-  const { pathname } = location;
-  const splitLocation = pathname.split('/');
-
   return (
     <div className={styles.container}>
-      <h1>{routes[splitLocation[1]].title}</h1>
+      <h1>{routes.profile.title}</h1>
       <div className={styles.content}>
         <aside>
           <AccountOverview />
