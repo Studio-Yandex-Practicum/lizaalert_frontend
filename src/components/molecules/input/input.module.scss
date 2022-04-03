@@ -1,6 +1,11 @@
 @import 'src/styles/color-variables';
 @import 'src/styles/font-variables';
 
+@mixin placeholder {
+  color: $dark-secondary;
+  opacity: 1;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -38,6 +43,18 @@
   font-weight: 400;
   font-size: $font-size-m;
   line-height: 1.3;
+
+  &::-webkit-input-placeholder {
+    @include placeholder;
+  }
+  
+  &::-moz-placeholder {
+    @include placeholder;
+  }
+  
+  &::placeholder {
+    @include placeholder;
+  }
 
   &_hidden {
     opacity: 0;
