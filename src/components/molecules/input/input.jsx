@@ -12,22 +12,26 @@ import styles from './input.module.scss';
  * - labelName - string - заголовок инпута, необязательный prop, не должен быть пустой строкой
  * - type - string - тип инпута
  * - inputName - string - имя инпута и id
+ * - placeholder - string - текст подсказки поля ввода
  * - value - string - значение инпута
  * - onChange - func - обработчик изменения значения инпута
  * - accept - string - необязательный prop, в котором указаны возможные форматы файла
+ * - className - string - css-класс для стилизации компонента родителя (div)
  */
 
-function Input({ labelName, type, inputName, value, onChange, accept }) {
-  const inputRef = React.useRef();
-
-  function focus() {
-    inputRef.current.focus();
-  }
-
-  console.log(labelName);
-
+function Input({
+  labelName,
+  type,
+  inputName,
+  value,
+  onChange,
+  accept,
+  placeholder,
+  className,
+  disabled,
+}) {
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       <label
         htmlFor={inputName}
         className={classNames({
@@ -40,19 +44,17 @@ function Input({ labelName, type, inputName, value, onChange, accept }) {
           <Icon type="attachment" className={styles.icon} />
         ) : (
           labelName &&
-          type !== 'tel' && (
-            <Icon type="edit" className={styles.icon} onClick={() => focus()} />
-          )
+          type !== 'tel' && <Icon type="edit" className={styles.icon} />
         )}
       </label>
       <input
         id={inputName}
         type={type}
         name={inputName}
+        placeholder={placeholder}
         value={value}
-        ref={inputRef}
         onChange={onChange}
-        disabled={type === 'tel'}
+        disabled={disabled}
         className={classNames(styles.input, {
           [styles.input_hidden]: type === 'file',
         })}
@@ -66,6 +68,7 @@ function Input({ labelName, type, inputName, value, onChange, accept }) {
 Input.defaultProps = {
   accept: null,
   labelName: null,
+  disabled: false,
 };
 
 Input.propTypes = {
@@ -73,9 +76,12 @@ Input.propTypes = {
   type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
     .isRequired,
   inputName: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   accept: PropTypes.string,
+  className: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default Input;
