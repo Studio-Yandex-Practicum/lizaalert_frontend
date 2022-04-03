@@ -7,17 +7,17 @@ import styles from './card.module.scss';
  * @description Компонент карточки. Визуальный элемент интерфейса с закругленными углами, тенью и паддингами, которые при необходимости обнуляются
  *
  * - className - string - необязательный проп - дополнительный css класс для стилизации
- * - nopadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеютсястандартные паддинги 32px
+ * - noPadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеютсястандартные паддинги 32px
  * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'
  */
 
-function Card({ className, children, nopadding, htmlTag }) {
+function Card({ className, children, noPadding, htmlTag }) {
   return createElement(
     htmlTag ?? 'div',
     {
       className: classnames(
         styles.card,
-        { [styles.cardNoPadding]: nopadding },
+        { [styles.cardNoPadding]: noPadding },
         className
       ),
     },
@@ -27,7 +27,7 @@ function Card({ className, children, nopadding, htmlTag }) {
 
 Card.propTypes = {
   className: PropTypes.string,
-  nopadding: PropTypes.bool,
+  noPadding: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -37,7 +37,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   className: '',
-  nopadding: false,
+  noPadding: false,
   htmlTag: 'div',
 };
 

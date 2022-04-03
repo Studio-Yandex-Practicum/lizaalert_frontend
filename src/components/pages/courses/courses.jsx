@@ -11,7 +11,9 @@ function Courses() {
         <Filter className={styles.filters} />
         <ul className={styles.list}>
           {mockCourses.map((course) => (
-            <CoursePreview course={course} key={course.id} />
+            <li key={course.id}>
+              <CoursePreview course={course} />
+            </li>
           ))}
         </ul>
       </div>
