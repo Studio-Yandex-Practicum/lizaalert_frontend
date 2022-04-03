@@ -5,33 +5,38 @@ import Accordion from '../../templates/accordion/accordion';
 import Card from '../../templates/card/card';
 import Checkbox from '../../molecules/checkbox/checkbox';
 import Tag from '../../molecules/tag/tag';
+import { Filters, Statuses, Levels } from '../../../utils/constants';
 import styles from './filter.module.scss';
 
 function Filter({ className }) {
   const filters = [
     {
-      name: { label: 'Категория', value: 'category' },
+      name: { label: 'Категория', value: Filters.CATEGORY },
       options: [],
     },
     {
-      name: { label: 'Тематика', value: 'theme' },
+      name: { label: 'Тематика', value: Filters.THEME },
       options: [],
     },
     {
-      name: { label: 'Уровень', value: 'level' },
+      name: { label: 'Уровень', value: Filters.LEVEL },
       options: [
-        { label: 'Новичок', value: 'new', name: 'level' },
-        { label: 'Бывалый', value: 'experienced', name: 'level' },
-        { label: 'Профессионал', value: 'professional', name: 'level' },
+        { label: 'Новичок', value: Levels.NEW, name: Filters.LEVEL },
+        { label: 'Бывалый', value: Levels.EXPERIENCED, name: Filters.LEVEL },
+        { label: 'Профессионал', value: Levels.PRO, name: Filters.LEVEL },
       ],
     },
     {
-      name: { label: 'Статус', value: 'status' },
+      name: { label: 'Статус', value: Filters.STATUS },
       options: [
-        { label: 'Не активный', value: 'not-active', name: 'status' },
-        { label: 'Вы записаны', value: 'booked', name: 'status' },
-        { label: 'Активный', value: 'active', name: 'status' },
-        { label: 'Пройден', value: 'finished', name: 'status' },
+        {
+          label: 'Не активный',
+          value: Statuses.INACTIVE,
+          name: Filters.STATUS,
+        },
+        { label: 'Вы записаны', value: Statuses.BOOKED, name: Filters.STATUS },
+        { label: 'Активный', value: Statuses.ACTIVE, name: Filters.STATUS },
+        { label: 'Пройден', value: Statuses.FINISHED, name: Filters.STATUS },
       ],
     },
   ];
@@ -39,11 +44,11 @@ function Filter({ className }) {
   const [selection, setSelection] = useState([]);
 
   const activityFilterChangeHandler = (filter) => {
-    const oppositFilter = { name: 'status' };
-    if (filter.value === 'active') {
-      oppositFilter.value = 'not-active';
+    const oppositFilter = { name: Filters.STATUS };
+    if (filter.value === Statuses.ACTIVE) {
+      oppositFilter.value = Statuses.INACTIVE;
     } else {
-      oppositFilter.value = 'active';
+      oppositFilter.value = Statuses.ACTIVE;
     }
     const filterIndex = selection.findIndex(
       (item) => item.value === filter.value && item.name === filter.name
@@ -67,8 +72,8 @@ function Filter({ className }) {
 
   const filterChangeHandler = (filter) => {
     if (
-      (filter.name === 'status' && filter.value === 'active') ||
-      (filter.name === 'status' && filter.value === 'not-active')
+      (filter.name === Filters.STATUS && filter.value === Statuses.ACTIVE) ||
+      (filter.name === Filters.STATUS && filter.value === Statuses.INACTIVE)
     ) {
       activityFilterChangeHandler(filter);
       return;
