@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { createElement } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 
@@ -6,29 +7,38 @@ import styles from './card.module.scss';
  * @description Компонент карточки. Визуальный элемент интерфейса с закругленными углами, тенью и паддингами, которые при необходимости обнуляются
  *
  * - className - string - необязательный проп - дополнительный css класс для стилизации
- * - noPadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеютсястандартные паддинги 32px
+ * - nopadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеютсястандартные паддинги 32px
+ * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'
  */
 
-function Card({ className, children, noPadding }) {
-  const classNames = classnames(styles.card, className, {
-    [styles.cardNoPadding]: noPadding,
-  });
-
-  return <div className={classNames}>{children}</div>;
+function Card({ className, children, nopadding, htmlTag }) {
+  return createElement(
+    htmlTag ?? 'div',
+    {
+      className: classnames(
+        styles.card,
+        { [styles.cardNoPadding]: nopadding },
+        className
+      ),
+    },
+    children
+  );
 }
-
-Card.defaultProps = {
-  className: '',
-  noPadding: false,
-};
 
 Card.propTypes = {
   className: PropTypes.string,
-  noPadding: PropTypes.bool,
+  nopadding: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  htmlTag: PropTypes.oneOf(['article', 'div', 'li', 'aside']),
+};
+
+Card.defaultProps = {
+  className: '',
+  nopadding: false,
+  htmlTag: 'div',
 };
 
 export default Card;
