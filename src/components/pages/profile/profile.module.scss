@@ -1,0 +1,50 @@
+@import '../../../styles/color-variables.scss';
+@import '../../../styles/font-variables';
+
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 60px;
+  box-sizing: border-box;
+
+  @media (min-width: 1320px)  {
+    padding: 0;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 24px;
+}
+
+.descriprion {
+  font-family: $mainFont;
+  max-width: 312px;
+  color: $dark-secondary;
+  font-size: 18px;
+  line-height: calc(24 / 18);
+
+  & p {
+    margin: 0 0 28px;
+  }
+
+  & ul {
+    padding: 0 0 0 30px;
+    margin: 0;
+  }
+}
