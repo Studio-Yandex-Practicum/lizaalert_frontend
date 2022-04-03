@@ -1,7 +1,7 @@
 .article {
   height: 240px;
   display: grid;
-  grid-template-columns: 200px 24px auto 56px 224px 32px;
+  grid-template-columns: 200px 24px minmax(150px, auto) minmax(24px, 56px) 224px 32px;
   grid-template-rows: 32px 28px 16px 24px 24px auto 32px;
 }
 

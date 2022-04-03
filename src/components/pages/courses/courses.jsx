@@ -9,14 +9,15 @@ function Courses() {
       <h2 className={`heading h1 ${styles.heading}`}>Курсы</h2>
       <div className={styles.courses}>
         <Filter className={styles.filters} />
-        <ul className={styles.list} />
+        <ul className={styles.list}>
+          {mockCourses.map((course) => (
+            <div key={course.id}>
+              <CoursePreview course={course} />
+              <div style={{ marginBottom: '24px' }} />
+            </div>
+          ))}
+        </ul>
       </div>
-      {mockCourses.map((course) => (
-        <div key={course.id}>
-          <CoursePreview course={course} />
-          <div style={{ marginBottom: '24px' }} />
-        </div>
-      ))}
     </div>
   );
 }
