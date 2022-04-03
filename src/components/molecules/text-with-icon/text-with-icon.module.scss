@@ -2,7 +2,7 @@
 
 .textWithIcon {
   display: flex;
-  max-width: fit-content;
+  min-width: fit-content;
   align-items: flex-start;
   min-height: 24px;
   gap: 10px;

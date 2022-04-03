@@ -1,43 +1,45 @@
-import { useLocation, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import HeaderLink from '../../molecules/header-link/header-link';
 import routes from '../../../config/routes';
 import styles from './header.module.scss';
 
-function Header() {
-  const location = useLocation();
-  const { pathname } = location;
-  const splitLocation = pathname.split('/');
-
+function Header({ links }) {
   return (
     <header className={styles.header}>
-      <div className={`container ${styles.headerContainer}`}>
-        <NavLink to={routes.courses.path} className={styles.headerTextLink}>
-          <h1 className={styles.headerText}>Учебная платформа</h1>
-        </NavLink>
+      <Link to={routes.courses.path} className={styles.headerTextLink}>
+        <h1 className={styles.headerText}>Учебная платформа</h1>
+      </Link>
+      <nav>
         <ul className={styles.headerLinks}>
-          <li>
-            <HeaderLink
-              text={routes.courses.title}
-              link={routes.courses.path}
-              // Если route для курсов изменится, можно будет удалить splitLocation[1] === ''
-              isActive={
-                (splitLocation[1] === routes.courses.path ||
-                  splitLocation[1] === '') &&
-                true
-              }
-            />
-          </li>
-          <li>
-            <HeaderLink
-              text={routes.profile.title}
-              link={routes.profile.path}
-              isActive={splitLocation[1] === routes.profile.path && true}
-            />
-          </li>
+          {links.map((link) => (
+            <li key={link.id}>
+              <HeaderLink
+                text={link.title}
+                iconType={link.icon}
+                link={link.path}
+              />
+            </li>
+          ))}
         </ul>
-      </div>
+      </nav>
     </header>
   );
 }
+
+Header.propTypes = {
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      path: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+Header.defaultProps = {
+  links: [],
+};
 
 export default Header;
