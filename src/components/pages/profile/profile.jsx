@@ -6,8 +6,10 @@ import styles from './profile.module.scss';
 
 function Profile() {
   return (
-    <div className={styles.container}>
-      <h1>{routes.profile.title}</h1>
+    <div className="container">
+      <h1 className={`heading heading.h1 ${styles.profileHeadline}`}>
+        {routes.profile.title}
+      </h1>
       <div className={styles.content}>
         <aside>
           <AccountOverview />

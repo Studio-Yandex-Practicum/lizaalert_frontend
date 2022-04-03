@@ -1,7 +1,14 @@
+import Filter from '../../organisms/filter/filter';
+import styles from './courses.module.scss';
+
 function Courses() {
   return (
-    <div>
-      <p>Courses page</p>
+    <div className="container">
+      <h2 className={`heading h1 ${styles.heading}`}>Курсы</h2>
+      <div className={styles.courses}>
+        <Filter className={styles.filters} />
+        <ul className={styles.list} />
+      </div>
     </div>
   );
 }

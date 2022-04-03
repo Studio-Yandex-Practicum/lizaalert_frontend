@@ -1,16 +1,8 @@
-@import '../../../styles/color-variables.scss';
-@import '../../../styles/font-variables';
+@use '../../../styles//font-variables';
+@use '../../../styles/color-variables.scss';
 
-
-.container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 60px;
-  box-sizing: border-box;
-
-  @media (min-width: 1320px)  {
-    padding: 0;
-  }
+.profileHeadline {
+  margin: 24px 0 32px;
 }
 
 .content {
@@ -33,9 +25,10 @@
 }
 
 .descriprion {
-  font-family: $mainFont;
+  font-family: font-variables.$mainFont;
   max-width: 312px;
-  color: $dark-secondary;
+  width: 100%;
+  color: color-variables.$dark-secondary;
   font-size: 18px;
   line-height: calc(24 / 18);
 

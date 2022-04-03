@@ -37,7 +37,7 @@ function Checkbox({
         type={isRadio ? 'radio' : 'checkbox'}
         name={name}
         value={value}
-        defaultChecked={checked}
+        checked={checked}
         onChange={onChange}
       />
       <Icon
