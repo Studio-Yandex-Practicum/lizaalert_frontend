@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Button from '../../molecules/button/button';
 import Accordion from '../../templates/accordion/accordion';
 import Card from '../../templates/card/card';
-import styles from './filter.module.scss';
 import Checkbox from '../../molecules/checkbox/checkbox';
 import Tag from '../../molecules/tag/tag';
+import styles from './filter.module.scss';
 
 function Filter({ className }) {
   const filters = [
@@ -30,7 +30,7 @@ function Filter({ className }) {
       options: [
         { label: 'Не активный', value: 'not-active', name: 'status' },
         { label: 'Вы записаны', value: 'booked', name: 'status' },
-        { label: 'Активный', value: 'acctive', name: 'status' },
+        { label: 'Активный', value: 'active', name: 'status' },
         { label: 'Пройден', value: 'finished', name: 'status' },
       ],
     },
@@ -38,12 +38,47 @@ function Filter({ className }) {
 
   const [selection, setSelection] = useState([]);
 
+  const activityFilterChangeHandler = (filter) => {
+    const oppositFilter = { name: 'status' };
+    if (filter.value === 'active') {
+      oppositFilter.value = 'not-active';
+    } else {
+      oppositFilter.value = 'active';
+    }
+    const filterIndex = selection.findIndex(
+      (item) => item.value === filter.value && item.name === filter.name
+    );
+    const oppositFilterIndex = selection.findIndex(
+      (item) =>
+        item.value === oppositFilter.value && item.name === oppositFilter.name
+    );
+    if (filterIndex < 0 && oppositFilterIndex < 0) {
+      setSelection((prevState) => [...prevState, filter]);
+    } else if (filterIndex < 0 && oppositFilterIndex >= 0) {
+      const newFilters = [...selection];
+      newFilters.splice(oppositFilterIndex, 1);
+      setSelection([...newFilters, filter]);
+    } else {
+      const newFilters = [...selection];
+      newFilters.splice(filterIndex, 1);
+      setSelection(newFilters);
+    }
+  };
+
   const filterChangeHandler = (filter) => {
+    if (
+      (filter.name === 'status' && filter.value === 'active') ||
+      (filter.name === 'status' && filter.value === 'not-active')
+    ) {
+      activityFilterChangeHandler(filter);
+      return;
+    }
+
     const filterIndex = selection.findIndex(
       (item) => item.value === filter.value && item.name === filter.name
     );
     if (filterIndex < 0) {
-      setSelection([...selection, filter]);
+      setSelection((prevState) => [...prevState, filter]);
     } else {
       const newFilters = [...selection];
       newFilters.splice(filterIndex, 1);
