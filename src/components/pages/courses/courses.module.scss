@@ -1,0 +1,20 @@
+.heading {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.courses {
+  display: flex;
+}
+
+.filters {
+  width: 312px;
+  margin-right: 24px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 336px);
+}

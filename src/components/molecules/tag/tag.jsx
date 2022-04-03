@@ -2,12 +2,18 @@ import PropTypes from 'prop-types';
 import styles from './tag.module.scss';
 import Icon from '../../atoms/icon/icon';
 
-function Tag({ text, onClick }) {
+function Tag({ text, onClick, className, value }) {
   if (onClick) {
     return (
-      <div className={styles.tag}>
+      <div className={`${className} ${styles.tag}`}>
         <p className={styles.text}>{text}</p>
-        <button className={styles.button} type="button" onClick={onClick}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => {
+            onClick(value);
+          }}
+        >
           <Icon
             type="xSolid"
             maxWidth={20}
@@ -20,7 +26,7 @@ function Tag({ text, onClick }) {
   }
 
   return (
-    <div className={styles.tag}>
+    <div className={`${className} ${styles.tag}`}>
       <p className={styles.text}>{text}</p>
     </div>
   );
@@ -29,10 +35,14 @@ function Tag({ text, onClick }) {
 Tag.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  className: PropTypes.string,
+  value: PropTypes.string,
 };
 
 Tag.defaultProps = {
   onClick: null,
+  className: '',
+  value: null,
 };
 
 export default Tag;
