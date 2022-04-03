@@ -1,7 +1,9 @@
+@use "../../../styles/color-variables.scss";
+
 .card {
   border-radius: 16px;
-  box-shadow: 0px 0px 4px rgba(231, 232, 235, 0.6), 0px 4px 16px rgba(231, 232, 235, 0.6);
-  background-color: white;
+  box-shadow: 0px 0px 4px color-variables.$drop-shadow-small, 0px 4px 16px color-variables.$drop-shadow-small;
+  background-color: color-variables.$bg-primary;
   padding: 32px;
 
   &NoPadding {

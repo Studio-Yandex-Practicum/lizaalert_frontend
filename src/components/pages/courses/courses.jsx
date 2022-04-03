@@ -1,11 +1,16 @@
+import Filter from '../../organisms/filter/filter';
 import { CoursePreview } from '../../organisms';
 import mockCourses from '../../../services/mock/courses.json';
+import styles from './courses.module.scss';
 
 function Courses() {
   return (
-    <div>
-      {/* delete mock data */}
-      <p>Courses page</p>
+    <div className="container">
+      <h2 className={`heading h1 ${styles.heading}`}>Курсы</h2>
+      <div className={styles.courses}>
+        <Filter className={styles.filters} />
+        <ul className={styles.list} />
+      </div>
       {mockCourses.map((course) => (
         <div key={course.id}>
           <CoursePreview course={course} />
