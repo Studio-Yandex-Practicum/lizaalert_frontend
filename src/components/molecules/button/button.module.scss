@@ -1,14 +1,13 @@
 @use 'src/styles/variables' as vars;
 
 .button {
-  min-width: 72px;
-  min-height: 48px;
   box-sizing: border-box;
   padding: 0 24px;
   background: transparent;
   border: none;
   border-radius: 16px;
   cursor: pointer;
+  font-family: vars.$mainFont;
   font-size: vars.$font-size-m;
   font-style: normal;
   font-weight: 500;
@@ -27,6 +26,8 @@
 .primary {
   background-color: vars.$color-primary;
   color: vars.$bg-primary;
+  min-width: 72px;
+  min-height: 48px;
 
   &:hover {
     background-color: vars.$color-hover;
@@ -43,6 +44,8 @@
   background-color: vars.$bg-primary;
   color: vars.$color-primary;
   border: 1.2px solid vars.$borders-divider-disabled-bg;
+  min-width: 72px;
+  min-height: 48px;
 
   &:hover {
     color: vars.$color-hover;
@@ -59,8 +62,6 @@
 
 .text {
   color: vars.$dark-primary;
-  min-width: 0;
-  min-height: 0;
   padding: 0;
 
   &:hover {

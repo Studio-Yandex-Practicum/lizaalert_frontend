@@ -1,11 +1,18 @@
 import { CoursePreview, Filter } from '../../organisms';
 import mockCourses from '../../../services/mock/courses.json';
+import { Heading } from '../../atoms';
 import styles from './courses.module.scss';
+import routes from '../../../config/routes';
 
 function Courses() {
   return (
     <div className="container">
-      <h2 className={`heading h1 ${styles.heading}`}>Курсы</h2>
+      <Heading
+        level={1}
+        size="xxl"
+        title={routes.courses.title}
+        className={styles.heading}
+      />
       <div className={styles.courses}>
         <Filter className={styles.filters} />
         <ul className={styles.list}>

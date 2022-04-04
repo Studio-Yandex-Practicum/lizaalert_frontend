@@ -1,23 +1,27 @@
+@use 'src/styles/variables' as vars;
+
 .heading {
-  margin-top: 32px;
+  padding-top: 32px;
   margin-bottom: 32px;
 }
 
 .courses {
   display: flex;
+  column-gap: vars.$grid-gap;
+  padding-bottom: 40px;
 }
 
 .filters {
-  width: 312px;
-  margin-right: 24px;
+  max-width: 312px;
 }
 
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
-  width: calc(100% - 336px);
+  width: 100%;
+  max-width: 984px;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: vars.$grid-gap;
 }

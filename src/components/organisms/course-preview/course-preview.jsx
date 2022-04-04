@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Button, Tag, TextWithIcon } from '../../molecules';
+import { Card } from '../../templates';
 import getDeclensionOf from '../../../utils/getDeclensionOf';
 import styles from './course-preview.module.scss';
-import Card from '../../templates/card/card';
+import { Heading } from '../../atoms';
 
 function CoursePreview({ course }) {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function CoursePreview({ course }) {
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
-      <h2 className={styles.title}>{title}</h2>
+      <Heading level={2} size="l" title={title} className={styles.title} />
       <p className={styles.description}>{description}</p>
       <Tag className={styles.level} text={level.name} />
       <TextWithIcon

@@ -1,40 +1,42 @@
-@use '../../../styles/color-variables';
+@use 'src/styles/variables' as vars;
+
+.filters {
+  width: 100%;
+}
+
+.card {
+  width: inherit;
+  margin-bottom: 32px;
+  padding-bottom: 0;
+}
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 8px;
   margin-bottom: 32px;
-
-  h2 {
-    margin: 0;
-  }
 }
 
 .filterAccordion > button {
   padding-top: 32px;
   padding-bottom: 32px;
-  font-size: 18px;
-  line-height: 24px;
-  border-top: 1px solid color-variables.$borders-divider-disabled-bg;
-  transition: color 0.3s ease;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+  border-top: 1px solid vars.$borders-divider-disabled-bg;
+  transition: color vars.$trans-300;
 
   &:hover {
-    color: color-variables.$color-hover;
+    color: vars.$color-hover;
   }
 }
 
 .checkbox {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   &:last-child {
     margin-bottom: 32px;
   }
-}
-
-.filters {
-  margin-bottom: 32px;
-  padding-bottom: 0;
 }
 
 .selection {
