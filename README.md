@@ -1,6 +1,10 @@
 # lizaalert_frontend
 Платформа для обучения добровольцев "ЛизаАлерт" - Frontend
 
+## Важно!
+- Перед началом работы обязательно убедитесь, что у вас установлены Eslint и Prettier
+- Выполните `npm i` и `npm run prepare` (в папке .husky должна появиться папка с названием `_`)
+
 ## Полезные ссылки:
 [Notion](https://www.notion.so/Workspase-1078a8066a6e45fbb9ad07854f7e0f38)
 
