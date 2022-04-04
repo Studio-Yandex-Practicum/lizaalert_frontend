@@ -8,7 +8,7 @@ import styles from './card.module.scss';
  *
  * - className - string - необязательный проп - дополнительный css класс для стилизации
  * - noPadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеютсястандартные паддинги 32px
- * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'
+ * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'. По умолчанию div.
  */
 
 function Card({ className, children, noPadding, htmlTag }) {

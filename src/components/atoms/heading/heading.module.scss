@@ -1,0 +1,30 @@
+@use 'src/styles/color-variables' as color;
+@use 'src/styles/font-variables' as font;
+
+.heading {
+  font-family: font.$mainFont;
+  font-style: normal;
+  font-weight: 700;
+  color: color.$dark-primary;
+  margin: 0;
+}
+
+.xxl {
+  font-size: font.$font-size-xxl;
+  line-height: font.$line-height-xxl;
+}
+
+.xl {
+  font-size: font.$font-size-xl;
+  line-height: font.$line-height-xl;
+}
+
+.l {
+  font-size: font.$font-size-l;
+  line-height: font.$line-height-l;
+}
+
+.m {
+  font-size: font.$font-size-m;
+  line-height: font.$line-height-m;
+}
