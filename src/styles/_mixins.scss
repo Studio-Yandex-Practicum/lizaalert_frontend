@@ -1,6 +1,7 @@
 @use 'variables' as vars;
 @import './animations';
 
+/* медиазапросы */
 @mixin atDesktopS {
   @media screen and (max-width: vars.$desktop-s) {
     @content;
@@ -25,6 +26,7 @@
   }
 }
 
+/* всякие анимашки */
 @mixin slide-bottom-up($delay) {
   opacity: 0;
   transform: translateY(20px);
