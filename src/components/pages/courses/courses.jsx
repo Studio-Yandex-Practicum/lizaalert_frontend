@@ -5,7 +5,7 @@ import styles from './courses.module.scss';
 
 function Courses() {
   return (
-    <div className={styles.container}>
+    <div className="container">
       <h2 className={`heading h1 ${styles.heading}`}>Курсы</h2>
       <div className={styles.courses}>
         <Filter className={styles.filters} />

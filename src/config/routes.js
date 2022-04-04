@@ -15,16 +15,19 @@ const routes = {
     id: 3,
     title: 'Регистрация',
     path: 'register',
+    icon: 'userSquare',
   },
   login: {
     id: 4,
     title: 'Вход',
     path: 'login',
+    icon: 'userSquare',
   },
   notFound: {
     id: 5,
     title: 'Страница не найдена',
     path: '*',
+    icon: 'XSolid',
   },
 };
 

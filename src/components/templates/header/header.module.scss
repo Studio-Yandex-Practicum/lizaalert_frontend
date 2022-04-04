@@ -1,5 +1,4 @@
 @use 'src/styles/color-variables.scss' as color;
-@use '../../../styles/mixins' as mixins;
 
 .header {
   box-shadow: 0 0 4px rgba(231, 232, 235, 0.6), 0 4px 16px rgba(231, 232, 235, 0.6);
@@ -7,7 +6,6 @@
   font-weight: 500;
 
   &Container {
-    @include mixins.container;
     display: flex;
     justify-content: space-between;
   }

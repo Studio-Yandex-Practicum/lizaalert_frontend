@@ -1,5 +1,3 @@
-@use '../../../styles/mixins' as mixins;
-
 .heading {
   margin-top: 32px;
   margin-bottom: 32px;
@@ -22,8 +20,4 @@
   display: flex;
   flex-direction: column;
   row-gap: 24px;
-}
-
-.container {
-  @include mixins.container;
 }
