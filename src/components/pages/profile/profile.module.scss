@@ -1,0 +1,43 @@
+@use '../../../styles//font-variables';
+@use '../../../styles/color-variables.scss';
+
+.profileHeadline {
+  margin: 24px 0 32px;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: auto fit-content(100%);
+  gap: 24px;
+}
+
+.descriprion {
+  font-family: font-variables.$mainFont;
+  max-width: 312px;
+  width: 100%;
+  color: color-variables.$dark-secondary;
+  font-size: 18px;
+  line-height: calc(24 / 18);
+
+  & p {
+    margin: 0 0 28px;
+  }
+
+  & ul {
+    padding: 0 0 0 30px;
+    margin: 0;
+  }
+}
