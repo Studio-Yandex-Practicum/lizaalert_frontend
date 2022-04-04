@@ -1,0 +1,25 @@
+@use 'variables' as vars;
+
+@mixin atDesktopS {
+  @media screen and (max-width: vars.$desktop-s) {
+    @content;
+  }
+}
+
+@mixin atTablet {
+  @media screen and (max-width: vars.$tablet) {
+    @content;
+  }
+}
+
+@mixin atMobile {
+  @media screen and (max-width: vars.$mobile) {
+    @content;
+  }
+}
+
+@mixin atMobileS {
+  @media screen and (max-width: vars.$mobile-s) {
+    @content;
+  }
+}
