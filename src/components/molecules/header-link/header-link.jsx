@@ -13,7 +13,6 @@ function HeaderLink({ text, iconType, link }) {
       to={link}
       children={({ isActive }) => {
         const color = isActive ? 'color-hover' : 'dark-primary';
-
         return <TextWithIcon text={text} iconType={iconType} color={color} />;
       }}
     />

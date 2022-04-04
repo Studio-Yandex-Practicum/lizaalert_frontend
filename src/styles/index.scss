@@ -1,7 +1,7 @@
 @use "./font-variables";
 @use "./color-variables";
 @import "../assets/fonts/fonts.css";
-@import "./container.scss";
+@import "mixins";
 @import "./typography.scss";
 
 body {

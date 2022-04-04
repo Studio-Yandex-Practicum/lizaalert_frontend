@@ -7,22 +7,24 @@ import styles from './header.module.scss';
 function Header({ links }) {
   return (
     <header className={styles.header}>
-      <Link to={routes.courses.path} className={styles.headerTextLink}>
-        <h1 className={styles.headerText}>Учебная платформа</h1>
-      </Link>
-      <nav>
-        <ul className={styles.headerLinks}>
-          {links.map((link) => (
-            <li key={link.id}>
-              <HeaderLink
-                text={link.title}
-                iconType={link.icon}
-                link={link.path}
-              />
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className={styles.headerContainer}>
+        <Link to={routes.courses.path} className={styles.headerTextLink}>
+          <h1 className={styles.headerText}>Учебная платформа</h1>
+        </Link>
+        <nav>
+          <ul className={styles.headerLinks}>
+            {links.map((link) => (
+              <li key={link.id}>
+                <HeaderLink
+                  text={link.title}
+                  iconType={link.icon}
+                  link={link.path}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }
