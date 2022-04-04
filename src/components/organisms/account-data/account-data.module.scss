@@ -1,15 +1,17 @@
-@import 'src/styles/color-variables';
+@use '../../../styles/color-variables.scss';
+@use '../../../styles/_font-variables';
 
 .accountData {
   max-width: 648px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  font-family: font-variables.$mainFont;
 }
 
 .title {
   margin: 0;
-  color: $dark-primary;
+  color: color-variables.$dark-primary;
   font-weight: 700;
   font-size: 24px;
   line-height: calc(28 / 24);
@@ -22,17 +24,6 @@
 
 .inputSection {
   margin: 32px 0 0 0;
-  padding: 12px 16px;
-  border: 1.2px solid $borders-divider-disabled-bg;
-  border-radius: 16px;
-  color: $dark-primary;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-
-  &[disabled] {
-    color: $dark-secondary;
-  }
 }
 
 .submitButton {
