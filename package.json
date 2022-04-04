@@ -13,7 +13,6 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
-    "sass": "^1.49.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -21,9 +20,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier --write src/**/*.js",
+    "prettier": "prettier --write src/**/*.(js|jsx)",
     "lint": "eslint --debug src/",
-    "lint:fix": "eslint --debug src/ --fix"
+    "lint:fix": "eslint --debug src/ --fix",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -31,9 +31,8 @@
     }
   },
   "lint-staged": {
-    "*.(js|jsx)": [
-      "npm run lint:fix",
-      "git add"
+    "**/*.(js|jsx)": [
+      "npm run lint:fix"
     ]
   },
   "eslintConfig": {
@@ -63,8 +62,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^12.3.7",
-    "prettier": "^2.6.1"
+    "prettier": "^2.6.1",
+    "sass": "^1.49.9"
   }
 }
