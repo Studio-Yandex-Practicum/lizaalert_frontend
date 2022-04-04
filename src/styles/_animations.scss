@@ -9,3 +9,9 @@
     transform: translateY(0);
   }
 }
+
+.slide-bottom-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slide-bottom-up .5s ease-out forwards;
+}

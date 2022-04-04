@@ -1,5 +1,5 @@
 @use 'variables' as vars;
-@import './animations';
+@use './animations';
 
 /* медиазапросы */
 @mixin atDesktopS {
@@ -26,9 +26,8 @@
   }
 }
 
-/* всякие анимашки */
+/* анимации */
 @mixin slide-bottom-up($delay) {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slide-bottom-up .5s ease-out $delay forwards;
+  @extend .slide-bottom-up;
+  animation-delay: $delay;
 }
