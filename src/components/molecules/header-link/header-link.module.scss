@@ -1,34 +1,26 @@
-@import '../../../styles/color-variables.scss';
+@use 'src/styles/variables' as vars;
 
 .link {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
-  color: $dark-primary;
+  color: vars.$dark-primary;
   cursor: pointer;
 
   &_active {
-    color: $color-hover;
+    color: vars.$color-hover;
   }
 
   &__icon {
-    width: 24px;
-    height: 24px;
-
-    &_active {
-      
-      path {
-        fill: $color-hover;
-      }
-    }
+    max-width: 24px;
+    max-height: 24px;
   }
 
   &__text {
     margin: 0;
-    font-family: 'GolosTextMedium';
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
+    font-size: vars.$font-size-m;
+    line-height: vars.$line-height-m;
   }
 }

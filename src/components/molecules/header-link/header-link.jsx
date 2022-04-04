@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import Icon from '../../atoms/icon/icon';
+import { Icon } from '../../atoms';
 
 import styles from './header-link.module.scss';
 
@@ -11,9 +10,7 @@ function HeaderLink({ text, isActive, link }) {
     [styles.link_active]: isActive,
   });
 
-  const classNameIcon = classNames(styles.link__icon, {
-    [styles.link__icon_active]: isActive,
-  });
+  const classNameIcon = classNames(styles.link__icon);
 
   return (
     <NavLink className={classNameLink} to={link}>

@@ -1,5 +1,4 @@
-import Filter from '../../organisms/filter/filter';
-import { CoursePreview } from '../../organisms';
+import { CoursePreview, Filter } from '../../organisms';
 import mockCourses from '../../../services/mock/courses.json';
 import styles from './courses.module.scss';
 
