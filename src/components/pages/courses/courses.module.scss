@@ -17,4 +17,7 @@
   margin: 0;
   padding: 0;
   width: calc(100% - 336px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
 }
