@@ -1,18 +1,16 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from '../../templates/card/card';
-import styles from './account-data.module.scss';
 import Button from '../../molecules/button/button';
 import Input from '../../molecules/input/input';
+import styles from './account-data.module.scss';
 
-function AccountData({ userPhoneNumber, userEmail, userPassword }) {
+function AccountData() {
   const [isInputsEdited, setIsInputsEdited] = useState(false);
   const [inputValues, setInputValues] = useState({
-    phoneNumber: userPhoneNumber,
-    email: userEmail,
-    password: userPassword,
+    phoneNumber: '+71234567890',
+    email: 'anna@liza-alert.ru',
+    password: 'password',
   });
-
   const onInputValuesChange = (evt) => {
     setInputValues({
       ...inputValues,
@@ -22,16 +20,13 @@ function AccountData({ userPhoneNumber, userEmail, userPassword }) {
       setIsInputsEdited(true);
     }
   };
-
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     // const { email, password } = inputValues;
   };
-
   return (
     <Card className={styles.accountData}>
       <h2 className={styles.title}>Аккаунт</h2>
-
       <form
         name="accountData"
         onSubmit={handleFormSubmit}
@@ -62,7 +57,6 @@ function AccountData({ userPhoneNumber, userEmail, userPassword }) {
           onChange={onInputValuesChange}
           className={styles.inputSection}
         />
-
         <Button
           type="submit"
           disabled={!isInputsEdited}
@@ -74,17 +68,5 @@ function AccountData({ userPhoneNumber, userEmail, userPassword }) {
     </Card>
   );
 }
-
-AccountData.propTypes = {
-  userPhoneNumber: PropTypes.string,
-  userEmail: PropTypes.string,
-  userPassword: PropTypes.string,
-};
-
-AccountData.defaultProps = {
-  userPhoneNumber: '+71234567890',
-  userEmail: 'anna@liza-alert.ru',
-  userPassword: 'password',
-};
 
 export default AccountData;
