@@ -9,8 +9,8 @@ import styles from './text-with-icon.module.scss';
  * - isReverse - optional boolean - swap text and icon
  */
 
-function TextWithIcon({ text, iconType, isReverse, color }) {
-  const className = classnames(styles.textWithIcon, {
+function TextWithIcon({ text, iconType, isReverse, color, className }) {
+  const classNames = classnames(styles.textWithIcon, className, {
     [styles.reverse]: isReverse,
   });
 
@@ -19,31 +19,30 @@ function TextWithIcon({ text, iconType, isReverse, color }) {
   };
 
   return (
-    <div className={className} style={colorStyle}>
-      {iconType && (
-        <Icon
-          type={iconType}
-          maxWidth={20}
-          maxHeight={20}
-          className={styles.icon}
-        />
-      )}
+    <div className={classNames} style={colorStyle}>
+      <Icon
+        type={iconType}
+        maxWidth={20}
+        maxHeight={20}
+        className={styles.icon}
+      />
       <p className={styles.text}>{text}</p>
     </div>
   );
 }
 
 TextWithIcon.propTypes = {
-  text: PropTypes.string.isRequired,
-  iconType: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  iconType: PropTypes.string.isRequired,
   isReverse: PropTypes.bool,
   color: PropTypes.string,
+  className: PropTypes.string,
 };
 
 TextWithIcon.defaultProps = {
-  iconType: null,
   isReverse: false,
   color: 'dark-primary',
+  className: '',
 };
 
 export default TextWithIcon;
