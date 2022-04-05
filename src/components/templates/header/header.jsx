@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import HeaderLink from '../../molecules/header-link/header-link';
 import routes from '../../../config/routes';
 import styles from './header.module.scss';
 
-function Header({ links }) {
+function Header() {
+  const renderRoutes = [routes.courses, routes.profile];
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
@@ -13,12 +14,12 @@ function Header({ links }) {
         </Link>
         <nav>
           <ul className={styles.headerLinks}>
-            {links.map((link) => (
-              <li key={link.id}>
+            {renderRoutes.map((route) => (
+              <li key={route.id}>
                 <HeaderLink
-                  text={link.title}
-                  iconType={link.icon}
-                  link={link.path}
+                  text={route.title}
+                  iconType={route.icon}
+                  link={route.path}
                 />
               </li>
             ))}
@@ -28,16 +29,5 @@ function Header({ links }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      path: PropTypes.string.isRequired,
-      icon: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-};
 
 export default Header;
