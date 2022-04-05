@@ -31,6 +31,7 @@
 @mixin pseudo {
   align-self: flex-start;
   transition: color vars.$trans-300;
+  min-height: 24px;
 
   path {
     opacity: 0;
@@ -47,7 +48,6 @@
 .pseudoRadio {
   @include pseudo;
   max-width: 22px;
-  max-height: 22px;
 
   path:nth-child(1), path:nth-child(2) {
     transform: scale(0);
@@ -57,7 +57,6 @@
 .pseudoCheckbox {
   @include pseudo;
   max-width: 20px;
-  max-height: 20px;
 }
 
 .labelText {
