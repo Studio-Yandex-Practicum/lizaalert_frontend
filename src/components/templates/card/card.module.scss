@@ -5,6 +5,7 @@
   box-shadow: 0 0 4px color.$drop-shadow-small, 0 4px 16px color.$drop-shadow-small;
   background-color: color.$bg-primary;
   padding: 32px;
+  min-width: fit-content;
 
   &NoPadding {
     padding: 0;
