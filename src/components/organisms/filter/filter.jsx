@@ -113,7 +113,7 @@ function Filter({ className }) {
     <aside className={classnames(styles.filters, className)}>
       <Card className={styles.card}>
         <div className={styles.header}>
-          <Heading size="l" level={2} title="Фильтры" />
+          <Heading size="l" level={3} title="Фильтры" />
           {selection.length > 0 && (
             <Button view="text" onClick={filterResetHandler}>
               Очистить

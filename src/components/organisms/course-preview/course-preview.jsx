@@ -21,7 +21,7 @@ function CoursePreview({ course }) {
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
-      <Heading level={2} size="l" title={title} className={styles.title} />
+      <Heading level={3} size="l" title={title} className={styles.title} />
       <p className={styles.description}>{description}</p>
       <Tag className={styles.level} text={level.name} />
       <TextWithIcon
