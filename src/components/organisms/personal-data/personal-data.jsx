@@ -40,6 +40,7 @@ function PersonalData() {
           value={inputsValues.name}
           onChange={onInputValuesChange}
           className={styles.inputSection}
+          placeholder="Ваше ФИО"
         />
         <Input
           labelName="Дата рождения"
@@ -48,6 +49,7 @@ function PersonalData() {
           value={inputsValues.dateOfBirth}
           onChange={onInputValuesChange}
           className={styles.inputSection}
+          placeholder="Дата рождения"
         />
         <Input
           labelName="Географический регион"
@@ -56,6 +58,7 @@ function PersonalData() {
           value={inputsValues.region}
           onChange={onInputValuesChange}
           className={styles.inputSection}
+          placeholder="Регион проживания"
         />
         <Input
           labelName="Позывной на форуме"
@@ -64,6 +67,7 @@ function PersonalData() {
           value={inputsValues.nickname}
           onChange={onInputValuesChange}
           className={styles.inputSection}
+          placeholder="Позывной на форуме"
         />
         <Input
           labelName="Фото"
@@ -71,6 +75,8 @@ function PersonalData() {
           inputName="avatar"
           value={inputsValues.avatar}
           className={styles.inputSection}
+          placeholder="Ваше фото"
+          accept="image/*"
         />
         <Button
           disabled={!isInputChanged}
