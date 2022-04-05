@@ -1,36 +1,41 @@
-@use '../../../styles//font-variables';
-@use '../../../styles/color-variables';
+@use 'src/styles/variables' as vars;
 
 .profileHeadline {
-  margin: 24px 0 32px;
+  padding-top: 24px;
+  margin-bottom: 32px;
 }
 
 .content {
   display: flex;
-  gap: 24px;
+  gap: vars.$grid-gap;
+  padding-bottom: 40px;
+}
+
+.aside {
+  max-width: 312px;
+  width: 100%;
 }
 
 .main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: vars.$grid-gap;
 }
 
 .section {
   display: grid;
   grid-template-columns: auto fit-content(100%);
-  gap: 24px;
+  gap: vars.$grid-gap;
 }
 
-.descriprion {
-  font-family: font-variables.$mainFont;
+.description {
+  font-family: vars.$mainFont;
   max-width: 312px;
   width: 100%;
-  color: color-variables.$dark-secondary;
-  font-size: 18px;
-  line-height: calc(24 / 18);
+  color: vars.$dark-secondary;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
 
   & p {
     margin: 0 0 28px;

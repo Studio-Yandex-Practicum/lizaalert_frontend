@@ -1,6 +1,6 @@
-import { CoursePreview, Filter } from '../../organisms';
 import mockCourses from '../../../services/mock/courses.json';
 import { Heading } from '../../atoms';
+import { CoursePreview, Filter } from '../../organisms';
 import styles from './courses.module.scss';
 import routes from '../../../config/routes';
 
@@ -8,7 +8,7 @@ function Courses() {
   return (
     <div className="container">
       <Heading
-        level={1}
+        level={2}
         size="xxl"
         title={routes.courses.title}
         className={styles.heading}
