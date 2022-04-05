@@ -3,17 +3,6 @@ import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './button.module.scss';
 
-const btnView = {
-  primary: styles.primary,
-  secondary: styles.secondary,
-  text: styles.text,
-};
-
-const iconPos = {
-  forward: styles.forward,
-  back: styles.back,
-};
-
 /**
  * @description Компонент кнопки с икнокой или без.
  *
@@ -41,8 +30,8 @@ function Button({
 }) {
   const btnClasses = classnames(
     styles.button,
-    btnView[view] ?? btnView.primary,
-    { [iconPos[iconPosition]]: iconPosition },
+    styles[view ?? 'primary'],
+    { [styles[iconPosition]]: iconPosition },
     className
   );
 
