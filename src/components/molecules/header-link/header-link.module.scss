@@ -1,26 +1,3 @@
-@use 'src/styles/variables' as vars;
-
 .link {
-  display: flex;
-  gap: 10px;
   text-decoration: none;
-  color: vars.$dark-primary;
-  cursor: pointer;
-
-  &_active {
-    color: vars.$color-hover;
-  }
-
-  &__icon {
-    max-width: 24px;
-    max-height: 24px;
-  }
-
-  &__text {
-    margin: 0;
-    font-style: normal;
-    font-weight: 500;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
-  }
 }
