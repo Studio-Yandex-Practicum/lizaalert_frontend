@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Icon } from '../../atoms';
+import { ANIMATION_DURATION } from '../../../utils/constants';
 import styles from './accordion.module.scss';
 
 /**
@@ -20,15 +21,15 @@ function Accordion({ children, className, title, button, open }) {
 
   const contentRef = useRef(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
-    }, 300);
-  }, [contentRef.current]);
-
   const updateContentHeight = () => {
     setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      updateContentHeight();
+    }, ANIMATION_DURATION);
+  }, [contentRef.current]);
 
   const innerAccordionToggleHandler = (evt) => {
     if (evt.target !== contentRef.current) {
