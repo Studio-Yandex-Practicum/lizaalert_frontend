@@ -9,7 +9,7 @@ import styles from './heading.module.scss';
  * - level - number - уровень заголовка от 1 до 6. Если число не входит в этот диапазон или не передано, то возвращается заголовок `<h2>`.
  * - title - string | node - контент заголовка, может быть текстом или элементом
  * - children - string | node - контент заголовка, может быть текстом или элементом. Имеет приоритет перед title!
- * - size - string - размер заголовка из заранее определенных стилей: `'xxl'`, `'xl'`, `'l'`, `'m'` из font-variables. По-умолчанию `'m'`.
+ * - size - string - размер заголовка из заранее определенных стилей: `'xxl'`, `'xl'`, `'l'`, `'m'` из font-variables. По-умолчанию `'xl'`.
  * - isSubheading - boolean - при передаче этого пропса вернется элемент `<p>`, по умолчанию false.
  * - className - string - css-класс миксин для передачи своих стилей
  */
@@ -35,7 +35,7 @@ Heading.defaultProps = {
   level: 2,
   title: '',
   children: null,
-  size: 'm',
+  size: 'xl',
   isSubheading: false,
   className: '',
 };

@@ -1,23 +1,25 @@
-import AccountData from '../../organisms/account-data/account-data';
-import AccountOverview from '../../organisms/account-overview/account-overview';
-import PersonalData from '../../organisms/personal-data/personal-data';
+import { Heading } from '../../atoms';
+import { AccountData, AccountOverview, PersonalData } from '../../organisms';
 import routes from '../../../config/routes';
 import styles from './profile.module.scss';
 
 function Profile() {
   return (
     <div className="container">
-      <h1 className={`heading heading.h1 ${styles.profileHeadline}`}>
-        {routes.profile.title}
-      </h1>
+      <Heading
+        level={2}
+        size="xxl"
+        title={routes.profile.title}
+        className={styles.profileHeadline}
+      />
       <div className={styles.content}>
-        <aside>
+        <aside className={styles.aside}>
           <AccountOverview />
         </aside>
         <main className={styles.main}>
           <section className={styles.section}>
             <PersonalData />
-            <div className={styles.descriprion}>
+            <div className={styles.description}>
               <p>
                 Просьба указывать настоящие ФИО, это нужно для получения
                 сертификатов
@@ -40,7 +42,7 @@ function Profile() {
           </section>
           <section className={styles.section}>
             <AccountData />
-            <div className={styles.descriprion}>
+            <div className={styles.description}>
               <p>
                 Номер телефона используется как уникальный идентификатор
                 пользователя, поэтому его нельзя поменять вручную

@@ -1,0 +1,33 @@
+@use 'variables' as vars;
+@use './animations';
+
+/* медиазапросы */
+@mixin atDesktopS {
+  @media screen and (max-width: vars.$desktop-s) {
+    @content;
+  }
+}
+
+@mixin atTablet {
+  @media screen and (max-width: vars.$tablet) {
+    @content;
+  }
+}
+
+@mixin atMobile {
+  @media screen and (max-width: vars.$mobile) {
+    @content;
+  }
+}
+
+@mixin atMobileS {
+  @media screen and (max-width: vars.$mobile-s) {
+    @content;
+  }
+}
+
+/* анимации */
+@mixin slide-bottom-up($delay) {
+  @extend .slide-bottom-up;
+  animation-delay: $delay;
+}

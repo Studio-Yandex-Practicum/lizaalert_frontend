@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Icon from '../../atoms/icon/icon';
+import { Icon } from '../../atoms';
 import styles from './tag.module.scss';
 
 function Tag({ text, onClick, className, value }) {
@@ -17,12 +17,7 @@ function Tag({ text, onClick, className, value }) {
             onClick(value);
           }}
         >
-          <Icon
-            type="xSolid"
-            maxWidth={20}
-            maxHeight={20}
-            className={styles.icon}
-          />
+          <Icon type="xSolid" className={styles.icon} />
         </button>
       </div>
     );

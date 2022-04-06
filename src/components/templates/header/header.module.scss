@@ -1,4 +1,4 @@
-@use 'src/styles/color-variables.scss' as color;
+@use 'src/styles/variables' as vars;
 
 .header {
   box-shadow: 0 0 4px rgba(231, 232, 235, 0.6), 0 4px 16px rgba(231, 232, 235, 0.6);
@@ -10,17 +10,9 @@
     justify-content: space-between;
   }
 
-  &Text {
-    font-weight: 700;
-    margin: 0;
-    font-size: 18px;
-    line-height: calc(24 / 18);
-    cursor: pointer;
-
-    &Link {
-      text-decoration: none;
-      color: color.$dark-primary;
-    }
+  &Link {
+    text-decoration: none;
+    color: vars.$dark-primary;
   }
 
   &Links {

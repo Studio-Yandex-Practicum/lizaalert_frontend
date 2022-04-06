@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import Icon from '../../atoms/icon/icon';
+import { Icon } from '../../atoms';
 import styles from './accordion.module.scss';
 
 /**

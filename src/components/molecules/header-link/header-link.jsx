@@ -1,7 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { TextWithIcon } from '../index';
+import TextWithIcon from '../text-with-icon/text-with-icon';
 import styles from './header-link.module.scss';
 
 function HeaderLink({ text, iconType, link }) {
