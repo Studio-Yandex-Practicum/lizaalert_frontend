@@ -1,10 +1,11 @@
-@use "../../../styles/color-variables.scss";
+@use "src/styles/color-variables.scss" as color;
 
 .card {
   border-radius: 16px;
-  box-shadow: 0px 0px 4px color-variables.$drop-shadow-small, 0px 4px 16px color-variables.$drop-shadow-small;
-  background-color: color-variables.$bg-primary;
+  box-shadow: 0 0 4px color.$drop-shadow-small, 0 4px 16px color.$drop-shadow-small;
+  background-color: color.$bg-primary;
   padding: 32px;
+  min-width: fit-content;
 
   &NoPadding {
     padding: 0;

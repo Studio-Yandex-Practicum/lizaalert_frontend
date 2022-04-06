@@ -1,5 +1,4 @@
 import Icon from './icon/icon';
+import Heading from './heading/heading';
 
-// TODO удалить исключение, когда здесь будет более 1 компонента
-// eslint-disable-next-line import/prefer-default-export
-export { Icon };
+export { Icon, Heading };

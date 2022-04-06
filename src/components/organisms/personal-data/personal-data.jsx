@@ -1,27 +1,27 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Card from '../../templates/card/card';
 import styles from './personal-data.module.scss';
 import Button from '../../molecules/button/button';
 
 function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
   // изменение с false на true при внесении изменений в данные
-  const [isInputChanged, setIsInputChanged] = useState(false);
-  const [inputsValues, setInputsValues] = useState({
-    name: userName,
-    dateOfBirth: userDateOfBirth,
-    region: userRegion,
-    nickname: userNickname,
-    avatar: '',
-  });
+  // const [isInputChanged, setIsInputChanged] = useState(false);
+  // const [inputsValues, setInputsValues] = useState({
+  //   name: userName,
+  //   dateOfBirth: userDateOfBirth,
+  //   region: userRegion,
+  //   nickname: userNickname,
+  //   avatar: '',
+  // });
 
   // функция на событие onChange для инпутов
-  const onInputValuesChange = (e) => {
-    if (e.target.value !== inputsValues[e.target.name] && isInputChanged) {
-      setIsInputChanged(true);
-      setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
-    }
-  };
+  // const onInputValuesChange = (e) => {
+  //   if (e.target.value !== inputsValues[e.target.name] && isInputChanged) {
+  //     setIsInputChanged(true);
+  //     setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+  //   }
+  // };
 
   return (
     <Card className={styles.personalData}>
@@ -33,7 +33,7 @@ function PersonalData({ userName, userDateOfBirth, userRegion, userNickname }) {
         <div className={styles.inputSection}>{userNickname}</div>
         <div className={styles.inputSection} />
         <Button
-          disabled={!isInputChanged}
+          // disabled={!isInputChanged}
           type="submit"
           className={styles.submitButton}
         >
