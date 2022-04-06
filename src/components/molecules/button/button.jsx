@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { Icon } from '../../atoms';
 import styles from './button.module.scss';
-import Icon from '../../atoms/icon/icon';
 
-const btnView = {
-  primary: ` ${styles.primary}`,
-  secondary: ` ${styles.secondary}`,
-  text: ` ${styles.text}`,
-};
-
-const iconPos = {
-  forward: ` ${styles.forward}`,
-  back: ` ${styles.back}`,
-};
+/**
+ * @description Компонент кнопки с икнокой или без.
+ *
+ * - children - string - текст кнопки
+ * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
+ * - iconName - string - имя иконки из объекта icons
+ * - iconPosition - string - позиционирование иконки слева/справа от текста: 'back', 'forward'
+ * - onClick - function - функция-обработчик клика
+ * - className - string - класс-миксин
+ * - disabled - boolean - флаг отключения кнопки
+ * - type - string - тип кнопки: 'button', 'submit'
+ * - minWidth - string | number - инлайновый стиль минимальной ширины, прибивается гвоздями, по умолчанию наследуется
+ */
 
 function Button({
   children,
@@ -24,10 +28,12 @@ function Button({
   type,
   minWidth,
 }) {
-  const btnClasses =
-    styles.button +
-    (btnView[view] ?? btnView.primary) +
-    (iconPosition && iconPos[iconPosition]);
+  const btnClasses = classnames(
+    styles.button,
+    styles[view ?? 'primary'],
+    { [styles[iconPosition]]: iconPosition },
+    className
+  );
 
   let inlineStyle = {};
 
@@ -36,17 +42,17 @@ function Button({
   return (
     <button
       onClick={onClick}
-      className={`${btnClasses}${className && ` ${className}`}`}
+      className={btnClasses}
       disabled={disabled}
       type={type === 'submit' ? 'submit' : 'button'}
       style={inlineStyle}
     >
       {iconPosition === 'back' && (
-        <Icon type={iconName} maxWidth={16} maxHeight={16} />
+        <Icon type={iconName} className={styles.icon} />
       )}
       {children}
       {iconPosition === 'forward' && (
-        <Icon type={iconName} maxWidth={16} maxHeight={16} />
+        <Icon type={iconName} className={styles.icon} />
       )}
     </button>
   );
@@ -56,7 +62,7 @@ Button.propTypes = {
   children: PropTypes.string,
   view: PropTypes.oneOf(['primary', 'secondary', 'text']),
   iconName: PropTypes.string,
-  iconPosition: PropTypes.string,
+  iconPosition: PropTypes.oneOf(['back', 'forward', '']),
   onClick: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -69,7 +75,7 @@ Button.defaultProps = {
   view: 'primary',
   iconName: '',
   iconPosition: '',
-  onClick: () => {},
+  onClick: undefined,
   className: '',
   disabled: false,
   type: 'button',

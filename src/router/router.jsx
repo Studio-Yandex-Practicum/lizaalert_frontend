@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
-  Courses,
   Course,
-  Profile,
-  NotFound,
-  Login,
-  Register,
+  Courses,
   Lesson,
+  Login,
+  NotFound,
+  Profile,
+  Register,
 } from '../components/pages';
 import Layout from '../components/templates/layout/layout';
 import routes from '../config/routes';
@@ -17,8 +17,8 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={courses.path} element={<Layout />}>
-          <Route index element={<Courses />} />
+        <Route element={<Layout />}>
+          <Route path={courses.path} element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:lessonId" element={<Lesson />} />
           <Route path={profile.path} element={<Profile />} />
