@@ -11,6 +11,7 @@
     object-position: center;
     display: block;
     width: 100%;
+
     &Container {
       overflow: hidden;
       border-radius: 16px;
@@ -21,7 +22,7 @@
   &Meta {
     list-style: none;
     width: 100%;
-    padding: 0 32px 0 34px;
+    padding: 0 32px;
     box-sizing: border-box;
     margin: 0 0 32px;
 
@@ -30,6 +31,7 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
+
       &:last-child {
         margin-bottom: 0;
       }
@@ -38,8 +40,9 @@
 
   &Alert {
     width: 100%;
-    padding: 0 32px;
+    max-width: 424px;
     box-sizing: border-box;
+    padding: 0 32px;
     margin-bottom: 32px;
   }
 
@@ -48,9 +51,5 @@
     max-width: calc(100% - 64px);
     margin: 0 0 32px;
     box-sizing: border-box;
-  }
-
-  &Alert {
-    margin-bottom: 32px;
   }
 }

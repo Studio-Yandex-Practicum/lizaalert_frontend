@@ -20,12 +20,7 @@ function TextWithIcon({ text, iconType, isReverse, color, className }) {
 
   return (
     <div className={classNames} style={colorStyle}>
-      <Icon
-        type={iconType}
-        maxWidth={20}
-        maxHeight={20}
-        className={styles.icon}
-      />
+      <Icon type={iconType} className={styles.icon} />
       <p className={styles.text}>{text}</p>
     </div>
   );

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import HeaderLink from '../../molecules/header-link/header-link';
+import { Heading } from '../../atoms';
+import { HeaderLink } from '../../molecules';
 import routes from '../../../config/routes';
 import styles from './header.module.scss';
 
@@ -9,8 +10,8 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <Link to={routes.courses.path} className={styles.headerTextLink}>
-          <h1 className={styles.headerText}>Учебная платформа</h1>
+        <Link to={routes.courses.path} className={styles.headerLink}>
+          <Heading level={1} size="m" title="Учебная платформа" />
         </Link>
         <nav>
           <ul className={styles.headerLinks}>

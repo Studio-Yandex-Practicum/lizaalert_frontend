@@ -1,13 +1,11 @@
-@use "./font-variables";
-@use "./color-variables";
+@use "variables" as vars;
 @import "../assets/fonts/fonts.css";
-@import "container";
-@import "./typography.scss";
+@import "container.scss";
 
 body {
   margin: 0;
-  font-family: font-variables.$mainFont;
+  font-family: vars.$mainFont;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: color-variables.$bg-secondary;
+  background-color: vars.$bg-secondary;
 }

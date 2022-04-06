@@ -1,0 +1,12 @@
+@import "font-variables";
+@import "color-variables";
+
+// остальные несортированные переменные, не относящиеся к шрифтам или цветам
+$grid-gap: 24px;
+$trans-300: 0.3s ease;
+
+// брейкпонты (предварительно)
+$desktop-s: 1279px;
+$tablet: 1023px;
+$mobile: 767px;
+$mobile-s: 640px;
