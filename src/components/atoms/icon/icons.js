@@ -18,7 +18,7 @@ import { ReactComponent as Duration } from '../../../assets/icons/duration.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
 import { ReactComponent as ExclamationMark } from '../../../assets/icons/exclamation-mark.svg';
 import { ReactComponent as Eye } from '../../../assets/icons/eye.svg';
-import { ReactComponent as FullScreen } from '../../../assets/icons/fullscreen.svg';
+import { ReactComponent as Fullscreen } from '../../../assets/icons/fullscreen.svg';
 import { ReactComponent as History } from '../../../assets/icons/history.svg';
 import { ReactComponent as Info } from '../../../assets/icons/info.svg';
 import { ReactComponent as Lessons } from '../../../assets/icons/lessons.svg';
@@ -79,7 +79,7 @@ const icons = {
   edit: <Edit {...defaultAttributes} />,
   exclamationMark: <ExclamationMark {...defaultAttributes} />,
   eye: <Eye {...defaultAttributes} />,
-  fullScreen: <FullScreen {...defaultAttributes} />,
+  fullscreen: <Fullscreen {...defaultAttributes} />,
   history: <History {...defaultAttributes} />,
   info: <Info {...defaultAttributes} />,
   lessons: <Lessons {...defaultAttributes} />,
