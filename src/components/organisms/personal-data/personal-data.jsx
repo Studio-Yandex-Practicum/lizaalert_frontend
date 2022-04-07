@@ -72,11 +72,12 @@ function PersonalData() {
         <Input
           labelName="Фото"
           type="file"
+          accept="image/*"
           inputName="avatar"
           value={inputsValues.avatar}
+          onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Ваше фото"
-          accept="image/*"
         />
         <Button
           disabled={!isInputChanged}
