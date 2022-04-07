@@ -1,76 +1,45 @@
-@import 'src/styles/color-variables';
-@import 'src/styles/font-variables';
+@use 'src/styles/variables' as vars;
 
 .card {
-  box-sizing: border-box;
   width: 872px;
+  color: vars.$dark-primary;
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.title {
+.title > button {
   margin: 0;
-  font-family: $mainFont;
-  font-style: normal;
   font-weight: 700;
-  font-size: $font-size-l;
+  font-size: vars.$font-size-l;
   line-height: 117%;
-  color: $dark-primary;
-}
-
-.button {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  cursor: pointer;
-  padding: 0;
-  font-family: $mainFont;
-  font-size: $font-size-m;
-  font-weight: 500;
-  line-height: 133%;
-  color: $dark-primary;
 }
 
 .list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.3s ease;
 
-  &_show {
-    opacity: 1;
-    max-height: 100%;
+  &__item {
+    max-width: 808px;
+    padding: 32px 0 33px;
+    border-bottom: 1px solid vars.$borders-divider-disabled-bg;
+
+    &:last-child {
+      padding: 32px 0 0;
+      border: none;
+    }
   }
 }
 
-.list__item {
-  padding: 32px 0;
-  border-bottom: 1px solid $borders-divider-disabled-bg;
-}
-
-.subtitle > button {
-  font-family: $mainFont;
-  font-style: normal;
+.question > button {
   font-weight: 700;
-  font-size: $font-size-m;
+  font-size: vars.$font-size-m;
   line-height: 133%;
-  color: $dark-primary;
 }
 
 .answer {
   margin: 0;
   padding-top: 16px;
-  font-family: $mainFont;
-  font-style: normal;
+  font-family: vars.$mainFont;
   font-weight: 400;
-  font-size: $font-size-m;
+  font-size: vars.$font-size-m;
   line-height: 133%;
-  color: $dark-primary;
 }
