@@ -1,0 +1,33 @@
+@import 'src/styles/color-variables';
+@import 'src/styles/_font-variables';
+
+.description {
+  max-width: 872px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.text {
+  font-size: $font-size-m;
+  line-height: $line-height-m;
+  margin: 32px 0 0;
+}
+
+.titleTasks {
+  margin-top: 32px;
+}
+
+.tasksList {
+  margin: 0 0 32px 0;
+  padding-left: 27px;
+}
+
+.task{
+  margin-top: 18px;
+  color: $dark-primary;
+  font-weight: 400;
+  font-size: $font-size-m;
+  line-height: $line-height-m;
+}
