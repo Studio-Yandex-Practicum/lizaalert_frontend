@@ -1,8 +1,7 @@
-@import 'src/styles/color-variables';
-@import 'src/styles/font-variables';
+@use 'src/styles/variables' as vars;
 
 @mixin placeholder {
-  color: $dark-secondary;
+  color: vars.$dark-secondary;
   opacity: 1;
 }
 
@@ -11,11 +10,11 @@
   flex-direction: column;
   position: relative;
   max-width: 584px;
-  font-family: $mainFont;
+  font-family: vars.$mainFont;
   font-style: normal;
   font-weight: 400;
-  font-size: $font-size-m;
-  line-height: 1.3;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
 }
 
 .label {
@@ -23,7 +22,7 @@
   margin-bottom: 8px;
   box-sizing: border-box;
   padding-left: 16px;
-  color: $dark-secondary;
+  color: vars.$dark-secondary;
 
   &_flex {
     display: flex;
@@ -36,22 +35,22 @@
   min-height: 48px;
   box-sizing: border-box;
   padding: 12px 52px 12px 16px;
-  border: 1.2px solid $borders-divider-disabled-bg;
+  border: 1.2px solid vars.$borders-divider-disabled-bg;
   border-radius: 16px;
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
-  font-size: $font-size-m;
-  line-height: 1.3;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
 
   &::-webkit-input-placeholder {
     @include placeholder;
   }
-  
+
   &::-moz-placeholder {
     @include placeholder;
   }
-  
+
   &::placeholder {
     @include placeholder;
   }
@@ -60,13 +59,13 @@
     opacity: 0;
     position: absolute;
     visibility: hidden;
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
   }
 
   &_warned {
-    border: 1.2px solid $warning;
-    background-color: $warning-bg;
+    border: 1.2px solid vars.$warning;
+    background-color: vars.$warning-bg;
   }
 
   &:hover {
@@ -80,7 +79,7 @@
   right: 16px;
   width: 24px;
   height: 24px;
-  color: $dark-primary;
+  color: vars.$dark-primary;
 
   &:hover {
     cursor: pointer;
@@ -88,20 +87,20 @@
 }
 
 .input:disabled {
-	background: $bg-primary;
-  color: $dark-secondary;
+  background: vars.$bg-primary;
+  color: vars.$dark-secondary;
   cursor: auto;
 }
 
 .input:focus {
-	outline: 1.2px solid $color-primary;
+  outline: 1.2px solid vars.$color-primary;
 }
 
 .error {
   box-sizing: border-box;
   padding-left: 16px;
   margin-top: 8px;
-  color: $warning;
+  color: vars.$warning;
 }
 
 input[type=date]::-webkit-calendar-picker-indicator {

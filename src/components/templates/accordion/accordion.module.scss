@@ -1,11 +1,11 @@
-@use '../../../styles/font-variables';
+@use 'src/styles/variables' as vars;
 
 .accordion {
   display: flex;
   flex-direction: column;
 }
 
-.open {
+.open > .handle {
   .btn.icon {
     transform: rotate(180deg);
   }
@@ -19,7 +19,7 @@
   background-color: transparent;
   cursor: pointer;
   padding: 0;
-  font-family: font-variables.$mainFont;
+  font-family: vars.$mainFont;
 }
 
 .btn {
@@ -27,18 +27,18 @@
 }
 
 .text {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
   font-weight: 500;
 }
 
 .icon {
-  transition: transform 0.3s ease;
+  transition: transform vars.$trans-300;
   padding-left: 7px;
   padding-right: 7px;
 }
 
 .content {
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: max-height vars.$trans-300;
 }

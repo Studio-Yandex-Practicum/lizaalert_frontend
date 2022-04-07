@@ -4,7 +4,7 @@ import { Icon } from '../../atoms';
 import styles from './checkbox.module.scss';
 
 /**
- * @description Компонент чекбокса или радио с текстом-лейблом.
+ * @description Компонент контролируемого чекбокса или радио с текстом-лейблом.
  *
  * - name - string, required - имя группы чекбоксов/радио
  * - value - string, required - значение чекбокса

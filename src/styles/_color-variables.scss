@@ -18,10 +18,12 @@ $success: #008000;
 $success-border: rgba(0, 128, 0, 0.6);
 $success-bg: rgba(0, 128, 0, 0.12);
 
-$trans-300: 0.3s ease;
+// на сафари есть косяки с просто transparent
+$transparent: rgba(255, 255, 255, 0);
 
 :export {
   dark-primary: $dark-primary;
   dark-secondary: $dark-secondary;
   warning: $warning;
+  color-hover: $color-hover;
 }

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../molecules/button/button';
-import Accordion from '../../templates/accordion/accordion';
-import Card from '../../templates/card/card';
-import Checkbox from '../../molecules/checkbox/checkbox';
-import Tag from '../../molecules/tag/tag';
-import { Filters, Statuses, Levels } from '../../../utils/constants';
+import classnames from 'classnames';
+import { Heading } from '../../atoms';
+import { Button, Checkbox, Tag } from '../../molecules';
+import { Accordion, Card } from '../../templates';
+import { Filters, Levels, Statuses } from '../../../utils/constants';
 import styles from './filter.module.scss';
 
 function Filter({ className }) {
@@ -111,13 +110,15 @@ function Filter({ className }) {
   };
 
   return (
-    <div className={className}>
-      <Card className={styles.filters}>
+    <aside className={classnames(styles.filters, className)}>
+      <Card className={styles.card}>
         <div className={styles.header}>
-          <h2>Фильтры</h2>
-          <Button view="text" onClick={filterResetHandler}>
-            Очистить
-          </Button>
+          <Heading size="l" level={3} title="Фильтры" />
+          {selection.length > 0 && (
+            <Button view="text" onClick={filterResetHandler}>
+              Очистить
+            </Button>
+          )}
         </div>
         {filters.map((section) => (
           <Accordion
@@ -160,7 +161,7 @@ function Filter({ className }) {
           />
         ))}
       </div>
-    </div>
+    </aside>
   );
 }
 
