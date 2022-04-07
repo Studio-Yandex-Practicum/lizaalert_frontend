@@ -1,0 +1,35 @@
+@use '../../../styles/color-variables.scss' as colors;
+
+.content {
+  display: flex;
+  gap: 24px;
+  padding: 32px 0;
+  border-bottom: 1px solid colors.$borders-divider-disabled-bg;
+}
+
+.text {
+  width: 50%;
+  padding: 0 40px 0 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.list {
+  width: 50%;
+  padding: 0;
+  list-style: none;
+
+  &Item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.complited {
+  color: colors.$success;
+}
