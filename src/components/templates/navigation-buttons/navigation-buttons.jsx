@@ -1,19 +1,26 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Button from '../button/button';
+import Button from '../../molecules/button/button';
 import styles from './navigation-buttons.module.scss';
 
 /**
  * @description Компонент с кнопками навигации по уроку.
  *
- * - className - string - класс-миксин
- * - view - string - внешний вид кнопок: 'primary', 'secondary', 'tertiary'
+ * - classNameForContainer - string - класс-миксин для контейнера
+ * - classNameForButtons - string - класс-миксин для кнопок
+ * - view - string - внешний вид кнопок: 'main', 'back-only', 'finish'
  * - onClickBack - function - функция-обработчик клика на левую кнопку (назад)
  * - onClickForward - function - функция-обработчик клика на правую кнопку (вперед)
  */
 
-function NavigationButtons({ className, view, onClickBack, onClickForward }) {
-  const navBtnsClasses = classnames(styles.navBtns, className);
+function NavigationButtons({
+  classNameForContainer,
+  classNameForButtons,
+  view,
+  onClickBack,
+  onClickForward,
+}) {
+  const navBtnsClasses = classnames(styles.navBtns, classNameForContainer);
 
   return (
     <div className={navBtnsClasses}>
@@ -21,36 +28,43 @@ function NavigationButtons({ className, view, onClickBack, onClickForward }) {
         view="secondary"
         iconName="arrowBack"
         iconPosition="back"
-        minWidth={184}
         onClick={onClickBack}
+        className={classNameForButtons}
+        minWidth={classNameForButtons ? '' : 184}
       >
         Назад
       </Button>
 
-      {view === 'primary' && (
+      {view === 'main' && (
         <Button
           iconName="arrowForward"
           iconPosition="forward"
-          minWidth={184}
           onClick={onClickForward}
+          className={classNameForButtons}
+          minWidth={classNameForButtons ? '' : 184}
         >
           Далее
         </Button>
       )}
 
-      {view === 'secondary' && (
+      {view === 'back-only' && (
         <Button
+          className={classNameForButtons}
           iconName="arrowForward"
           iconPosition="forward"
-          minWidth={184}
           disabled
+          minWidth={classNameForButtons ? '' : 184}
         >
           Далее
         </Button>
       )}
 
-      {view === 'tertiary' && (
-        <Button minWidth={184} onClick={onClickForward}>
+      {view === 'finish' && (
+        <Button
+          className={classNameForButtons}
+          onClick={onClickForward}
+          minWidth={classNameForButtons ? '' : 184}
+        >
           Завершить
         </Button>
       )}
@@ -59,15 +73,17 @@ function NavigationButtons({ className, view, onClickBack, onClickForward }) {
 }
 
 NavigationButtons.propTypes = {
-  view: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  className: PropTypes.string,
+  view: PropTypes.oneOf(['main', 'back-only', 'finish']),
+  classNameForContainer: PropTypes.string,
+  classNameForButtons: PropTypes.string,
   onClickBack: PropTypes.func,
   onClickForward: PropTypes.func,
 };
 
 NavigationButtons.defaultProps = {
-  view: 'primary',
-  className: '',
+  view: 'main',
+  classNameForContainer: '',
+  classNameForButtons: '',
   onClickBack: undefined,
   onClickForward: undefined,
 };
