@@ -9,7 +9,7 @@
   margin: 0;
   font-weight: 700;
   font-size: vars.$font-size-l;
-  line-height: 117%;
+  line-height: vars.$line-height-l;
 }
 
 .list {
@@ -32,7 +32,7 @@
 .question > button {
   font-weight: 700;
   font-size: vars.$font-size-m;
-  line-height: 133%;
+  line-height: vars.$line-height-m;
 }
 
 .answer {
@@ -41,5 +41,5 @@
   font-family: vars.$mainFont;
   font-weight: 400;
   font-size: vars.$font-size-m;
-  line-height: 133%;
+  line-height: vars.$line-height-m;
 }
