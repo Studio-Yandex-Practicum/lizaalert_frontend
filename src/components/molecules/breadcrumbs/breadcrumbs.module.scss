@@ -1,0 +1,36 @@
+@use 'src/styles/variables' as vars;
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  font-family: vars.$mainFont;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+  font-weight: 500;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  column-gap: 9px;
+}
+
+.link {
+  display: block;
+  max-width: 521px;
+  color: vars.$dark-primary;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.icon {
+  max-width: 6px;
+}
+
+.breadcrumb:last-of-type .link {
+  color: vars.$dark-secondary;
+}

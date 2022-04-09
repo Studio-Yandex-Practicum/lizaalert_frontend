@@ -17,10 +17,12 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path={courses.path} element={<Courses />} />
+        <Route path={courses.path} element={<Layout />}>
+          <Route index element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
-          <Route path=":courseId/:lessonId" element={<Lesson />} />
+          <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+        </Route>
+        <Route element={<Layout />}>
           <Route path={profile.path} element={<Profile />} />
         </Route>
         <Route path={register.path} element={<Register />} />
