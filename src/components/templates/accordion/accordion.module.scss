@@ -20,6 +20,7 @@
   cursor: pointer;
   padding: 0;
   font-family: vars.$mainFont;
+  text-align: start;
 }
 
 .btn {
@@ -36,6 +37,7 @@
   transition: transform vars.$trans-300;
   padding-left: 7px;
   padding-right: 7px;
+  flex-shrink: 0;
 }
 
 .content {
