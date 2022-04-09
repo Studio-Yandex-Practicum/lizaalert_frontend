@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Button from '../../molecules/button/button';
+import { Button } from '../../molecules';
 import styles from './navigation-buttons.module.scss';
 
 /**
@@ -8,7 +8,8 @@ import styles from './navigation-buttons.module.scss';
  *
  * - classNameForContainer - string - класс-миксин для контейнера
  * - classNameForButtons - string - класс-миксин для кнопок
- * - view - string - внешний вид кнопок: 'main', 'back-only', 'finish'
+ * - view - string - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
+ * - disabled - string - дизейбл одной из кнопок: 'back', 'forward'
  * - onClickBack - function - функция-обработчик клика на левую кнопку (назад)
  * - onClickForward - function - функция-обработчик клика на правую кнопку (вперед)
  */
@@ -17,6 +18,7 @@ function NavigationButtons({
   classNameForContainer,
   classNameForButtons,
   view,
+  disabled,
   onClickBack,
   onClickForward,
 }) {
@@ -30,7 +32,7 @@ function NavigationButtons({
         iconPosition="back"
         onClick={onClickBack}
         className={classNameForButtons}
-        minWidth={classNameForButtons ? '' : 184}
+        disabled={disabled === 'back' && true}
       >
         Назад
       </Button>
@@ -41,19 +43,7 @@ function NavigationButtons({
           iconPosition="forward"
           onClick={onClickForward}
           className={classNameForButtons}
-          minWidth={classNameForButtons ? '' : 184}
-        >
-          Далее
-        </Button>
-      )}
-
-      {view === 'back-only' && (
-        <Button
-          className={classNameForButtons}
-          iconName="arrowForward"
-          iconPosition="forward"
-          disabled
-          minWidth={classNameForButtons ? '' : 184}
+          disabled={disabled === 'forward' && true}
         >
           Далее
         </Button>
@@ -63,7 +53,7 @@ function NavigationButtons({
         <Button
           className={classNameForButtons}
           onClick={onClickForward}
-          minWidth={classNameForButtons ? '' : 184}
+          disabled={disabled === 'forward' && true}
         >
           Завершить
         </Button>
@@ -73,19 +63,19 @@ function NavigationButtons({
 }
 
 NavigationButtons.propTypes = {
-  view: PropTypes.oneOf(['main', 'back-only', 'finish']),
+  view: PropTypes.oneOf(['main', 'finish']),
   classNameForContainer: PropTypes.string,
+  disabled: PropTypes.oneOf(['back', 'forward']),
   classNameForButtons: PropTypes.string,
-  onClickBack: PropTypes.func,
-  onClickForward: PropTypes.func,
+  onClickBack: PropTypes.func.isRequired,
+  onClickForward: PropTypes.func.isRequired,
 };
 
 NavigationButtons.defaultProps = {
   view: 'main',
+  disabled: '',
   classNameForContainer: '',
   classNameForButtons: '',
-  onClickBack: undefined,
-  onClickForward: undefined,
 };
 
 export default NavigationButtons;
