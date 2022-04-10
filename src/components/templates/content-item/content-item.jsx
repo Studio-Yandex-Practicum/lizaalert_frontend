@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { Link, useParams } from 'react-router-dom';
 import { courseContentPropTypes } from '../../../utils/prop-types';
 import Icon from '../../atoms/icon/icon';
 import { TextWithIcon } from '../../molecules';
@@ -7,7 +8,8 @@ import Accordion from '../accordion/accordion';
 import styles from './content-item.module.scss';
 
 function ContentItem({ content, index, type }) {
-  const { topic, lessons } = content;
+  const { topic, lessons, id } = content;
+  const { courseId } = useParams();
   const mapSlugToIcon = {
     lesson: 'document',
     video: 'video',
@@ -21,17 +23,29 @@ function ContentItem({ content, index, type }) {
         <p className={styles.text}>{`${index + 1}. ${topic}`}</p>
         <ul className={styles.list}>
           {lessons.map((lesson) => (
-            <li className={styles.listItem} key={lesson.slug + Math.random()}>
-              <TextWithIcon
-                text={lesson.title}
-                iconType={mapSlugToIcon[lesson.slug]}
-              />
-              {lesson.status === 'finished' && (
-                <Icon
-                  type="checkSolid"
-                  maxWidth={20}
-                  maxHeight={20}
-                  className={styles.complited}
+            <li className={styles.listItem} key={lesson.id}>
+              {lesson.status === 'finished' ? (
+                <>
+                  <Link
+                    to={`/${courseId}/${id}/${lesson.id}`}
+                    className={styles.link}
+                  >
+                    <TextWithIcon
+                      text={lesson.title}
+                      iconType={mapSlugToIcon[lesson.slug]}
+                    />
+                  </Link>
+                  <Icon
+                    type="checkSolid"
+                    maxWidth={20}
+                    maxHeight={20}
+                    className={styles.complited}
+                  />
+                </>
+              ) : (
+                <TextWithIcon
+                  text={lesson.title}
+                  iconType={mapSlugToIcon[lesson.slug]}
                 />
               )}
             </li>
@@ -54,18 +68,27 @@ function ContentItem({ content, index, type }) {
                 [styles.finished]: lesson.status === 'finished',
                 [styles.active]: lesson.status === 'active',
               })}
-              key={lesson.slug + Math.random()}
+              key={lesson.id}
             >
-              <TextWithIcon
-                key={lesson.slug + Math.random()}
-                text={lesson.title}
-                color={lesson.status === 'active' ? '#F06000' : '#212329'}
-                iconType={
-                  lesson.status === 'finished'
-                    ? 'checkSolid'
-                    : mapSlugToIcon[lesson.slug]
-                }
-              />
+              {lesson.status === 'finished' ? (
+                <Link
+                  to={`/${courseId}/${id}/${lesson.id}`}
+                  className={styles.link}
+                >
+                  <TextWithIcon
+                    key={lesson.id}
+                    text={lesson.title}
+                    iconType="checkSolid"
+                  />
+                </Link>
+              ) : (
+                <TextWithIcon
+                  key={lesson.id}
+                  text={lesson.title}
+                  color={lesson.status === 'active' ? '#F06000' : '#212329'}
+                  iconType={mapSlugToIcon[lesson.slug]}
+                />
+              )}
             </li>
           ))}
         </ul>

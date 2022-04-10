@@ -41,7 +41,7 @@ TextWithIcon.propTypes = {
 
 TextWithIcon.defaultProps = {
   isReverse: false,
-  color: 'dark-primary',
+  color: '',
   className: '',
 };
 

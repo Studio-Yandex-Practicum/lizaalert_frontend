@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 const lessonPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.oneOf(['finished', 'active', 'coming']),
