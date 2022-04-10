@@ -17,3 +17,5 @@ export const Levels = {
   EXPERIENCED: 'experienced',
   PRO: 'professional',
 };
+
+export const ANIMATION_DURATION = 300;

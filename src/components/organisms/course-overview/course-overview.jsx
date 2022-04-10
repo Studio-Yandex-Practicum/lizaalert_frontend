@@ -13,7 +13,7 @@ function CourseOverview({
   duration,
 }) {
   return (
-    <Card className={styles.courseOverview} nopadding>
+    <Card className={styles.courseOverview} noPadding>
       <div className={styles.courseImageContainer}>
         <img
           className={styles.courseImage}

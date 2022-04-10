@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "topic": "В каких случаях перспективно применение следовых кинологических расчётов",
+    "lessons": [
+      {
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "slug": "video",
+        "title": "Видео",
+        "status": "finished"
+      },
+      {
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "finished"
+      },
+      {
+        "slug": "test",
+        "title": "Тест",
+        "status": ""
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "topic": "В каких случаях перспективно применение следовых кинологических расчётов",
+    "lessons": [
+      {
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "slug": "video",
+        "title": "Видео",
+        "status": "finished"
+      },
+      {
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "finished"
+      },
+      {
+        "slug": "test",
+        "title": "Тест",
+        "status": "finished"
+      }
+    ]
+  }
+]

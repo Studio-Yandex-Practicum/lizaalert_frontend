@@ -39,7 +39,8 @@ function AccountData() {
           value={inputValues.phoneNumber}
           onChange={onInputValuesChange}
           className={styles.inputSection}
-          disabled="true"
+          placeholder="Номер телефона начиная с +7"
+          disabled
         />
         <Input
           labelName="Email"
@@ -48,6 +49,7 @@ function AccountData() {
           value={inputValues.email}
           onChange={onInputValuesChange}
           className={styles.inputSection}
+          placeholder="Ваш email"
         />
         <Input
           labelName="Пароль"
@@ -55,6 +57,7 @@ function AccountData() {
           inputName="password"
           value={inputValues.password}
           onChange={onInputValuesChange}
+          placeholder="Ваш пароль"
           className={styles.inputSection}
         />
         <Button

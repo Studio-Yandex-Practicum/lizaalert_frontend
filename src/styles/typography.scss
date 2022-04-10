@@ -1,5 +1,6 @@
 @use './font-variables';
 
+/* использовать компонент Heading */
 .heading {
   font-family: font-variables.$mainFont;
   font-weight: 700;
@@ -9,12 +10,12 @@
     font-size: font-variables.$font-size-xxl;
     line-height: 108%;
   }
-  
+
   &.h2 {
     font-size: font-variables.$font-size-xl;
     line-height: 112%;
   }
-  
+
   &.h3 {
     font-size: font-variables.$font-size-l;
     line-height: 117%;

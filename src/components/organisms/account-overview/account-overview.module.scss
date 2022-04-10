@@ -1,5 +1,6 @@
 .accountOverview {
   max-width: 312px;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
 
 .avatar {
   width: 100%;
+
   &Container {
     border-radius: 50%;
     overflow: hidden;
@@ -21,7 +23,7 @@
 .personalData {
   font-weight: 700;
   font-size: 18px;
-  line-height: calc( 24 / 18 );
+  line-height: calc(24 / 18);
   margin: 0 0 32px;
 }
 
@@ -31,10 +33,12 @@
   list-style: none;
   margin: 0 0 32px;
   font-size: 18px;
-  line-height: calc( 24 / 18 );
+  line-height: calc(24 / 18);
   width: 100%;
+
   &Item {
     margin-bottom: 16px;
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -43,5 +47,4 @@
 
 .logout {
   white-space: nowrap;
-  white-space: pre;
 }

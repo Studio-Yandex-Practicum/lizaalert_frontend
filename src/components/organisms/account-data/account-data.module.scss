@@ -3,6 +3,7 @@
 
 .accountData {
   max-width: 648px;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -34,5 +35,4 @@
   border-radius: 16px;
   text-align: center;
   white-space: nowrap;
-  white-space: pre;
 }

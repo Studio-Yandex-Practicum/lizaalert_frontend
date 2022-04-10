@@ -1,0 +1,23 @@
+@use '../../../styles/color-variables.scss' as colors;
+@use '../../../styles/font-variables' as fonts;
+
+.content {
+  box-sizing: border-box;
+  max-width: 872px;
+  width: 100%;
+}
+
+.subtitle > button {
+  font-family: fonts.$mainFont;
+  font-style: normal;
+  font-weight: 700;
+  font-size: fonts.$font-size-l;
+  line-height: 133%;
+  color: colors.$dark-primary;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+}
+
