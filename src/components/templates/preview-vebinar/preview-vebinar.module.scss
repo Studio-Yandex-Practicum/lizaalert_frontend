@@ -1,0 +1,35 @@
+@use 'src/styles/variables' as vars;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  color: vars.$dark-primary;
+
+  .title {
+    margin: 0;
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+
+    .date {
+      font-weight: 700;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+
+    .button {
+      min-width: 184px;
+    }
+  }
+}
