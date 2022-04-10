@@ -12,6 +12,7 @@
 .text {
   font-size: $font-size-m;
   line-height: $line-height-m;
+  color: $dark-primary;
   margin: 32px 0 0;
 }
 
@@ -27,7 +28,6 @@
 .task{
   margin-top: 18px;
   color: $dark-primary;
-  font-weight: 400;
   font-size: $font-size-m;
   line-height: $line-height-m;
 }
