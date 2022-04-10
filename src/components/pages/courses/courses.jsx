@@ -1,10 +1,20 @@
-import mockCourses from '../../../services/mock/courses.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { Heading } from '../../atoms';
 import { CoursePreview, Filter } from '../../organisms';
 import styles from './courses.module.scss';
 import routes from '../../../config/routes';
+import fetchCoursesAction from '../../../store/courses/thunk';
+import { selectCourses } from '../../../store/courses/selectors';
 
 function Courses() {
+  const dispatch = useDispatch();
+  const courses = useSelector(selectCourses);
+
+  useEffect(() => {
+    dispatch(fetchCoursesAction());
+  }, [dispatch]);
+
   return (
     <div className="container">
       <Heading
@@ -16,7 +26,7 @@ function Courses() {
       <div className={styles.courses}>
         <Filter className={styles.filters} />
         <ul className={styles.list}>
-          {mockCourses.map((course) => (
+          {courses.map((course) => (
             <li key={course.id} className={styles.card}>
               <CoursePreview course={course} />
             </li>
