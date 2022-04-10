@@ -1,7 +1,7 @@
-import Router from '../../router/router';
+import { PreviewWebinar } from '../organisms';
 
 function App() {
-  return <Router />;
+  return <PreviewWebinar date="20.20.2000 19:00" link="#" />;
 }
 
 export default App;

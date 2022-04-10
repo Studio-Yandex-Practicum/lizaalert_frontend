@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Button } from '../../molecules';
-import Card from '../card/card';
-import styles from './preview-vebinar.module.scss';
+import { Heading } from '../../atoms';
+import { Card } from '../../templates';
+import styles from './preview-webinar.module.scss';
 
 /**
  * @description Компонент превью вебинара.
@@ -10,12 +11,14 @@ import styles from './preview-vebinar.module.scss';
  * - link - string - ссылка на вебинар
  */
 
-function PreviewVebinar({ date, link }) {
+function PreviewWebinar({ date, link }) {
   const dateArr = date.split(' ');
 
   return (
     <Card className={styles.card}>
-      <h2 className={styles.title}>Вебинар</h2>
+      <Heading size="l" className={styles.title}>
+        Вебинар
+      </Heading>
       <p className={styles.text}>
         Вебинар стартует <span className={styles.date}>{dateArr[0]}</span> в{' '}
         <span className={styles.date}>{dateArr[1]}</span> МСК (GTM+3)
@@ -27,9 +30,9 @@ function PreviewVebinar({ date, link }) {
   );
 }
 
-PreviewVebinar.propTypes = {
+PreviewWebinar.propTypes = {
   date: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
 };
 
-export default PreviewVebinar;
+export default PreviewWebinar;
