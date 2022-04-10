@@ -9,7 +9,8 @@ import styles from './content-item.module.scss';
 
 function ContentItem({ content, index, type }) {
   const { topic, lessons, id } = content;
-  const { courseId } = useParams();
+  const { courseId, topicId } = useParams();
+
   const mapSlugToIcon = {
     lesson: 'document',
     video: 'video',
@@ -60,6 +61,7 @@ function ContentItem({ content, index, type }) {
       <Accordion
         title={`${index + 1}. ${content.topic}`}
         className={styles.accordion}
+        open={content.id === +topicId}
       >
         <ul className={styles.list}>
           {lessons.map((lesson) => (
