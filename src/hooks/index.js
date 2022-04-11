@@ -1,5 +1,4 @@
 import useBreadcrumbs from './useBreadcrumbs';
+import useRedirectFromTopic from './useRedirectFromTopic';
 
-// TODO удалить после импорта-экспорта новых хуков
-// eslint-disable-next-line import/prefer-default-export
-export { useBreadcrumbs };
+export { useBreadcrumbs, useRedirectFromTopic };

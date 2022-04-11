@@ -1,8 +1,9 @@
-import { useParams } from 'react-router-dom';
-import { Breadcrumbs } from '../../molecules';
+import { Breadcrumbs } from '../../organisms';
+import { useRedirectFromTopic } from '../../../hooks';
 
 function Lesson() {
-  const { lessonId } = useParams();
+  const { lessonId } = useRedirectFromTopic();
+
   return (
     <div>
       <Breadcrumbs />
