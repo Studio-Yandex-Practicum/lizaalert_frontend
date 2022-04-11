@@ -8,7 +8,7 @@ import {
   Profile,
   Register,
 } from '../components/pages';
-import Layout from '../components/templates/layout/layout';
+import { Layout } from '../components/templates';
 import routes from '../config/routes';
 
 function Router() {
@@ -20,6 +20,7 @@ function Router() {
         <Route path={courses.path} element={<Layout />}>
           <Route index element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
+          <Route path=":courseId/:topicId" element={<Lesson />} />
           <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
         </Route>
         <Route element={<Layout />}>

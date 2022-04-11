@@ -33,4 +33,5 @@
 
 .breadcrumb:last-of-type .link {
   color: vars.$dark-secondary;
+  pointer-events: none;
 }

@@ -12,7 +12,7 @@ function Breadcrumbs() {
           <Link className={styles.link} to={link.path}>
             {link.title}
           </Link>
-          {i !== breadcrumbs.length - 1 && (
+          {i + 1 !== breadcrumbs.length && (
             <Icon type="arrowRight" className={styles.icon} />
           )}
         </span>
