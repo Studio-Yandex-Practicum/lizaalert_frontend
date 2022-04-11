@@ -1,0 +1,63 @@
+@use '../../../styles/color-variables' as colors;
+
+.player {
+  &Container {
+    position: relative;
+  }
+}
+
+.playpause {
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.video {
+  max-width: 808px;
+  display: block;
+  object-fit: fill;
+
+  &Controls {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    display: flex;
+    list-style: none;
+    width: 100%;
+    padding: 36px;
+    gap: 34px;
+    align-items: center;
+  }
+}
+
+.progress {
+  &Container {
+    max-width: 468px;
+    flex-grow: 1;
+    height: 6px;
+    border-radius: 16px;
+    display: flex;
+    background-color: colors.$dark-secondary;
+    position: relative;
+  }
+
+  &Bar {
+    background-color: colors.$color-primary;
+    height: 100%;
+    border-radius: 16px;
+  }
+
+  &Dot {
+    color: #fff;
+    height: 20px;
+    width: 20px;
+    transform: translate(-50%, -35%);
+  }
+}
+
