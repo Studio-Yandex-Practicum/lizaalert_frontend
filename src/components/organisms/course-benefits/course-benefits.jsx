@@ -5,24 +5,24 @@ import Accordion from '../../templates/accordion/accordion';
 import Heading from '../../atoms/heading/heading';
 import '../../../assets/icons/check-solid.svg';
 import { Icon } from '../../atoms';
-import './course-benefits.scss';
+import styles from './course-benefits.module.scss';
 
 function CourseBenefits({ benefitsList }) {
   return (
-    <Card className="benefits" htmlTag="article">
+    <Card className={styles.benefits} htmlTag="article">
       <Accordion
         button="text"
         title={<Heading level={2} size="l" title="Чему вы научитесь" />}
         open
       >
-        <ul className="content">
+        <ul className={styles.content}>
           {benefitsList.map((item) => (
-            <li key={item.id} className="benefit">
-              <Heading level={3} size="m" className="heading">
-                <Icon type="checkSolid" className="icon" />
+            <li key={item.id} className={styles.benefit}>
+              <Heading level={3} size="m" className={styles.heading}>
+                <Icon type="checkSolid" className={styles.icon} />
                 <span>{item.title}</span>
               </Heading>
-              <p className="text">{item.description}</p>
+              <p className={styles.text}>{item.description}</p>
             </li>
           ))}
         </ul>
@@ -30,7 +30,6 @@ function CourseBenefits({ benefitsList }) {
     </Card>
   );
 }
-
 CourseBenefits.defaultProps = {
   benefitsList: [
     {
@@ -53,7 +52,6 @@ CourseBenefits.defaultProps = {
     },
   ],
 };
-
 CourseBenefits.propTypes = {
   benefitsList: PropTypes.arrayOf(
     PropTypes.shape({
