@@ -3,6 +3,7 @@
 .card {
   padding-bottom: 64px;
   color: vars.$dark-primary;
+  max-width: 872px;
 
   .title {
     margin-right: auto;
@@ -27,8 +28,10 @@
       margin-bottom: 18px;
       text-align: center;
 
-      &_bold {
+      .link {
         font-weight: 700;
+        text-decoration: none;
+        color: inherit;
       }
     }
 
