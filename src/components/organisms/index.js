@@ -3,7 +3,7 @@ import AccountOverview from './account-overview/account-overview';
 import CoursePreview from './course-preview/course-preview';
 import Filter from './filter/filter';
 import PersonalData from './personal-data/personal-data';
-import PreviewWebinar from './preview-webinar/preview-webinar';
+import VideoLesson from './video-lesson/video-lesson';
 
 export {
   AccountData,
@@ -11,5 +11,5 @@ export {
   CoursePreview,
   Filter,
   PersonalData,
-  PreviewWebinar,
+  VideoLesson,
 };
