@@ -6,6 +6,15 @@ const fetchCoursesAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       // insert api call here
+
+      // eslint-disable-next-line no-inner-declarations
+      async function timeout() {
+        // eslint-disable-next-line no-promise-executor-return
+        return new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+
+      await timeout();
+
       return mockCourses;
     } catch (error) {
       return rejectWithValue(error.message);
