@@ -3,6 +3,9 @@ import AccountOverview from './account-overview/account-overview';
 import CoursePreview from './course-preview/course-preview';
 import Filter from './filter/filter';
 import PersonalData from './personal-data/personal-data';
+import PreviewWebinar from './preview-webinar/preview-webinar';
+import CourseCompleted from './course-completed/course-completed';
+import VideoLesson from './video-lesson/video-lesson';
 import TestPreview from './test-preview/test-preview';
 import Test from './test/test';
 
@@ -12,6 +15,9 @@ export {
   CoursePreview,
   Filter,
   PersonalData,
+  PreviewWebinar,
+  CourseCompleted,
+  VideoLesson,
   TestPreview,
   Test,
 };
