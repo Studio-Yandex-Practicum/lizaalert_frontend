@@ -1,10 +1,15 @@
 import { useParams } from 'react-router-dom';
+import mockTest from '../../../services/mock/test-preview.json';
+import TestContent from '../../templates/test-content/test-content';
 
 function Lesson() {
   const { lessonId } = useParams();
+
   return (
     <div>
+      {/* DELETE mock data */}
       <p>Lesson page. Lesson id: {lessonId}</p>
+      <TestContent test={mockTest[0]} />
     </div>
   );
 }
