@@ -5,6 +5,8 @@ import Filter from './filter/filter';
 import PersonalData from './personal-data/personal-data';
 import PreviewWebinar from './preview-webinar/preview-webinar';
 import CourseCompleted from './course-completed/course-completed';
+import VideoLesson from './video-lesson/video-lesson';
+
 
 export {
   AccountData,
@@ -14,4 +16,5 @@ export {
   PersonalData,
   PreviewWebinar,
   CourseCompleted,
+  VideoLesson,
 };
