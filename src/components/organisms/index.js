@@ -6,10 +6,12 @@ import PersonalData from './personal-data/personal-data';
 import PreviewWebinar from './preview-webinar/preview-webinar';
 import CourseCompleted from './course-completed/course-completed';
 import VideoLesson from './video-lesson/video-lesson';
+import CourseBenefits from './course-benefits/course-benefits';
 
 export {
   AccountData,
   AccountOverview,
+  CourseBenefits,
   CoursePreview,
   Filter,
   PersonalData,
