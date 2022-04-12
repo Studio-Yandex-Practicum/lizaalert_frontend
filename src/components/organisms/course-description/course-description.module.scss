@@ -9,6 +9,12 @@
   min-width: 0;
 }
 
+.title > button {
+  font-weight: 700;
+  font-size: $font-size-l;
+  line-height: $line-height-l;
+}
+
 .text {
   font-size: $font-size-m;
   line-height: $line-height-m;
@@ -25,7 +31,7 @@
   padding-left: 27px;
 }
 
-.task{
+.task {
   margin-top: 18px;
   color: $dark-primary;
   font-size: $font-size-m;

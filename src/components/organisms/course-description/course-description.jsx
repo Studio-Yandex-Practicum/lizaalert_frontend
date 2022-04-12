@@ -8,13 +8,10 @@ import styles from './course-description.module.scss';
 function CourseDescription({ description, tasks, className }) {
   return (
     <Card className={classnames(styles.description, className)}>
-      <Accordion
-        button="text"
-        title={<Heading level="2" title="Описание курса" size="l" />}
-      >
-        <p className={styles.text}> {description} </p>
+      <Accordion button="text" title="Описание курса" className={styles.title}>
+        <p className={styles.text}>{description}</p>
         <Heading
-          level="3"
+          level={3}
           title="Основные задачи нашего подразделения:"
           size="m"
           className={styles.titleTasks}
@@ -22,7 +19,9 @@ function CourseDescription({ description, tasks, className }) {
         {tasks.length > 0 && (
           <ul className={styles.tasksList}>
             {tasks.map((task) => (
-              <li className={styles.task}>{task}</li>
+              <li key={task} className={styles.task}>
+                {task}
+              </li>
             ))}
           </ul>
         )}
