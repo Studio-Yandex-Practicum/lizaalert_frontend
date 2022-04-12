@@ -7,18 +7,18 @@ import '../../../assets/icons/check-solid.svg';
 import { Icon } from '../../atoms';
 import './course-benefits.scss';
 
-function CourseBenefits({ items }) {
+function CourseBenefits({ benefitsList }) {
   return (
     <Card className="benefits" htmlTag="article">
       <Accordion
         button="text"
-        title={<Heading level="2" size="l" title="Чему вы научитесь" />}
+        title={<Heading level={2} size="l" title="Чему вы научитесь" />}
         open
       >
         <ul className="content">
-          {items.map((item) => (
+          {benefitsList.map((item) => (
             <li key={item.id} className="benefit">
-              <Heading level="3" size="m" className="heading">
+              <Heading level={3} size="m" className="heading">
                 <Icon type="checkSolid" className="icon" />
                 <span>{item.title}</span>
               </Heading>
@@ -32,7 +32,7 @@ function CourseBenefits({ items }) {
 }
 
 CourseBenefits.defaultProps = {
-  items: [
+  benefitsList: [
     {
       id: 0,
       title: 'Поисково-спасательная работа',
@@ -55,7 +55,7 @@ CourseBenefits.defaultProps = {
 };
 
 CourseBenefits.propTypes = {
-  items: PropTypes.arrayOf(
+  benefitsList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
       title: PropTypes.string,
