@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
-import CourseContent from '../../organisms/course-content/course-content';
-import CourseOverview from '../../organisms/course-overview/course-overview';
+import { CourseBenefits, CourseOverview, CourseContent } from '../../organisms';
 
 function Course() {
   const { courseId } = useParams();
@@ -10,6 +9,7 @@ function Course() {
       <p>Single course page. Course id: {courseId}</p>
       <CourseOverview />
       <CourseContent />
+      <CourseBenefits />
     </div>
   );
 }
