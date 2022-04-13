@@ -8,6 +8,7 @@ import CourseCompleted from './course-completed/course-completed';
 import VideoLesson from './video-lesson/video-lesson';
 import TestPreview from './test-preview/test-preview';
 import Test from './test/test';
+import TestContent from './test-content/test-content';
 
 export {
   AccountData,
@@ -20,4 +21,5 @@ export {
   VideoLesson,
   TestPreview,
   Test,
+  TestContent,
 };

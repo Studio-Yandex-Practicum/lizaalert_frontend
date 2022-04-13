@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import mockTest from '../../../services/mock/test-preview.json';
-import TestContent from '../../templates/test-content/test-content';
+import { TestContent } from '../../organisms';
 
 function Lesson() {
   const { lessonId } = useParams();

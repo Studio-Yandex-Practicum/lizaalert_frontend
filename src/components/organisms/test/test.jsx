@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './test.module.scss';
 import { Heading } from '../../atoms';
 import { Button } from '../../molecules';
-import Card from '../../templates/card/card';
+import { Card } from '../../templates';
 
 function Test({ toggleRender }) {
   return (

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Test, TestPreview } from '../../organisms';
+import Test from '../test/test';
+import TestPreview from '../test-preview/test-preview';
 
 function TestContent({ test }) {
   const [renderTest, setRenderTest] = useState(test.inProgress);
