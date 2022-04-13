@@ -11,11 +11,12 @@ function CourseBenefits({ benefitsList }) {
   return (
     <Card className={styles.benefits} htmlTag="article">
       <Accordion
+        className={styles.title}
         button="text"
-        title={<Heading level={2} size="l" title="Чему вы научитесь" />}
+        title="Чему вы научитесь"
         open
       >
-        <ul className={styles.content}>
+        <ul className={styles.benefitsList}>
           {benefitsList.map((item) => (
             <li key={item.id} className={styles.benefit}>
               <Heading level={3} size="m" className={styles.heading}>
