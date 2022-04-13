@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
-import CourseContent from '../../organisms/course-content/course-content';
-import CourseOverview from '../../organisms/course-overview/course-overview';
 import mockCourseContent from '../../../services/mock/course-content.json';
+import { CourseBenefits, CourseOverview, CourseContent } from '../../organisms';
 
 function Course() {
   const { courseId } = useParams();
@@ -11,6 +10,7 @@ function Course() {
       <p>Single course page. Course id: {courseId}</p>
       <CourseOverview />
       <CourseContent content={mockCourseContent} />
+      <CourseBenefits />
     </div>
   );
 }

@@ -23,6 +23,7 @@ function NavigationButtons({
   onClickForward,
 }) {
   const navBtnsClasses = classnames(styles.navBtns, classNameForContainer);
+  const btnsClasses = classnames(styles.button, classNameForButtons);
 
   return (
     <div className={navBtnsClasses}>
@@ -31,8 +32,8 @@ function NavigationButtons({
         iconName="arrowBack"
         iconPosition="back"
         onClick={onClickBack}
-        className={classNameForButtons}
-        disabled={disabled === 'back' && true}
+        className={btnsClasses}
+        disabled={disabled === 'back'}
       >
         Назад
       </Button>
@@ -42,8 +43,8 @@ function NavigationButtons({
           iconName="arrowForward"
           iconPosition="forward"
           onClick={onClickForward}
-          className={classNameForButtons}
-          disabled={disabled === 'forward' && true}
+          className={btnsClasses}
+          disabled={disabled === 'forward'}
         >
           Далее
         </Button>
@@ -51,9 +52,9 @@ function NavigationButtons({
 
       {view === 'finish' && (
         <Button
-          className={classNameForButtons}
+          className={btnsClasses}
           onClick={onClickForward}
-          disabled={disabled === 'forward' && true}
+          disabled={disabled === 'forward'}
         >
           Завершить
         </Button>
