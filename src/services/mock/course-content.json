@@ -4,50 +4,202 @@
     "topic": "В каких случаях перспективно применение следовых кинологических расчётов",
     "lessons": [
       {
+        "id": 1,
         "slug": "lesson",
         "title": "Урок",
         "status": "finished"
       },
       {
+        "id": 2,
         "slug": "video",
         "title": "Видео",
         "status": "finished"
       },
       {
+        "id": 3,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "id": 4,
         "slug": "webinar",
         "title": "Вебинар",
         "status": "finished"
       },
       {
+        "id": 5,
         "slug": "test",
         "title": "Тест",
-        "status": ""
+        "status": "finished"
       }
     ]
   },
   {
     "id": 2,
-    "topic": "В каких случаях перспективно применение следовых кинологических расчётов",
+    "topic": "Необходимые обеспечительные меры для успешного применения следовых (розыскных собак)",
     "lessons": [
       {
+        "id": 6,
         "slug": "lesson",
         "title": "Урок",
         "status": "finished"
       },
       {
-        "slug": "video",
-        "title": "Видео",
-        "status": "finished"
-      },
-      {
+        "id": 7,
         "slug": "webinar",
         "title": "Вебинар",
         "status": "finished"
       },
       {
+        "id": 8,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "id": 9,
+        "slug": "video",
+        "title": "Видео",
+        "status": "finished"
+      },
+      {
+        "id": 27,
         "slug": "test",
         "title": "Тест",
         "status": "finished"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "topic": "Особенности привлечения следовых расчётов на ПСР и особенности взаимодействия",
+    "lessons": [
+      {
+        "id": 10,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "id": 11,
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "finished"
+      },
+      {
+        "id": 12,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "id": 13,
+        "slug": "video",
+        "title": "Видео",
+        "status": "finished"
+      },
+      {
+        "id": 14,
+        "slug": "test",
+        "title": "Тест",
+        "status": "finished"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "topic": "Корректная постановка задачи кинологу и особенности её исполнения",
+    "lessons": [
+      {
+        "id": 15,
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "finished"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "topic": "Работа «второго номера» совместно со следовым кинологическим расчётом",
+    "lessons": [
+      {
+        "id": 16,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "finished"
+      },
+      {
+        "id": 17,
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "active"
+      },
+      {
+        "id": 18,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "coming"
+      },
+      {
+        "id": 19,
+        "slug": "video",
+        "title": "Видео",
+        "status": "coming"
+      },
+      {
+        "id": 20,
+        "slug": "test",
+        "title": "Тест",
+        "status": "coming"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "topic": "Оценка качества и особенности анализа результата проделанной следовым кинологическим расчётом работы",
+    "lessons": [
+      {
+        "id": 21,
+        "slug": "lesson",
+        "title": "Урок",
+        "status": "coming"
+      },
+      {
+        "id": 22,
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "coming"
+      },
+      {
+        "id": 23,
+        "slug": "video",
+        "title": "Видео",
+        "status": "coming"
+      },
+      {
+        "id": 24,
+        "slug": "test",
+        "title": "Тест",
+        "status": "coming"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "topic": "Особенности и пределы использования РПРС ом полученной в ходе применения специальной следовой собаки информации в целях успешного разрешения поисков",
+    "lessons": [
+      {
+        "id": 25,
+        "slug": "webinar",
+        "title": "Вебинар",
+        "status": "coming"
+      },
+      {
+        "id": 26,
+        "slug": "test",
+        "title": "Тест",
+        "status": "coming"
       }
     ]
   }
