@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { Heading } from '../../atoms';
-import Card from '../../templates/card/card';
-import Checkbox from '../../molecules/checkbox/checkbox';
-import Button from '../../molecules/button/button';
-import TextWithIcon from '../../molecules/text-with-icon/text-with-icon';
+import { Button, Checkbox, TextWithIcon } from '../../molecules';
+import { Card } from '../../templates';
 
 import styles from './test.module.scss';
 

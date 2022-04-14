@@ -10,6 +10,7 @@ import Filter from './filter/filter';
 import PersonalData from './personal-data/personal-data';
 import PreviewWebinar from './preview-webinar/preview-webinar';
 import VideoLesson from './video-lesson/video-lesson';
+import Test from './test/test';
 
 export {
   AccountData,
@@ -24,4 +25,5 @@ export {
   CourseCompleted,
   VideoLesson,
   CourseDescription,
+  Test,
 };
