@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import fetchCourseAction from '../../../store/course/thunk';
+import mockCourseContent from '../../../services/mock/course-content.json';
 import {
   selectCourseLoading,
   selectCourseTitle,
@@ -30,7 +31,7 @@ function Course() {
     <div>
       {pageContent}
       <CourseOverview />
-      <CourseContent />
+      <CourseContent content={mockCourseContent} />
       <CourseBenefits />
     </div>
   );

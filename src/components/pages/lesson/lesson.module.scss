@@ -1,0 +1,16 @@
+@use 'src/styles/variables' as vars;
+
+.lesson {
+  display: flex;
+  align-items: flex-start;
+  column-gap: vars.$grid-gap;
+}
+
+.body {
+  flex-grow: 1;
+}
+
+.content {
+  width: 32%;
+  max-width: 424px;
+}
