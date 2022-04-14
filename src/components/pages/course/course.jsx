@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import mockCourseContent from '../../../services/mock/course-content.json';
 import { CourseBenefits, CourseOverview, CourseContent } from '../../organisms';
 
 function Course() {
@@ -8,7 +9,7 @@ function Course() {
     <div>
       <p>Single course page. Course id: {courseId}</p>
       <CourseOverview />
-      <CourseContent />
+      <CourseContent content={mockCourseContent} />
       <CourseBenefits />
     </div>
   );

@@ -49,12 +49,14 @@ function Accordion({ children, className, title, button, open }) {
     );
     return () => {
       window.removeEventListener('resize', updateContentHeight);
-      contentRef.current.removeEventListener(
-        'accordionToggle',
-        innerAccordionToggleHandler
-      );
+      if (contentRef.current) {
+        contentRef.current.removeEventListener(
+          'accordionToggle',
+          innerAccordionToggleHandler
+        );
+      }
     };
-  }, [updateContentHeight]);
+  }, [updateContentHeight, contentRef.current, innerAccordionToggleHandler]);
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
