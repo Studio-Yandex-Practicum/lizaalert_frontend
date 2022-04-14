@@ -4,7 +4,6 @@ import mockCourse from '../../services/mock/course.json';
 const fetchCourseAction = createAsyncThunk(
   'course/fetch',
   async (courseId, { rejectWithValue }) => {
-    console.log(courseId);
     try {
       // insert api call here with courseId, that comes from url params
 
