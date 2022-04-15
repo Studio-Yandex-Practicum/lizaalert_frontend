@@ -20,7 +20,12 @@ function TextWithIcon({ text, iconType, isReverse, color, className }) {
 
   return (
     <div className={classNames} style={colorStyle}>
-      <Icon type={iconType} className={styles.icon} />
+      <Icon
+        type={iconType}
+        className={styles.icon}
+        maxWidth={20}
+        maxHeight={20}
+      />
       <p className={styles.text}>{text}</p>
     </div>
   );
@@ -36,7 +41,7 @@ TextWithIcon.propTypes = {
 
 TextWithIcon.defaultProps = {
   isReverse: false,
-  color: 'dark-primary',
+  color: '',
   className: '',
 };
 
