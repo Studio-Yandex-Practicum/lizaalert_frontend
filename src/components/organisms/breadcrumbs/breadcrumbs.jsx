@@ -1,12 +1,14 @@
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Icon } from '../../atoms';
 import { useBreadcrumbs } from '../../../hooks';
 import styles from './breadcrumbs.module.scss';
 
-function Breadcrumbs() {
+function Breadcrumbs({ className }) {
   const breadcrumbs = useBreadcrumbs();
   return (
-    <div className={styles.breadcrumbs}>
+    <div className={classnames(styles.breadcrumbs, className)}>
       {breadcrumbs.map((link, i) => (
         <span className={styles.breadcrumb} key={link.path}>
           <Link className={styles.link} to={link.path}>
@@ -20,5 +22,13 @@ function Breadcrumbs() {
     </div>
   );
 }
+
+Breadcrumbs.propTypes = {
+  className: PropTypes.string,
+};
+
+Breadcrumbs.defaultProps = {
+  className: '',
+};
 
 export default Breadcrumbs;

@@ -10,7 +10,7 @@ function Lesson() {
   return (
     <div className="container">
       <p>Lesson page. Lesson id: {lessonId}</p>
-      <Breadcrumbs />
+      <Breadcrumbs className={styles.breadcrumbs} />
       <div className={styles.lesson}>
         <TestContent test={mockTest[0]} />
         <CourseContent
