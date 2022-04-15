@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Heading } from '../../atoms';
-import styles from './test-preview.module.scss';
 import { Button, TextWithIcon } from '../../molecules';
 import { Card } from '../../templates';
+import styles from './test-preview.module.scss';
 
 function TestPreview({ test, toggleRender }) {
   const date = new Date(test.deadline);
