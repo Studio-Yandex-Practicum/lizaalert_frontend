@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Heading } from '../../atoms';
-import { Card } from '../../templates';
+import { Card, Heading } from '../../atoms';
 import styles from './course-completed.module.scss';
 import routes from '../../../config/routes';
 
@@ -43,11 +42,11 @@ function CourseCompleted({
         {!isCompleted && (
           <>
             <p className={styles.text}>
-              Курс <span className={styles.text_bold}>{`«${courseName}»`}</span>{' '}
-              не пройден.
+              Курс <span className={styles.link}>{`«${courseName}»`}</span> не
+              пройден.
             </p>
             <p className={styles.text}>
-              Мы предьявляем очень строгие требования к участникам
+              Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
               сложным. Вы&nbsp;можете попробовать себя{' '}
               <Link to={courses.path} className={styles.link}>

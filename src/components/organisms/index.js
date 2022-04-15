@@ -1,35 +1,19 @@
-import AccountData from './account-data/account-data';
-import AccountOverview from './account-overview/account-overview';
-import CourseBenefits from './course-benefits/course-benefits';
-import CourseCompleted from './course-completed/course-completed';
-import CourseContent from './course-content/course-content';
-import CourseDescription from './course-description/course-description';
-import CourseOverview from './course-overview/course-overview';
-import CoursePreview from './course-preview/course-preview';
-import Filter from './filter/filter';
-import PersonalData from './personal-data/personal-data';
-import Breadcrumbs from './breadcrumbs/breadcrumbs';
-import PreviewWebinar from './preview-webinar/preview-webinar';
-import VideoLesson from './video-lesson/video-lesson';
-import TestPreview from './test-preview/test-preview';
-import Test from './test/test';
-import TestContent from './test-content/test-content';
-
-export {
-  AccountData,
-  AccountOverview,
-  Breadcrumbs,
-  CourseBenefits,
-  CourseContent,
-  CourseOverview,
-  CoursePreview,
-  Filter,
-  PersonalData,
-  PreviewWebinar,
-  CourseCompleted,
-  VideoLesson,
-  TestPreview,
-  Test,
-  TestContent,
-  CourseDescription,
-};
+export { default as AccountData } from './account-data/account-data';
+export { default as AccountOverview } from './account-overview/account-overview';
+export { default as Breadcrumbs } from './breadcrumbs/breadcrumbs';
+export { default as ContentItem } from './content-item/content-item';
+export { default as CourseBenefits } from './course-benefits/course-benefits';
+export { default as CourseCompleted } from './course-completed/course-completed';
+export { default as CourseContent } from './course-content/course-content';
+export { default as CourseDescription } from './course-description/course-description';
+export { default as CourseOverview } from './course-overview/course-overview';
+export { default as CoursePreview } from './course-preview/course-preview';
+export { default as FAQ } from './faq/faq';
+export { default as Filter } from './filter/filter';
+export { default as NavigationButtons } from './navigation-buttons/navigation-buttons';
+export { default as PersonalData } from './personal-data/personal-data';
+export { default as PreviewWebinar } from './preview-webinar/preview-webinar';
+export { default as Test } from './test/test';
+export { default as TestContent } from './test-content/test-content';
+export { default as TestPreview } from './test-preview/test-preview';
+export { default as VideoLesson } from './video-lesson/video-lesson';

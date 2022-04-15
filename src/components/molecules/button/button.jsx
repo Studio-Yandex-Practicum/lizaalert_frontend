@@ -4,7 +4,7 @@ import { Icon } from '../../atoms';
 import styles from './button.module.scss';
 
 /**
- * @description Компонент кнопки с икнокой или без.
+ * @description Компонент кнопки с иконкой или без.
  *
  * - children - string - текст кнопки
  * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'

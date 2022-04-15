@@ -1,8 +1,5 @@
-import React from 'react';
-
-import Accordion from '../../templates/accordion/accordion';
-import Card from '../../templates/card/card';
-
+import { Card } from '../../atoms';
+import { Accordion } from '../../molecules';
 import styles from './faq.module.scss';
 
 const initialData = [
