@@ -8,6 +8,7 @@ import CourseOverview from './course-overview/course-overview';
 import CoursePreview from './course-preview/course-preview';
 import Filter from './filter/filter';
 import PersonalData from './personal-data/personal-data';
+import Breadcrumbs from './breadcrumbs/breadcrumbs';
 import PreviewWebinar from './preview-webinar/preview-webinar';
 import VideoLesson from './video-lesson/video-lesson';
 import TestPreview from './test-preview/test-preview';
@@ -17,6 +18,7 @@ import TestContent from './test-content/test-content';
 export {
   AccountData,
   AccountOverview,
+  Breadcrumbs,
   CourseBenefits,
   CourseContent,
   CourseOverview,
