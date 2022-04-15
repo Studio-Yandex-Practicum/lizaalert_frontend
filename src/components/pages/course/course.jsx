@@ -8,6 +8,7 @@ import {
   selectCourseTitle,
 } from '../../../store/course/selectors';
 import { CourseBenefits, CourseOverview, CourseContent } from '../../organisms';
+import { Heading } from '../../atoms';
 
 function Course() {
   const { courseId } = useParams();
@@ -24,17 +25,17 @@ function Course() {
   if (isLoading) {
     pageContent = <p>Loading...</p>;
   } else {
-    pageContent = <h1>{title}</h1>;
+    pageContent = (
+      <>
+        <Heading level={1}>{title}</Heading>
+        <CourseOverview />
+        <CourseContent content={mockCourseContent} />
+        <CourseBenefits />
+      </>
+    );
   }
 
-  return (
-    <div>
-      {pageContent}
-      <CourseOverview />
-      <CourseContent content={mockCourseContent} />
-      <CourseBenefits />
-    </div>
-  );
+  return <div>{pageContent}</div>;
 }
 
 export default Course;
