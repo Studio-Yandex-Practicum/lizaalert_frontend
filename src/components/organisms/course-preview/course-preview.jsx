@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Button, Tag, TextWithIcon } from '../../molecules';
-import { Card } from '../../templates';
+import Card from '../../templates/card/card';
 import { Heading } from '../../atoms';
 import getDeclensionOf from '../../../utils/getDeclensionOf';
 import styles from './course-preview.module.scss';
