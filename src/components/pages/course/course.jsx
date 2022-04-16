@@ -20,22 +20,17 @@ function Course() {
     dispatch(fetchCourseAction(courseId));
   }, [dispatch]);
 
-  let pageContent;
-
   if (isLoading) {
-    pageContent = <p>Loading...</p>;
-  } else {
-    pageContent = (
-      <>
-        <Heading level={1}>{title}</Heading>
-        <CourseOverview />
-        <CourseContent content={mockCourseContent} />
-        <CourseBenefits />
-      </>
-    );
+    return <p>Loading...</p>;
   }
-
-  return <div>{pageContent}</div>;
+  return (
+    <div>
+      <Heading level={1}>{title}</Heading>
+      <CourseOverview />
+      <CourseContent content={mockCourseContent} />
+      <CourseBenefits />
+    </div>
+  );
 }
 
 export default Course;
