@@ -14,6 +14,7 @@ import VideoLesson from './video-lesson/video-lesson';
 import TestPreview from './test-preview/test-preview';
 import Test from './test/test';
 import TestContent from './test-content/test-content';
+import FAQ from './faq/faq';
 
 export {
   AccountData,
@@ -32,4 +33,5 @@ export {
   Test,
   TestContent,
   CourseDescription,
+  FAQ,
 };
