@@ -7,12 +7,12 @@
 }
 
 .lessonContent {
-  flex-grow: 1;
+  width: calc(68% - #{vars.$grid-gap});
 }
 
 .courseContent {
   width: 32%;
-  max-width: 424px;
+  min-width: 300px;
 }
 
 .breadcrumbs {

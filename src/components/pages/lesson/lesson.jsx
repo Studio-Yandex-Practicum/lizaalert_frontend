@@ -30,7 +30,9 @@ function Lesson() {
       <Breadcrumbs className={styles.breadcrumbs} />
       <div className={styles.lesson}>
         <div className={styles.lessonContent}>
-          {lesson.slug === 'lesson' && <TheoryLesson />}
+          {lesson.slug === 'lesson' && (
+            <TheoryLesson content={lesson.content} />
+          )}
           {lesson.slug === 'video' && <VideoLesson source={lesson.source} />}
           {lesson.slug === 'webinar' && (
             <PreviewWebinar date={lesson.date} link={lesson.source} />
