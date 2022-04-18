@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import Card from '../../templates/card/card';
+import { Card } from '../../atoms';
+import { Button, TextWithIcon } from '../../molecules';
 import styles from './account-overview.module.scss';
 import DefaultImg from '../../../assets/images/profile.jpg';
-import TextWithIcon from '../../molecules/text-with-icon/text-with-icon';
-import Button from '../../molecules/button/button';
 
 function AccountOverview({
   avatar,

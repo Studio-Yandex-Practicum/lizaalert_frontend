@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Card from '../../templates/card/card';
-import Accordion from '../../templates/accordion/accordion';
-import Heading from '../../atoms/heading/heading';
+import { Card, Heading } from '../../atoms';
+import { Accordion } from '../../molecules';
 import styles from './course-description.module.scss';
 
 function CourseDescription({ description, tasks, className }) {

@@ -1,9 +1,7 @@
-import Courses from './courses/courses';
-import Profile from './profile/profile';
-import NotFound from './not-found/not-found';
-import Course from './course/course';
-import Register from './register/register';
-import Login from './login/login';
-import Lesson from './lesson/lesson';
-
-export { Courses, Profile, NotFound, Course, Login, Register, Lesson };
+export { default as Course } from './course/course';
+export { default as Courses } from './courses/courses';
+export { default as Lesson } from './lesson/lesson';
+export { default as Login } from './login/login';
+export { default as NotFound } from './not-found/not-found';
+export { default as Profile } from './profile/profile';
+export { default as Register } from './register/register';

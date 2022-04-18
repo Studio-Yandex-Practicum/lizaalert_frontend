@@ -1,5 +1,4 @@
 @use 'src/styles/variables' as vars;
-@use 'src/styles/color-variables' as colors;
 
 .accordion {
   display: flex;
@@ -27,9 +26,9 @@
 .btn {
   margin-left: auto;
   transition: vars.$trans-300;
-  
+
   &:hover {
-    color: colors.$color-hover;
+    color: vars.$color-hover;
   }
 }
 
