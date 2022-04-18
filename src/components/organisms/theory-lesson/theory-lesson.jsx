@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from '../../templates';
+import { Card } from '../../atoms';
 
 // Временный компонент-заглушка, необходимо переписать
 

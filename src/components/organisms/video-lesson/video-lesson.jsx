@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
-import { Heading } from '../../atoms';
-import { Card } from '../../templates';
-
+import { Card, Heading } from '../../atoms';
 import styles from './video-lesson.module.scss';
 
 function VideoLesson({ source }) {
   return (
     <Card className={styles.container}>
-      <Heading level={1} size="l" className={styles.heading}>
+      <Heading level={2} size="l" className={styles.heading}>
         Видео
       </Heading>
-      <div className={styles.videoContainer}>
+      <div>
         <iframe
           className={styles.video}
           height="456"

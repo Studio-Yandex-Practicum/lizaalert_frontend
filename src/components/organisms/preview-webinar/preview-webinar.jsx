@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
+import { Card, Heading } from '../../atoms';
 import { Button } from '../../molecules';
-import { Heading } from '../../atoms';
-import { Card } from '../../templates';
 import styles from './preview-webinar.module.scss';
 
 /**

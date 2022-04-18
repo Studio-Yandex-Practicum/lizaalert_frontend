@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { courseContentPropTypes } from '../../../utils/prop-types';
-import { Card, Accordion } from '../../templates';
-import ContentItem from '../../templates/content-item/content-item';
-import { Heading } from '../../atoms';
+import { Card, Heading } from '../../atoms';
+import { Accordion } from '../../molecules';
+import ContentItem from '../content-item/content-item';
 import styles from './course-content.module.scss';
 
 function CourseContent({ content, type, className }) {

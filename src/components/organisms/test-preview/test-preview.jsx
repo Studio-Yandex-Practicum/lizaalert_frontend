@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import { Heading } from '../../atoms';
+import { Card, Heading } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
-import { Card } from '../../templates';
 import styles from './test-preview.module.scss';
 
 function TestPreview({ test, toggleRender }) {
@@ -10,7 +9,7 @@ function TestPreview({ test, toggleRender }) {
   return (
     <Card htmlTag="article" className={styles.container}>
       <div className={styles.propertiesRow}>
-        <Heading level={1} size="l" title="Тест" />
+        <Heading level={2} size="l" title="Тест" />
         {test.inProgress && (
           <Button view="text" onClick={toggleRender}>
             Вернуться к тесту

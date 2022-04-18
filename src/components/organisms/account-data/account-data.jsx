@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Card from '../../templates/card/card';
-import Button from '../../molecules/button/button';
-import Input from '../../molecules/input/input';
+import { Card, Heading } from '../../atoms';
+import { Button, Input } from '../../molecules';
 import styles from './account-data.module.scss';
 
 function AccountData() {
@@ -26,7 +25,7 @@ function AccountData() {
   };
   return (
     <Card className={styles.accountData}>
-      <h2 className={styles.title}>Аккаунт</h2>
+      <Heading level={2} size="l" title="Аккаунт" />
       <form
         name="accountData"
         onSubmit={handleFormSubmit}
