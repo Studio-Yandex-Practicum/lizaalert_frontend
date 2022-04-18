@@ -1,10 +1,32 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { Heading } from '../../atoms';
 import { AccountData, AccountOverview, PersonalData } from '../../organisms';
 import routes from '../../../config/routes';
 import styles from './profile.module.scss';
+import fetchProfileAction from '../../../store/profile/thunk';
+import profileMock from '../../../services/mock/profile.json';
+import {
+  selectProfileOverview,
+  selectProfilePersonal,
+  selectProfileAccount,
+  selectProfileLoading,
+} from '../../../store/profile/selectors';
 
 function Profile() {
-  return (
+  const dispatch = useDispatch();
+  const profileAccountOverview = useSelector(selectProfileOverview);
+  const profilePersonalData = useSelector(selectProfilePersonal);
+  const profileAccountData = useSelector(selectProfileAccount);
+  const isLoading = useSelector(selectProfileLoading);
+
+  useEffect(() => {
+    dispatch(fetchProfileAction());
+  }, [dispatch]);
+
+  return isLoading ? (
+    <h3>Loading...</h3>
+  ) : (
     <div className="container">
       <Heading
         level={2}
@@ -14,7 +36,13 @@ function Profile() {
       />
       <div className={styles.content}>
         <aside className={styles.aside}>
-          <AccountOverview />
+          <AccountOverview
+            avatar={profileAccountOverview.photo}
+            userName={profileAccountOverview.name}
+            userStatus={profileAccountOverview.status}
+            userOccupation={profileAccountOverview.occupation}
+            coursesFinished={profileAccountOverview.finishedCourses}
+          />
         </aside>
         <main className={styles.main}>
           <section className={styles.section}>
@@ -41,7 +69,11 @@ function Profile() {
             </div>
           </section>
           <section className={styles.section}>
-            <AccountData />
+            <AccountData
+              phoneNumber={profileAccountData.phoneNumber}
+              email={profileAccountData.email}
+              password={profileAccountData.password}
+            />
             <div className={styles.description}>
               <p>
                 Номер телефона используется как уникальный идентификатор

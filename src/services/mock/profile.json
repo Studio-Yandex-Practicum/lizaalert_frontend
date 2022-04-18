@@ -1,0 +1,22 @@
+{
+  "id": 0,
+  "accountOverview": {
+    "photo": "../../assets/images/profile.jpg",
+    "name": "Иванова Анна Сидоровна",
+    "status": "Профессионал",
+    "occupation": "Картограф",
+    "finishedCourses": 2
+  },
+  "personalData": {
+    "name": "Иванова Анна Сидоровна",
+    "birthDate": "1990-01-01",
+    "region": "г. Санкт-Петербург",
+    "nickname": "Белка",
+    "avatar": ""
+  },
+  "accountData": {
+    "phoneNumber": "+71234567890",
+    "email": "anna@liza-alert.ru",
+    "password": "password"
+  }
+}

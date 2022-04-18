@@ -1,15 +1,16 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './account-data.module.scss';
 
-function AccountData() {
+function AccountData({ phoneNumber, email, password }) {
   const [isInputsEdited, setIsInputsEdited] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    phoneNumber: '+71234567890',
-    email: 'anna@liza-alert.ru',
-    password: 'password',
-  });
+  // const [inputValues, setInputValues] = useState({
+  //   phoneNumber: '+71234567890',
+  //   email: 'anna@liza-alert.ru',
+  //   password: 'password',
+  // });
   const onInputValuesChange = (evt) => {
     setInputValues({
       ...inputValues,
@@ -35,7 +36,7 @@ function AccountData() {
           labelName="Номер телефона"
           type="tel"
           inputName="mobilePhone"
-          value={inputValues.phoneNumber}
+          value={phoneNumber}
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Номер телефона начиная с +7"
@@ -45,7 +46,7 @@ function AccountData() {
           labelName="Email"
           type="email"
           inputName="email"
-          value={inputValues.email}
+          value={email}
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Ваш email"
@@ -54,7 +55,7 @@ function AccountData() {
           labelName="Пароль"
           type="password"
           inputName="password"
-          value={inputValues.password}
+          value={password}
           onChange={onInputValuesChange}
           placeholder="Ваш пароль"
           className={styles.inputSection}
@@ -70,5 +71,17 @@ function AccountData() {
     </Card>
   );
 }
+
+AccountData.defaultProps = {
+  phoneNumber: '+71234567890',
+  email: 'anna@liza-alert.ru',
+  password: 'password',
+};
+
+AccountData.propTypes = {
+  phoneNumber: PropTypes.string,
+  email: PropTypes.string,
+  password: PropTypes.string,
+};
 
 export default AccountData;
