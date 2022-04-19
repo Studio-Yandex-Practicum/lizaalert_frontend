@@ -6,22 +6,18 @@ import routes from '../../../config/routes';
 import styles from './profile.module.scss';
 import fetchProfileAction from '../../../store/profile/thunk';
 import profileMock from '../../../services/mock/profile.json';
-import {
-  selectProfileOverview,
-  selectProfilePersonal,
-  selectProfileAccount,
-  selectProfileLoading,
-} from '../../../store/profile/selectors';
+import { selectProfileLoading } from '../../../store/profile/selectors';
 
 function Profile() {
   const dispatch = useDispatch();
-  const profileAccountOverview = useSelector(selectProfileOverview);
-  const profilePersonalData = useSelector(selectProfilePersonal);
-  const profileAccountData = useSelector(selectProfileAccount);
+  // const profileSelect = useSelector(selectProfile);
+  // const profileAccountOverview = useSelector(selectProfileOverview);
+  // const profilePersonalData = useSelector(selectProfilePersonal);
+  // const profileAccountData = useSelector(selectProfileAccount);
   const isLoading = useSelector(selectProfileLoading);
 
   useEffect(() => {
-    dispatch(fetchProfileAction());
+    dispatch(fetchProfileAction(0));
   }, [dispatch]);
 
   return isLoading ? (
@@ -37,16 +33,22 @@ function Profile() {
       <div className={styles.content}>
         <aside className={styles.aside}>
           <AccountOverview
-            avatar={profileAccountOverview.photo}
-            userName={profileAccountOverview.name}
-            userStatus={profileAccountOverview.status}
-            userOccupation={profileAccountOverview.occupation}
-            coursesFinished={profileAccountOverview.finishedCourses}
+            avatar={profileMock.accountOverview.avatar}
+            userName={profileMock.accountOverview.userName}
+            userStatus={profileMock.accountOverview.userStatus}
+            userOccupation={profileMock.accountOverview.userOccupation}
+            coursesFinished={profileMock.accountOverview.coursesFinished}
           />
         </aside>
         <main className={styles.main}>
           <section className={styles.section}>
-            <PersonalData />
+            <PersonalData
+              name={profileMock.personalData.name}
+              dateOfBirth={profileMock.personalData.dateOfBirth}
+              region={profileMock.personalData.region}
+              nickname={profileMock.personalData.nickname}
+              avatar={profileMock.personalData.avatar}
+            />
             <div className={styles.description}>
               <p>
                 Просьба указывать настоящие ФИО, это нужно для получения
@@ -70,9 +72,9 @@ function Profile() {
           </section>
           <section className={styles.section}>
             <AccountData
-              phoneNumber={profileAccountData.phoneNumber}
-              email={profileAccountData.email}
-              password={profileAccountData.password}
+              phoneNumber={profileMock.accountData.phoneNumber}
+              email={profileMock.accountData.email}
+              password={profileMock.accountData.password}
             />
             <div className={styles.description}>
               <p>

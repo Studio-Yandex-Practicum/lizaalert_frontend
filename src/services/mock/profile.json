@@ -1,15 +1,15 @@
 {
   "id": 0,
   "accountOverview": {
-    "photo": "../../assets/images/profile.jpg",
-    "name": "Иванова Анна Сидоровна",
-    "status": "Профессионал",
-    "occupation": "Картограф",
-    "finishedCourses": 2
+    "avatar": "../../assets/images/profile.jpg",
+    "userName": "Иванова Анна Сидоровна",
+    "userStatus": "Профессионал",
+    "userOccupation": "Картограф",
+    "coursesFinished": 2
   },
   "personalData": {
     "name": "Иванова Анна Сидоровна",
-    "birthDate": "1990-01-01",
+    "dateOfBirth": "1990-01-01",
     "region": "г. Санкт-Петербург",
     "nickname": "Белка",
     "avatar": ""

@@ -9,14 +9,11 @@ export const profileSlice = createSlice({
     error: null,
   },
   reducers: {
-    setPersonalData(state, action) {
+    setPersonalData: (state, action) => {
       state.profile.personalData = action.payload;
     },
-    setAccountData(state, action) {
+    setAccountData: (state, action) => {
       state.profile.accountData = action.payload;
-    },
-    setAccountOverview(state, action) {
-      state.profile.accountOverview = action.payload;
     },
   },
   extraReducers: {
@@ -35,5 +32,7 @@ export const profileSlice = createSlice({
     },
   },
 });
+
+export const { setPersonalData, setAccountData } = profileSlice.actions;
 
 export default profileSlice.reducer;

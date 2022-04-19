@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
+import { setAccountData } from '../../../store/profile/slice';
 import styles from './account-data.module.scss';
 
 function AccountData({ phoneNumber, email, password }) {
+  const dispatch = useDispatch();
   const [isInputsEdited, setIsInputsEdited] = useState(false);
-  // const [inputValues, setInputValues] = useState({
-  //   phoneNumber: '+71234567890',
-  //   email: 'anna@liza-alert.ru',
-  //   password: 'password',
-  // });
+  const [inputValues, setInputValues] = useState({
+    phoneNumber,
+    email,
+    password,
+  });
   const onInputValuesChange = (evt) => {
     setInputValues({
       ...inputValues,
@@ -22,7 +25,7 @@ function AccountData({ phoneNumber, email, password }) {
   };
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setAccountData(inputValues));
   };
   return (
     <Card className={styles.accountData}>
@@ -36,7 +39,7 @@ function AccountData({ phoneNumber, email, password }) {
           labelName="Номер телефона"
           type="tel"
           inputName="mobilePhone"
-          value={phoneNumber}
+          value={inputValues.phoneNumber}
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Номер телефона начиная с +7"
@@ -46,7 +49,7 @@ function AccountData({ phoneNumber, email, password }) {
           labelName="Email"
           type="email"
           inputName="email"
-          value={email}
+          value={inputValues.email}
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Ваш email"
@@ -55,7 +58,7 @@ function AccountData({ phoneNumber, email, password }) {
           labelName="Пароль"
           type="password"
           inputName="password"
-          value={password}
+          value={inputValues.password}
           onChange={onInputValuesChange}
           placeholder="Ваш пароль"
           className={styles.inputSection}

@@ -1,16 +1,20 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
+import { setPersonalData } from '../../../store/profile/slice';
 import styles from './personal-data.module.scss';
 
-function PersonalData() {
+function PersonalData({ name, dateOfBirth, region, nickname, avatar }) {
+  const dispatch = useDispatch();
   const [isInputChanged, setIsInputChanged] = useState(false);
   const [inputsValues, setInputsValues] = useState({
-    name: 'Иванова Анна Сидоровна',
-    dateOfBirth: '1990-01-01',
-    region: 'г. Санкт-Петербург',
-    nickname: 'Белка',
-    avatar: '',
+    name,
+    dateOfBirth,
+    region,
+    nickname,
+    avatar,
   });
   const onInputValuesChange = (e) => {
     if (e.target.value !== inputsValues[e.target.name]) {
@@ -22,7 +26,7 @@ function PersonalData() {
   };
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setPersonalData(inputsValues));
   };
   return (
     <Card className={styles.personalData}>
@@ -89,5 +93,19 @@ function PersonalData() {
     </Card>
   );
 }
+PersonalData.defaultProps = {
+  name: 'Иванова Анна Сидоровна',
+  dateOfBirth: '1990-01-01',
+  region: 'г. Санкт-Петербург',
+  nickname: 'Белка',
+  avatar: '',
+};
+PersonalData.propTypes = {
+  name: PropTypes.string,
+  dateOfBirth: PropTypes.string,
+  region: PropTypes.string,
+  nickname: PropTypes.string,
+  avatar: PropTypes.string,
+};
 
 export default PersonalData;
