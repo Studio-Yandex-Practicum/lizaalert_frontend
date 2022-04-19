@@ -12,6 +12,15 @@ import styles from './preview-webinar.module.scss';
 
 function PreviewWebinar({ date, link }) {
   const dateObject = new Date(date);
+  const webinarDate = <b>{dateObject.toLocaleDateString('ru-RU')}</b>;
+  const webinarTime = (
+    <b>
+      {dateObject.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })}
+    </b>
+  );
 
   return (
     <Card className={styles.card}>
@@ -19,18 +28,7 @@ function PreviewWebinar({ date, link }) {
         Вебинар
       </Heading>
       <p className={styles.text}>
-        Вебинар стартует{' '}
-        <span className={styles.date}>
-          {dateObject.toLocaleDateString('ru-RU')}
-        </span>{' '}
-        в{' '}
-        <span className={styles.date}>
-          {dateObject.toLocaleTimeString('ru-RU', {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        </span>{' '}
-        МСК (GTM+3)
+        {['Вебинар стартует ', webinarDate, ' в ', webinarTime, ' МСК (GTM+3)']}
       </p>
       <a className={styles.link} href={link} target="blank">
         <Button className={styles.button}>Подключиться</Button>

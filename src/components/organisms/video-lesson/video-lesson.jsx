@@ -11,7 +11,6 @@ function VideoLesson({ source }) {
       <div>
         <iframe
           className={styles.video}
-          height="456"
           src={source}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
