@@ -1,11 +1,10 @@
-@use '../../../styles/color-variables.scss' as colors;
-@use '../../../styles/variables.scss' as vars;
+@use 'src/styles/variables' as vars;
 
 .content {
   display: flex;
   gap: 24px;
   padding: 32px 0;
-  border-bottom: 1px solid colors.$borders-divider-disabled-bg;
+  border-bottom: 1px solid vars.$borders-divider-disabled-bg;
 
   &:last-child {
     border-bottom: none;
@@ -36,17 +35,17 @@
   }
 }
 
-.complited {
-  color: colors.$success;
+.completed {
+  color: vars.$success;
 }
 
 .accordion {
-  border-top: 1px solid colors.$borders-divider-disabled-bg;
-  
+  border-top: 1px solid vars.$borders-divider-disabled-bg;
+
   & > button {
     padding-top: 32px;
     padding-bottom: 32px;
-    font-size: 18px;
+    font-size: vars.$font-size-m;
   }
 
   .list {
@@ -58,20 +57,20 @@
 
 .finished {
   svg {
-    color: colors.$success;
+    color: vars.$success;
   }
 }
 
 .active {
-  color: colors.$color-hover;
+  color: vars.$color-hover;
 }
 
 .link {
   text-decoration: none;
   transition: vars.$trans-300;
-  color: inherit;;
+  color: inherit;
 
   &:hover {
-    color: colors.$color-hover;
+    color: vars.$color-hover;
   }
 }

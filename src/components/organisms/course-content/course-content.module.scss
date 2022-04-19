@@ -1,5 +1,4 @@
-@use '../../../styles/color-variables.scss' as colors;
-@use '../../../styles/font-variables' as fonts;
+@use 'src/styles/variables' as vars;
 
 .content {
   box-sizing: border-box;
@@ -8,12 +7,12 @@
 }
 
 .subtitle > button {
-  font-family: fonts.$mainFont;
+  font-family: vars.$mainFont;
   font-style: normal;
   font-weight: 700;
-  font-size: fonts.$font-size-l;
-  line-height: 133%;
-  color: colors.$dark-primary;
+  font-size: vars.$font-size-l;
+  line-height: vars.$line-height-l;
+  color: vars.$dark-primary;
 }
 
 .list {

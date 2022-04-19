@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Heading } from '../../atoms';
-import { Button, Checkbox, Tag } from '../../molecules';
-import { Accordion, Card } from '../../templates';
+import { Card, Heading } from '../../atoms';
+import { Accordion, Button, Checkbox, Tag } from '../../molecules';
 import { Filters, Levels, Statuses } from '../../../utils/constants';
 import styles from './filter.module.scss';
 
