@@ -7,8 +7,15 @@ import {
   selectCourseLoading,
   selectCourseTitle,
 } from '../../../store/course/selectors';
-import { CourseBenefits, CourseOverview, CourseContent } from '../../organisms';
+import {
+  CourseBenefits,
+  CourseOverview,
+  CourseContent,
+  CourseDescription,
+  FAQ,
+} from '../../organisms';
 import { Heading } from '../../atoms';
+import styles from './course.module.scss';
 
 function Course() {
   const { courseId } = useParams();
@@ -24,11 +31,21 @@ function Course() {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <Heading level={1}>{title}</Heading>
-      <CourseOverview />
-      <CourseContent content={mockCourseContent} />
-      <CourseBenefits />
+    <div className="container">
+      <Heading level={2} size="xxl" className={styles.heading}>
+        {title}
+      </Heading>
+      <div className={styles.content}>
+        <main className={styles.main}>
+          <CourseDescription />
+          <CourseBenefits />
+          <CourseContent content={mockCourseContent} />
+          <FAQ />
+        </main>
+        <aside className={styles.aside}>
+          <CourseOverview />
+        </aside>
+      </div>
     </div>
   );
 }

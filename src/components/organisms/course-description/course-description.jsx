@@ -7,7 +7,12 @@ import styles from './course-description.module.scss';
 function CourseDescription({ description, tasks, className }) {
   return (
     <Card className={classnames(styles.description, className)}>
-      <Accordion button="text" title="Описание курса" className={styles.title}>
+      <Accordion
+        button="text"
+        title="Описание курса"
+        className={styles.title}
+        open
+      >
         <p className={styles.text}>{description}</p>
         <Heading
           level={3}
