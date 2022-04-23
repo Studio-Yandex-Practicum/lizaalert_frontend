@@ -1,0 +1,31 @@
+@use 'src/styles/variables' as vars;
+
+.text {
+  color: vars.$dark-primary;
+  font-weight: 400;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+
+  &__success {
+    color: vars.$success;
+  }
+
+  &__notChecked {
+    
+    &_right {
+      svg {
+        width: 14px; 
+       }
+    }
+
+    &_warning {
+      svg {
+        width: 12px; 
+       }
+    }
+  }
+
+  &__warning {
+    color: vars.$warning;
+  }
+}
