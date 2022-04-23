@@ -59,7 +59,7 @@ function Button({
 }
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   view: PropTypes.oneOf(['primary', 'secondary', 'text']),
   iconName: PropTypes.string,
   iconPosition: PropTypes.oneOf(['back', 'forward', '']),
