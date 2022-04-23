@@ -9,6 +9,7 @@ function HeaderLink({ text, iconType, link }) {
   return (
     <NavLink
       className={styles.link}
+      end
       to={link}
       children={({ isActive }) => {
         const color = isActive ? 'color-hover' : 'dark-primary';

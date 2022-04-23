@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Heading } from '../../atoms';
+import { Heading, Card } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
-import { Card } from '../../templates';
 import { selectTest, selectIsLoading } from '../../../store/test/selectors';
 
 import styles from './test.module.scss';

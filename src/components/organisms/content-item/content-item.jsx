@@ -3,8 +3,7 @@ import classnames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { courseContentPropTypes } from '../../../utils/prop-types';
 import { Icon } from '../../atoms';
-import { TextWithIcon } from '../../molecules';
-import { Accordion } from '..';
+import { Accordion, TextWithIcon } from '../../molecules';
 import styles from './content-item.module.scss';
 
 function ContentItem({ content, index, type }) {
@@ -40,7 +39,7 @@ function ContentItem({ content, index, type }) {
               type="checkSolid"
               maxWidth={20}
               maxHeight={20}
-              className={styles.complited}
+              className={styles.completed}
             />
           )}
         </div>

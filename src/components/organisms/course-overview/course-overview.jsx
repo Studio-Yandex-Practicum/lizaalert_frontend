@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import Card from '../../templates/card/card';
+import { Card } from '../../atoms';
+import { Button, TextWithIcon } from '../../molecules';
 import DefaultImage from '../../../assets/images/course.jpg';
-import TextWithIcon from '../../molecules/text-with-icon/text-with-icon';
-import Button from '../../molecules/button/button';
 import styles from './course-overview.module.scss';
 
 function CourseOverview({

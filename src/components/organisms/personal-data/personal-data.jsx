@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Card from '../../templates/card/card';
-import Button from '../../molecules/button/button';
-import Input from '../../molecules/input/input';
+import { Card, Heading } from '../../atoms';
+import { Button, Input } from '../../molecules';
 import styles from './personal-data.module.scss';
 
 function PersonalData() {
@@ -27,7 +26,7 @@ function PersonalData() {
   };
   return (
     <Card className={styles.personalData}>
-      <h2 className={styles.title}>Личные данные</h2>
+      <Heading leve={2} size="l" title="Личные данные" />
       <form
         name="personalData"
         className={styles.form}

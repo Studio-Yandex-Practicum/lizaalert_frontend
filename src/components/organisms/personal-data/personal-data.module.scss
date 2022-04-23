@@ -1,18 +1,8 @@
-@import 'src/styles/color-variables';
-
 .personalData {
   max-width: 648px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-}
-
-.title {
-  color: $dark-primary;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: calc(28 / 24);
-  margin: 0;
 }
 
 .form {

@@ -6,11 +6,15 @@
   column-gap: vars.$grid-gap;
 }
 
-.body {
-  flex-grow: 1;
+.lessonContent {
+  width: calc(68% - #{vars.$grid-gap});
 }
 
-.content {
+.courseContent {
   width: 32%;
-  max-width: 424px;
+  min-width: 300px;
+}
+
+.breadcrumbs {
+  margin-bottom: 32px;
 }

@@ -1,24 +1,23 @@
-@import 'src/styles/color-variables';
-@import 'src/styles/_font-variables';
+@use 'src/styles/variables' as vars;
 
 .description {
   max-width: 872px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  width: 100%;
 }
 
 .title > button {
   font-weight: 700;
-  font-size: $font-size-l;
-  line-height: $line-height-l;
+  font-size: vars.$font-size-l;
+  line-height: vars.$line-height-l;
 }
 
 .text {
-  font-size: $font-size-m;
-  line-height: $line-height-m;
-  color: $dark-primary;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+  color: vars.$dark-primary;
   margin: 32px 0 0;
 }
 
@@ -27,13 +26,13 @@
 }
 
 .tasksList {
-  margin: 0 0 32px 0;
+  margin: 0;
   padding-left: 27px;
 }
 
 .task {
   margin-top: 18px;
-  color: $dark-primary;
-  font-size: $font-size-m;
-  line-height: $line-height-m;
+  color: vars.$dark-primary;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
 }

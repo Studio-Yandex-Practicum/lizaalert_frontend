@@ -1,19 +1,17 @@
-import { Heading } from '../../atoms';
-import { Card } from '../../templates';
-
+import PropTypes from 'prop-types';
+import { Card, Heading } from '../../atoms';
 import styles from './video-lesson.module.scss';
 
-function VideoLesson() {
+function VideoLesson({ source }) {
   return (
     <Card className={styles.container}>
-      <Heading level={1} size="l" className={styles.heading}>
+      <Heading level={2} size="l" className={styles.heading}>
         Видео
       </Heading>
-      <div className={styles.videoContainer}>
+      <div>
         <iframe
           className={styles.video}
-          height="456"
-          src="https://www.youtube.com/embed/elDsY6yS9H8"
+          src={source}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -22,5 +20,9 @@ function VideoLesson() {
     </Card>
   );
 }
+
+VideoLesson.propTypes = {
+  source: PropTypes.string.isRequired,
+};
 
 export default VideoLesson;

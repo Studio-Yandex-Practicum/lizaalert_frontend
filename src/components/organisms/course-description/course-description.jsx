@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Card from '../../templates/card/card';
-import Accordion from '../../templates/accordion/accordion';
-import Heading from '../../atoms/heading/heading';
+import { Card, Heading } from '../../atoms';
+import { Accordion } from '../../molecules';
 import styles from './course-description.module.scss';
 
 function CourseDescription({ description, tasks, className }) {
   return (
     <Card className={classnames(styles.description, className)}>
-      <Accordion button="text" title="Описание курса" className={styles.title}>
+      <Accordion
+        button="text"
+        title="Описание курса"
+        className={styles.title}
+        open
+      >
         <p className={styles.text}>{description}</p>
         <Heading
           level={3}

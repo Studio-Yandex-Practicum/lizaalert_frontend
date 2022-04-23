@@ -1,7 +1,7 @@
 @use 'src/styles/variables' as vars;
 
 .card {
-  width: 872px;
+  max-width: 872px;
   color: vars.$dark-primary;
 }
 

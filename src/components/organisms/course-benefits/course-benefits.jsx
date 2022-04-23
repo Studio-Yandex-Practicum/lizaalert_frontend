@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import Card from '../../templates/card/card';
-import Accordion from '../../templates/accordion/accordion';
-import Heading from '../../atoms/heading/heading';
-import '../../../assets/icons/check-solid.svg';
-import { Icon } from '../../atoms';
+import { Card, Heading, Icon } from '../../atoms';
+import { Accordion } from '../../molecules';
 import styles from './course-benefits.module.scss';
 
 function CourseBenefits({ benefitsList }) {
@@ -31,6 +27,7 @@ function CourseBenefits({ benefitsList }) {
     </Card>
   );
 }
+
 CourseBenefits.defaultProps = {
   benefitsList: [
     {

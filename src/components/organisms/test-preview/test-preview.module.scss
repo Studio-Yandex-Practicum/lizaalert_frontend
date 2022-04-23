@@ -1,0 +1,35 @@
+@use "src/styles/font-variables" as vars;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.paragraph {
+  padding: 0;
+  margin: 0;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.propertiesRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  max-width: 184px;
+  margin: auto;
+}
+
+.icon {
+  max-width: 20px;
+  max-height: 20px;
+}

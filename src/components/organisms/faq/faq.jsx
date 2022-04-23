@@ -1,8 +1,5 @@
-import React from 'react';
-
-import Accordion from '../../templates/accordion/accordion';
-import Card from '../../templates/card/card';
-
+import { Card } from '../../atoms';
+import { Accordion } from '../../molecules';
 import styles from './faq.module.scss';
 
 const initialData = [
@@ -28,7 +25,7 @@ const initialData = [
 function FAQ() {
   return (
     <Card className={styles.card}>
-      <Accordion className={styles.title} title="FAQ" button="text">
+      <Accordion className={styles.title} title="FAQ" button="text" open>
         <ul className={styles.list}>
           {initialData.map((list) => (
             <li key={list.id} className={styles.list__item}>
