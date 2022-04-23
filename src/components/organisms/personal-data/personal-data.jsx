@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './personal-data.module.scss';
+import { useFormWithValidation } from '../../../hooks';
 
 function PersonalData() {
+  const { handleChange, isValid, errors, handleChangeFiles } =
+    useFormWithValidation();
   const [isInputChanged, setIsInputChanged] = useState(false);
   const [inputsValues, setInputsValues] = useState({
     name: 'Иванова Анна Сидоровна',
@@ -15,18 +18,31 @@ function PersonalData() {
   const onInputValuesChange = (e) => {
     if (e.target.value !== inputsValues[e.target.name]) {
       setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+      handleChange(e);
       if (!isInputChanged) {
         setIsInputChanged(true);
       }
     }
   };
+
+  const onChangeFile = (e) => {
+    const pattern = /\.(gif|jpg|jpeg|tiff|png)$/i;
+    setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+    handleChangeFiles(e, pattern);
+  };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     // const { email, password } = inputValues;
   };
   return (
     <Card className={styles.personalData}>
-      <Heading leve={2} size="l" title="Личные данные" />
+      <Heading
+        leve={2}
+        size="l"
+        title="Личные данные"
+        className={styles.heading}
+      />
       <form
         name="personalData"
         className={styles.form}
@@ -40,6 +56,9 @@ function PersonalData() {
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Ваше ФИО"
+          error={errors.name}
+          minLength={2}
+          required
         />
         <Input
           labelName="Дата рождения"
@@ -49,6 +68,10 @@ function PersonalData() {
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Дата рождения"
+          max="2050-12-31"
+          min="1900-01-01"
+          error={errors.dateOfBirth}
+          required
         />
         <Input
           labelName="Географический регион"
@@ -58,6 +81,9 @@ function PersonalData() {
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Регион проживания"
+          error={errors.region}
+          minLength={2}
+          required
         />
         <Input
           labelName="Позывной на форуме"
@@ -67,6 +93,9 @@ function PersonalData() {
           onChange={onInputValuesChange}
           className={styles.inputSection}
           placeholder="Позывной на форуме"
+          error={errors.nickname}
+          minLength={2}
+          required
         />
         <Input
           labelName="Фото"
@@ -74,12 +103,13 @@ function PersonalData() {
           accept="image/*"
           inputName="avatar"
           value={inputsValues.avatar}
-          onChange={onInputValuesChange}
+          onChange={onChangeFile}
+          error={errors.avatar}
           className={styles.inputSection}
           placeholder="Ваше фото"
         />
         <Button
-          disabled={!isInputChanged}
+          disabled={!isValid}
           type="submit"
           className={styles.submitButton}
         >

@@ -9,18 +9,20 @@
   font-family: vars.$mainFont;
 }
 
+.heading {
+  margin-bottom: 32px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
 }
 
 .inputSection {
-  margin: 32px 0 0 0;
 }
 
 .submitButton {
   max-width: 246px;
-  margin-top: 32px;
   padding: 12px 24px;
   align-self: center;
   border-radius: 16px;

@@ -31,6 +31,12 @@ function Input({
   disabled,
   onChange,
   className,
+  minLength,
+  maxLength,
+  required,
+  max,
+  min,
+  pattern,
 }) {
   return (
     <div className={classNames(styles.container, className)}>
@@ -62,10 +68,16 @@ function Input({
           [styles.input_hidden]: type === 'file',
           [styles.input_warned]: error,
         })}
+        minLength={minLength}
+        maxLength={maxLength}
+        required={required}
+        max={max}
+        min={min}
+        pattern={pattern}
       />
       {type === 'file' && <span className={styles.input}>{value}</span>}
       {/* когда будет настроена валидация, будет условие isValid, вместо error */}
-      {error && <span className={styles.error}>{error}</span>}
+      <span className={styles.error}>{error}</span>
     </div>
   );
 }
@@ -75,6 +87,13 @@ Input.defaultProps = {
   accept: null,
   error: null,
   disabled: false,
+  minLength: null,
+  maxLength: null,
+  required: false,
+  max: null,
+  min: null,
+  className: '',
+  pattern: null,
 };
 
 Input.propTypes = {
@@ -88,7 +107,13 @@ Input.propTypes = {
   error: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  minLength: PropTypes.number,
+  maxLength: PropTypes.number,
+  required: PropTypes.bool,
+  max: PropTypes.string,
+  min: PropTypes.string,
+  pattern: PropTypes.string,
 };
 
 export default Input;

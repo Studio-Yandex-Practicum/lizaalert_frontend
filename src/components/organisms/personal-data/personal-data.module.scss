@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.heading {
+  margin-bottom: 32px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -12,7 +16,6 @@
 
 .submitButton {
   max-width: 246px;
-  margin-top: 32px;
   padding: 12px 24px;
   align-self: center;
   border-radius: 16px;
@@ -21,5 +24,5 @@
 }
 
 .inputSection {
-  margin: 32px 0 0 0;
+  
 }
