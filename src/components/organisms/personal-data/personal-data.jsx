@@ -1,21 +1,17 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import { setPersonalData } from '../../../store/profile/slice';
+import { selectProfilePersonal } from '../../../store/profile/selectors';
 import styles from './personal-data.module.scss';
 
-function PersonalData({ name, dateOfBirth, region, nickname, avatar }) {
+function PersonalData() {
+  const personalData = useSelector(selectProfilePersonal);
   const dispatch = useDispatch();
+  const [inputsValues, setInputsValues] = useState(personalData);
   const [isInputChanged, setIsInputChanged] = useState(false);
-  const [inputsValues, setInputsValues] = useState({
-    name,
-    dateOfBirth,
-    region,
-    nickname,
-    avatar,
-  });
+
   const onInputValuesChange = (e) => {
     if (e.target.value !== inputsValues[e.target.name]) {
       setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
@@ -24,13 +20,16 @@ function PersonalData({ name, dateOfBirth, region, nickname, avatar }) {
       }
     }
   };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     dispatch(setPersonalData(inputsValues));
+    setIsInputChanged(false);
   };
+
   return (
     <Card className={styles.personalData}>
-      <Heading leve={2} size="l" title="Личные данные" />
+      <Heading level={2} size="l" title="Личные данные" />
       <form
         name="personalData"
         className={styles.form}
@@ -93,19 +92,5 @@ function PersonalData({ name, dateOfBirth, region, nickname, avatar }) {
     </Card>
   );
 }
-PersonalData.defaultProps = {
-  name: 'Иванова Анна Сидоровна',
-  dateOfBirth: '1990-01-01',
-  region: 'г. Санкт-Петербург',
-  nickname: 'Белка',
-  avatar: '',
-};
-PersonalData.propTypes = {
-  name: PropTypes.string,
-  dateOfBirth: PropTypes.string,
-  region: PropTypes.string,
-  nickname: PropTypes.string,
-  avatar: PropTypes.string,
-};
 
 export default PersonalData;

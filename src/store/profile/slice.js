@@ -5,7 +5,7 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState: {
     profile: {},
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
   reducers: {
