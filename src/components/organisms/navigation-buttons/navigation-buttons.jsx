@@ -18,7 +18,8 @@ function NavigationButtons({
   classNameForContainer,
   classNameForButtons,
   view,
-  disabled,
+  disabledBack,
+  disabledForward,
   onClickBack,
   onClickForward,
 }) {
@@ -33,7 +34,7 @@ function NavigationButtons({
         iconPosition="back"
         onClick={onClickBack}
         className={btnsClasses}
-        disabled={disabled === 'back'}
+        disabled={disabledBack}
       >
         Назад
       </Button>
@@ -44,7 +45,7 @@ function NavigationButtons({
           iconPosition="forward"
           onClick={onClickForward}
           className={btnsClasses}
-          disabled={disabled === 'forward'}
+          disabled={disabledForward}
         >
           Далее
         </Button>
@@ -54,7 +55,7 @@ function NavigationButtons({
         <Button
           className={btnsClasses}
           onClick={onClickForward}
-          disabled={disabled === 'forward'}
+          disabled={disabledForward}
         >
           Завершить
         </Button>
@@ -66,7 +67,8 @@ function NavigationButtons({
 NavigationButtons.propTypes = {
   view: PropTypes.oneOf(['main', 'finish']),
   classNameForContainer: PropTypes.string,
-  disabled: PropTypes.oneOf(['back', 'forward']),
+  disabledBack: PropTypes.bool,
+  disabledForward: PropTypes.bool,
   classNameForButtons: PropTypes.string,
   onClickBack: PropTypes.func.isRequired,
   onClickForward: PropTypes.func.isRequired,
@@ -74,7 +76,8 @@ NavigationButtons.propTypes = {
 
 NavigationButtons.defaultProps = {
   view: 'main',
-  disabled: '',
+  disabledBack: false,
+  disabledForward: false,
   classNameForContainer: '',
   classNameForButtons: '',
 };
