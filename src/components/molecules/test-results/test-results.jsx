@@ -1,9 +1,6 @@
-import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
-import { TextWithIcon } from '..';
-
+import TextWithIcon from '../text-with-icon/text-with-icon';
 import styles from './test-results.module.scss';
 
 /**
@@ -14,25 +11,26 @@ import styles from './test-results.module.scss';
  */
 
 function TestResult({ answer, className }) {
-  function handleIconType() {
-    const icon = {
-      iconType: '',
-    };
+  const CORRECT_SELECTED_ANSWER = 'checkSolid';
+  const CORRECT_UNSELECTED_ANSWER = 'check';
+  const INCORRECT_SELECTED_ANSWER = 'xSolid';
+  const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
 
+  function handleIconType() {
     if (answer.isCorrect && answer.isChecked) {
       // eslint-disable-next-line no-return-assign
-      return (icon.iconType = 'checkSolid');
+      return CORRECT_SELECTED_ANSWER;
     }
     if (answer.isCorrect && !answer.isChecked) {
       // eslint-disable-next-line no-return-assign
-      return (icon.iconType = 'check');
+      return CORRECT_UNSELECTED_ANSWER;
     }
     if (!answer.isCorrect && answer.isChecked) {
       // eslint-disable-next-line no-return-assign
-      return (icon.iconType = 'xSolid');
+      return INCORRECT_SELECTED_ANSWER;
     }
     // eslint-disable-next-line no-return-assign
-    return (icon.iconType = 'xSmall');
+    return INCORRECT_UNSELECTED_ANSWER;
   }
 
   return (
@@ -40,7 +38,7 @@ function TestResult({ answer, className }) {
       key={answer.id}
       text={answer.text}
       color=""
-      iconType={handleIconType(answer)}
+      iconType={handleIconType()}
       className={classNames(className, styles.text, {
         [styles.text__success]: answer.isCorrect && answer.isChecked,
         [styles.text__notChecked_right]: answer.isCorrect && !answer.isChecked,

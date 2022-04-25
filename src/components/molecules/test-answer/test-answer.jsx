@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 import { useDispatch } from 'react-redux';
+import Checkbox from '../checkbox/checkbox';
 import { change } from '../../../store/test/slice';
-import { Checkbox } from '..';
+import { CHECKBOX, RADIO } from '../../../utils/constants';
 
 /**
  * @description Компонент ответа теста.
@@ -22,11 +21,9 @@ function TestAnswer({ answer, questionId, questionType }) {
 
   return (
     <Checkbox
-      isRadio={questionType === 'radio'}
+      isRadio={questionType === RADIO}
       name={
-        questionType === 'checkbox'
-          ? `answer${answer.id}`
-          : `answer${questionId}`
+        questionType === CHECKBOX ? `answer${answer.id}` : `answer${questionId}`
       }
       value={answer.text}
       labelText={answer.text}

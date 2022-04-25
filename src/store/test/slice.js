@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import fetchTest from './thunk';
+import { CHECKBOX, RADIO } from '../../utils/constants';
 
 const initialState = {
   test: {},
   isLoading: false,
   error: null,
 };
-
-const CHECKBOX = 'checkbox';
-const RADIO = 'radio';
 
 export const testSlice = createSlice({
   name: 'test',

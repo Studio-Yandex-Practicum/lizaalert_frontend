@@ -1,12 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Heading } from '../../atoms';
-
-import TestResult from '../test-results/test-results';
-
-import styles from './test-question.module.scss';
 import TestAnswer from '../test-answer/test-answer';
+import TestResult from '../test-results/test-results';
+import styles from './test-question.module.scss';
 
 /**
  * @description Компонент тестового вопроса.

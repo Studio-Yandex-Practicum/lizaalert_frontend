@@ -1,34 +1,38 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Heading, Card } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
-import { selectTest, selectIsLoading } from '../../../store/test/selectors';
-
-import styles from './test.module.scss';
-import fetchTest from '../../../store/test/thunk';
 import TestQuestion from '../../molecules/test-question/test-question';
+import styles from './test.module.scss';
+import { selectTest, selectIsLoading } from '../../../store/test/selectors';
+import fetchTest from '../../../store/test/thunk';
 
 function Test() {
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const test = useSelector(selectTest);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
-  // массив, выбранных ответов в 1 вопросе
-  const resultsQuestion1 =
-    test.questions?.length > 0 &&
-    test.questions[0].answers.filter((i) => i.isChecked === true);
-  // массив, выбранных ответов в 2 вопросе
-  const resultsQuestion2 =
-    test.questions?.length > 0 &&
-    test.questions[1].answers.filter((i) => i.isChecked === true);
-
-  React.useEffect(() => {
+  useEffect(() => {
     setInitialState();
   }, [dispatch]);
+
+  function selectButtonIsDisabled() {
+    let isDisabled = false;
+    if (test.questions?.length > 0) {
+      test.questions.forEach((question) => {
+        let checkedCount = 0;
+        question.answers.forEach((answer) => {
+          // eslint-disable-next-line no-plusplus
+          if (answer.isChecked) checkedCount++;
+        });
+        if (checkedCount === 0) isDisabled = true;
+      });
+    }
+    return isDisabled;
+  }
 
   function setInitialState() {
     dispatch(fetchTest());
@@ -90,9 +94,7 @@ function Test() {
             <Button
               className={styles.button}
               type="submit"
-              disabled={
-                resultsQuestion1.length < 1 || resultsQuestion2.length < 1
-              }
+              disabled={selectButtonIsDisabled()}
             >
               Показать результат
             </Button>
