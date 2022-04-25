@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Heading } from '../../atoms';
 import { AccountData, AccountOverview, PersonalData } from '../../organisms';
-import routes from '../../../config/routes';
 import styles from './profile.module.scss';
-import fetchProfileAction from '../../../store/profile/thunk';
 import { selectProfileLoading } from '../../../store/profile/selectors';
+import fetchProfileAction from '../../../store/profile/thunk';
+import routes from '../../../config/routes';
 
 function Profile() {
   const dispatch = useDispatch();

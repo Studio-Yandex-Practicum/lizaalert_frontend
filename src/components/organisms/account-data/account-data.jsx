@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
-import { setAccountData } from '../../../store/profile/slice';
 import styles from './account-data.module.scss';
+import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
 
 function AccountData() {

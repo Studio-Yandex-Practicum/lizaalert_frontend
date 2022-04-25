@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
+import styles from './personal-data.module.scss';
 import { setPersonalData } from '../../../store/profile/slice';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
-import styles from './personal-data.module.scss';
 
 function PersonalData() {
   const personalData = useSelector(selectProfilePersonal);

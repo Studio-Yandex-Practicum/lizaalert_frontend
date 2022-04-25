@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { Card } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
 import styles from './account-overview.module.scss';
-import { selectProfileOverview } from '../../../store/profile/selectors';
 import DefaultImg from '../../../assets/images/profile.jpg';
+import { selectProfileOverview } from '../../../store/profile/selectors';
 
 function AccountOverview() {
   const accountOverview = useSelector(selectProfileOverview);
