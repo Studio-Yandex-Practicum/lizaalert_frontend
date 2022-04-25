@@ -9,7 +9,8 @@ import styles from './navigation-buttons.module.scss';
  * - classNameForContainer - string - класс-миксин для контейнера
  * - classNameForButtons - string - класс-миксин для кнопок
  * - view - string - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
- * - disabled - string - дизейбл одной из кнопок: 'back', 'forward'
+ * - disabledBack - boolean - дизейбл кнопки "Назад"
+ * - disabledForward - boolean - дизейбл кнопки "Далее"
  * - onClickBack - function - функция-обработчик клика на левую кнопку (назад)
  * - onClickForward - function - функция-обработчик клика на правую кнопку (вперед)
  */

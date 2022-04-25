@@ -16,42 +16,38 @@ import styles from './lesson.module.scss';
 import mockCourseContent from '../../../services/mock/course-content.json';
 // import mockTest from '../../../services/mock/test-preview.json';
 import TheoryLesson from '../../organisms/theory-lesson/theory-lesson';
+import { usePathnames } from '../../../hooks/usePathnames';
 
 function Lesson() {
   const { lessonId, topicId, courseId } = useParams();
   const dispatch = useDispatch();
   const lesson = useSelector(selectLesson);
   const navigation = useNavigate();
-  const [pred, setPred] = useState('');
-  const [sled, setSled] = useState('');
+  const [backLink, setBackLink] = useState('');
+  const [forwardLink, setForwardLink] = useState('');
   const [backIsDisabled, setBackIsDisabled] = useState(false);
   const [forwardIsDisabled, setForwardIsDisabled] = useState(false);
 
+  const pathnamesArray = usePathnames(mockCourseContent, courseId);
+
   useEffect(() => {
     dispatch(fetchLessonByIdAction(lessonId));
-
-    bbb();
+    getNavigationOptions();
   }, [dispatch, lessonId]);
 
-  function bbb() {
-    const aaa = mockCourseContent.map((topic) =>
-      topic.lessons.map((les) => `${courseId}/${topic.id}/${les.id}`)
-    );
+  function getNavigationOptions() {
+    const index = pathnamesArray.indexOf(`${courseId}/${topicId}/${lessonId}`);
 
-    const ccc = aaa.reduce((init, curr) => init.concat(curr));
+    setBackLink(pathnamesArray[index - 1]);
+    setForwardLink(pathnamesArray[index + 1]);
 
-    const index = ccc.indexOf(`${courseId}/${topicId}/${lessonId}`);
-
-    setPred(ccc[index - 1]);
-    setSled(ccc[index + 1]);
-
-    if (!ccc[index - 1]) {
+    if (!pathnamesArray[index - 1]) {
       setBackIsDisabled(true);
     } else {
       setBackIsDisabled(false);
     }
 
-    if (!ccc[index + 1]) {
+    if (!pathnamesArray[index + 1]) {
       setForwardIsDisabled(true);
     } else {
       setForwardIsDisabled(false);
@@ -63,21 +59,29 @@ function Lesson() {
       <Breadcrumbs className={styles.breadcrumbs} />
       <div className={styles.lesson}>
         <div className={styles.lessonContent}>
-          {lesson.slug === 'lesson' && (
-            <TheoryLesson content={lesson.content} />
+          {typeof lesson === 'undefined' ? (
+            <div>Данные отсутствуют</div>
+          ) : (
+            <>
+              {lesson.slug === 'lesson' && (
+                <TheoryLesson content={lesson.content} />
+              )}
+              {lesson.slug === 'video' && (
+                <VideoLesson source={lesson.source} />
+              )}
+              {lesson.slug === 'webinar' && (
+                <PreviewWebinar date={lesson.date} link={lesson.source} />
+              )}
+              {lesson.slug === 'test' && <TestContent test={lesson} />}
+            </>
           )}
-          {lesson.slug === 'video' && <VideoLesson source={lesson.source} />}
-          {lesson.slug === 'webinar' && (
-            <PreviewWebinar date={lesson.date} link={lesson.source} />
-          )}
-          {lesson.slug === 'test' && <TestContent test={lesson} />}
           <NavigationButtons
             classNameForContainer={styles['nav-buttons']}
             onClickBack={() => {
-              navigation(pred, { replace: true });
+              navigation(`../${backLink}`);
             }}
             onClickForward={() => {
-              navigation(sled, { replace: true });
+              navigation(`../${forwardLink}`);
             }}
             disabledBack={backIsDisabled}
             disabledForward={forwardIsDisabled}
