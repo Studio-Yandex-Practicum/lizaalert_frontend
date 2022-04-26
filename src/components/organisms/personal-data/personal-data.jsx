@@ -1,17 +1,17 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './personal-data.module.scss';
+import { setPersonalData } from '../../../store/profile/slice';
+import { selectProfilePersonal } from '../../../store/profile/selectors';
 
 function PersonalData() {
+  const personalData = useSelector(selectProfilePersonal);
+  const dispatch = useDispatch();
+  const [inputsValues, setInputsValues] = useState(personalData);
   const [isInputChanged, setIsInputChanged] = useState(false);
-  const [inputsValues, setInputsValues] = useState({
-    name: 'Иванова Анна Сидоровна',
-    dateOfBirth: '1990-01-01',
-    region: 'г. Санкт-Петербург',
-    nickname: 'Белка',
-    avatar: '',
-  });
+
   const onInputValuesChange = (e) => {
     if (e.target.value !== inputsValues[e.target.name]) {
       setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
@@ -20,13 +20,16 @@ function PersonalData() {
       }
     }
   };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setPersonalData(inputsValues));
+    setIsInputChanged(false);
   };
+
   return (
     <Card className={styles.personalData}>
-      <Heading leve={2} size="l" title="Личные данные" />
+      <Heading level={2} size="l" title="Личные данные" />
       <form
         name="personalData"
         className={styles.form}

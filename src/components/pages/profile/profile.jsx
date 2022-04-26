@@ -1,9 +1,22 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Heading } from '../../atoms';
 import { AccountData, AccountOverview, PersonalData } from '../../organisms';
-import routes from '../../../config/routes';
 import styles from './profile.module.scss';
+import { selectProfileLoading } from '../../../store/profile/selectors';
+import fetchProfileAction from '../../../store/profile/thunk';
+import routes from '../../../config/routes';
 
 function Profile() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProfileAction(0));
+  }, [dispatch]);
+  const isLoading = useSelector(selectProfileLoading);
+
+  if (isLoading) {
+    return <h3>Loading...</h3>;
+  }
   return (
     <div className="container">
       <Heading

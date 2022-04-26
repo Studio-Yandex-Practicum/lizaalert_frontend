@@ -1,32 +1,29 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Card } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
 import styles from './account-overview.module.scss';
 import DefaultImg from '../../../assets/images/profile.jpg';
+import { selectProfileOverview } from '../../../store/profile/selectors';
 
-function AccountOverview({
-  avatar,
-  userName,
-  userStatus,
-  userOccupation,
-  coursesFinished,
-}) {
+function AccountOverview() {
+  const accountOverview = useSelector(selectProfileOverview);
   return (
     <Card className={styles.accountOverview}>
       <div className={styles.avatarContainer}>
-        <img className={styles.avatar} src={avatar} alt="Фото профиля" />
+        {/* Заменить значение аттрибута src на accountOverview.avatar когда будет готов бэкенд, сейчас оставлено для наглядности */}
+        <img className={styles.avatar} src={DefaultImg} alt="Фото профиля" />
       </div>
-      <p className={styles.personalData}>{userName}</p>
+      <p className={styles.personalData}>{accountOverview.userName}</p>
       <ul className={styles.accountMeta}>
         <li className={styles.accountMetaItem}>
-          <TextWithIcon text={userStatus} iconType="rank" />
+          <TextWithIcon text={accountOverview.userStatus} iconType="rank" />
         </li>
         <li className={styles.accountMetaItem}>
-          <TextWithIcon text={userOccupation} iconType="role" />
+          <TextWithIcon text={accountOverview.userOccupation} iconType="role" />
         </li>
         <li className={styles.accountMetaItem}>
           <TextWithIcon
-            text={`Пройдено ${coursesFinished} курса`}
+            text={`Пройдено ${accountOverview.coursesFinished} курса`}
             iconType="course"
           />
         </li>
@@ -42,21 +39,5 @@ function AccountOverview({
     </Card>
   );
 }
-
-AccountOverview.defaultProps = {
-  avatar: DefaultImg,
-  userName: 'Иванова Анна Сидоровна',
-  userStatus: 'Профессионал',
-  userOccupation: 'Картограф',
-  coursesFinished: 2,
-};
-
-AccountOverview.propTypes = {
-  avatar: PropTypes.string,
-  userName: PropTypes.string,
-  userStatus: PropTypes.string,
-  userOccupation: PropTypes.string,
-  coursesFinished: PropTypes.number,
-};
 
 export default AccountOverview;
