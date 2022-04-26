@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import Checkbox from '../checkbox/checkbox';
+import { Checkbox } from '..';
 import { change } from '../../../store/test/slice';
 import { CHECKBOX, RADIO } from '../../../utils/constants';
 

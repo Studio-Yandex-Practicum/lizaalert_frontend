@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Card } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
-import TestQuestion from '../../molecules/test-question/test-question';
+import { TestQuestion } from '..';
 import styles from './test.module.scss';
 import { selectTest, selectIsLoading } from '../../../store/test/selectors';
 import fetchTest from '../../../store/test/thunk';

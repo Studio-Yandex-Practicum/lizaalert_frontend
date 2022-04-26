@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Heading } from '../../atoms';
-import TestAnswer from '../test-answer/test-answer';
-import TestResult from '../test-results/test-results';
+import { TestAnswer, TestResult } from '../../molecules';
 import styles from './test-question.module.scss';
 
 /**

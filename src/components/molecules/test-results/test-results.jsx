@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import TextWithIcon from '../text-with-icon/text-with-icon';
+import { TextWithIcon } from '..';
 import styles from './test-results.module.scss';
 
 /**
@@ -10,26 +10,22 @@ import styles from './test-results.module.scss';
  * - className - string - css-класс для стилизации текста компонента TextWithIcon
  */
 
-function TestResult({ answer, className }) {
-  const CORRECT_SELECTED_ANSWER = 'checkSolid';
-  const CORRECT_UNSELECTED_ANSWER = 'check';
-  const INCORRECT_SELECTED_ANSWER = 'xSolid';
-  const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
+const CORRECT_SELECTED_ANSWER = 'checkSolid';
+const CORRECT_UNSELECTED_ANSWER = 'check';
+const INCORRECT_SELECTED_ANSWER = 'xSolid';
+const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
 
+function TestResult({ answer, className }) {
   function handleIconType() {
     if (answer.isCorrect && answer.isChecked) {
-      // eslint-disable-next-line no-return-assign
       return CORRECT_SELECTED_ANSWER;
     }
     if (answer.isCorrect && !answer.isChecked) {
-      // eslint-disable-next-line no-return-assign
       return CORRECT_UNSELECTED_ANSWER;
     }
     if (!answer.isCorrect && answer.isChecked) {
-      // eslint-disable-next-line no-return-assign
       return INCORRECT_SELECTED_ANSWER;
     }
-    // eslint-disable-next-line no-return-assign
     return INCORRECT_UNSELECTED_ANSWER;
   }
 
