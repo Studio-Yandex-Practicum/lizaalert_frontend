@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './account-data.module.scss';
+import { setAccountData } from '../../../store/profile/slice';
+import { selectProfileAccount } from '../../../store/profile/selectors';
 
 function AccountData() {
+  const accountData = useSelector(selectProfileAccount);
+  const dispatch = useDispatch();
+  const [inputValues, setInputValues] = useState(accountData);
   const [isInputsEdited, setIsInputsEdited] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    phoneNumber: '+71234567890',
-    email: 'anna@liza-alert.ru',
-    password: 'password',
-  });
+
   const onInputValuesChange = (evt) => {
     setInputValues({
       ...inputValues,
@@ -19,10 +21,13 @@ function AccountData() {
       setIsInputsEdited(true);
     }
   };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setAccountData(inputValues));
+    setIsInputsEdited(false);
   };
+
   return (
     <Card className={styles.accountData}>
       <Heading level={2} size="l" title="Аккаунт" />
