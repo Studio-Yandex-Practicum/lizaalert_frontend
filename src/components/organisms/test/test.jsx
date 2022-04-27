@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Card } from '../../atoms';
-import { Button, TextWithIcon } from '../../molecules';
-import { TestQuestion } from '..';
+import { Button } from '../../molecules';
+import TestQuestion from '../test-question/test-question';
 import styles from './test.module.scss';
 import { selectTest, selectIsLoading } from '../../../store/test/selectors';
 import fetchTest from '../../../store/test/thunk';
@@ -15,11 +15,16 @@ function Test() {
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
+  const setInitialState = () => {
+    dispatch(fetchTest());
+    setIsSubmitted(false);
+  };
+
   useEffect(() => {
     setInitialState();
   }, [dispatch]);
 
-  function selectButtonIsDisabled() {
+  const selectButtonIsDisabled = () => {
     let isDisabled = false;
     if (test.questions?.length > 0) {
       test.questions.forEach((question) => {
@@ -32,17 +37,12 @@ function Test() {
       });
     }
     return isDisabled;
-  }
+  };
 
-  function setInitialState() {
-    dispatch(fetchTest());
-    setIsSubmitted(false);
-  }
-
-  function onSubmit(evt) {
+  const onSubmit = (evt) => {
     evt.preventDefault();
     setIsSubmitted(true);
-  }
+  };
 
   // заменить на компонент Loader
   if (isLoading) {
@@ -85,10 +85,12 @@ function Test() {
           {isSubmitted ? (
             <Button
               className={styles.button}
-              type="submit"
-              onClick={() => setInitialState()}
+              type="button"
+              iconName="retry"
+              onClick={setInitialState}
+              iconPosition="back"
             >
-              <TextWithIcon text="Пересдать" color="" iconType="retry" />
+              Пересдать
             </Button>
           ) : (
             <Button

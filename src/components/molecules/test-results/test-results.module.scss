@@ -16,12 +16,20 @@
       svg {
         width: 14px; 
        }
+
+      span {
+        width: 100%;
+      }
     }
 
     &_warning {
       svg {
         width: 12px; 
        }
+
+       span {
+        width: 100%;
+      }
     }
   }
 

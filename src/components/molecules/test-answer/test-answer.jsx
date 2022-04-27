@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Checkbox } from '..';
+import Checkbox from '../checkbox/checkbox';
 import { change } from '../../../store/test/slice';
 import { CHECKBOX, RADIO } from '../../../utils/constants';
 
@@ -15,9 +15,9 @@ import { CHECKBOX, RADIO } from '../../../utils/constants';
 function TestAnswer({ answer, questionId, questionType }) {
   const dispatch = useDispatch();
 
-  function updateCheckStatus() {
+  const updateCheckStatus = () => {
     dispatch(change({ answerId: answer.id, questionId }));
-  }
+  };
 
   return (
     <Checkbox
@@ -28,7 +28,7 @@ function TestAnswer({ answer, questionId, questionType }) {
       value={answer.text}
       labelText={answer.text}
       checked={answer.isChecked}
-      onChange={() => updateCheckStatus()}
+      onChange={updateCheckStatus}
     />
   );
 }

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { TextWithIcon } from '..';
+import TextWithIcon from '../text-with-icon/text-with-icon';
 import styles from './test-results.module.scss';
 
 /**
@@ -33,7 +33,6 @@ function TestResult({ answer, className }) {
     <TextWithIcon
       key={answer.id}
       text={answer.text}
-      color=""
       iconType={handleIconType()}
       className={classNames(className, styles.text, {
         [styles.text__success]: answer.isCorrect && answer.isChecked,
