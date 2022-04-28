@@ -1,33 +1,37 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './personal-data.module.scss';
 import { useFormWithValidation } from '../../../hooks';
 
 function PersonalData() {
-  const { handleChange, isValid, errors, handleChangeFiles } =
+  const { handleChange, isValid, errors, handleChangeFiles, values } =
     useFormWithValidation();
-  const [isInputChanged, setIsInputChanged] = useState(false);
-  const [inputsValues, setInputsValues] = useState({
-    name: 'Иванова Анна Сидоровна',
-    dateOfBirth: '1990-01-01',
-    region: 'г. Санкт-Петербург',
-    nickname: 'Белка',
-    avatar: '',
-  });
-  const onInputValuesChange = (e) => {
-    if (e.target.value !== inputsValues[e.target.name]) {
-      setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
-      handleChange(e);
-      if (!isInputChanged) {
-        setIsInputChanged(true);
-      }
-    }
+  // const [isInputChanged, setIsInputChanged] = useState(false);
+  // const [inputsValues, setInputsValues] = useState({
+  //   name: 'Иванова Анна Сидоровна',
+  //   dateOfBirth: '1990-01-01',
+  //   region: 'г. Санкт-Петербург',
+  //   nickname: 'Белка',
+  //   avatar: '',
+  // });
+  // const onInputValuesChange = (e) => {
+  //   if (e.target.value !== inputsValues[e.target.name]) {
+  //     setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+  //     handleChange(e);
+  //     if (!isInputChanged) {
+  //       setIsInputChanged(true);
+  //     }
+  //   }
+  // };
+
+  const onChangeInputValue = (evt) => {
+    handleChange(evt);
   };
 
   const onChangeFile = (e) => {
     const pattern = /\.(gif|jpg|jpeg|tiff|png)$/i;
-    setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
+    // setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
     handleChangeFiles(e, pattern);
   };
 
@@ -52,8 +56,8 @@ function PersonalData() {
           labelName="ФИО"
           type="text"
           inputName="name"
-          value={inputsValues.name}
-          onChange={onInputValuesChange}
+          value={values.name || ''}
+          onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Ваше ФИО"
           error={errors.name}
@@ -64,8 +68,8 @@ function PersonalData() {
           labelName="Дата рождения"
           type="date"
           inputName="dateOfBirth"
-          value={inputsValues.dateOfBirth}
-          onChange={onInputValuesChange}
+          value={values.dateOfBirth || ''}
+          onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Дата рождения"
           max="2050-12-31"
@@ -77,8 +81,8 @@ function PersonalData() {
           labelName="Географический регион"
           type="text"
           inputName="region"
-          value={inputsValues.region}
-          onChange={onInputValuesChange}
+          value={values.region || ''}
+          onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Регион проживания"
           error={errors.region}
@@ -89,8 +93,8 @@ function PersonalData() {
           labelName="Позывной на форуме"
           type="text"
           inputName="nickname"
-          value={inputsValues.nickname}
-          onChange={onInputValuesChange}
+          value={values.nickname || ''}
+          onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Позывной на форуме"
           error={errors.nickname}
@@ -102,7 +106,7 @@ function PersonalData() {
           type="file"
           accept="image/*"
           inputName="avatar"
-          value={inputsValues.avatar}
+          value={values.avatar || ''}
           onChange={onChangeFile}
           error={errors.avatar}
           className={styles.inputSection}

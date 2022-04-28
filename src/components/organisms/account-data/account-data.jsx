@@ -1,27 +1,32 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import { useFormWithValidation } from '../../../hooks';
 import styles from './account-data.module.scss';
 
 function AccountData() {
-  const { handleChange, isValid, errors } = useFormWithValidation();
-  const [isInputsEdited, setIsInputsEdited] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    phoneNumber: '+71234567890',
-    email: 'anna@liza-alert.ru',
-    password: 'password',
-  });
-  const onInputValuesChange = (evt) => {
-    setInputValues({
-      ...inputValues,
-      [evt.target.name]: evt.target.value,
-    });
+  const { handleChange, isValid, errors, values } = useFormWithValidation();
+  // const [isInputsEdited, setIsInputsEdited] = useState(false);
+  // const [inputValues, setInputValues] = useState({
+  //   phoneNumber: '+71234567890',
+  //   email: 'anna@liza-alert.ru',
+  //   password: 'password',
+  // });
+  // const onInputValuesChange = (evt) => {
+  //   setInputValues({
+  //     ...inputValues,
+  //     [evt.target.name]: evt.target.value,
+  //   });
+  //   handleChange(evt);
+  //   if (!isInputsEdited) {
+  //     setIsInputsEdited(true);
+  //   }
+  // };
+
+  const onChangeInputValue = (evt) => {
     handleChange(evt);
-    if (!isInputsEdited) {
-      setIsInputsEdited(true);
-    }
   };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     // const { email, password } = inputValues;
@@ -38,8 +43,8 @@ function AccountData() {
           labelName="Номер телефона"
           type="tel"
           inputName="mobilePhone"
-          value={inputValues.phoneNumber}
-          onChange={onInputValuesChange}
+          value={values.phoneNumber || ''}
+          onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Номер телефона начиная с +7"
           disabled
@@ -48,8 +53,8 @@ function AccountData() {
           labelName="Email"
           type="email"
           inputName="email"
-          value={inputValues.email}
-          onChange={onInputValuesChange}
+          value={values.email || ''}
+          onChange={onChangeInputValue}
           error={errors.email}
           className={styles.inputSection}
           placeholder="Ваш email"
@@ -58,8 +63,8 @@ function AccountData() {
           labelName="Пароль"
           type="password"
           inputName="password"
-          value={inputValues.password}
-          onChange={onInputValuesChange}
+          value={values.password || ''}
+          onChange={onChangeInputValue}
           placeholder="Ваш пароль"
           className={styles.inputSection}
           minLength={8}
