@@ -5,3 +5,4 @@ export { default as Login } from './login/login';
 export { default as NotFound } from './not-found/not-found';
 export { default as Profile } from './profile/profile';
 export { default as Register } from './register/register';
+export { default as ErrorBoundary } from './error-boundary/error-boundary';
