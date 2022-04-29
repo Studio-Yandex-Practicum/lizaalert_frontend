@@ -19,3 +19,6 @@ export const Levels = {
 };
 
 export const ANIMATION_DURATION = 300;
+
+export const CHECKBOX = 'checkbox';
+export const RADIO = 'radio';

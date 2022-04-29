@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
-import styles from './personal-data.module.scss';
 import { useFormWithValidation } from '../../../hooks';
+import { selectProfilePersonal } from '../../../store/profile/selectors';
+import styles from './personal-data.module.scss';
+import { setPersonalData } from '../../../store/profile/slice';
 
 function PersonalData() {
   const {
@@ -13,15 +16,11 @@ function PersonalData() {
     values,
     setValues,
   } = useFormWithValidation();
+  const personalData = useSelector(selectProfilePersonal);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setValues({
-      name: 'Иванова Анна Сидоровна',
-      dateOfBirth: '1990-01-01',
-      region: 'г. Санкт-Петербург',
-      nickname: 'Белка',
-      avatar: '',
-    });
+    setValues(personalData);
   }, []);
 
   const onChangeInputValue = (evt) => {
@@ -36,7 +35,7 @@ function PersonalData() {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setPersonalData(values));
   };
 
   return (
@@ -93,7 +92,7 @@ function PersonalData() {
           labelName="Позывной на форуме"
           type="text"
           inputName="nickname"
-          value={values.nickname}
+          value={values.nickname || ''}
           onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Позывной на форуме"

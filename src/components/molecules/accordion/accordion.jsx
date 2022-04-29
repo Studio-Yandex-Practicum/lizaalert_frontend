@@ -22,7 +22,9 @@ function Accordion({ children, className, title, button, open }) {
   const contentRef = useRef(null);
 
   const updateContentHeight = () => {
-    setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
+    if (contentRef.current) {
+      setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
+    }
   };
 
   useEffect(() => {

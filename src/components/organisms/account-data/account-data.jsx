@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import { useFormWithValidation } from '../../../hooks';
 import styles from './account-data.module.scss';
+import { setAccountData } from '../../../store/profile/slice';
+import { selectProfileAccount } from '../../../store/profile/selectors';
 
 function AccountData() {
   const { handleChange, isValid, errors, values, setValues } =
     useFormWithValidation();
 
+  const accountData = useSelector(selectProfileAccount);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setValues({
-      phoneNumber: '+71234567890',
-      email: 'anna@liza-alert.ru',
-      password: 'password',
-    });
+    setValues(accountData);
   }, []);
 
   const onChangeInputValue = (evt) => {
@@ -22,7 +24,7 @@ function AccountData() {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    // const { email, password } = inputValues;
+    dispatch(setAccountData(values));
   };
 
   return (
