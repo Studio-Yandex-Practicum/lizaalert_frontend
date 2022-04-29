@@ -1,27 +1,20 @@
-// import { useState } from 'react';
+import { useEffect } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import { useFormWithValidation } from '../../../hooks';
 import styles from './account-data.module.scss';
 
 function AccountData() {
-  const { handleChange, isValid, errors, values } = useFormWithValidation();
-  // const [isInputsEdited, setIsInputsEdited] = useState(false);
-  // const [inputValues, setInputValues] = useState({
-  //   phoneNumber: '+71234567890',
-  //   email: 'anna@liza-alert.ru',
-  //   password: 'password',
-  // });
-  // const onInputValuesChange = (evt) => {
-  //   setInputValues({
-  //     ...inputValues,
-  //     [evt.target.name]: evt.target.value,
-  //   });
-  //   handleChange(evt);
-  //   if (!isInputsEdited) {
-  //     setIsInputsEdited(true);
-  //   }
-  // };
+  const { handleChange, isValid, errors, values, setValues } =
+    useFormWithValidation();
+
+  useEffect(() => {
+    setValues({
+      phoneNumber: '+71234567890',
+      email: 'anna@liza-alert.ru',
+      password: 'password',
+    });
+  }, []);
 
   const onChangeInputValue = (evt) => {
     handleChange(evt);
@@ -31,6 +24,7 @@ function AccountData() {
     evt.preventDefault();
     // const { email, password } = inputValues;
   };
+
   return (
     <Card className={styles.accountData}>
       <Heading level={2} size="l" title="Аккаунт" className={styles.heading} />

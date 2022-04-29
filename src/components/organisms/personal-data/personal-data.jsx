@@ -1,29 +1,28 @@
-// import { useState } from 'react';
+import { useEffect } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import styles from './personal-data.module.scss';
 import { useFormWithValidation } from '../../../hooks';
 
 function PersonalData() {
-  const { handleChange, isValid, errors, handleChangeFiles, values } =
-    useFormWithValidation();
-  // const [isInputChanged, setIsInputChanged] = useState(false);
-  // const [inputsValues, setInputsValues] = useState({
-  //   name: 'Иванова Анна Сидоровна',
-  //   dateOfBirth: '1990-01-01',
-  //   region: 'г. Санкт-Петербург',
-  //   nickname: 'Белка',
-  //   avatar: '',
-  // });
-  // const onInputValuesChange = (e) => {
-  //   if (e.target.value !== inputsValues[e.target.name]) {
-  //     setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
-  //     handleChange(e);
-  //     if (!isInputChanged) {
-  //       setIsInputChanged(true);
-  //     }
-  //   }
-  // };
+  const {
+    handleChange,
+    isValid,
+    errors,
+    handleChangeFiles,
+    values,
+    setValues,
+  } = useFormWithValidation();
+
+  useEffect(() => {
+    setValues({
+      name: 'Иванова Анна Сидоровна',
+      dateOfBirth: '1990-01-01',
+      region: 'г. Санкт-Петербург',
+      nickname: 'Белка',
+      avatar: '',
+    });
+  }, []);
 
   const onChangeInputValue = (evt) => {
     handleChange(evt);
@@ -39,6 +38,7 @@ function PersonalData() {
     evt.preventDefault();
     // const { email, password } = inputValues;
   };
+
   return (
     <Card className={styles.personalData}>
       <Heading
@@ -93,7 +93,7 @@ function PersonalData() {
           labelName="Позывной на форуме"
           type="text"
           inputName="nickname"
-          value={values.nickname || ''}
+          value={values.nickname}
           onChange={onChangeInputValue}
           className={styles.inputSection}
           placeholder="Позывной на форуме"
