@@ -16,11 +16,7 @@ function AccountData() {
 
   useEffect(() => {
     setValues(accountData);
-  }, []);
-
-  const onChangeInputValue = (evt) => {
-    handleChange(evt);
-  };
+  }, [accountData]);
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -40,7 +36,7 @@ function AccountData() {
           type="tel"
           inputName="mobilePhone"
           value={values.phoneNumber || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           className={styles.inputSection}
           placeholder="Номер телефона начиная с +7"
           disabled
@@ -50,7 +46,7 @@ function AccountData() {
           type="email"
           inputName="email"
           value={values.email || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           error={errors.email}
           className={styles.inputSection}
           placeholder="Ваш email"
@@ -60,7 +56,7 @@ function AccountData() {
           type="password"
           inputName="password"
           value={values.password || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           placeholder="Ваш пароль"
           className={styles.inputSection}
           minLength={8}

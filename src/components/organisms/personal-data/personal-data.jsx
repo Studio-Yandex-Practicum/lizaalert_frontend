@@ -21,15 +21,10 @@ function PersonalData() {
 
   useEffect(() => {
     setValues(personalData);
-  }, []);
-
-  const onChangeInputValue = (evt) => {
-    handleChange(evt);
-  };
+  }, [personalData]);
 
   const onChangeFile = (e) => {
     const pattern = /\.(gif|jpg|jpeg|tiff|png)$/i;
-    // setInputsValues({ ...inputsValues, [e.target.name]: e.target.value });
     handleChangeFiles(e, pattern);
   };
 
@@ -56,7 +51,7 @@ function PersonalData() {
           type="text"
           inputName="name"
           value={values.name || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           className={styles.inputSection}
           placeholder="Ваше ФИО"
           error={errors.name}
@@ -68,7 +63,7 @@ function PersonalData() {
           type="date"
           inputName="dateOfBirth"
           value={values.dateOfBirth || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           className={styles.inputSection}
           placeholder="Дата рождения"
           max="2050-12-31"
@@ -81,7 +76,7 @@ function PersonalData() {
           type="text"
           inputName="region"
           value={values.region || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           className={styles.inputSection}
           placeholder="Регион проживания"
           error={errors.region}
@@ -93,7 +88,7 @@ function PersonalData() {
           type="text"
           inputName="nickname"
           value={values.nickname || ''}
-          onChange={onChangeInputValue}
+          onChange={handleChange}
           className={styles.inputSection}
           placeholder="Позывной на форуме"
           error={errors.nickname}
