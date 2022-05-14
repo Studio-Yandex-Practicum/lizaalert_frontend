@@ -47,6 +47,7 @@ const useFormWithValidation = () => {
     isValid,
     resetForm,
     setValues,
+    setIsValid,
   };
 };
 export default useFormWithValidation;

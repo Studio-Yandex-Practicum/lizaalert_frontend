@@ -8,7 +8,7 @@ import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
 
 function AccountData() {
-  const { handleChange, isValid, errors, values, setValues } =
+  const { handleChange, isValid, errors, values, setValues, setIsValid } =
     useFormWithValidation();
 
   const accountData = useSelector(selectProfileAccount);
@@ -21,6 +21,7 @@ function AccountData() {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     dispatch(setAccountData(values));
+    setIsValid(false);
   };
 
   return (

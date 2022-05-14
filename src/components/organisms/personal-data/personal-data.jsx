@@ -15,6 +15,7 @@ function PersonalData() {
     handleChangeFiles,
     values,
     setValues,
+    setIsValid,
   } = useFormWithValidation();
   const personalData = useSelector(selectProfilePersonal);
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function PersonalData() {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     dispatch(setPersonalData(values));
+    setIsValid(false);
   };
 
   return (
