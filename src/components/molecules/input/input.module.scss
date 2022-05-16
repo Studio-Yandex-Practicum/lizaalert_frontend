@@ -99,7 +99,8 @@
 .error {
   box-sizing: border-box;
   padding-left: 16px;
-  margin-top: 8px;
+  margin-top: 3px;
+  min-height: 48px;
   color: vars.$warning;
 }
 
