@@ -4,6 +4,7 @@
   display: flex;
   align-items: flex-start;
   column-gap: vars.$grid-gap;
+  padding-bottom: 97px;
 }
 
 .lessonContent {
@@ -17,4 +18,9 @@
 
 .breadcrumbs {
   margin-bottom: 32px;
+  margin-top: 24px;
+}
+
+.nav-buttons {
+  margin-top: vars.$grid-gap;
 }

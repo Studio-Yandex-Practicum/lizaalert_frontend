@@ -9,7 +9,8 @@ import styles from './navigation-buttons.module.scss';
  * - classNameForContainer - string - класс-миксин для контейнера
  * - classNameForButtons - string - класс-миксин для кнопок
  * - view - string - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
- * - disabled - string - дизейбл одной из кнопок: 'back', 'forward'
+ * - disabledBack - boolean - дизейбл кнопки "Назад"
+ * - disabledForward - boolean - дизейбл кнопки "Далее"
  * - onClickBack - function - функция-обработчик клика на левую кнопку (назад)
  * - onClickForward - function - функция-обработчик клика на правую кнопку (вперед)
  */
@@ -18,7 +19,8 @@ function NavigationButtons({
   classNameForContainer,
   classNameForButtons,
   view,
-  disabled,
+  disabledBack,
+  disabledForward,
   onClickBack,
   onClickForward,
 }) {
@@ -33,7 +35,7 @@ function NavigationButtons({
         iconPosition="back"
         onClick={onClickBack}
         className={btnsClasses}
-        disabled={disabled === 'back'}
+        disabled={disabledBack}
       >
         Назад
       </Button>
@@ -44,7 +46,7 @@ function NavigationButtons({
           iconPosition="forward"
           onClick={onClickForward}
           className={btnsClasses}
-          disabled={disabled === 'forward'}
+          disabled={disabledForward}
         >
           Далее
         </Button>
@@ -54,7 +56,7 @@ function NavigationButtons({
         <Button
           className={btnsClasses}
           onClick={onClickForward}
-          disabled={disabled === 'forward'}
+          disabled={disabledForward}
         >
           Завершить
         </Button>
@@ -66,7 +68,8 @@ function NavigationButtons({
 NavigationButtons.propTypes = {
   view: PropTypes.oneOf(['main', 'finish']),
   classNameForContainer: PropTypes.string,
-  disabled: PropTypes.oneOf(['back', 'forward']),
+  disabledBack: PropTypes.bool,
+  disabledForward: PropTypes.bool,
   classNameForButtons: PropTypes.string,
   onClickBack: PropTypes.func.isRequired,
   onClickForward: PropTypes.func.isRequired,
@@ -74,7 +77,8 @@ NavigationButtons.propTypes = {
 
 NavigationButtons.defaultProps = {
   view: 'main',
-  disabled: '',
+  disabledBack: false,
+  disabledForward: false,
   classNameForContainer: '',
   classNameForButtons: '',
 };
