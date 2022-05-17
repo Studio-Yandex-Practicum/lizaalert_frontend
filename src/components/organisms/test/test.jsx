@@ -7,6 +7,7 @@ import TestQuestion from '../test-question/test-question';
 import styles from './test.module.scss';
 import { selectTest, selectIsLoading } from '../../../store/test/selectors';
 import fetchTest from '../../../store/test/thunk';
+import TestSuccessRate from '../test-success-rate/test-success-rate';
 
 function Test() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -83,15 +84,18 @@ function Test() {
           </div>
           <ul className={styles.list}>{questionsList}</ul>
           {isSubmitted ? (
-            <Button
-              className={styles.button}
-              type="button"
-              iconName="retry"
-              onClick={setInitialState}
-              iconPosition="back"
-            >
-              Пересдать
-            </Button>
+            <>
+              <TestSuccessRate questions={test.questions} />
+              <Button
+                className={styles.button}
+                type="button"
+                iconName="retry"
+                onClick={setInitialState}
+                iconPosition="back"
+              >
+                Пересдать
+              </Button>
+            </>
           ) : (
             <Button
               className={styles.button}
