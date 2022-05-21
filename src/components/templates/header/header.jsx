@@ -6,16 +6,9 @@ import styles from './header.module.scss';
 import routes from '../../../config/routes';
 
 function Header({ isAdmin }) {
-  let renderRoutes = [];
+  let renderRoutes = [routes.courses, routes.profile];
   if (isAdmin) {
-    renderRoutes = [
-      routes.users,
-      routes.library,
-      routes.courses,
-      routes.profile,
-    ];
-  } else {
-    renderRoutes = [routes.courses, routes.profile];
+    renderRoutes = [routes.users, routes.library, ...renderRoutes];
   }
 
   return (
