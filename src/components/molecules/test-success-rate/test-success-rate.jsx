@@ -1,70 +1,67 @@
+import { Children } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { Heading } from '../../atoms';
 import styles from './test-success-rate.module.scss';
 
-function TestSuccessRate({ isSuccess, testResultPercent }) {
-  if (isSuccess)
-    return (
-      <div className={styles.good__result}>
-        <Heading
-          level={3}
-          title={`${testResultPercent}%`}
-          size="xxl"
-          className={`${styles.percent} ${styles.green}`}
-        />
-        <div className={styles.result__description}>
-          <Heading
-            title="Отличный результат!"
-            isSubheading
-            size="m"
-            className={`${styles.description__title} ${styles.green}`}
-          />
-          <Heading
-            title="Нажите «Далее» чтобы продолжить."
-            isSubheading
-            size="m"
-            className={`${styles.description__text} ${styles.green}`}
-          />
-          <Heading
-            title="Если считаете, что сможете лучше, нажмите «Пересдать». В случае если результат будет хуже, засчитается наивысший результат."
-            isSubheading
-            size="m"
-            className={`${styles.description__text} ${styles.green}`}
-          />
-        </div>
-      </div>
-    );
+const testResultsTexts = {
+  success: [
+    'Отличный результат!',
+    'Нажмите «Далее» чтобы продолжить.',
+    'Если считаете, что сможете лучше, нажмите «Пересдать». В случае если результат будет хуже, засчитается наивысший результат.',
+  ],
+  failure: [
+    'К сожалению, вы не набрали проходной результат.',
+    'Нажмите «Пересдать», чтобы попробовать снова.',
+  ],
+};
 
-  if (!isSuccess)
-    return (
-      <div className={styles.bad__result}>
-        <Heading
-          level={3}
-          title={`${testResultPercent}%`}
-          size="xxl"
-          className={`${styles.percent} ${styles.red}`}
-        />
-        <div className={styles.result__description}>
-          <Heading
-            title="К сожалению, вы не набрали проходной результат."
-            isSubheading
-            size="m"
-            className={`${styles.description__text} ${styles.red}`}
-          />
-          <Heading
-            title="Нажмите «Пересдать», чтобы попробовать снова."
-            isSubheading
-            size="m"
-            className={`${styles.description__text} ${styles.red}`}
-          />
-        </div>
+function TestSuccessRate({ isSuccess, testResultPercent, className }) {
+  const texts = isSuccess ? testResultsTexts.success : testResultsTexts.failure;
+
+  return (
+    <div
+      className={classnames(
+        styles.result,
+        isSuccess ? styles.result_type_good : styles.result_type_bad,
+        className
+      )}
+    >
+      <Heading
+        level={3}
+        title={`${testResultPercent}%`}
+        size="xxl"
+        className={classnames(
+          styles.percent,
+          isSuccess ? styles.green : styles.red
+        )}
+      />
+      <div className={styles.result__description}>
+        {Children.toArray(
+          texts.map((text) => (
+            <p
+              className={classnames(
+                styles.description__text,
+                isSuccess ? styles.green : styles.red
+              )}
+            >
+              {text}
+            </p>
+          ))
+        )}
       </div>
-    );
+    </div>
+  );
 }
 
 TestSuccessRate.propTypes = {
   testResultPercent: PropTypes.number.isRequired,
   isSuccess: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+};
+
+TestSuccessRate.defaultProps = {
+  className: '',
 };
 
 export default TestSuccessRate;

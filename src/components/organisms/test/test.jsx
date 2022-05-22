@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Card } from '../../atoms';
@@ -15,6 +15,7 @@ import { RADIO } from '../../../utils/constants';
 function Test() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [testResultPercent, setTestResultPercent] = useState(0);
   const { courseId } = useParams();
   const navigate = useNavigate();
 
@@ -32,8 +33,7 @@ function Test() {
     setInitialState();
   }, [dispatch]);
 
-  // считаем процент выполнения теста
-  const testResultPercent = useMemo(() => {
+  useEffect(() => {
     if (test.questions?.length >= 0) {
       const percentArr = [];
       test.questions.forEach((question) => {
@@ -58,14 +58,11 @@ function Test() {
       const middlePercent =
         percentArr.reduce((sum, percent) => sum + percent, 0) /
         percentArr.length;
-      return Math.round(middlePercent);
+      const resultPercent = Math.round(middlePercent);
+      setTestResultPercent(resultPercent);
+      setIsSuccess(resultPercent >= passingScore);
     }
-    return null;
-  }, [test.questions]);
-
-  useEffect(() => {
-    setIsSuccess(testResultPercent >= passingScore);
-  }, [passingScore, testResultPercent]);
+  }, [passingScore, test.questions]);
 
   const selectButtonIsDisabled = () => {
     let isDisabled = false;
@@ -125,11 +122,12 @@ function Test() {
             </Link>
           </div>
           <ul className={styles.list}>{questionsList}</ul>
-          {isSubmitted && testResultPercent !== null ? (
+          {isSubmitted ? (
             <>
               <TestSuccessRate
                 isSuccess={isSuccess}
                 testResultPercent={testResultPercent}
+                className={styles.test__result}
               />
               <Button
                 className={styles.button}
