@@ -4,6 +4,7 @@ import {
   Courses,
   Lesson,
   Login,
+  NewCourse,
   NotFound,
   Profile,
   Register,
@@ -12,7 +13,7 @@ import { Layout } from '../components/templates';
 import routes from '../config/routes';
 
 function Router() {
-  const { courses, profile, register, login, notFound } = routes;
+  const { courses, newCourse, profile, register, login, notFound } = routes;
 
   return (
     <BrowserRouter>
@@ -22,6 +23,9 @@ function Router() {
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:topicId" element={<Lesson />} />
           <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+        </Route>
+        <Route element={<Layout />}>
+          <Route path={newCourse.path} element={<NewCourse />} />
         </Route>
         <Route element={<Layout />}>
           <Route path={profile.path} element={<Profile />} />

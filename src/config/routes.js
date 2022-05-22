@@ -20,26 +20,32 @@ const routes = {
       },
     ],
   },
-  profile: {
+  newCourse: {
     id: 2,
+    title: 'Создать курс',
+    path: '/new-course',
+    icon: '',
+  },
+  profile: {
+    id: 3,
     title: 'Профиль',
     path: '/profile',
     icon: 'userCircle',
   },
   register: {
-    id: 3,
+    id: 4,
     title: 'Регистрация',
     path: '/register',
     icon: 'userSquare',
   },
   login: {
-    id: 4,
+    id: 5,
     title: 'Вход',
     path: '/login',
     icon: 'userSquare',
   },
   notFound: {
-    id: 5,
+    id: 6,
     title: 'Страница не найдена',
     path: '/*',
     icon: 'XSolid',

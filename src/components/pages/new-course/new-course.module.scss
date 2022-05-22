@@ -1,0 +1,24 @@
+@use 'src/styles/_color-variables' as vars;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0 32px;
+
+  .createBtn {
+    min-width: 184px;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 40px;
+
+  .active {
+    color: vars.$color-primary;
+  }
+
+  .previewBtn {
+    margin-left: auto;
+  }
+}
