@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Card, Heading } from '../../atoms';
 import { Button, Checkbox, Input } from '../../molecules';
 import styles from './login-form.module.scss';
 import { useFormWithValidation } from '../../../hooks';
 
-function LoginForm() {
+function LoginForm({ onLogin, isLoading }) {
   const [isChecked, setIsChecked] = useState(false);
 
   const { values, handleChange, errors, isValid, setIsValid } =
@@ -14,13 +15,17 @@ function LoginForm() {
 
   const checkboxValue = isChecked ? 'Сохранить' : 'Не сохранять';
 
+  useEffect(() => {
+    setIsValid(false);
+  }, []);
+
   const handleChangeCheckbox = (evt) => {
     setIsChecked(evt.target.checked);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setIsValid(false);
+    onLogin(values.userEmail, values.userTel, values.userPassword, isChecked);
   };
 
   return (
@@ -81,7 +86,7 @@ function LoginForm() {
           iconPosition="back"
           disabled={!isValid}
         >
-          Войти
+          {isLoading ? 'Войти...' : 'Войти'}
         </Button>
         <Button
           className={classnames(styles.button, styles.button_color_black)}
@@ -96,5 +101,10 @@ function LoginForm() {
     </Card>
   );
 }
+
+LoginForm.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default LoginForm;
