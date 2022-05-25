@@ -1,8 +1,19 @@
+import { Heading } from '../../atoms';
+import { LoginForm } from '../../templates';
+
+import styles from './login.module.scss';
+
 function Login() {
   return (
-    <div>
-      <p>Login page</p>
-    </div>
+    <>
+      <Heading
+        level={2}
+        title="Автворизация"
+        size="xxl"
+        className={styles.heading}
+      />
+      <LoginForm />
+    </>
   );
 }
 

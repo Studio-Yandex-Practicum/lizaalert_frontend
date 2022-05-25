@@ -11,6 +11,7 @@ import styles from './input.module.scss';
  * - labelName - string - заголовок инпута, необязательный prop, не должен быть пустой строкой
  * - inputName - string - имя инпута и id
  * - type - string - тип инпута
+ * - isWithIcon - bool - пропс, по умолчанию false, определяет есть ли иконка у инпута
  * - value - string - значение инпута
  * - accept - string - необязательный prop, в котором указаны возможные форматы файла
  * - placeholder - string - текст подсказки поля ввода
@@ -23,6 +24,7 @@ import styles from './input.module.scss';
 function Input({
   labelName,
   inputName,
+  isWithIcon,
   type,
   value,
   accept,
@@ -48,9 +50,10 @@ function Input({
         })}
       >
         {labelName}
-        {labelName && type === 'file' ? (
+        {isWithIcon && labelName && type === 'file' ? (
           <Icon type="attachment" className={styles.icon} />
         ) : (
+          isWithIcon &&
           labelName &&
           type !== 'tel' && <Icon type="edit" className={styles.icon} />
         )}
@@ -84,6 +87,7 @@ function Input({
 
 Input.defaultProps = {
   labelName: null,
+  isWithIcon: false,
   accept: null,
   error: null,
   disabled: false,
@@ -101,6 +105,7 @@ Input.propTypes = {
   inputName: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
     .isRequired,
+  isWithIcon: PropTypes.bool,
   value: PropTypes.string.isRequired,
   accept: PropTypes.string,
   placeholder: PropTypes.string.isRequired,

@@ -1,0 +1,50 @@
+@use 'src/styles/variables' as vars;
+
+.container {
+  max-width: 648px;
+  margin: 0 auto;
+}
+
+.auhtForm__heading {
+  margin-bottom: 32px;
+}
+
+.linksContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.authForm__checkbox {
+  color: vars.$dark-secondary;
+  font-weight: 400;
+}
+
+.textLink {
+  text-decoration: none;
+  color: vars.$dark-secondary;
+  font-weight: 400;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.button {
+  margin: 0 auto;
+  width: 236px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 16px;
+  }
+
+  &_color_black {
+    background-color: vars.$dark-primary;
+    font-family: vars.$yandexFont;
+    padding: 0 22px;
+
+  }
+}
+
+.icon {
+  max-width: 26px;
+  max-height: 26px;
+}
