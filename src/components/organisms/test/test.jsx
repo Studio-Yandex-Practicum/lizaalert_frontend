@@ -155,6 +155,7 @@ function Test() {
         disabled="forward"
         classNameForContainer={styles.navigation}
         onClickBack={() => navigate(`/${courseId}`)}
+        onClickForward={() => null}
       />
     </div>
   );
