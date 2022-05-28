@@ -1,18 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Card } from '../../atoms';
 import { Button } from '../../molecules';
 import TestQuestion from '../test-question/test-question';
+import NavigationButtons from '../navigation-buttons/navigation-buttons';
+import TestSuccessRate from '../../molecules/test-success-rate/test-success-rate';
 import styles from './test.module.scss';
 import { selectTest, selectIsLoading } from '../../../store/test/selectors';
 import fetchTest from '../../../store/test/thunk';
+import { selectLesson } from '../../../store/lesson/selectors';
+import { RADIO } from '../../../utils/constants';
 
 function Test() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [testResultPercent, setTestResultPercent] = useState(0);
+  const { courseId } = useParams();
+  const navigate = useNavigate();
 
   const test = useSelector(selectTest);
   const isLoading = useSelector(selectIsLoading);
+  const { passingScore } = useSelector(selectLesson);
   const dispatch = useDispatch();
 
   const setInitialState = () => {
@@ -23,6 +32,37 @@ function Test() {
   useEffect(() => {
     setInitialState();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (test.questions?.length >= 0) {
+      const percentArr = [];
+      test.questions.forEach((question) => {
+        if (question.type === RADIO) {
+          question.answers.forEach((answer) => {
+            if (answer.isChecked && answer.isCorrect) percentArr.push(100);
+            if (answer.isChecked && !answer.isCorrect) percentArr.push(0);
+          });
+        } else {
+          const weight = 100 / question.answers.length;
+          let percent = 0;
+          question.answers.forEach((answer) => {
+            if (
+              (answer.isChecked && answer.isCorrect) ||
+              (!answer.isChecked && !answer.isCorrect)
+            )
+              percent += weight;
+          });
+          percentArr.push(percent);
+        }
+      });
+      const middlePercent =
+        percentArr.reduce((sum, percent) => sum + percent, 0) /
+        percentArr.length;
+      const resultPercent = Math.round(middlePercent);
+      setTestResultPercent(resultPercent);
+      setIsSuccess(resultPercent >= passingScore);
+    }
+  }, [passingScore, test.questions]);
 
   const selectButtonIsDisabled = () => {
     let isDisabled = false;
@@ -83,15 +123,22 @@ function Test() {
           </div>
           <ul className={styles.list}>{questionsList}</ul>
           {isSubmitted ? (
-            <Button
-              className={styles.button}
-              type="button"
-              iconName="retry"
-              onClick={setInitialState}
-              iconPosition="back"
-            >
-              Пересдать
-            </Button>
+            <>
+              <TestSuccessRate
+                isSuccess={isSuccess}
+                testResultPercent={testResultPercent}
+                className={styles.test__result}
+              />
+              <Button
+                className={styles.button}
+                type="button"
+                iconName="retry"
+                onClick={setInitialState}
+                iconPosition="back"
+              >
+                Пересдать
+              </Button>
+            </>
           ) : (
             <Button
               className={styles.button}
@@ -103,6 +150,13 @@ function Test() {
           )}
         </form>
       </Card>
+      <NavigationButtons
+        view="main"
+        disabled="forward"
+        classNameForContainer={styles.navigation}
+        onClickBack={() => navigate(`/${courseId}`)}
+        onClickForward={() => null}
+      />
     </div>
   );
 }

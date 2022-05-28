@@ -26,6 +26,10 @@
       text-decoration: underline;
     }
   }
+
+  &__result {
+    margin-bottom: 32px;
+  }
 }
 
 .card {
@@ -55,4 +59,8 @@
 
 .button {
   margin: 0 auto;
+}
+
+.navigation {
+  margin-top: 36px;
 }
