@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import mockAuth from '../../services/mock/auth.json';
 
-const fetchAuth = createAsyncThunk(
-  'auth/fetchAuth',
+const checkAuth = createAsyncThunk(
+  'auth/checkAuth',
   async (authData, { rejectWithValue }) => {
     const { email, tel } = authData.user;
     const { isRememberMe } = authData;
@@ -26,4 +26,4 @@ const fetchAuth = createAsyncThunk(
   }
 );
 
-export default fetchAuth;
+export default checkAuth;

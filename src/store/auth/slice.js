@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import fetchAuth from './thunk';
+import checkAuth from './thunk';
 
 const initialState = {
   isAuth: false,
@@ -16,15 +16,15 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchAuth.pending.type]: (state) => {
+    [checkAuth.pending.type]: (state) => {
       state.isLoading = true;
       state.error = null;
     },
-    [fetchAuth.fulfilled.type]: (state) => {
+    [checkAuth.fulfilled.type]: (state) => {
       state.isAuth = true;
       state.isLoading = false;
     },
-    [fetchAuth.rejected.type]: (state, { payload }) => {
+    [checkAuth.rejected.type]: (state, { payload }) => {
       state.isAuth = false;
       state.isLoading = false;
       state.error = payload;
