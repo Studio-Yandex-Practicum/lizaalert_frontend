@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.lebel {
+.label {
   color: vars.$dark-primary;
   font-size: vars.$font-size-m;
   font-weight: 700;
@@ -55,6 +55,5 @@
   &Item {
     padding: 12px 16px;
     border-bottom: 1px solid vars.$borders-divider-disabled-bg;
-    cursor: pointer;
   }
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './select.module.scss';
+import Option from '../../atoms/option/option';
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
@@ -14,7 +15,8 @@ function Select({
   selectName,
   inputName,
   placeholder,
-  options = DUMMY_OPTIONS,
+  options,
+  setSelectedValue,
 }) {
   const [showOptions, setShowOptions] = useState(false);
   const [selectValue, setSelectValue] = useState('');
@@ -30,13 +32,14 @@ function Select({
   };
 
   const handleSetValue = (value) => {
+    setSelectedValue(selectName, value);
     setSelectValue(value);
     setShowOptions(false);
   };
 
   return (
     <div className={classNames(styles.container, className)}>
-      <label htmlFor={selectName} className={styles.lebel}>
+      <label htmlFor={selectName} className={styles.label}>
         {inputName}
       </label>
       <div className={styles.selectContainer}>
@@ -56,17 +59,13 @@ function Select({
         {showOptions && (
           <ul className={styles.list}>
             {options.map((option) => (
-              <li
+              <Option
                 key={option.id}
-                onClick={() => handleSetValue(option.name)}
-                onKeyDown={handleEscDown}
-                role="option"
-                aria-selected
+                option={option}
+                handleSetValue={handleSetValue}
+                handleEscDown={handleEscDown}
                 className={styles.listItem}
-                value={option.name}
-              >
-                {option.name}
-              </li>
+              />
             ))}
           </ul>
         )}
@@ -77,9 +76,11 @@ function Select({
 
 Select.defaultProps = {
   className: '',
+  options: DUMMY_OPTIONS,
 };
 
 Select.propTypes = {
+  setSelectedValue: PropTypes.func.isRequired,
   className: PropTypes.string,
   selectName: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
@@ -89,7 +90,7 @@ Select.propTypes = {
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
 };
 
 export default Select;
