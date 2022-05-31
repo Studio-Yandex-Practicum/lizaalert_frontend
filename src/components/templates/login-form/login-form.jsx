@@ -1,31 +1,50 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Checkbox, Input } from '../../molecules';
 import styles from './login-form.module.scss';
 import { useFormWithValidation } from '../../../hooks';
+import fetchAuth from '../../../store/auth/thunk';
+import { selectIsLoading, selectIsAuth } from '../../../store/auth/selectors';
+import { setIsAuth } from '../../../store/auth/slice';
+import routes from '../../../config/routes';
 
-function LoginForm({ onLogin, isLoading }) {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const { values, handleChange, errors, isValid, setIsValid } =
-    useFormWithValidation();
-
-  const checkboxValue = isChecked ? 'Сохранить' : 'Не сохранять';
+function LoginForm() {
+  const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { profile } = routes;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
-    setIsValid(false);
-  }, []);
+    if (localStorage.getItem('jwt')) {
+      dispatch(setIsAuth(true));
+      navigate(profile.path);
+    } else {
+      dispatch(setIsAuth(false));
+    }
+  }, [dispatch, isAuth]);
 
   const handleChangeCheckbox = (evt) => {
-    setIsChecked(evt.target.checked);
+    setIsCheckedRememberMe(evt.target.checked);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onLogin(values.userEmail, values.userTel, values.userPassword, isChecked);
+    const authData = {
+      user: {
+        email: values.userEmail,
+        tel: values.userTel,
+        password: values.userPassword,
+      },
+      isRememberMe: isCheckedRememberMe,
+    };
+
+    dispatch(fetchAuth(authData));
   };
 
   return (
@@ -53,6 +72,7 @@ function LoginForm({ onLogin, isLoading }) {
           type="tel"
           value={values?.userTel || ''}
           placeholder="+7 ( ___ ) ___  -  ___"
+          pattern="[0-9]{11}"
           error={errors.userTel || ''}
           onChange={handleChange}
           required
@@ -71,12 +91,12 @@ function LoginForm({ onLogin, isLoading }) {
           <Checkbox
             className={styles.authForm__checkbox}
             name="isSavedData"
-            value={checkboxValue}
+            value="Сохранить"
             labelText="Сохранить данные входа"
-            checked={isChecked}
+            checked={isCheckedRememberMe}
             onChange={handleChangeCheckbox}
           />
-          <Link to="ds" className={styles.textLink}>
+          <Link to="." className={styles.textLink}>
             Забыли пароль?
           </Link>
         </div>
@@ -84,14 +104,14 @@ function LoginForm({ onLogin, isLoading }) {
           className={styles.button}
           type="submit"
           iconPosition="back"
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
           {isLoading ? 'Войти...' : 'Войти'}
         </Button>
         <Button
           className={classnames(styles.button, styles.button_color_black)}
           classNameIcon={styles.icon}
-          type="submit"
+          type="button"
           iconName="yandex"
           iconPosition="back"
         >
@@ -101,10 +121,5 @@ function LoginForm({ onLogin, isLoading }) {
     </Card>
   );
 }
-
-LoginForm.propTypes = {
-  onLogin: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
 
 export default LoginForm;
