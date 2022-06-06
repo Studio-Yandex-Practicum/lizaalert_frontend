@@ -17,9 +17,9 @@ function Select({
   placeholder,
   options,
   setSelectedValue,
+  selectedValue,
 }) {
   const [showOptions, setShowOptions] = useState(false);
-  const [selectValue, setSelectValue] = useState('');
 
   const handleShowOptions = () => {
     setShowOptions((prevValue) => !prevValue);
@@ -33,7 +33,6 @@ function Select({
 
   const handleSetValue = (value) => {
     setSelectedValue(selectName, value);
-    setSelectValue(value);
     setShowOptions(false);
   };
 
@@ -54,7 +53,7 @@ function Select({
           onKeyDown={handleEscDown}
           tabIndex={0}
         >
-          {selectValue || placeholder}
+          {selectedValue || placeholder}
         </div>
         {showOptions && (
           <ul className={styles.list}>
@@ -77,9 +76,11 @@ function Select({
 Select.defaultProps = {
   className: '',
   options: DUMMY_OPTIONS,
+  selectedValue: '',
 };
 
 Select.propTypes = {
+  selectedValue: PropTypes.string,
   setSelectedValue: PropTypes.func.isRequired,
   className: PropTypes.string,
   selectName: PropTypes.string.isRequired,
