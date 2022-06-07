@@ -4,8 +4,10 @@
 name: Lint Pull Request
 
 on:
+  push:
+    branches: [ 'master' ]
   pull_request:
-    branches: [ master ]
+    branches: [ 'master' ]
 
 jobs:
   validation:
@@ -14,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [ 16.x ]
 
     steps:
       - uses: actions/checkout@v3
