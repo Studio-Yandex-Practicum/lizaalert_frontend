@@ -5,11 +5,14 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
+import { ErrorBoundary } from './components/pages';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
