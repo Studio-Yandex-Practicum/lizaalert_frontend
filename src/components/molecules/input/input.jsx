@@ -19,6 +19,7 @@ import styles from './input.module.scss';
  * - disabled - bool - контроль возможности изменения инпута
  * - onChange - func - обработчик изменения значения инпута
  * - className - string - css-класс для стилизации компонента родителя (div)
+ * - title - string - кастомный текст ошибки, необязательный prop
  */
 
 function Input({
@@ -39,6 +40,7 @@ function Input({
   max,
   min,
   pattern,
+  title,
 }) {
   return (
     <div className={classNames(styles.container, className)}>
@@ -80,7 +82,9 @@ function Input({
       />
       {type === 'file' && <span className={styles.input}>{value}</span>}
       {/* когда будет настроена валидация, будет условие isValid, вместо error */}
-      <span className={styles.error}>{error}</span>
+      <span className={styles.error}>
+        {error && title ? title : error || ''}
+      </span>
     </div>
   );
 }
@@ -98,6 +102,7 @@ Input.defaultProps = {
   min: null,
   className: '',
   pattern: null,
+  title: '',
 };
 
 Input.propTypes = {
@@ -119,6 +124,7 @@ Input.propTypes = {
   max: PropTypes.string,
   min: PropTypes.string,
   pattern: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default Input;

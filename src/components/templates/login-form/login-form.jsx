@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,28 +6,28 @@ import { Card, Heading } from '../../atoms';
 import { Button, Checkbox, Input } from '../../molecules';
 import styles from './login-form.module.scss';
 import { useFormWithValidation } from '../../../hooks';
-import fetchAuth from '../../../store/auth/thunk';
-import { selectIsLoading, selectIsAuth } from '../../../store/auth/selectors';
-import { setIsAuth } from '../../../store/auth/slice';
+import { fetchAuth } from '../../../store/auth/thunk';
+import { selectIsAuth, selectIsLoading } from '../../../store/auth/selectors';
 import routes from '../../../config/routes';
+import {
+  ERROR_MESSAGE_INCORRECT_EMAIL,
+  ERROR_MESSAGE_INCORRECT_PHONE,
+} from '../../../utils/constants';
 
 function LoginForm() {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const { profile } = routes;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const isAuth = useSelector(selectIsAuth);
+  const navigate = useNavigate();
+  const { profile } = routes;
 
   useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      dispatch(setIsAuth(true));
+    if (isAuth) {
       navigate(profile.path);
-    } else {
-      dispatch(setIsAuth(false));
     }
-  }, [dispatch, isAuth]);
+  }, [isAuth]);
 
   const handleChangeCheckbox = (evt) => {
     setIsCheckedRememberMe(evt.target.checked);
@@ -62,7 +62,9 @@ function LoginForm() {
           type="email"
           value={values?.userEmail || ''}
           placeholder="Введите адрес электронной почты"
+          pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
           error={errors.userEmail}
+          title={ERROR_MESSAGE_INCORRECT_EMAIL}
           onChange={handleChange}
           required
         />
@@ -72,8 +74,9 @@ function LoginForm() {
           type="tel"
           value={values?.userTel || ''}
           placeholder="+7 ( ___ ) ___  -  ___"
-          pattern="[0-9]{11}"
+          pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
           error={errors.userTel || ''}
+          title={ERROR_MESSAGE_INCORRECT_PHONE}
           onChange={handleChange}
           required
         />
