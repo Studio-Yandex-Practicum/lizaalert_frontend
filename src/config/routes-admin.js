@@ -19,6 +19,21 @@ const routes = {
       },
     ],
   },
+  createCourse: {
+    title: 'Создание нового курса',
+    path: '/create-course',
+    icon: 'plus',
+  },
+  editCourse: {
+    title: 'Редактирование курса',
+    path: '/edit-course',
+    icon: 'edit',
+  },
+  editLesson: {
+    title: 'Редактирование урока',
+    path: '/edit-lesson',
+    icon: 'edit',
+  },
   profile: {
     title: 'Профиль',
     path: '/profile',

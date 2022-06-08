@@ -1,16 +1,9 @@
-import { lazy, Suspense } from 'react';
+import Router from '../../router/router';
+import RouterAdmin from '../../router/router-admin';
 import { isAdmin } from '../../config';
 
-// пилим бандлы
-const Router = lazy(() => import('../../router/router'));
-const RouterAdmin = lazy(() => import('../../router/router-admin'));
-
 function App() {
-  return (
-    <Suspense fallback="Прогреваемся...">
-      {isAdmin ? <RouterAdmin /> : <Router />}
-    </Suspense>
-  );
+  return isAdmin ? <RouterAdmin /> : <Router />;
 }
 
 export default App;

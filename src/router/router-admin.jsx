@@ -2,6 +2,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   Course,
   Courses,
+  CreateCourse,
+  Development,
+  EditCourse,
+  EditLesson,
   Lesson,
   Login,
   NotFound,
@@ -12,8 +16,18 @@ import { Layout } from '../components/templates';
 import { routes } from '../config';
 
 function RouterAdmin() {
-  const { courses, profile, register, login, notFound, library, users } =
-    routes;
+  const {
+    courses,
+    profile,
+    register,
+    login,
+    notFound,
+    library,
+    users,
+    createCourse,
+    editCourse,
+    editLesson,
+  } = routes;
   const headerRoutes = [users, library, courses, profile];
   const BaseLayout = (
     <Layout headerRoutes={headerRoutes} mainPageHref={courses.path} />
@@ -27,12 +41,23 @@ function RouterAdmin() {
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:topicId" element={<Lesson />} />
           <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+          <Route path={createCourse.path} element={<CreateCourse />} />
+          <Route
+            path={`${editCourse.path}/:courseId`}
+            element={<EditCourse />}
+          />
+          <Route
+            path={`${editLesson.path}/:lessonId`}
+            element={<EditLesson />}
+          />
         </Route>
         <Route element={BaseLayout}>
           <Route path={profile.path} element={<Profile />} />
         </Route>
         <Route path={register.path} element={<Register />} />
         <Route path={login.path} element={<Login />} />
+        <Route path={library.path} element={<Development />} />
+        <Route path={users.path} element={<Development />} />
         <Route path={notFound.path} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
