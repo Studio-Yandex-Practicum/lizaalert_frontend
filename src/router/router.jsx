@@ -13,21 +13,17 @@ import { routes } from '../config';
 
 function Router() {
   const { courses, profile, register, login, notFound } = routes;
-  const headerRoutes = [courses, profile];
-  const BaseLayout = (
-    <Layout headerRoutes={headerRoutes} mainPageHref={courses.path} />
-  );
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={courses.path} element={BaseLayout}>
+        <Route path={courses.path} element={<Layout />}>
           <Route index element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:topicId" element={<Lesson />} />
           <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
         </Route>
-        <Route element={BaseLayout}>
+        <Route element={<Layout />}>
           <Route path={profile.path} element={<Profile />} />
         </Route>
         <Route path={register.path} element={<Register />} />
