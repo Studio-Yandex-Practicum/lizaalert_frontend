@@ -34,6 +34,16 @@ const routes = {
     path: '/login',
     icon: 'userSquare',
   },
+  users: {
+    title: 'Пользователи',
+    path: '/users',
+    icon: 'users',
+  },
+  library: {
+    title: 'Библиотека',
+    path: '/library',
+    icon: 'library',
+  },
   notFound: {
     title: 'Страница не найдена',
     path: '/*',

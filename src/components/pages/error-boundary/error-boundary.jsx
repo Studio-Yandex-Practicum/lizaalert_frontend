@@ -5,7 +5,7 @@ import errorCat from '../../../assets/images/error-cat.png';
 import { Button } from '../../molecules';
 import { Heading } from '../../atoms';
 import styles from './error-boundary.module.scss';
-import routes from '../../../config/routes';
+import { routes } from '../../../config';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

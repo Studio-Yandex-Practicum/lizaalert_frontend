@@ -1,3 +1,6 @@
+import defaultRoutes from './routes';
+import adminRoutes from './routes-admin';
+
 /**
  * Получение env-переменной
  */
@@ -14,3 +17,5 @@ export const isDevEnv = NODE_ENV === 'development';
 
 /** Режим продакшена */
 export const isProdEnv = NODE_ENV === 'production';
+
+export const routes = isAdmin ? adminRoutes : defaultRoutes;

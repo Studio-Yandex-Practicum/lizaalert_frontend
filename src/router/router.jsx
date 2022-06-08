@@ -9,13 +9,13 @@ import {
   Register,
 } from '../components/pages';
 import { Layout } from '../components/templates';
-import routes from '../config/routes';
+import { routes } from '../config';
 
 function Router() {
   const { courses, profile, register, login, notFound } = routes;
   const headerRoutes = [courses, profile];
   const BaseLayout = (
-    <Layout routes={headerRoutes} mainLinkHref={courses.path} />
+    <Layout headerRoutes={headerRoutes} mainPageHref={courses.path} />
   );
 
   return (
