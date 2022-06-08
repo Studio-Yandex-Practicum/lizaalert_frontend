@@ -1,4 +1,4 @@
-import React from 'react';
+import { Children } from 'react';
 import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
 import { HeaderLink } from '../../molecules';
@@ -19,7 +19,7 @@ function Header() {
         </Link>
         <nav>
           <ul className={styles.headerLinks}>
-            {React.Children.toArray(
+            {Children.toArray(
               headerRoutes.map((route) => (
                 <li>
                   <HeaderLink
