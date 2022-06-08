@@ -3,23 +3,17 @@ import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
 import { HeaderLink } from '../../molecules';
 import styles from './header.module.scss';
-import routes from '../../../config/routes';
 
-function Header({ isAdmin }) {
-  let renderRoutes = [routes.courses, routes.profile];
-  if (isAdmin) {
-    renderRoutes = [routes.users, routes.library, ...renderRoutes];
-  }
-
+function Header({ routes, mainLinkHref }) {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <Link to={routes.courses.path} className={styles.headerLink}>
+        <Link to={mainLinkHref} className={styles.headerLink}>
           <Heading level={1} size="m" title="Учебная платформа" />
         </Link>
         <nav>
           <ul className={styles.headerLinks}>
-            {renderRoutes.map((route) => (
+            {routes?.map((route) => (
               <li key={route.id}>
                 <HeaderLink
                   text={route.title}
@@ -36,11 +30,8 @@ function Header({ isAdmin }) {
 }
 
 Header.propTypes = {
-  isAdmin: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  isAdmin: false,
+  routes: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  mainLinkHref: PropTypes.string.isRequired,
 };
 
 export default Header;

@@ -11,9 +11,10 @@ import {
 import { Layout } from '../components/templates';
 import routes from '../config/routes';
 
-function Router() {
-  const { courses, profile, register, login, notFound } = routes;
-  const headerRoutes = [courses, profile];
+function RouterAdmin() {
+  const { courses, profile, register, login, notFound, library, users } =
+    routes;
+  const headerRoutes = [users, library, courses, profile];
   const BaseLayout = (
     <Layout routes={headerRoutes} mainLinkHref={courses.path} />
   );
@@ -38,4 +39,4 @@ function Router() {
   );
 }
 
-export default Router;
+export default RouterAdmin;
