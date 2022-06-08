@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './select.module.scss';
 import Option from '../../atoms/option/option';
+import styles from './select.module.scss';
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
