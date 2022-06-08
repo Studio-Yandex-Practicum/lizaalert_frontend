@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
-import { routes } from '../../../config';
-import styles from './development.module.scss';
 import { TextWithIcon } from '../../molecules';
+import styles from './development.module.scss';
+import { routes } from '../../../config';
 
 function Development() {
   return (
