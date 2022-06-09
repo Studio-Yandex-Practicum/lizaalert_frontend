@@ -3,6 +3,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 24px 0 32px;
 
   .createBtn {
@@ -13,6 +14,7 @@
 .tabs {
   display: flex;
   gap: 40px;
+  padding-bottom: 32px;
 
   .active {
     color: vars.$color-primary;

@@ -6,20 +6,20 @@ import {
   NewCourseDescription,
   NewCourseMain,
 } from '../../organisms';
-import styles from './new-course.module.scss';
+import styles from './create-course.module.scss';
 
-function NewCourse() {
+function CreateCourse() {
   const [activeTab, setActiveTab] = useState('main');
 
-  function handleMain() {
+  const handleMain = () => {
     setActiveTab('main');
-  }
-  function handleDescription() {
+  };
+  const handleDescription = () => {
     setActiveTab('description');
-  }
-  function handleContent() {
+  };
+  const handleContent = () => {
     setActiveTab('content');
-  }
+  };
 
   return (
     <div className="container">
@@ -31,21 +31,21 @@ function NewCourse() {
         <div className={styles.tabs}>
           <Button
             view="text"
-            onClick={() => handleMain()}
+            onClick={handleMain}
             className={activeTab === 'main' && styles.active}
           >
             Основное
           </Button>
           <Button
             view="text"
-            onClick={() => handleDescription()}
+            onClick={handleDescription}
             className={activeTab === 'description' && styles.active}
           >
             Описание
           </Button>
           <Button
             view="text"
-            onClick={() => handleContent()}
+            onClick={handleContent}
             className={activeTab === 'content' && styles.active}
           >
             Контент
@@ -67,4 +67,4 @@ function NewCourse() {
   );
 }
 
-export default NewCourse;
+export default CreateCourse;
