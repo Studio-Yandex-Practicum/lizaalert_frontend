@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Card, Heading } from '../../atoms';
 import { Button } from '../../molecules';
 import {
@@ -11,15 +11,15 @@ import styles from './create-course.module.scss';
 function CreateCourse() {
   const [activeTab, setActiveTab] = useState('main');
 
-  const handleMain = () => {
+  const handleMain = useCallback(() => {
     setActiveTab('main');
-  };
-  const handleDescription = () => {
+  }, []);
+  const handleDescription = useCallback(() => {
     setActiveTab('description');
-  };
-  const handleContent = () => {
+  }, []);
+  const handleContent = useCallback(() => {
     setActiveTab('content');
-  };
+  }, []);
 
   return (
     <div className="container">
@@ -32,21 +32,21 @@ function CreateCourse() {
           <Button
             view="text"
             onClick={handleMain}
-            className={activeTab === 'main' && styles.active}
+            className={activeTab === 'main' ? styles.active : ''}
           >
             Основное
           </Button>
           <Button
             view="text"
             onClick={handleDescription}
-            className={activeTab === 'description' && styles.active}
+            className={activeTab === 'description' ? styles.active : ''}
           >
             Описание
           </Button>
           <Button
             view="text"
             onClick={handleContent}
-            className={activeTab === 'content' && styles.active}
+            className={activeTab === 'content' ? styles.active : ''}
           >
             Контент
           </Button>
