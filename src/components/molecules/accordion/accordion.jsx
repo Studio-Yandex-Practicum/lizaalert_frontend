@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Icon } from '../../atoms';
@@ -43,7 +43,7 @@ function Accordion({ children, className, title, button, open }) {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('resize', updateContentHeight);
     contentRef.current.addEventListener(
       'accordionToggle',
