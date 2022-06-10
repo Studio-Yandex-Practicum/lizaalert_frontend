@@ -1,4 +1,4 @@
-# lizaalert_frontend
+# lizaalert_frontend7
 
 Платформа для обучения добровольцев "ЛизаАлерт" - Frontend
 
