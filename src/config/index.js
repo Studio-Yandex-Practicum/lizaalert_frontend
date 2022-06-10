@@ -1,9 +1,7 @@
 import defaultRoutes from './routes';
 import adminRoutes from './routes-admin';
 
-/**
- * Получение env-переменной
- */
+/** Получение env-переменной */
 const getEnvVar = (key) => process.env[key] || '';
 
 /** Режим запуска */
@@ -18,4 +16,5 @@ export const isDevEnv = NODE_ENV === 'development';
 /** Режим продакшена */
 export const isProdEnv = NODE_ENV === 'production';
 
+/** Единая точка выхода для роутов проекта */
 export const routes = isAdmin ? adminRoutes : defaultRoutes;
