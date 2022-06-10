@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { SPINNER_DELAY } from '../../utils/constants';
 import mockProfile from '../../services/mock/profile.json';
 
 const fetchProfileAction = createAsyncThunk(
@@ -10,7 +11,7 @@ const fetchProfileAction = createAsyncThunk(
       // eslint-disable-next-line no-inner-declarations
       async function timeout() {
         // eslint-disable-next-line no-promise-executor-return
-        return new Promise((resolve) => setTimeout(resolve, 100));
+        return new Promise((resolve) => setTimeout(resolve, SPINNER_DELAY));
       }
 
       await timeout();

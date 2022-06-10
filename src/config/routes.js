@@ -44,6 +44,18 @@ const routes = {
     path: '/*',
     icon: 'XSolid',
   },
+  users: {
+    id: 6,
+    title: 'Пользователи',
+    path: '/users',
+    icon: 'users',
+  },
+  library: {
+    id: 7,
+    title: 'Библиотека',
+    path: '/library',
+    icon: 'library',
+  },
 };
 
 export default routes;

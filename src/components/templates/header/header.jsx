@@ -1,11 +1,15 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
 import { HeaderLink } from '../../molecules';
-import routes from '../../../config/routes';
 import styles from './header.module.scss';
+import routes from '../../../config/routes';
 
-function Header() {
-  const renderRoutes = [routes.courses, routes.profile];
+function Header({ isAdmin }) {
+  let renderRoutes = [routes.courses, routes.profile];
+  if (isAdmin) {
+    renderRoutes = [routes.users, routes.library, ...renderRoutes];
+  }
 
   return (
     <header className={styles.header}>
@@ -30,5 +34,13 @@ function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  isAdmin: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  isAdmin: false,
+};
 
 export default Header;

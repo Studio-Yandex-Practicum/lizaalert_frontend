@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import mockCourse from '../../services/mock/course.json';
+import { SPINNER_DELAY } from '../../utils/constants';
 
 const fetchCourseAction = createAsyncThunk(
   'course/fetch',
@@ -10,7 +11,7 @@ const fetchCourseAction = createAsyncThunk(
       // eslint-disable-next-line no-inner-declarations
       async function timeout() {
         // eslint-disable-next-line no-promise-executor-return
-        return new Promise((resolve) => setTimeout(resolve, 3000));
+        return new Promise((resolve) => setTimeout(resolve, SPINNER_DELAY));
       }
 
       await timeout();
