@@ -1,11 +1,8 @@
 name: CI Deploy Dev
 
 on:
-  workflow_run:
-    workflows: [ 'CI Lint' ]
+  push:
     branches: [ 'enhancement-ci-deploy' ]
-    types:
-      - completed
 
 jobs:
   copy_files:
@@ -16,7 +13,7 @@ jobs:
       - name: copy start files via ssh password
         uses: appleboy/scp-action@master
         with:
-          host: ${{  secrets.HOST }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
