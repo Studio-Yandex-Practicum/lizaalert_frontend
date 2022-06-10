@@ -3,13 +3,13 @@ name: CI Deploy Dev
 on:
   workflow_run:
     workflows: [ 'CI Lint' ]
+    branches: [ 'master' ]
     types:
       - completed
 
 jobs:
 
   build:
-    if: ${{github.head_ref == 'master'}}
     runs-on: ubuntu-latest
 
     steps:
