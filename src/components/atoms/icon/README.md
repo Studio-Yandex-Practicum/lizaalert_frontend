@@ -238,5 +238,9 @@
       <img width="130" height="50" src="../../../assets/icons/x-solid.svg">
       <p align="center">xSolid</p>
     </td>
+    <td>
+      <img width="130" height="50" src="../../../assets/icons/yandex.svg">
+      <p align="center">yandex</p>
+    </td>
   </tr>
 </table>
