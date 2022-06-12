@@ -9,10 +9,7 @@ import { useFormWithValidation } from '../../../hooks';
 import { fetchAuth } from '../../../store/auth/thunk';
 import { selectIsAuth, selectIsLoading } from '../../../store/auth/selectors';
 import routes from '../../../config/routes';
-import {
-  ERROR_MESSAGE_INCORRECT_EMAIL,
-  ERROR_MESSAGE_INCORRECT_PHONE,
-} from '../../../utils/constants';
+import { errorMessages, patterns } from '../../../utils/constants';
 
 function LoginForm() {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
@@ -62,9 +59,9 @@ function LoginForm() {
           type="email"
           value={values?.userEmail || ''}
           placeholder="Введите адрес электронной почты"
-          pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+          pattern={patterns.email}
           error={errors.userEmail}
-          title={ERROR_MESSAGE_INCORRECT_EMAIL}
+          message={errorMessages.email}
           onChange={handleChange}
           required
         />
@@ -74,9 +71,9 @@ function LoginForm() {
           type="tel"
           value={values?.userTel || ''}
           placeholder="+7 ( ___ ) ___  -  ___"
-          pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+          pattern={patterns.tel}
           error={errors.userTel || ''}
-          title={ERROR_MESSAGE_INCORRECT_PHONE}
+          message={errorMessages.tel}
           onChange={handleChange}
           required
         />
@@ -109,7 +106,7 @@ function LoginForm() {
           iconPosition="back"
           disabled={!isValid || isLoading}
         >
-          {isLoading ? 'Войти...' : 'Войти'}
+          {isLoading ? 'Вход...' : 'Войти'}
         </Button>
         <Button
           className={classnames(styles.button, styles.button_color_black)}
