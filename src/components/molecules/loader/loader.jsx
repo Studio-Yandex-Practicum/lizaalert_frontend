@@ -7,6 +7,7 @@ const settings = {
   cy: 25,
   radius: 20,
   strokeWidth: 5,
+  fill: 'none',
 };
 
 /**
@@ -15,11 +16,11 @@ const settings = {
  *
  * @props
  * - className - string - класс-миксин для оверлея
- * - isFixed - boolean - делает оверлею `position: fixed` и растянутым на ширину и высоту родительского контейнера
- * - isAbsolute - boolean - делает оверлею `position: absolute` и растянутым на ширину и высоту родительского контейнера
+ * - isFixed - boolean - делает оверлею `position: fixed` и растягивает на ширину и высоту родительского контейнера
+ * - isAbsolute - boolean - делает оверлею `position: absolute` и растягивает на ширину и высоту родительского контейнера
  * */
 
-function Loader({ className, isFixed, isAbsolute }) {
+function Loader({ isFixed, isAbsolute, className }) {
   return (
     <div
       className={classnames(
@@ -37,7 +38,7 @@ function Loader({ className, isFixed, isAbsolute }) {
           cx={settings.cx}
           cy={settings.cy}
           r={settings.radius}
-          fill="none"
+          fill={settings.fill}
           strokeWidth={settings.strokeWidth}
         />
       </svg>
