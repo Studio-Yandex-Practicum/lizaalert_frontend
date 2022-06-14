@@ -2,11 +2,12 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Icon } from '../../atoms';
 import styles from './accordion.module.scss';
-import useAccordion from './hooks/useAccordion';
+import { useAccordion } from './hooks';
 
 /**
  * @description Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
  *
+ * @props
  * - title - string - заголовок аккордеона
  * - children - содержимое, которое будет скрываться (JSX или Компонент)
  * - button - "icon" | "text" - необязательный проп, отвечающий за кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть". По умолчанию равен "icon", если необходимо, чтобы отображался текст - добавьте проп button="text"
