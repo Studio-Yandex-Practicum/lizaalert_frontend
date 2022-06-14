@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import classnames from 'classnames';
 import { Card, Heading } from '../../atoms';
 import { Button } from '../../molecules';
 import {
@@ -22,7 +23,7 @@ function CreateCourse() {
   }, []);
 
   return (
-    <div className="container">
+    <main className="container">
       <div className={styles.header}>
         <Heading size="xxl">Создание нового курса</Heading>
         <Button className={styles.createBtn}>Создать</Button>
@@ -32,21 +33,23 @@ function CreateCourse() {
           <Button
             view="text"
             onClick={handleMain}
-            className={activeTab === 'main' ? styles.active : ''}
+            className={classnames({ [styles.active]: activeTab === 'main' })}
           >
             Основное
           </Button>
           <Button
             view="text"
             onClick={handleDescription}
-            className={activeTab === 'description' ? styles.active : ''}
+            className={classnames({
+              [styles.active]: activeTab === 'description',
+            })}
           >
             Описание
           </Button>
           <Button
             view="text"
             onClick={handleContent}
-            className={activeTab === 'content' ? styles.active : ''}
+            className={classnames({ [styles.active]: activeTab === 'content' })}
           >
             Контент
           </Button>
@@ -63,7 +66,7 @@ function CreateCourse() {
         {activeTab === 'description' && <NewCourseDescription />}
         {activeTab === 'content' && <NewCourseContent />}
       </Card>
-    </div>
+    </main>
   );
 }
 
