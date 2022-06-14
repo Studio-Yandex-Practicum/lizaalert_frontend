@@ -1,7 +1,7 @@
-import {useCallback, useState} from 'react';
+import { useCallback, useState } from 'react';
 import classnames from 'classnames';
-import {Card, Heading} from '../../atoms';
-import {Button} from '../../molecules';
+import { Card, Heading } from '../../atoms';
+import { Button } from '../../molecules';
 import {
   NewCourseContent,
   NewCourseDescription,
@@ -33,7 +33,7 @@ function CreateCourse() {
           <Button
             view="text"
             onClick={handleMain}
-            className={classnames({[styles.active]: activeTab === 'main'})}
+            className={classnames({ [styles.active]: activeTab === 'main' })}
           >
             Основное
           </Button>
@@ -49,7 +49,7 @@ function CreateCourse() {
           <Button
             view="text"
             onClick={handleContent}
-            className={classnames({[styles.active]: activeTab === 'content'})}
+            className={classnames({ [styles.active]: activeTab === 'content' })}
           >
             Контент
           </Button>
@@ -62,9 +62,9 @@ function CreateCourse() {
             Предпросмотр
           </Button>
         </div>
-        {activeTab === 'main' && <NewCourseMain/>}
-        {activeTab === 'description' && <NewCourseDescription/>}
-        {activeTab === 'content' && <NewCourseContent/>}
+        {activeTab === 'main' && <NewCourseMain />}
+        {activeTab === 'description' && <NewCourseDescription />}
+        {activeTab === 'content' && <NewCourseContent />}
       </Card>
     </main>
   );
