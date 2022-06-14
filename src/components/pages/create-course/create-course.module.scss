@@ -1,0 +1,26 @@
+@use 'src/styles/variables' as vars;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 32px;
+
+  .createBtn {
+    min-width: 184px;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 40px;
+  padding-bottom: 32px;
+
+  .active {
+    color: vars.$color-primary;
+  }
+
+  .previewBtn {
+    margin-left: auto;
+  }
+}
