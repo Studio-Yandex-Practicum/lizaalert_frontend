@@ -8,7 +8,9 @@ export const coursesSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    resetAllState: () => {},
+  },
   extraReducers: {
     [fetchCoursesAction.pending.type]: (state) => {
       state.isLoading = true;

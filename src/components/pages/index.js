@@ -6,3 +6,4 @@ export { default as NotFound } from './not-found/not-found';
 export { default as Profile } from './profile/profile';
 export { default as Register } from './register/register';
 export { default as NewCourse } from './create-course/create-course';
+export { default as ErrorBoundary } from './error-boundary/error-boundary';
