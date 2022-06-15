@@ -5,6 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:admin": "REACT_APP_IS_ADMIN=true npm start",
+    "start:admin-win": "set \"REACT_APP_IS_ADMIN=true\" && npm start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "build:admin": "REACT_APP_IS_ADMIN=true npm run build",
     "test": "react-scripts test",
