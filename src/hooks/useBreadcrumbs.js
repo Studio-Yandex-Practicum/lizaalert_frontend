@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import routes from '../config/routes';
+import { routes } from '../config';
 
 /**
  * Хук useBreadcrumbs возвращает массив объектов для отрисовки ссылок в компоненте Breadcrumbs

@@ -5,7 +5,7 @@ import { AccountData, AccountOverview, PersonalData } from '../../organisms';
 import styles from './profile.module.scss';
 import { selectProfileLoading } from '../../../store/profile/selectors';
 import fetchProfileAction from '../../../store/profile/thunk';
-import routes from '../../../config/routes';
+import { routes } from '../../../config';
 
 function Profile() {
   const dispatch = useDispatch();
