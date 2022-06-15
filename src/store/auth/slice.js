@@ -3,7 +3,7 @@ import { checkAuth, fetchAuth } from './thunk';
 
 const initialState = {
   isAuth: false,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

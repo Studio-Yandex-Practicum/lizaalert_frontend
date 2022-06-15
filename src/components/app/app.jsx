@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from '../../router/router';
-import { selectIsAuth } from '../../store/auth/selectors';
+import { selectIsLoading } from '../../store/auth/selectors';
 import { checkAuth } from '../../store/auth/thunk';
 
 function App() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(checkAuth());
-  }, [isAuth]);
+  }, [dispatch]);
 
+  if (isLoading) {
+    return <h3>Loading...</h3>;
+  }
   return <Router />;
 }
 

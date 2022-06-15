@@ -4,7 +4,6 @@ import mockAuth from '../../services/mock/auth.json';
 export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',
   async (authData, { rejectWithValue }) => {
-    /* const { email, tel } = authData.user; */
     const { isRememberMe } = authData;
     try {
       // eslint-disable-next-line no-inner-declarations
