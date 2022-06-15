@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
+import { Children } from 'react';
 import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
 import { HeaderLink } from '../../molecules';
 import styles from './header.module.scss';
-import routes from '../../../config/routes';
+import { isAdmin, routes } from '../../../config';
 
-function Header({ isAdmin }) {
-  let renderRoutes = [routes.courses, routes.profile];
+function Header() {
+  let headerRoutes = [routes.courses, routes.profile];
   if (isAdmin) {
-    renderRoutes = [routes.users, routes.library, ...renderRoutes];
+    headerRoutes = [routes.users, routes.library, ...headerRoutes];
   }
 
   return (
@@ -19,28 +19,22 @@ function Header({ isAdmin }) {
         </Link>
         <nav>
           <ul className={styles.headerLinks}>
-            {renderRoutes.map((route) => (
-              <li key={route.id}>
-                <HeaderLink
-                  text={route.title}
-                  iconType={route.icon}
-                  link={route.path}
-                />
-              </li>
-            ))}
+            {Children.toArray(
+              headerRoutes.map((route) => (
+                <li>
+                  <HeaderLink
+                    text={route.title}
+                    iconType={route.icon}
+                    link={route.path}
+                  />
+                </li>
+              ))
+            )}
           </ul>
         </nav>
       </div>
     </header>
   );
 }
-
-Header.propTypes = {
-  isAdmin: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  isAdmin: false,
-};
 
 export default Header;

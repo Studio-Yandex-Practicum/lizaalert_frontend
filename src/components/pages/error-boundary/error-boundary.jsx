@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import errorCat from '../../../assets/images/error-cat.png';
-import { Button } from '../../molecules';
 import { Heading } from '../../atoms';
+import { Button } from '../../molecules';
 import styles from './error-boundary.module.scss';
-import routes from '../../../config/routes';
+import { routes } from '../../../config';
+import errorCat from '../../../assets/images/error-cat.png';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Heading } from '../../atoms';
 import { CoursePreview, Filter } from '../../organisms';
 import styles from './courses.module.scss';
-import routes from '../../../config/routes';
+import { routes } from '../../../config';
 import fetchCoursesAction from '../../../store/courses/thunk';
 import {
   selectCourses,
