@@ -6,8 +6,11 @@ export const isContainsFile = (data: DataType): boolean => {
     return false;
   }
 
-  for (const key of Object.keys(data)) {
-    const value = data[key];
+  const keys = Object.keys(data);
+  const keysLength = Object.keys(data).length;
+
+  for (let i = 0; i < keysLength; i += 1) {
+    const value = data[keys[i]];
     if (typeof value === 'object' && value?.constructor === File) {
       return true;
     }

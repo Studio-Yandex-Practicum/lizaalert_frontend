@@ -4,27 +4,29 @@ import { DataType } from '../http-client.types';
 export const convertToFormData = (data: DataType): FormData => {
   const formData = new FormData();
 
-  for (const key of Object.keys(data)) {
-    const value = data[key];
+  const keys = Object.keys(data);
+  const keysLength = Object.keys(data).length;
 
+  for (let i = 0; i < keysLength; i += 1) {
+    const value = data[keys[i]];
     if (typeof value === 'string') {
-      formData.set(key, value);
+      formData.set(keys[i], value);
     }
 
     if (typeof value === 'object' && value?.constructor === File) {
-      formData.set(key, value);
+      formData.set(keys[i], value);
     }
 
     if (typeof value === 'number' || typeof value === 'boolean') {
-      formData.set(key, value.toString());
+      formData.set(keys[i], value.toString());
     }
 
     if (Array.isArray(value)) {
-      formData.set(key, JSON.stringify(value));
+      formData.set(keys[i], JSON.stringify(value));
     }
 
     if (typeof value === 'object' && value?.constructor !== File) {
-      formData.set(key, JSON.stringify(value));
+      formData.set(keys[i], JSON.stringify(value));
     }
   }
 
