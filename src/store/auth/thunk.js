@@ -34,7 +34,7 @@ export const checkAuth = createAsyncThunk(
         return new Promise((resolve) => setTimeout(resolve(), 2000));
       }
       await timeout();
-      return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+      return false;
     } catch (error) {
       return rejectWithValue(error.message);
     }

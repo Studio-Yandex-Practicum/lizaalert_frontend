@@ -30,7 +30,7 @@ export const authSlice = createSlice({
       state.error = null;
     },
     [checkAuth.fulfilled.type]: (state, { payload }) => {
-      state.isAuth = !!payload;
+      state.isAuth = payload;
       state.isLoading = false;
     },
     [checkAuth.rejected.type]: (state, { payload }) => {
