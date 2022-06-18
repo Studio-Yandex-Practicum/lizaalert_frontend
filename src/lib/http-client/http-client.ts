@@ -11,6 +11,8 @@ import {
   stringifyQuery,
 } from './utils';
 
+const DEFAULT_TIMEOUT = 10000;
+
 interface IHTTPClient {
   get: (url: string, options: Options) => Promise<XMLHttpRequest>;
   post: (url: string, options: Options) => Promise<XMLHttpRequest>;
@@ -20,12 +22,14 @@ interface IHTTPClient {
 }
 
 /**
- * Класс HTTPClient используется для составления запросов к API.
- * На вход принимает baseURL (http://example.com).
- * Имеет публичные методы `get`, `post`, `patch`, `put`, `delete`.
- * Самостоятельно приводит к строке объект с данными, также самостоятельно приводит к `formData`, если в объекте есть файл.
- * Самостоятельно преобразовывает объект params в query.
- * По умолчанию возвращает данные в формате `json`, его не нужно дополнительно обрабатывать.
+ * @description Класс HTTPClient используется для составления запросов к API.
+ *
+ * - На вход принимает `baseURL` (http://example.com).
+ * - Имеет публичные методы `get`, `post`, `patch`, `put`, `delete`. Возвращает Promise<XMLHttpRequest>, ответ лежит в свойстве `response`.
+ * - Можно установить `timeout` запроса (в миллисекундах), по умолчанию 10 секунд.
+ * - Самостоятельно приводит к строке объект с данными, также самостоятельно приводит к `formData`, если в объекте есть файл.
+ * - Самостоятельно преобразовывает объект `params` в query.
+ * - По умолчанию возвращает данные в формате `json`, его не нужно дополнительно обрабатывать.
  * */
 
 class HTTPClient implements IHTTPClient {
@@ -34,7 +38,7 @@ class HTTPClient implements IHTTPClient {
   private request = (
     url: string,
     options: ReqOptions = { method: Methods.Get },
-    timeout = 10000
+    timeout = DEFAULT_TIMEOUT
   ): Promise<XMLHttpRequest> => {
     const target = `${this.baseURL}${url}`;
     const {
