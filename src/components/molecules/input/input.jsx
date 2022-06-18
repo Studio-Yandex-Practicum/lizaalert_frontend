@@ -11,6 +11,7 @@ import styles from './input.module.scss';
  * - labelName - string - заголовок инпута, необязательный prop, не должен быть пустой строкой
  * - inputName - string - имя инпута и id
  * - type - string - тип инпута
+ * - isWithIcon - bool - пропс, по умолчанию false, определяет есть ли иконка у инпута
  * - value - string - значение инпута
  * - accept - string - необязательный prop, в котором указаны возможные форматы файла
  * - placeholder - string - текст подсказки поля ввода
@@ -18,11 +19,13 @@ import styles from './input.module.scss';
  * - disabled - bool - контроль возможности изменения инпута
  * - onChange - func - обработчик изменения значения инпута
  * - className - string - css-класс для стилизации компонента родителя (div)
+ * - message - string - кастомный текст ошибки, необязательный prop
  */
 
 function Input({
   labelName,
   inputName,
+  isWithIcon,
   type,
   value,
   accept,
@@ -37,6 +40,7 @@ function Input({
   max,
   min,
   pattern,
+  message,
 }) {
   return (
     <div className={classNames(styles.container, className)}>
@@ -48,9 +52,10 @@ function Input({
         })}
       >
         {labelName}
-        {labelName && type === 'file' ? (
+        {isWithIcon && labelName && type === 'file' ? (
           <Icon type="attachment" className={styles.icon} />
         ) : (
+          isWithIcon &&
           labelName &&
           type !== 'tel' && <Icon type="edit" className={styles.icon} />
         )}
@@ -77,13 +82,16 @@ function Input({
       />
       {type === 'file' && <span className={styles.input}>{value}</span>}
       {/* когда будет настроена валидация, будет условие isValid, вместо error */}
-      <span className={styles.error}>{error}</span>
+      <span className={styles.error}>
+        {error && message ? message : error || ''}
+      </span>
     </div>
   );
 }
 
 Input.defaultProps = {
   labelName: null,
+  isWithIcon: false,
   accept: null,
   error: null,
   disabled: false,
@@ -94,6 +102,7 @@ Input.defaultProps = {
   min: null,
   className: '',
   pattern: null,
+  message: '',
 };
 
 Input.propTypes = {
@@ -101,6 +110,7 @@ Input.propTypes = {
   inputName: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
     .isRequired,
+  isWithIcon: PropTypes.bool,
   value: PropTypes.string.isRequired,
   accept: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
@@ -114,6 +124,7 @@ Input.propTypes = {
   max: PropTypes.string,
   min: PropTypes.string,
   pattern: PropTypes.string,
+  message: PropTypes.string,
 };
 
 export default Input;

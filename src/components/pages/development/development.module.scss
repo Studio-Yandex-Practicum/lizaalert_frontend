@@ -1,0 +1,19 @@
+@use 'src/styles/variables' as vars;
+
+.development {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: vars.$grid-gap;
+  min-height: 100vh;
+}
+
+.link {
+  text-decoration: none;
+  color: vars.$dark-primary;
+
+  &:hover {
+    color: vars.$color-primary;
+  }
+}

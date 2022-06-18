@@ -24,3 +24,12 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Yandex Sans Text';
+  src: url('yandex-sans-text-medium.woff2') format('woff2'),
+    url('yandex-sans-text-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

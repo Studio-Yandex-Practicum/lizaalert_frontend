@@ -9,7 +9,7 @@ import {
   Register,
 } from '../components/pages';
 import { Layout } from '../components/templates';
-import routes from '../config/routes';
+import { routes } from '../config';
 
 function Router() {
   const { courses, profile, register, login, notFound } = routes;
@@ -27,7 +27,9 @@ function Router() {
           <Route path={profile.path} element={<Profile />} />
         </Route>
         <Route path={register.path} element={<Register />} />
-        <Route path={login.path} element={<Login />} />
+        <Route element={<Layout />}>
+          <Route path={login.path} element={<Login />} />
+        </Route>
         <Route path={notFound.path} element={<NotFound />} />
       </Routes>
     </BrowserRouter>

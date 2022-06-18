@@ -4,6 +4,7 @@ import testReducer from './test/slice';
 import courseReducer from './course/slice';
 import lessonReducer from './lesson/slice';
 import profileReducer from './profile/slice';
+import authReducer from './auth/slice';
 
 const appReducer = combineReducers({
   courses: coursesReducer,
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
   course: courseReducer,
   lesson: lessonReducer,
   profile: profileReducer,
+  auth: authReducer,
 });
 
 const rootReducer = (state, action) => {

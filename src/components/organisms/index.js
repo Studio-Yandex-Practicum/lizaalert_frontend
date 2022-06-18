@@ -18,3 +18,6 @@ export { default as TestQuestion } from './test-question/test-question';
 export { default as TestContent } from './test-content/test-content';
 export { default as TestPreview } from './test-preview/test-preview';
 export { default as VideoLesson } from './video-lesson/video-lesson';
+export { default as NewCourseMain } from './new-course-main/new-course-main';
+export { default as NewCourseDescription } from './new-course-description/new-course-description';
+export { default as NewCourseContent } from './new-course-content/new-course-content';

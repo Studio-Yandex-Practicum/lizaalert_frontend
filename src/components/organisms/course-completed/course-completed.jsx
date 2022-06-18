@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card, Heading } from '../../atoms';
 import styles from './course-completed.module.scss';
-import routes from '../../../config/routes';
 
 /**
  * @description Компонент карточки завершения курса.
@@ -16,9 +15,8 @@ function CourseCompleted({
   isCompleted,
   courseName,
   courseSuccessDescription,
+  linkHref,
 }) {
-  const { courses } = routes;
-
   return (
     <Card className={styles.card}>
       <Heading size="l" className={styles.title}>
@@ -49,7 +47,7 @@ function CourseCompleted({
               Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
               сложным. Вы&nbsp;можете попробовать себя{' '}
-              <Link to={courses.path} className={styles.link}>
+              <Link to={linkHref} className={styles.link}>
                 в других направлениях.
               </Link>
             </p>
@@ -69,6 +67,7 @@ CourseCompleted.propTypes = {
   isCompleted: PropTypes.bool,
   courseName: PropTypes.string.isRequired,
   courseSuccessDescription: PropTypes.string,
+  linkHref: PropTypes.string.isRequired,
 };
 
 export default CourseCompleted;
