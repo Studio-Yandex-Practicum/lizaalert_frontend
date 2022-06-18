@@ -101,6 +101,10 @@
           "state"
         ]
       }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      "BinaryExpression[operator='of']"
     ]
   }
 }
