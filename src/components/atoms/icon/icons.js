@@ -50,6 +50,7 @@ import { ReactComponent as Volume } from '../../../assets/icons/volume.svg';
 import { ReactComponent as Webinar } from '../../../assets/icons/webinar.svg';
 import { ReactComponent as XSmall } from '../../../assets/icons/x-small.svg';
 import { ReactComponent as XSolid } from '../../../assets/icons/x-solid.svg';
+import { ReactComponent as Yandex } from '../../../assets/icons/yandex.svg';
 
 const defaultAttributes = {
   width: '100%',
@@ -111,6 +112,7 @@ const icons = {
   webinar: <Webinar {...defaultAttributes} />,
   xSmall: <XSmall {...defaultAttributes} />,
   xSolid: <XSolid {...defaultAttributes} />,
+  yandex: <Yandex {...defaultAttributes} />,
 };
 
 export default icons;
