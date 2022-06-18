@@ -17,6 +17,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === 'courses/resetAllState') {
+    // eslint-disable-next-line no-param-reassign
     state = undefined;
   }
 

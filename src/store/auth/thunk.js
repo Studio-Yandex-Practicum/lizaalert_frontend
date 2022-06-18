@@ -8,9 +8,10 @@ export const fetchAuth = createAsyncThunk(
     try {
       // eslint-disable-next-line no-inner-declarations
       async function timeout() {
-        // eslint-disable-next-line no-promise-executor-return
+        // eslint-disable-next-line no-promise-executor-return,@typescript-eslint/no-implied-eval
         return new Promise((resolve) => setTimeout(resolve(mockAuth), 2000));
       }
+
       const jwt = await timeout();
       if (isRememberMe) {
         localStorage.setItem('jwt', jwt.token);
@@ -31,8 +32,9 @@ export const checkAuth = createAsyncThunk(
       // eslint-disable-next-line no-inner-declarations
       async function timeout() {
         // eslint-disable-next-line no-promise-executor-return
-        return new Promise((resolve) => setTimeout(resolve(), 2000));
+        return new Promise((resolve) => setTimeout(resolve, 2000));
       }
+
       await timeout();
       return false;
     } catch (error) {
