@@ -7,7 +7,7 @@ export const isContainsFile = (data: DataType): boolean => {
   }
 
   const keys = Object.keys(data);
-  const keysLength = Object.keys(data).length;
+  const keysLength = keys.length;
 
   for (let i = 0; i < keysLength; i += 1) {
     const value = data[keys[i]];

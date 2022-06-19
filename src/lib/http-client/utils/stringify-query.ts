@@ -6,7 +6,7 @@ export const stringifyQuery = (target: string, params: ParamsType): string => {
 
   if (typeof params === 'object') {
     const keys = Object.keys(params);
-    const keysLength = Object.keys(params).length;
+    const keysLength = keys.length;
 
     for (let i = 0; i < keysLength; i += 1) {
       const value = params[keys[i]];
