@@ -3,8 +3,8 @@ import { Button, Input } from '../../molecules';
 import { useFormWithValidation } from '../../../hooks';
 import styles from './password-restoration.module.scss';
 
-function PasswordRestorarion() {
-  const { values, handleChange, errors } = useFormWithValidation();
+function PasswordRestoration() {
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -28,7 +28,11 @@ function PasswordRestorarion() {
           type="email"
           placeholder="Ведите адрес электронной почты"
         />
-        <Button view="primary" className={styles.submitButton}>
+        <Button
+          view="primary"
+          className={styles.submitButton}
+          disabled={!isValid}
+        >
           Отправить новый пароль
         </Button>
       </form>
@@ -45,4 +49,4 @@ function PasswordRestorarion() {
   );
 }
 
-export default PasswordRestorarion;
+export default PasswordRestoration;
