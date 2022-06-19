@@ -15,6 +15,7 @@ import styles from './button.module.scss';
  * - disabled - boolean - флаг отключения кнопки
  * - type - string - тип кнопки: 'button', 'submit'
  * - minWidth - string | number - инлайновый стиль минимальной ширины, прибивается гвоздями, по умолчанию наследуется
+ * - classNameIcon - string - класс-миксин
  */
 
 function Button({
@@ -27,6 +28,7 @@ function Button({
   disabled,
   type,
   minWidth,
+  classNameIcon,
 }) {
   const btnClasses = classnames(
     styles.button,
@@ -48,11 +50,17 @@ function Button({
       style={inlineStyle}
     >
       {iconPosition === 'back' && (
-        <Icon type={iconName} className={styles.icon} />
+        <Icon
+          type={iconName}
+          className={classnames(styles.icon, classNameIcon)}
+        />
       )}
       {children}
       {iconPosition === 'forward' && (
-        <Icon type={iconName} className={styles.icon} />
+        <Icon
+          type={iconName}
+          className={classnames(styles.icon, classNameIcon)}
+        />
       )}
     </button>
   );
@@ -68,6 +76,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   type: PropTypes.oneOf(['button', 'submit']),
   minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  classNameIcon: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -80,6 +89,7 @@ Button.defaultProps = {
   disabled: false,
   type: 'button',
   minWidth: 'inherit',
+  classNameIcon: '',
 };
 
 export default Button;

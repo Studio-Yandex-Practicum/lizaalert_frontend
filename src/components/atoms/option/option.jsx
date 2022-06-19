@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './option.module.scss';
 
@@ -9,7 +9,7 @@ function Option({ option, handleSetValue, handleEscDown, className }) {
 
   return (
     <li
-      className={classNames(styles.option, className)}
+      className={classnames(styles.option, className)}
       onClick={onOptionClick}
       onKeyDown={handleEscDown}
       role="option"

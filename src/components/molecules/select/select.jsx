@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Option from '../../atoms/option/option';
+import classnames from 'classnames';
+import { Option } from '../../atoms';
 import styles from './select.module.scss';
+
+/* TODO: На мобильном разрешении вернуть нативный select */
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
@@ -37,7 +39,7 @@ function Select({
   };
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={classnames(styles.container, className)}>
       <label htmlFor={selectName} className={styles.label}>
         {inputName}
       </label>
