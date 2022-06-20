@@ -9,3 +9,4 @@ export { default as Tag } from './tag/tag';
 export { default as TextWithIcon } from './text-with-icon/text-with-icon';
 export { default as TestAnswer } from './test-answer/test-answer';
 export { default as TestResult } from './test-results/test-results';
+export { default as UpdatedPassword } from './success-updated-password/success-updated-password';
