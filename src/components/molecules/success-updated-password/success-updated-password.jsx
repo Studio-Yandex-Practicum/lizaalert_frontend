@@ -1,9 +1,9 @@
 import { Card, Heading } from '../../atoms';
 import Button from '../button/button';
 
-import styles from './updated-password.module.scss';
+import styles from './success-updated-password.module.scss';
 
-function UpdatedPassword() {
+function SuccessUpdatedPassword() {
   return (
     <Card className={styles.container}>
       <Heading
@@ -22,4 +22,4 @@ function UpdatedPassword() {
   );
 }
 
-export default UpdatedPassword;
+export default SuccessUpdatedPassword;
