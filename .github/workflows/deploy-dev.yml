@@ -27,6 +27,5 @@ jobs:
             rm -rf ./lizaalert_frontend
             git clone git@github.com:Studio-Yandex-Practicum/lizaalert_frontend.git
             cd ./lizaalert_frontend
-            git checkout enhancement-160-docker-build
             docker-compose build
             docker-compose up -d
