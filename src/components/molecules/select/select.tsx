@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Option } from '../../atoms';
 import styles from './select.module.scss';
@@ -12,28 +11,52 @@ const DUMMY_OPTIONS = [
   { id: 3, name: 'Первая помощь' },
 ];
 
+type OptionType = {
+  id: number;
+  name: string;
+};
+
+type SelectProps = {
+  className?: string;
+  selectName: string;
+  inputName: string;
+  placeholder: string;
+  options: OptionType[];
+  setSelectedValue: (selectName: string, value: string) => void;
+  selectedValue?: string;
+};
+
+type KeyboardEvent = {
+  key: string;
+};
+
+const defaultProps = {
+  className: '',
+  selectedValue: '',
+};
+
 function Select({
   className,
   selectName,
   inputName,
   placeholder,
-  options,
+  options = DUMMY_OPTIONS,
   setSelectedValue,
   selectedValue,
-}) {
+}: SelectProps) {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleShowOptions = () => {
     setShowOptions((prevValue) => !prevValue);
   };
 
-  const handleEscDown = (event) => {
+  const handleEscDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setShowOptions(false);
     }
   };
 
-  const handleSetValue = (value) => {
+  const handleSetValue = (value: string) => {
     setSelectedValue(selectName, value);
     setShowOptions(false);
   };
@@ -75,25 +98,6 @@ function Select({
   );
 }
 
-Select.defaultProps = {
-  className: '',
-  options: DUMMY_OPTIONS,
-  selectedValue: '',
-};
-
-Select.propTypes = {
-  selectedValue: PropTypes.string,
-  setSelectedValue: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  selectName: PropTypes.string.isRequired,
-  inputName: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ),
-};
+Select.defaultProps = defaultProps;
 
 export default Select;
