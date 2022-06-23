@@ -8,7 +8,7 @@
     "start:admin-win": "set \"REACT_APP_IS_ADMIN=true\" && npm start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build npm run compress",
     "build:admin": "REACT_APP_IS_ADMIN=true npm run build",
-    "compress": "gzipper compress ./build",
+    "compress": "gzipper compress --verbose ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write src/**/*.js",
