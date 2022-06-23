@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  base_app:
+    image: base-app
+    build:
+      context: ./
+      dockerfile: Dockerfile_base
+    container_name: lizaalert-base
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+  admin_app:
+    image: admin-app
+    build:
+      context: ./
+      dockerfile: Dockerfile_admin
+    container_name: lizaalert-admin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    
