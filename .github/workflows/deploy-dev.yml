@@ -22,6 +22,7 @@ jobs:
           script: |
             cd ./lizaalert_frontend
             docker-compose down
+            docker system prune -f
             cd ..
             rm -rf ./lizaalert_frontend
             git clone git@github.com:Studio-Yandex-Practicum/lizaalert_frontend.git
