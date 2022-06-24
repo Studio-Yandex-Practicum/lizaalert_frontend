@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react';
-import Card from './card';
+import Card, { CardHtmlTags } from './card';
 import styles from './card.module.scss';
 
 const testString = 'Тестовый компонент';
@@ -25,7 +25,7 @@ describe('Компонент Card', () => {
 
   it('Принимает prop htmlTag="article" и рендерит "article" вместо "div"', () => {
     const { container } = render(
-      <Card htmlTag="article">
+      <Card htmlTag={CardHtmlTags.Article}>
         <TestComponent />
       </Card>
     );
@@ -36,7 +36,7 @@ describe('Компонент Card', () => {
 
   it('Принимает prop htmlTag="aside" и рендерит "aside" вместо "div"', () => {
     const { container } = render(
-      <Card htmlTag="aside">
+      <Card htmlTag={CardHtmlTags.Aside}>
         <TestComponent />
       </Card>
     );
@@ -47,7 +47,7 @@ describe('Компонент Card', () => {
 
   it('Принимает prop htmlTag="li" и рендерит "li" вместо "div"', () => {
     const { container } = render(
-      <Card htmlTag="li">
+      <Card htmlTag={CardHtmlTags.Li}>
         <TestComponent />
       </Card>
     );

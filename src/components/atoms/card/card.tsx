@@ -2,7 +2,12 @@ import { createElement, ReactNode } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 
-type CardHtmlTags = 'article' | 'div' | 'li' | 'aside';
+export const enum CardHtmlTags {
+  Article = 'article',
+  Div = 'div',
+  Li = 'li',
+  Aside = 'aside',
+}
 
 type CardProps = {
   className?: string;
@@ -14,7 +19,7 @@ type CardProps = {
 const defaultProps = {
   className: '',
   noPadding: false,
-  htmlTag: 'div',
+  htmlTag: CardHtmlTags.Div,
 };
 
 /**
@@ -27,14 +32,9 @@ const defaultProps = {
  * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'. По умолчанию div.
  */
 
-function Card({
-  className,
-  children,
-  noPadding,
-  htmlTag,
-}: CardProps): JSX.Element {
+function Card({ className, children, noPadding, htmlTag }: CardProps) {
   return createElement(
-    htmlTag ?? 'div',
+    htmlTag ?? CardHtmlTags.Div,
     {
       className: classnames(
         styles.card,
