@@ -6,8 +6,9 @@
     "start": "react-scripts start",
     "start:admin": "REACT_APP_IS_ADMIN=true npm start",
     "start:admin-win": "set \"REACT_APP_IS_ADMIN=true\" && npm start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build && npm run compress",
     "build:admin": "REACT_APP_IS_ADMIN=true npm run build",
+    "compress": "gzipper compress --verbose ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write src/**/*.js",
@@ -64,6 +65,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.3.0",
+    "gzipper": "7.1.0",
     "prettier": "2.6.1",
     "sass": "1.49.9",
     "typescript": "4.7.3"

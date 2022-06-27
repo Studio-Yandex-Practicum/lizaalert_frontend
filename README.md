@@ -8,7 +8,9 @@
 
 [Макет](https://www.figma.com/file/FasUcYffR2kJAhPvBGcACW/LizaAlert-Mockups?node-id=155%3A5905)
 
-[Deploy](http://51.250.75.176/)
+[Deploy Base](http://51.250.75.176:8080/)
+
+[Deploy Admin](http://51.250.75.176:8081/)
 
 ## Стек:
 
