@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import classnames from 'classnames';
 import { Option } from '../../atoms';
 import styles from './select.module.scss';
@@ -29,10 +29,6 @@ type SelectProps = {
   selectedValue?: string;
 };
 
-type KeyboardEvent = {
-  key: string;
-};
-
 const defaultProps = {
   className: '',
   selectedValue: '',
@@ -53,7 +49,7 @@ function Select({
     setShowOptions((prevValue) => !prevValue);
   };
 
-  const handleEscDown = (event: KeyboardEvent) => {
+  const handleEscDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       setShowOptions(false);
     }
@@ -72,8 +68,6 @@ function Select({
       <div className={styles.selectContainer}>
         <div
           className={styles.select}
-          type="select"
-          name={selectName}
           id={selectName}
           placeholder={placeholder}
           onClick={handleShowOptions}
