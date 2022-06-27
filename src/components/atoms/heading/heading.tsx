@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import styles from './heading.module.scss';
 
 export const enum HeadingSizes {
-  Xxl = 'xxl',
-  Xl = 'xl',
+  XXL = 'xxl',
+  XL = 'xl',
   L = 'l',
   M = 'm',
 }
@@ -22,7 +22,7 @@ const defaultProps = {
   level: 2,
   title: '',
   children: null,
-  size: HeadingSizes.Xl,
+  size: HeadingSizes.XL,
   isSubheading: false,
   className: '',
 };
@@ -43,7 +43,7 @@ function Heading({
   level = 2,
   title,
   children,
-  size = HeadingSizes.Xl,
+  size = HeadingSizes.XL,
   isSubheading,
   className,
 }: HeadingProps) {
