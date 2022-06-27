@@ -9,7 +9,7 @@ export const enum CardHtmlTags {
   Aside = 'aside',
 }
 
-type CardProps = {
+export type CardProps = {
   className?: string;
   children: ReactNode;
   noPadding?: boolean;
