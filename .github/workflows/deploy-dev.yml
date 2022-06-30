@@ -36,4 +36,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
             docker stop lizaalert_base
             docker system prune -f
-            docker run --name lizaalert_base -dit -p 8080:80 --net=host ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
+            docker run --name lizaalert_base -dit -p 8080:80 ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
