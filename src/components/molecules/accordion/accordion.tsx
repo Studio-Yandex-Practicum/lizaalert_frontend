@@ -1,8 +1,27 @@
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import { Icon } from '../../atoms';
+import { ReactNode, Ref } from 'react';
+import { Icon as Arrow } from '../../atoms';
 import styles from './accordion.module.scss';
-import { useAccordion } from './hooks';
+import useAccordion from './hooks/use-accordion';
+
+export const enum AccordionButtons {
+  Text = 'text',
+  Icon = 'icon',
+}
+
+type AccordionProps = {
+  title: string;
+  children: ReactNode;
+  className?: string;
+  button?: AccordionButtons;
+  open?: boolean;
+};
+
+const defaultProps = {
+  className: '',
+  button: AccordionButtons.Icon,
+  open: false,
+};
 
 /**
  * @description Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
@@ -15,20 +34,14 @@ import { useAccordion } from './hooks';
  * - open - boolean - начальное состояние аккордеона при рендере. По умолчанию false - аккордеон закрыт
  */
 
-function Accordion({ children, className, title, button, open }) {
+function Accordion({
+  children,
+  className,
+  title,
+  button = AccordionButtons.Icon,
+  open = false,
+}: AccordionProps) {
   const { isOpen, height, contentRef, toggleAccordion } = useAccordion(open);
-
-  const renderButton = (type) => (
-    <span
-      className={classnames(styles.btn, {
-        [styles.icon]: type === 'icon',
-        [styles.text]: type === 'text',
-      })}
-    >
-      {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-      {type === 'icon' && <Icon type="arrowDown" maxHeight={7} />}
-    </span>
-  );
 
   const classList = classnames(styles.accordion, className, {
     [styles.open]: isOpen,
@@ -42,30 +55,31 @@ function Accordion({ children, className, title, button, open }) {
       </button>
       <div
         className={styles.content}
-        ref={contentRef}
+        ref={contentRef as Ref<HTMLDivElement>}
         style={{ maxHeight: height }}
       >
         {children}
       </div>
     </div>
   );
+
+  function renderButton(type: AccordionButtons) {
+    return (
+      <span
+        className={classnames(styles.btn, {
+          [styles.icon]: type === AccordionButtons.Icon,
+          [styles.text]: type === AccordionButtons.Text,
+        })}
+      >
+        {type === AccordionButtons.Text && (isOpen ? 'Свернуть' : 'Развернуть')}
+        {type === AccordionButtons.Icon && (
+          <Arrow type="arrowDown" maxHeight={7} />
+        )}
+      </span>
+    );
+  }
 }
 
-Accordion.defaultProps = {
-  className: '',
-  button: 'icon',
-  open: false,
-};
-
-Accordion.propTypes = {
-  className: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  button: PropTypes.oneOf(['text', 'icon']),
-  open: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-};
+Accordion.defaultProps = defaultProps;
 
 export default Accordion;
