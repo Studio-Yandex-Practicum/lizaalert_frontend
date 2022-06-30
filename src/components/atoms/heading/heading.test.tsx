@@ -30,13 +30,13 @@ describe('Компонент Heading', () => {
     });
 
     it('Принимает prop "children" как реакт ноду и рендерит её на страницу', () => {
-      render(
+      const { container } = render(
         <Heading>
           <TestComponent />
         </Heading>
       );
 
-      const anchorElement = document.querySelector('a');
+      const anchorElement = container.querySelector('a');
       expect(anchorElement).toBeInTheDocument();
       expect(anchorElement?.textContent).toBe('Тестовая ссылка');
     });
