@@ -6,7 +6,7 @@ const createIcon = (props?: Omit<IconProps, 'type'>) =>
   render(<Icon type="arrowBack" {...props} />);
 
 describe('Компонент Icon', () => {
-  describe('Корректно рендерится на страницу', () => {
+  describe('Тестирование рендера', () => {
     it('Вставляется в DOM и по внешний тег это "span"', () => {
       const { container } = createIcon();
       const spanElement = container.querySelector('span');
@@ -32,7 +32,7 @@ describe('Компонент Icon', () => {
     });
   });
 
-  describe('Корректно принимает все пропсы', () => {
+  describe('Тестирование пропсов', () => {
     it('Принимает prop "type", которого нет в словаре и возвращает null', () => {
       const { container } = render(<Icon type="doesntExists" />);
       const iconElement = container.firstChild;
@@ -109,6 +109,18 @@ describe('Компонент Icon', () => {
       const iconElement = container.firstChild;
       expect(iconElement).toHaveClass(styles.icon);
       expect(iconElement).toHaveStyle('max-height: 100px');
+    });
+  });
+
+  describe('Тестирование слушателей событий', () => {
+    it('Клик по кнопке отрабатывает корректно', () => {
+      const mockCallBack = jest.fn();
+      const { container } = createIcon({
+        onClick: mockCallBack,
+      });
+      const buttonElement = container.querySelector('button');
+      buttonElement?.click();
+      expect(mockCallBack.mock.calls.length).toEqual(1);
     });
   });
 });

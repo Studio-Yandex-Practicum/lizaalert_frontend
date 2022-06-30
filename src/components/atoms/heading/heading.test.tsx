@@ -9,14 +9,16 @@ function TestComponent() {
 }
 
 describe('Компонент Heading', () => {
-  it('Вставляется в DOM', () => {
-    const { container } = render(<Heading />);
-    const headingElement = container.firstChild;
-    expect(headingElement).toBeInTheDocument();
-    expect(headingElement).toHaveClass(styles.heading);
+  describe('Тестирование рендера', () => {
+    it('Вставляется в DOM', () => {
+      const { container } = render(<Heading />);
+      const headingElement = container.firstChild;
+      expect(headingElement).toBeInTheDocument();
+      expect(headingElement).toHaveClass(styles.heading);
+    });
   });
 
-  describe('Корректно принимает все пропсы', () => {
+  describe('Тестирование пропсов', () => {
     it('Принимает prop "title" и рендерит переданный текст на страницу', () => {
       const { container } = render(<Heading title={testTitle} />);
       const titleElement = getByText(container, testTitle);

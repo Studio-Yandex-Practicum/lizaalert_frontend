@@ -16,18 +16,20 @@ const createCard = (props?: Omit<CardProps, 'children'>) =>
   );
 
 describe('Компонент Card', () => {
-  it('Вставляется в DOM вместе с ребенком', () => {
-    const { container } = createCard();
+  describe('Тестирование рендера', () => {
+    it('Вставляется в DOM вместе с ребенком', () => {
+      const { container } = createCard();
 
-    const cardElement = container.firstChild;
-    expect(cardElement).toBeInTheDocument();
-    expect(cardElement).toHaveClass(styles.card);
+      const cardElement = container.firstChild;
+      expect(cardElement).toBeInTheDocument();
+      expect(cardElement).toHaveClass(styles.card);
 
-    const childElement = getByText(container, testString);
-    expect(childElement).toBeInTheDocument();
+      const childElement = getByText(container, testString);
+      expect(childElement).toBeInTheDocument();
+    });
   });
 
-  describe('Корректно принимает все пропсы', () => {
+  describe('Тестирование пропсов', () => {
     it('Принимает prop htmlTag="article" и рендерит "article" вместо "div"', () => {
       const { container } = createCard({ htmlTag: CardHtmlTags.Article });
       const cardElement = container.querySelector('article');
