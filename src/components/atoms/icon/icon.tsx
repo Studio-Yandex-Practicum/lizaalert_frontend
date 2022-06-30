@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import styles from './icon.module.scss';
-import icons from './icons';
+import icons, { IconsType } from './icons';
 
 export type IconProps = {
-  type: string;
+  type: keyof IconsType;
   maxWidth?: string | number;
   height?: string | number;
   maxHeight?: string | number;
