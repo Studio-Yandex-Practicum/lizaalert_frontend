@@ -1,0 +1,39 @@
+name: CI Deploy Dev Admin
+
+on:
+  workflow_run:
+    workflows: [ CI Lint ]
+    branches: [ master ]
+    types: [ completed ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/courses_admin_frontend:latest
+          file: Dockerfile_admin
+
+      - name: Deploy package
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/courses_admin_frontend:latest
+            docker stop lizaalert_admin
+            docker system prune -f
+            docker run --name lizaalert_admin -dit -p 8081:80 ${{ secrets.DOCKER_USERNAME }}/courses_admin_frontend:latest
