@@ -2,16 +2,29 @@ name: CI Deploy Dev
 
 on:
   workflow_run:
-    workflows: [ 'CI Lint' ]
-    branches: [ 'master' ]
-    types:
-      - completed
+    workflows: [ CI Lint ]
+    branches: [ master ]
+    types: [ completed ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
+          file: Dockerfile_base
+
       - name: Deploy package
         uses: appleboy/ssh-action@master
         with:
@@ -20,12 +33,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd ./lizaalert_frontend
-            docker-compose down
-            cd ..
-            rm -rf ./lizaalert_frontend
-            git clone git@github.com:Studio-Yandex-Practicum/lizaalert_frontend.git
-            cd ./lizaalert_frontend
-            docker-compose build
-            docker-compose up -d
+            docker pull ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
+            docker stop lizaalert_base
             docker system prune -f
+            docker run --name lizaalert_base -dit -p 8080:80 --net=host ${{ secrets.DOCKER_USERNAME }}/courses_base_frontend:latest
