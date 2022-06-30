@@ -50,8 +50,8 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
   );
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', updateContentHeight);
     if (contentRef.current) {
+      window.addEventListener('resize', updateContentHeight);
       contentRef.current.addEventListener(
         'accordionToggle',
         handleInnerAccordion as EventListener
@@ -59,8 +59,8 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
     }
 
     return () => {
-      window.removeEventListener('resize', updateContentHeight);
       if (contentRef.current) {
+        window.removeEventListener('resize', updateContentHeight);
         contentRef.current.removeEventListener(
           'accordionToggle',
           handleInnerAccordion as EventListener
