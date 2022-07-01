@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './checkbox.module.scss';
+import { Controls } from '../../../types';
 
 export type CheckboxProps = {
   name: string;
@@ -42,7 +43,7 @@ function Checkbox({
   onChange,
   className,
 }: CheckboxProps) {
-  const checkboxId = `checkbox-${name}-${value}`;
+  const checkboxId = `${Controls.Checkbox}-${name}-${value}`;
 
   return (
     <label
@@ -52,7 +53,7 @@ function Checkbox({
       <input
         id={checkboxId}
         className={styles.input}
-        type={isRadio ? 'radio' : 'checkbox'}
+        type={isRadio ? Controls.Radio : Controls.Checkbox}
         name={name}
         value={value}
         checked={checked}
@@ -60,7 +61,7 @@ function Checkbox({
       />
       <Icon
         className={isRadio ? styles.pseudoRadio : styles.pseudoCheckbox}
-        type={isRadio ? 'radio' : 'checkbox'}
+        type={isRadio ? Controls.Radio : Controls.Checkbox}
       />
       <p className={styles.labelText}>{labelText}</p>
     </label>
