@@ -1,6 +1,6 @@
-import { useState, KeyboardEvent } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
-import { Option } from '../../atoms';
+import { Option, OptionType } from '../../atoms';
 import styles from './select.module.scss';
 
 /* TODO: На мобильном разрешении вернуть нативный select */
@@ -10,11 +10,6 @@ const DUMMY_OPTIONS = [
   { id: 2, name: 'Оперативное' },
   { id: 3, name: 'Первая помощь' },
 ];
-
-type OptionType = {
-  id: number;
-  name: string;
-};
 
 type SelectProps = {
   className?: string;
@@ -46,7 +41,7 @@ function Select({
     setShowOptions((prevValue) => !prevValue);
   };
 
-  const handleEscDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  const handleEscDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Escape') {
       setShowOptions(false);
     }
@@ -80,8 +75,8 @@ function Select({
               <Option
                 key={option.id}
                 option={option}
-                handleSetValue={handleSetValue}
-                handleEscDown={handleEscDown}
+                onClick={handleSetValue}
+                onKeyDown={handleEscDown}
                 className={styles.listItem}
               />
             ))}
