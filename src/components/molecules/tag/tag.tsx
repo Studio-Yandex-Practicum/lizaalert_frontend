@@ -36,7 +36,7 @@ function Tag({ text, onClick, className, value }: TagProps) {
       <div className={classNames}>
         <p className={styles.text}>{text}</p>
         <button className={styles.button} type="button" onClick={onTagClick}>
-          <Icon type="xSolid" className={styles.icon} />
+          <Icon type="xSolid" />
         </button>
       </div>
     );

@@ -49,6 +49,7 @@ function AccountData() {
           value={values.email || ''}
           onChange={handleChange}
           error={errors.email}
+          isWithIcon
           className={styles.inputSection}
           placeholder="Ваш email"
         />
@@ -59,6 +60,7 @@ function AccountData() {
           value={values.password || ''}
           onChange={handleChange}
           placeholder="Ваш пароль"
+          isWithIcon
           className={styles.inputSection}
           minLength={8}
           error={errors.password}

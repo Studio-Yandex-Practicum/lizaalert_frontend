@@ -10,29 +10,6 @@
     color: vars.$success;
   }
 
-  &__notChecked {
-    
-    &_right {
-      svg {
-        width: 14px; 
-       }
-
-      span {
-        width: 100%;
-      }
-    }
-
-    &_warning {
-      svg {
-        width: 12px; 
-       }
-
-       span {
-        width: 100%;
-      }
-    }
-  }
-
   &__warning {
     color: vars.$warning;
   }

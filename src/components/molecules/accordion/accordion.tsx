@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { ReactNode, Ref } from 'react';
+import classnames from 'classnames';
 import { Icon as Arrow } from '../../atoms';
 import styles from './accordion.module.scss';
 import useAccordion from './hooks/use-accordion';
@@ -73,7 +73,7 @@ function Accordion({
       >
         {type === AccordionButtons.Text && (isOpen ? 'Свернуть' : 'Развернуть')}
         {type === AccordionButtons.Icon && (
-          <Arrow type="arrowDown" maxHeight={7} />
+          <Arrow type="arrowDown" maxHeight={24} />
         )}
       </span>
     );

@@ -12,6 +12,7 @@
 .link {
   text-decoration: none;
   color: vars.$dark-primary;
+  transition: vars.$color-hover;
 
   &:hover {
     color: vars.$color-primary;

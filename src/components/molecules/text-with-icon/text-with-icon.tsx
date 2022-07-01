@@ -47,8 +47,8 @@ function TextWithIcon({
       <Icon
         type={iconType}
         className={styles.icon}
-        maxWidth={20}
-        maxHeight={20}
+        maxWidth={24}
+        maxHeight={24}
       />
       <p className={styles.text}>{text}</p>
     </div>

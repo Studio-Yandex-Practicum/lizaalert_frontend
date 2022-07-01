@@ -25,6 +25,7 @@
 
 .btn {
   margin-left: auto;
+  height: 24px;
   transition: vars.$trans-300;
 
   &:hover {
@@ -40,8 +41,6 @@
 
 .icon {
   transition: transform vars.$trans-300;
-  padding-left: 7px;
-  padding-right: 7px;
   flex-shrink: 0;
 }
 

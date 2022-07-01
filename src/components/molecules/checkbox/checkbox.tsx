@@ -60,7 +60,7 @@ function Checkbox({
         onChange={onChange}
       />
       <Icon
-        className={isRadio ? styles.pseudoRadio : styles.pseudoCheckbox}
+        className={styles.pseudo}
         type={isRadio ? Controls.Radio : Controls.Checkbox}
       />
       <p className={styles.labelText}>{labelText}</p>

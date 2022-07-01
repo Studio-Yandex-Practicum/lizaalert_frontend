@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../../atoms';
 
@@ -8,7 +7,7 @@ function TheoryLesson({ content }) {
   return (
     <Card>
       {/* eslint-disable-next-line */}
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <div dangerouslySetInnerHTML={{__html: content}}/>
     </Card>
   );
 }
