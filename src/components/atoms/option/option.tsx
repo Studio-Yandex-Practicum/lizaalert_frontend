@@ -2,12 +2,12 @@ import { KeyboardEvent } from 'react';
 import classnames from 'classnames';
 import styles from './option.module.scss';
 
-type OptionType = {
+export type OptionType = {
   id: number;
   name: string;
 };
 
-type OptionProps = {
+export type OptionProps = {
   option: OptionType;
   onClick: (value: string) => void;
   onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;

@@ -1,6 +1,6 @@
 import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
-import { Option } from '../../atoms';
+import { Option, OptionType } from '../../atoms';
 import styles from './select.module.scss';
 
 /* TODO: На мобильном разрешении вернуть нативный select */
@@ -10,11 +10,6 @@ const DUMMY_OPTIONS = [
   { id: 2, name: 'Оперативное' },
   { id: 3, name: 'Первая помощь' },
 ];
-
-type OptionType = {
-  id: number;
-  name: string;
-};
 
 type SelectProps = {
   className?: string;
