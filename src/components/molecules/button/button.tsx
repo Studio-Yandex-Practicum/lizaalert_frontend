@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './button.module.scss';
@@ -18,6 +17,31 @@ import styles from './button.module.scss';
  * - classNameIcon - string - класс-миксин
  */
 
+export type ButtonProps = {
+  children?: string;
+  view?: 'primary' | 'secondary' | 'text';
+  iconName: string;
+  iconPosition: 'back' | 'forward' | '';
+  onClick?: (...args: unknown[]) => void;
+  className?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit';
+  minWidth?: string | number;
+  classNameIcon?: string;
+};
+
+const defaultProps = {
+  children: '',
+  view: 'primary',
+  // iconName: '',
+  onClick: undefined,
+  className: '',
+  disabled: false,
+  type: 'button',
+  minWidth: 'inherit',
+  classNameIcon: '',
+};
+
 function Button({
   children,
   view,
@@ -29,7 +53,7 @@ function Button({
   type,
   minWidth,
   classNameIcon,
-}) {
+}: ButtonProps) {
   const btnClasses = classnames(
     styles.button,
     styles[view ?? 'primary'],
@@ -66,30 +90,6 @@ function Button({
   );
 }
 
-Button.propTypes = {
-  children: PropTypes.string,
-  view: PropTypes.oneOf(['primary', 'secondary', 'text']),
-  iconName: PropTypes.string,
-  iconPosition: PropTypes.oneOf(['back', 'forward', '']),
-  onClick: PropTypes.func,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'submit']),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  classNameIcon: PropTypes.string,
-};
-
-Button.defaultProps = {
-  children: '',
-  view: 'primary',
-  iconName: '',
-  iconPosition: '',
-  onClick: undefined,
-  className: '',
-  disabled: false,
-  type: 'button',
-  minWidth: 'inherit',
-  classNameIcon: '',
-};
+Button.defaultProps = defaultProps;
 
 export default Button;
