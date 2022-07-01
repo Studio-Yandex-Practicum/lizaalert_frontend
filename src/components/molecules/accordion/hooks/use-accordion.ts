@@ -27,7 +27,7 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
     if (contentRef.current) {
       setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
     }
-  }, [contentRef.current]);
+  }, [contentRef.current, isOpen]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -67,7 +67,7 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
         );
       }
     };
-  }, [contentRef.current, handleInnerAccordion]);
+  }, [contentRef.current, handleInnerAccordion, updateContentHeight]);
 
   const toggleAccordion = () => {
     if (contentRef.current) {
