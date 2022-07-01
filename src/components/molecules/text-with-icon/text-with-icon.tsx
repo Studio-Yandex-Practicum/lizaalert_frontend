@@ -1,10 +1,10 @@
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
+import { Icon, IconType } from '../../atoms';
 import styles from './text-with-icon.module.scss';
 
 type TextWithIconProps = {
   text: string | number;
-  iconType: string;
+  iconType: IconType;
   isReverse?: boolean;
   color?: string;
   className?: string;

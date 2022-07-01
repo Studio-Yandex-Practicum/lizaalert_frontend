@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react';
-import Heading, { HeadingSizes } from './heading';
+import Heading from './heading';
 import styles from './heading.module.scss';
 
 const testTitle = 'Заголовок';
@@ -102,27 +102,27 @@ describe('Компонент Heading', () => {
     });
 
     it('Принимает prop "size=xxl" и ставит компоненту класс "xxl" вместо "xl"', () => {
-      const { container } = render(<Heading size={HeadingSizes.XXL} />);
+      const { container } = render(<Heading size="xxl" />);
       const headingElement = container.firstChild;
       expect(headingElement).toHaveClass(styles.xxl);
       expect(headingElement).not.toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=xl" и ставит компоненту класс "xl"', () => {
-      const { container } = render(<Heading size={HeadingSizes.XL} />);
+      const { container } = render(<Heading size="xl" />);
       const headingElement = container.firstChild;
       expect(headingElement).toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=l" и ставит компоненту класс "l" вместо "xl"', () => {
-      const { container } = render(<Heading size={HeadingSizes.L} />);
+      const { container } = render(<Heading size="l" />);
       const headingElement = container.firstChild;
       expect(headingElement).toHaveClass(styles.l);
       expect(headingElement).not.toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=m" и ставит компоненту класс "m" вместо "xl"', () => {
-      const { container } = render(<Heading size={HeadingSizes.M} />);
+      const { container } = render(<Heading size="m" />);
       const headingElement = container.firstChild;
       expect(headingElement).toHaveClass(styles.m);
       expect(headingElement).not.toHaveClass(styles.xl);

@@ -59,9 +59,7 @@ const defaultAttributes = {
   fill: 'currentColor',
 };
 
-export type IconsType = Record<string, JSX.Element>;
-
-const icons: IconsType = {
+const icons = {
   arrowBack: <ArrowBack {...defaultAttributes} />,
   arrowDown: <ArrowDown {...defaultAttributes} />,
   arrowForward: <ArrowForward {...defaultAttributes} />,

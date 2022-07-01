@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { IconType } from '../../atoms';
 import TextWithIcon from '../text-with-icon/text-with-icon';
 import styles from './header-link.module.scss';
 
 export type HeaderLinkProps = {
   text: string;
-  iconType: string;
+  iconType: IconType;
   link: string;
 };
 

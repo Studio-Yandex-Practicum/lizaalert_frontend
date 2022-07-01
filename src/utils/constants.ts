@@ -18,10 +18,10 @@ export const Levels = {
   PRO: 'professional',
 };
 
-export enum Controls {
-  Radio = 'radio',
-  Checkbox = 'checkbox',
-}
+export const Controls = {
+  radio: 'radio',
+  checkbox: 'checkbox',
+};
 
 export const SPINNER_DELAY = 300;
 

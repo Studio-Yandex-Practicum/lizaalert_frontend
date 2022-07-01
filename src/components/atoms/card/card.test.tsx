@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react';
-import Card, { CardHtmlTags, CardProps } from './card';
+import Card, { CardProps } from './card';
 import styles from './card.module.scss';
 
 const testString = 'Тестовый компонент';
@@ -31,21 +31,21 @@ describe('Компонент Card', () => {
 
   describe('Тестирование пропсов', () => {
     it('Принимает prop htmlTag="article" и рендерит "article" вместо "div"', () => {
-      const { container } = createCard({ htmlTag: CardHtmlTags.Article });
+      const { container } = createCard({ htmlTag: 'article' });
       const cardElement = container.querySelector('article');
       expect(cardElement).toHaveClass(styles.card);
       expect(cardElement).toBeInTheDocument();
     });
 
     it('Принимает prop htmlTag="aside" и рендерит "aside" вместо "div"', () => {
-      const { container } = createCard({ htmlTag: CardHtmlTags.Aside });
+      const { container } = createCard({ htmlTag: 'aside' });
       const cardElement = container.querySelector('aside');
       expect(cardElement).toHaveClass(styles.card);
       expect(cardElement).toBeInTheDocument();
     });
 
     it('Принимает prop htmlTag="li" и рендерит "li" вместо "div"', () => {
-      const { container } = createCard({ htmlTag: CardHtmlTags.Li });
+      const { container } = createCard({ htmlTag: 'li' });
       const cardElement = container.querySelector('li');
       expect(cardElement).toHaveClass(styles.card);
       expect(cardElement).toBeInTheDocument();
