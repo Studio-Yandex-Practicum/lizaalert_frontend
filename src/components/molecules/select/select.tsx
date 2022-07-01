@@ -1,4 +1,4 @@
-import { useState, KeyboardEvent } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
 import { Option } from '../../atoms';
 import styles from './select.module.scss';
@@ -46,7 +46,7 @@ function Select({
     setShowOptions((prevValue) => !prevValue);
   };
 
-  const handleEscDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  const handleEscDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Escape') {
       setShowOptions(false);
     }
@@ -80,8 +80,8 @@ function Select({
               <Option
                 key={option.id}
                 option={option}
-                handleSetValue={handleSetValue}
-                handleEscDown={handleEscDown}
+                onClick={handleSetValue}
+                onKeyDown={handleEscDown}
                 className={styles.listItem}
               />
             ))}
