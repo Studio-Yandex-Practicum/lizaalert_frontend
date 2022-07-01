@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './checkbox.module.scss';
-import { Controls } from '../../../types';
+import { Controls } from '../../../utils/constants';
 
 export type CheckboxProps = {
   name: string;
