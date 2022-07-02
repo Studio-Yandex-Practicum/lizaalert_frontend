@@ -1,26 +1,11 @@
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
+import { Icon, IconType } from '../../atoms';
 import styles from './button.module.scss';
-
-/**
- * @description Компонент кнопки с иконкой или без.
- *
- * - children - string - текст кнопки
- * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
- * - iconName - string - имя иконки из объекта icons
- * - iconPosition - string - позиционирование иконки слева/справа от текста: 'back', 'forward'
- * - onClick - function - функция-обработчик клика
- * - className - string - класс-миксин
- * - disabled - boolean - флаг отключения кнопки
- * - type - string - тип кнопки: 'button', 'submit'
- * - minWidth - string | number - инлайновый стиль минимальной ширины, прибивается гвоздями, по умолчанию наследуется
- * - classNameIcon - string - класс-миксин
- */
 
 export type ButtonProps = {
   children?: string;
   view?: 'primary' | 'secondary' | 'text';
-  iconName: string;
+  iconName?: IconType;
   iconPosition: 'back' | 'forward' | '';
   onClick?: (...args: unknown[]) => void;
   className?: string;
@@ -33,7 +18,7 @@ export type ButtonProps = {
 const defaultProps = {
   children: '',
   view: 'primary',
-  // iconName: '',
+  iconName: '',
   onClick: undefined,
   className: '',
   disabled: false,
@@ -42,9 +27,25 @@ const defaultProps = {
   classNameIcon: '',
 };
 
+/**
+ * @description Компонент кнопки с иконкой или без.
+ *
+ * @props
+ * - children - string - текст кнопки
+ * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
+ * - iconName - string - имя иконки из объекта icons
+ * - iconPosition - string - позиционирование иконки слева/справа от текста: 'back', 'forward'
+ * - onClick - function - функция-обработчик клика
+ * - className - string - класс-миксин
+ * - disabled - boolean - флаг отключения кнопки
+ * - type - string - тип кнопки: 'button', 'submit'
+ * - minWidth - string | number - инлайновый стиль минимальной ширины, прибивается гвоздями, по умолчанию наследуется
+ * - classNameIcon - string - класс-миксин
+ */
+
 function Button({
   children,
-  view,
+  view = 'primary',
   iconName,
   iconPosition,
   onClick,
@@ -56,7 +57,7 @@ function Button({
 }: ButtonProps) {
   const btnClasses = classnames(
     styles.button,
-    styles[view ?? 'primary'],
+    styles[view],
     { [styles[iconPosition]]: iconPosition },
     className
   );
