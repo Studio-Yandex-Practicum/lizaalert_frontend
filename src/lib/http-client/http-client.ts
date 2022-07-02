@@ -66,7 +66,7 @@ class HTTPClient implements IHTTPClient {
         true
       );
 
-      if (headers) {
+      if (headers && !isEmptyObject(headers)) {
         Object.keys(headers).forEach((key) =>
           request.setRequestHeader(key, headers[key])
         );

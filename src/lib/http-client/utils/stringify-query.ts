@@ -1,7 +1,12 @@
 import { ParamsType } from '../http-client.types';
+import { isEmptyObject } from './is-empty-object';
 
 /** Приводит url и объект параметров к браузерному query. Опускает значение null и undefined. */
 export const stringifyQuery = (target: string, params: ParamsType): string => {
+  if (isEmptyObject(params)) {
+    return target;
+  }
+
   const url = new URL(target);
 
   if (typeof params === 'object') {

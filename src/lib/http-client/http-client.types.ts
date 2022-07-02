@@ -1,4 +1,4 @@
-export enum Methods {
+export const enum Methods {
   Get = 'GET',
   Post = 'POST',
   Put = 'PUT',
@@ -6,7 +6,7 @@ export enum Methods {
   Delete = 'DELETE',
 }
 
-export enum ResponseFormat {
+export const enum ResponseFormat {
   Json = 'json',
 }
 
