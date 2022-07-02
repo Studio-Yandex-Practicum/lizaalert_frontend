@@ -3,20 +3,13 @@ import classNames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './input.module.scss';
 
-enum Type {
-  text = 'text',
-  date = 'date',
-  file = 'file',
-  tel = 'tel',
-  email = 'email',
-  password = 'password',
-}
+type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
 
 type InputProps = {
   labelName?: string;
   inputName: string;
   isWithIcon?: boolean;
-  type: Type;
+  type: InputType;
   value: string;
   accept?: string;
   placeholder: string;
