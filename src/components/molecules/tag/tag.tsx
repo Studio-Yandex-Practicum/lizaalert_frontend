@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './tag.module.scss';
@@ -30,12 +29,14 @@ function Tag({ text, onClick, className, value }: TagProps) {
   const classNames = classnames(styles.tag, className);
 
   if (onClick && value) {
-    const onTagClick = useCallback(() => onClick(value), [value, onClick]);
-
     return (
       <div className={classNames}>
         <p className={styles.text}>{text}</p>
-        <button className={styles.button} type="button" onClick={onTagClick}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => onClick(value)}
+        >
           <Icon type="xSolid" />
         </button>
       </div>
