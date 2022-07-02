@@ -7,6 +7,7 @@ import {
 import {
   convertToFormData,
   isContainsFile,
+  isEmptyObject,
   stringifyData,
   stringifyQuery,
 } from './utils';
@@ -84,13 +85,12 @@ class HTTPClient implements IHTTPClient {
         request.withCredentials = true;
       }
 
-      if (isGet || !data) {
+      if (isGet || !data || isEmptyObject(data)) {
         request.send();
         return;
       }
 
       if (data && isContainsFile(data)) {
-        request.setRequestHeader('Content-Type', 'multipart/form-data');
         request.send(convertToFormData(data));
         return;
       }

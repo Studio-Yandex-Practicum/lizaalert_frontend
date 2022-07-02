@@ -1,5 +1,5 @@
-import { EXPECTED_PARAMS_URL, MOCK_PARAMS, MOCK_URL } from './constants';
 import { stringifyQuery } from '../stringify-query';
+import { EXPECTED_PARAMS_URL, MOCK_PARAMS, MOCK_URL } from './constants';
 
 describe('Функция stringifyQuery корректно приводит параметры в url', () => {
   it('Возвращает корректную строку при передаче объекта параметров', () => {

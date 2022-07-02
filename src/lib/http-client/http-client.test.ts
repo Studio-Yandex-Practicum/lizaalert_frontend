@@ -2,11 +2,7 @@ import { MOCK_URL } from './utils/test/constants';
 import HTTPClient from './http-client';
 
 describe('Класс HTTPClient', () => {
-  let httpClient: HTTPClient;
-
-  beforeEach(() => {
-    httpClient = new HTTPClient(MOCK_URL);
-  });
+  const httpClient = new HTTPClient(MOCK_URL);
 
   it('Корректно создается инстанс класса', () => {
     expect(httpClient).toBeInstanceOf(HTTPClient);

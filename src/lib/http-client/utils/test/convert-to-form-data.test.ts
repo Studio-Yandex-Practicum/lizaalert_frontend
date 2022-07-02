@@ -1,5 +1,5 @@
-import { MOCK_DATA, MOCK_FILE } from './constants';
 import { convertToFormData } from '../convert-to-form-data';
+import { MOCK_DATA, MOCK_FILE } from './constants';
 
 describe('Функция convertToFormData корректно приводит к FormData', () => {
   it('Преобразованный объект является инстансом FormData и имеет все ключи', () => {
