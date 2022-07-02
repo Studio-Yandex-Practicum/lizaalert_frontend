@@ -22,6 +22,7 @@ export type ReqOptions = {
   headers?: HeadersType;
   includeCredentials?: boolean;
   responseFormat?: ResponseFormat;
+  tries?: number;
 };
 
 export type Options = Omit<ReqOptions, 'method'>;

@@ -14,6 +14,7 @@ import {
 } from './utils';
 
 const DEFAULT_TIMEOUT = 10000;
+const DEFAULT_TRIES = 3;
 
 interface IHTTPClient {
   get: (url: string, options: Options) => Promise<XMLHttpRequest>;
@@ -101,28 +102,39 @@ class HTTPClient implements IHTTPClient {
     });
   };
 
+  private retry = <T>(
+    url: string,
+    options: ReqOptions
+  ): Promise<XHRTyped<T>> => {
+    const { tries = DEFAULT_TRIES } = options;
+
+    const onError = (err: unknown) => {
+      const triesLeft = tries - 1;
+
+      if (!triesLeft) {
+        throw err;
+      }
+
+      return this.retry<T>(url, { ...options, tries: triesLeft });
+    };
+
+    return this.request<T>(url, options, options.timeout).catch(onError);
+  };
+
   public get = async <T>(url: string, options: Options = {}) =>
-    this.request<T>(url, { ...options, method: Methods.Get }, options.timeout);
+    this.retry<T>(url, { ...options, method: Methods.Get });
 
   public post = async <T>(url: string, options: Options = {}) =>
-    this.request<T>(url, { ...options, method: Methods.Post }, options.timeout);
+    this.retry<T>(url, { ...options, method: Methods.Post });
 
   public put = async <T>(url: string, options: Options = {}) =>
-    this.request<T>(url, { ...options, method: Methods.Put }, options.timeout);
+    this.retry<T>(url, { ...options, method: Methods.Put });
 
   public patch = async <T>(url: string, options: Options = {}) =>
-    this.request<T>(
-      url,
-      { ...options, method: Methods.Patch },
-      options.timeout
-    );
+    this.retry<T>(url, { ...options, method: Methods.Patch });
 
   public delete = async <T>(url: string, options: Options = {}) =>
-    this.request<T>(
-      url,
-      { ...options, method: Methods.Delete },
-      options.timeout
-    );
+    this.retry<T>(url, { ...options, method: Methods.Delete });
 }
 
 export default HTTPClient;
