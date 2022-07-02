@@ -10,6 +10,7 @@ export const MOCK_DATA = {
 export const MOCK_FILE = new File([''], 'mockFile');
 
 export const MOCK_URL = 'http://localhost/';
+export const MOCK_SERVER_URL = 'https://jsonplaceholder.typicode.com';
 
 export const MOCK_PARAMS = {
   name: 'Marcus Aurelius',

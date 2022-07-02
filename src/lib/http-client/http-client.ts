@@ -3,6 +3,7 @@ import {
   Options,
   ReqOptions,
   ResponseFormat,
+  XHRTyped,
 } from './http-client.types';
 import {
   convertToFormData,
@@ -36,11 +37,11 @@ interface IHTTPClient {
 class HTTPClient implements IHTTPClient {
   constructor(private readonly baseURL: string) {}
 
-  private request = (
+  private request = <T>(
     url: string,
     options: ReqOptions = { method: Methods.Get },
     timeout = DEFAULT_TIMEOUT
-  ): Promise<XMLHttpRequest> => {
+  ): Promise<XHRTyped<T>> => {
     const target = `${this.baseURL}${url}`;
     const {
       headers,
@@ -51,7 +52,7 @@ class HTTPClient implements IHTTPClient {
       includeCredentials,
     } = options;
 
-    return new Promise<XMLHttpRequest>((resolve, reject) => {
+    return new Promise<XHRTyped<T>>((resolve, reject) => {
       if (!method) {
         reject(new Error('No method was specified.'));
         return;
@@ -100,20 +101,28 @@ class HTTPClient implements IHTTPClient {
     });
   };
 
-  public get = async (url: string, options: Options = {}) =>
-    this.request(url, { ...options, method: Methods.Get }, options.timeout);
+  public get = async <T>(url: string, options: Options = {}) =>
+    this.request<T>(url, { ...options, method: Methods.Get }, options.timeout);
 
-  public post = async (url: string, options: Options = {}) =>
-    this.request(url, { ...options, method: Methods.Post }, options.timeout);
+  public post = async <T>(url: string, options: Options = {}) =>
+    this.request<T>(url, { ...options, method: Methods.Post }, options.timeout);
 
-  public put = async (url: string, options: Options = {}) =>
-    this.request(url, { ...options, method: Methods.Put }, options.timeout);
+  public put = async <T>(url: string, options: Options = {}) =>
+    this.request<T>(url, { ...options, method: Methods.Put }, options.timeout);
 
-  public patch = async (url: string, options: Options = {}) =>
-    this.request(url, { ...options, method: Methods.Patch }, options.timeout);
+  public patch = async <T>(url: string, options: Options = {}) =>
+    this.request<T>(
+      url,
+      { ...options, method: Methods.Patch },
+      options.timeout
+    );
 
-  public delete = async (url: string, options: Options = {}) =>
-    this.request(url, { ...options, method: Methods.Delete }, options.timeout);
+  public delete = async <T>(url: string, options: Options = {}) =>
+    this.request<T>(
+      url,
+      { ...options, method: Methods.Delete },
+      options.timeout
+    );
 }
 
 export default HTTPClient;

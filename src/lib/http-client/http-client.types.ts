@@ -25,3 +25,7 @@ export type ReqOptions = {
 };
 
 export type Options = Omit<ReqOptions, 'method'>;
+
+export interface XHRTyped<T> extends XMLHttpRequest {
+  readonly response: T;
+}
