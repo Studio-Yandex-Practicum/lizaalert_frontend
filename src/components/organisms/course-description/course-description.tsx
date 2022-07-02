@@ -42,17 +42,15 @@ function CourseDescription({
           size="m"
           className={styles.titleTasks}
         />
-        {tasks
-          ? tasks.length > 0 && (
-              <ul className={styles.tasksList}>
-                {tasks.map((task) => (
-                  <li key={task} className={styles.task}>
-                    {task}
-                  </li>
-                ))}
-              </ul>
-            )
-          : null}
+        {tasks && tasks.length > 0 && (
+          <ul className={styles.tasksList}>
+            {tasks.map((task) => (
+              <li key={task} className={styles.task}>
+                {task}
+              </li>
+            ))}
+          </ul>
+        )}
       </Accordion>
     </Card>
   );
