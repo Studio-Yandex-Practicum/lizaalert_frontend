@@ -1,7 +1,22 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import TextWithIcon from '../text-with-icon/text-with-icon';
 import styles from './test-results.module.scss';
+
+type AnswerType = {
+  id: number;
+  text: string;
+  isCorrect: boolean;
+  isChecked: boolean;
+};
+
+type TestResultProps = {
+  answer: AnswerType;
+  className?: string;
+};
+
+const defaultProps = {
+  className: '',
+};
 
 /**
  * @description Компонент результата ответов теста.
@@ -15,7 +30,7 @@ const CORRECT_UNSELECTED_ANSWER = 'check';
 const INCORRECT_SELECTED_ANSWER = 'xSolid';
 const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
 
-function TestResult({ answer, className }) {
+function TestResult({ answer, className }: TestResultProps) {
   function handleIconType() {
     if (answer.isCorrect && answer.isChecked) {
       return CORRECT_SELECTED_ANSWER;
@@ -45,18 +60,6 @@ function TestResult({ answer, className }) {
   );
 }
 
-TestResult.defaultProps = {
-  className: '',
-};
-
-TestResult.propTypes = {
-  answer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    isCorrect: PropTypes.bool.isRequired,
-    isChecked: PropTypes.bool.isRequired,
-  }).isRequired,
-  className: PropTypes.string,
-};
+TestResult.defaultProps = defaultProps;
 
 export default TestResult;
