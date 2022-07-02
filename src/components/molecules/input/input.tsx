@@ -1,9 +1,53 @@
-import PropTypes from 'prop-types';
+import { ChangeEvent } from 'react';
 import classNames from 'classnames';
-
 import { Icon } from '../../atoms';
-
 import styles from './input.module.scss';
+
+enum Type {
+  text = 'text',
+  date = 'date',
+  file = 'file',
+  tel = 'tel',
+  email = 'email',
+  password = 'password',
+}
+
+type InputProps = {
+  labelName?: string;
+  inputName: string;
+  isWithIcon?: boolean;
+  type: Type;
+  value: string;
+  accept?: string;
+  placeholder: string;
+  error?: string;
+  disabled?: boolean;
+  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
+  minLength?: number;
+  maxLength?: number;
+  required?: boolean;
+  max?: string;
+  min?: string;
+  pattern?: string;
+  message?: string;
+};
+
+const defaultProps = {
+  labelName: null,
+  isWithIcon: false,
+  accept: null,
+  error: null,
+  disabled: false,
+  minLength: null,
+  maxLength: null,
+  required: false,
+  max: null,
+  min: null,
+  className: '',
+  pattern: null,
+  message: '',
+};
 
 /**
  * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
@@ -41,7 +85,7 @@ function Input({
   min,
   pattern,
   message,
-}) {
+}: InputProps) {
   return (
     <div className={classNames(styles.container, className)}>
       <label
@@ -88,42 +132,6 @@ function Input({
   );
 }
 
-Input.defaultProps = {
-  labelName: null,
-  isWithIcon: false,
-  accept: null,
-  error: null,
-  disabled: false,
-  minLength: null,
-  maxLength: null,
-  required: false,
-  max: null,
-  min: null,
-  className: '',
-  pattern: null,
-  message: '',
-};
-
-Input.propTypes = {
-  labelName: PropTypes.string,
-  inputName: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'date', 'file', 'tel', 'email', 'password'])
-    .isRequired,
-  isWithIcon: PropTypes.bool,
-  value: PropTypes.string.isRequired,
-  accept: PropTypes.string,
-  placeholder: PropTypes.string.isRequired,
-  error: PropTypes.string,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  minLength: PropTypes.number,
-  maxLength: PropTypes.number,
-  required: PropTypes.bool,
-  max: PropTypes.string,
-  min: PropTypes.string,
-  pattern: PropTypes.string,
-  message: PropTypes.string,
-};
+Input.defaultProps = defaultProps;
 
 export default Input;
