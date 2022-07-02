@@ -1,8 +1,22 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Checkbox from '../checkbox/checkbox';
 import { change } from '../../../store/test/slice';
 import { CHECKBOX, RADIO } from '../../../utils/constants';
+
+type AnswerType = {
+  id: number;
+  text: string;
+  isCorrect: boolean;
+  isChecked: boolean;
+};
+
+type QuestionType = 'checkbox' | 'radio';
+
+type TestAnswerProps = {
+  answer: AnswerType;
+  questionId: number;
+  questionType: QuestionType;
+};
 
 /**
  * @description Компонент ответа теста.
@@ -12,7 +26,7 @@ import { CHECKBOX, RADIO } from '../../../utils/constants';
  * - questionType - string - тип вопроса ('checkbox', 'radio')
  */
 
-function TestAnswer({ answer, questionId, questionType }) {
+function TestAnswer({ answer, questionId, questionType }: TestAnswerProps) {
   const dispatch = useDispatch();
 
   const updateCheckStatus = () => {
@@ -32,16 +46,5 @@ function TestAnswer({ answer, questionId, questionType }) {
     />
   );
 }
-
-TestAnswer.propTypes = {
-  answer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    isCorrect: PropTypes.bool.isRequired,
-    isChecked: PropTypes.bool.isRequired,
-  }).isRequired,
-  questionId: PropTypes.number.isRequired,
-  questionType: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
-};
 
 export default TestAnswer;
