@@ -33,12 +33,6 @@ describe('Компонент Icon', () => {
   });
 
   describe('Тестирование пропсов', () => {
-    it('Принимает prop "type", которого нет в словаре и возвращает null', () => {
-      const { container } = render(<Icon type="doesntExists" />);
-      const iconElement = container.firstChild;
-      expect(iconElement).not.toBeInTheDocument();
-    });
-
     it('Принимает prop "onClick" и возвращает "button", а не "span"', () => {
       const { container } = createIcon({
         onClick: () => {},
@@ -52,14 +46,6 @@ describe('Компонент Icon', () => {
 
       const spanElement = container.querySelector('span');
       expect(spanElement).not.toBeInTheDocument();
-    });
-
-    it('Если передан prop "onClick", но "type" отсутствует в словаре, то возвращает null', () => {
-      const { container } = render(
-        <Icon type="doesntExists" onClick={() => {}} />
-      );
-      const iconElement = container.firstChild;
-      expect(iconElement).not.toBeInTheDocument();
     });
 
     it('Принимает prop "className" и ставит компоненту этот класс', () => {

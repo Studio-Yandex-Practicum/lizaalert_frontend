@@ -1,13 +1,10 @@
-import classnames from 'classnames';
 import { ReactNode, Ref } from 'react';
-import { Icon as Arrow } from '../../atoms';
+import classnames from 'classnames';
+import { Icon } from '../../atoms';
 import styles from './accordion.module.scss';
 import useAccordion from './hooks/use-accordion';
 
-export const enum AccordionButtons {
-  Text = 'text',
-  Icon = 'icon',
-}
+type AccordionButtons = 'text' | 'icon';
 
 type AccordionProps = {
   title: string;
@@ -19,7 +16,7 @@ type AccordionProps = {
 
 const defaultProps = {
   className: '',
-  button: AccordionButtons.Icon,
+  button: 'icon',
   open: false,
 };
 
@@ -38,7 +35,7 @@ function Accordion({
   children,
   className,
   title,
-  button = AccordionButtons.Icon,
+  button = 'icon',
   open = false,
 }: AccordionProps) {
   const { isOpen, height, contentRef, toggleAccordion } = useAccordion(open);
@@ -67,14 +64,12 @@ function Accordion({
     return (
       <span
         className={classnames(styles.btn, {
-          [styles.icon]: type === AccordionButtons.Icon,
-          [styles.text]: type === AccordionButtons.Text,
+          [styles.icon]: type === 'icon',
+          [styles.text]: type === 'text',
         })}
       >
-        {type === AccordionButtons.Text && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === AccordionButtons.Icon && (
-          <Arrow type="arrowDown" maxHeight={7} />
-        )}
+        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+        {type === 'icon' && <Icon type="arrowDown" maxHeight={24} />}
       </span>
     );
   }

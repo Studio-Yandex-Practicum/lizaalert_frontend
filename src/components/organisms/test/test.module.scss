@@ -21,9 +21,10 @@
     font-size: vars.$font-size-m;
     line-height: vars.$line-height-m;
     color: vars.$dark-primary;
+    transition: color vars.$trans-300;
 
     &:hover {
-      text-decoration: underline;
+      color: vars.$color-hover;
     }
   }
 

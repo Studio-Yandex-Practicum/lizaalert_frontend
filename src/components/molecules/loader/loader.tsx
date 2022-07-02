@@ -1,6 +1,17 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './loader.module.scss';
+
+type LoaderProps = {
+  className?: string;
+  isFixed?: boolean;
+  isAbsolute?: boolean;
+};
+
+const defaultProps = {
+  className: '',
+  isFixed: false,
+  isAbsolute: false,
+};
 
 const settings = {
   cx: 25,
@@ -11,7 +22,7 @@ const settings = {
 };
 
 /**
- * @description Компонент-лоадер, обернутый в div-оверлей с полупрозрачным фоном в цвет основного `background`.
+ * @description Компонент-лоадер, обернутый в `div`-оверлей с полупрозрачным фоном в цвет основного `background`.
  * По умолчанию расположен по центру контейнера по обеим осям.
  *
  * @props
@@ -20,7 +31,7 @@ const settings = {
  * - isAbsolute - boolean - делает оверлею `position: absolute` и растягивает на ширину и высоту родительского контейнера
  * */
 
-function Loader({ isFixed, isAbsolute, className }) {
+function Loader({ isFixed, isAbsolute, className }: LoaderProps) {
   return (
     <div
       className={classnames(
@@ -46,16 +57,6 @@ function Loader({ isFixed, isAbsolute, className }) {
   );
 }
 
-Loader.propTypes = {
-  className: PropTypes.string,
-  isFixed: PropTypes.bool,
-  isAbsolute: PropTypes.bool,
-};
-
-Loader.defaultProps = {
-  className: '',
-  isFixed: false,
-  isAbsolute: false,
-};
+Loader.defaultProps = defaultProps;
 
 export default Loader;

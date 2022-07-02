@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
 import { useFormWithValidation } from '../../../hooks';
@@ -54,7 +54,7 @@ function PersonalData() {
           inputName="name"
           value={values.name || ''}
           onChange={handleChange}
-          className={styles.inputSection}
+          isWithIcon
           placeholder="Ваше ФИО"
           error={errors.name}
           minLength={2}
@@ -66,7 +66,7 @@ function PersonalData() {
           inputName="dateOfBirth"
           value={values.dateOfBirth || ''}
           onChange={handleChange}
-          className={styles.inputSection}
+          isWithIcon
           placeholder="Дата рождения"
           max="2050-12-31"
           min="1900-01-01"
@@ -79,7 +79,7 @@ function PersonalData() {
           inputName="region"
           value={values.region || ''}
           onChange={handleChange}
-          className={styles.inputSection}
+          isWithIcon
           placeholder="Регион проживания"
           error={errors.region}
           minLength={2}
@@ -91,7 +91,7 @@ function PersonalData() {
           inputName="nickname"
           value={values.nickname || ''}
           onChange={handleChange}
-          className={styles.inputSection}
+          isWithIcon
           placeholder="Позывной на форуме"
           error={errors.nickname}
           minLength={2}
@@ -105,7 +105,7 @@ function PersonalData() {
           value={values.avatar || ''}
           onChange={onChangeFile}
           error={errors.avatar}
-          className={styles.inputSection}
+          isWithIcon
           placeholder="Ваше фото"
         />
         <Button

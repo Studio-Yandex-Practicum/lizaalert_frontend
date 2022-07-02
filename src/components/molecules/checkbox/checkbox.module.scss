@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   max-width: fit-content;
-  gap: 10px;
+  gap: 8px;
   color: vars.$dark-primary;
   font-weight: 400;
   font-size: vars.$font-size-m;
@@ -28,9 +28,10 @@
   clip: rect(0 0 0 0);
 }
 
-@mixin pseudo {
+.pseudo {
   align-self: flex-start;
   transition: color vars.$trans-300;
+  max-width: 24px;
   min-height: 24px;
 
   path {
@@ -43,20 +44,11 @@
   path:last-child {
     opacity: 1;
   }
-}
 
-.pseudoRadio {
-  @include pseudo;
-  max-width: 22px;
-
-  path:nth-child(1), path:nth-child(2) {
+  /* Внутренняя галка/кружок */
+  path:nth-child(1) {
     transform: scale(0);
   }
-}
-
-.pseudoCheckbox {
-  @include pseudo;
-  max-width: 20px;
 }
 
 .labelText {
@@ -65,18 +57,10 @@
 }
 
 /* Регулировки вкл/выкл чекбокса */
-.input:checked + .pseudoCheckbox {
+.input:checked + .pseudo {
   color: vars.$color-hover;
 
-  path {
-    opacity: 1;
-  }
-}
-
-.input:checked + .pseudoRadio {
-  color: vars.$color-hover;
-
-  path:nth-child(1), path:nth-child(2) {
+  path:nth-child(1) {
     transform: scale(1);
     opacity: 1;
   }

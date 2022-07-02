@@ -7,30 +7,25 @@
   height: 24px;
   background-color: vars.$borders-divider-disabled-bg;
   border-radius: 16px;
-  padding: 0 2px 0 8px;
+  padding: 0 0 0 8px;
 }
 
 .text {
   max-width: 250px;
   text-overflow: ellipsis;
-  margin: 0 6px 0 0;
+  margin: 0 4px 0 0;
   overflow: hidden;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
 }
 
 .button {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   box-sizing: border-box;
   border: none;
   border-radius: 50%;
   padding: 0;
-  cursor: pointer;
-}
-
-.icon {
   color: vars.$dark-secondary;
-  max-width: 20px;
-  max-height: 20px;
+  cursor: pointer;
 }

@@ -3,7 +3,7 @@
 .breadcrumbs {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 9px;
+  gap: 4px 0;
   font-family: vars.$mainFont;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
@@ -13,7 +13,6 @@
 .breadcrumb {
   display: flex;
   align-items: center;
-  column-gap: 9px;
 }
 
 .link {
@@ -24,10 +23,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  transition: color vars.$trans-300;
+
+  &:hover {
+    color: vars.$color-hover;
+  }
 }
 
 .icon {
-  max-width: 6px;
+  max-width: 24px;
 }
 
 .breadcrumb:last-of-type .link {

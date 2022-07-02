@@ -2,12 +2,7 @@ import { createElement, ReactNode } from 'react';
 import classnames from 'classnames';
 import styles from './heading.module.scss';
 
-export const enum HeadingSizes {
-  XXL = 'xxl',
-  XL = 'xl',
-  L = 'l',
-  M = 'm',
-}
+type HeadingSizes = 'xxl' | 'xl' | 'l' | 'm';
 
 export type HeadingProps = {
   level?: number;
@@ -22,7 +17,7 @@ const defaultProps = {
   level: 2,
   title: '',
   children: null,
-  size: HeadingSizes.XL,
+  size: 'xl',
   isSubheading: false,
   className: '',
 };
@@ -43,7 +38,7 @@ function Heading({
   level = 2,
   title,
   children,
-  size = HeadingSizes.XL,
+  size = 'xl',
   isSubheading,
   className,
 }: HeadingProps) {

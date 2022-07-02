@@ -2,12 +2,7 @@ import { createElement, ReactNode } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 
-export const enum CardHtmlTags {
-  Article = 'article',
-  Div = 'div',
-  Li = 'li',
-  Aside = 'aside',
-}
+type CardHtmlTags = 'article' | 'div' | 'li' | 'aside';
 
 export type CardProps = {
   className?: string;
@@ -19,7 +14,7 @@ export type CardProps = {
 const defaultProps = {
   className: '',
   noPadding: false,
-  htmlTag: CardHtmlTags.Div,
+  htmlTag: 'div',
 };
 
 /**
@@ -34,7 +29,7 @@ const defaultProps = {
 
 function Card({ className, children, noPadding, htmlTag }: CardProps) {
   return createElement(
-    htmlTag ?? CardHtmlTags.Div,
+    htmlTag ?? 'div',
     {
       className: classnames(
         styles.card,

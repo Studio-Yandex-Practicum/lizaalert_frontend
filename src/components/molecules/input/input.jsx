@@ -56,8 +56,7 @@ function Input({
           <Icon type="attachment" className={styles.icon} />
         ) : (
           isWithIcon &&
-          labelName &&
-          type !== 'tel' && <Icon type="edit" className={styles.icon} />
+          labelName && <Icon type="edit" className={styles.icon} />
         )}
       </label>
       <input
