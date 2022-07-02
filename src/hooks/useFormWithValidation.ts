@@ -5,15 +5,24 @@ const useFormWithValidation = () => {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (evt) => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = evt;
     const { name, value } = target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest('form').checkValidity());
+    const form = target.closest('form');
+    if (form != null) {
+      setIsValid(form.checkValidity());
+    }
   };
 
-  const handleChangeFiles = (evt, pattern) => {
+  const handleChangeFiles = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    pattern: RegExp
+  ) => {
+    if (evt.target.files == null) {
+      return;
+    }
     const file = evt.target.files[0];
     const { name, value } = evt.target;
     if (!file) {
@@ -27,7 +36,10 @@ const useFormWithValidation = () => {
       setIsValid(false);
       return;
     }
-    setIsValid(evt.target.closest('form').checkValidity());
+    const form = evt.target.closest('form');
+    if (form != null) {
+      setIsValid(form.checkValidity());
+    }
   };
 
   const resetForm = useCallback(
@@ -50,4 +62,5 @@ const useFormWithValidation = () => {
     setIsValid,
   };
 };
+
 export default useFormWithValidation;
