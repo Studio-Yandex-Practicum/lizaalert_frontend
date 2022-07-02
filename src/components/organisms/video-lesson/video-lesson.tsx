@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types';
 import { Card, Heading } from '../../atoms';
 import styles from './video-lesson.module.scss';
 
-function VideoLesson({ source }) {
+type TagProps = {
+  source: string;
+};
+
+function VideoLesson({ source }: TagProps) {
   return (
     <Card className={styles.container}>
       <Heading level={2} size="l" className={styles.heading}>
@@ -20,9 +23,5 @@ function VideoLesson({ source }) {
     </Card>
   );
 }
-
-VideoLesson.propTypes = {
-  source: PropTypes.string.isRequired,
-};
 
 export default VideoLesson;
