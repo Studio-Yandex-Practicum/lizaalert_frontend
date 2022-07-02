@@ -18,11 +18,6 @@ export const Levels = {
   PRO: 'professional',
 };
 
-export const Controls = {
-  radio: 'radio',
-  checkbox: 'checkbox',
-};
-
 export const SPINNER_DELAY = 300;
 
 export const CHECKBOX = 'checkbox';

@@ -31,7 +31,7 @@ function TextWithIcon({
   text,
   iconType,
   isReverse,
-  color,
+  color = '',
   className,
 }: TextWithIconProps) {
   const classNames = classnames(styles.textWithIcon, className, {
@@ -39,7 +39,7 @@ function TextWithIcon({
   });
 
   const colorStyle = {
-    color: styles[color ?? ''],
+    color: styles[color],
   };
 
   return (
