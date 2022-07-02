@@ -24,7 +24,7 @@ export const stringifyQuery = (target: string, params: ParamsType): string => {
       }
 
       if (Array.isArray(value)) {
-        url.searchParams.set(keys[i], JSON.stringify(value));
+        url.searchParams.set(keys[i], value.toString());
       }
 
       if (typeof value === 'object' && value?.constructor === Object) {
