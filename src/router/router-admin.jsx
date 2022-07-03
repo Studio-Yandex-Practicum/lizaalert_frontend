@@ -49,9 +49,9 @@ function RouterAdmin() {
         </Route>
         <Route element={<Layout />}>
           <Route path={profile.path} element={<Profile />} />
+          <Route path={login.path} element={<Login />} />
         </Route>
         <Route path={register.path} element={<Register />} />
-        <Route path={login.path} element={<Login />} />
         <Route path={library.path} element={<Development />} />
         <Route path={users.path} element={<Development />} />
         <Route path={notFound.path} element={<NotFound />} />

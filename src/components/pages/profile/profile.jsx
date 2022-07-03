@@ -18,7 +18,7 @@ function Profile() {
     return <h3>Loading...</h3>;
   }
   return (
-    <div className="container">
+    <>
       <Heading
         level={2}
         size="xxl"
@@ -69,7 +69,7 @@ function Profile() {
           </section>
         </main>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -25,11 +25,9 @@ function Router() {
         </Route>
         <Route element={<Layout />}>
           <Route path={profile.path} element={<Profile />} />
-        </Route>
-        <Route path={register.path} element={<Register />} />
-        <Route element={<Layout />}>
           <Route path={login.path} element={<Login />} />
         </Route>
+        <Route path={register.path} element={<Register />} />
         <Route path={notFound.path} element={<NotFound />} />
       </Routes>
     </BrowserRouter>

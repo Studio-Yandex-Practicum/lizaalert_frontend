@@ -9,9 +9,9 @@ import {
 } from '../../../store/course/selectors';
 import {
   CourseBenefits,
-  CourseOverview,
   CourseContent,
   CourseDescription,
+  CourseOverview,
   FAQ,
 } from '../../organisms';
 import { Heading } from '../../atoms';
@@ -31,7 +31,7 @@ function Course() {
     return <p>Loading...</p>;
   }
   return (
-    <div className="container">
+    <>
       <Heading level={2} size="xxl" className={styles.heading}>
         {title}
       </Heading>
@@ -46,7 +46,7 @@ function Course() {
           <CourseOverview />
         </aside>
       </div>
-    </div>
+    </>
   );
 }
 

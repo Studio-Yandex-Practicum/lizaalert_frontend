@@ -23,7 +23,7 @@ function CreateCourse() {
   }, []);
 
   return (
-    <main className="container">
+    <>
       <div className={styles.header}>
         <Heading size="xxl">Создание нового курса</Heading>
         <Button className={styles.createBtn}>Создать</Button>
@@ -66,7 +66,7 @@ function CreateCourse() {
         {activeTab === 'description' && <NewCourseDescription />}
         {activeTab === 'content' && <NewCourseContent />}
       </Card>
-    </main>
+    </>
   );
 }
 

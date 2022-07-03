@@ -20,7 +20,7 @@ function Courses() {
   }, [dispatch]);
 
   return (
-    <div className="container">
+    <>
       <Heading
         level={2}
         size="xxl"
@@ -41,7 +41,7 @@ function Courses() {
           </ul>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

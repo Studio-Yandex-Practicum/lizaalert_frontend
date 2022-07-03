@@ -6,11 +6,11 @@ import fetchLessonByIdAction from '../../../store/lesson/thunk';
 
 import {
   Breadcrumbs,
-  TestContent,
-  PreviewWebinar,
   CourseContent,
-  VideoLesson,
   NavigationButtons,
+  PreviewWebinar,
+  TestContent,
+  VideoLesson,
 } from '../../organisms';
 import styles from './lesson.module.scss';
 import mockCourseContent from '../../../services/mock/course-content.json';
@@ -55,7 +55,7 @@ function Lesson() {
   }
 
   return (
-    <div className="container">
+    <>
       <Breadcrumbs className={styles.breadcrumbs} />
       <div className={styles.lesson}>
         <div className={styles.lessonContent}>
@@ -93,7 +93,7 @@ function Lesson() {
           className={styles.courseContent}
         />
       </div>
-    </div>
+    </>
   );
 }
 
