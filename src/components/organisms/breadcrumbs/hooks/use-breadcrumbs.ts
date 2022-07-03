@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { routes } from '../config';
+import { BreadcrumbType } from '../breadcrumbs.types';
+import { RouteType } from '../../../../types';
+import { routes } from '../../../../config';
 
 /**
  * Хук useBreadcrumbs возвращает массив объектов для отрисовки ссылок в компоненте Breadcrumbs
  * Пока рассчитан только на страницу Курса и возвращает моковые данные
  * Нужна доработка после интеграции с бекендом
  * */
+
 const useBreadcrumbs = () => {
   const { pathname } = useLocation();
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
 
-  const match = (path) => matchPath({ path, end: false }, pathname);
+  const match = (path: string) => matchPath({ path, end: false }, pathname);
 
   const clearBreadcrumbs = () => {
     if (breadcrumbs.length > 0) {
@@ -19,7 +22,7 @@ const useBreadcrumbs = () => {
     }
   };
 
-  const updateBreadcrumbs = (routesArray) => {
+  const updateBreadcrumbs = (routesArray: RouteType[]) => {
     routesArray.forEach((route) => {
       if (route.path !== routes.notFound.path) {
         // корень
