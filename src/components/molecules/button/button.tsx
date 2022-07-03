@@ -1,11 +1,37 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
+import { Icon, IconType } from '../../atoms';
 import styles from './button.module.scss';
+
+export type ButtonProps = {
+  children?: string;
+  view?: 'primary' | 'secondary' | 'text';
+  iconName?: IconType;
+  iconPosition?: 'back' | 'forward' | '';
+  onClick?: (...args: unknown[]) => void;
+  className?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit';
+  minWidth?: string | number;
+  classNameIcon?: string;
+};
+
+const defaultProps = {
+  children: '',
+  view: 'primary',
+  iconName: '',
+  iconPosition: '',
+  onClick: undefined,
+  className: '',
+  disabled: false,
+  type: 'button',
+  minWidth: 'inherit',
+  classNameIcon: '',
+};
 
 /**
  * @description Компонент кнопки с иконкой или без.
  *
+ * @props
  * - children - string - текст кнопки
  * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
  * - iconName - string - имя иконки из объекта icons
@@ -20,19 +46,19 @@ import styles from './button.module.scss';
 
 function Button({
   children,
-  view,
+  view = 'primary',
   iconName,
-  iconPosition,
+  iconPosition = '',
   onClick,
   className,
   disabled,
   type,
   minWidth,
   classNameIcon,
-}) {
+}: ButtonProps) {
   const btnClasses = classnames(
     styles.button,
-    styles[view ?? 'primary'],
+    styles[view],
     { [styles[iconPosition]]: iconPosition },
     className
   );
@@ -49,14 +75,14 @@ function Button({
       type={type === 'submit' ? 'submit' : 'button'}
       style={inlineStyle}
     >
-      {iconPosition === 'back' && (
+      {iconPosition === 'back' && iconName && (
         <Icon
           type={iconName}
           className={classnames(styles.icon, classNameIcon)}
         />
       )}
       {children}
-      {iconPosition === 'forward' && (
+      {iconPosition === 'forward' && iconName && (
         <Icon
           type={iconName}
           className={classnames(styles.icon, classNameIcon)}
@@ -66,30 +92,6 @@ function Button({
   );
 }
 
-Button.propTypes = {
-  children: PropTypes.string,
-  view: PropTypes.oneOf(['primary', 'secondary', 'text']),
-  iconName: PropTypes.string,
-  iconPosition: PropTypes.oneOf(['back', 'forward', '']),
-  onClick: PropTypes.func,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'submit']),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  classNameIcon: PropTypes.string,
-};
-
-Button.defaultProps = {
-  children: '',
-  view: 'primary',
-  iconName: '',
-  iconPosition: '',
-  onClick: undefined,
-  className: '',
-  disabled: false,
-  type: 'button',
-  minWidth: 'inherit',
-  classNameIcon: '',
-};
+Button.defaultProps = defaultProps;
 
 export default Button;
