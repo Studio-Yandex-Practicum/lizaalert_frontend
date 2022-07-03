@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
 import { Card, Heading } from '../../atoms';
 import { Button } from '../../molecules';
 import styles from './preview-webinar.module.scss';
+import { convertDate } from '../../../utils/convert-date';
+
+type PreviewWebinarProps = {
+  date: string;
+  link: string;
+};
 
 /**
  * @description Компонент превью вебинара.
@@ -10,17 +15,9 @@ import styles from './preview-webinar.module.scss';
  * - link - string - ссылка на вебинар
  */
 
-function PreviewWebinar({ date, link }) {
-  const dateObject = new Date(date);
-  const webinarDate = <b>{dateObject.toLocaleDateString('ru-RU')}</b>;
-  const webinarTime = (
-    <b>
-      {dateObject.toLocaleTimeString('ru-RU', {
-        hour: '2-digit',
-        minute: '2-digit',
-      })}
-    </b>
-  );
+function PreviewWebinar({ date, link }: PreviewWebinarProps) {
+  const webinarDate = <span>{convertDate(date)}</span>;
+  const webinarTime = <span>{convertDate(date, { onlyTime: true })}</span>;
 
   return (
     <Card className={styles.card}>
@@ -36,10 +33,5 @@ function PreviewWebinar({ date, link }) {
     </Card>
   );
 }
-
-PreviewWebinar.propTypes = {
-  date: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-};
 
 export default PreviewWebinar;
