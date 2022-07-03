@@ -1,13 +1,11 @@
 import { Heading } from '../../atoms';
-import { TestAnswer, TestResult } from '../../molecules';
+import {
+  TestAnswer,
+  TestResult,
+  AnswerType,
+  AnswerOptionsType,
+} from '../../molecules';
 import styles from './test-question.module.scss';
-
-type AnswerType = {
-  id: number;
-  text: string;
-  isCorrect: boolean;
-  isChecked: boolean;
-};
 
 type QuestionType = {
   id: number;
@@ -15,12 +13,10 @@ type QuestionType = {
   answers: AnswerType[];
 };
 
-type TypeType = 'checkbox' | 'radio';
-
 type TestQuestionProps = {
   question: QuestionType;
   index: number;
-  type: TypeType;
+  type: AnswerOptionsType;
   isSubmitted?: boolean;
   className?: string;
 };
@@ -53,7 +49,7 @@ function TestQuestion({
       <TestAnswer
         answer={answer}
         questionId={question.id}
-        questionType={type}
+        answerOptions={type}
       />
     </li>
   ));
