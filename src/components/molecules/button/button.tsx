@@ -4,6 +4,7 @@ import styles from './button.module.scss';
 
 export type ButtonProps = {
   children?: string;
+  text?: string;
   view?: 'primary' | 'secondary' | 'text';
   iconName?: IconType;
   iconPosition?: 'back' | 'forward' | '';
@@ -17,6 +18,7 @@ export type ButtonProps = {
 
 const defaultProps = {
   children: '',
+  text: '',
   view: 'primary',
   iconName: '',
   iconPosition: '',
@@ -32,7 +34,8 @@ const defaultProps = {
  * @description Компонент кнопки с иконкой или без.
  *
  * @props
- * - children - string - текст кнопки
+ * - children - string - текст кнопки, имеет приоритет перед `text`
+ * - text - string - текст кнопки, альтернатива для `children`
  * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
  * - iconName - string - имя иконки из объекта icons
  * - iconPosition - string - позиционирование иконки слева/справа от текста: 'back', 'forward'
@@ -46,6 +49,7 @@ const defaultProps = {
 
 function Button({
   children,
+  text,
   view = 'primary',
   iconName,
   iconPosition = '',
@@ -81,7 +85,7 @@ function Button({
           className={classnames(styles.icon, classNameIcon)}
         />
       )}
-      {children}
+      {children ?? text}
       {iconPosition === 'forward' && iconName && (
         <Icon
           type={iconName}
