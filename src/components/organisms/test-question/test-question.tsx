@@ -1,7 +1,34 @@
-import PropTypes from 'prop-types';
 import { Heading } from '../../atoms';
 import { TestAnswer, TestResult } from '../../molecules';
 import styles from './test-question.module.scss';
+
+type AnswerType = {
+  id: number;
+  text: string;
+  isCorrect: boolean;
+  isChecked: boolean;
+};
+
+type QuestionType = {
+  id: number;
+  title: string;
+  answers: AnswerType[];
+};
+
+type TypeType = 'checkbox' | 'radio';
+
+type TestQuestionProps = {
+  question: QuestionType;
+  index: number;
+  type: TypeType;
+  isSubmitted?: boolean;
+  className?: string;
+};
+
+const defaultProps = {
+  isSubmitted: false,
+  className: '',
+};
 
 /**
  * @description Компонент тестового вопроса.
@@ -13,7 +40,13 @@ import styles from './test-question.module.scss';
  * - className - string - css-класс для стилизации компонента родителя (li)
  */
 
-function TestQuestion({ question, index, type, isSubmitted, className }) {
+function TestQuestion({
+  question,
+  index,
+  type,
+  isSubmitted,
+  className,
+}: TestQuestionProps) {
   // список ответов
   const answersList = question.answers.map((answer) => (
     <li className={className} key={answer.id}>
@@ -42,28 +75,6 @@ function TestQuestion({ question, index, type, isSubmitted, className }) {
   );
 }
 
-TestQuestion.defaultProps = {
-  isSubmitted: false,
-  className: '',
-};
-
-TestQuestion.propTypes = {
-  question: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    answers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired,
-        isCorrect: PropTypes.bool.isRequired,
-        isChecked: PropTypes.bool.isRequired,
-      }).isRequired
-    ),
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
-  isSubmitted: PropTypes.bool,
-  className: PropTypes.string,
-};
+TestQuestion.defaultProps = defaultProps;
 
 export default TestQuestion;
