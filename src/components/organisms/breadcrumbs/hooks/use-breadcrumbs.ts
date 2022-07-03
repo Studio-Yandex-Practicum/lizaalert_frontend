@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { BreadcrumbType } from '../breadcrumbs.types';
 import { RouteType } from '../../../../types';
 import { routes } from '../../../../config';
+
+type BreadcrumbType = {
+  path: string;
+  title: string;
+};
 
 /**
  * Хук useBreadcrumbs возвращает массив объектов для отрисовки ссылок в компоненте Breadcrumbs
