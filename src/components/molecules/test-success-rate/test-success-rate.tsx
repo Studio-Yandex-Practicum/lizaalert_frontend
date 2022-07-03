@@ -1,8 +1,17 @@
 import { Children } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Heading } from '../../atoms';
 import styles from './test-success-rate.module.scss';
+
+type TestSuccessRateProps = {
+  testResultPercent: number;
+  isSuccess: boolean;
+  className?: string;
+};
+
+const defaultProps = {
+  className: '',
+};
 
 const testResultsTexts = {
   success: [
@@ -16,7 +25,20 @@ const testResultsTexts = {
   ],
 };
 
-function TestSuccessRate({ isSuccess, testResultPercent, className }) {
+/**
+ * @description Компонент, показывающий результат прохождения теста
+ *
+ * @props
+ * - testResultPercent - number - результат прохождения теста
+ * - isSuccess - boolean - флаг того, что тест пройден успешно
+ * - className - string - класс-миксин для стилизации контейнера
+ * */
+
+function TestSuccessRate({
+  isSuccess,
+  testResultPercent,
+  className,
+}: TestSuccessRateProps) {
   const texts = isSuccess ? testResultsTexts.success : testResultsTexts.failure;
 
   return (
@@ -54,14 +76,6 @@ function TestSuccessRate({ isSuccess, testResultPercent, className }) {
   );
 }
 
-TestSuccessRate.propTypes = {
-  testResultPercent: PropTypes.number.isRequired,
-  isSuccess: PropTypes.bool.isRequired,
-  className: PropTypes.string,
-};
-
-TestSuccessRate.defaultProps = {
-  className: '',
-};
+TestSuccessRate.defaultProps = defaultProps;
 
 export default TestSuccessRate;

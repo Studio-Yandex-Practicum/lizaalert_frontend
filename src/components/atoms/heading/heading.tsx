@@ -7,7 +7,7 @@ type HeadingSizes = 'xxl' | 'xl' | 'l' | 'm';
 export type HeadingProps = {
   level?: number;
   title?: ReactNode | string;
-  children?: ReactNode;
+  children?: ReactNode | string;
   size?: HeadingSizes;
   isSubheading?: boolean;
   className?: string;
