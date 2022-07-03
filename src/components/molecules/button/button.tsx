@@ -6,7 +6,7 @@ export type ButtonProps = {
   children?: string;
   view?: 'primary' | 'secondary' | 'text';
   iconName?: IconType;
-  iconPosition: 'back' | 'forward' | '';
+  iconPosition?: 'back' | 'forward' | '';
   onClick?: (...args: unknown[]) => void;
   className?: string;
   disabled?: boolean;
@@ -19,6 +19,7 @@ const defaultProps = {
   children: '',
   view: 'primary',
   iconName: '',
+  iconPosition: '',
   onClick: undefined,
   className: '',
   disabled: false,
@@ -47,7 +48,7 @@ function Button({
   children,
   view = 'primary',
   iconName,
-  iconPosition,
+  iconPosition = '',
   onClick,
   className,
   disabled,
@@ -74,14 +75,14 @@ function Button({
       type={type === 'submit' ? 'submit' : 'button'}
       style={inlineStyle}
     >
-      {iconPosition === 'back' && (
+      {iconPosition === 'back' && iconName && (
         <Icon
           type={iconName}
           className={classnames(styles.icon, classNameIcon)}
         />
       )}
       {children}
-      {iconPosition === 'forward' && (
+      {iconPosition === 'forward' && iconName && (
         <Icon
           type={iconName}
           className={classnames(styles.icon, classNameIcon)}
