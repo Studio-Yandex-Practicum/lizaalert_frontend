@@ -1,26 +1,28 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, ChangeEvent } from 'react';
 
-const useFormWithValidation = () => {
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
+const useFormWithValidation = <T extends Record<string, unknown>>() => {
+  type ErrorsType = Record<keyof T, string>;
+
+  const [values, setValues] = useState<T>({} as T);
+  const [errors, setErrors] = useState<ErrorsType>({} as ErrorsType);
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { target } = evt;
     const { name, value } = target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     const form = target.closest('form');
-    if (form != null) {
+    if (form) {
       setIsValid(form.checkValidity());
     }
   };
 
   const handleChangeFiles = (
-    evt: React.ChangeEvent<HTMLInputElement>,
+    evt: ChangeEvent<HTMLInputElement>,
     pattern: RegExp
   ) => {
-    if (evt.target.files == null) {
+    if (!evt.target.files) {
       return;
     }
     const file = evt.target.files[0];
@@ -37,13 +39,13 @@ const useFormWithValidation = () => {
       return;
     }
     const form = evt.target.closest('form');
-    if (form != null) {
+    if (form) {
       setIsValid(form.checkValidity());
     }
   };
 
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = {} as T, newErrors = {} as ErrorsType, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
