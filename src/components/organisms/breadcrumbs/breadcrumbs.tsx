@@ -1,11 +1,25 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Icon } from '../../atoms';
-import { useBreadcrumbs } from '../../../hooks';
+import useBreadcrumbs from './hooks/use-breadcrumbs';
 import styles from './breadcrumbs.module.scss';
 
-function Breadcrumbs({ className }) {
+type BreadcrumbsProps = {
+  className?: string;
+};
+
+const defaultProps = {
+  className: '',
+};
+
+/**
+ * @description Компонент хлебных крошек, создает цепочку вложенных роутов.
+ *
+ * @props
+ * - className - string - класс-миксин для стилизации контейнера
+ * */
+
+function Breadcrumbs({ className }: BreadcrumbsProps) {
   const breadcrumbs = useBreadcrumbs();
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
@@ -23,12 +37,6 @@ function Breadcrumbs({ className }) {
   );
 }
 
-Breadcrumbs.propTypes = {
-  className: PropTypes.string,
-};
-
-Breadcrumbs.defaultProps = {
-  className: '',
-};
+Breadcrumbs.defaultProps = defaultProps;
 
 export default Breadcrumbs;
