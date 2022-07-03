@@ -1,56 +1,46 @@
-import { getByText, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Heading from './heading';
 import styles from './heading.module.scss';
 
-const testTitle = 'Заголовок';
+const testTitle = 'Тестовый текст';
 
 function TestComponent() {
-  return <a href="/">Тестовая ссылка</a>;
+  return <a href="/">{testTitle}</a>;
 }
 
 describe('Компонент Heading', () => {
   describe('Тестирование рендера', () => {
     it('Вставляется в DOM', () => {
       const { container } = render(<Heading />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toBeInTheDocument();
-      expect(headingElement).toHaveClass(styles.heading);
+      expect(container.firstChild).toBeInTheDocument();
+      expect(container.firstChild).toHaveClass(styles.heading);
     });
   });
 
   describe('Тестирование пропсов', () => {
     it('Принимает prop "title" и рендерит переданный текст на страницу', () => {
-      const { container } = render(<Heading title={testTitle} />);
-      const titleElement = getByText(container, testTitle);
-      expect(titleElement).toBeInTheDocument();
+      render(<Heading title={testTitle} />);
+      expect(screen.getByText(testTitle)).toBeInTheDocument();
     });
 
     it('Принимает prop "children" как строку и рендерит переданный текст на страницу', () => {
-      const { container } = render(<Heading>{testTitle}</Heading>);
-      const titleElement = getByText(container, testTitle);
-      expect(titleElement).toBeInTheDocument();
+      render(<Heading>{testTitle}</Heading>);
+      expect(screen.getByText(testTitle)).toBeInTheDocument();
     });
 
     it('Принимает prop "children" как реакт ноду и рендерит её на страницу', () => {
-      const { container } = render(
+      render(
         <Heading>
           <TestComponent />
         </Heading>
       );
-
-      const anchorElement = container.querySelector('a');
-      expect(anchorElement).toBeInTheDocument();
-      expect(anchorElement?.textContent).toBe('Тестовая ссылка');
+      expect(screen.getByText(testTitle)).toBeInTheDocument();
     });
 
     it('Переданный prop "children" имеет приоритет перед "title"', () => {
-      const { container } = render(
-        <Heading title={testTitle}>Текст ребенка</Heading>
-      );
-
-      const headingElement = container.firstChild;
-      expect(headingElement?.textContent).toBe('Текст ребенка');
-      expect(headingElement?.textContent).not.toBe(testTitle);
+      render(<Heading title={testTitle}>Текст ребенка</Heading>);
+      expect(screen.getByText('Текст ребенка')).toBeInTheDocument();
+      expect(screen.queryByText(testTitle)).toBeNull();
     });
 
     it('По умолчанию у компонента второй уровень заголовка', () => {
@@ -90,42 +80,35 @@ describe('Компонент Heading', () => {
 
     it('Принимает prop "className" и ставит компоненту этот класс', () => {
       const { container } = render(<Heading className="test" />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.heading);
-      expect(headingElement).toHaveClass('test');
+      expect(container.firstChild).toHaveClass('test');
     });
 
     it('По умолчанию у компонента стоит класс "xl"', () => {
       const { container } = render(<Heading />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.xl);
-    });
-
-    it('Принимает prop "size=xxl" и ставит компоненту класс "xxl" вместо "xl"', () => {
-      const { container } = render(<Heading size="xxl" />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.xxl);
-      expect(headingElement).not.toHaveClass(styles.xl);
+      expect(container.firstChild).toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=xl" и ставит компоненту класс "xl"', () => {
       const { container } = render(<Heading size="xl" />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.xl);
+      expect(container.firstChild).toHaveClass(styles.xl);
+    });
+
+    it('Принимает prop "size=xxl" и ставит компоненту класс "xxl" вместо "xl"', () => {
+      const { container } = render(<Heading size="xxl" />);
+      expect(container.firstChild).toHaveClass(styles.xxl);
+      expect(container.firstChild).not.toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=l" и ставит компоненту класс "l" вместо "xl"', () => {
       const { container } = render(<Heading size="l" />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.l);
-      expect(headingElement).not.toHaveClass(styles.xl);
+      expect(container.firstChild).toHaveClass(styles.l);
+      expect(container.firstChild).not.toHaveClass(styles.xl);
     });
 
     it('Принимает prop "size=m" и ставит компоненту класс "m" вместо "xl"', () => {
       const { container } = render(<Heading size="m" />);
-      const headingElement = container.firstChild;
-      expect(headingElement).toHaveClass(styles.m);
-      expect(headingElement).not.toHaveClass(styles.xl);
+      expect(container.firstChild).toHaveClass(styles.m);
+      expect(container.firstChild).not.toHaveClass(styles.xl);
     });
   });
 });

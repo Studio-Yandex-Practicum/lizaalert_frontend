@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Icon, { IconProps } from './icon';
 import styles from './icon.module.scss';
 
@@ -7,7 +8,7 @@ const createIcon = (props?: Omit<IconProps, 'type'>) =>
 
 describe('Компонент Icon', () => {
   describe('Тестирование рендера', () => {
-    it('Вставляется в DOM и по внешний тег это "span"', () => {
+    it('Вставляется в DOM и внешний тег это "span"', () => {
       const { container } = createIcon();
       const spanElement = container.querySelector('span');
       expect(spanElement).toBeInTheDocument();
@@ -50,63 +51,48 @@ describe('Компонент Icon', () => {
 
     it('Принимает prop "className" и ставит компоненту этот класс', () => {
       const { container } = createIcon({ className: 'test' });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveClass('test');
+      expect(container.firstChild).toHaveClass('test');
     });
 
     it('Принимает prop "maxWidth" числом и ставит корневому элементу инлайновый стиль "max-width"', () => {
       const { container } = createIcon({ maxWidth: 20 });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('max-width: 20px');
+      expect(container.firstChild).toHaveStyle('max-width: 20px');
     });
 
     it('Принимает prop "maxWidth" строкой и ставит корневому элементу инлайновый стиль "max-width"', () => {
       const { container } = createIcon({ maxWidth: '100px' });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('max-width: 100px');
+      expect(container.firstChild).toHaveStyle('max-width: 100px');
     });
 
     it('Принимает prop "height" числом и ставит корневому элементу инлайновый стиль "height"', () => {
       const { container } = createIcon({ height: 20 });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('height: 20px');
+      expect(container.firstChild).toHaveStyle('height: 20px');
     });
 
     it('Принимает prop "height" строкой и ставит корневому элементу инлайновый стиль "height"', () => {
       const { container } = createIcon({ height: '100px' });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('height: 100px');
+      expect(container.firstChild).toHaveStyle('height: 100px');
     });
 
     it('Принимает prop "maxHeight" числом и ставит корневому элементу инлайновый стиль "max-height"', () => {
       const { container } = createIcon({ maxHeight: 20 });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('max-height: 20px');
+      expect(container.firstChild).toHaveStyle('max-height: 20px');
     });
 
     it('Принимает prop "maxHeight" строкой и ставит корневому элементу инлайновый стиль "max-height"', () => {
       const { container } = createIcon({ maxHeight: '100px' });
-      const iconElement = container.firstChild;
-      expect(iconElement).toHaveClass(styles.icon);
-      expect(iconElement).toHaveStyle('max-height: 100px');
+      expect(container.firstChild).toHaveStyle('max-height: 100px');
     });
   });
 
   describe('Тестирование слушателей событий', () => {
     it('Клик по кнопке отрабатывает корректно', () => {
-      const mockCallBack = jest.fn();
-      const { container } = createIcon({
-        onClick: mockCallBack,
+      const handleClick = jest.fn();
+      createIcon({
+        onClick: handleClick,
       });
-      const buttonElement = container.querySelector('button');
-      buttonElement?.click();
-      expect(mockCallBack.mock.calls.length).toEqual(1);
+      userEvent.click(screen.getByRole('button'));
+      expect(handleClick).toHaveBeenCalledTimes(1);
     });
   });
 });

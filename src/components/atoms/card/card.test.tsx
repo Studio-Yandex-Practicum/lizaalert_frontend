@@ -1,4 +1,4 @@
-import { getByText, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Card, { CardProps } from './card';
 import styles from './card.module.scss';
 
@@ -19,13 +19,9 @@ describe('Компонент Card', () => {
   describe('Тестирование рендера', () => {
     it('Вставляется в DOM вместе с ребенком', () => {
       const { container } = createCard();
-
-      const cardElement = container.firstChild;
-      expect(cardElement).toBeInTheDocument();
-      expect(cardElement).toHaveClass(styles.card);
-
-      const childElement = getByText(container, testString);
-      expect(childElement).toBeInTheDocument();
+      expect(container.firstChild).toBeInTheDocument();
+      expect(container.firstChild).toHaveClass(styles.card);
+      expect(screen.getByText(testString)).toBeInTheDocument();
     });
   });
 
@@ -53,20 +49,17 @@ describe('Компонент Card', () => {
 
     it('По умолчанию у компонента нет класса "cardNoPadding"', () => {
       const { container } = createCard();
-      const cardElement = container.firstChild;
-      expect(cardElement).not.toHaveClass(styles.cardNoPadding);
+      expect(container.firstChild).not.toHaveClass(styles.cardNoPadding);
     });
 
     it('Принимает prop "noPadding" и при true ставит компоненту класс "cardNoPadding"', () => {
       const { container } = createCard({ noPadding: true });
-      const cardElement = container.firstChild;
-      expect(cardElement).toHaveClass(styles.cardNoPadding);
+      expect(container.firstChild).toHaveClass(styles.cardNoPadding);
     });
 
     it('Принимает prop "className" и ставит компоненту этот класс', () => {
       const { container } = createCard({ className: 'test' });
-      const cardElement = container.firstChild;
-      expect(cardElement).toHaveClass('test');
+      expect(container.firstChild).toHaveClass('test');
     });
   });
 });
