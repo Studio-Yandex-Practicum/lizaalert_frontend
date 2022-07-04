@@ -1,7 +1,24 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Button } from '../../molecules';
 import styles from './navigation-buttons.module.scss';
+
+export type NavigationButtonsProps = {
+  view?: 'main' | 'finish';
+  disabledBack?: boolean;
+  disabledForward?: boolean;
+  classNameForContainer?: string;
+  classNameForButtons?: string;
+  onClickBack: (...args: unknown[]) => void;
+  onClickForward: (...args: unknown[]) => void;
+};
+
+const defaultProps = {
+  view: 'main',
+  disabledBack: false,
+  disabledForward: false,
+  classNameForContainer: '',
+  classNameForButtons: '',
+};
 
 /**
  * @description Компонент с кнопками навигации по уроку.
@@ -23,7 +40,7 @@ function NavigationButtons({
   disabledForward,
   onClickBack,
   onClickForward,
-}) {
+}: NavigationButtonsProps) {
   const navBtnsClasses = classnames(styles.navBtns, classNameForContainer);
   const btnsClasses = classnames(styles.button, classNameForButtons);
 
@@ -65,22 +82,6 @@ function NavigationButtons({
   );
 }
 
-NavigationButtons.propTypes = {
-  view: PropTypes.oneOf(['main', 'finish']),
-  classNameForContainer: PropTypes.string,
-  disabledBack: PropTypes.bool,
-  disabledForward: PropTypes.bool,
-  classNameForButtons: PropTypes.string,
-  onClickBack: PropTypes.func.isRequired,
-  onClickForward: PropTypes.func.isRequired,
-};
-
-NavigationButtons.defaultProps = {
-  view: 'main',
-  disabledBack: false,
-  disabledForward: false,
-  classNameForContainer: '',
-  classNameForButtons: '',
-};
+NavigationButtons.defaultProps = defaultProps;
 
 export default NavigationButtons;
