@@ -3,19 +3,19 @@ import Checkbox from '../checkbox/checkbox';
 import { change } from '../../../store/test/slice';
 import { CHECKBOX, RADIO } from '../../../utils/constants';
 
-type AnswerType = {
+export type AnswerType = {
   id: number;
   text: string;
   isCorrect: boolean;
   isChecked: boolean;
 };
 
-type QuestionType = 'checkbox' | 'radio';
+export type AnswerOptionsType = 'checkbox' | 'radio';
 
 type TestAnswerProps = {
   answer: AnswerType;
   questionId: number;
-  questionType: QuestionType;
+  answerOptions: AnswerOptionsType;
 };
 
 /**
@@ -23,10 +23,10 @@ type TestAnswerProps = {
  *
  * - answer - obj - объект ответа, содержит id, text, isChecked, isCorrect
  * - questionId - number - id вопроса, в котором содержится answer
- * - questionType - string - тип вопроса ('checkbox', 'radio')
+ * - answerOptions - string - варианты ответов ('checkbox' или 'radio')
  */
 
-function TestAnswer({ answer, questionId, questionType }: TestAnswerProps) {
+function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
   const dispatch = useDispatch();
 
   const updateCheckStatus = () => {
@@ -35,9 +35,11 @@ function TestAnswer({ answer, questionId, questionType }: TestAnswerProps) {
 
   return (
     <Checkbox
-      isRadio={questionType === RADIO}
+      isRadio={answerOptions === RADIO}
       name={
-        questionType === CHECKBOX ? `answer${answer.id}` : `answer${questionId}`
+        answerOptions === CHECKBOX
+          ? `answer${answer.id}`
+          : `answer${questionId}`
       }
       value={answer.text}
       labelText={answer.text}
