@@ -1,9 +1,30 @@
-import PropTypes from 'prop-types';
 import { Card, Heading } from '../../atoms';
 import { Button, TextWithIcon } from '../../molecules';
 import styles from './test-preview.module.scss';
 
-function TestPreview({ test, toggleRender }) {
+type TestType = {
+  id: number;
+  description: string;
+  passingScore: number;
+  retries: number;
+  deadline: string;
+  inProgress: boolean;
+};
+
+type TextPreviewProps = {
+  test: TestType;
+  toggleRender: (...args: unknown[]) => void;
+};
+
+/**
+ * @description Компонент превью теста
+ *
+ * @props
+ * test - obj - объект тест содержит id, description, passingScore, retries, deadline, inProgress
+ * toggleRender - function - функция возврата к тесту
+ */
+
+function TestPreview({ test, toggleRender }: TextPreviewProps) {
   const date = new Date(test.deadline);
 
   return (
@@ -39,17 +60,5 @@ function TestPreview({ test, toggleRender }) {
     </Card>
   );
 }
-
-TestPreview.propTypes = {
-  test: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    passingScore: PropTypes.number.isRequired,
-    retries: PropTypes.number.isRequired,
-    deadline: PropTypes.string.isRequired,
-    inProgress: PropTypes.bool.isRequired,
-  }).isRequired,
-  toggleRender: PropTypes.func.isRequired,
-};
 
 export default TestPreview;
