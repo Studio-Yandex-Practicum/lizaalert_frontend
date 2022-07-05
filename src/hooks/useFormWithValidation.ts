@@ -1,9 +1,9 @@
 import { useCallback, useState, ChangeEvent } from 'react';
 
 const useFormWithValidation = <T extends Record<string, unknown>>() => {
-  type ErrorsType = Record<keyof T, string>;
+  type ErrorsType = Partial<Record<keyof T, string>>;
 
-  const [values, setValues] = useState<T>({} as T);
+  const [values, setValues] = useState<Partial<T>>({} as T);
   const [errors, setErrors] = useState<ErrorsType>({} as ErrorsType);
   const [isValid, setIsValid] = useState(false);
 
