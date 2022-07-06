@@ -53,15 +53,16 @@ function CourseBenefits({ benefitsList }: CourseBenefitsProps) {
         open
       >
         <ul className={styles.benefitsList}>
-          {benefitsList.map((item) => (
-            <li key={item.id} className={styles.benefit}>
-              <Heading level={3} size="m" className={styles.heading}>
-                <Icon type="checkSolid" className={styles.icon} />
-                <span>{item.title}</span>
-              </Heading>
-              <p className={styles.text}>{item.description}</p>
-            </li>
-          ))}
+          {benefitsList &&
+            benefitsList.map((item) => (
+              <li key={item.id} className={styles.benefit}>
+                <Heading level={3} size="m" className={styles.heading}>
+                  <Icon type="checkSolid" className={styles.icon} />
+                  <span>{item.title}</span>
+                </Heading>
+                <p className={styles.text}>{item.description}</p>
+              </li>
+            ))}
         </ul>
       </Accordion>
     </Card>
