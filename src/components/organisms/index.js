@@ -10,6 +10,7 @@ export { default as CourseOverview } from './course-overview/course-overview';
 export { default as CoursePreview } from './course-preview/course-preview';
 export { default as FAQ } from './faq/faq';
 export { default as Filter } from './filter/filter';
+export { default as LoginForm } from './login-form/login-form';
 export { default as NavigationButtons } from './navigation-buttons/navigation-buttons';
 export { default as PersonalData } from './personal-data/personal-data';
 export { default as PreviewWebinar } from './preview-webinar/preview-webinar';

@@ -1,11 +1,11 @@
-@use 'src/styles/variables' as vars;
+@use '../../../styles/variables' as vars;
 
 .container {
   max-width: 648px;
   margin: 0 auto;
 }
 
-.auhtForm__heading {
+.authForm__heading {
   margin-bottom: 32px;
 }
 

@@ -1,5 +1,5 @@
 import { Heading } from '../../atoms';
-import { LoginForm } from '../../templates';
+import { LoginForm } from '../../organisms';
 import styles from './login.module.scss';
 
 function Login() {

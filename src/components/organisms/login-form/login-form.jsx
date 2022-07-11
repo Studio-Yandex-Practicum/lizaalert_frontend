@@ -46,12 +46,12 @@ function LoginForm() {
 
   return (
     <Card className={styles.container}>
-      <form className={styles.authForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Heading
           level={3}
           title="Войти в профиль"
           size="l"
-          className={styles.auhtForm__heading}
+          className={styles.authForm__heading}
         />
         <Input
           labelName="Email"
