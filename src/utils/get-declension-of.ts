@@ -1,5 +1,5 @@
 export class GetDeclensionOf {
-  static lessons(lessonsCount: number) {
+  public static lessons(lessonsCount: number) {
     let lessonsText = 'занятий';
 
     if (lessonsCount % 10 === 1 && lessonsCount !== 11) {
