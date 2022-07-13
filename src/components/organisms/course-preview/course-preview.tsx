@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Card, Heading } from '../../atoms';
 import { Button, Tag, TextWithIcon } from '../../molecules';
-import getDeclensionOf from '../../../utils/getDeclensionOf';
 import styles from './course-preview.module.scss';
+import { GetDeclensionOf } from '../../../utils/get-declension-of';
 
 export type LevelType = {
   id: number;
@@ -64,7 +64,7 @@ function CoursePreview({ course }: CoursePreviewProps) {
       />
       <TextWithIcon
         className={styles.lessons}
-        text={`${lessonsCount} ${getDeclensionOf.lessons(lessonsCount)}`}
+        text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
         iconType="lessons"
       />
       <Button
