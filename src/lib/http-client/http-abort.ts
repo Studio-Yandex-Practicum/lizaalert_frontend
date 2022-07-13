@@ -3,6 +3,7 @@ class HTTPAbort {
 
   public onabort = () => {};
 
+  /** Отменяет запрос */
   public readonly cancel = () => {
     this.isCanceled = true;
     this.onabort();
