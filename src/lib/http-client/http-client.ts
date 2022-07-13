@@ -52,6 +52,7 @@ class HTTPClient implements IHTTPClient {
       params,
       responseFormat,
       includeCredentials,
+      abort,
     } = options;
 
     return new Promise<XHRTyped<T>>((resolve, reject) => {
@@ -88,6 +89,10 @@ class HTTPClient implements IHTTPClient {
         request.withCredentials = true;
       }
 
+      if (abort) {
+        abort.onabort = () => request.abort();
+      }
+
       if (isGet || !data || isEmptyObject(data)) {
         request.send();
         return;
@@ -107,12 +112,12 @@ class HTTPClient implements IHTTPClient {
     url: string,
     options: ReqOptions
   ): Promise<XHRTyped<T>> => {
-    const { tries = DEFAULT_TRIES } = options;
+    const { tries = DEFAULT_TRIES, abort } = options;
 
     const onError = (err: unknown) => {
       const triesLeft = tries - 1;
 
-      if (!triesLeft) {
+      if (!triesLeft || abort?.isCanceled) {
         throw err;
       }
 

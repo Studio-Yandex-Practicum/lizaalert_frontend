@@ -1,3 +1,5 @@
+import HTTPAbort from './http-abort';
+
 export const enum Methods {
   Get = 'GET',
   Post = 'POST',
@@ -23,6 +25,7 @@ export type ReqOptions = {
   includeCredentials?: boolean;
   responseFormat?: ResponseFormat;
   tries?: number;
+  abort?: HTTPAbort;
 };
 
 export type Options = Omit<ReqOptions, 'method'>;
