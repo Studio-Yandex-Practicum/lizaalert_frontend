@@ -1,5 +1,9 @@
 class HTTPAbort {
-  isCanceled = false;
+  private isCanceled = false;
+
+  public getCanceled() {
+    return this.isCanceled;
+  }
 
   public onabort = () => {};
 

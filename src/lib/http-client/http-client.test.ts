@@ -1,4 +1,5 @@
 import HTTPClient from './http-client';
+import HTTPAbort from './http-abort';
 import { MOCK_SERVER_URL, MOCK_URL } from './utils/test/constants';
 
 describe('Класс HTTPClient', () => {
@@ -96,6 +97,16 @@ describe('Класс HTTPClient', () => {
     it('Должен корректно отправлять DELETE-запрос', async () => {
       const { status } = await httpClient.delete('/posts/1');
       expect(status).toBe(200);
+    });
+
+    it('Должен корректно завершать запрос до выполнения', async () => {
+      const httpAbort = new HTTPAbort();
+
+      httpClient
+        .get('/posts', { abort: httpAbort })
+        .catch((err: XMLHttpRequest) => expect(err.status).toBe(0));
+
+      httpAbort.cancel();
     });
   });
 });

@@ -117,7 +117,7 @@ class HTTPClient implements IHTTPClient {
     const onError = (err: unknown) => {
       const triesLeft = tries - 1;
 
-      if (!triesLeft || abort?.isCanceled) {
+      if (!triesLeft || abort?.getCanceled()) {
         throw err;
       }
 
