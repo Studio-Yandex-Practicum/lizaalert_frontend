@@ -18,9 +18,10 @@ export const ErrorTypes: Record<string, typeof ConflictError> = {
   [STATUS_CODES.UNAUTHORIZED]: UnauthorizedError,
 };
 
-export const checkResponseStatus = <T>(
+/** Проверяет статус XHR-запроса. Возвращает XHR или ошибку */
+export const checkResponseStatus = async <T>(
   xhr: XHRTyped<T>
-): XHRTyped<T> | Promise<never> => {
+): Promise<XHRTyped<T> | never> => {
   const { status, response } = xhr;
   if (status !== 0 && status < 400) {
     return xhr;
