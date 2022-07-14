@@ -1,31 +1,44 @@
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
-import { useFormWithValidation } from '../../../hooks';
 import styles from './account-data.module.scss';
 import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
+import { useFormWithValidation } from '../../../hooks';
+
+type AccountDataType = {
+  phoneNumber: string;
+  email: string;
+  password: string;
+};
+
+/**
+ * @description Компонент-виджет с редактируемой формой данных аккаунта.
+ * */
 
 function AccountData() {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
-    useFormWithValidation();
+    useFormWithValidation<AccountDataType>();
 
-  const accountData = useSelector(selectProfileAccount);
+  // TODO заменить первый аргумент на RootState после типизации Store
+  const accountData = useSelector<unknown, AccountDataType>(
+    selectProfileAccount
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     setValues(accountData);
   }, [accountData]);
 
-  const handleFormSubmit = (evt) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(setAccountData(values));
     setIsValid(false);
   };
 
   return (
-    <Card className={styles.accountData}>
+    <Card className={styles.accountData} htmlTag="section">
       <Heading level={2} size="l" title="Аккаунт" className={styles.heading} />
       <form
         name="accountData"
@@ -35,7 +48,7 @@ function AccountData() {
         <Input
           labelName="Номер телефона"
           type="tel"
-          inputName="mobilePhone"
+          inputName="phoneNumber"
           value={values.phoneNumber || ''}
           onChange={handleChange}
           placeholder="Номер телефона начиная с +7"
@@ -66,9 +79,8 @@ function AccountData() {
           type="submit"
           disabled={!isValid}
           className={styles.submitButton}
-        >
-          Сохранить изменения
-        </Button>
+          text="Сохранить изменения"
+        />
       </form>
     </Card>
   );
