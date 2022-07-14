@@ -45,7 +45,7 @@ const defaultProps = {
 /**
  * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
  *
- * - labelName - string - заголовок инпута, необязательный prop, не должен быть пустой строкой
+ * - labelName - string - заголовок инпута, необязательный prop
  * - inputName - string - имя инпута и id
  * - type - string - тип инпута
  * - isWithIcon - bool - пропс, по умолчанию false, определяет есть ли иконка у инпута
@@ -82,7 +82,7 @@ function Input({
   return (
     <div className={classnames(styles.container, className)}>
       <label htmlFor={inputName} className={styles.label}>
-        <span className={styles.labelText}>{labelName}</span>
+        {labelName && <span className={styles.labelText}>{labelName}</span>}
 
         <div className={styles.inputContainer}>
           {isWithIcon && type === 'file' ? (
