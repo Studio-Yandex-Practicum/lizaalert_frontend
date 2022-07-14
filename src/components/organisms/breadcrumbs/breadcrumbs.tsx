@@ -30,9 +30,7 @@ function Breadcrumbs({ className }: BreadcrumbsProps) {
             href={link.path}
             linkText={link.title}
           />
-          {i + 1 !== breadcrumbs.length && (
-            <Icon type="arrowRight" className={styles.icon} />
-          )}
+          {i + 1 !== breadcrumbs.length && <Icon type="arrowRight" />}
         </span>
       ))}
     </div>

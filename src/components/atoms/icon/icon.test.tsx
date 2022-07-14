@@ -53,36 +53,6 @@ describe('Компонент Icon', () => {
       const { container } = createIcon({ className: 'test' });
       expect(container.firstChild).toHaveClass('test');
     });
-
-    it('Принимает prop "maxWidth" числом и ставит корневому элементу инлайновый стиль "max-width"', () => {
-      const { container } = createIcon({ maxWidth: 20 });
-      expect(container.firstChild).toHaveStyle('max-width: 20px');
-    });
-
-    it('Принимает prop "maxWidth" строкой и ставит корневому элементу инлайновый стиль "max-width"', () => {
-      const { container } = createIcon({ maxWidth: '100px' });
-      expect(container.firstChild).toHaveStyle('max-width: 100px');
-    });
-
-    it('Принимает prop "height" числом и ставит корневому элементу инлайновый стиль "height"', () => {
-      const { container } = createIcon({ height: 20 });
-      expect(container.firstChild).toHaveStyle('height: 20px');
-    });
-
-    it('Принимает prop "height" строкой и ставит корневому элементу инлайновый стиль "height"', () => {
-      const { container } = createIcon({ height: '100px' });
-      expect(container.firstChild).toHaveStyle('height: 100px');
-    });
-
-    it('Принимает prop "maxHeight" числом и ставит корневому элементу инлайновый стиль "max-height"', () => {
-      const { container } = createIcon({ maxHeight: 20 });
-      expect(container.firstChild).toHaveStyle('max-height: 20px');
-    });
-
-    it('Принимает prop "maxHeight" строкой и ставит корневому элементу инлайновый стиль "max-height"', () => {
-      const { container } = createIcon({ maxHeight: '100px' });
-      expect(container.firstChild).toHaveStyle('max-height: 100px');
-    });
   });
 
   describe('Тестирование слушателей событий', () => {

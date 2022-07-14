@@ -80,17 +80,11 @@ function Button({
       style={inlineStyle}
     >
       {iconPosition === 'back' && iconName && (
-        <Icon
-          type={iconName}
-          className={classnames(styles.icon, classNameIcon)}
-        />
+        <Icon type={iconName} className={classNameIcon} />
       )}
       {children ?? text}
       {iconPosition === 'forward' && iconName && (
-        <Icon
-          type={iconName}
-          className={classnames(styles.icon, classNameIcon)}
-        />
+        <Icon type={iconName} className={classNameIcon} />
       )}
     </button>
   );

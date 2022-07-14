@@ -31,8 +31,6 @@
 .pseudo {
   align-self: flex-start;
   transition: color vars.$trans-300;
-  max-width: 24px;
-  min-height: 24px;
 
   path {
     opacity: 0;

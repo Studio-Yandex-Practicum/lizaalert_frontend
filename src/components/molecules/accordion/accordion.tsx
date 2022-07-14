@@ -62,14 +62,9 @@ function Accordion({
 
   function renderButton(type: AccordionButtons) {
     return (
-      <span
-        className={classnames(styles.btn, {
-          [styles.icon]: type === 'icon',
-          [styles.text]: type === 'text',
-        })}
-      >
+      <span className={classnames(styles.btn, styles[type])}>
         {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === 'icon' && <Icon type="arrowDown" maxHeight={24} />}
+        {type === 'icon' && <Icon type="arrowDown" />}
       </span>
     );
   }
