@@ -1,10 +1,8 @@
-import { useCallback, useState, ChangeEvent } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 const useFormWithValidation = <T extends Record<string, unknown>>() => {
-  type ErrorsType = Partial<Record<keyof T, string>>;
-
-  const [values, setValues] = useState<Partial<T>>({} as T);
-  const [errors, setErrors] = useState<ErrorsType>({} as ErrorsType);
+  const [values, setValues] = useState<Partial<T>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +43,7 @@ const useFormWithValidation = <T extends Record<string, unknown>>() => {
   };
 
   const resetForm = useCallback(
-    (newValues = {} as T, newErrors = {} as ErrorsType, newIsValid = false) => {
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);

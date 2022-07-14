@@ -17,7 +17,7 @@ export type ButtonProps = {
 };
 
 const defaultProps = {
-  children: '',
+  children: null,
   text: '',
   view: 'primary',
   iconName: '',
