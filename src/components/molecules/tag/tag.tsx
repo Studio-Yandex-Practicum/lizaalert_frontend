@@ -26,7 +26,11 @@ const defaultProps = {
  * */
 
 function Tag({ text, onClick, className, value }: TagProps) {
-  const classNames = classnames(styles.tag, className);
+  const classNames = classnames(
+    styles.tag,
+    { [styles.tag_type_withButton]: onClick && value },
+    className
+  );
 
   if (onClick && value) {
     return (
