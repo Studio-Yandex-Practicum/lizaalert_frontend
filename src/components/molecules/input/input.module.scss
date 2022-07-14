@@ -102,7 +102,11 @@
   right: 18px;
   width: 24px;
   color: vars.$dark-primary;
-  cursor: pointer;
+  pointer-events: none;
+}
+
+.placeholder {
+  @include placeholder;
 }
 
 .error {

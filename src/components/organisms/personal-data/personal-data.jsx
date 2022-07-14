@@ -86,7 +86,7 @@ function PersonalData() {
           required
         />
         <Input
-          labelName="Позывной на форуме"
+          // labelName="Позывной на форуме"
           type="text"
           inputName="nickname"
           value={values.nickname || ''}
