@@ -11,20 +11,24 @@ type LessonType = {
   status: 'finished' | 'active' | 'coming';
 };
 
-type CourseContentsType = {
+export type CourseContentsType = {
   id: number;
   topic: string;
   lessons: LessonType[];
 };
 
+export type ContentsItemType = 'main' | 'inner';
+
 type ContentsItemProps = {
   index: number;
   content: CourseContentsType;
-  type?: 'main' | 'inner';
+  type?: ContentsItemType;
+  className?: string;
 };
 
 const defaultProps = {
   type: 'main',
+  className: '',
 };
 
 const mapSlugToIcon: Record<string, IconType> = {
@@ -34,7 +38,17 @@ const mapSlugToIcon: Record<string, IconType> = {
   test: 'test',
 };
 
-function ContentsItem({ content, index, type }: ContentsItemProps) {
+/**
+ * @description Компонент элемента оглавления. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
+ *
+ * @props
+ * - index - number - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
+ * - content - object - содержание главы: `id`, `topic` и массив `lessons`.
+ * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
+ * - className - string - класс-миксин для стилизации внешнего контейнера.
+ * */
+
+function ContentsItem({ content, index, type, className }: ContentsItemProps) {
   const { topic, lessons, id } = content;
   const { courseId = '', topicId } = useParams();
 
@@ -46,7 +60,7 @@ function ContentsItem({ content, index, type }: ContentsItemProps) {
 
   if (type === 'main') {
     return (
-      <li className={styles.content}>
+      <li className={classnames(styles.content, className)}>
         <p className={styles.text}>{`${index + 1}. ${topic}`}</p>
         {lessonsList}
       </li>
@@ -57,13 +71,15 @@ function ContentsItem({ content, index, type }: ContentsItemProps) {
     return (
       <Accordion
         title={`${index + 1}. ${content.topic}`}
-        className={styles.accordion}
+        className={classnames(styles.accordion, className)}
         open={content.id === +topicId}
       >
         {lessonsList}
       </Accordion>
     );
   }
+
+  return null;
 
   function renderLesson(lesson: LessonType) {
     if (lesson.status === 'finished') {

@@ -9,7 +9,7 @@ import {
 } from '../../../store/course/selectors';
 import {
   CourseBenefits,
-  CourseContent,
+  CourseContents,
   CourseDescription,
   CourseOverview,
   FAQ,
@@ -39,7 +39,7 @@ function Course() {
         <main className={styles.main}>
           <CourseDescription />
           <CourseBenefits />
-          <CourseContent content={mockCourseContent} />
+          <CourseContents content={mockCourseContent} />
           <FAQ />
         </main>
         <aside className={styles.aside}>

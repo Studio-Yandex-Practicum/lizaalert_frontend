@@ -2,7 +2,7 @@ import { createElement, ReactNode } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 
-type CardHtmlTags = 'article' | 'div' | 'li' | 'aside';
+type CardHtmlTags = 'article' | 'div' | 'li' | 'aside' | 'section';
 
 export type CardProps = {
   className?: string;

@@ -47,6 +47,13 @@ describe('Компонент Card', () => {
       expect(cardElement).toBeInTheDocument();
     });
 
+    it('Принимает prop htmlTag="section" и рендерит "section" вместо "div"', () => {
+      const { container } = createCard({ htmlTag: 'section' });
+      const cardElement = container.querySelector('section');
+      expect(cardElement).toHaveClass(styles.card);
+      expect(cardElement).toBeInTheDocument();
+    });
+
     it('По умолчанию у компонента нет класса "cardNoPadding"', () => {
       const { container } = createCard();
       expect(container.firstChild).not.toHaveClass(styles.cardNoPadding);

@@ -4,7 +4,7 @@ export { default as Breadcrumbs } from './breadcrumbs/breadcrumbs';
 export { default as ContentsItem } from './contents-item/contents-item';
 export { default as CourseBenefits } from './course-benefits/course-benefits';
 export { default as CourseCompleted } from './course-completed/course-completed';
-export { default as CourseContent } from './course-content/course-content';
+export { default as CourseContents } from './course-contents/course-contents';
 export { default as CourseDescription } from './course-description/course-description';
 export { default as CourseOverview } from './course-overview/course-overview';
 export { default as CoursePreview } from './course-preview/course-preview';

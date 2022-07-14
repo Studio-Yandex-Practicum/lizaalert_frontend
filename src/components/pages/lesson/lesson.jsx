@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectLesson } from '../../../store/lesson/selectors';
 import fetchLessonByIdAction from '../../../store/lesson/thunk';
-
 import {
   Breadcrumbs,
-  CourseContent,
+  CourseContents,
   NavigationButtons,
   PreviewWebinar,
   TestContent,
@@ -87,7 +86,7 @@ function Lesson() {
             disabledForward={forwardIsDisabled}
           />
         </div>
-        <CourseContent
+        <CourseContents
           content={mockCourseContent}
           type="inner"
           className={styles.courseContent}
