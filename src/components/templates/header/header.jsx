@@ -1,6 +1,6 @@
 import { Children } from 'react';
 import { Heading } from '../../atoms';
-import { HeaderLink, WithLink } from '../../molecules';
+import { HeaderLink, StyledLink } from '../../molecules';
 import styles from './header.module.scss';
 import { isAdmin, routes } from '../../../config';
 
@@ -13,13 +13,9 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <WithLink
-          href={routes.courses.path}
-          component={Heading}
-          level={1}
-          size="m"
-          title="Учебная платформа"
-        />
+        <StyledLink href={routes.courses.path}>
+          <Heading level={1} size="m" title="Учебная платформа" />
+        </StyledLink>
         <nav>
           <ul className={styles.headerLinks}>
             {Children.toArray(

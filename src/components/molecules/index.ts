@@ -10,5 +10,5 @@ export { default as TextWithIcon } from './text-with-icon/text-with-icon';
 export { default as TestAnswer } from './test-answer/test-answer';
 export { default as TestResult } from './test-results/test-results';
 export { default as PasswordUpdated } from './password-updated/password-updated';
-export { default as WithLink } from './with-link/with-link';
+export { default as StyledLink } from './styled-link/styled-link';
 export type { AnswerType, AnswerOptionsType } from './test-answer/test-answer';

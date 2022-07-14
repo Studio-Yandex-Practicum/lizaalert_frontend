@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Card, Heading } from '../../atoms';
-import { WithLink } from '../../molecules';
+import { StyledLink } from '../../molecules';
 import styles from './course-completed.module.scss';
 
 /**
@@ -46,7 +46,7 @@ function CourseCompleted({
               Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
               сложным. Вы&nbsp;можете попробовать себя
-              <WithLink
+              <StyledLink
                 href={linkHref}
                 weight="bold"
                 linkText=" в других направлениях"

@@ -1,7 +1,7 @@
 export { default as AccountData } from './account-data/account-data';
 export { default as AccountOverview } from './account-overview/account-overview';
 export { default as Breadcrumbs } from './breadcrumbs/breadcrumbs';
-export { default as ContentItem } from './content-item/content-item';
+export { default as ContentsItem } from './contents-item/contents-item';
 export { default as CourseBenefits } from './course-benefits/course-benefits';
 export { default as CourseCompleted } from './course-completed/course-completed';
 export { default as CourseContent } from './course-content/course-content';
