@@ -1,0 +1,26 @@
+@use 'src/styles/variables' as vars;
+
+.link {
+  text-decoration: none;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+  color: vars.$dark-primary;
+  transition: color vars.$trans-300;
+
+  &:hover {
+    color: vars.$color-primary;
+  }
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.semibold {
+  font-weight: 500;
+}
+
