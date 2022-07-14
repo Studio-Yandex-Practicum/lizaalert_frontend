@@ -38,8 +38,8 @@ function AccountData() {
   };
 
   return (
-    <Card className={styles.accountData} htmlTag="section">
-      <Heading level={2} size="l" title="Аккаунт" className={styles.heading} />
+    <Card className={styles.accountData}>
+      <Heading size="l" title="Аккаунт" className={styles.heading} />
       <form
         name="accountData"
         onSubmit={handleFormSubmit}
