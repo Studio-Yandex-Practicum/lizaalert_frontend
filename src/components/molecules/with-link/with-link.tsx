@@ -14,14 +14,14 @@ type WithLinkProps = {
 const defaultProps = {
   isExternal: false,
   className: '',
-  weight: 'normal',
+  weight: 'semibold',
 };
 
 function WithLink({
   component: Component,
   isExternal,
   href,
-  weight = 'normal',
+  weight = 'semibold',
   className,
   ...props
 }: WithLinkProps) {

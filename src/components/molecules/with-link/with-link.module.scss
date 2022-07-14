@@ -1,4 +1,4 @@
-@use 'src/styles/variables' as vars;
+@use '../../../styles/variables' as vars;
 
 .link {
   text-decoration: none;
@@ -8,7 +8,7 @@
   transition: color vars.$trans-300;
 
   &:hover {
-    color: vars.$color-primary;
+    color: vars.$color-hover;
   }
 }
 
