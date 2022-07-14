@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as vars;
+@use 'src/styles/variables' as vars;
 
 .container {
   max-width: 648px;
@@ -17,15 +17,11 @@
 
 .authForm__checkbox {
   color: vars.$dark-secondary;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .textLink {
-  text-decoration: none;
   color: vars.$dark-secondary;
-  font-weight: 400;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 }
 
 .button {

@@ -18,16 +18,9 @@
 .link {
   display: block;
   max-width: 521px;
-  color: vars.$dark-primary;
-  text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  transition: color vars.$trans-300;
-
-  &:hover {
-    color: vars.$color-hover;
-  }
 }
 
 .icon {

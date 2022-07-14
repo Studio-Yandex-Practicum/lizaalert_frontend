@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { courseContentPropTypes } from '../../../utils/prop-types';
 import { Icon } from '../../atoms';
-import { Accordion, TextWithIcon } from '../../molecules';
+import { Accordion, TextWithIcon, WithLink } from '../../molecules';
 import styles from './content-item.module.scss';
 
 function ContentItem({ content, index, type }) {
@@ -26,14 +26,15 @@ function ContentItem({ content, index, type }) {
           })}
           key={lesson.id}
         >
-          <Link to={`/${courseId}/${id}/${lesson.id}`} className={styles.link}>
-            <TextWithIcon
-              text={lesson.title}
-              iconType={
-                type === 'main' ? mapSlugToIcon[lesson.slug] : 'checkSolid'
-              }
-            />
-          </Link>
+          <WithLink
+            component={TextWithIcon}
+            href={`/${courseId}/${id}/${lesson.id}`}
+            text={lesson.title}
+            weight="normal"
+            iconType={
+              type === 'main' ? mapSlugToIcon[lesson.slug] : 'checkSolid'
+            }
+          />
           {type === 'main' && (
             <Icon
               type="checkSolid"

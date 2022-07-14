@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Heading, Card } from '../../atoms';
-import { Button } from '../../molecules';
+import { Card, Heading } from '../../atoms';
+import { Button, WithLink } from '../../molecules';
 import TestQuestion from '../test-question/test-question';
 import NavigationButtons from '../navigation-buttons/navigation-buttons';
 import TestSuccessRate from '../../molecules/test-success-rate/test-success-rate';
 import styles from './test.module.scss';
-import { selectTest, selectIsLoading } from '../../../store/test/selectors';
+import { selectIsLoading, selectTest } from '../../../store/test/selectors';
 import fetchTest from '../../../store/test/thunk';
 import { selectLesson } from '../../../store/lesson/selectors';
 import { RADIO } from '../../../utils/constants';
@@ -117,9 +117,7 @@ function Test() {
               className={styles.test__heading}
             />
             {/* указать роут */}
-            <Link to="/test" className={styles.test__link}>
-              Посмотреть условия
-            </Link>
+            <WithLink href="/test" linkText="Посмотреть условия" />
           </div>
           <ul className={styles.list}>{questionsList}</ul>
           {isSubmitted ? (

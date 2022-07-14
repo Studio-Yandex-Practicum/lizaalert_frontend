@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
 import { Icon } from '../../atoms';
+import { WithLink } from '../../molecules';
 import useBreadcrumbs from './hooks/use-breadcrumbs';
 import styles from './breadcrumbs.module.scss';
 
@@ -25,9 +25,11 @@ function Breadcrumbs({ className }: BreadcrumbsProps) {
     <div className={classnames(styles.breadcrumbs, className)}>
       {breadcrumbs.map((link, i) => (
         <span className={styles.breadcrumb} key={link.path}>
-          <Link className={styles.link} to={link.path}>
-            {link.title}
-          </Link>
+          <WithLink
+            className={styles.link}
+            href={link.path}
+            linkText={link.title}
+          />
           {i + 1 !== breadcrumbs.length && (
             <Icon type="arrowRight" className={styles.icon} />
           )}

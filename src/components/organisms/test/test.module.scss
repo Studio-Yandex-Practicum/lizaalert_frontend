@@ -14,20 +14,6 @@
     margin-right: 8px;
   }
 
-  &__link {
-    text-decoration: none;
-    font-style: normal;
-    font-weight: 500;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
-    color: vars.$dark-primary;
-    transition: color vars.$trans-300;
-
-    &:hover {
-      color: vars.$color-hover;
-    }
-  }
-
   &__result {
     margin-bottom: 32px;
   }
