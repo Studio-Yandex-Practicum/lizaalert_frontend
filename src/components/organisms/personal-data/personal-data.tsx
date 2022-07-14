@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
 import { Button, Input } from '../../molecules';
@@ -6,6 +6,19 @@ import { useFormWithValidation } from '../../../hooks';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import styles from './personal-data.module.scss';
 import { setPersonalData } from '../../../store/profile/slice';
+import { patterns } from '../../../utils/constants';
+
+type PersonalDataType = {
+  name: string;
+  dateOfBirth: string;
+  region: string;
+  nickname: string;
+  avatar: string;
+};
+
+/**
+ * @description Компонент-виджет с редактируемой формой данных профиля.
+ * */
 
 function PersonalData() {
   const {
@@ -16,20 +29,23 @@ function PersonalData() {
     values,
     setValues,
     setIsValid,
-  } = useFormWithValidation();
-  const personalData = useSelector(selectProfilePersonal);
+  } = useFormWithValidation<PersonalDataType>();
+
+  // TODO заменить первый аргумент на RootState после типизации Store
+  const personalData = useSelector<unknown, PersonalDataType>(
+    selectProfilePersonal
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     setValues(personalData);
   }, [personalData]);
 
-  const onChangeFile = (e) => {
-    const pattern = /\.(gif|jpg|jpeg|tiff|png)$/i;
-    handleChangeFiles(e, pattern);
+  const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
+    handleChangeFiles(evt, patterns.image);
   };
 
-  const handleFormSubmit = (evt) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(setPersonalData(values));
     setIsValid(false);
@@ -37,12 +53,7 @@ function PersonalData() {
 
   return (
     <Card className={styles.personalData}>
-      <Heading
-        leve={2}
-        size="l"
-        title="Личные данные"
-        className={styles.heading}
-      />
+      <Heading size="l" title="Личные данные" className={styles.heading} />
       <form
         name="personalData"
         className={styles.form}
@@ -112,9 +123,8 @@ function PersonalData() {
           disabled={!isValid}
           type="submit"
           className={styles.submitButton}
-        >
-          Сохранить изменения
-        </Button>
+          text="Сохранить изменения"
+        />
       </form>
     </Card>
   );

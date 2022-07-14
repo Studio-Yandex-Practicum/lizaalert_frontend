@@ -31,4 +31,5 @@ export const errorMessages = {
 export const patterns = {
   email: '[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$',
   tel: '\\+7\\s?[0-9]{10}',
+  image: /\.(gif|jpg|jpeg|tiff|png)$/i,
 };
