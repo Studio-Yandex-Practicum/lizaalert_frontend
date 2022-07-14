@@ -36,12 +36,7 @@ function ContentItem({ content, index, type }) {
             }
           />
           {type === 'main' && (
-            <Icon
-              type="checkSolid"
-              maxWidth={24}
-              maxHeight={24}
-              className={styles.completed}
-            />
+            <Icon type="checkSolid" className={styles.completed} />
           )}
         </div>
       );

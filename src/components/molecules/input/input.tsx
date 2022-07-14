@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { Icon } from '../../atoms';
 import styles from './input.module.scss';
 
@@ -80,43 +80,45 @@ function Input({
   message,
 }: InputProps) {
   return (
-    <div className={classNames(styles.container, className)}>
-      <label
-        htmlFor={inputName}
-        className={classNames({
-          [styles.label]: labelName,
-          [styles.label_flex]: type === 'file',
-        })}
-      >
-        {labelName}
-        {isWithIcon && labelName && type === 'file' ? (
-          <Icon type="attachment" className={styles.icon} />
-        ) : (
-          isWithIcon &&
-          labelName && <Icon type="edit" className={styles.icon} />
-        )}
+    <div className={classnames(styles.container, className)}>
+      <label htmlFor={inputName} className={styles.label}>
+        <span className={styles.labelText}>{labelName}</span>
+
+        <div className={styles.inputContainer}>
+          {isWithIcon && type === 'file' ? (
+            <Icon type="attachment" className={styles.icon} />
+          ) : (
+            isWithIcon && <Icon type="edit" className={styles.icon} />
+          )}
+
+          <input
+            id={inputName}
+            name={inputName}
+            type={type}
+            value={value}
+            accept={accept}
+            placeholder={placeholder}
+            disabled={disabled}
+            onChange={onChange}
+            className={classnames(styles.input, {
+              [styles.input_hidden]: type === 'file',
+              [styles.input_warned]: error,
+            })}
+            minLength={minLength}
+            maxLength={maxLength}
+            required={required}
+            max={max}
+            min={min}
+            pattern={pattern}
+          />
+
+          {type === 'file' && (
+            <span className={classnames(styles.input, styles.input_type_file)}>
+              {value}
+            </span>
+          )}
+        </div>
       </label>
-      <input
-        id={inputName}
-        name={inputName}
-        type={type}
-        value={value}
-        accept={accept}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={onChange}
-        className={classNames(styles.input, {
-          [styles.input_hidden]: type === 'file',
-          [styles.input_warned]: error,
-        })}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-        max={max}
-        min={min}
-        pattern={pattern}
-      />
-      {type === 'file' && <span className={styles.input}>{value}</span>}
       {/* когда будет настроена валидация, будет условие isValid, вместо error */}
       <span className={styles.error}>
         {error && message ? message : error || ''}

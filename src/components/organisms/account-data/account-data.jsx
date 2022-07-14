@@ -38,7 +38,6 @@ function AccountData() {
           inputName="mobilePhone"
           value={values.phoneNumber || ''}
           onChange={handleChange}
-          className={styles.inputSection}
           placeholder="Номер телефона начиная с +7"
           disabled
         />
@@ -50,7 +49,6 @@ function AccountData() {
           onChange={handleChange}
           error={errors.email}
           isWithIcon
-          className={styles.inputSection}
           placeholder="Ваш email"
         />
         <Input
@@ -61,7 +59,6 @@ function AccountData() {
           onChange={handleChange}
           placeholder="Ваш пароль"
           isWithIcon
-          className={styles.inputSection}
           minLength={8}
           error={errors.password}
         />

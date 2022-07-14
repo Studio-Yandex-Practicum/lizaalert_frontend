@@ -57,7 +57,7 @@ function CourseBenefits({ benefitsList }: CourseBenefitsProps) {
             benefitsList.map((item) => (
               <li key={item.id} className={styles.benefit}>
                 <Heading level={3} size="m" className={styles.heading}>
-                  <Icon type="checkSolid" className={styles.icon} />
+                  <Icon type="checkSolid" />
                   <span>{item.title}</span>
                 </Heading>
                 <p className={styles.text}>{item.description}</p>

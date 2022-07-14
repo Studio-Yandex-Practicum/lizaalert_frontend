@@ -6,17 +6,11 @@ export type IconType = keyof typeof icons;
 
 export type IconProps = {
   type: IconType;
-  maxWidth?: string | number;
-  height?: string | number;
-  maxHeight?: string | number;
   onClick?: (...args: unknown[]) => void;
   className?: string;
 };
 
 const defaultProps = {
-  maxWidth: 'inherit',
-  height: 'inherit',
-  maxHeight: 'inherit',
   onClick: undefined,
   className: '',
 };
@@ -28,37 +22,20 @@ const defaultProps = {
  *
  * @props
  * - type - string, required - тип иконки, должен совпадать по ключу с объектом icons
- * - maxWidth - string | number - максимальная ширина иконки, по умолчанию наследуется
- * - height - string | number - фиксированная высота иконки, с осторожностью, по умолчанию наследуется
- * - maxHeight - string | number - максимальная высота иконки, по умолчанию наследуется
  * - onClick - function - функция-обработчик клика, при её передаче вместо `span` будет `button`
  * - className - string - css-класс, присваивается `span`у
  */
 
-function Icon({
-  type,
-  maxWidth,
-  height,
-  maxHeight,
-  onClick,
-  className,
-}: IconProps) {
+function Icon({ type, onClick, className }: IconProps) {
   if (!icons[type]) {
     return null;
   }
-
-  let inlineStyle = {};
-
-  if (maxWidth !== 'inherit') inlineStyle = { ...inlineStyle, maxWidth };
-  if (height !== 'inherit') inlineStyle = { ...inlineStyle, height };
-  if (maxHeight !== 'inherit') inlineStyle = { ...inlineStyle, maxHeight };
 
   if (onClick) {
     return (
       <button
         type="button"
         className={classnames(styles.icon, className)}
-        style={inlineStyle}
         onClick={onClick}
       >
         {icons[type]}
@@ -67,9 +44,7 @@ function Icon({
   }
 
   return (
-    <span className={classnames(styles.icon, className)} style={inlineStyle}>
-      {icons[type]}
-    </span>
+    <span className={classnames(styles.icon, className)}>{icons[type]}</span>
   );
 }
 

@@ -15,15 +15,10 @@
   line-height: vars.$line-height-l;
 }
 
-.icon {
-  max-width: 24px;
-  max-height: 24px;
-  margin-right: 8px;
-}
-
 .heading {
   display: flex;
   align-items: center;
+  column-gap: 8px;
 }
 
 .benefitsList {

@@ -6,26 +6,26 @@
   align-items: center;
   gap: 32px;
   color: vars.$dark-primary;
+}
 
-  .title {
-    margin-right: auto;
+.title {
+  margin-right: auto;
+}
+
+.text {
+  margin: 0;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+
+  span {
+    font-weight: 700;
   }
+}
 
-  .text {
-    margin: 0;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
+.link {
+  text-decoration: none;
+}
 
-    span {
-      font-weight: 700;
-    }
-  }
-
-  .link {
-    text-decoration: none;
-
-    .button {
-      min-width: 184px;
-    }
-  }
+.button {
+  min-width: 184px;
 }

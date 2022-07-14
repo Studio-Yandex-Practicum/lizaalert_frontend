@@ -8,10 +8,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  position: relative;
   max-width: 584px;
   font-family: vars.$mainFont;
-  font-style: normal;
   font-weight: 400;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
@@ -19,18 +17,22 @@
 
 .label {
   width: 100%;
-  margin-bottom: 8px;
-  box-sizing: border-box;
-  padding-left: 16px;
   color: vars.$dark-secondary;
+}
 
-  &_flex {
-    display: flex;
-    flex-direction: column;
-  }
+.labelText {
+  display: block;
+  box-sizing: border-box;
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+
+.inputContainer {
+  position: relative;
 }
 
 .input {
+  display: block;
   width: 100%;
   min-height: 48px;
   box-sizing: border-box;
@@ -38,8 +40,8 @@
   border: 1.2px solid vars.$borders-divider-disabled-bg;
   border-radius: 16px;
   font-family: inherit;
-  font-style: normal;
   font-weight: 400;
+  color: vars.$dark-primary;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
 
@@ -55,12 +57,25 @@
     @include placeholder;
   }
 
+  &:disabled {
+    background: vars.$bg-primary;
+    color: vars.$dark-secondary;
+    cursor: default;
+  }
+
+  &:focus {
+    outline: 1.2px solid vars.$color-primary;
+  }
+
   &_hidden {
-    opacity: 0;
     position: absolute;
-    visibility: hidden;
-    width: 0;
-    height: 0;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    min-height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
   }
 
   &_warned {
@@ -68,32 +83,26 @@
     background-color: vars.$warning-bg;
   }
 
-  &:hover {
+  &_type_file {
     cursor: pointer;
+  }
+
+  &[type=date] {
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+    }
   }
 }
 
 .icon {
   position: absolute;
-  top: 44px;
-  right: 16px;
+  top: 13px;
+  right: 18px;
   width: 24px;
-  height: 24px;
   color: vars.$dark-primary;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.input:disabled {
-  background: vars.$bg-primary;
-  color: vars.$dark-secondary;
-  cursor: auto;
-}
-
-.input:focus {
-  outline: 1.2px solid vars.$color-primary;
+  cursor: pointer;
 }
 
 .error {
@@ -106,8 +115,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-input[type=date]::-webkit-calendar-picker-indicator {
-  display: none;
 }
