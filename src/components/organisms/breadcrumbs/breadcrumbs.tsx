@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Icon } from '../../atoms';
-import { WithLink } from '../../molecules';
+import { StyledLink } from '../../molecules';
 import useBreadcrumbs from './hooks/use-breadcrumbs';
 import styles from './breadcrumbs.module.scss';
 
@@ -25,7 +25,7 @@ function Breadcrumbs({ className }: BreadcrumbsProps) {
     <div className={classnames(styles.breadcrumbs, className)}>
       {breadcrumbs.map((link, i) => (
         <span className={styles.breadcrumb} key={link.path}>
-          <WithLink
+          <StyledLink
             className={styles.link}
             href={link.path}
             linkText={link.title}

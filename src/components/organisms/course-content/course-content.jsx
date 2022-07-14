@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { courseContentPropTypes } from '../../../utils/prop-types';
 import { Card, Heading } from '../../atoms';
 import { Accordion } from '../../molecules';
-import ContentItem from '../content-item/content-item';
+import ContentItem from '../contents-item/contents-item';
 import styles from './course-content.module.scss';
 
 function CourseContent({ content, type, className }) {

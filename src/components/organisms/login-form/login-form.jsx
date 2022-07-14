@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
-import { Button, Checkbox, Input, WithLink } from '../../molecules';
+import { Button, Checkbox, Input, StyledLink } from '../../molecules';
 import styles from './login-form.module.scss';
 import { useFormWithValidation } from '../../../hooks';
 import { fetchAuth } from '../../../store/auth/thunk';
@@ -96,7 +96,7 @@ function LoginForm() {
             checked={isCheckedRememberMe}
             onChange={handleChangeCheckbox}
           />
-          <WithLink
+          <StyledLink
             href="."
             className={styles.textLink}
             linkText="Забыли пароль?"

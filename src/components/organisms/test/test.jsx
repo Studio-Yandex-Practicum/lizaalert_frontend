@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Heading } from '../../atoms';
-import { Button, WithLink } from '../../molecules';
+import { Button, StyledLink } from '../../molecules';
 import TestQuestion from '../test-question/test-question';
 import NavigationButtons from '../navigation-buttons/navigation-buttons';
 import TestSuccessRate from '../../molecules/test-success-rate/test-success-rate';
@@ -117,7 +117,7 @@ function Test() {
               className={styles.test__heading}
             />
             {/* указать роут */}
-            <WithLink href="/test" linkText="Посмотреть условия" />
+            <StyledLink href="/test" linkText="Посмотреть условия" />
           </div>
           <ul className={styles.list}>{questionsList}</ul>
           {isSubmitted ? (
