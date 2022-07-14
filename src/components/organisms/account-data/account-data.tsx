@@ -13,6 +13,10 @@ type AccountDataType = {
   password: string;
 };
 
+/**
+ * @description Компонент-виджет с редактируемой формой данных аккаунта.
+ * */
+
 function AccountData() {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
     useFormWithValidation<AccountDataType>();
@@ -34,7 +38,7 @@ function AccountData() {
   };
 
   return (
-    <Card className={styles.accountData}>
+    <Card className={styles.accountData} htmlTag="section">
       <Heading level={2} size="l" title="Аккаунт" className={styles.heading} />
       <form
         name="accountData"
