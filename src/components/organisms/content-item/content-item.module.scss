@@ -64,13 +64,3 @@
 .active {
   color: vars.$color-hover;
 }
-
-.link {
-  text-decoration: none;
-  transition: vars.$trans-300;
-  color: inherit;
-
-  &:hover {
-    color: vars.$color-hover;
-  }
-}

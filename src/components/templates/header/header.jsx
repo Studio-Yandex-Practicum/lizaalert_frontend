@@ -1,7 +1,6 @@
 import { Children } from 'react';
-import { Link } from 'react-router-dom';
 import { Heading } from '../../atoms';
-import { HeaderLink } from '../../molecules';
+import { HeaderLink, WithLink } from '../../molecules';
 import styles from './header.module.scss';
 import { isAdmin, routes } from '../../../config';
 
@@ -14,9 +13,13 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
-        <Link to={routes.courses.path} className={styles.headerLink}>
-          <Heading level={1} size="m" title="Учебная платформа" />
-        </Link>
+        <WithLink
+          href={routes.courses.path}
+          component={Heading}
+          level={1}
+          size="m"
+          title="Учебная платформа"
+        />
         <nav>
           <ul className={styles.headerLinks}>
             {Children.toArray(

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Card, Heading } from '../../atoms';
+import { WithLink } from '../../molecules';
 import styles from './course-completed.module.scss';
 
 /**
@@ -40,16 +40,18 @@ function CourseCompleted({
         {!isCompleted && (
           <>
             <p className={styles.text}>
-              Курс <span className={styles.link}>{`«${courseName}»`}</span> не
-              пройден.
+              Курс <span>{`«${courseName}»`}</span> не пройден.
             </p>
             <p className={styles.text}>
               Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
-              сложным. Вы&nbsp;можете попробовать себя{' '}
-              <Link to={linkHref} className={styles.link}>
-                в других направлениях.
-              </Link>
+              сложным. Вы&nbsp;можете попробовать себя
+              <WithLink
+                href={linkHref}
+                weight="bold"
+                linkText=" в других направлениях"
+              />
+              .
             </p>
           </>
         )}
