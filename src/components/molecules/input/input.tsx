@@ -1,28 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon, IconType } from '../../atoms';
+import { Icon } from '../../atoms';
 import styles from './input.module.scss';
-
-type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
-
-type InputProps = {
-  type: InputType;
-  labelName?: string;
-  isWithIcon?: boolean;
-  iconType?: IconType;
-  error?: string;
-  className?: string;
-  message?: string;
-};
-
-const defaultProps = {
-  labelName: null,
-  isWithIcon: false,
-  iconType: 'edit',
-  error: null,
-  className: '',
-  message: '',
-};
+import { InputProps } from './types';
 
 /**
  * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
@@ -38,13 +18,13 @@ const defaultProps = {
  */
 
 function Input({
-  labelName,
-  isWithIcon,
+  labelName = null,
+  isWithIcon = false,
   iconType = 'edit',
   type,
-  error,
-  className,
-  message,
+  error = null,
+  className = '',
+  message = '',
   name,
   value,
   placeholder,
@@ -94,7 +74,5 @@ function Input({
     </div>
   );
 }
-
-Input.defaultProps = defaultProps;
 
 export default Input;
