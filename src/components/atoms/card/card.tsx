@@ -11,7 +11,7 @@ import { CardProps } from './types';
  * - children - ReactNode - контент, который нужно вставить в карточку
  * - noPadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеются стандартные паддинги 32px
  * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'. По умолчанию div.
- * - стандартные атрибуты HTML для `div`
+ * - стандартные атрибуты HTML для `<div>`
  */
 
 function Card({
