@@ -11,12 +11,8 @@
     object-position: center;
     display: block;
     width: 100%;
-
-    &Container {
-      overflow: hidden;
-      border-radius: 16px;
-      margin-bottom: 32px;
-    }
+    border-radius: 16px;
+    margin-bottom: 32px;
   }
 
   &Meta {

@@ -6,7 +6,7 @@ export { CourseBenefits } from './course-benefits';
 export { default as CourseCompleted } from './course-completed/course-completed';
 export { CourseContents } from './course-contents';
 export { CourseDescription } from './course-description';
-export { default as CourseOverview } from './course-overview/course-overview';
+export { CourseOverview } from './course-overview';
 export { CoursePreview } from './course-preview';
 export { FAQ } from './faq';
 export { Filter } from './filter';

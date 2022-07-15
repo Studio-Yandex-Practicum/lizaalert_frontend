@@ -1,40 +1,25 @@
-import { Card } from '../../atoms';
-import { Button, TextWithIcon } from '../../molecules';
-import DefaultImage from '../../../assets/images/course.jpg';
+import { Card } from '../../atoms/card';
+import { Button } from '../../molecules/button';
+import { TextWithIcon } from '../../molecules/text-with-icon';
 import styles from './course-overview.module.scss';
+import { CourseOverviewProps } from './types';
+import defaultImage from '../../../assets/images/course.jpg';
 
-type CourseOverviewProps = {
-  imgLink?: string;
-  level?: string;
-  lessonQuantity?: number;
-  duration?: string;
-  startDate?: string;
-};
-
-const defaultProps = {
-  imgLink: DefaultImage,
-  level: 'Бывалый',
-  lessonQuantity: 24,
-  duration: '64 ч',
-  startDate: '22.02.2022',
-};
+/**
+ * @description Карточка краткого описания курса.
+ * */
 
 function CourseOverview({
-  imgLink,
-  level,
-  lessonQuantity,
-  startDate,
-  duration,
+  imgLink = defaultImage,
+  level = 'Бывалый',
+  lessonQuantity = 24,
+  startDate = '22.02.2022',
+  duration = 64,
 }: CourseOverviewProps) {
   return (
     <Card className={styles.courseOverview} noPadding>
-      <div className={styles.courseImageContainer}>
-        <img
-          className={styles.courseImage}
-          src={imgLink}
-          alt="Картинка курса"
-        />
-      </div>
+      <img className={styles.courseImage} src={imgLink} alt="Картинка курса" />
+
       <ul className={styles.courseMeta}>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Уровень:" iconType="rank" />
@@ -46,25 +31,24 @@ function CourseOverview({
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {duration}
+          {duration} ч
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
           {startDate} г
         </li>
       </ul>
-      <div className={styles.courseAlert}>
-        <TextWithIcon
-          text="Внимание! Количество попыток прохождения курса ограничено"
-          iconType="exclamationMark"
-          color="warning"
-        />
-      </div>
-      <Button className={styles.courseEnroll}>Записаться</Button>
+
+      <TextWithIcon
+        className={styles.courseAlert}
+        text="Внимание! Количество попыток прохождения курса ограничено"
+        iconType="exclamationMark"
+        color="warning"
+      />
+
+      <Button className={styles.courseEnroll} text="Записаться" />
     </Card>
   );
 }
-
-CourseOverview.defaultProps = defaultProps;
 
 export default CourseOverview;
