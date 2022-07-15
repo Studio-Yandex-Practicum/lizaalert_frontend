@@ -18,7 +18,7 @@ const mapSlugToIcon: Record<string, IconType> = {
  * @description Компонент элемента оглавления. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
  *
  * @props
- * - preview-webinar - number, required - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
+ * - index - number, required - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
  * - content - object, required - содержание главы: `id`, `topic` и массив `lessons`.
  * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
  * - className - string - класс-миксин для стилизации внешнего контейнера.
