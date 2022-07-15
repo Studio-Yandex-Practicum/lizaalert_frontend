@@ -9,9 +9,11 @@ import { Controls } from '../../../utils/constants';
  * @description Компонент контролируемого чекбокса или радио с текстом-лейблом.
  *
  * @props
- * - isRadio - boolean - флаг, является ли компонент радио-инпутом
- * - labelText - string - текст лейбла, всегда справа
- * - className - string - класс-миксин
+ * - name - string, required - имя инпута.
+ * - isRadio - boolean - флаг, является ли компонент радио-инпутом.
+ * - labelText - string - текст лейбла, всегда справа.
+ * - className - string - класс-миксин.
+ * - стандартные атрибуты HTML для `<input>`.
  */
 
 function Checkbox({

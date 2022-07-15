@@ -1,20 +1,21 @@
 import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
+import { Icon } from '../../atoms/icon';
 import styles from './input.module.scss';
 import { InputProps } from './types';
 
 /**
  * @description Компонент инпут с основной стилизацией (активное и неактивное состояние).
  *
- * - type - enum('text' | 'date' | 'file' | 'tel' | 'email' | 'password'), required - тип инпута
- * - labelName - string - заголовок инпута
- * - isWithIcon - boolean - пропс, по умолчанию false, определяет есть ли иконка у инпута
+ * - type - enum('text' | 'date' | 'file' | 'tel' | 'email' | 'password'), required - тип инпута.
+ * - name - string, required - имя инпута.
+ * - labelName - string - лейбл инпута.
+ * - isWithIcon - boolean - пропс, по умолчанию false, определяет есть ли иконка у инпута.
  * - iconType - enum(IconType) - тип иконки из объекта иконок, по умолчанию `'edit'`. При типе инпута `file` ставится иконка скрепки.
- * - error - string - текст ошибки валидации
- * - className - string - css-класс для стилизации компонента родителя (div)
- * - message - string - кастомный текст ошибки
- * - остальные атрибуты HTMLInputElement
+ * - error - string - текст ошибки валидации.
+ * - className - string - css-класс для стилизации компонента родителя (div).
+ * - message - string - кастомный текст ошибки.
+ * - стандартные атрибуты HTML для `<input>`.
  */
 
 function Input({
@@ -44,6 +45,7 @@ function Input({
           )}
 
           <input
+            {...props}
             id={name}
             name={name}
             value={value}
@@ -52,7 +54,6 @@ function Input({
               [styles.input_hidden]: type === 'file',
               [styles.input_warned]: error,
             })}
-            {...props}
             type={type}
           />
 
