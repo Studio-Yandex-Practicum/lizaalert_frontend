@@ -1,6 +1,6 @@
 export { Accordion } from './accordion';
 export { Button } from './button';
-export { default as Checkbox } from './checkbox/checkbox';
+export { Checkbox } from './checkbox';
 export { default as HeaderLink } from './header-link/header-link';
 export { Input } from './input';
 export { default as Loader } from './loader/loader';

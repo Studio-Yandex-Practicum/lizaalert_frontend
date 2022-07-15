@@ -23,6 +23,11 @@ export const SPINNER_DELAY = 300;
 export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
 
+export const Controls = {
+  CHECKBOX: 'checkbox',
+  RADIO: 'radio',
+};
+
 export const errorMessages = {
   email: 'Введите эл. адрес в формате: anna@liza-alert.ru',
   tel: 'Введите номер телефона в формате: +7 (XXX) XXX XX XX',
