@@ -1,12 +1,12 @@
 export { Accordion } from './accordion';
 export { Button } from './button';
 export { Checkbox } from './checkbox';
-export { default as HeaderLink } from './header-link/header-link';
+export { HeaderLink } from './header-link';
 export { Input } from './input';
 export { default as Loader } from './loader/loader';
 export { default as Select } from './select/select';
 export { default as Tag } from './tag/tag';
-export { default as TextWithIcon } from './text-with-icon/text-with-icon';
+export { TextWithIcon } from './text-with-icon';
 export { default as TestAnswer } from './test-answer/test-answer';
 export { default as TestResult } from './test-results/test-results';
 export { default as PasswordUpdated } from './password-updated/password-updated';
