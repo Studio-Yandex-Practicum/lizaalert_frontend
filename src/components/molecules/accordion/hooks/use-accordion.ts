@@ -1,21 +1,13 @@
 import {
-  RefObject,
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import { Nullable } from '../../../../types';
+import { UseAccordionReturnType } from '../types';
 
 const ANIMATION_DURATION = 300;
-
-type UseAccordionReturnType = {
-  isOpen: boolean;
-  toggleAccordion: () => void;
-  contentRef: Nullable<RefObject<HTMLElement>>;
-  height: string;
-};
 
 const useAccordion = (open: boolean): UseAccordionReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(open);

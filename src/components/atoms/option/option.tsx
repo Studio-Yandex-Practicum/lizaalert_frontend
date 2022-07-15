@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import { HTMLAttributes } from 'react';
+import classnames from 'classnames';
 import styles from './option.module.scss';
 import { OptionProps } from './types';
 

@@ -1,24 +1,9 @@
-import { ReactNode, Ref } from 'react';
+import { Ref } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
+import { Icon } from '../../atoms/icon';
 import styles from './accordion.module.scss';
+import { AccordionButtons, AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
-
-type AccordionButtons = 'text' | 'icon';
-
-type AccordionProps = {
-  title: string;
-  children: ReactNode;
-  className?: string;
-  button?: AccordionButtons;
-  open?: boolean;
-};
-
-const defaultProps = {
-  className: '',
-  button: 'icon',
-  open: false,
-};
 
 /**
  * @description Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
@@ -33,7 +18,7 @@ const defaultProps = {
 
 function Accordion({
   children,
-  className,
+  className = '',
   title,
   button = 'icon',
   open = false,
@@ -69,7 +54,5 @@ function Accordion({
     );
   }
 }
-
-Accordion.defaultProps = defaultProps;
 
 export default Accordion;

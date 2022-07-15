@@ -1,4 +1,4 @@
-export { default as Accordion } from './accordion/accordion';
+export { Accordion } from './accordion';
 export { default as Button } from './button/button';
 export { default as Checkbox } from './checkbox/checkbox';
 export { default as HeaderLink } from './header-link/header-link';
