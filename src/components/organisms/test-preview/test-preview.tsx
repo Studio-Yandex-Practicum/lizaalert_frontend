@@ -43,7 +43,7 @@ function TestPreview({ test, toggleRender }: TextPreviewProps) {
         <Button
           className={styles.button}
           onClick={toggleRender}
-          text=" Начать тест"
+          text="Начать тест"
         />
       )}
     </Card>

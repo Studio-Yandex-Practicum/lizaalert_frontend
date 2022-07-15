@@ -18,7 +18,7 @@ export { default as Test } from './test/test';
 export { TestQuestion } from './test-question';
 export { default as TestContent } from './test-content/test-content';
 export { TestPreview } from './test-preview';
-export { default as VideoLesson } from './video-lesson/video-lesson';
+export { VideoLesson } from './video-lesson';
 export { default as NewCourseMain } from './new-course-main/new-course-main';
 export { default as NewCourseDescription } from './new-course-description/new-course-description';
 export { default as NewCourseContent } from './new-course-content/new-course-content';
