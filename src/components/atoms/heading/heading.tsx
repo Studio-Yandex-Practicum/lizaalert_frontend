@@ -1,26 +1,7 @@
-import { createElement, ReactNode } from 'react';
+import { createElement, HTMLAttributes } from 'react';
 import classnames from 'classnames';
 import styles from './heading.module.scss';
-
-type HeadingSizes = 'xxl' | 'xl' | 'l' | 'm';
-
-export type HeadingProps = {
-  level?: number;
-  title?: ReactNode | string;
-  children?: ReactNode | string;
-  size?: HeadingSizes;
-  isSubheading?: boolean;
-  className?: string;
-};
-
-const defaultProps = {
-  level: 2,
-  title: '',
-  children: null,
-  size: 'xl',
-  isSubheading: false,
-  className: '',
-};
+import { HeadingProps } from './types';
 
 /**
  * @description Компонент-конструктор заголовка, возвращает элемент `<h{level}>` или `<p>`, если нужен подзаголовок.
@@ -32,23 +13,26 @@ const defaultProps = {
  * - size - string - размер заголовка из заранее определенных стилей: `xxl`, `xl`, `l`, `m` из font-variables. По-умолчанию `xl`.
  * - isSubheading - boolean - при передаче этого пропса вернется элемент `<p>`, по умолчанию false.
  * - className - string - css-класс миксин для передачи своих стилей
+ * - стандартные атрибуты HTML для `<h*>`
  */
 
 function Heading({
   level = 2,
-  title,
-  children,
+  title = '',
+  children = null,
   size = 'xl',
-  isSubheading,
-  className,
-}: HeadingProps) {
+  isSubheading = false,
+  className = '',
+  ...props
+}: HeadingProps & HTMLAttributes<HTMLHeadingElement>) {
   return createElement(
     isSubheading ? 'p' : `h${level > 6 || level < 1 ? 2 : level}`,
-    { className: classnames(styles.heading, styles[size], className) },
+    {
+      ...props,
+      className: classnames(styles.heading, styles[size], className),
+    },
     children ?? title
   );
 }
-
-Heading.defaultProps = defaultProps;
 
 export default Heading;

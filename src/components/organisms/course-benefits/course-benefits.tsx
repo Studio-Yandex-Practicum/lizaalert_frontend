@@ -1,51 +1,41 @@
-import { Card, Heading, Icon } from '../../atoms';
-import { Accordion } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Icon } from '../../atoms/icon';
+import { Accordion } from '../../molecules/accordion';
 import styles from './course-benefits.module.scss';
+import { CourseBenefitsProps } from './types';
 
-export type BenefitType = {
-  id: number;
-  title: string;
-  description: string;
-};
-
-type CourseBenefitsProps = {
-  benefitsList?: BenefitType[];
-};
-
-const defaultProps = {
-  benefitsList: [
-    {
-      id: 0,
-      title: 'Поисково-спасательная работа',
-      description:
-        'Оказание помощи гражданам, оказавшимся в зонах бедствия или пропавшим в безлюдной местности',
-    },
-    {
-      id: 1,
-      title: 'Следовая работа',
-      description:
-        'Обучение животного идти как по горячему, так и по остывшему следу',
-    },
-    {
-      id: 2,
-      title: 'Поиск тел погибших',
-      description:
-        'Поиск тел и их остатков с применением специально обученных собак',
-    },
-  ],
-};
+const defaultList = [
+  {
+    id: 0,
+    title: 'Поисково-спасательная работа',
+    description:
+      'Оказание помощи гражданам, оказавшимся в зонах бедствия или пропавшим в безлюдной местности',
+  },
+  {
+    id: 1,
+    title: 'Следовая работа',
+    description:
+      'Обучение животного идти как по горячему, так и по остывшему следу',
+  },
+  {
+    id: 2,
+    title: 'Поиск тел погибших',
+    description:
+      'Поиск тел и их остатков с применением специально обученных собак',
+  },
+];
 
 /**
  * @description Компонент тем курса
  *
  * @props
- * benefitsList - arr - массив объектов. Объект темы содержит id, title, description
- * toggleRender - function - функция возврата к тесту
+ * - benefitsList - arr - массив объектов. Объект темы содержит id, title, description
  */
 
-function CourseBenefits({ benefitsList }: CourseBenefitsProps) {
+function CourseBenefits({ benefitsList = defaultList }: CourseBenefitsProps) {
   return (
-    <Card className={styles.benefits} htmlTag="article">
+    <Card className={styles.benefits} htmlTag="section">
       <Accordion
         className={styles.title}
         button="text"
@@ -68,7 +58,5 @@ function CourseBenefits({ benefitsList }: CourseBenefitsProps) {
     </Card>
   );
 }
-
-CourseBenefits.defaultProps = defaultProps;
 
 export default CourseBenefits;

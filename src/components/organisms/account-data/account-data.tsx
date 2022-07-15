@@ -1,17 +1,14 @@
 import { FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Heading } from '../../atoms';
-import { Button, Input } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
+import { Input } from '../../molecules/input';
 import styles from './account-data.module.scss';
+import { AccountDataType } from './types';
 import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
 import { useFormWithValidation } from '../../../hooks';
-
-type AccountDataType = {
-  phoneNumber: string;
-  email: string;
-  password: string;
-};
 
 /**
  * @description Компонент-виджет с редактируемой формой данных аккаунта.
@@ -41,14 +38,14 @@ function AccountData() {
     <Card className={styles.accountData}>
       <Heading size="l" title="Аккаунт" className={styles.heading} />
       <form
-        name="accountData"
+        name="accountDataForm"
         onSubmit={handleFormSubmit}
         className={styles.form}
       >
         <Input
           labelName="Номер телефона"
           type="tel"
-          inputName="phoneNumber"
+          name="phoneNumber"
           value={values.phoneNumber || ''}
           onChange={handleChange}
           placeholder="Номер телефона начиная с +7"
@@ -57,7 +54,7 @@ function AccountData() {
         <Input
           labelName="Email"
           type="email"
-          inputName="email"
+          name="email"
           value={values.email || ''}
           onChange={handleChange}
           error={errors.email}
@@ -67,7 +64,7 @@ function AccountData() {
         <Input
           labelName="Пароль"
           type="password"
-          inputName="password"
+          name="password"
           value={values.password || ''}
           onChange={handleChange}
           placeholder="Ваш пароль"

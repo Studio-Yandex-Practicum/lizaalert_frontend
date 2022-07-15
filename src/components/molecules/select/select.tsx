@@ -1,9 +1,8 @@
 import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
-import { Option, OptionType } from '../../atoms';
+import { Option } from '../../atoms/option';
 import styles from './select.module.scss';
-
-/* TODO: На мобильном разрешении вернуть нативный select */
+import { SelectProps } from './types';
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
@@ -11,29 +10,27 @@ const DUMMY_OPTIONS = [
   { id: 3, name: 'Первая помощь' },
 ];
 
-type SelectProps = {
-  className?: string;
-  selectName: string;
-  inputName: string;
-  placeholder: string;
-  options: OptionType[];
-  setSelectedValue: (selectName: string, value: string) => void;
-  selectedValue?: string;
-};
-
-const defaultProps = {
-  className: '',
-  selectedValue: '',
-};
+/**
+ * @description Компонент стилизованного селекта.
+ *
+ * @props
+ * - className - string - css-класс миксин для описания внешней геометрии.
+ * - selectName - string, required - имя селекта.
+ * - inputName - string, required - имя лейбла.
+ * - placeholder - string, required - плейсхолдер для селекта.
+ * - options - array of { id: string, name: string }, required - массив объектов опции, name -- текст опции
+ * - setSelectedValue - function, required - обработчик выбора опции
+ * - selectedValue - string - текст выбранной опции по умолчанию
+ * */
 
 function Select({
-  className,
+  className = '',
   selectName,
   inputName,
   placeholder,
   options = DUMMY_OPTIONS,
   setSelectedValue,
-  selectedValue,
+  selectedValue = '',
 }: SelectProps) {
   const [showOptions, setShowOptions] = useState(false);
 
@@ -86,7 +83,5 @@ function Select({
     </div>
   );
 }
-
-Select.defaultProps = defaultProps;
 
 export default Select;

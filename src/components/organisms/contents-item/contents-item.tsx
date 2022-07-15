@@ -1,35 +1,11 @@
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
-import { Icon, IconType } from '../../atoms';
-import { Accordion, StyledLink, TextWithIcon } from '../../molecules';
+import { Icon, IconType } from '../../atoms/icon';
+import { Accordion } from '../../molecules/accordion';
+import { StyledLink } from '../../molecules/styled-link';
+import { TextWithIcon } from '../../molecules/text-with-icon';
 import styles from './contents-item.module.scss';
-
-type LessonType = {
-  id: number;
-  slug: 'lesson' | 'video' | 'webinar' | 'test';
-  title: string;
-  status: 'finished' | 'active' | 'coming';
-};
-
-export type CourseContentsType = {
-  id: number;
-  topic: string;
-  lessons: LessonType[];
-};
-
-export type ContentsItemType = 'main' | 'inner';
-
-type ContentsItemProps = {
-  index: number;
-  content: CourseContentsType;
-  type?: ContentsItemType;
-  className?: string;
-};
-
-const defaultProps = {
-  type: 'main',
-  className: '',
-};
+import { ContentsItemProps, LessonType } from './types';
 
 const mapSlugToIcon: Record<string, IconType> = {
   lesson: 'document',
@@ -42,13 +18,18 @@ const mapSlugToIcon: Record<string, IconType> = {
  * @description Компонент элемента оглавления. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
  *
  * @props
- * - index - number - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
- * - content - object - содержание главы: `id`, `topic` и массив `lessons`.
+ * - index - number, required - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
+ * - content - object, required - содержание главы: `id`, `topic` и массив `lessons`.
  * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
  * - className - string - класс-миксин для стилизации внешнего контейнера.
  * */
 
-function ContentsItem({ content, index, type, className }: ContentsItemProps) {
+function ContentsItem({
+  content,
+  index,
+  type = 'main',
+  className = '',
+}: ContentsItemProps) {
   const { topic, lessons, id } = content;
   const { courseId = '', topicId } = useParams();
 
@@ -121,7 +102,5 @@ function ContentsItem({ content, index, type, className }: ContentsItemProps) {
     );
   }
 }
-
-ContentsItem.defaultProps = defaultProps;
 
 export default ContentsItem;

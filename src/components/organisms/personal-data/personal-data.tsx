@@ -1,20 +1,15 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Heading } from '../../atoms';
-import { Button, Input } from '../../molecules';
-import { useFormWithValidation } from '../../../hooks';
-import { selectProfilePersonal } from '../../../store/profile/selectors';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
+import { Input } from '../../molecules/input';
 import styles from './personal-data.module.scss';
+import { PersonalDataType } from './types';
+import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
+import { useFormWithValidation } from '../../../hooks';
 import { patterns } from '../../../utils/constants';
-
-type PersonalDataType = {
-  name: string;
-  dateOfBirth: string;
-  region: string;
-  nickname: string;
-  avatar: string;
-};
 
 /**
  * @description Компонент-виджет с редактируемой формой данных профиля.
@@ -55,14 +50,14 @@ function PersonalData() {
     <Card className={styles.personalData}>
       <Heading size="l" title="Личные данные" className={styles.heading} />
       <form
-        name="personalData"
+        name="personalDataForm"
         className={styles.form}
         onSubmit={handleFormSubmit}
       >
         <Input
           labelName="ФИО"
           type="text"
-          inputName="name"
+          name="name"
           value={values.name || ''}
           onChange={handleChange}
           isWithIcon
@@ -74,7 +69,7 @@ function PersonalData() {
         <Input
           labelName="Дата рождения"
           type="date"
-          inputName="dateOfBirth"
+          name="dateOfBirth"
           value={values.dateOfBirth || ''}
           onChange={handleChange}
           isWithIcon
@@ -87,7 +82,7 @@ function PersonalData() {
         <Input
           labelName="Географический регион"
           type="text"
-          inputName="region"
+          name="region"
           value={values.region || ''}
           onChange={handleChange}
           isWithIcon
@@ -99,7 +94,7 @@ function PersonalData() {
         <Input
           labelName="Позывной на форуме"
           type="text"
-          inputName="nickname"
+          name="nickname"
           value={values.nickname || ''}
           onChange={handleChange}
           isWithIcon
@@ -112,7 +107,7 @@ function PersonalData() {
           labelName="Фото"
           type="file"
           accept="image/*"
-          inputName="avatar"
+          name="avatar"
           value={values.avatar || ''}
           onChange={onChangeFile}
           error={errors.avatar}

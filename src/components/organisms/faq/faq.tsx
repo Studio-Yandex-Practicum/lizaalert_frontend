@@ -1,5 +1,5 @@
-import { Card } from '../../atoms';
-import { Accordion } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Accordion } from '../../molecules/accordion';
 import styles from './faq.module.scss';
 
 const initialData = [
@@ -13,18 +13,22 @@ const initialData = [
     id: 2,
     question: 'Что если я не набрал достаточное количество баллов?',
     answer:
-      'У вас будет несколько попыток пересдачи теста. Если вы безуспешно используете все попытки, то материалы курса становятся недоступными.',
+      'У вас будет несколько попыток пересдачи теста. Если вы безуспешно используете все попытки, то материалы курса становятся недоступными.',
   },
   {
     id: 3,
     question: 'Как долго доступны материалы?',
-    answer: 'После окончания материалы доступны бессрочно',
+    answer: 'После окончания материалы доступны бессрочно',
   },
 ];
 
+/**
+ * @description Компонент карточки "Часто задаваемые вопросы" со списком-аккордеоном.
+ */
+
 function FAQ() {
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} htmlTag="section">
       <Accordion className={styles.title} title="FAQ" button="text" open>
         <ul className={styles.list}>
           {initialData.map((list) => (

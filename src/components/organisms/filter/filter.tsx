@@ -1,19 +1,23 @@
 import classnames from 'classnames';
-import { Card, Heading } from '../../atoms';
-import { Accordion, Button, Checkbox, Tag } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Accordion } from '../../molecules/accordion';
+import { Button } from '../../molecules/button';
+import { Checkbox } from '../../molecules/checkbox';
+import { Tag } from '../../molecules/tag';
 import styles from './filter.module.scss';
+import { FilterProps } from './types';
 import { useFilter } from './hooks/use-filter';
 import { filters } from './constants';
 
-type FilterProps = {
-  className?: string;
-};
+/**
+ * @description Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
+ *
+ * @props
+ * - className - string - класс-миксин для внешнего контейнера
+ */
 
-const defaultProps = {
-  className: '',
-};
-
-function Filter({ className }: FilterProps) {
+function Filter({ className = '' }: FilterProps) {
   const {
     selection,
     resetFilters,
@@ -71,7 +75,5 @@ function Filter({ className }: FilterProps) {
     </aside>
   );
 }
-
-Filter.defaultProps = defaultProps;
 
 export default Filter;

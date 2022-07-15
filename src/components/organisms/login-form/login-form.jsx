@@ -55,7 +55,7 @@ function LoginForm() {
         />
         <Input
           labelName="Email"
-          inputName="userEmail"
+          name="userEmail"
           type="email"
           value={values?.userEmail || ''}
           placeholder="Введите адрес электронной почты"
@@ -67,7 +67,7 @@ function LoginForm() {
         />
         <Input
           labelName="Номер телефона"
-          inputName="userTel"
+          name="userTel"
           type="tel"
           value={values?.userTel || ''}
           placeholder="+7 ( ___ ) ___  -  ___"
@@ -79,7 +79,7 @@ function LoginForm() {
         />
         <Input
           labelName="Пароль"
-          inputName="userPassword"
+          name="userPassword"
           type="password"
           value={values?.userPassword || ''}
           placeholder=""

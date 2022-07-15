@@ -1,20 +1,7 @@
 import classnames from 'classnames';
-import { Icon, IconType } from '../../atoms';
+import { Icon } from '../../atoms/icon';
 import styles from './text-with-icon.module.scss';
-
-type TextWithIconProps = {
-  text: string | number;
-  iconType: IconType;
-  isReverse?: boolean;
-  color?: string;
-  className?: string;
-};
-
-const defaultProps = {
-  isReverse: false,
-  color: '',
-  className: '',
-};
+import { TextWithIconProps } from './types';
 
 /**
  * @description Компонент текста с иконкой. По умолчанию иконка расположена слева от текста.
@@ -30,9 +17,9 @@ const defaultProps = {
 function TextWithIcon({
   text,
   iconType,
-  isReverse,
+  isReverse = false,
   color = '',
-  className,
+  className = '',
 }: TextWithIconProps) {
   const classNames = classnames(styles.textWithIcon, className, {
     [styles.reverse]: isReverse,
@@ -49,7 +36,5 @@ function TextWithIcon({
     </div>
   );
 }
-
-TextWithIcon.defaultProps = defaultProps;
 
 export default TextWithIcon;

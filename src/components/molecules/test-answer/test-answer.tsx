@@ -1,29 +1,15 @@
 import { useDispatch } from 'react-redux';
-import Checkbox from '../checkbox/checkbox';
+import { Checkbox } from '../checkbox';
 import { change } from '../../../store/test/slice';
-import { CHECKBOX, RADIO } from '../../../utils/constants';
-
-export type AnswerType = {
-  id: number;
-  text: string;
-  isCorrect: boolean;
-  isChecked: boolean;
-};
-
-export type AnswerOptionsType = 'checkbox' | 'radio';
-
-type TestAnswerProps = {
-  answer: AnswerType;
-  questionId: number;
-  answerOptions: AnswerOptionsType;
-};
+import { TestAnswerProps } from './types';
+import { Controls } from '../../../utils/constants';
 
 /**
  * @description Компонент ответа теста.
  *
- * - answer - obj - объект ответа, содержит id, text, isChecked, isCorrect
- * - questionId - number - id вопроса, в котором содержится answer
- * - answerOptions - string - варианты ответов ('checkbox' или 'radio')
+ * - answer - obj, required - объект ответа, содержит id, text, isChecked, isCorrect
+ * - questionId - number, required - id вопроса, в котором содержится answer
+ * - answerOptions - enum('checkbox' | 'radio'), required - варианты ответов
  */
 
 function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
@@ -35,9 +21,9 @@ function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
 
   return (
     <Checkbox
-      isRadio={answerOptions === RADIO}
+      isRadio={answerOptions === Controls.RADIO}
       name={
-        answerOptions === CHECKBOX
+        answerOptions === Controls.CHECKBOX
           ? `answer${answer.id}`
           : `answer${questionId}`
       }
