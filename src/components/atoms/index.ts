@@ -1,4 +1,4 @@
-export { default as Card } from './card/card';
+export { Card } from './card';
 export { default as Icon } from './icon/icon';
 export type { IconType } from './icon/icon';
 export { default as Heading } from './heading/heading';
