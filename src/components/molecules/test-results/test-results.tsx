@@ -1,54 +1,41 @@
 import classNames from 'classnames';
-import TextWithIcon from '../text-with-icon/text-with-icon';
+import { TextWithIcon } from '../text-with-icon';
 import styles from './test-results.module.scss';
-
-type AnswerType = {
-  id: number;
-  text: string;
-  isCorrect: boolean;
-  isChecked: boolean;
-};
-
-type TestResultProps = {
-  answer: AnswerType;
-  className?: string;
-};
-
-const defaultProps = {
-  className: '',
-};
-
-/**
- * @description Компонент результата ответов теста.
- *
- * - answer - obj - объект ответа, содержит id, text, isChecked, isCorrect
- * - className - string - css-класс для стилизации текста компонента TextWithIcon
- */
+import { TestResultProps } from './types';
+import { AnswerType } from '../test-answer';
+import { IconType } from '../../atoms/icon';
 
 const CORRECT_SELECTED_ANSWER = 'checkSolid';
 const CORRECT_UNSELECTED_ANSWER = 'check';
 const INCORRECT_SELECTED_ANSWER = 'xSolid';
 const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
 
-function TestResult({ answer, className }: TestResultProps) {
-  function handleIconType() {
-    if (answer.isCorrect && answer.isChecked) {
-      return CORRECT_SELECTED_ANSWER;
-    }
-    if (answer.isCorrect && !answer.isChecked) {
-      return CORRECT_UNSELECTED_ANSWER;
-    }
-    if (!answer.isCorrect && answer.isChecked) {
-      return INCORRECT_SELECTED_ANSWER;
-    }
-    return INCORRECT_UNSELECTED_ANSWER;
+function handleIconType(answer: AnswerType): IconType {
+  if (answer.isCorrect && answer.isChecked) {
+    return CORRECT_SELECTED_ANSWER;
   }
+  if (answer.isCorrect && !answer.isChecked) {
+    return CORRECT_UNSELECTED_ANSWER;
+  }
+  if (!answer.isCorrect && answer.isChecked) {
+    return INCORRECT_SELECTED_ANSWER;
+  }
+  return INCORRECT_UNSELECTED_ANSWER;
+}
 
+/**
+ * @description Компонент результата ответов теста.
+ *
+ * - answer - obj, required - объект ответа, содержит id, text, isChecked, isCorrect.
+ * - className - string - css-класс для стилизации текста компонента TextWithIcon.
+ */
+
+function TestResult({ answer, className = '' }: TestResultProps) {
   return (
     <TextWithIcon
       key={answer.id}
       text={answer.text}
-      iconType={handleIconType()}
+      iconType={handleIconType(answer)}
       className={classNames(className, styles.text, {
         [styles.text__success]: answer.isCorrect && answer.isChecked,
         [styles.text__notChecked_right]: answer.isCorrect && !answer.isChecked,
@@ -59,7 +46,5 @@ function TestResult({ answer, className }: TestResultProps) {
     />
   );
 }
-
-TestResult.defaultProps = defaultProps;
 
 export default TestResult;
