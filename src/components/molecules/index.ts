@@ -5,7 +5,7 @@ export { HeaderLink } from './header-link';
 export { Input } from './input';
 export { Loader } from './loader';
 export { StyledLink } from './styled-link';
-export { default as Tag } from './tag/tag';
+export { Tag } from './tag';
 export { TextWithIcon } from './text-with-icon';
 export { default as TestAnswer } from './test-answer/test-answer';
 export { default as TestResult } from './test-results/test-results';
