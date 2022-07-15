@@ -28,8 +28,8 @@ function Heading({
   return createElement(
     isSubheading ? 'p' : `h${level > 6 || level < 1 ? 2 : level}`,
     {
-      className: classnames(styles.heading, styles[size], className),
       ...props,
+      className: classnames(styles.heading, styles[size], className),
     },
     children ?? title
   );

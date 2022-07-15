@@ -1,22 +1,7 @@
-import { KeyboardEvent } from 'react';
 import classnames from 'classnames';
+import { HTMLAttributes } from 'react';
 import styles from './option.module.scss';
-
-export type OptionType = {
-  id: number;
-  name: string;
-};
-
-export type OptionProps = {
-  option: OptionType;
-  onClick: (value: string) => void;
-  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
-  className?: string;
-};
-
-const defaultProps = {
-  className: '',
-};
+import { OptionProps } from './types';
 
 /**
  * @description Компонент-опция, возвращает элемент `li` с текстом
@@ -26,27 +11,33 @@ const defaultProps = {
  * - onClick - function - функция-обработчик клика, поднимает "наверх" значение `option.name`
  * - onKeyDown - function - функция-обработчик при нажатии на клавишу клавиатуры
  * - className - string - css-класс миксин
+ * - стандартные атрибуты HTML для `<li>`
  */
 
-function Option({ option, onClick, onKeyDown, className }: OptionProps) {
+function Option({
+  option,
+  onClick,
+  onKeyDown,
+  className = '',
+  ...props
+}: OptionProps & HTMLAttributes<HTMLLIElement>) {
   const onOptionClick = () => {
     onClick(option.name);
   };
 
   return (
     <li
+      {...props}
       className={classnames(styles.option, className)}
       onClick={onOptionClick}
       onKeyDown={onKeyDown}
-      role="option"
       aria-selected
       value={option.name}
+      role="option"
     >
       {option.name}
     </li>
   );
 }
-
-Option.defaultProps = defaultProps;
 
 export default Option;

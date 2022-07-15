@@ -24,12 +24,12 @@ function Card({
   return createElement(
     htmlTag ?? 'div',
     {
+      ...props,
       className: classnames(
         styles.card,
         { [styles.cardNoPadding]: noPadding },
         className
       ),
-      ...props,
     },
     children
   );
