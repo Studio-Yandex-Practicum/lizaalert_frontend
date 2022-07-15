@@ -1,17 +1,6 @@
 import classnames from 'classnames';
 import styles from './loader.module.scss';
-
-type LoaderProps = {
-  className?: string;
-  isFixed?: boolean;
-  isAbsolute?: boolean;
-};
-
-const defaultProps = {
-  className: '',
-  isFixed: false,
-  isAbsolute: false,
-};
+import { LoaderProps } from './types';
 
 const settings = {
   cx: 25,
@@ -31,7 +20,11 @@ const settings = {
  * - isAbsolute - boolean - делает оверлею `position: absolute` и растягивает на ширину и высоту родительского контейнера
  * */
 
-function Loader({ isFixed, isAbsolute, className }: LoaderProps) {
+function Loader({
+  isFixed = false,
+  isAbsolute = false,
+  className = '',
+}: LoaderProps) {
   return (
     <div
       className={classnames(
@@ -56,7 +49,5 @@ function Loader({ isFixed, isAbsolute, className }: LoaderProps) {
     </div>
   );
 }
-
-Loader.defaultProps = defaultProps;
 
 export default Loader;
