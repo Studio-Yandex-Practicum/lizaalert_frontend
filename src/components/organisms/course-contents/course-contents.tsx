@@ -1,33 +1,25 @@
 import classnames from 'classnames';
-import { Card, Heading } from '../../atoms';
-import { Accordion } from '../../molecules';
-import ContentsItem, {
-  ContentsItemType,
-  CourseContentsType,
-} from '../contents-item/contents-item';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Accordion } from '../../molecules/accordion';
+import { ContentsItem } from '../contents-item';
 import styles from './course-contents.module.scss';
-
-type CourseContentsProps = {
-  content: CourseContentsType[];
-  type?: ContentsItemType;
-  className?: string;
-};
-
-const defaultProps = {
-  className: '',
-  type: 'main',
-};
+import { CourseContentsProps } from './types';
 
 /**
  * @description Компонент оглавления. Представляет собой список со вложенным списком уроков или аккордеон.
  *
  * @props
- * - content - array of objects - массив глав: `id`, `topic` и массив `lessons`.
+ * - content - array of objects, required - массив глав: `id`, `topic` и массив `lessons`.
  * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
  * - className - string - класс-миксин для стилизации внешнего контейнера.
  * */
 
-function CourseContents({ content, type, className }: CourseContentsProps) {
+function CourseContents({
+  content,
+  type = 'main',
+  className = '',
+}: CourseContentsProps) {
   const classes = classnames(className, styles.contents);
 
   const contentItems = content.map((item, index) => (
@@ -57,7 +49,5 @@ function CourseContents({ content, type, className }: CourseContentsProps) {
     </Card>
   );
 }
-
-CourseContents.defaultProps = defaultProps;
 
 export default CourseContents;

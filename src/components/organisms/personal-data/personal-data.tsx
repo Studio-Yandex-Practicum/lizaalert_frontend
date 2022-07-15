@@ -1,20 +1,15 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Heading } from '../../atoms';
-import { Button, Input } from '../../molecules';
-import { useFormWithValidation } from '../../../hooks';
-import { selectProfilePersonal } from '../../../store/profile/selectors';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
+import { Input } from '../../molecules/input';
 import styles from './personal-data.module.scss';
+import { PersonalDataType } from './types';
+import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
+import { useFormWithValidation } from '../../../hooks';
 import { patterns } from '../../../utils/constants';
-
-type PersonalDataType = {
-  name: string;
-  dateOfBirth: string;
-  region: string;
-  nickname: string;
-  avatar: string;
-};
 
 /**
  * @description Компонент-виджет с редактируемой формой данных профиля.
@@ -55,7 +50,7 @@ function PersonalData() {
     <Card className={styles.personalData}>
       <Heading size="l" title="Личные данные" className={styles.heading} />
       <form
-        name="personalData"
+        name="personalDataForm"
         className={styles.form}
         onSubmit={handleFormSubmit}
       >

@@ -1,87 +1,65 @@
 import classnames from 'classnames';
-import { Button } from '../../molecules';
+import { Button } from '../../molecules/button';
 import styles from './navigation-buttons.module.scss';
-
-export type NavigationButtonsProps = {
-  view?: 'main' | 'finish';
-  disabledBack?: boolean;
-  disabledForward?: boolean;
-  classNameForContainer?: string;
-  classNameForButtons?: string;
-  onClickBack: (...args: unknown[]) => void;
-  onClickForward: (...args: unknown[]) => void;
-};
-
-const defaultProps = {
-  view: 'main',
-  disabledBack: false,
-  disabledForward: false,
-  classNameForContainer: '',
-  classNameForButtons: '',
-};
+import { NavigationButtonsProps } from './types';
 
 /**
- * @description Компонент с кнопками навигации по уроку.
+ * @description Компонент кнопок навигации по уроку.
  *
+ * @props
  * - classNameForContainer - string - класс-миксин для контейнера
  * - classNameForButtons - string - класс-миксин для кнопок
- * - view - string - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
+ * - view - enum ('main' | 'finish') - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
  * - disabledBack - boolean - дизейбл кнопки "Назад"
  * - disabledForward - boolean - дизейбл кнопки "Далее"
- * - onClickBack - function - функция-обработчик клика на левую кнопку (назад)
- * - onClickForward - function - функция-обработчик клика на правую кнопку (вперед)
+ * - onClickBack - function, required - функция-обработчик клика на левую кнопку (назад)
+ * - onClickForward - function, required - функция-обработчик клика на правую кнопку (вперед)
  */
 
 function NavigationButtons({
-  classNameForContainer,
-  classNameForButtons,
-  view,
-  disabledBack,
-  disabledForward,
+  classNameForContainer = '',
+  classNameForButtons = '',
+  view = 'main',
+  disabledBack = false,
+  disabledForward = false,
   onClickBack,
   onClickForward,
 }: NavigationButtonsProps) {
-  const navBtnsClasses = classnames(styles.navBtns, classNameForContainer);
-  const btnsClasses = classnames(styles.button, classNameForButtons);
+  const buttonClasses = classnames(styles.button, classNameForButtons);
 
   return (
-    <div className={navBtnsClasses}>
+    <div className={classnames(styles.navButtons, classNameForContainer)}>
       <Button
         view="secondary"
         iconName="arrowBack"
         iconPosition="back"
         onClick={onClickBack}
-        className={btnsClasses}
+        className={buttonClasses}
         disabled={disabledBack}
-      >
-        Назад
-      </Button>
+        text="Назад"
+      />
 
       {view === 'main' && (
         <Button
           iconName="arrowForward"
           iconPosition="forward"
           onClick={onClickForward}
-          className={btnsClasses}
+          className={buttonClasses}
           disabled={disabledForward}
-        >
-          Далее
-        </Button>
+          text="Далее"
+        />
       )}
 
       {view === 'finish' && (
         <Button
-          className={btnsClasses}
+          className={buttonClasses}
           onClick={onClickForward}
           disabled={disabledForward}
-        >
-          Завершить
-        </Button>
+          text="Завершить"
+        />
       )}
     </div>
   );
 }
-
-NavigationButtons.defaultProps = defaultProps;
 
 export default NavigationButtons;

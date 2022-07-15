@@ -1,16 +1,9 @@
 import classnames from 'classnames';
-import { Icon } from '../../atoms';
-import { StyledLink } from '../../molecules';
+import { Icon } from '../../atoms/icon';
+import { StyledLink } from '../../molecules/styled-link';
 import useBreadcrumbs from './hooks/use-breadcrumbs';
 import styles from './breadcrumbs.module.scss';
-
-type BreadcrumbsProps = {
-  className?: string;
-};
-
-const defaultProps = {
-  className: '',
-};
+import { BreadcrumbsProps } from './types';
 
 /**
  * @description Компонент хлебных крошек, создает цепочку вложенных роутов.
@@ -19,8 +12,9 @@ const defaultProps = {
  * - className - string - класс-миксин для стилизации контейнера
  * */
 
-function Breadcrumbs({ className }: BreadcrumbsProps) {
+function Breadcrumbs({ className = '' }: BreadcrumbsProps) {
   const breadcrumbs = useBreadcrumbs();
+
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
       {breadcrumbs.map((link, i) => (
@@ -36,7 +30,5 @@ function Breadcrumbs({ className }: BreadcrumbsProps) {
     </div>
   );
 }
-
-Breadcrumbs.defaultProps = defaultProps;
 
 export default Breadcrumbs;

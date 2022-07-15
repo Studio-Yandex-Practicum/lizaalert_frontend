@@ -8,5 +8,5 @@ export { StyledLink } from './styled-link';
 export { Tag } from './tag';
 export { TextWithIcon } from './text-with-icon';
 export { TestAnswer } from './test-answer';
-export { TestResult } from './test-results';
+export { TestResults } from './test-results';
 export type { AnswerType, AnswerOptionsType } from './test-answer';

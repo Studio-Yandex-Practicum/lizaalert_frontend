@@ -1,13 +1,9 @@
 import classnames from 'classnames';
-import { Card, Heading } from '../../atoms';
-import { Accordion } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Accordion } from '../../molecules/accordion';
 import styles from './course-description.module.scss';
-
-type CourseDescriptionProps = {
-  description?: string;
-  tasks?: string[];
-  className?: string;
-};
+import { CourseDescriptionProps } from './types';
 
 const defaultProps = {
   description:
@@ -19,16 +15,27 @@ const defaultProps = {
     'Подготовка и проведение лесных испытаний для проверки готовности кинологических расчётов к выполнению работ по предназначению.',
     'Выработка порядка взаимодействия с кинологическими расчётами в ходе проведения ПСР',
   ],
-  className: '',
 };
 
+/**
+ * @description Компонент описания курса
+ *
+ * @props
+ * - description - string - описание курса
+ * - tasks - array of string - список задач курса
+ * - className - string - класс-миксин для внешнего контейнера
+ */
+
 function CourseDescription({
-  description,
-  tasks,
-  className,
+  description = defaultProps.description,
+  tasks = defaultProps.tasks,
+  className = '',
 }: CourseDescriptionProps) {
   return (
-    <Card className={classnames(styles.description, className)}>
+    <Card
+      className={classnames(styles.description, className)}
+      htmlTag="section"
+    >
       <Accordion
         button="text"
         title="Описание курса"
@@ -55,7 +62,5 @@ function CourseDescription({
     </Card>
   );
 }
-
-CourseDescription.defaultProps = defaultProps;
 
 export default CourseDescription;

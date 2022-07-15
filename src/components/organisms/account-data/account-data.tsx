@@ -1,17 +1,14 @@
 import { FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Heading } from '../../atoms';
-import { Button, Input } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
+import { Input } from '../../molecules/input';
 import styles from './account-data.module.scss';
+import { AccountDataType } from './types';
 import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
 import { useFormWithValidation } from '../../../hooks';
-
-type AccountDataType = {
-  phoneNumber: string;
-  email: string;
-  password: string;
-};
 
 /**
  * @description Компонент-виджет с редактируемой формой данных аккаунта.
@@ -41,7 +38,7 @@ function AccountData() {
     <Card className={styles.accountData}>
       <Heading size="l" title="Аккаунт" className={styles.heading} />
       <form
-        name="accountData"
+        name="accountDataForm"
         onSubmit={handleFormSubmit}
         className={styles.form}
       >

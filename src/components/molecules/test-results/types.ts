@@ -1,6 +1,6 @@
 import { AnswerType } from '../test-answer';
 
-export type TestResultProps = {
+export type TestResultsProps = {
   answer: AnswerType;
   className?: string;
 };

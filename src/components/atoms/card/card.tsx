@@ -1,17 +1,16 @@
-import { createElement, HTMLAttributes } from 'react';
+import { createElement } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 import { CardProps } from './types';
 
 /**
- * @description Компонент карточки. Визуальный элемент интерфейса с закругленными углами, тенью и паддингами, которые при необходимости обнуляются
+ * @description Компонент карточки. Визуальный элемент интерфейса с закругленными углами, тенью и паддингами, которые при необходимости обнуляются.
  *
  * @props
  * - className - string - дополнительный css-класс для стилизации
  * - children - ReactNode - контент, который нужно вставить в карточку
  * - noPadding - boolean - проп, позволяющий обнулить паддинги. По умолчанию false, т.е. у карточки имеются стандартные паддинги 32px
  * - htmlTag - string - тип тега-контейнера html для семантики: 'article', 'div', 'li', 'aside'. По умолчанию div.
- * - стандартные атрибуты HTML для `<div>`
  */
 
 function Card({
@@ -19,12 +18,10 @@ function Card({
   children,
   noPadding = false,
   htmlTag = 'div',
-  ...props
-}: CardProps & HTMLAttributes<HTMLElement>) {
+}: CardProps) {
   return createElement(
     htmlTag ?? 'div',
     {
-      ...props,
       className: classnames(
         styles.card,
         { [styles.cardNoPadding]: noPadding },

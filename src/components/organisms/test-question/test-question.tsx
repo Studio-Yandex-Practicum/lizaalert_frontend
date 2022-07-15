@@ -1,37 +1,16 @@
-import { Heading } from '../../atoms';
-import {
-  TestAnswer,
-  TestResult,
-  AnswerType,
-  AnswerOptionsType,
-} from '../../molecules';
+import { Heading } from '../../atoms/heading';
+import { TestAnswer } from '../../molecules/test-answer';
+import { TestResults } from '../../molecules/test-results';
 import styles from './test-question.module.scss';
-
-type QuestionType = {
-  id: number;
-  title: string;
-  answers: AnswerType[];
-};
-
-type TestQuestionProps = {
-  question: QuestionType;
-  index: number;
-  type: AnswerOptionsType;
-  isSubmitted?: boolean;
-  className?: string;
-};
-
-const defaultProps = {
-  isSubmitted: false,
-  className: '',
-};
+import { TestQuestionProps } from './types';
 
 /**
  * @description Компонент тестового вопроса.
  *
- * - question - obj - объект вопрос, содержит id, title и answers (массив ответов)
- * - index - number - index объекта
- * - type - string - тип вопроса ('checkbox', 'radio')
+ * @props
+ * - question - obj, required - объект вопрос, содержит id, title и answers (массив ответов)
+ * - index - number, required - index объекта
+ * - type - enum ('checkbox' | 'radio'), required - тип вопроса
  * - isSubmitted - bool - необязательный пропс, true или false в зависимости от того, отправлена ли форма
  * - className - string - css-класс для стилизации компонента родителя (li)
  */
@@ -40,8 +19,8 @@ function TestQuestion({
   question,
   index,
   type,
-  isSubmitted,
-  className,
+  isSubmitted = false,
+  className = '',
 }: TestQuestionProps) {
   // список ответов
   const answersList = question.answers.map((answer) => (
@@ -57,7 +36,7 @@ function TestQuestion({
   // список с проверкой ответов теста
   const resultsList = question.answers.map((answer) => (
     <li className={className} key={answer.id}>
-      <TestResult answer={answer} className={className} />
+      <TestResults answer={answer} className={className} />
     </li>
   ));
 
@@ -70,7 +49,5 @@ function TestQuestion({
     </>
   );
 }
-
-TestQuestion.defaultProps = defaultProps;
 
 export default TestQuestion;

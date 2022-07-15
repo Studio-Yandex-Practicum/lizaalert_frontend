@@ -1,2 +1,2 @@
-export { default as TestResult } from './test-results';
-export type { TestResultProps } from './types';
+export { default as TestResults } from './test-results';
+export type { TestResultsProps } from './types';
