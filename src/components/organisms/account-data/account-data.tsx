@@ -48,7 +48,7 @@ function AccountData() {
         <Input
           labelName="Номер телефона"
           type="tel"
-          inputName="phoneNumber"
+          name="phoneNumber"
           value={values.phoneNumber || ''}
           onChange={handleChange}
           placeholder="Номер телефона начиная с +7"
@@ -57,7 +57,7 @@ function AccountData() {
         <Input
           labelName="Email"
           type="email"
-          inputName="email"
+          name="email"
           value={values.email || ''}
           onChange={handleChange}
           error={errors.email}
@@ -67,7 +67,7 @@ function AccountData() {
         <Input
           labelName="Пароль"
           type="password"
-          inputName="password"
+          name="password"
           value={values.password || ''}
           onChange={handleChange}
           placeholder="Ваш пароль"

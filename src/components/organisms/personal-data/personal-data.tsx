@@ -62,7 +62,7 @@ function PersonalData() {
         <Input
           labelName="ФИО"
           type="text"
-          inputName="name"
+          name="name"
           value={values.name || ''}
           onChange={handleChange}
           isWithIcon
@@ -74,7 +74,7 @@ function PersonalData() {
         <Input
           labelName="Дата рождения"
           type="date"
-          inputName="dateOfBirth"
+          name="dateOfBirth"
           value={values.dateOfBirth || ''}
           onChange={handleChange}
           isWithIcon
@@ -87,7 +87,7 @@ function PersonalData() {
         <Input
           labelName="Географический регион"
           type="text"
-          inputName="region"
+          name="region"
           value={values.region || ''}
           onChange={handleChange}
           isWithIcon
@@ -99,7 +99,7 @@ function PersonalData() {
         <Input
           labelName="Позывной на форуме"
           type="text"
-          inputName="nickname"
+          name="nickname"
           value={values.nickname || ''}
           onChange={handleChange}
           isWithIcon
@@ -112,7 +112,7 @@ function PersonalData() {
           labelName="Фото"
           type="file"
           accept="image/*"
-          inputName="avatar"
+          name="avatar"
           value={values.avatar || ''}
           onChange={onChangeFile}
           error={errors.avatar}

@@ -21,7 +21,7 @@ function PasswordRestoration() {
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <Input
           labelName="Email"
-          inputName="email"
+          name="email"
           value={values.email || ''}
           onChange={handleChange}
           error={errors.email}
