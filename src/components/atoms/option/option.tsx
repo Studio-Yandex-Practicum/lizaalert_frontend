@@ -1,4 +1,3 @@
-import { HTMLAttributes } from 'react';
 import classnames from 'classnames';
 import styles from './option.module.scss';
 import { OptionProps } from './types';
@@ -11,23 +10,15 @@ import { OptionProps } from './types';
  * - onClick - function - функция-обработчик клика, поднимает "наверх" значение `option.name`
  * - onKeyDown - function - функция-обработчик при нажатии на клавишу клавиатуры
  * - className - string - css-класс миксин
- * - стандартные атрибуты HTML для `<li>`
  */
 
-function Option({
-  option,
-  onClick,
-  onKeyDown,
-  className = '',
-  ...props
-}: OptionProps & HTMLAttributes<HTMLLIElement>) {
+function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
   const onOptionClick = () => {
     onClick(option.name);
   };
 
   return (
     <li
-      {...props}
       className={classnames(styles.option, className)}
       onClick={onOptionClick}
       onKeyDown={onKeyDown}

@@ -13,7 +13,7 @@ import icons from './icons';
  */
 
 function Icon({ type, onClick, className = '' }: IconProps) {
-  if (!icons[type]) {
+  if (!type) {
     return null;
   }
 
