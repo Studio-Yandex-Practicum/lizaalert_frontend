@@ -1,5 +1,5 @@
 export { AccountData } from './account-data';
-export { default as AccountOverview } from './account-overview/account-overview';
+export { AccountOverview } from './account-overview';
 export { Breadcrumbs } from './breadcrumbs';
 export { ContentsItem } from './contents-item';
 export { CourseBenefits } from './course-benefits';
