@@ -12,6 +12,7 @@ import defaultImg from '../../../assets/images/profile.jpg';
  * */
 
 function AccountOverview() {
+  // TODO заменить первый аргумент на RootState после типизации Store
   const accountOverview = useSelector<unknown, AccountOverviewType>(
     selectProfileOverview
   );
