@@ -3,7 +3,7 @@ import { Heading } from '../../atoms/heading';
 import { HeaderLink } from '../../molecules/header-link';
 import { StyledLink } from '../../molecules/styled-link';
 import styles from './header.module.scss';
-import { RouteType } from '../../../types';
+import { RouteType } from '../../../types/route.types';
 import { isAdmin, routes } from '../../../config';
 
 /**

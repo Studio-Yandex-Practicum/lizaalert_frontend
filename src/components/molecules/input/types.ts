@@ -1,5 +1,5 @@
-import {IconType} from '../../atoms/icon';
-import {Nullable} from '../../../types';
+import { IconType } from '../../atoms/icon';
+import { Nullable } from '../../../types';
 
 export type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
 

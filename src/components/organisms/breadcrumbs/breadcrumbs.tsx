@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import { Icon } from '../../atoms/icon';
 import { StyledLink } from '../../molecules/styled-link';
-import useBreadcrumbs from './hooks/use-breadcrumbs';
 import styles from './breadcrumbs.module.scss';
 import { BreadcrumbsProps } from './types';
+import useBreadcrumbs from './hooks/use-breadcrumbs';
 
 /**
  * @description Компонент хлебных крошек, создает цепочку вложенных роутов.
