@@ -9,4 +9,4 @@ export { Tag } from './tag';
 export { TextWithIcon } from './text-with-icon';
 export { TestAnswer } from './test-answer';
 export { TestResults } from './test-results';
-export type { AnswerType, AnswerOptionsType } from './test-answer';
+export type { TestAnswerType, TestAnswerOptionsType } from './test-answer';

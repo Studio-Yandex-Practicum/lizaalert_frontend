@@ -1,6 +1,6 @@
-import { AnswerType } from '../test-answer';
+import { TestAnswerType } from '../test-answer';
 
 export type TestResultsProps = {
-  answer: AnswerType;
+  answer: TestAnswerType;
   className?: string;
 };

@@ -1,15 +1,19 @@
-import { AnswerOptionsType, AnswerType } from '../../molecules/test-answer';
+import {
+  TestAnswerOptionsType,
+  TestAnswerType,
+} from '../../molecules/test-answer';
 
-export type QuestionType = {
+export type TestQuestionType = {
   id: number;
   title: string;
-  answers: AnswerType[];
+  type: TestAnswerOptionsType;
+  answers: TestAnswerType[];
 };
 
 export type TestQuestionProps = {
-  question: QuestionType;
+  question: TestQuestionType;
   index: number;
-  type: AnswerOptionsType;
+  type: TestAnswerOptionsType;
   isSubmitted?: boolean;
   className?: string;
 };
