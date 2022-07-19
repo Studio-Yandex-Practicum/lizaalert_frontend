@@ -38,5 +38,7 @@
 }
 
 .text {
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
   margin: 16px 0 0;
 }
