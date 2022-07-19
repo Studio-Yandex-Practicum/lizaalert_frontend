@@ -3,7 +3,7 @@ export { AccountOverview } from './account-overview';
 export { Breadcrumbs } from './breadcrumbs';
 export { ContentsItem } from './contents-item';
 export { CourseBenefits } from './course-benefits';
-export { default as CourseCompleted } from './course-completed/course-completed';
+export { CourseCompleted } from './course-completed';
 export { CourseContents } from './course-contents';
 export { CourseDescription } from './course-description';
 export { CourseOverview } from './course-overview';
