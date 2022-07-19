@@ -1,14 +1,14 @@
-export type AnswerType = {
+export type TestAnswerType = {
   id: number;
   text: string;
   isCorrect: boolean;
   isChecked: boolean;
 };
 
-export type AnswerOptionsType = 'checkbox' | 'radio';
+export type TestAnswerOptionsType = 'checkbox' | 'radio';
 
 export type TestAnswerProps = {
-  answer: AnswerType;
+  answer: TestAnswerType;
   questionId: number;
-  answerOptions: AnswerOptionsType;
+  answerOptions: TestAnswerOptionsType;
 };

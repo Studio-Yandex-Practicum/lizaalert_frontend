@@ -1,43 +1,40 @@
 @use 'src/styles/variables' as vars;
 
 .test {
-  width: 872px;
-  margin-bottom: 125px;
+  max-width: 872px;
 
   &__container {
     display: flex;
     justify-content: space-between;
+    column-gap: 8px;
   }
 
   &__heading {
     max-width: 615px;
-    margin-right: 8px;
   }
-
-  &__result {
-    margin-bottom: 32px;
-  }
-}
-
-.card {
-  width: 872px;
 }
 
 .list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  font-weight: 700;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
 
   &__item {
-    padding: 32px 0;
+    padding-top: 32px;
 
     &:not(:last-of-type) {
+      padding-bottom: 32px;
       border-bottom: 1px solid vars.$borders-divider-disabled-bg;
     }
   }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
 }
 
 .checkbox {

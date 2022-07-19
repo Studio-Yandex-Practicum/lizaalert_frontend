@@ -1,16 +1,16 @@
 import classnames from 'classnames';
 import { TextWithIcon } from '../text-with-icon';
-import { TestResultsProps } from './types';
-import { AnswerType } from '../test-answer';
-import { IconType } from '../../atoms/icon';
 import styles from './test-results.module.scss';
+import { TestResultsProps } from './types';
+import { IconType } from '../../atoms/icon';
+import { TestAnswerType } from '../test-answer';
 
 const CORRECT_SELECTED_ANSWER = 'checkSolid';
 const CORRECT_UNSELECTED_ANSWER = 'check';
 const INCORRECT_SELECTED_ANSWER = 'xSolid';
 const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
 
-function handleIconType(answer: AnswerType): IconType {
+function handleIconType(answer: TestAnswerType): IconType {
   if (answer.isCorrect && answer.isChecked) {
     return CORRECT_SELECTED_ANSWER;
   }
