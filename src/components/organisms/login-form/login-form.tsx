@@ -16,6 +16,10 @@ import { useFormWithValidation } from '../../../hooks';
 import { routes } from '../../../config';
 import { ErrorMessages, Patterns } from '../../../utils/constants';
 
+/**
+ * @description Компонент-форма логина пользователя.
+ * */
+
 function LoginForm() {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
 

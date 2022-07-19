@@ -3,6 +3,10 @@ import { Test } from '../test';
 import { TestPreview } from '../test-preview';
 import { TestContentProps } from './types';
 
+/**
+ * @description Компонент-тогглер между превью теста и карточкой с вопросами
+ * */
+
 function TestContent({ test }: TestContentProps) {
   const [renderTest, setRenderTest] = useState(test.inProgress);
 
