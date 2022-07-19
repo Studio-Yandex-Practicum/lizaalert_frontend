@@ -1,27 +1,27 @@
-import PropTypes from 'prop-types';
-import { Card, Heading } from '../../atoms';
-import { StyledLink } from '../../molecules';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { StyledLink } from '../../molecules/styled-link';
 import styles from './course-completed.module.scss';
+import { CourseCompletedProps } from './types';
 
 /**
  * @description Компонент карточки завершения курса.
  *
- * - isCompleted - boolean - успешное завершение курса
- * - courseName - string - название курса - обязательный параметр
+ * - isCompleted - boolean - флаг успешного завершения курса
+ * - courseName - string - название курса
  * - courseSuccessDescription - string - описание успешного прохождения курса
+ * - linkHref - string - href ссылки для неудачного прохождения
  */
 
 function CourseCompleted({
-  isCompleted,
+  isCompleted = false,
   courseName,
-  courseSuccessDescription,
+  courseSuccessDescription = '',
   linkHref,
-}) {
+}: CourseCompletedProps) {
   return (
-    <Card className={styles.card}>
-      <Heading size="l" className={styles.title}>
-        Курс завершен
-      </Heading>
+    <Card className={styles.card} htmlTag="section">
+      <Heading size="l" className={styles.title} title="Курс завершен" />
 
       <div className={styles.content}>
         <Heading className={styles.subtitle} level={3} size="xxl">
@@ -59,17 +59,5 @@ function CourseCompleted({
     </Card>
   );
 }
-
-CourseCompleted.defaultProps = {
-  isCompleted: false,
-  courseSuccessDescription: '',
-};
-
-CourseCompleted.propTypes = {
-  isCompleted: PropTypes.bool,
-  courseName: PropTypes.string.isRequired,
-  courseSuccessDescription: PropTypes.string,
-  linkHref: PropTypes.string.isRequired,
-};
 
 export default CourseCompleted;
