@@ -16,7 +16,7 @@ export { PersonalData } from './personal-data';
 export { PreviewWebinar } from './preview-webinar';
 export { Test } from './test';
 export { TestQuestion } from './test-question';
-export { default as TestContent } from './test-content/test-content';
+export { TestContent } from './test-content';
 export { TestPreview } from './test-preview';
 export { VideoLesson } from './video-lesson';
 export { default as NewCourseMain } from './new-course-main/new-course-main';
