@@ -1,5 +1,6 @@
-import { Heading } from '../../atoms';
-import { StyledLink, TextWithIcon } from '../../molecules';
+import { Heading } from '../../atoms/heading';
+import { StyledLink } from '../../molecules/styled-link';
+import { TextWithIcon } from '../../molecules/text-with-icon';
 import styles from './development.module.scss';
 import { routes } from '../../../config';
 

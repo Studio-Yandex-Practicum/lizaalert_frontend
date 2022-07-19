@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumbs } from '../../organisms/breadcrumbs';
+import { CourseContents } from '../../organisms/course-contents';
+import { NavigationButtons } from '../../organisms/navigation-buttons';
+import { PreviewWebinar } from '../../organisms/preview-webinar';
+import { TestContent } from '../../organisms/test-content';
+import { VideoLesson } from '../../organisms/video-lesson';
+import { TheoryLesson } from '../../organisms/theory-lesson';
+import styles from './lesson.module.scss';
 import { selectLesson } from '../../../store/lesson/selectors';
 import fetchLessonByIdAction from '../../../store/lesson/thunk';
-import {
-  Breadcrumbs,
-  CourseContents,
-  NavigationButtons,
-  PreviewWebinar,
-  TestContent,
-  VideoLesson,
-} from '../../organisms';
-import styles from './lesson.module.scss';
-import mockCourseContent from '../../../services/mock/course-content.json';
-// import mockTest from '../../../services/mock/test-preview.json';
-import TheoryLesson from '../../organisms/theory-lesson/theory-lesson';
 import { usePathnames } from '../../../hooks/usePathnames';
+import mockCourseContent from '../../../services/mock/course-content.json';
+
+// import mockTest from '../../../services/mock/test-preview.json';
 
 function Lesson() {
   const { lessonId, topicId, courseId } = useParams();

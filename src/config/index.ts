@@ -2,7 +2,7 @@ import defaultRoutes from './routes';
 import adminRoutes from './routes-admin';
 
 /** Получение env-переменной */
-const getEnvVar = (key) => process.env[key] || '';
+const getEnvVar = (key: string) => process.env[key] || '';
 
 /** Режим запуска */
 export const NODE_ENV = getEnvVar('NODE_ENV');

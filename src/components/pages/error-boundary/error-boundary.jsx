@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Heading } from '../../atoms';
-import { Button } from '../../molecules';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
 import styles from './error-boundary.module.scss';
 import { routes } from '../../../config';
 import errorCat from '../../../assets/images/error-cat.png';

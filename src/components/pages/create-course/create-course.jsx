@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
 import classnames from 'classnames';
-import { Card, Heading } from '../../atoms';
-import { Button } from '../../molecules';
-import {
-  NewCourseContent,
-  NewCourseDescription,
-  NewCourseMain,
-} from '../../organisms';
+import { Card } from '../../atoms/card';
+import { Heading } from '../../atoms/heading';
+import { Button } from '../../molecules/button';
+import { NewCourseContent } from '../../organisms/new-course-content';
+import { NewCourseDescription } from '../../organisms/new-course-description';
+import { NewCourseMain } from '../../organisms/new-course-main';
 import styles from './create-course.module.scss';
 
 function CreateCourse() {

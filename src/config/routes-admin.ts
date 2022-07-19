@@ -1,4 +1,6 @@
-const routes = {
+import { RouteType } from '../types';
+
+const routes: Record<string, RouteType> = {
   courses: {
     title: 'Курсы',
     path: '/',
@@ -19,6 +21,21 @@ const routes = {
       },
     ],
   },
+  createCourse: {
+    title: 'Создание нового курса',
+    path: '/create-course',
+    icon: 'plus',
+  },
+  editCourse: {
+    title: 'Редактирование курса',
+    path: '/edit-course',
+    icon: 'edit',
+  },
+  editLesson: {
+    title: 'Редактирование урока',
+    path: '/edit-lesson',
+    icon: 'edit',
+  },
   profile: {
     title: 'Профиль',
     path: '/profile',
@@ -34,10 +51,20 @@ const routes = {
     path: '/login',
     icon: 'userSquare',
   },
+  users: {
+    title: 'Пользователи',
+    path: '/users',
+    icon: 'users',
+  },
+  library: {
+    title: 'Библиотека',
+    path: '/library',
+    icon: 'library',
+  },
   notFound: {
     title: 'Страница не найдена',
     path: '/*',
-    icon: 'XSolid',
+    icon: 'xSolid',
   },
 };
 

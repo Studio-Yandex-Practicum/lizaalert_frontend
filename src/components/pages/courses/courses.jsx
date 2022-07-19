@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Heading } from '../../atoms';
-import { CoursePreview, Filter } from '../../organisms';
+import { Heading } from '../../atoms/heading';
+import { CoursePreview } from '../../organisms/course-preview';
+import { Filter } from '../../organisms/filter';
 import styles from './courses.module.scss';
 import { routes } from '../../../config';
 import fetchCoursesAction from '../../../store/courses/thunk';

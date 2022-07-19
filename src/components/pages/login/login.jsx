@@ -1,5 +1,5 @@
-import { Heading } from '../../atoms';
-import { LoginForm } from '../../organisms';
+import { Heading } from '../../atoms/heading';
+import { LoginForm } from '../../organisms/login-form';
 import styles from './login.module.scss';
 
 function Login() {

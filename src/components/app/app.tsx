@@ -6,7 +6,7 @@ import { checkAuth } from '../../store/auth/thunk';
 
 function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector<unknown, boolean>(selectIsLoading);
 
   useEffect(() => {
     dispatch(checkAuth());

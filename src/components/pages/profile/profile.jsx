@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Heading } from '../../atoms';
-import { AccountData, AccountOverview, PersonalData } from '../../organisms';
+import { Heading } from '../../atoms/heading';
+import { AccountData } from '../../organisms/account-data';
+import { AccountOverview } from '../../organisms/account-overview';
+import { PersonalData } from '../../organisms/personal-data';
 import styles from './profile.module.scss';
 import { selectProfileLoading } from '../../../store/profile/selectors';
 import fetchProfileAction from '../../../store/profile/thunk';

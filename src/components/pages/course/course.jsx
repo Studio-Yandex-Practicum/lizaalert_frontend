@@ -7,14 +7,12 @@ import {
   selectCourseLoading,
   selectCourseTitle,
 } from '../../../store/course/selectors';
-import {
-  CourseBenefits,
-  CourseContents,
-  CourseDescription,
-  CourseOverview,
-  FAQ,
-} from '../../organisms';
-import { Heading } from '../../atoms';
+import { CourseBenefits } from '../../organisms/course-benefits';
+import { CourseContents } from '../../organisms/course-contents';
+import { CourseDescription } from '../../organisms/course-description';
+import { CourseOverview } from '../../organisms/course-overview';
+import { FAQ } from '../../organisms/faq';
+import { Heading } from '../../atoms/heading';
 import styles from './course.module.scss';
 
 function Course() {
@@ -32,9 +30,7 @@ function Course() {
   }
   return (
     <>
-      <Heading level={2} size="xxl" className={styles.heading}>
-        {title}
-      </Heading>
+      <Heading level={2} size="xxl" className={styles.heading} title={title} />
       <div className={styles.content}>
         <main className={styles.main}>
           <CourseDescription />

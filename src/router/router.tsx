@@ -8,7 +8,7 @@ import {
   Profile,
   Register,
 } from '../components/pages';
-import { Layout } from '../components/templates';
+import { BaseLayout } from '../components/templates/base-layout';
 import { routes } from '../config';
 
 function Router() {
@@ -17,13 +17,13 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={courses.path} element={<Layout />}>
+        <Route path={courses.path} element={<BaseLayout />}>
           <Route index element={<Courses />} />
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:topicId" element={<Lesson />} />
           <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
         </Route>
-        <Route element={<Layout />}>
+        <Route element={<BaseLayout />}>
           <Route path={profile.path} element={<Profile />} />
           <Route path={login.path} element={<Login />} />
         </Route>
