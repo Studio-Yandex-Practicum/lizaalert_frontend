@@ -1,11 +1,11 @@
 import { Card } from '../../atoms/card';
 import { Heading } from '../../atoms/heading';
 import { Button } from '../../molecules/button';
-import { TestQuestion, TestQuestionType } from '../test-question';
 import { TestSuccessRate } from '../../molecules/test-success-rate';
+import { TestQuestion, TestQuestionType } from '../test-question';
 import styles from './test.module.scss';
-import useTest from './hooks/use-test';
 import { TestProps } from './types';
+import useTest from './hooks/use-test';
 
 /**
  * @description Компонент-карточка теста с вопросами

@@ -14,7 +14,7 @@ export { default as LoginForm } from './login-form/login-form';
 export { NavigationButtons } from './navigation-buttons';
 export { PersonalData } from './personal-data';
 export { PreviewWebinar } from './preview-webinar';
-export { default as Test } from './test/test';
+export { Test } from './test';
 export { TestQuestion } from './test-question';
 export { default as TestContent } from './test-content/test-content';
 export { TestPreview } from './test-preview';
