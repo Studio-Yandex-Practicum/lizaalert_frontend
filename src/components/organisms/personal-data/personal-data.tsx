@@ -5,7 +5,7 @@ import { Heading } from '../../atoms/heading';
 import { Button } from '../../molecules/button';
 import { Input } from '../../molecules/input';
 import styles from './personal-data.module.scss';
-import { PersonalDataType } from './types';
+import { PersonalFormData } from './types';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
 import { useFormWithValidation } from '../../../hooks';
@@ -24,10 +24,10 @@ function PersonalData() {
     values,
     setValues,
     setIsValid,
-  } = useFormWithValidation<PersonalDataType>();
+  } = useFormWithValidation<PersonalFormData>();
 
   // TODO заменить первый аргумент на RootState после типизации Store
-  const personalData = useSelector<unknown, PersonalDataType>(
+  const personalData = useSelector<unknown, PersonalFormData>(
     selectProfilePersonal
   );
   const dispatch = useDispatch();
