@@ -1,8 +1,8 @@
-import { TestQuestionProps } from './types';
+import { Heading } from '../../atoms/heading';
 import { TestAnswer } from '../../molecules/test-answer';
 import { TestResults } from '../../molecules/test-results';
-import { Heading } from '../../atoms/heading';
 import styles from './test-question.module.scss';
+import { TestQuestionProps } from './types';
 
 /**
  * @description Компонент тестового вопроса.

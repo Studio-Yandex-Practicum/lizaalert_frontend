@@ -5,7 +5,7 @@ import { Heading } from '../../atoms/heading';
 import { Button } from '../../molecules/button';
 import { Input } from '../../molecules/input';
 import styles from './account-data.module.scss';
-import { AccountDataType } from './types';
+import { AccountFormData } from './types';
 import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
 import { useFormWithValidation } from '../../../hooks';
@@ -16,10 +16,10 @@ import { useFormWithValidation } from '../../../hooks';
 
 function AccountData() {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
-    useFormWithValidation<AccountDataType>();
+    useFormWithValidation<AccountFormData>();
 
   // TODO заменить первый аргумент на RootState после типизации Store
-  const accountData = useSelector<unknown, AccountDataType>(
+  const accountData = useSelector<unknown, AccountFormData>(
     selectProfileAccount
   );
   const dispatch = useDispatch();

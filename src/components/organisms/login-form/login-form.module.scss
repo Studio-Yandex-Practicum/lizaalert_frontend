@@ -5,7 +5,7 @@
   margin: 0 auto;
 }
 
-.authForm__heading {
+.heading {
   margin-bottom: 32px;
 }
 
@@ -15,7 +15,11 @@
   margin-bottom: 32px;
 }
 
-.authForm__checkbox {
+.form {
+  margin-bottom: 16px;
+}
+
+.checkbox {
   color: vars.$dark-secondary;
   font-weight: 500;
 }
@@ -27,23 +31,10 @@
 .button {
   margin: 0 auto;
   width: 236px;
-
-  &:not(:last-of-type) {
-    margin-bottom: 16px;
-  }
-
-  &_color_black {
-    background-color: vars.$dark-primary;
-    font-family: vars.$yandexFont;
-    padding: 0 22px;
-
-  }
+  padding: 0 22px;
 }
 
 .icon {
-  max-width: 26px;
-  max-height: 26px;
-  height: 26px;
   background-color: vars.$bg-yandex-logo;
   border-radius: 50%;
 }

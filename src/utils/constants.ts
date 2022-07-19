@@ -20,20 +20,17 @@ export const Levels = {
 
 export const SPINNER_DELAY = 300;
 
-export const CHECKBOX = 'checkbox';
-export const RADIO = 'radio';
-
 export const Controls = {
   CHECKBOX: 'checkbox',
   RADIO: 'radio',
 };
 
-export const errorMessages = {
+export const ErrorMessages = {
   email: 'Введите эл. адрес в формате: anna@liza-alert.ru',
   tel: 'Введите номер телефона в формате: +7 (XXX) XXX XX XX',
 };
 
-export const patterns = {
+export const Patterns = {
   email: '[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$',
   tel: '\\+7\\s?[0-9]{10}',
   image: /\.(gif|jpg|jpeg|tiff|png)$/i,

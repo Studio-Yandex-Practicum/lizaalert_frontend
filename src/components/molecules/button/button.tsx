@@ -10,11 +10,11 @@ import { ButtonProps } from './types';
  * @props
  * - children - string - текст кнопки, имеет приоритет перед `text`
  * - text - string - текст кнопки, альтернатива для `children`
- * - view - string - внешний вид кнопки: 'primary', 'secondary', 'text'
+ * - view - enum ('primary' | 'secondary' | 'tertiary' | 'text') - внешний вид кнопки
  * - iconName - string - имя иконки из объекта icons
- * - iconPosition - string - позиционирование иконки слева/справа от текста: 'back', 'forward'
+ * - iconPosition - enum ('back' | 'forward') - позиционирование иконки слева/справа от текста
  * - className - string - класс-миксин
- * - type - string - тип кнопки: 'button', 'submit'
+ * - type - enum ('button' | 'submit') - тип кнопки
  * - classNameIcon - string - класс-миксин
  * - стандартные атрибуты HTML для `<button>`
  */
@@ -28,14 +28,10 @@ function Button({
   className = '',
   type = 'button',
   classNameIcon = '',
+  iconSize,
   ...props
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
-  const btnClasses = classnames(
-    styles.button,
-    styles[view],
-    { [styles[iconPosition ?? '']]: iconPosition },
-    className
-  );
+  const btnClasses = classnames(styles.button, styles[view], className);
 
   return (
     <button
@@ -44,13 +40,13 @@ function Button({
       type={type === 'submit' ? 'submit' : 'button'}
     >
       {iconPosition === 'back' && iconName && (
-        <Icon type={iconName} className={classNameIcon} />
+        <Icon type={iconName} size={iconSize} className={classNameIcon} />
       )}
 
       {children ?? text}
 
       {iconPosition === 'forward' && iconName && (
-        <Icon type={iconName} className={classNameIcon} />
+        <Icon type={iconName} size={iconSize} className={classNameIcon} />
       )}
     </button>
   );

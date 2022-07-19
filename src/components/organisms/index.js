@@ -10,7 +10,7 @@ export { CourseOverview } from './course-overview';
 export { CoursePreview } from './course-preview';
 export { FAQ } from './faq';
 export { Filter } from './filter';
-export { default as LoginForm } from './login-form/login-form';
+export { LoginForm } from './login-form';
 export { NavigationButtons } from './navigation-buttons';
 export { PersonalData } from './personal-data';
 export { PreviewWebinar } from './preview-webinar';

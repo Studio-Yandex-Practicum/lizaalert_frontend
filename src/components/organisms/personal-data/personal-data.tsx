@@ -5,11 +5,11 @@ import { Heading } from '../../atoms/heading';
 import { Button } from '../../molecules/button';
 import { Input } from '../../molecules/input';
 import styles from './personal-data.module.scss';
-import { PersonalDataType } from './types';
+import { PersonalFormData } from './types';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
 import { useFormWithValidation } from '../../../hooks';
-import { patterns } from '../../../utils/constants';
+import { Patterns } from '../../../utils/constants';
 
 /**
  * @description Компонент-виджет с редактируемой формой данных профиля.
@@ -24,10 +24,10 @@ function PersonalData() {
     values,
     setValues,
     setIsValid,
-  } = useFormWithValidation<PersonalDataType>();
+  } = useFormWithValidation<PersonalFormData>();
 
   // TODO заменить первый аргумент на RootState после типизации Store
-  const personalData = useSelector<unknown, PersonalDataType>(
+  const personalData = useSelector<unknown, PersonalFormData>(
     selectProfilePersonal
   );
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function PersonalData() {
   }, [personalData]);
 
   const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
-    handleChangeFiles(evt, patterns.image);
+    handleChangeFiles(evt, Patterns.image);
   };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {

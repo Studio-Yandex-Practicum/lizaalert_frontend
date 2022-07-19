@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import fetchTest from './thunk';
-import { CHECKBOX, RADIO } from '../../utils/constants';
+import { Controls } from '../../utils/constants';
 
 const initialState = {
   test: {},
@@ -23,7 +23,7 @@ export const testSlice = createSlice({
                   if (answer.id === action.payload.answerId) {
                     return { ...answer, isChecked: !answer.isChecked };
                   }
-                  if (question.type === RADIO) {
+                  if (question.type === Controls.RADIO) {
                     return { ...answer, isChecked: false };
                   }
                   return answer;
@@ -48,13 +48,12 @@ export const testSlice = createSlice({
           ...payload.questions.map((question) => {
             let countCorrectAnswers = 0;
             question.answers.forEach((answer) => {
-              // eslint-disable-next-line no-plusplus
-              if (answer.isCorrect) countCorrectAnswers++;
+              if (answer.isCorrect) countCorrectAnswers += 1;
             });
             if (countCorrectAnswers > 1) {
-              return { ...question, type: CHECKBOX };
+              return { ...question, type: Controls.CHECKBOX };
             }
-            return { ...question, type: RADIO };
+            return { ...question, type: Controls.RADIO };
           }),
         ],
       };
