@@ -21,6 +21,12 @@
   &:focus {
     outline: none;
   }
+
+  &:disabled {
+    cursor: auto;
+    background-color: vars.$borders-divider-disabled-bg;
+    color: vars.$dark-secondary;
+  }
 }
 
 .primary {
@@ -34,9 +40,7 @@
   }
 
   &:disabled {
-    cursor: auto;
     background-color: vars.$borders-divider-disabled-bg;
-    color: vars.$dark-secondary;
   }
 }
 
@@ -53,11 +57,17 @@
   }
 
   &:disabled {
-    cursor: auto;
-    background-color: vars.$borders-divider-disabled-bg;
     color: vars.$dark-secondary;
     box-shadow: none;
   }
+}
+
+.tertiary {
+  background-color: vars.$dark-primary;
+  color: vars.$bg-primary;
+  font-family: vars.$yandexFont;
+  min-width: 72px;
+  min-height: 48px;
 }
 
 .text {
@@ -69,15 +79,6 @@
   }
 
   &:disabled {
-    cursor: auto;
     color: vars.$dark-secondary;
   }
-}
-
-.forward {
-  padding-right: 28px;
-}
-
-.back {
-  padding-left: 28px;
 }

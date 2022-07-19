@@ -9,7 +9,7 @@ import { PersonalDataType } from './types';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
 import { useFormWithValidation } from '../../../hooks';
-import { patterns } from '../../../utils/constants';
+import { Patterns } from '../../../utils/constants';
 
 /**
  * @description Компонент-виджет с редактируемой формой данных профиля.
@@ -37,7 +37,7 @@ function PersonalData() {
   }, [personalData]);
 
   const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
-    handleChangeFiles(evt, patterns.image);
+    handleChangeFiles(evt, Patterns.image);
   };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {

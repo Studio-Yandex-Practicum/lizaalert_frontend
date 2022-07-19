@@ -5,6 +5,7 @@ export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',
   async (authData, { rejectWithValue }) => {
     const { isRememberMe } = authData;
+
     try {
       // eslint-disable-next-line no-inner-declarations
       async function timeout() {

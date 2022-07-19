@@ -8,30 +8,27 @@ import icons from './icons';
  *
  * @props
  * - type - string, required - тип иконки, должен совпадать по ключу с объектом icons
+ * - size - enum ('default' | 'medium') - размер иконки. По умолчанию 'default'.
  * - onClick - function - функция-обработчик клика, при её передаче вместо `span` будет `button`
  * - className - string - css-класс, присваивается `span`у
  */
 
-function Icon({ type, onClick, className = '' }: IconProps) {
+function Icon({ type, size = 'default', onClick, className = '' }: IconProps) {
   if (!type) {
     return null;
   }
 
+  const classNames = classnames(styles.icon, styles[size], className);
+
   if (onClick) {
     return (
-      <button
-        type="button"
-        className={classnames(styles.icon, className)}
-        onClick={onClick}
-      >
+      <button type="button" className={classNames} onClick={onClick}>
         {icons[type]}
       </button>
     );
   }
 
-  return (
-    <span className={classnames(styles.icon, className)}>{icons[type]}</span>
-  );
+  return <span className={classNames}>{icons[type]}</span>;
 }
 
 export default Icon;
