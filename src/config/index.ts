@@ -18,3 +18,6 @@ export const isProdEnv = NODE_ENV === 'production';
 
 /** Единая точка выхода для роутов проекта */
 export const routes = isAdmin ? adminRoutes : defaultRoutes;
+
+/** Урлы бекенда */
+export const BACKEND_ORIGIN = 'https://jsonplaceholder.typicode.com';
