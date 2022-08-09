@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { BACKEND_ORIGIN } from '../config';
+import { BACKEND_ORIGIN } from './index';
 
 export const configureAxios = () => {
   axios.defaults.baseURL = BACKEND_ORIGIN;
