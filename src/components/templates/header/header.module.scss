@@ -4,6 +4,7 @@
   box-shadow: 0 0 4px rgba(231, 232, 235, 0.6), 0 4px 16px rgba(231, 232, 235, 0.6);
   padding: 24px 0;
   font-weight: 500;
+  background-color: vars.$bg-primary;
 
   &Container {
     display: flex;
