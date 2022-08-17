@@ -11,6 +11,7 @@ import { ButtonProps } from './types';
  * - children - string - текст кнопки, имеет приоритет перед `text`
  * - text - string - текст кнопки, альтернатива для `children`
  * - view - enum ('primary' | 'secondary' | 'tertiary' | 'text') - внешний вид кнопки
+ * - hover - enum ('default' | 'border') - внешний вид обводки кнопки
  * - iconName - string - имя иконки из объекта icons
  * - iconPosition - enum ('back' | 'forward') - позиционирование иконки слева/справа от текста
  * - className - string - класс-миксин
@@ -23,6 +24,7 @@ function Button({
   children = null,
   text = '',
   view = 'primary',
+  hover = 'default',
   iconName = null,
   iconPosition = null,
   className = '',
@@ -31,12 +33,21 @@ function Button({
   iconSize,
   ...props
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
-  const btnClasses = classnames(styles.button, styles[view], className);
+  const btnClasses = classnames(
+    styles.button,
+    styles[view],
+    styles[hover],
+    className
+  );
 
   return (
     <button
       {...props}
-      className={btnClasses}
+      className={classnames(
+        styles.button,
+        { [styles.hover]: styles[view] === 'secondary' },
+        btnClasses
+      )}
       type={type === 'submit' ? 'submit' : 'button'}
     >
       {iconPosition === 'back' && iconName && (

@@ -82,3 +82,13 @@
     color: vars.$dark-secondary;
   }
 }
+
+.default {
+  border: 1.2px solid vars.$borders-divider-disabled-bg;
+}
+
+.border {
+  &:hover {
+    border: 1.2px solid vars.$color-primary;
+  }
+}
