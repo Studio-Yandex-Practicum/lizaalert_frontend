@@ -9,13 +9,14 @@
   font-family: vars.$mainFont;
 }
 
-.heading {
-  margin-bottom: 32px;
-}
+// .heading {
+//   margin-bottom: 32px;
+// }
 
 .form {
   display: flex;
   flex-direction: column;
+  margin-top: 32px;
 }
 
 .submitButton {
