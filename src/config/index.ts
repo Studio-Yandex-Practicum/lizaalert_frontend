@@ -20,4 +20,6 @@ export const isProdEnv = NODE_ENV === 'production';
 export const routes = isAdmin ? adminRoutes : defaultRoutes;
 
 /** Урлы бекенда */
-export const BACKEND_ORIGIN = 'https://jsonplaceholder.typicode.com';
+export const BACKEND_ORIGIN = 'http://51.250.35.214:8000';
+export const BACKEND_API = `${BACKEND_ORIGIN}/api/v1`;
+export const BACKEND_MEDIA = `${BACKEND_ORIGIN}/media`;
