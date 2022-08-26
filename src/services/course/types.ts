@@ -1,5 +1,6 @@
 export type LessonType = {
   id: number;
+  title: string;
   lesson_type: 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
   lesson_status: 'Ready' | 'Draft' | 'Published';
 };
