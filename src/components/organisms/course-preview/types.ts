@@ -1,4 +1,4 @@
-import { ICoursePreview } from 'store/courses/types';
+import { CoursePreviewType } from 'services/courses/types';
 
 export type LevelType = {
   id: number;
@@ -25,5 +25,5 @@ export type CourseType = {
 };
 
 export type CoursePreviewProps = {
-  course: ICoursePreview;
+  course: CoursePreviewType;
 };
