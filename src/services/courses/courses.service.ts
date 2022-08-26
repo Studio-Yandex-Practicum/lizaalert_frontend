@@ -4,8 +4,7 @@ import { CoursesType } from './types';
 
 export class CoursesService {
   static async getCourses() {
-    // eslint-disable-next-line
-    const data = (await axios.get('/courses/')) as CoursesType;
+    const data = await axios.get<never, CoursesType>('/courses/');
 
     // TODO: Удалить, когда на беке добавят айдишники
     data.results?.map((course) => Object.assign(course, { id: nanoid(8) }));
