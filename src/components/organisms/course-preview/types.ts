@@ -1,3 +1,5 @@
+import { CoursePreviewType } from 'services/courses/types';
+
 export type LevelType = {
   id: number;
   name: string;
@@ -23,5 +25,5 @@ export type CourseType = {
 };
 
 export type CoursePreviewProps = {
-  course: CourseType;
+  course: CoursePreviewType;
 };
