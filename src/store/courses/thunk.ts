@@ -1,20 +1,13 @@
-import { createAsyncThunk, nanoid } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { api } from '../../services/network';
-import { ICourses } from './types';
+import { CoursesService } from '../../services/courses/courses.service';
 
 const fetchCoursesAction = createAsyncThunk(
   'courses/fetch',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await api().get<ICourses>('/api/v1/courses/');
-
-      // TODO: Удалить, когда на беке добавят айдишники
-      res.data?.results?.map((course) =>
-        Object.assign(course, { id: nanoid(8) })
-      );
-
-      return res.data;
+      const data = await CoursesService.getCourses();
+      return data;
     } catch (error) {
       const err = error as AxiosError;
       return rejectWithValue(err.message);
