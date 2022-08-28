@@ -4,7 +4,7 @@ import {
   combineReducers,
   configureStore,
 } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { isDevEnv } from 'config';
 import coursesReducer from './courses/slice';
 import testReducer from './test/slice';
@@ -39,6 +39,11 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: isDevEnv,
 });
+
+export type AppDispatch = typeof store.dispatch;
+
+/** Типизированный хук диспетчера, использовать его в компонентах */
+export const useAppDispatch: () => AppDispatch = useDispatch;
 
 /** Типизированный хук селектора, использовать его в компонентах */
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
