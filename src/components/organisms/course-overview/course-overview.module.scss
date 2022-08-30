@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 32px;
+    padding-bottom: 32px;
   }
 
   &Image {
@@ -13,7 +15,6 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 16px;
-    margin-bottom: 32px;
   }
 
   &Meta {
@@ -21,7 +22,7 @@
     width: 100%;
     padding: 0 32px;
     box-sizing: border-box;
-    margin: 0 0 32px;
+    margin: 0;
 
     &Item {
       display: flex;
@@ -40,13 +41,11 @@
     max-width: 424px;
     box-sizing: border-box;
     padding: 0 32px;
-    margin-bottom: 32px;
   }
 
   &Enroll {
     width: 100%;
     max-width: calc(100% - 64px);
-    margin: 0 0 32px;
     box-sizing: border-box;
   }
 }
