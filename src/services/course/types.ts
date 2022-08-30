@@ -15,7 +15,7 @@ export type CourseType = {
   id: number;
   title: string;
   level: string;
-  full_description: string;
+  short_description: string;
   start_date: string;
   cover_path: string;
   lessons_count: number;

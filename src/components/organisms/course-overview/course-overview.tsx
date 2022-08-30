@@ -1,41 +1,52 @@
-import { Card } from '../../atoms/card';
-import { Button } from '../../molecules/button';
-import { TextWithIcon } from '../../molecules/text-with-icon';
+import { SyntheticEvent } from 'react';
+import placeholderCover from 'assets/images/course-placeholder.jpg';
+import { Card } from 'components/atoms/card';
+import { Button } from 'components/molecules/button';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
 import styles from './course-overview.module.scss';
 import { CourseOverviewProps } from './types';
-import defaultImage from '../../../assets/images/course.jpg';
+
+const onImageLoadError = (event: SyntheticEvent<HTMLImageElement, Event>) => {
+  // eslint-disable-next-line no-param-reassign
+  event.currentTarget.src = placeholderCover;
+};
 
 /**
  * @description Карточка краткого описания курса.
  * */
 
 function CourseOverview({
-  imgLink = defaultImage,
-  level = 'Бывалый',
-  lessonQuantity = 24,
-  startDate = '22.02.2022',
-  duration = 64,
+  coverPath = placeholderCover,
+  level,
+  lessonsCount = 0,
+  startDate,
+  courseDuration = 0,
 }: CourseOverviewProps) {
   return (
-    <Card className={styles.courseOverview} noPadding>
-      <img className={styles.courseImage} src={imgLink} alt="Картинка курса" />
+    <Card className={styles.courseOverview} htmlTag="article" noPadding>
+      <img
+        className={styles.courseImage}
+        src={coverPath}
+        alt="Обложка курса"
+        onError={onImageLoadError}
+      />
 
       <ul className={styles.courseMeta}>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Уровень:" iconType="rank" />
-          {level}
+          {level ?? 'неизвестно'}
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Количество занятий:" iconType="lessons" />
-          {lessonQuantity}
+          {lessonsCount}
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {duration} ч
+          {courseDuration} ч
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {startDate} г
+          {startDate ? `${startDate} г` : 'неизвестно'}
         </li>
       </ul>
 
