@@ -13,7 +13,7 @@ function App() {
   }, [dispatch]);
 
   if (isLoading) {
-    return <h3>Loading...</h3>;
+    /// ...loader
   }
   return <Router />;
 }

@@ -1,3 +1,5 @@
+@use 'src/styles/variables' as vars;
+
 .course {
   &Overview {
     max-width: 424px;
@@ -29,6 +31,8 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
+      font-size: vars.$font-size-m;
+      line-height: vars.$line-height-m;
 
       &:last-child {
         margin-bottom: 0;
