@@ -1,4 +1,4 @@
-@use 'src/styles/variables' as vars;
+@use 'src/styles/variables' as vars; 
 
 .button {
   box-sizing: border-box;
@@ -83,12 +83,23 @@
   }
 }
 
-.default {
-  border: 1.2px solid vars.$borders-divider-disabled-bg;
-}
-
-.border {
-  &:hover {
-    border: 1.2px solid vars.$color-primary;
+.hover {
+  &-default {
+    border: 1.2px solid vars.$borders-divider-disabled-bg;
+  }
+  &-border {
+    &:hover {
+      border: 1.2px solid vars.$color-primary;
+    }
   }
 }
+ 
+// .hover-default {
+//   border: 1.2px solid vars.$borders-divider-disabled-bg;
+// }
+
+// .hover-border {
+//   &:hover {
+//     border: 1.2px solid vars.$color-primary;
+//   }
+// }
