@@ -1,0 +1,45 @@
+@use 'src/styles/variables' as vars;
+
+.title {
+  margin-bottom: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  margin: 80px auto  145px;
+  text-align: center;
+}
+
+.text {
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+  margin: 0 0 18px;
+  text-align: center;
+
+  span {
+    font-weight: 700;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.textWithLink {
+  display: flex;
+}
+
+.textLink {
+  color: vars.$dark-primary;
+}
+
+.button {
+  margin: 0 auto;
+  width: 184px;
+  padding: 12px 24px;
+}
+
+.icon {
+  margin: 0;
+  background: #FF6600;
+}

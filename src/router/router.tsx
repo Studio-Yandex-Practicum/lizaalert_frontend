@@ -26,9 +26,9 @@ function Router() {
         <Route element={<BaseLayout />}>
           <Route path={profile.path} element={<Profile />} />
           <Route path={login.path} element={<Login />} />
+          <Route path={notFound.path} element={<NotFound />} />
         </Route>
         <Route path={register.path} element={<Register />} />
-        <Route path={notFound.path} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
