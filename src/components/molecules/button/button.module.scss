@@ -47,6 +47,7 @@
 .secondary {
   background-color: vars.$bg-primary;
   color: vars.$color-primary;
+  border: 1.2px solid vars.$borders-divider-disabled-bg;
   min-width: 72px;
   min-height: 48px;
 
@@ -82,16 +83,14 @@
 }
 
 
-.default {
-  border: 1.2px solid vars.$borders-divider-disabled-bg;
+.hover-default {
 
   &:hover {
     box-shadow: 0 4px 8px 0 vars.$drop-shadow-small;
   }
 }
 
-.border {
-  border: 1.2px solid vars.$borders-divider-disabled-bg;
+.hover-border {
   
   &:hover {
     border-color: vars.$color-primary;

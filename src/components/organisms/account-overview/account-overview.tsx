@@ -43,7 +43,7 @@ function AccountOverview() {
 
       <Button
         view="secondary"
-        hover="border"
+        hover="hover-border"
         iconName="logout"
         iconPosition="back"
         className={styles.logout}
