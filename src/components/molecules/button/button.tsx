@@ -24,7 +24,7 @@ function Button({
   children = null,
   text = '',
   view = 'primary',
-  hover = 'hover-default',
+  hover = 'default',
   iconName = null,
   iconPosition = null,
   className = '',
@@ -36,7 +36,7 @@ function Button({
   const btnClasses = classnames(
     styles.button,
     styles[view],
-    { [styles[`${hover}`]]: view === 'secondary' },
+    { [styles[`hover-${hover}`]]: view === 'secondary' },
     className
   );
 
