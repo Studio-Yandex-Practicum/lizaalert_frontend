@@ -3,11 +3,13 @@ import { IconSize, IconType } from '../../atoms/icon';
 import { Nullable } from '../../../types';
 
 export type ButtonViews = 'primary' | 'secondary' | 'tertiary' | 'text';
+export type ButtonHover = 'default' | 'border';
 
 export type ButtonProps = {
   children?: ReactNode;
   text?: string;
   view?: ButtonViews;
+  hover?: ButtonHover;
   iconName?: IconType;
   iconPosition?: Nullable<'back' | 'forward'>;
   className?: string;

@@ -53,7 +53,6 @@
 
   &:hover {
     color: vars.$color-hover;
-    box-shadow: 0 4px 8px 0 vars.$drop-shadow-small;
   }
 
   &:disabled {
@@ -80,5 +79,18 @@
 
   &:disabled {
     color: vars.$dark-secondary;
+  }
+}
+
+
+.hover-default {
+  &:hover {
+    box-shadow: 0 4px 8px 0 vars.$drop-shadow-small;
+  }
+}
+
+.hover-border {
+  &:hover {
+    border-color: vars.$color-primary;
   }
 }
