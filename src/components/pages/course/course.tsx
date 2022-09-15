@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { Heading } from 'components/atoms/heading';
 import { Loader } from 'components/molecules/loader';
 import { CourseBenefits } from 'components/organisms/course-benefits';
@@ -7,9 +7,11 @@ import { CourseContents } from 'components/organisms/course-contents';
 import { CourseDescription } from 'components/organisms/course-description';
 import { CourseOverview } from 'components/organisms/course-overview';
 import { FAQ } from 'components/organisms/faq';
+import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourse,
+  selectCourseError,
   selectCourseLoading,
   selectCourseTitle,
 } from 'store/course/selectors';
@@ -23,6 +25,7 @@ function Course() {
   const course = useAppSelector(selectCourse);
   const title = useAppSelector(selectCourseTitle);
   const isLoading = useAppSelector(selectCourseLoading);
+  const error = useAppSelector(selectCourseError);
 
   useEffect(() => {
     if (courseId) {
@@ -32,6 +35,11 @@ function Course() {
 
   if (isLoading) {
     return <Loader isAbsolute />;
+  }
+
+  if (error) {
+    // При ошибке редиректим на 404
+    return <Navigate to={routes.notFound.path} />;
   }
 
   return (
