@@ -44,9 +44,9 @@ function Course() {
           {course.chapters?.length > 0 && (
             <CourseContents content={course.chapters} />
           )}
-
           <FAQ />
         </div>
+
         <aside className={styles.aside}>
           <CourseOverview
             id={course.id}
