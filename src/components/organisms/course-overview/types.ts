@@ -1,8 +1,10 @@
+import { Nullable } from '../../../types';
+
 export type CourseOverviewProps = {
   id?: number;
   level?: string;
   startDate?: string;
-  coverPath?: string;
+  coverPath?: Nullable<string>;
   lessonsCount?: number;
-  courseDuration?: number;
+  courseDuration?: Nullable<number>;
 };

@@ -1,32 +1,27 @@
-import { SyntheticEvent } from 'react';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { onImageLoadError } from 'utils/on-image-load-error';
 import styles from './course-overview.module.scss';
 import { CourseOverviewProps } from './types';
-
-const onImageLoadError = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-  // eslint-disable-next-line no-param-reassign
-  event.currentTarget.src = placeholderCover;
-};
 
 /**
  * @description Карточка краткого описания курса.
  * */
 
 function CourseOverview({
-  coverPath = placeholderCover,
+  coverPath,
   level,
   lessonsCount = 0,
   startDate,
-  courseDuration = 0,
+  courseDuration,
 }: CourseOverviewProps) {
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
       <img
         className={styles.courseImage}
-        src={coverPath}
+        src={coverPath ?? placeholderCover}
         alt="Обложка курса"
         onError={onImageLoadError}
       />
@@ -34,7 +29,7 @@ function CourseOverview({
       <ul className={styles.courseMeta}>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Уровень:" iconType="rank" />
-          {level ?? 'неизвестно'}
+          {level}
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Количество занятий:" iconType="lessons" />
@@ -42,11 +37,11 @@ function CourseOverview({
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {courseDuration} ч
+          {courseDuration ?? 0} ч
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {startDate ? `${startDate} г` : 'неизвестно'}
+          {startDate}
         </li>
       </ul>
 
