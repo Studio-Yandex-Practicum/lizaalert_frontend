@@ -3,6 +3,7 @@ import { Card } from 'components/atoms/card';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { onImageLoadError } from 'utils/on-image-load-error';
+import { convertDate } from 'utils/convert-date';
 import styles from './course-overview.module.scss';
 import { CourseOverviewProps } from './types';
 
@@ -13,7 +14,7 @@ import { CourseOverviewProps } from './types';
 function CourseOverview({
   coverPath,
   level,
-  lessonsCount = 0,
+  lessonsCount,
   startDate,
   courseDuration,
 }: CourseOverviewProps) {
@@ -41,7 +42,7 @@ function CourseOverview({
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {startDate}
+          {convertDate(startDate)} г
         </li>
       </ul>
 
