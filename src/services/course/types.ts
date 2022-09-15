@@ -1,21 +1,25 @@
 import { Nullable } from '../../types';
 
-export type LessonType = {
+export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
+
+export type LessonStatus = 'Ready' | 'Draft' | 'Published';
+
+export type Lesson = {
   id: number;
   order_number: number;
   duration: number;
   title: string;
-  lesson_type: 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
-  lesson_status: 'Ready' | 'Draft' | 'Published';
+  lesson_type: LessonType;
+  lesson_status: LessonStatus;
 };
 
-export type ChapterType = {
+export type Chapter = {
   id: number;
   title: string;
-  lessons: LessonType[];
+  lessons: Lesson[];
 };
 
-export type CourseType = {
+export type Course = {
   id: number;
   title: string;
   level: string;
@@ -25,5 +29,5 @@ export type CourseType = {
   cover_path: Nullable<string>;
   lessons_count: number;
   course_duration: Nullable<number>;
-  chapters: ChapterType[];
+  chapters: Chapter[];
 };

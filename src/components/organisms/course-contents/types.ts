@@ -1,7 +1,8 @@
-import { ContentsItemType, CourseContentsType } from '../contents-item';
+import { Chapter } from 'services/course/types';
+import { ContentsItemType } from '../contents-item';
 
 export type CourseContentsProps = {
-  content: CourseContentsType[];
+  content: Chapter[];
   type?: ContentsItemType;
   className?: string;
 };

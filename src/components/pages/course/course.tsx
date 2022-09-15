@@ -7,7 +7,6 @@ import { CourseContents } from 'components/organisms/course-contents';
 import { CourseDescription } from 'components/organisms/course-description';
 import { CourseOverview } from 'components/organisms/course-overview';
 import { FAQ } from 'components/organisms/faq';
-import { CourseContentsType } from 'components/organisms/contents-item';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourse,
@@ -15,7 +14,6 @@ import {
   selectCourseTitle,
 } from 'store/course/selectors';
 import fetchCourseAction from 'store/course/thunk';
-import mockCourseContent from 'services/mock/course-content.json';
 import styles from './course.module.scss';
 
 function Course() {
@@ -43,8 +41,10 @@ function Course() {
         <div className={styles.main}>
           <CourseDescription />
           <CourseBenefits />
-          {/* TODO убрать type casting, когда будут готовы данные */}
-          <CourseContents content={mockCourseContent as CourseContentsType[]} />
+          {course.chapters?.length > 0 && (
+            <CourseContents content={course.chapters} />
+          )}
+
           <FAQ />
         </div>
         <aside className={styles.aside}>

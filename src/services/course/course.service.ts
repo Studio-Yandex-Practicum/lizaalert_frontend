@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { CourseType } from './types';
+import { Course } from './types';
 
 export class CourseService {
   static getCourse(id: number) {
-    return axios.get<unknown, CourseType>(`/courses/${id}/`);
+    return axios.get<unknown, Course>(`/courses/${id}/`);
   }
 
   // create course

@@ -1,7 +1,7 @@
-import { CourseType } from 'services/course/types';
+import { Course } from 'services/course/types';
 
 export type CourseReducerType = {
-  course: Partial<CourseType>;
+  course: Course;
   isLoading: boolean;
   error: string | null;
 };
