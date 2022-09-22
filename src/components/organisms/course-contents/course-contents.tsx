@@ -1,16 +1,16 @@
 import classnames from 'classnames';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Accordion } from '../../molecules/accordion';
-import { ContentsItem } from '../contents-item';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Accordion } from 'components/molecules/accordion';
+import { ContentsItem } from 'components/organisms/contents-item';
 import styles from './course-contents.module.scss';
 import { CourseContentsProps } from './types';
 
 /**
- * @description Компонент оглавления. Представляет собой список со вложенным списком уроков или аккордеон.
+ * @description Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
  *
  * @props
- * - content - array of objects, required - массив глав: `id`, `topic` и массив `lessons`.
+ * - content - array of objects, required - массив глав: `id`, `title` и массив `lessons`.
  * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
  * - className - string - класс-миксин для стилизации внешнего контейнера.
  * */
@@ -20,9 +20,10 @@ function CourseContents({
   type = 'main',
   className = '',
 }: CourseContentsProps) {
-  const classes = classnames(className, styles.contents);
+  const classes = classnames(styles.contents, className);
 
-  const contentItems = content.map((item, index) => (
+  // Список уроков
+  const contentItems = content?.map((item, index) => (
     <ContentsItem key={item.id} content={item} index={index} type={type} />
   ));
 

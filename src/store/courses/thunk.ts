@@ -1,16 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { CoursesService } from '../../services/courses/courses.service';
+import { CoursesService } from 'services/courses/courses.service';
 
 const fetchCoursesAction = createAsyncThunk(
   'courses/fetch',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await CoursesService.getCourses();
-      return data;
+      const courses = await CoursesService.getCourses();
+      return courses;
     } catch (error) {
-      const err = error as AxiosError;
-      return rejectWithValue(err.message);
+      return rejectWithValue((error as AxiosError).message);
     }
   }
 );

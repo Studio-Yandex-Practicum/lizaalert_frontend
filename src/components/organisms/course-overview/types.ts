@@ -1,7 +1,10 @@
+import { Nullable } from 'types';
+
 export type CourseOverviewProps = {
-  imgLink?: string;
-  level?: string;
-  lessonQuantity?: number;
-  duration?: number;
-  startDate?: string;
+  id: number;
+  level: string;
+  startDate: string;
+  coverPath?: Nullable<string>;
+  lessonsCount: number;
+  courseDuration?: Nullable<number>;
 };

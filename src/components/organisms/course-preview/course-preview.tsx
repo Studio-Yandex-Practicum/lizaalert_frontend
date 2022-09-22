@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { GetDeclensionOf } from 'utils/get-declension-of';
 import { CourseStatusButtons } from 'types/courseStatusButtons.types';
-import { SyntheticEvent } from 'react';
 import { Card } from '../../atoms/card';
 import { Heading } from '../../atoms/heading';
 import { Button } from '../../molecules/button';
@@ -10,6 +9,7 @@ import { Tag } from '../../molecules/tag';
 import { TextWithIcon } from '../../molecules/text-with-icon';
 import styles from './course-preview.module.scss';
 import { CoursePreviewProps } from './types';
+import { onImageLoadError } from '../../../utils/on-image-load-error';
 
 /**
  * @description Компонент предпросмотра курса
@@ -30,11 +30,6 @@ function CoursePreview({ course }: CoursePreviewProps) {
     course_status: status,
     cover_path: coverPath,
   } = course;
-
-  const imageOnErrorLoad = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-    // eslint-disable-next-line no-param-reassign
-    event.currentTarget.src = placeholderCover;
-  };
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
@@ -65,7 +60,7 @@ function CoursePreview({ course }: CoursePreviewProps) {
         src={coverPath || placeholderCover}
         alt={title}
         className={styles.cover}
-        onError={imageOnErrorLoad}
+        onError={onImageLoadError}
       />
     </Card>
   );
