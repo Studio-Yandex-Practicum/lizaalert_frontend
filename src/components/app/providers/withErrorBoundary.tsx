@@ -1,13 +1,12 @@
-import { Provider } from 'react-redux';
-import { store } from 'store';
+import ErrorBoundary from '../../pages/error-boundary/error-boundary';
 import { ProviderComponent, ProviderReturnType } from './types';
 
 /* eslint react/function-component-definition: 0 */
-export const withStore =
+export const withErrorBoundary =
   (Component: ProviderComponent): ProviderReturnType =>
   () =>
     (
-      <Provider store={store}>
+      <ErrorBoundary>
         <Component />
-      </Provider>
+      </ErrorBoundary>
     );
