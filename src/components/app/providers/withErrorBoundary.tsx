@@ -1,12 +1,10 @@
-import ErrorBoundary from '../../pages/error-boundary/error-boundary';
-import { ProviderComponent, ProviderReturnType } from './types';
+import ErrorBoundary from 'components/pages/error-boundary/error-boundary';
+import { ProviderComponent } from './types';
 
 /* eslint react/function-component-definition: 0 */
-export const withErrorBoundary =
-  (Component: ProviderComponent): ProviderReturnType =>
-  () =>
-    (
-      <ErrorBoundary>
-        <Component />
-      </ErrorBoundary>
-    );
+export const withErrorBoundary = (Component: ProviderComponent) => () =>
+  (
+    <ErrorBoundary>
+      <Component />
+    </ErrorBoundary>
+  );

@@ -1,9 +1,10 @@
-import { ReactElement, Suspense } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Loader } from '../../molecules/loader';
+import { Loader } from 'components/molecules/loader';
+import { ProviderComponent } from './types';
 
 /* eslint react/function-component-definition: 0 */
-export const withRouter = (Component: () => ReactElement) => () =>
+export const withRouter = (Component: ProviderComponent) => () =>
   (
     <BrowserRouter>
       <Suspense fallback={<Loader />}>
