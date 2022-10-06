@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from '../../router/router';
 import { selectIsLoading } from '../../store/auth/selectors';
 import { checkAuth } from '../../store/auth/thunk';
+import { withProviders } from './providers';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,4 +19,4 @@ function App() {
   return <Router />;
 }
 
-export default App;
+export default withProviders(App);
