@@ -10,8 +10,8 @@ export type CoursePreviewType = {
 };
 
 export type GetCoursesDataModel = {
-  page?: number;
-  pageSize?: number;
+  page: number;
+  pageSize: number;
 };
 
 export type CoursesType = {

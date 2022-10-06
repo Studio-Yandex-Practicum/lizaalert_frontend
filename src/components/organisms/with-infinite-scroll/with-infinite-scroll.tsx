@@ -3,12 +3,13 @@ import { Loader } from 'components/molecules/loader';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from 'utils/constants';
 import useIntersectionObserver from './hooks/use-intersection-observer';
 import { PaginationState, WithInfiniteScrollConfig } from './types';
+import styles from './with-infinite-scroll.module.scss';
 
 /**
  * @description HOC для создания бесконечной прокрутки
  *
  * @props
- * - initialPaginationState - { page: number, pageSize: number } - начальный стейт пагинации, по умолчанию page=1 и pageSize=10
+ * - initialPaginationState - { page: number, pageSize: number } - начальный стейт пагинации, по умолчанию берется из констант
  * - data - array, required - типизируемый массив с данными
  * - total - number - общее количество элементов в базе
  * - isLoading - boolean, required - флаг индикатора загрузки, по нему появляется прелоадер последнего элемента
@@ -32,9 +33,9 @@ function WithInfiniteScroll<T>({
     initialPaginationState
   );
 
-  const fetchData = (paginationState: PaginationState) => {
+  const fetchData = async (paginationState: PaginationState) => {
     if (data.length === 0 || data.length < total) {
-      actionOnIntersect(paginationState);
+      await actionOnIntersect(paginationState);
       setPagination((prevState) => ({
         ...prevState,
         page: prevState.page + 1,
@@ -43,18 +44,18 @@ function WithInfiniteScroll<T>({
   };
 
   useEffect(() => {
-    fetchData(initialPaginationState);
+    void fetchData(initialPaginationState);
   }, []);
 
   useIntersectionObserver({
     elementRef: loadMoreRef,
     callbackOnIntersect: () => {
-      fetchData(pagination);
+      void fetchData(pagination);
     },
   });
 
   return (
-    <>
+    <div className={styles.scrollContainer}>
       {children}
 
       {isLoading && <Loader />}
@@ -62,7 +63,7 @@ function WithInfiniteScroll<T>({
       {!isLoading && data.length > 0 && data.length < total && (
         <span aria-hidden ref={loadMoreRef} />
       )}
-    </>
+    </div>
   );
 }
 

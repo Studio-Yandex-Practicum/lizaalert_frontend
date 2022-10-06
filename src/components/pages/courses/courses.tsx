@@ -26,7 +26,7 @@ function Courses() {
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
   const isLoading = useAppSelector(selectCoursesLoading);
 
-  const fetchCourses = (paginationState: PaginationState) => {
+  const fetchCourses = async (paginationState: PaginationState) => {
     void dispatch(fetchCoursesAction(paginationState));
   };
 
@@ -40,22 +40,23 @@ function Courses() {
       />
       <div className={styles.courses}>
         <Filter className={styles.filters} />
-        <ul className={styles.list}>
-          <WithInfiniteScroll
-            initialPaginationState={initialPaginationState}
-            data={courses}
-            isLoading={isLoading}
-            actionOnIntersect={fetchCourses}
-            total={coursesTotal}
-          >
+
+        <WithInfiniteScroll
+          initialPaginationState={initialPaginationState}
+          data={courses}
+          isLoading={isLoading}
+          actionOnIntersect={fetchCourses}
+          total={coursesTotal}
+        >
+          <ul className={styles.list}>
             {courses.length > 0 &&
               courses.map((course) => (
-                <li key={course.id} className={styles.card}>
+                <li key={course.id}>
                   <CoursePreview course={course} />
                 </li>
               ))}
-          </WithInfiniteScroll>
-        </ul>
+          </ul>
+        </WithInfiniteScroll>
       </div>
     </>
   );

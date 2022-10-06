@@ -11,5 +11,5 @@ export type WithInfiniteScrollConfig<T> = {
   total: number;
   isLoading: boolean;
   children: ReactNode;
-  actionOnIntersect: (state: PaginationState) => void;
+  actionOnIntersect: (state: PaginationState) => Promise<void>;
 };
