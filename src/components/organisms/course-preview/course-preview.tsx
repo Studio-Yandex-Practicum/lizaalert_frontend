@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
+import { CourseStatusButtons } from 'types/course-status-buttons.types';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { Tag } from 'components/molecules/tag';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
-import { CourseStatusButtons } from 'types/courseStatusButtons.types';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { Tag } from '../../molecules/tag';
-import { TextWithIcon } from '../../molecules/text-with-icon';
 import styles from './course-preview.module.scss';
 import { CoursePreviewProps } from './types';
-import { onImageLoadError } from '../../../utils/on-image-load-error';
 
 /**
  * @description Компонент предпросмотра курса
@@ -59,6 +59,8 @@ function CoursePreview({ course }: CoursePreviewProps) {
       <img
         src={coverPath || placeholderCover}
         alt={title}
+        draggable={false}
+        loading="lazy"
         className={styles.cover}
         onError={onImageLoadError}
       />
