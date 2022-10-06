@@ -20,6 +20,9 @@ export const Levels = {
 
 export const SPINNER_DELAY = 300;
 
+export const DEFAULT_PAGE = 1;
+export const DEFAULT_PAGE_SIZE = 10;
+
 export const Controls = {
   CHECKBOX: 'checkbox',
   RADIO: 'radio',

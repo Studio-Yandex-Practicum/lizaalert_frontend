@@ -1,0 +1,8 @@
+@use 'src/styles/variables' as vars;
+
+.scrollContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: vars.$grid-gap;
+}
