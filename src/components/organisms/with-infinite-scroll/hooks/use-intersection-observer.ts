@@ -8,8 +8,8 @@ type IntersectionObserverConfig = {
   threshold?: number;
 };
 
-/*
- * Хук используется для подгрузки данных и других манипуляций при появлении elementRef во вьюпорте
+/**
+ * @description Хук используется для подгрузки данных и других манипуляций при появлении elementRef во вьюпорте
  * */
 
 const useIntersectionObserver = ({

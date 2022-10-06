@@ -8,6 +8,7 @@
 
 .courses {
   display: flex;
+  width: 100%;
   column-gap: vars.$grid-gap;
   padding-bottom: 40px;
 }
@@ -27,18 +28,7 @@
   row-gap: vars.$grid-gap;
 }
 
-/* анимация карточек */
-$visibleCardsCount: 5;
-
 .card {
   display: block;
-}
-
-@for $i from 1 through $visibleCardsCount {
-  .card {
-    &:nth-child(#{$i}) {
-      @include mixins.slide-bottom-up($i * 0.15s);
-    }
-  }
 }
 

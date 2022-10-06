@@ -25,7 +25,7 @@ export const coursesSlice = createSlice({
       state,
       { payload }: PayloadAction<CoursesType>
     ) => {
-      state.results = payload.results;
+      state.results = [...state.results, ...payload.results];
       state.count = payload.count;
       state.isLoading = false;
     },

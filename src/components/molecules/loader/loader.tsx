@@ -16,8 +16,8 @@ const settings = {
  *
  * @props
  * - className - string - класс-миксин для оверлея
- * - isFixed - boolean - делает оверлею `position: fixed` и растягивает на ширину и высоту родительского контейнера
- * - isAbsolute - boolean - делает оверлею `position: absolute` и растягивает на ширину и высоту родительского контейнера
+ * - isFixed - boolean - делает оверлею `position: fixed` и растягивает на высоту родительского контейнера
+ * - isAbsolute - boolean - делает оверлею `position: absolute` и растягивает на высоту родительского контейнера
  * */
 
 function Loader({
