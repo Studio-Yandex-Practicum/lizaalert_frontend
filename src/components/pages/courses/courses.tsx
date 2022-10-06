@@ -17,7 +17,7 @@ import styles from './courses.module.scss';
 
 const initialPaginationState = {
   page: 1,
-  pageSize: 2,
+  pageSize: 8,
 };
 
 function Courses() {

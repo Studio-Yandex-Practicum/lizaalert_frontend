@@ -8,7 +8,7 @@ export type PaginationState = {
 export type WithInfiniteScrollConfig<T> = {
   initialPaginationState?: PaginationState;
   data: T[];
-  total?: number;
+  total: number;
   isLoading: boolean;
   children: ReactNode;
   actionOnIntersect: (state: PaginationState) => void;

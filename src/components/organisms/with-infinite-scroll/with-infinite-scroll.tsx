@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from 'components/molecules/loader';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from 'utils/constants';
 import useIntersectionObserver from './hooks/use-intersection-observer';
 import { PaginationState, WithInfiniteScrollConfig } from './types';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../../utils/constants';
 
 /**
  * @description HOC для создания бесконечной прокрутки
@@ -22,7 +22,7 @@ function WithInfiniteScroll<T>({
     pageSize: DEFAULT_PAGE_SIZE,
   },
   data,
-  total = 0,
+  total,
   isLoading,
   children,
   actionOnIntersect,
