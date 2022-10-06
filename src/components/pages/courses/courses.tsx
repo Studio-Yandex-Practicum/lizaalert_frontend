@@ -1,19 +1,19 @@
-import { Heading } from '../../atoms/heading';
-import { Filter } from '../../organisms/filter';
-import styles from './courses.module.scss';
-import { routes } from '../../../config';
+import { Heading } from 'components/atoms/heading';
+import { Filter } from 'components/organisms/filter';
 import {
   PaginationState,
   WithInfiniteScroll,
-} from '../../organisms/with-infinite-scroll';
-import { useAppDispatch, useAppSelector } from '../../../store';
+} from 'components/organisms/with-infinite-scroll';
+import { CoursePreview } from 'components/organisms/course-preview';
+import { routes } from 'config';
+import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourses,
   selectCoursesLoading,
   selectCoursesTotal,
-} from '../../../store/courses/selectors';
-import fetchCoursesAction from '../../../store/courses/thunk';
-import { CoursePreview } from '../../organisms/course-preview';
+} from 'store/courses/selectors';
+import fetchCoursesAction from 'store/courses/thunk';
+import styles from './courses.module.scss';
 
 const initialPaginationState = {
   page: 1,
