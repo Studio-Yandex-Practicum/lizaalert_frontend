@@ -11,10 +11,10 @@ import styles from './with-infinite-scroll.module.scss';
  * @props
  * - initialPageSize - number - начальный стейт пагинации, по умолчанию берется из констант
  * - data - array, required - типизируемый массив с данными
- * - total - number - общее количество элементов в базе
+ * - total - number, required - общее количество элементов в базе
  * - isLoading - boolean, required - флаг индикатора загрузки, по нему появляется прелоадер последнего элемента
  * - children - ReactNode, required - то, что нужно отобразить из родителя
- * - actionOnIntersect - (state: PaginationState) => void - коллбек для загрузки данных при прокрутке вниз
+ * - actionOnIntersect - (state: PaginationState) => void, required - коллбек для загрузки данных при прокрутке вниз
  * */
 
 function WithInfiniteScroll<T>({

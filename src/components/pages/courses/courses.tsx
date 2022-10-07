@@ -15,7 +15,7 @@ import {
 import fetchCoursesAction from 'store/courses/thunk';
 import styles from './courses.module.scss';
 
-const initialPageSize = 4;
+const initialPageSize = 8;
 
 function Courses() {
   const dispatch = useAppDispatch();
