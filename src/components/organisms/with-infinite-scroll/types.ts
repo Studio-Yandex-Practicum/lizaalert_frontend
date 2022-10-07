@@ -6,7 +6,7 @@ export type PaginationState = {
 };
 
 export type WithInfiniteScrollConfig<T> = {
-  initialPaginationState?: PaginationState;
+  initialPageSize?: number;
   data: T[];
   total: number;
   isLoading: boolean;

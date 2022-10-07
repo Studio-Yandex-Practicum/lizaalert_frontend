@@ -1,27 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Loader } from 'components/molecules/loader';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from 'utils/constants';
+import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 import useIntersectionObserver from './hooks/use-intersection-observer';
 import { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
 
 /**
- * @description HOC для создания бесконечной прокрутки
+ * @description HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  *
  * @props
- * - initialPaginationState - { page: number, pageSize: number } - начальный стейт пагинации, по умолчанию берется из констант
+ * - initialPageSize - number - начальный стейт пагинации, по умолчанию берется из констант
  * - data - array, required - типизируемый массив с данными
- * - total - number - общее количество элементов в базе
+ * - total - number, required - общее количество элементов в базе
  * - isLoading - boolean, required - флаг индикатора загрузки, по нему появляется прелоадер последнего элемента
  * - children - ReactNode, required - то, что нужно отобразить из родителя
- * - actionOnIntersect - (state: PaginationState) => void - коллбек для загрузки данных при прокрутке вниз
+ * - actionOnIntersect - (state: PaginationState) => void, required - коллбек для загрузки данных при прокрутке вниз
  * */
 
 function WithInfiniteScroll<T>({
-  initialPaginationState = {
-    page: DEFAULT_PAGE,
-    pageSize: DEFAULT_PAGE_SIZE,
-  },
+  initialPageSize = DEFAULT_PAGE_SIZE,
   data,
   total,
   isLoading,
@@ -29,9 +26,11 @@ function WithInfiniteScroll<T>({
   actionOnIntersect,
 }: WithInfiniteScrollConfig<T>) {
   const loadMoreRef = useRef(null);
-  const [pagination, setPagination] = useState<PaginationState>(
-    initialPaginationState
-  );
+  const [pagination, setPagination] = useState<PaginationState>({
+    // следующая страница
+    page: data.length / initialPageSize + 1,
+    pageSize: initialPageSize,
+  });
 
   const fetchData = async (paginationState: PaginationState) => {
     if (data.length === 0 || data.length < total) {
@@ -42,10 +41,6 @@ function WithInfiniteScroll<T>({
       }));
     }
   };
-
-  useEffect(() => {
-    void fetchData(initialPaginationState);
-  }, []);
 
   useIntersectionObserver({
     elementRef: loadMoreRef,
@@ -60,7 +55,7 @@ function WithInfiniteScroll<T>({
 
       {isLoading && <Loader />}
 
-      {!isLoading && data.length > 0 && data.length < total && (
+      {!isLoading && (data.length === 0 || data.length < total) && (
         <span aria-hidden ref={loadMoreRef} />
       )}
     </div>
