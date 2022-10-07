@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useScrollToTop } from 'hooks';
+import useScrollToTop from 'hooks/use-scroll-to-top';
 import { Header } from '../header';
 
 /**

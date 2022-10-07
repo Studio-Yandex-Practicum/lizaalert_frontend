@@ -8,7 +8,7 @@ import styles from './personal-data.module.scss';
 import { PersonalFormData } from './types';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 import { Patterns } from '../../../utils/constants';
 
 /**
