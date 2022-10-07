@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useScrollToTop } from 'hooks';
 import { Header } from '../header';
 
 /**
@@ -6,6 +7,10 @@ import { Header } from '../header';
  * */
 
 function BaseLayout() {
+  const { pathname } = useLocation();
+
+  useScrollToTop(pathname);
+
   return (
     <>
       <Header />
