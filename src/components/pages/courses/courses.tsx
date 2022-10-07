@@ -15,10 +15,7 @@ import {
 import fetchCoursesAction from 'store/courses/thunk';
 import styles from './courses.module.scss';
 
-const initialPaginationState = {
-  page: 1,
-  pageSize: 8,
-};
+const initialPageSize = 4;
 
 function Courses() {
   const dispatch = useAppDispatch();
@@ -42,7 +39,7 @@ function Courses() {
         <Filter className={styles.filters} />
 
         <WithInfiniteScroll
-          initialPaginationState={initialPaginationState}
+          initialPageSize={initialPageSize}
           data={courses}
           isLoading={isLoading}
           actionOnIntersect={fetchCourses}

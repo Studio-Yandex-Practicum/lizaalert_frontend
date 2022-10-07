@@ -6,10 +6,10 @@ import { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
 
 /**
- * @description HOC для создания бесконечной прокрутки
+ * @description HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  *
  * @props
- * - initialPaginationState - { page: number, pageSize: number } - начальный стейт пагинации, по умолчанию берется из констант
+ * - initialPageSize - number - начальный стейт пагинации, по умолчанию берется из констант
  * - data - array, required - типизируемый массив с данными
  * - total - number - общее количество элементов в базе
  * - isLoading - boolean, required - флаг индикатора загрузки, по нему появляется прелоадер последнего элемента
@@ -18,10 +18,7 @@ import styles from './with-infinite-scroll.module.scss';
  * */
 
 function WithInfiniteScroll<T>({
-  initialPaginationState = {
-    page: DEFAULT_PAGE,
-    pageSize: DEFAULT_PAGE_SIZE,
-  },
+  initialPageSize = DEFAULT_PAGE_SIZE,
   data,
   total,
   isLoading,
@@ -29,9 +26,10 @@ function WithInfiniteScroll<T>({
   actionOnIntersect,
 }: WithInfiniteScrollConfig<T>) {
   const loadMoreRef = useRef(null);
-  const [pagination, setPagination] = useState<PaginationState>(
-    initialPaginationState
-  );
+  const [pagination, setPagination] = useState<PaginationState>({
+    page: DEFAULT_PAGE,
+    pageSize: initialPageSize,
+  });
 
   const fetchData = async (paginationState: PaginationState) => {
     if (data.length === 0 || data.length < total) {
@@ -44,7 +42,9 @@ function WithInfiniteScroll<T>({
   };
 
   useEffect(() => {
-    void fetchData(initialPaginationState);
+    if (data.length === 0 || data.length < total) {
+      void fetchData(pagination);
+    }
   }, []);
 
   useIntersectionObserver({
