@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Loader } from 'components/molecules/loader';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from 'utils/constants';
+import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 import useIntersectionObserver from './hooks/use-intersection-observer';
 import { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
@@ -27,7 +27,8 @@ function WithInfiniteScroll<T>({
 }: WithInfiniteScrollConfig<T>) {
   const loadMoreRef = useRef(null);
   const [pagination, setPagination] = useState<PaginationState>({
-    page: DEFAULT_PAGE,
+    // следующая страница
+    page: data.length / initialPageSize + 1,
     pageSize: initialPageSize,
   });
 
@@ -40,12 +41,6 @@ function WithInfiniteScroll<T>({
       }));
     }
   };
-
-  useEffect(() => {
-    if (data.length === 0 || data.length < total) {
-      void fetchData(pagination);
-    }
-  }, []);
 
   useIntersectionObserver({
     elementRef: loadMoreRef,
@@ -60,7 +55,7 @@ function WithInfiniteScroll<T>({
 
       {isLoading && <Loader />}
 
-      {!isLoading && data.length > 0 && data.length < total && (
+      {!isLoading && (data.length === 0 || data.length < total) && (
         <span aria-hidden ref={loadMoreRef} />
       )}
     </div>
