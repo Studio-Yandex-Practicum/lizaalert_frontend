@@ -12,7 +12,7 @@ import styles from './login-form.module.scss';
 import { UserLoginFormData } from './types';
 import { fetchAuth } from '../../../store/auth/thunk';
 import { selectIsAuth, selectIsLoading } from '../../../store/auth/selectors';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 import { routes } from '../../../config';
 import { ErrorMessages, Patterns } from '../../../utils/constants';
 
