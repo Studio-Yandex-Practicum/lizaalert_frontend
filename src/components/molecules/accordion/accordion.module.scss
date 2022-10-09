@@ -3,6 +3,7 @@
 .accordion {
   display: flex;
   flex-direction: column;
+  font-family: vars.$mainFont;
 }
 
 .open > .handle {
@@ -19,8 +20,34 @@
   background-color: transparent;
   cursor: pointer;
   padding: 0;
-  font-family: vars.$mainFont;
   text-align: start;
+  font-family: inherit;
+}
+
+.title {
+  margin: 0;
+
+  &_weight {
+    &_bold {
+      font-weight: 700;
+    }
+
+    &_regular {
+      font-weight: 400;
+    }
+  }
+
+  &_size {
+    &_l {
+      font-size: vars.$font-size-l;
+      line-height: vars.$line-height-l;
+    }
+
+    &_m {
+      font-size: vars.$font-size-m;
+      line-height: vars.$line-height-m;
+    }
+  }
 }
 
 .btn {
