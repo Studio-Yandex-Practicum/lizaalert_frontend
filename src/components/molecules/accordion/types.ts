@@ -2,8 +2,8 @@ import { ReactNode, RefObject } from 'react';
 import { Nullable } from '../../../types';
 
 export type AccordionButton = 'text' | 'icon';
-export type AccordionTitleSize = 'l' | 'm';
-export type AccordionTitleWeight = 'bold' | 'regular';
+export type TitleSize = 'l' | 'm';
+export type TitleWeight = 'bold' | 'regular';
 
 export type AccordionProps = {
   /**
@@ -13,11 +13,11 @@ export type AccordionProps = {
   /**
    * Размер заголовка аккордеона
    * */
-  titleSize?: AccordionTitleSize;
+  titleSize?: TitleSize;
   /**
    * Начертание заголовка аккордеона
    * */
-  titleWeight?: AccordionTitleWeight;
+  titleWeight?: TitleWeight;
   /**
    * Содержимое, которое будет скрываться
    * */
