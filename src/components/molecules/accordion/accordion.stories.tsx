@@ -21,14 +21,19 @@ const Template: ComponentStory<typeof Accordion> = ({ title, ...args }) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+
+export const Opened = Template.bind({});
+Opened.args = {
+  open: true,
+};
 
 export const WithButtonText = Template.bind({});
 WithButtonText.args = {
   button: 'text',
 };
 
-export const Opened = Template.bind({});
-Opened.args = {
-  open: true,
+export const WithMediumTitle = Template.bind({});
+WithMediumTitle.args = {
+  titleSize: 'm',
+  titleWeight: 'regular',
 };
