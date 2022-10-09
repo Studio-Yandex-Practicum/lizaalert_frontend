@@ -23,9 +23,9 @@ const Template: ComponentStory<typeof Card> = ({
   </Card>
 );
 
+export const Standard = Template.bind({});
+
 export const WithoutPadding = Template.bind({});
 WithoutPadding.args = {
   noPadding: true,
 };
-
-export const Standard = Template.bind({});
