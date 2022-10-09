@@ -29,15 +29,11 @@ const initialData = [
 function FAQ() {
   return (
     <Card className={styles.card} htmlTag="section">
-      <Accordion className={styles.title} title="FAQ" button="text" open>
+      <Accordion title="FAQ" button="text" open>
         <ul className={styles.list}>
           {initialData.map((list) => (
             <li key={list.id} className={styles.list__item}>
-              <Accordion
-                title={list.question}
-                button="icon"
-                className={styles.question}
-              >
+              <Accordion title={list.question} button="icon" titleSize="m">
                 <p className={styles.answer}>{list.answer}</p>
               </Accordion>
             </li>

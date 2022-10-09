@@ -36,12 +36,7 @@ const defaultList = [
 function CourseBenefits({ benefitsList = defaultList }: CourseBenefitsProps) {
   return (
     <Card className={styles.benefits} htmlTag="section">
-      <Accordion
-        className={styles.title}
-        button="text"
-        title="Чему вы научитесь"
-        open
-      >
+      <Accordion button="text" title="Чему вы научитесь" open>
         <ul className={styles.benefitsList}>
           {benefitsList &&
             benefitsList.map((item) => (

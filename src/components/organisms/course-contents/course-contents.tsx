@@ -30,12 +30,7 @@ function CourseContents({
   return (
     <Card className={classes} htmlTag={type === 'inner' ? 'aside' : 'section'}>
       {type === 'main' && (
-        <Accordion
-          title="Содержание"
-          button="text"
-          className={styles.subtitle}
-          open
-        >
+        <Accordion title="Содержание" button="text" open>
           <ul className={styles.list}>{contentItems}</ul>
         </Accordion>
       )}

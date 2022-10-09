@@ -41,6 +41,8 @@ function Filter({ className = '' }: FilterProps) {
           <Accordion
             title={countSectionSelection(section)}
             key={section.name.value}
+            titleSize="m"
+            titleWeight="regular"
             className={styles.filterAccordion}
           >
             {section.options.map((checkbox) => (

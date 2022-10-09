@@ -52,6 +52,8 @@ function ContentsItem({
     return (
       <Accordion
         title={`${index + 1}. ${content.title}`}
+        titleSize="m"
+        titleWeight="regular"
         className={classnames(styles.accordion, className)}
         open={content.id === +topicId}
       >
