@@ -5,19 +5,7 @@ import styles from './button.module.scss';
 import { ButtonProps } from './types';
 
 /**
- * @description Компонент кнопки с иконкой или без.
- *
- * @props
- * - children - string - текст кнопки, имеет приоритет перед `text`
- * - text - string - текст кнопки, альтернатива для `children`
- * - view - enum ('primary' | 'secondary' | 'tertiary' | 'text') - внешний вид кнопки
- * - hover - enum ('default' | 'border') - внешний вид обводки кнопки
- * - iconName - string - имя иконки из объекта icons
- * - iconPosition - enum ('back' | 'forward') - позиционирование иконки слева/справа от текста
- * - className - string - класс-миксин
- * - type - enum ('button' | 'submit') - тип кнопки
- * - classNameIcon - string - класс-миксин
- * - стандартные атрибуты HTML для `<button>`
+ * Компонент кнопки с иконкой или без.
  */
 
 function Button({
@@ -26,11 +14,11 @@ function Button({
   view = 'primary',
   hover = 'default',
   iconName = null,
-  iconPosition = null,
+  iconPosition = 'back',
   className = '',
   type = 'button',
   classNameIcon = '',
-  iconSize,
+  iconSize = 'default',
   ...props
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const btnClasses = classnames(

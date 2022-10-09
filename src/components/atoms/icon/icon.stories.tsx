@@ -11,7 +11,10 @@ export default {
 const Template: ComponentStory<typeof Icon> = ({ type, ...args }) => (
   <div style={{ display: 'flex', flexDirection: 'column', rowGap: 10 }}>
     {(Object.keys(icons) as IconType[]).map((key) => (
-      <div style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}>
+      <div
+        key={key}
+        style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}
+      >
         <Icon type={key} {...args} />
         <code>{key}</code>
       </div>
