@@ -6,15 +6,17 @@ export default {
   component: Checkbox,
 } as ComponentMeta<typeof Checkbox>;
 
-const Template: ComponentStory<typeof Checkbox> = ({
-  labelText,
-  name,
-  ...args
-}) => <Checkbox labelText="Текст чекбокса" name="storybook" {...args} />;
+const Template: ComponentStory<typeof Checkbox> = ({ labelText, ...args }) => (
+  <Checkbox labelText="Текст чекбокса" {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  name: 'storybook',
+};
 
 export const Radio = Template.bind({});
 Radio.args = {
   isRadio: true,
+  name: 'storybook-radio',
 };
