@@ -1,8 +1,12 @@
-import { Heading } from '../../atoms/heading';
-import { StyledLink } from '../../molecules/styled-link';
-import { TextWithIcon } from '../../molecules/text-with-icon';
+import { Heading } from 'components/atoms/heading';
+import { StyledLink } from 'components/molecules/styled-link';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { routes } from 'config';
 import styles from './development.module.scss';
-import { routes } from '../../../config';
+
+/**
+ * @description Заглушка для тех страниц, что находятся в разработке и пока не готовы для прода.
+ * */
 
 function Development() {
   return (
