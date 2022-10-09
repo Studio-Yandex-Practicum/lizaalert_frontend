@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { IconSize, IconType } from '../../atoms/icon';
+import { IconSize, IconType } from 'components/atoms/icon';
 
 export type ButtonView = 'primary' | 'secondary' | 'tertiary' | 'text';
 export type ButtonHover = 'default' | 'border';

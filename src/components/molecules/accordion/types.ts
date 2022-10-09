@@ -1,5 +1,5 @@
 import { ReactNode, RefObject } from 'react';
-import { Nullable } from '../../../types';
+import { Nullable } from 'types';
 
 export type AccordionButton = 'text' | 'icon';
 export type TitleSize = 'l' | 'm';

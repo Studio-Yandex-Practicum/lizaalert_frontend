@@ -4,12 +4,7 @@ import styles from './header-link.module.scss';
 import { HeaderLinkProps } from './types';
 
 /**
- * @description Компонент ссылки для навигации сайта, подсвечивает активный роут.
- *
- * @props
- * - text - string - текст ссылки.
- * - iconType - string - тип иконки из объекта `icons`.
- * - link - string - `href` для ссылки.
+ * Компонент ссылки для навигации сайта, подсвечивает активный роут.
  * */
 
 function HeaderLink({ text, iconType, link }: HeaderLinkProps) {

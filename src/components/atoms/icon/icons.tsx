@@ -51,6 +51,7 @@ import { ReactComponent as Webinar } from 'assets/icons/webinar.svg';
 import { ReactComponent as XSmall } from 'assets/icons/x-small.svg';
 import { ReactComponent as XSolid } from 'assets/icons/x-solid.svg';
 import { ReactComponent as Yandex } from 'assets/icons/yandex.svg';
+import { IconType } from './types';
 
 const defaultAttributes = {
   width: '100%',
@@ -116,3 +117,5 @@ const icons = {
 };
 
 export default icons;
+
+export const iconKeys = Object.keys(icons) as IconType[];

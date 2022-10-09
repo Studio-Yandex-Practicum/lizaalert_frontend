@@ -1,5 +1,5 @@
+import { Nullable } from 'types';
 import icons from './icons';
-import { Nullable } from '../../../types';
 
 export type IconType = Nullable<keyof typeof icons>;
 export type IconSize = 'default' | 'medium';
