@@ -1,20 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
+import { iconKeys } from 'components/atoms/icon';
+import { exportConfig } from 'config/storybook';
 import HeaderLink from './header-link';
-import { iconKeys } from '../../atoms/icon/icons';
 
 export default {
+  ...exportConfig,
   title: 'Molecules/HeaderLink',
   component: HeaderLink,
   decorators: [withRouter],
   argTypes: {
-    text: { type: 'string', defaultValue: 'Ссылка c иконкой', control: 'text' },
+    text: { defaultValue: 'Ссылка c иконкой' },
     iconType: {
       options: iconKeys,
       defaultValue: 'calendar',
       control: 'select',
     },
-    link: { type: 'string', defaultValue: '/123', control: 'text' },
+    link: { defaultValue: '/123' },
   },
 } as ComponentMeta<typeof HeaderLink>;
 

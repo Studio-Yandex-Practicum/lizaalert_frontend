@@ -1,13 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { exportConfig } from 'config/storybook';
 import Heading from './heading';
 
 export default {
+  ...exportConfig,
   title: 'Atoms/Heading',
   component: Heading,
+  argTypes: {
+    title: { defaultValue: 'Заголовок' },
+    isSubheading: { defaultValue: false },
+    level: { defaultValue: 1 },
+  },
 } as ComponentMeta<typeof Heading>;
 
 const Template: ComponentStory<typeof Heading> = (args) => (
-  <Heading title="Заголовок" level={1} {...args} />
+  <Heading {...args} />
 );
 
 export const ExtraExtraLarge = Template.bind({});

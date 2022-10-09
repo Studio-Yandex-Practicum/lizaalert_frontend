@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { TextWithIcon } from '../text-with-icon';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
 import styles from './header-link.module.scss';
 import { HeaderLinkProps } from './types';
 

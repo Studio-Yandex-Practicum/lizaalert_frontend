@@ -1,13 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { exportConfig } from 'config/storybook';
 import Accordion from './accordion';
 
 export default {
+  ...exportConfig,
   title: 'Molecules/Accordion',
   component: Accordion,
+  argTypes: {
+    title: { defaultValue: 'Заголовок' },
+    titleSize: { defaultValue: 'l' },
+    titleWeight: { defaultValue: 'bold' },
+    button: { defaultValue: 'icon' },
+    open: { defaultValue: false },
+  },
 } as ComponentMeta<typeof Accordion>;
 
 const Template: ComponentStory<typeof Accordion> = ({ title, ...args }) => (
-  <Accordion title="Заголовок" {...args}>
+  <Accordion title={title} {...args}>
     <span>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

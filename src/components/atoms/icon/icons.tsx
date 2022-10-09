@@ -1,3 +1,4 @@
+import { Nullable } from 'types';
 import { ReactComponent as ArrowBack } from 'assets/icons/arrow-back.svg';
 import { ReactComponent as ArrowDown } from 'assets/icons/arrow-down.svg';
 import { ReactComponent as ArrowForward } from 'assets/icons/arrow-forward.svg';
@@ -51,7 +52,6 @@ import { ReactComponent as Webinar } from 'assets/icons/webinar.svg';
 import { ReactComponent as XSmall } from 'assets/icons/x-small.svg';
 import { ReactComponent as XSolid } from 'assets/icons/x-solid.svg';
 import { ReactComponent as Yandex } from 'assets/icons/yandex.svg';
-import { IconType } from './types';
 
 const defaultAttributes = {
   width: '100%',
@@ -117,5 +117,7 @@ const icons = {
 };
 
 export default icons;
+
+export type IconType = Nullable<keyof typeof icons>;
 
 export const iconKeys = Object.keys(icons) as IconType[];

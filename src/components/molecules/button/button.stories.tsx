@@ -1,23 +1,34 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { iconKeys } from 'components/atoms/icon';
+import { exportConfig } from 'config/storybook';
 import Button from './button';
 
 export default {
+  ...exportConfig,
   title: 'Molecules/Button',
   component: Button,
+  argTypes: {
+    text: { defaultValue: 'Кнопка' },
+    view: { defaultValue: 'primary' },
+    iconName: {
+      options: iconKeys,
+      control: 'select',
+    },
+    hover: { defaultValue: 'default' },
+    iconPosition: { defaultValue: 'back' },
+    iconSize: { defaultValue: 'default' },
+    type: { defaultValue: 'button' },
+  },
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = ({ text, ...args }) => (
-  <Button text="Кнопка" {...args} />
+  <Button text={text} {...args} />
 );
 
 export const Primary = Template.bind({});
-Primary.args = {
-  view: 'primary',
-};
 
 export const PrimaryWithIcon = Template.bind({});
 PrimaryWithIcon.args = {
-  view: 'primary',
   iconName: 'calendar',
 };
 

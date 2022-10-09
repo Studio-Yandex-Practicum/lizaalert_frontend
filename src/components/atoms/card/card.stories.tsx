@@ -1,26 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { exportConfig } from 'config/storybook';
 import Card from './card';
-import { CardProps } from './types';
-
-type TemplateProps = CardProps & {
-  content?: string;
-};
 
 export default {
+  ...exportConfig,
   title: 'Atoms/Card',
   component: Card,
   argTypes: {
-    content: { type: 'string', defaultValue: 'Контент карточки' },
+    children: { type: 'string', defaultValue: 'Контент карточки' },
+    htmlTag: { defaultValue: 'div' },
+    noPadding: { defaultValue: false },
   },
 } as ComponentMeta<typeof Card>;
 
-const Template: ComponentStory<typeof Card> = ({
-  content,
-  ...args
-}: TemplateProps) => (
-  <Card {...args}>
-    <span>{content}</span>
-  </Card>
+const Template: ComponentStory<typeof Card> = ({ children, ...args }) => (
+  <Card {...args}>{children}</Card>
 );
 
 export const Standard = Template.bind({});
