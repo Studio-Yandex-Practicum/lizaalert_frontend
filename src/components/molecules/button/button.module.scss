@@ -29,7 +29,7 @@
   }
 }
 
-.primary {
+.view-primary {
   background-color: vars.$color-primary;
   color: vars.$bg-primary;
   min-width: 72px;
@@ -44,7 +44,7 @@
   }
 }
 
-.secondary {
+.view-secondary {
   background-color: vars.$bg-primary;
   color: vars.$color-primary;
   border: 1.2px solid vars.$borders-divider-disabled-bg;
@@ -61,7 +61,7 @@
   }
 }
 
-.tertiary {
+.view-tertiary {
   background-color: vars.$dark-primary;
   color: vars.$bg-primary;
   font-family: vars.$yandexFont;
@@ -69,7 +69,7 @@
   min-height: 48px;
 }
 
-.text {
+.view-text {
   color: vars.$dark-primary;
   padding: 0;
 
