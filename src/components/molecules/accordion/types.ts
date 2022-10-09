@@ -36,9 +36,24 @@ export type AccordionProps = {
   open?: boolean;
 };
 
+/**
+ * Возвращаемый из хука useAccordion объект
+ * */
 export type UseAccordionReturnType = {
+  /**
+   * Флаг, открыт ли текущий аккордеон
+   * */
   isOpen: boolean;
+  /**
+   * Функция-обработчик для открытия/закрытия аккордеона
+   * */
   toggleAccordion: () => void;
+  /**
+   * Ref-ссылка на контейнер контента аккордеона
+   * */
   contentRef: Nullable<RefObject<HTMLElement>>;
+  /**
+   * Текущая высота аккордеона
+   * */
   height: string;
 };

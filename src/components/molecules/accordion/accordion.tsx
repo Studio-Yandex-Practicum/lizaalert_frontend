@@ -1,12 +1,12 @@
 import { Ref } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
 import { AccordionButton, AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
 
 /**
- * Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
+ * HOC-компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
  */
 
 function Accordion({

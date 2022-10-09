@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './button.module.scss';
 import { ButtonProps } from './types';
 

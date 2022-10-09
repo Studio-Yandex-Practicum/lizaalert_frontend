@@ -37,5 +37,5 @@ Medium.args = {
 export const Button = Template.bind({});
 Button.args = {
   size: 'default',
-  onClick: () => {},
+  onClick: () => console.log('click'),
 };
