@@ -13,13 +13,9 @@
     "eject": "react-scripts eject",
     "prettier": "prettier --write src/**/*.js",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint:fix": "eslint src/ --fix",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -51,12 +47,23 @@
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "6.5.12",
+    "@storybook/addon-essentials": "6.5.12",
+    "@storybook/addon-interactions": "6.5.12",
+    "@storybook/addon-links": "6.5.12",
+    "@storybook/builder-webpack5": "6.5.12",
+    "@storybook/manager-webpack5": "6.5.12",
+    "@storybook/node-logger": "6.5.12",
+    "@storybook/preset-create-react-app": "4.1.2",
+    "@storybook/react": "6.5.12",
+    "@storybook/testing-library": "0.0.13",
     "@types/jest": "28.1.1",
     "@types/node": "17.0.41",
     "@types/react": "18.0.12",
     "@types/react-dom": "18.0.5",
     "@types/react-router": "5.1.18",
     "@types/react-router-dom": "5.3.3",
+    "babel-plugin-named-exports-order": "0.0.2",
     "eslint": "8.12.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
@@ -69,6 +76,7 @@
     "gzipper": "7.1.0",
     "prettier": "2.6.1",
     "sass": "1.49.9",
-    "typescript": "4.7.3"
+    "typescript": "4.7.3",
+    "webpack": "5.74.0"
   }
 }
