@@ -1,13 +1,15 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { iconKeys } from 'components/atoms/icon';
-import { exportConfig } from 'config/storybook';
+import { disableControls, exportConfig, flexLayoutRow } from 'config/storybook';
 import Button from './button';
+import { ButtonProps } from './types';
 
 export default {
   ...exportConfig,
   title: 'Molecules/Button',
   component: Button,
   argTypes: {
+    children: { control: false },
     text: { defaultValue: 'Кнопка' },
     view: { defaultValue: 'primary' },
     iconName: {
@@ -25,16 +27,11 @@ const Template: ComponentStory<typeof Button> = ({ text, ...args }) => (
   <Button text={text} {...args} />
 );
 
-export const Primary = Template.bind({});
+export const Standard = Template.bind({});
 
-export const PrimaryWithIcon = Template.bind({});
-PrimaryWithIcon.args = {
+export const StandardWithIcon = Template.bind({});
+StandardWithIcon.args = {
   iconName: 'calendar',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  view: 'secondary',
 };
 
 export const SecondaryDanger = Template.bind({});
@@ -43,12 +40,12 @@ SecondaryDanger.args = {
   hover: 'border',
 };
 
-export const Tertiary = Template.bind({});
-Tertiary.args = {
-  view: 'tertiary',
-};
-
-export const Text = Template.bind({});
-Text.args = {
-  view: 'text',
-};
+export const Views: ComponentStory<typeof Button> = ({ text, ...args }) => (
+  <div style={flexLayoutRow}>
+    <Button text={text} {...args} view="primary" />
+    <Button text={text} {...args} view="secondary" />
+    <Button text={text} {...args} view="tertiary" />
+    <Button text={text} {...args} view="text" />
+  </div>
+);
+Views.argTypes = disableControls<keyof ButtonProps>('view');

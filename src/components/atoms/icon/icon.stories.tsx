@@ -1,7 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { exportConfig } from 'config/storybook';
+import {
+  disableControls,
+  exportConfig,
+  flexLayoutColumn,
+  flexLayoutRow,
+} from 'config/storybook';
 import Icon from './icon';
 import icons, { iconKeys, IconType } from './icons';
+import { IconProps } from './types';
 
 export default {
   ...exportConfig,
@@ -21,37 +27,35 @@ const Template: ComponentStory<typeof Icon> = ({ type, ...args }) => (
   <Icon type={type} {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  onClick: undefined,
-};
-
-export const Medium = Template.bind({});
-Medium.args = {
-  size: 'medium',
+export const Standard = Template.bind({});
+Standard.args = {
   onClick: undefined,
 };
 
 export const Button = Template.bind({});
 Button.args = {
-  onClick: () => console.log('click'),
+  onClick: () => 'Click!',
 };
 
-const IconListTemplate: ComponentStory<typeof Icon> = ({ type, ...args }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', rowGap: 10 }}>
+export const Sizes: ComponentStory<typeof Icon> = ({ type }) => (
+  <div style={flexLayoutRow}>
+    <Icon type={type} size="medium" />
+    <Icon type={type} size="default" />
+  </div>
+);
+Sizes.argTypes = disableControls('size', 'className');
+
+export const IconList: ComponentStory<typeof Icon> = ({ type, ...args }) => (
+  <div style={flexLayoutColumn}>
     {(Object.keys(icons) as IconType[]).map((key) => (
-      <div
-        key={key}
-        style={{ display: 'flex', alignItems: 'center', columnGap: 10 }}
-      >
+      <div key={key} style={flexLayoutRow}>
         <Icon type={key} {...args} />
         <code>{key}</code>
       </div>
     ))}
   </div>
 );
-
-export const IconList = IconListTemplate.bind({});
 IconList.args = {
   onClick: undefined,
 };
+IconList.argTypes = disableControls<keyof IconProps>('type');

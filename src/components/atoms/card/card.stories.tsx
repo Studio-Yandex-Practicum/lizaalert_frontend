@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { exportConfig } from 'config/storybook';
+import { exportConfig, textStub } from 'config/storybook';
 import Card from './card';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   title: 'Atoms/Card',
   component: Card,
   argTypes: {
-    children: { type: 'string', defaultValue: 'Контент карточки' },
+    children: { type: 'string', defaultValue: textStub },
     htmlTag: { defaultValue: 'div' },
     noPadding: { defaultValue: false },
   },
@@ -18,8 +18,3 @@ const Template: ComponentStory<typeof Card> = ({ children, ...args }) => (
 );
 
 export const Standard = Template.bind({});
-
-export const WithoutPadding = Template.bind({});
-WithoutPadding.args = {
-  noPadding: true,
-};

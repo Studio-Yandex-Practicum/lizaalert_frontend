@@ -1,15 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { exportConfig } from 'config/storybook';
+import {
+  disableControls,
+  exportConfig,
+  flexLayoutColumn,
+} from 'config/storybook';
 import Heading from './heading';
+import { HeadingProps } from './types';
 
 export default {
   ...exportConfig,
   title: 'Atoms/Heading',
   component: Heading,
   argTypes: {
+    children: { control: false },
     title: { defaultValue: 'Заголовок' },
     isSubheading: { defaultValue: false },
-    level: { defaultValue: 1 },
+    level: { defaultValue: 2 },
+    size: { defaultValue: 'xl' },
   },
 } as ComponentMeta<typeof Heading>;
 
@@ -17,22 +24,19 @@ const Template: ComponentStory<typeof Heading> = (args) => (
   <Heading {...args} />
 );
 
-export const ExtraExtraLarge = Template.bind({});
-ExtraExtraLarge.args = {
-  size: 'xxl',
-};
+export const Standard = Template.bind({});
 
-export const ExtraLarge = Template.bind({});
-ExtraLarge.args = {
-  size: 'xl',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'l',
-};
-
-export const Medium = Template.bind({});
-Medium.args = {
-  size: 'm',
-};
+export const Sizes: ComponentStory<typeof Heading> = ({ title }) => (
+  <div style={flexLayoutColumn}>
+    <Heading title={title} size="xxl" />
+    <Heading title={title} size="xl" />
+    <Heading title={title} size="l" />
+    <Heading title={title} size="m" />
+  </div>
+);
+Sizes.argTypes = disableControls<keyof HeadingProps>(
+  'isSubheading',
+  'level',
+  'size',
+  'className'
+);

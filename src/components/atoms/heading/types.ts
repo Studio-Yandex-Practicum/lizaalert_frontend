@@ -8,7 +8,7 @@ export type HeadingProps = {
    * */
   level?: number;
   /**
-   * Текст заголовка
+   * Текст заголовка, альтернатива для children
    * */
   title?: string;
   /**
@@ -20,11 +20,11 @@ export type HeadingProps = {
    * */
   size?: HeadingSize;
   /**
-   * При true вернется элемент <p>, по умолчанию false
+   * При проставлении пропса вернется элемент <p>, по умолчанию false
    * */
   isSubheading?: boolean;
   /**
-   * css-класс миксин для передачи своих стилей
+   * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
   className?: string;
 };
