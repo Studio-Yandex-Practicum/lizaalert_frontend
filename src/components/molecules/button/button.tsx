@@ -1,11 +1,11 @@
 import { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './button.module.scss';
 import { ButtonProps } from './types';
 
 /**
- * @description Компонент кнопки с иконкой или без.
+ * Компонент кнопки с иконкой или без.
  *
  * @props
  * - children - string - текст кнопки, имеет приоритет перед `text`
@@ -14,6 +14,7 @@ import { ButtonProps } from './types';
  * - hover - enum ('default' | 'border') - внешний вид обводки кнопки
  * - iconName - string - имя иконки из объекта icons
  * - iconPosition - enum ('back' | 'forward') - позиционирование иконки слева/справа от текста
+ * - iconSize - enum ('default' | 'medium') - размер иконки
  * - className - string - класс-миксин
  * - type - enum ('button' | 'submit') - тип кнопки
  * - classNameIcon - string - класс-миксин
@@ -26,11 +27,11 @@ function Button({
   view = 'primary',
   hover = 'default',
   iconName = null,
-  iconPosition = null,
+  iconPosition = 'back',
   className = '',
   type = 'button',
   classNameIcon = '',
-  iconSize,
+  iconSize = 'default',
   ...props
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const btnClasses = classnames(
