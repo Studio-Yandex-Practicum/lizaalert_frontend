@@ -50,32 +50,6 @@
   }
 }
 
-.title {
-  margin: 0;
-
-  &_weight {
-    &_bold {
-      font-weight: 700;
-    }
-
-    &_regular {
-      font-weight: 400;
-    }
-  }
-
-  &_size {
-    &_l {
-      font-size: vars.$font-size-l;
-      line-height: vars.$line-height-l;
-    }
-
-    &_m {
-      font-size: vars.$font-size-m;
-      line-height: vars.$line-height-m;
-    }
-  }
-}
-
 .btn {
   margin-left: auto;
   height: 24px;
