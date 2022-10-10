@@ -6,7 +6,7 @@ import {
   flexLayoutRow,
 } from 'config/storybook';
 import Icon from './icon';
-import icons, { iconKeys, IconType } from './icons';
+import { iconKeys, icons, IconType } from './icons';
 import { IconProps } from './types';
 
 export default {

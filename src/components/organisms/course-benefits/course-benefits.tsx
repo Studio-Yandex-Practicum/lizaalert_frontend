@@ -27,7 +27,7 @@ const defaultList = [
 ];
 
 /**
- * @description Компонент тем курса
+ * Компонент тем курса
  *
  * @props
  * - benefitsList - arr - массив объектов. Объект темы содержит id, title, description

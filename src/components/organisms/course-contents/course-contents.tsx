@@ -7,7 +7,7 @@ import styles from './course-contents.module.scss';
 import { CourseContentsProps } from './types';
 
 /**
- * @description Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
+ * Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
  *
  * @props
  * - content - array of objects, required - массив глав: `id`, `title` и массив `lessons`.

@@ -11,7 +11,7 @@ import { useFilter } from './hooks/use-filter';
 import { filters } from './constants';
 
 /**
- * @description Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
+ * Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
  *
  * @props
  * - className - string - класс-миксин для внешнего контейнера
@@ -40,9 +40,9 @@ function Filter({ className = '' }: FilterProps) {
         {filters.map((section) => (
           <Accordion
             title={countSectionSelection(section)}
-            key={section.name.value}
             titleSize="m"
             titleWeight="regular"
+            key={section.name.value}
             className={styles.filterAccordion}
           >
             {section.options.map((checkbox) => (

@@ -7,9 +7,10 @@ import { NewCourseContent } from '../../organisms/new-course-content';
 import { NewCourseDescription } from '../../organisms/new-course-description';
 import { NewCourseMain } from '../../organisms/new-course-main';
 import styles from './create-course.module.scss';
+import { ActiveTabs } from './types';
 
 function CreateCourse() {
-  const [activeTab, setActiveTab] = useState('main');
+  const [activeTab, setActiveTab] = useState<ActiveTabs>('main');
 
   const handleMain = useCallback(() => {
     setActiveTab('main');

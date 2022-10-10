@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import styles from './icon.module.scss';
 import { IconProps } from './types';
-import icons from './icons';
+import { icons } from './icons';
 
 /**
  * Компонент адаптивной иконки, возвращает инлайновый `svg`, обернутый в `span`. Может наследовать свойство `color`.

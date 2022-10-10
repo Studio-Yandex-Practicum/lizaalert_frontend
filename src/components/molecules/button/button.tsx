@@ -23,7 +23,7 @@ function Button({
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const btnClasses = classnames(
     styles.button,
-    styles[view],
+    styles[`view-${view}`],
     { [styles[`hover-${hover}`]]: view === 'secondary' },
     className
   );
