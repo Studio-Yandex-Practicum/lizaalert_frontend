@@ -1,4 +1,4 @@
-import { IconType } from '../../atoms/icon';
+import { IconType } from 'components/atoms/icon';
 
 export type HeaderLinkProps = {
   text: string;

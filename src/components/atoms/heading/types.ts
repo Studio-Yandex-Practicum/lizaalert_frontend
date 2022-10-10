@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-export type HeadingSizes = 'xxl' | 'xl' | 'l' | 'm';
+export type HeadingSize = 'xxl' | 'xl' | 'l' | 'm';
 
 export type HeadingProps = {
   level?: number;
   title?: ReactNode;
   children?: ReactNode;
-  size?: HeadingSizes;
+  size?: HeadingSize;
   isSubheading?: boolean;
   className?: string;
 };

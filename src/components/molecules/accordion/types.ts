@@ -1,13 +1,17 @@
 import { ReactNode, RefObject } from 'react';
-import { Nullable } from '../../../types';
+import { Nullable } from 'types';
 
-export type AccordionButtons = 'text' | 'icon';
+export type AccordionButton = 'text' | 'icon';
+export type TitleSize = 'l' | 'm';
+export type TitleWeight = 'bold' | 'regular';
 
 export type AccordionProps = {
   title: string;
+  titleSize?: TitleSize;
+  titleWeight?: TitleWeight;
   children: ReactNode;
   className?: string;
-  button?: AccordionButtons;
+  button?: AccordionButton;
   open?: boolean;
 };
 

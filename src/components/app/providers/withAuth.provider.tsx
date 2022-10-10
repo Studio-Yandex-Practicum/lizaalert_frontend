@@ -4,7 +4,6 @@ import { useAppDispatch } from 'store';
 import { checkAuth } from 'store/auth/thunk';
 import { ProviderComponent } from './types';
 
-/* eslint react/function-component-definition: 0 */
 export const withAuth = (Component: ProviderComponent) => () => {
   const dispatch = useAppDispatch();
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);

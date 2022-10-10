@@ -39,6 +39,16 @@
           }
         ]
       }
+    },
+    {
+      "files": [
+        "**/*.provider.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off",
+        "react/function-component-definition": "off",
+        "react/require-default-props": "off"
+      }
     }
   ],
   "parserOptions": {

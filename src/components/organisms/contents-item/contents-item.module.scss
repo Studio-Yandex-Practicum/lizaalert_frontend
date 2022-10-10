@@ -47,13 +47,23 @@
   & > button {
     padding-top: 32px;
     padding-bottom: 32px;
-    font-size: vars.$font-size-m;
   }
 
   .list {
     width: 100%;
     margin: 0;
-    padding-bottom: 35px;
+    padding-bottom: 32px;
+  }
+
+  &:last-child {
+    .list {
+      padding-top: 32px;
+      padding-bottom: 0;
+    }
+
+    & > button {
+      padding-bottom: 0;
+    }
   }
 }
 

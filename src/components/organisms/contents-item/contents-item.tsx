@@ -15,7 +15,7 @@ const mapSlugToIcon: Record<string, IconType> = {
 };
 
 /**
- * @description Компонент элемента содержания курса. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
+ * Компонент элемента содержания курса. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
  *
  * @props
  * - index - number, required - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
@@ -52,6 +52,8 @@ function ContentsItem({
     return (
       <Accordion
         title={`${index + 1}. ${content.title}`}
+        titleSize="m"
+        titleWeight="regular"
         className={classnames(styles.accordion, className)}
         open={content.id === +topicId}
       >
