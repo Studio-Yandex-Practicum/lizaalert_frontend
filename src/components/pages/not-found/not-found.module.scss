@@ -1,34 +1,31 @@
 @use 'src/styles/variables' as vars;
 
 .title {
-  margin-bottom: 25px;
-  margin-top: 30px;
+  margin: 0;
   font-weight: 800;
 }
 
 .card {
-  margin: 80px auto  145px;
+  margin: 80px auto  132px;
+  padding-top: 64px;
+  padding-bottom: 64px;
   text-align: center;
 }
 
 .text {
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
-  margin: 0 0 18px;
-  text-align: center;
+  margin: 0;
 
-  &:last-child {
-    margin-bottom: 0;
+  & p {
+    margin: 0;
+    padding-top: vars.$grid-gap;
+    text-align: center;
+    font-size: vars.$font-size-m;
+    line-height: vars.$line-height-m;
   }
-}
-
-.textLink {
-  color: vars.$dark-primary;
 }
 
 .button {
   margin: 0 auto;
   width: 184px;
-  padding: 12px 24px;
 }
 

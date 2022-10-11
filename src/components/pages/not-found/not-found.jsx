@@ -3,6 +3,7 @@ import { Card } from '../../atoms/card';
 import { Heading } from '../../atoms/heading';
 import { StyledLink } from '../../molecules/styled-link';
 import { Button } from '../../molecules/button';
+import { routes } from '../../../config';
 import styles from './not-found.module.scss';
 
 function NotFound() {
@@ -18,14 +19,10 @@ function NotFound() {
           className={styles.title}
         />
         <div className={styles.text}>
-          <p>Страница потерялась</p>
+          <p>Страница потерялась.</p>
           <p>
             А пока мы её ищем, ознакомьтесь с
-            <StyledLink
-              href="."
-              className={styles.textLink}
-              linkText=" нашими курсами"
-            />
+            <StyledLink href={routes.courses.path} linkText=" нашими курсами" />
           </p>
         </div>
       </Card>
