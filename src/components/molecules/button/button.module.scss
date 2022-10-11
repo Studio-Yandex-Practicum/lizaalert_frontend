@@ -79,6 +79,7 @@
 
   &:disabled {
     color: vars.$dark-secondary;
+    background-color: transparent;
   }
 }
 

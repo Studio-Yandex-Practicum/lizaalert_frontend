@@ -21,6 +21,7 @@ export default {
     iconPosition: { defaultValue: 'back' },
     iconSize: { defaultValue: 'default' },
     type: { defaultValue: 'button' },
+    disabled: { type: 'boolean', defaultValue: false },
   },
 } as ComponentMeta<typeof Button>;
 
