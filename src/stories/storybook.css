@@ -1,0 +1,12 @@
+.flex {
+  display: flex;
+  gap: 12px;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  align-items: center;
+}

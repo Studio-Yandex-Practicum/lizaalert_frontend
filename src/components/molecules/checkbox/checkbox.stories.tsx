@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { exportConfig } from 'config/storybook';
+import { exportConfig } from 'stories/config';
 import Checkbox from './checkbox';
 
 export default {
@@ -16,9 +16,9 @@ const Template: ComponentStory<typeof Checkbox> = ({ labelText, ...args }) => (
   <Checkbox labelText={labelText} {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  name: 'storybook',
+export const Standard = Template.bind({});
+Standard.args = {
+  name: 'storybook-checkbox',
 };
 
 export const Radio = Template.bind({});

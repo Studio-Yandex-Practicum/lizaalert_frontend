@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { iconKeys } from 'components/atoms/icon';
-import { disableControls, exportConfig, flexLayoutRow } from 'config/storybook';
+import { exportConfig } from 'stories/config';
+import { utils } from 'stories/utils';
 import Button from './button';
 import { ButtonProps } from './types';
 
@@ -41,11 +42,11 @@ SecondaryDanger.args = {
 };
 
 export const Views: ComponentStory<typeof Button> = ({ text, ...args }) => (
-  <div style={flexLayoutRow}>
+  <div className="flex flex-row">
     <Button text={text} {...args} view="primary" />
     <Button text={text} {...args} view="secondary" />
     <Button text={text} {...args} view="tertiary" />
     <Button text={text} {...args} view="text" />
   </div>
 );
-Views.argTypes = disableControls<keyof ButtonProps>('view');
+Views.argTypes = utils.disableControls<keyof ButtonProps>('view');

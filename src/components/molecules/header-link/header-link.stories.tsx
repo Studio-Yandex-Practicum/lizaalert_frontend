@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { iconKeys } from 'components/atoms/icon';
-import { exportConfig } from 'config/storybook';
+import { exportConfig } from 'stories/config';
 import HeaderLink from './header-link';
 
 export default {
@@ -26,4 +26,4 @@ const Template: ComponentStory<typeof HeaderLink> = ({
   iconType,
 }) => <HeaderLink text={text} iconType={iconType} link={link} />;
 
-export const Default = Template.bind({});
+export const Standard = Template.bind({});

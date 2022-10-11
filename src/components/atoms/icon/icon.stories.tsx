@@ -1,10 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import {
-  disableControls,
-  exportConfig,
-  flexLayoutColumn,
-  flexLayoutRow,
-} from 'config/storybook';
+import { exportConfig } from 'stories/config';
+import { utils } from 'stories/utils';
 import Icon from './icon';
 import { iconKeys, icons, IconType } from './icons';
 import { IconProps } from './types';
@@ -38,17 +34,17 @@ Button.args = {
 };
 
 export const Sizes: ComponentStory<typeof Icon> = ({ type }) => (
-  <div style={flexLayoutRow}>
+  <div className="flex flex-row">
     <Icon type={type} size="medium" />
     <Icon type={type} size="default" />
   </div>
 );
-Sizes.argTypes = disableControls('size', 'className');
+Sizes.argTypes = utils.disableControls('size', 'className');
 
 export const IconList: ComponentStory<typeof Icon> = ({ type, ...args }) => (
-  <div style={flexLayoutColumn}>
+  <div className="flex flex-column">
     {(Object.keys(icons) as IconType[]).map((key) => (
-      <div key={key} style={flexLayoutRow}>
+      <div key={key} className="flex flex-row">
         <Icon type={key} {...args} />
         <code>{key}</code>
       </div>
@@ -58,4 +54,4 @@ export const IconList: ComponentStory<typeof Icon> = ({ type, ...args }) => (
 IconList.args = {
   onClick: undefined,
 };
-IconList.argTypes = disableControls<keyof IconProps>('type');
+IconList.argTypes = utils.disableControls<keyof IconProps>('type');

@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { exportConfig, textStub } from 'config/storybook';
+import { exportConfig } from 'stories/config';
+import { textStub } from 'stories/constants';
 import Accordion from './accordion';
 
 export default {

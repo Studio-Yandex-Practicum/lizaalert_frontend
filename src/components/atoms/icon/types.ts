@@ -8,11 +8,11 @@ export type IconProps = {
    * */
   type: IconType;
   /**
-   * Размер иконки
+   * Размер иконки.
    * */
   size?: IconSize;
   /**
-   * Функция-обработчик клика, при её передаче вместо span будет отрисован элемент button с type="button"
+   * Функция-обработчик клика, при её передаче вместо span будет отрисован элемент button с type="button".
    * */
   onClick?: (...args: unknown[]) => void;
   /**
