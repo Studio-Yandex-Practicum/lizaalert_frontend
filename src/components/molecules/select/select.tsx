@@ -1,9 +1,9 @@
 import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
 import { Option, OptionType } from 'components/atoms/option';
+import { Icon } from 'components/atoms/icon';
 import styles from './select.module.scss';
 import { SelectProps } from './types';
-import { Icon } from '../../atoms/icon';
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
@@ -13,15 +13,6 @@ const DUMMY_OPTIONS = [
 
 /**
  * Компонент стилизованного селекта.
- *
- * @props
- * - className - string - css-класс миксин для описания внешней геометрии.
- * - name - string, required - имя селекта.
- * - label - string, required - имя лейбла.
- * - placeholder - string, required - плейсхолдер для селекта.
- * - options - array of { id: string, name: string }, required - массив объектов опции, name -- текст опции
- * - onSelect - function, required - обработчик выбора опции
- * - selectedValue - string - текст выбранной опции по умолчанию
  * */
 
 function Select({
