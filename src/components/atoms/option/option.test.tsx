@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Option from './option';
 import styles from './option.module.scss';
-import { OptionProps } from './types';
+import { OptionProps, OptionType } from './types';
 
 const mockOption = {
   id: 1,
@@ -13,7 +13,7 @@ const createOption = (props?: Partial<OptionProps>) =>
   render(
     <Option
       option={mockOption}
-      onClick={(value: string) => value}
+      onClick={(option: OptionType) => option}
       onKeyDown={() => {}}
       {...props}
     />

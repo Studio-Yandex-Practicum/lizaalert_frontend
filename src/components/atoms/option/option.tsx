@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { KeyboardEvent } from 'react';
 import styles from './option.module.scss';
 import { OptionProps } from './types';
 
@@ -14,17 +15,23 @@ import { OptionProps } from './types';
 
 function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
   const onOptionClick = () => {
-    onClick(option.name);
+    onClick(option);
+  };
+
+  const onOptionKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
+    onOptionClick();
+    onKeyDown(evt);
   };
 
   return (
     <li
       className={classnames(styles.option, className)}
       onClick={onOptionClick}
-      onKeyDown={onKeyDown}
+      onKeyDown={onOptionKeyDown}
       aria-selected
       value={option.name}
       role="option"
+      tabIndex={0}
     >
       {option.name}
     </li>

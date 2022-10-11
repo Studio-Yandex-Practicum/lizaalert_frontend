@@ -7,7 +7,7 @@ export type OptionType = {
 
 export type OptionProps = {
   option: OptionType;
-  onClick: (value: string) => void;
-  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
+  onClick: (option: OptionType) => void;
+  onKeyDown: (event: KeyboardEvent<HTMLLIElement>) => void;
   className?: string;
 };

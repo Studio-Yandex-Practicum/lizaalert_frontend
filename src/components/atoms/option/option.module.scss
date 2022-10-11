@@ -1,3 +1,18 @@
+@use 'src/styles/variables' as vars;
+
 .option {
+  background-color: vars.$bg-primary;
   cursor: pointer;
+  padding: 12px 16px;
+  color: inherit;
+  border-bottom: 1px solid vars.$borders-divider-disabled-bg;
+  transition: vars.$trans-300;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &:hover {
+    color: vars.$color-hover;
+  }
 }
