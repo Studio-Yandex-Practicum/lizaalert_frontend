@@ -1,5 +1,6 @@
 import { IconType } from 'components/atoms/icon';
 import { Nullable } from 'types';
+import { InputHTMLAttributes } from 'react';
 
 export type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
 
@@ -36,4 +37,4 @@ export type InputProps = {
    * Флаг валидности данных в инпуте. При false показывается текст ошибки из пропа error.
    * */
   isValid?: boolean;
-};
+} & InputHTMLAttributes<HTMLInputElement>;

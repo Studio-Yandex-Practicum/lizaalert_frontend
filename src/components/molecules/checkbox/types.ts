@@ -1,3 +1,5 @@
+import { InputHTMLAttributes } from 'react';
+
 export type CheckboxProps = {
   /**
    * Атрибут-имя инпута.
@@ -15,4 +17,4 @@ export type CheckboxProps = {
    * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
   className?: string;
-};
+} & InputHTMLAttributes<HTMLInputElement>;

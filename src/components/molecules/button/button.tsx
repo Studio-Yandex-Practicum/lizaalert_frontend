@@ -1,4 +1,3 @@
-import { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './button.module.scss';
@@ -6,6 +5,7 @@ import { ButtonProps } from './types';
 
 /**
  * Компонент кнопки с иконкой или без.
+ * Также в качестве props принимает все стандартные HTML-атрибуты для кнопки.
  */
 
 function Button({
@@ -20,7 +20,7 @@ function Button({
   classNameIcon = '',
   iconSize = 'default',
   ...props
-}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ButtonProps) {
   const btnClasses = classnames(
     styles.button,
     styles[`view-${view}`],

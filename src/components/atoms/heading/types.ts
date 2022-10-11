@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
 export type HeadingSize = 'xxl' | 'xl' | 'l' | 'm';
 
@@ -27,4 +27,4 @@ export type HeadingProps = {
    * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
   className?: string;
-};
+} & HTMLAttributes<HTMLHeadingElement>;

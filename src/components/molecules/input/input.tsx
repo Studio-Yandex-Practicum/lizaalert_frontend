@@ -1,11 +1,11 @@
-import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './input.module.scss';
 import { InputProps } from './types';
 
 /**
- * Компонент-инпут с основной стилизацией.
+ * Компонент-инпут с основной стилизацией. Может отображать текст ошибки.
+ * Также в качестве props принимает все стандартные HTML-атрибуты для инпута.
  */
 
 function Input({
@@ -19,8 +19,9 @@ function Input({
   name,
   value,
   placeholder,
+  disabled,
   ...props
-}: InputProps & InputHTMLAttributes<HTMLInputElement>) {
+}: InputProps) {
   return (
     <div className={classnames(styles.container, className)}>
       <label htmlFor={name} className={styles.label}>
@@ -42,8 +43,9 @@ function Input({
             placeholder={placeholder}
             className={classnames(styles.input, {
               [styles.input_hidden]: type === 'file',
-              [styles.input_warned]: !isValid,
+              [styles.input_warned]: !isValid && !disabled,
             })}
+            disabled={disabled}
             type={type}
           />
 
@@ -58,7 +60,7 @@ function Input({
           )}
         </div>
       </label>
-      <span className={styles.error}>{!isValid ? error : ''}</span>
+      <span className={styles.error}>{!isValid && !disabled ? error : ''}</span>
     </div>
   );
 }

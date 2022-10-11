@@ -6,6 +6,7 @@ import { HeaderLinkProps } from './types';
 
 /**
  * Компонент ссылки для навигации сайта, подсвечивает активный роут.
+ * Всегда поставляется с иконкой, можно кастомизировать её тип.
  * */
 
 function HeaderLink({ text, iconType, link, className }: HeaderLinkProps) {

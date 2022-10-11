@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { IconSize, IconType } from 'components/atoms/icon';
 
 export type ButtonView = 'primary' | 'secondary' | 'tertiary' | 'text';
@@ -45,4 +45,4 @@ export type ButtonProps = {
    * Тип кнопки.
    * */
   type?: 'button' | 'submit';
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
