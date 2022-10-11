@@ -35,11 +35,19 @@ StandardWithIcon.args = {
   iconName: 'calendar',
 };
 
-export const SecondaryDanger = Template.bind({});
-SecondaryDanger.args = {
-  view: 'secondary',
-  hover: 'border',
-};
+export const SecondaryHover: ComponentStory<typeof Button> = ({
+  text,
+  ...args
+}) => (
+  <div className="flex flex-row">
+    <Button text={text} {...args} view="secondary" hover="default" />
+    <Button text={text} {...args} view="secondary" hover="border" />
+  </div>
+);
+SecondaryHover.argTypes = utils.disableControls<keyof ButtonProps>(
+  'view',
+  'hover'
+);
 
 export const Views: ComponentStory<typeof Button> = ({ text, ...args }) => (
   <div className="flex flex-row">
@@ -49,4 +57,4 @@ export const Views: ComponentStory<typeof Button> = ({ text, ...args }) => (
     <Button text={text} {...args} view="text" />
   </div>
 );
-Views.argTypes = utils.disableControls<keyof ButtonProps>('view');
+Views.argTypes = utils.disableControls<keyof ButtonProps>('view', 'hover');
