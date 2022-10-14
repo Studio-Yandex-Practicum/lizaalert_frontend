@@ -5,6 +5,8 @@ on:
     workflows: [ CI Lint ]
     branches: [ master ]
     types: [ completed ]
+  push:
+    branches: [ documentation-330-storybook ]
 
 jobs:
   build:
