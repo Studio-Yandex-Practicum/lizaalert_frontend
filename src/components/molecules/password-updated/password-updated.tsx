@@ -1,20 +1,18 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../button';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
 import styles from './password-updated.module.scss';
 import { PasswordUpdatedProps } from './types';
 
 /**
- * @description Компонент-сообщение отправки нового пароля. Стилизован под карточку.
+ * Компонент-сообщение отправки нового пароля. Стилизован под карточку.
  * Имеет заголовок, текст сообщения и кнопку "Войти".
- *
- * @props
- * - onButtonClick - function, required - обработчик клика по кнопке
  * */
 
-function PasswordUpdated({ onButtonClick }: PasswordUpdatedProps) {
+function PasswordUpdated({ onButtonClick, className }: PasswordUpdatedProps) {
   return (
-    <Card className={styles.container}>
+    <Card className={classnames(styles.container, className)}>
       <Heading
         className={styles.heading}
         level={3}
