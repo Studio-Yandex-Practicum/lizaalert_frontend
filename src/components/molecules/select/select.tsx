@@ -12,7 +12,7 @@ const DUMMY_OPTIONS = [
 ];
 
 /**
- * Компонент стилизованного селекта.
+ * Компонент стилизованного селекта. При нажатии выпадает список опций.
  * */
 
 function Select({
@@ -48,9 +48,7 @@ function Select({
   return (
     <div className={classnames(styles.container, className)}>
       {label && (
-        // Лейбл не фокусируется, клик - имитация работы обычного лейбла для инпута
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
-        <label htmlFor={name} className={styles.label} onClick={handleSelect}>
+        <label htmlFor={name} className={styles.label}>
           {label}
         </label>
       )}

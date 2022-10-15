@@ -2,6 +2,7 @@
 
 .link {
   text-decoration: none;
+  font-family: vars.$mainFont;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
   color: vars.$dark-primary;

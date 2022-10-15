@@ -26,4 +26,4 @@ const Template: ComponentStory<typeof HeaderLink> = ({
   iconType,
 }) => <HeaderLink text={text} iconType={iconType} link={link} />;
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

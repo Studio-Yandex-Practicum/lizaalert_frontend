@@ -21,7 +21,7 @@ const Template: ComponentStory<typeof Heading> = (args) => (
   <Heading {...args} />
 );
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});
 
 export const Sizes: ComponentStory<typeof Heading> = ({ title }) => (
   <div className="flex flex-column">

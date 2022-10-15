@@ -2,7 +2,7 @@ import { Ref } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
-import { AccordionButton, AccordionProps } from './types';
+import { AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
 
 /**
@@ -36,8 +36,12 @@ function Accordion({
         >
           {title}
         </span>
-        {renderButton(button)}
+        <span className={classnames(styles.btn, styles[button])}>
+          {button === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+          {button === 'icon' && <Icon type="arrowDown" />}
+        </span>
       </button>
+
       <div
         className={styles.content}
         ref={contentRef as Ref<HTMLDivElement>}
@@ -47,15 +51,6 @@ function Accordion({
       </div>
     </div>
   );
-
-  function renderButton(type: AccordionButton) {
-    return (
-      <span className={classnames(styles.btn, styles[type])}>
-        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === 'icon' && <Icon type="arrowDown" />}
-      </span>
-    );
-  }
 }
 
 export default Accordion;

@@ -12,4 +12,4 @@ const Template: ComponentStory<typeof PasswordUpdated> = (args) => (
   <PasswordUpdated {...args} />
 );
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

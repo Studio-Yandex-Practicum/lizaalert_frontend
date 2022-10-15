@@ -18,4 +18,4 @@ export default {
 
 const Template: ComponentStory<typeof Option> = (args) => <Option {...args} />;
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

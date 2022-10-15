@@ -12,10 +12,6 @@ export type IconProps = {
    * */
   size?: IconSize;
   /**
-   * Функция-обработчик клика, при её передаче вместо span будет отрисован элемент button с type="button".
-   * */
-  onClick?: (...args: unknown[]) => void;
-  /**
    * Миксин для стилизации, присваивается элементу span или button. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
   className?: string;
