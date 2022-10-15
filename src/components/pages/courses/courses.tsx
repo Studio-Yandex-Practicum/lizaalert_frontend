@@ -9,6 +9,7 @@ import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourses,
+  selectCoursesError,
   selectCoursesLoading,
   selectCoursesTotal,
 } from 'store/courses/selectors';
@@ -22,6 +23,7 @@ function Courses() {
   const courses = useAppSelector(selectCourses);
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
   const isLoading = useAppSelector(selectCoursesLoading);
+  const error = useAppSelector(selectCoursesError);
 
   const fetchCourses = async (paginationState: PaginationState) => {
     void dispatch(fetchCoursesAction(paginationState));
@@ -44,6 +46,7 @@ function Courses() {
           isLoading={isLoading}
           actionOnIntersect={fetchCourses}
           total={coursesTotal}
+          error={error}
         >
           <ul className={styles.list}>
             {courses.length > 0 &&
