@@ -79,9 +79,9 @@
 
   &:disabled {
     color: vars.$dark-secondary;
+    background-color: transparent;
   }
 }
-
 
 .hover-default {
   &:hover {

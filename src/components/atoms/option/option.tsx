@@ -1,30 +1,33 @@
 import classnames from 'classnames';
+import { KeyboardEvent } from 'react';
 import styles from './option.module.scss';
 import { OptionProps } from './types';
 
 /**
- * @description Компонент-опция, возвращает элемент `li` с текстом
- *
- * @props
- * - option - { id: string, name: string } - данные для опции, name -- текст опции
- * - onClick - function - функция-обработчик клика, поднимает "наверх" значение `option.name`
- * - onKeyDown - function - функция-обработчик при нажатии на клавишу клавиатуры
- * - className - string - css-класс миксин
+ * Интерактивный компонент-опция для списков, селектов.
  */
 
 function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
   const onOptionClick = () => {
-    onClick(option.name);
+    onClick(option);
+  };
+
+  const onOptionKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
+    if (evt.key === 'Escape') {
+      onOptionClick();
+    }
+    onKeyDown(evt);
   };
 
   return (
     <li
       className={classnames(styles.option, className)}
       onClick={onOptionClick}
-      onKeyDown={onKeyDown}
+      onKeyDown={onOptionKeyDown}
       aria-selected
       value={option.name}
       role="option"
+      tabIndex={0}
     >
       {option.name}
     </li>
