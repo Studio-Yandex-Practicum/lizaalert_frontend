@@ -16,8 +16,8 @@ const Template: ComponentStory<typeof Checkbox> = ({ labelText, ...args }) => (
   <Checkbox labelText={labelText} {...args} />
 );
 
-export const Standard = Template.bind({});
-Standard.args = {
+export const Base = Template.bind({});
+Base.args = {
   name: 'storybook-checkbox',
 };
 

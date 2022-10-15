@@ -23,15 +23,7 @@ const Template: ComponentStory<typeof Icon> = ({ type, ...args }) => (
   <Icon type={type} {...args} />
 );
 
-export const Standard = Template.bind({});
-Standard.args = {
-  onClick: undefined,
-};
-
-export const Button = Template.bind({});
-Button.args = {
-  onClick: () => 'Click!',
-};
+export const Base = Template.bind({});
 
 export const Sizes: ComponentStory<typeof Icon> = ({ type }) => (
   <div className="flex flex-row">
@@ -51,7 +43,4 @@ export const IconList: ComponentStory<typeof Icon> = ({ type, ...args }) => (
     ))}
   </div>
 );
-IconList.args = {
-  onClick: undefined,
-};
 IconList.argTypes = utils.disableControls<keyof IconProps>('type');

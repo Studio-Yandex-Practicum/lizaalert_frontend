@@ -14,4 +14,4 @@ export default {
 
 const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

@@ -9,7 +9,7 @@ export default {
   argTypes: {
     name: { type: 'string', defaultValue: 'storybook-select' },
     label: { type: 'string', defaultValue: 'Текст лейбла' },
-    placeholder: { type: 'string', defaultValue: '' },
+    placeholder: { type: 'string', defaultValue: 'Выберите опцию...' },
     options: { control: false },
     initialOption: { control: false },
   },
@@ -17,4 +17,4 @@ export default {
 
 const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

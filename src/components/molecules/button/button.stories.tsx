@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof Button> = ({ text, ...args }) => (
   <Button text={text} {...args} />
 );
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});
 
 export const StandardWithIcon = Template.bind({});
 StandardWithIcon.args = {

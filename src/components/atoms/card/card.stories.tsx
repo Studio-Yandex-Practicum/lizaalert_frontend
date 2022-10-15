@@ -18,4 +18,4 @@ const Template: ComponentStory<typeof Card> = ({ children, ...args }) => (
   <Card {...args}>{children}</Card>
 );
 
-export const Standard = Template.bind({});
+export const Base = Template.bind({});

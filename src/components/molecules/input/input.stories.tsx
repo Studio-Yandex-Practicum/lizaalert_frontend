@@ -32,8 +32,8 @@ const Template: ComponentStory<typeof Input> = ({ disabled, ...args }) => (
   <Input {...args} disabled={disabled} />
 );
 
-export const Standard = Template.bind({});
-Standard.args = {
+export const Base = Template.bind({});
+Base.args = {
   labelName: 'Поле ввода',
   placeholder: 'Введите текст...',
 };
