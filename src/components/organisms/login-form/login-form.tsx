@@ -12,7 +12,7 @@ import styles from './login-form.module.scss';
 import { UserLoginFormData } from './types';
 import { fetchAuth } from '../../../store/auth/thunk';
 import { selectIsAuth, selectIsLoading } from '../../../store/auth/selectors';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 import { routes } from '../../../config';
 import { ErrorMessages, Patterns } from '../../../utils/constants';
 
@@ -70,8 +70,8 @@ function LoginForm() {
           value={values?.email || ''}
           placeholder="Введите адрес электронной почты"
           pattern={Patterns.email}
-          error={errors.email}
-          message={ErrorMessages.email}
+          isValid={!errors.email}
+          error={ErrorMessages.email}
           onChange={handleChange}
           required
         />
@@ -82,8 +82,8 @@ function LoginForm() {
           value={values?.tel || ''}
           placeholder="+7 ( ___ ) ___  -  ___"
           pattern={Patterns.tel}
-          error={errors.tel || ''}
-          message={ErrorMessages.tel}
+          isValid={!errors.tel}
+          error={ErrorMessages.tel}
           onChange={handleChange}
           required
         />
@@ -93,6 +93,7 @@ function LoginForm() {
           type="password"
           value={values?.password || ''}
           placeholder=""
+          isValid={!errors.password}
           error={errors.password}
           onChange={handleChange}
           required

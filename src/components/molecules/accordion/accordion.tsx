@@ -1,25 +1,20 @@
 import { Ref } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
-import { AccordionButtons, AccordionProps } from './types';
+import { AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
 
 /**
- * @description Компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
- *
- * @props
- * - title - string - заголовок аккордеона
- * - children - содержимое, которое будет скрываться (JSX или Компонент)
- * - button - "icon" | "text" - необязательный проп, отвечающий за кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть". По умолчанию равен "icon", если необходимо, чтобы отображался текст - добавьте проп button="text"
- * - className - string - необязательный проп - дополнительный css класс для стилизации ручки аккордеона через вложенность или задания внешних отступов (CSS-селектор: .classname > button {...})
- * - open - boolean - начальное состояние аккордеона при рендере. По умолчанию false - аккордеон закрыт
+ * HOC-компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
  */
 
 function Accordion({
   children,
   className = '',
   title,
+  titleSize = 'l',
+  titleWeight = 'bold',
   button = 'icon',
   open = false,
 }: AccordionProps) {
@@ -32,9 +27,21 @@ function Accordion({
   return (
     <div className={classList}>
       <button type="button" className={styles.handle} onClick={toggleAccordion}>
-        {title}
-        {renderButton(button)}
+        <span
+          className={classnames(
+            styles.title,
+            styles[`title_size_${titleSize}`],
+            styles[`title_weight_${titleWeight}`]
+          )}
+        >
+          {title}
+        </span>
+        <span className={classnames(styles.btn, styles[button])}>
+          {button === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+          {button === 'icon' && <Icon type="arrowDown" />}
+        </span>
       </button>
+
       <div
         className={styles.content}
         ref={contentRef as Ref<HTMLDivElement>}
@@ -44,15 +51,6 @@ function Accordion({
       </div>
     </div>
   );
-
-  function renderButton(type: AccordionButtons) {
-    return (
-      <span className={classnames(styles.btn, styles[type])}>
-        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === 'icon' && <Icon type="arrowDown" />}
-      </span>
-    );
-  }
 }
 
 export default Accordion;

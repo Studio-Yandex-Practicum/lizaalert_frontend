@@ -11,7 +11,7 @@ import { TheoryLesson } from '../../organisms/theory-lesson';
 import styles from './lesson.module.scss';
 import { selectLesson } from '../../../store/lesson/selectors';
 import fetchLessonByIdAction from '../../../store/lesson/thunk';
-import { usePathnames } from '../../../hooks/usePathnames';
+import { usePathnames } from '../../../hooks/use-pathnames';
 import mockCourseContent from '../../../services/mock/course-content.json';
 
 // import mockTest from '../../../services/mock/test-preview.json';

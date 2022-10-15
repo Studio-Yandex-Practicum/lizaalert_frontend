@@ -6,7 +6,7 @@ import { Button } from '../../molecules/button';
 import { Input } from '../../molecules/input';
 import styles from './restore-password-form.module.scss';
 import { RestorePasswordFormData } from './types';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 import { Patterns } from '../../../utils/constants';
 
 function RestorePasswordForm() {

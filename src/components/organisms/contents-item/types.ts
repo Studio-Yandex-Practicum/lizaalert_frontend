@@ -1,21 +1,14 @@
-export type LessonType = {
-  id: number;
-  slug: 'lesson' | 'video' | 'webinar' | 'test';
-  title: string;
-  status: 'finished' | 'active' | 'coming';
-};
-
-export type CourseContentsType = {
-  id: number;
-  topic: string;
-  lessons: LessonType[];
-};
+import { Chapter, Lesson } from 'services/course/types';
 
 export type ContentsItemType = 'main' | 'inner';
 
 export type ContentsItemProps = {
   index: number;
-  content: CourseContentsType;
+  content: Chapter;
   type?: ContentsItemType;
   className?: string;
+};
+
+export type LessonType = Lesson & {
+  status: 'finished' | 'active' | 'coming';
 };

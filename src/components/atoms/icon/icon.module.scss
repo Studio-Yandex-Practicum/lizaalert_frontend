@@ -1,3 +1,5 @@
+@use 'src/styles/variables' as vars;
+
 .icon {
   display: inline-flex;
   justify-content: center;
@@ -6,6 +8,7 @@
   background-color: rgba(255, 255, 255, 0);
   border: none;
   padding: 0;
+  transition: vars.$trans-300;
 }
 
 .default {
@@ -18,4 +21,8 @@
   max-height: 26px;
   max-width: 26px;
   height: 26px;
+}
+
+button.icon {
+  cursor: pointer;
 }

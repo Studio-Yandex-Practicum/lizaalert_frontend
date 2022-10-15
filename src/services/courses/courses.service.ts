@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { nanoid } from '@reduxjs/toolkit';
-import { CoursesType } from './types';
+import { CoursesType, GetCoursesDataModel } from './types';
 
 export class CoursesService {
-  static async getCourses() {
-    const data = await axios.get<unknown, CoursesType>('/courses/');
-
-    // TODO: Удалить, когда на беке добавят айдишники
-    data.results?.map((course) => Object.assign(course, { id: nanoid(8) }));
-    return data;
+  static getCourses({ page, pageSize }: GetCoursesDataModel) {
+    return axios.get<unknown, CoursesType>('/courses/', {
+      params: {
+        page,
+        page_size: pageSize,
+      },
+    });
   }
 }

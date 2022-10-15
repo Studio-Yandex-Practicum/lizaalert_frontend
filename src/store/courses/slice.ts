@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { CoursesType } from 'services/courses/types';
 import fetchCoursesAction from './thunk';
 import { CoursesReducerType } from './types';
@@ -26,13 +25,15 @@ export const coursesSlice = createSlice({
       state,
       { payload }: PayloadAction<CoursesType>
     ) => {
-      state.results = payload.results;
+      if (state.results.length < Number(payload.count)) {
+        state.results = [...state.results, ...payload.results];
+      }
       state.count = payload.count;
       state.isLoading = false;
     },
     [fetchCoursesAction.rejected.type]: (
       state,
-      { payload }: PayloadAction<AxiosError>
+      { payload }: PayloadAction<string>
     ) => {
       state.results = [];
       state.isLoading = false;

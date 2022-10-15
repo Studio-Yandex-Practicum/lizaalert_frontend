@@ -1,37 +1,32 @@
-import { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './button.module.scss';
 import { ButtonProps } from './types';
 
 /**
- * @description Компонент кнопки с иконкой или без.
- *
- * @props
- * - children - string - текст кнопки, имеет приоритет перед `text`
- * - text - string - текст кнопки, альтернатива для `children`
- * - view - enum ('primary' | 'secondary' | 'tertiary' | 'text') - внешний вид кнопки
- * - iconName - string - имя иконки из объекта icons
- * - iconPosition - enum ('back' | 'forward') - позиционирование иконки слева/справа от текста
- * - className - string - класс-миксин
- * - type - enum ('button' | 'submit') - тип кнопки
- * - classNameIcon - string - класс-миксин
- * - стандартные атрибуты HTML для `<button>`
+ * Компонент кнопки с иконкой или без.
+ * Также в качестве props принимает все стандартные HTML-атрибуты для кнопки.
  */
 
 function Button({
   children = null,
   text = '',
   view = 'primary',
+  hover = 'default',
   iconName = null,
-  iconPosition = null,
+  iconPosition = 'back',
   className = '',
   type = 'button',
   classNameIcon = '',
-  iconSize,
+  iconSize = 'default',
   ...props
-}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
-  const btnClasses = classnames(styles.button, styles[view], className);
+}: ButtonProps) {
+  const btnClasses = classnames(
+    styles.button,
+    styles[`view-${view}`],
+    { [styles[`hover-${hover}`]]: view === 'secondary' },
+    className
+  );
 
   return (
     <button

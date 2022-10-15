@@ -1,19 +1,12 @@
-import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
+import { Controls } from 'utils/constants';
 import styles from './checkbox.module.scss';
 import { CheckboxProps } from './types';
-import { Controls } from '../../../utils/constants';
 
 /**
- * @description Компонент контролируемого чекбокса или радио с текстом-лейблом.
- *
- * @props
- * - name - string, required - имя инпута.
- * - isRadio - boolean - флаг, является ли компонент радио-инпутом.
- * - labelText - string - текст лейбла, всегда справа.
- * - className - string - класс-миксин.
- * - стандартные атрибуты HTML для `<input>`.
+ * Компонент чекбокса или радио с текстом-лейблом.
+ * Также в качестве props принимает все стандартные HTML-атрибуты для инпута.
  */
 
 function Checkbox({
@@ -23,7 +16,7 @@ function Checkbox({
   name = '',
   value = '',
   ...props
-}: CheckboxProps & InputHTMLAttributes<HTMLInputElement>) {
+}: CheckboxProps) {
   const checkboxId = `${Controls.CHECKBOX}-${name}-${value.toString()}`;
 
   return (

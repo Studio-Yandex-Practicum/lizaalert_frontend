@@ -8,7 +8,7 @@ import styles from './account-data.module.scss';
 import { AccountFormData } from './types';
 import { setAccountData } from '../../../store/profile/slice';
 import { selectProfileAccount } from '../../../store/profile/selectors';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 
 /**
  * @description Компонент-виджет с редактируемой формой данных аккаунта.
@@ -57,6 +57,7 @@ function AccountData() {
           name="email"
           value={values.email || ''}
           onChange={handleChange}
+          isValid={!errors.email}
           error={errors.email}
           isWithIcon
           placeholder="Ваш email"
@@ -70,6 +71,7 @@ function AccountData() {
           placeholder="Ваш пароль"
           isWithIcon
           minLength={8}
+          isValid={!errors.password}
           error={errors.password}
         />
         <Button

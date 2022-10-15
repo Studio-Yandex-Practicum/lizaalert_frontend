@@ -9,6 +9,11 @@ export type CoursePreviewType = {
   cover_path: string | null;
 };
 
+export type GetCoursesDataModel = {
+  page: number;
+  pageSize: number;
+};
+
 export type CoursesType = {
   count: number | null;
   results: CoursePreviewType[];

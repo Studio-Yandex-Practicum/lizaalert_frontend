@@ -8,7 +8,7 @@ import styles from './personal-data.module.scss';
 import { PersonalFormData } from './types';
 import { selectProfilePersonal } from '../../../store/profile/selectors';
 import { setPersonalData } from '../../../store/profile/slice';
-import { useFormWithValidation } from '../../../hooks';
+import useFormWithValidation from '../../../hooks/use-form-with-validation';
 import { Patterns } from '../../../utils/constants';
 
 /**
@@ -62,6 +62,7 @@ function PersonalData() {
           onChange={handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
+          isValid={!errors.name}
           error={errors.name}
           minLength={2}
           required
@@ -76,6 +77,7 @@ function PersonalData() {
           placeholder="Дата рождения"
           max="2050-12-31"
           min="1900-01-01"
+          isValid={!errors.dateOfBirth}
           error={errors.dateOfBirth}
           required
         />
@@ -87,6 +89,7 @@ function PersonalData() {
           onChange={handleChange}
           isWithIcon
           placeholder="Регион проживания"
+          isValid={!errors.region}
           error={errors.region}
           minLength={2}
           required
@@ -99,6 +102,7 @@ function PersonalData() {
           onChange={handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
+          isValid={!errors.nickname}
           error={errors.nickname}
           minLength={2}
           required
@@ -110,6 +114,7 @@ function PersonalData() {
           name="avatar"
           value={values.avatar || ''}
           onChange={onChangeFile}
+          isValid={!errors.avatar}
           error={errors.avatar}
           isWithIcon
           placeholder="Ваше фото"

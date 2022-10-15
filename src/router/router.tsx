@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {
   Course,
   Courses,
@@ -15,22 +15,20 @@ function Router() {
   const { courses, profile, register, login, notFound } = routes;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={courses.path} element={<BaseLayout />}>
-          <Route index element={<Courses />} />
-          <Route path=":courseId" element={<Course />} />
-          <Route path=":courseId/:topicId" element={<Lesson />} />
-          <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
-        </Route>
-        <Route element={<BaseLayout />}>
-          <Route path={profile.path} element={<Profile />} />
-          <Route path={login.path} element={<Login />} />
-          <Route path={notFound.path} element={<NotFound />} />
-        </Route>
-        <Route path={register.path} element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path={courses.path} element={<BaseLayout />}>
+        <Route index element={<Courses />} />
+        <Route path=":courseId" element={<Course />} />
+        <Route path=":courseId/:topicId" element={<Lesson />} />
+        <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+      </Route>
+      <Route element={<BaseLayout />}>
+        <Route path={profile.path} element={<Profile />} />
+        <Route path={login.path} element={<Login />} />
+        <Route path={notFound.path} element={<NotFound />} />
+      </Route>
+      <Route path={register.path} element={<Register />} />
+    </Routes>
   );
 }
 

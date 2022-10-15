@@ -39,6 +39,16 @@
           }
         ]
       }
+    },
+    {
+      "files": [
+        "**/*.provider.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off",
+        "react/function-component-definition": "off",
+        "react/require-default-props": "off"
+      }
     }
   ],
   "parserOptions": {
@@ -97,6 +107,18 @@
         "ignorePropertyModificationsFor": [
           "state"
         ]
+      }
+    ],
+    "@typescript-eslint/no-floating-promises": [
+      "error",
+      {
+        "ignoreVoid": true
+      }
+    ],
+    "no-void": [
+      "error",
+      {
+        "allowAsStatement": true
       }
     ]
   }

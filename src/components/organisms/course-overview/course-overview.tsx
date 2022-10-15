@@ -1,24 +1,31 @@
-import { Card } from '../../atoms/card';
-import { Button } from '../../molecules/button';
-import { TextWithIcon } from '../../molecules/text-with-icon';
+import placeholderCover from 'assets/images/course-placeholder.jpg';
+import { Card } from 'components/atoms/card';
+import { Button } from 'components/molecules/button';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { onImageLoadError } from 'utils/on-image-load-error';
+import { convertDate } from 'utils/convert-date';
 import styles from './course-overview.module.scss';
 import { CourseOverviewProps } from './types';
-import defaultImage from '../../../assets/images/course.jpg';
 
 /**
  * @description Карточка краткого описания курса.
  * */
 
 function CourseOverview({
-  imgLink = defaultImage,
-  level = 'Бывалый',
-  lessonQuantity = 24,
-  startDate = '22.02.2022',
-  duration = 64,
+  coverPath,
+  level,
+  lessonsCount,
+  startDate,
+  courseDuration,
 }: CourseOverviewProps) {
   return (
-    <Card className={styles.courseOverview} noPadding>
-      <img className={styles.courseImage} src={imgLink} alt="Картинка курса" />
+    <Card className={styles.courseOverview} htmlTag="article" noPadding>
+      <img
+        className={styles.courseImage}
+        src={coverPath ?? placeholderCover}
+        alt="Обложка курса"
+        onError={onImageLoadError}
+      />
 
       <ul className={styles.courseMeta}>
         <li className={styles.courseMetaItem}>
@@ -27,15 +34,15 @@ function CourseOverview({
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Количество занятий:" iconType="lessons" />
-          {lessonQuantity}
+          {lessonsCount}
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {duration} ч
+          {courseDuration ?? 0} ч
         </li>
         <li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {startDate} г
+          {convertDate(startDate)} г
         </li>
       </ul>
 

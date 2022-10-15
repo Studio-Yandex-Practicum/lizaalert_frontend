@@ -10,3 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: vars.$bg-secondary;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
