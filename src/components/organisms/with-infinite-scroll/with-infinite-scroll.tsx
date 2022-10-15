@@ -21,6 +21,7 @@ function WithInfiniteScroll<T>({
   initialPageSize = DEFAULT_PAGE_SIZE,
   data,
   total,
+  error,
   isLoading,
   children,
   actionOnIntersect,
@@ -55,7 +56,7 @@ function WithInfiniteScroll<T>({
 
       {isLoading && <Loader />}
 
-      {!isLoading && (data.length === 0 || data.length < total) && (
+      {!isLoading && !error && (data.length === 0 || data.length < total) && (
         <span aria-hidden ref={loadMoreRef} />
       )}
     </div>

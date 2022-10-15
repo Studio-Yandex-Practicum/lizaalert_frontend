@@ -9,6 +9,7 @@ export type WithInfiniteScrollConfig<T> = {
   initialPageSize?: number;
   data: T[];
   total: number;
+  error?: string | null;
   isLoading: boolean;
   children: ReactNode;
   actionOnIntersect: (state: PaginationState) => Promise<void>;
