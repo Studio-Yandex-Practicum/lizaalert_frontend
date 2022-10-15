@@ -1,24 +1,17 @@
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
+import { Icon } from 'components/atoms/icon';
 import styles from './text-with-icon.module.scss';
 import { TextWithIconProps } from './types';
 
 /**
- * @description Компонент текста с иконкой. По умолчанию иконка расположена слева от текста.
- *
- * @props
- * - text - string | number - текст компонента
- * - iconType - string - тип иконки из объекта `icons`
- * - color - string - цвет иконки из `color-variables`
- * - isReverse - boolean - при true иконка становится справа от текста
- * - className - string - класс-миксин для стилизации
+ * Компонент текста с иконкой. По умолчанию иконка расположена слева от текста.
  */
 
 function TextWithIcon({
   text,
   iconType,
   isReverse = false,
-  color = '',
+  color,
   className = '',
 }: TextWithIconProps) {
   const classNames = classnames(styles.textWithIcon, className, {
@@ -26,7 +19,7 @@ function TextWithIcon({
   });
 
   const colorStyle = {
-    color: styles[color],
+    color: styles[color ?? ''],
   };
 
   return (

@@ -2,20 +2,11 @@ import { Ref } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
-import { AccordionButton, AccordionProps } from './types';
+import { AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
 
 /**
  * HOC-компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
- *
- * @props
- * - title - string - заголовок аккордеона
- * - titleSize - enum ('l' | 'm') - размер заголовка аккордеона
- * - titleWeight - enum ('bold' | 'regular') - Начертание заголовка аккордеона
- * - children - содержимое, которое будет скрываться (JSX или Компонент)
- * - button - "icon" | "text" - необязательный проп, отвечающий за кнопку в правом верхнем углу в виде иконки либо текста "Развернуть"/"Свернуть". По умолчанию равен "icon", если необходимо, чтобы отображался текст - добавьте проп button="text"
- * - className - string - необязательный проп - дополнительный css класс для стилизации ручки аккордеона через вложенность или задания внешних отступов (CSS-селектор: .classname > button {...})
- * - open - boolean - начальное состояние аккордеона при рендере. По умолчанию false - аккордеон закрыт
  */
 
 function Accordion({
@@ -45,8 +36,12 @@ function Accordion({
         >
           {title}
         </span>
-        {renderButton(button)}
+        <span className={classnames(styles.btn, styles[button])}>
+          {button === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
+          {button === 'icon' && <Icon type="arrowDown" />}
+        </span>
       </button>
+
       <div
         className={styles.content}
         ref={contentRef as Ref<HTMLDivElement>}
@@ -56,15 +51,6 @@ function Accordion({
       </div>
     </div>
   );
-
-  function renderButton(type: AccordionButton) {
-    return (
-      <span className={classnames(styles.btn, styles[type])}>
-        {type === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
-        {type === 'icon' && <Icon type="arrowDown" />}
-      </span>
-    );
-  }
 }
 
 export default Accordion;

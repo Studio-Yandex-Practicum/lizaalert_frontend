@@ -30,3 +30,4 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run build:admin
+      - run: npm run build-storybook

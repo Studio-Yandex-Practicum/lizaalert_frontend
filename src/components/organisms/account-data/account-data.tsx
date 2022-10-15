@@ -57,6 +57,7 @@ function AccountData() {
           name="email"
           value={values.email || ''}
           onChange={handleChange}
+          isValid={!errors.email}
           error={errors.email}
           isWithIcon
           placeholder="Ваш email"
@@ -70,6 +71,7 @@ function AccountData() {
           placeholder="Ваш пароль"
           isWithIcon
           minLength={8}
+          isValid={!errors.password}
           error={errors.password}
         />
         <Button

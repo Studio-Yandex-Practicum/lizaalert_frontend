@@ -1,0 +1,46 @@
+.card_card__LoOzr{box-sizing:border-box;border-radius:16px;box-shadow:0 0 4px rgba(231,232,235,.6),0 4px 16px rgba(231,232,235,.6);background-color:#fff;padding:32px;font-family:"Golos","Arial",sans-serif}.card_cardNoPadding__p0viP{padding:0}li.card_card__LoOzr{list-style:none}
+.heading_heading__5o3uh{font-family:"Golos","Arial",sans-serif;font-style:normal;font-weight:700;color:inherit;margin:0}.heading_xxl__8UdXS{font-size:48px;line-height:1.0833333333}.heading_xl__iRhJw{font-size:32px;line-height:1.125}.heading_l__myN3\+{font-size:24px;line-height:1.1666666667}.heading_m__xvgtD{font-size:18px;line-height:1.3333333333}
+.icon_icon__Ac9hB{display:inline-flex;justify-content:center;align-items:center;flex-shrink:0;background-color:rgba(255,255,255,0);border:none;padding:0}.icon_default__iziFD{max-height:24px;max-width:24px;height:24px}.icon_medium__i7cUq{max-height:26px;max-width:26px;height:26px}button.icon_icon__Ac9hB{cursor:pointer}
+.accordion_accordion__2bru0{display:flex;flex-direction:column;font-family:"Golos","Arial",sans-serif}.accordion_open__V1vGY>.accordion_handle__gOL\+l .accordion_btn__kKv-l.accordion_icon__-X\+19{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.accordion_handle__gOL\+l{display:flex;align-items:center;border:none;outline:none;background-color:transparent;cursor:pointer;padding:0;font-family:inherit;text-align:start}.accordion_title__\+-Cfs{margin:0}.accordion_title_weight_bold__0ULf-{font-weight:700}.accordion_title_weight_regular__BXKD8{font-weight:400}.accordion_title_size_l__EH5lX{font-size:24px;line-height:1.1666666667}.accordion_title_size_m__-hpLb{font-size:18px;line-height:1.3333333333}.accordion_btn__kKv-l{margin-left:auto;height:24px;transition:.3s ease}.accordion_btn__kKv-l:hover{color:#f06000}.accordion_text__TwovT{font-size:18px;line-height:1.3333333333;font-weight:500}.accordion_icon__-X\+19{transition:-webkit-transform .3s ease;transition:transform .3s ease;transition:transform .3s ease, -webkit-transform .3s ease;flex-shrink:0}.accordion_content__iTAn3{overflow:hidden;transition:max-height .3s ease}
+.button_button__YlCoG{box-sizing:border-box;padding:0 24px;background:transparent;border:none;border-radius:16px;cursor:pointer;font-family:"Golos","Arial",sans-serif;font-size:18px;font-style:normal;font-weight:500;line-height:1.3333333333;display:flex;align-items:center;justify-content:center;gap:8px;transition:.3s ease}.button_button__YlCoG:focus{outline:none}.button_button__YlCoG:disabled{cursor:auto;background-color:#e6e7eb;color:#9397a3}.button_view-primary__ApT-s{background-color:#f60;color:#fff;min-width:72px;min-height:48px}.button_view-primary__ApT-s:hover{background-color:#f06000}.button_view-primary__ApT-s:disabled{background-color:#e6e7eb}.button_view-secondary__Pvuv8{background-color:#fff;color:#f60;border:1.2px solid #e6e7eb;min-width:72px;min-height:48px}.button_view-secondary__Pvuv8:hover{color:#f06000}.button_view-secondary__Pvuv8:disabled{color:#9397a3;box-shadow:none}.button_view-tertiary__Nkx\+Q{background-color:#212329;color:#fff;font-family:"Yandex Sans Text","Arial",sans-serif;min-width:72px;min-height:48px}.button_view-text__EopRE{color:#212329;padding:0}.button_view-text__EopRE:hover{color:#f06000}.button_view-text__EopRE:disabled{color:#9397a3}.button_hover-default__\+JCQb:hover{box-shadow:0 4px 8px 0 rgba(231,232,235,.6)}.button_hover-border__ihiBl:hover{border-color:#f60}
+.checkbox_checkbox__-WBbC{position:relative;display:flex;justify-content:center;align-items:center;max-width:-webkit-fit-content;max-width:-moz-fit-content;max-width:fit-content;gap:8px;font-family:"Golos","Arial",sans-serif;color:#212329;font-weight:400;font-size:18px;line-height:1.3333333333}.checkbox_checkbox__-WBbC:hover{color:#f06000;cursor:pointer}.checkbox_input__ZVNuX{position:absolute;top:0;left:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.checkbox_pseudo__U5pt8{align-self:flex-start;transition:color .3s ease}.checkbox_pseudo__U5pt8 path{opacity:0;-webkit-transform-origin:center;transform-origin:center;transition:opacity .3s ease,-webkit-transform .3s ease;transition:transform .3s ease,opacity .3s ease;transition:transform .3s ease,opacity .3s ease,-webkit-transform .3s ease}.checkbox_pseudo__U5pt8 path:last-child{opacity:1}.checkbox_pseudo__U5pt8 path:nth-child(1){-webkit-transform:scale(0);transform:scale(0)}.checkbox_labelText__qIjGo{margin:0;transition:color .3s ease}.checkbox_input__ZVNuX:checked+.checkbox_pseudo__U5pt8{color:#f06000}.checkbox_input__ZVNuX:checked+.checkbox_pseudo__U5pt8 path:nth-child(1){-webkit-transform:scale(1);transform:scale(1);opacity:1}.checkbox_input__ZVNuX:checked~.checkbox_labelText__qIjGo{color:#f06000}
+.text-with-icon_textWithIcon__GbVTa{display:flex;align-items:center;min-height:24px;gap:8px;color:inherit}.text-with-icon_reverse__HxL4a{flex-direction:row-reverse}.text-with-icon_text__xB9bC{text-overflow:ellipsis;overflow:hidden;margin:0;font-size:18px;line-height:1.3333333333;overflow-wrap:anywhere}.text-with-icon_icon__ZgDME{align-self:flex-start}
+.header-link_link__0EjxF{text-decoration:none;font-family:"Golos","Arial",sans-serif;font-weight:500}
+@font-face {
+  font-family: 'Golos';
+  src: url(../../8f52cab9d9d6bf2a09f1.woff2) format('woff2'),
+    url(../../4356396c65ce245caa61.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golos';
+  src: url(../../2bfa58cb087a6b8f03d5.woff2) format('woff2'),
+    url(../../5f1463676ca0cb61b459.woff) format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golos';
+  src: url(../../70f6b18f94e11627fa5d.woff2) format('woff2'),
+    url(../../58fcc085d9c07cde1f04.woff) format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yandex Sans Text';
+  src: url(../../43fa0def7951e857f96c.woff2) format('woff2'),
+    url(../../6b83f25f39c3f10cc22e.woff) format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/*# sourceMappingURL=main.562f9a22.css.map*/
