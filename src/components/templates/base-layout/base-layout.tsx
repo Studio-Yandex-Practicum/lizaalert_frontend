@@ -1,9 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import useScrollToTop from 'hooks/use-scroll-to-top';
-import { Header } from '../header';
+import { Header } from 'components/templates/header';
 
 /**
- * @description Основной лейаут для сайта из шапки и основного контента, который меняется в зависимости от роута
+ * Основной лейаут для сайта из шапки и основного контента, который меняется в зависимости от роута.
+ * Также страницу подкидывает наверх при переходе на новый роут.
  * */
 
 function BaseLayout() {
