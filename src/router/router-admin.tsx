@@ -43,11 +43,11 @@ function RouterAdmin() {
       <Route element={<BaseLayout />}>
         <Route path={profile.path} element={<Profile />} />
         <Route path={login.path} element={<Login />} />
+        <Route path={notFound.path} element={<NotFound />} />
       </Route>
       <Route path={register.path} element={<Register />} />
       <Route path={library.path} element={<Development />} />
       <Route path={users.path} element={<Development />} />
-      <Route path={notFound.path} element={<NotFound />} />
     </Routes>
   );
 }
