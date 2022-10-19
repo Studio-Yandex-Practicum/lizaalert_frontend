@@ -1,13 +1,13 @@
 import { Children } from 'react';
-import { Heading } from '../../atoms/heading';
-import { HeaderLink } from '../../molecules/header-link';
-import { StyledLink } from '../../molecules/styled-link';
+import { Heading } from 'components/atoms/heading';
+import { HeaderLink } from 'components/molecules/header-link';
+import { StyledLink } from 'components/molecules/styled-link';
+import { RouteType } from 'types/route.types';
+import { isAdmin, routes } from 'config';
 import styles from './header.module.scss';
-import { RouteType } from '../../../types/route.types';
-import { isAdmin, routes } from '../../../config';
 
 /**
- * @description Компонент-шапка с заголовком h1, обернутым в ссылку, и списком навигационных ссылок
+ * Компонент-шапка с заголовком h1, обернутым в ссылку, и списком навигационных ссылок.
  * */
 
 function Header() {
