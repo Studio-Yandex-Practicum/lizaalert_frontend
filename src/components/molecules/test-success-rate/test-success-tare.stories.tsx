@@ -17,3 +17,9 @@ const Template: ComponentStory<typeof TestSuccessRate> = (args) => (
 );
 
 export const Base = Template.bind({});
+
+export const Failure = Template.bind({});
+Failure.args = {
+  isSuccess: false,
+  testResultPercent: 15,
+};
