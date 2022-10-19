@@ -5,10 +5,9 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: vars.$transparent;
   border: none;
   padding: 0;
-  transition: vars.$trans-300;
 }
 
 .default {
