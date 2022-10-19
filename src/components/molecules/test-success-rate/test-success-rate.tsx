@@ -1,6 +1,6 @@
 import { Children } from 'react';
 import classnames from 'classnames';
-import { Heading } from '../../atoms/heading';
+import { Heading } from 'components/atoms/heading';
 import styles from './test-success-rate.module.scss';
 import { TestSuccessRateProps } from './types';
 
@@ -17,17 +17,13 @@ const testResultsTexts = {
 };
 
 /**
- * @description Компонент, показывающий результат прохождения теста
- *
- * @props
- * - testResultPercent - number, required - результат прохождения теста
- * - isSuccess - boolean, required - флаг того, что тест пройден успешно
- * - className - string - класс-миксин для стилизации контейнера
+ * Компонент, показывающий результат прохождения теста.
+ * Представляет собой плашку красного или зеленого цвета с заголовком и текстом.
  * */
 
 function TestSuccessRate({
   isSuccess,
-  testResultPercent,
+  testResultPercent = 0,
   className = '',
 }: TestSuccessRateProps) {
   const texts = isSuccess ? testResultsTexts.success : testResultsTexts.failure;
@@ -40,27 +36,10 @@ function TestSuccessRate({
         className
       )}
     >
-      <Heading
-        level={3}
-        title={`${testResultPercent}%`}
-        size="xxl"
-        className={classnames(
-          styles.percent,
-          isSuccess ? styles.green : styles.red
-        )}
-      />
+      <Heading level={3} title={`${testResultPercent}%`} size="xxl" />
       <div className={styles.result__description}>
         {Children.toArray(
-          texts.map((text) => (
-            <p
-              className={classnames(
-                styles.description__text,
-                isSuccess ? styles.green : styles.red
-              )}
-            >
-              {text}
-            </p>
-          ))
+          texts.map((text) => <p className={styles.result__text}>{text}</p>)
         )}
       </div>
     </div>
