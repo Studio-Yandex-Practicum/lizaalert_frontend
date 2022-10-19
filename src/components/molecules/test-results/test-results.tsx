@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import { TextWithIcon } from '../text-with-icon';
+import { IconType } from 'components/atoms/icon';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { TestAnswerType } from 'components/molecules/test-answer';
 import styles from './test-results.module.scss';
 import { TestResultsProps } from './types';
-import { IconType } from '../../atoms/icon';
-import { TestAnswerType } from '../test-answer';
 
 const CORRECT_SELECTED_ANSWER = 'checkSolid';
 const CORRECT_UNSELECTED_ANSWER = 'check';
@@ -24,10 +24,14 @@ function handleIconType(answer: TestAnswerType): IconType {
 }
 
 /**
- * @description Компонент результата ответов теста.
+ * Компонент результата ответов теста.
+ * Представляет собой текст с иконкой. Цвет текста и иконка различаются в зависимости от входных данных по ответу.
+ * Реализует состояния:
  *
- * - answer - obj, required - объект ответа, содержит id, text, isChecked, isCorrect.
- * - className - string - css-класс для стилизации текста компонента TextWithIcon.
+ * - правильный выбранный ответ
+ * - неправильный выбранный ответ
+ * - правильный, но не выбранный ответ
+ * - неправильный и не выбранный ответ
  */
 
 function TestResults({ answer, className = '' }: TestResultsProps) {
@@ -38,9 +42,6 @@ function TestResults({ answer, className = '' }: TestResultsProps) {
       iconType={handleIconType(answer)}
       className={classnames(className, styles.text, {
         [styles.text__success]: answer.isCorrect && answer.isChecked,
-        [styles.text__notChecked_right]: answer.isCorrect && !answer.isChecked,
-        [styles.text__notChecked_warning]:
-          !answer.isCorrect && !answer.isChecked,
         [styles.text__warning]: !answer.isCorrect && answer.isChecked,
       })}
     />

@@ -3,8 +3,6 @@
 .text {
   color: vars.$dark-primary;
   font-weight: 400;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 
   &__success {
     color: vars.$success;
