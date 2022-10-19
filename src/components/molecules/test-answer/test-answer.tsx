@@ -1,19 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { Checkbox } from '../checkbox';
-import { change } from '../../../store/test/slice';
+import { Checkbox } from 'components/molecules/checkbox';
+import { change } from 'store/test/slice';
+import { Controls } from 'utils/constants';
+import { useAppDispatch } from 'store';
 import { TestAnswerProps } from './types';
-import { Controls } from '../../../utils/constants';
 
 /**
- * @description Компонент ответа теста.
- *
- * - answer - obj, required - объект ответа, содержит id, text, isChecked, isCorrect
- * - questionId - number, required - id вопроса, в котором содержится answer
- * - answerOptions - enum('checkbox' | 'radio'), required - варианты ответов
+ * Компонент чекбокса для теста.
+ * Реализует логику для выбора правильного/неправильного ответа.
  */
 
 function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const updateCheckStatus = () => {
     dispatch(change({ answerId: answer.id, questionId }));

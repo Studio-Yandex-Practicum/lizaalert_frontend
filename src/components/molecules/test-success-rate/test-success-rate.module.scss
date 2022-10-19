@@ -9,17 +9,20 @@
   margin: 0 auto;
   border-radius: 16px;
   box-sizing: border-box;
+  font-family: vars.$mainFont;
   padding: 32px 64px 24px;
 }
 
 .result_type_good {
   border: rgba(0, 128, 0, 0.6) 1px solid;
   background-color: rgba(0, 128, 0, 0.12);
+  color: vars.$success;
 }
 
 .result_type_bad {
   border: rgba(255, 0, 0, 0.6) 1px solid;
   background-color: rgba(255, 0, 0, 0.12);
+  color: vars.$warning;
 }
 
 .result__description {
@@ -31,7 +34,7 @@
   text-align: center;
 }
 
-.description__text {
+.result__text {
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
   font-weight: 400;
@@ -40,12 +43,4 @@
   &:first-of-type {
     margin-bottom: 24px;
   }
-}
-
-.red {
-  color: vars.$warning;
-}
-
-.green {
-  color: vars.$success;
 }
