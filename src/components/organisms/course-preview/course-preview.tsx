@@ -12,10 +12,7 @@ import styles from './course-preview.module.scss';
 import { CoursePreviewProps } from './types';
 
 /**
- * @description Компонент предпросмотра курса
- *
- * @props
- * - course - obj, required - объект курса содержит id, level, title, description, image, duration, lessonsCount, status
+ * Компонент карточки предпросмотра курса.
  */
 
 function CoursePreview({ course }: CoursePreviewProps) {
