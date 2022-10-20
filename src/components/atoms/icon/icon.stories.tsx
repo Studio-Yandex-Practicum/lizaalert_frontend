@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
 import { utils } from 'stories/utils';
 import Icon from './icon';
-import { iconKeys, icons, IconType } from './icons';
+import { iconKeys } from './icons';
 import { IconProps } from './types';
 
 export default {
@@ -19,9 +19,7 @@ export default {
   },
 } as ComponentMeta<typeof Icon>;
 
-const Template: ComponentStory<typeof Icon> = ({ type, ...args }) => (
-  <Icon type={type} {...args} />
-);
+const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
 
 export const Base = Template.bind({});
 
@@ -35,7 +33,7 @@ Sizes.argTypes = utils.disableControls('size', 'className');
 
 export const IconList: ComponentStory<typeof Icon> = ({ type, ...args }) => (
   <div className="flex flex-column">
-    {(Object.keys(icons) as IconType[]).map((key) => (
+    {iconKeys.map((key) => (
       <div key={key} className="flex flex-row">
         <Icon type={key} {...args} />
         <code>{key}</code>

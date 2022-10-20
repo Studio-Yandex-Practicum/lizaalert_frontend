@@ -11,9 +11,8 @@ export default {
   },
 } as ComponentMeta<typeof CourseBenefits>;
 
-const Template: ComponentStory<typeof CourseBenefits> = ({
-  benefitsList,
-  ...args
-}) => <CourseBenefits benefitsList={benefitsList} {...args} />;
+const Template: ComponentStory<typeof CourseBenefits> = (args) => (
+  <CourseBenefits {...args} />
+);
 
 export const Base = Template.bind({});

@@ -20,10 +20,8 @@ export default {
   },
 } as ComponentMeta<typeof HeaderLink>;
 
-const Template: ComponentStory<typeof HeaderLink> = ({
-  text,
-  link,
-  iconType,
-}) => <HeaderLink text={text} iconType={iconType} link={link} />;
+const Template: ComponentStory<typeof HeaderLink> = (args) => (
+  <HeaderLink {...args} />
+);
 
 export const Base = Template.bind({});

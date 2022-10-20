@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
-import { mockContents } from 'components/organisms/contents-item/contents-item.stories';
+import { mockContents } from 'components/organisms/contents-item/constants';
 import CourseContents from './course-contents';
 
 export default {
@@ -13,9 +13,8 @@ export default {
   },
 } as ComponentMeta<typeof CourseContents>;
 
-const Template: ComponentStory<typeof CourseContents> = ({
-  content,
-  ...args
-}) => <CourseContents content={content} {...args} />;
+const Template: ComponentStory<typeof CourseContents> = (args) => (
+  <CourseContents {...args} />
+);
 
 export const Base = Template.bind({});

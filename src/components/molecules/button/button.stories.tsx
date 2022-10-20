@@ -25,9 +25,7 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = ({ text, ...args }) => (
-  <Button text={text} {...args} />
-);
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Base = Template.bind({});
 
@@ -36,13 +34,10 @@ StandardWithIcon.args = {
   iconName: 'calendar',
 };
 
-export const SecondaryHover: ComponentStory<typeof Button> = ({
-  text,
-  ...args
-}) => (
+export const SecondaryHover: ComponentStory<typeof Button> = (args) => (
   <div className="flex flex-row">
-    <Button text={text} {...args} view="secondary" hover="default" />
-    <Button text={text} {...args} view="secondary" hover="border" />
+    <Button {...args} view="secondary" hover="default" />
+    <Button {...args} view="secondary" hover="border" />
   </div>
 );
 SecondaryHover.argTypes = utils.disableControls<keyof ButtonProps>(
@@ -50,12 +45,12 @@ SecondaryHover.argTypes = utils.disableControls<keyof ButtonProps>(
   'hover'
 );
 
-export const Views: ComponentStory<typeof Button> = ({ text, ...args }) => (
+export const Views: ComponentStory<typeof Button> = (args) => (
   <div className="flex flex-row">
-    <Button text={text} {...args} view="primary" />
-    <Button text={text} {...args} view="secondary" />
-    <Button text={text} {...args} view="tertiary" />
-    <Button text={text} {...args} view="text" />
+    <Button {...args} view="primary" />
+    <Button {...args} view="secondary" />
+    <Button {...args} view="tertiary" />
+    <Button {...args} view="text" />
   </div>
 );
 Views.argTypes = utils.disableControls<keyof ButtonProps>('view', 'hover');
