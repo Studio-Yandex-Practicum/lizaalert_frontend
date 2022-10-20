@@ -8,7 +8,7 @@ import styles from './course-overview.module.scss';
 import { CourseOverviewProps } from './types';
 
 /**
- * @description Карточка краткого описания курса.
+ * Карточка краткого описания курса.
  * */
 
 function CourseOverview({
@@ -17,6 +17,7 @@ function CourseOverview({
   lessonsCount,
   startDate,
   courseDuration,
+  onClick,
 }: CourseOverviewProps) {
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
@@ -53,7 +54,11 @@ function CourseOverview({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} text="Записаться" />
+      <Button
+        className={styles.courseEnroll}
+        onClick={onClick}
+        text="Записаться"
+      />
     </Card>
   );
 }
