@@ -1,3 +1,7 @@
+/**
+ * Компонент создания описания нового курса.
+ * */
+
 function NewCourseDescription() {
   return (
     <div>

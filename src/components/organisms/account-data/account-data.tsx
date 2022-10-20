@@ -1,28 +1,25 @@
 import { FormEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { Input } from '../../molecules/input';
-import styles from './account-data.module.scss';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { Input } from 'components/molecules/input';
+import { useAppDispatch, useAppSelector } from 'store';
+import { setAccountData } from 'store/profile/slice';
+import { selectProfileAccount } from 'store/profile/selectors';
+import useFormWithValidation from 'hooks/use-form-with-validation';
 import { AccountFormData } from './types';
-import { setAccountData } from '../../../store/profile/slice';
-import { selectProfileAccount } from '../../../store/profile/selectors';
-import useFormWithValidation from '../../../hooks/use-form-with-validation';
+import styles from './account-data.module.scss';
 
 /**
- * @description Компонент-виджет с редактируемой формой данных аккаунта.
+ * Компонент-виджет с редактируемой формой данных аккаунта.
  * */
 
 function AccountData() {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
     useFormWithValidation<AccountFormData>();
 
-  // TODO заменить первый аргумент на RootState после типизации Store
-  const accountData = useSelector<unknown, AccountFormData>(
-    selectProfileAccount
-  );
-  const dispatch = useDispatch();
+  const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setValues(accountData);

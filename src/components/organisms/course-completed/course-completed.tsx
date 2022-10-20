@@ -21,7 +21,7 @@ function CourseCompleted({
       <Heading size="l" className={styles.title} title="Курс завершен" />
 
       <div className={styles.content}>
-        <Heading className={styles.subtitle} level={3} size="xxl">
+        <Heading level={3} size="xxl">
           {isCompleted ? 'Поздравляем!' : 'Сожалеем'}
         </Heading>
 

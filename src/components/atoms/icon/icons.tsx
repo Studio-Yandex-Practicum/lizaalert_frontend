@@ -60,6 +60,7 @@ const defaultAttributes = {
   fill: 'currentColor',
 };
 
+/** Объект со всеми иконками проекта */
 export const icons = {
   arrowBack: <ArrowBack {...defaultAttributes} />,
   arrowDown: <ArrowDown {...defaultAttributes} />,
@@ -116,6 +117,8 @@ export const icons = {
   yandex: <Yandex {...defaultAttributes} />,
 };
 
+/** Union ключей иконок */
 export type IconType = Nullable<keyof typeof icons>;
 
+/** Массив ключей иконок */
 export const iconKeys = Object.keys(icons) as IconType[];

@@ -1,13 +1,19 @@
 import { KeyboardEvent } from 'react';
 
 export type OptionType = {
+  /**
+   * id опции.
+   * */
   id: number;
+  /**
+   * Название опции.
+   * */
   name: string;
 };
 
 export type OptionProps = {
   /**
-   * Данные для опции, id - идентификатор, name - текст опции
+   * Данные для опции, id - идентификатор, name - текст опции.
    * */
   option: OptionType;
   /**

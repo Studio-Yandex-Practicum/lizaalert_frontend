@@ -6,7 +6,7 @@ export type StyledLinkProps = {
    * */
   children?: ReactNode;
   /**
-   * Путь для ссылки.
+   * URL ссылки.
    * */
   href: string;
   /**

@@ -1,6 +1,15 @@
 type FAQuestion = {
+  /**
+   * id вопроса.
+   * */
   id: number;
+  /**
+   * Вопрос в виде строки.
+   * */
   question: string;
+  /**
+   * Ответ в виде строки.
+   * */
   answer: string;
 };
 

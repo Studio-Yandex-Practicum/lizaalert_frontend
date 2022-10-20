@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/heading';
@@ -6,7 +7,6 @@ import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
-import { useNavigate } from 'react-router-dom';
 import styles from './restore-password-form.module.scss';
 import { RestorePasswordFormData } from './types';
 

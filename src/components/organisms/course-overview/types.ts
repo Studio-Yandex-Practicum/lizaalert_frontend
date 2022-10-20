@@ -14,7 +14,7 @@ export type CourseOverviewProps = {
    * */
   startDate: string;
   /**
-   * Путь к обложке курса.
+   * URL обложки курса.
    * */
   coverPath?: Nullable<string>;
   /**

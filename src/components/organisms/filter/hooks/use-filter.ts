@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { Filters, Statuses } from '../../../../utils/constants';
+import { Filters, Statuses } from 'utils/constants';
 import { FilterItem, SectionType } from '../constants';
+
+/**
+ * Хук реализует логику фильтрации для списка курсов.
+ * Возвращает массив выбранных опций и функции-обработчики для корректной работы фильтров.
+ *
+ * @returns \{ selection, resetFilters, countSectionSelection, selectFilter, removeFilter \}
+ * */
 
 export const useFilter = () => {
   const [selection, setSelection] = useState<FilterItem[]>([]);

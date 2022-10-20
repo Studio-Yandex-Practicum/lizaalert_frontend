@@ -1,6 +1,15 @@
 export type BenefitType = {
+  /**
+   * id навыка.
+   * */
   id: number;
+  /**
+   * Заголовок навыка.
+   * */
   title: string;
+  /**
+   * Краткое описание навыка.
+   * */
   description: string;
 };
 

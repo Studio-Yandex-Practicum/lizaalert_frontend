@@ -22,5 +22,8 @@ export type ContentsItemProps = {
 };
 
 export type LessonType = Lesson & {
+  /**
+   * Статус прохождения урока.
+   * */
   status: 'finished' | 'active' | 'coming';
 };

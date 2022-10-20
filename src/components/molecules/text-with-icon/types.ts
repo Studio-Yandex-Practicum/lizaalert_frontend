@@ -15,7 +15,7 @@ export type TextWithIconProps = {
    * */
   isReverse?: boolean;
   /**
-   * Цвет иконки из color-variables
+   * Цвет иконки из color-variables.
    * */
   color?: ColorVariables;
   /**

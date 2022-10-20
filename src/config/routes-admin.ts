@@ -1,4 +1,4 @@
-import { RouteType } from '../types/route.types';
+import { RouteType } from 'types/route.types';
 
 const routes: Record<string, RouteType> = {
   courses: {

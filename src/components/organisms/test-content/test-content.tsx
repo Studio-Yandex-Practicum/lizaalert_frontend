@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Test } from '../test';
-import { TestPreview } from '../test-preview';
+import { Test } from 'components/organisms/test';
+import { TestPreview } from 'components/organisms/test-preview';
 import { TestContentProps } from './types';
 
 /**
- * @description Компонент-тогглер между превью теста и карточкой с вопросами
+ * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
 
 function TestContent({ test }: TestContentProps) {

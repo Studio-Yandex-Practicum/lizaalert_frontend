@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { RouteType } from '../../../../types/route.types';
+import { RouteType } from 'types/route.types';
+import { routes } from 'config';
 import { BreadcrumbType } from '../types';
-import { routes } from '../../../../config';
 
 /**
- * Хук useBreadcrumbs возвращает массив объектов для отрисовки ссылок в компоненте Breadcrumbs
- * Пока рассчитан только на страницу Курса и возвращает моковые данные
- * Нужна доработка после интеграции с бекендом
+ * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
+ * Пока рассчитан только на страницу Курса и возвращает моковые данные.
+ * Нужна доработка после интеграции с бекендом.
+ *
+ * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
 
 const useBreadcrumbs = () => {

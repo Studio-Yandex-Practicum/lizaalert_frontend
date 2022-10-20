@@ -5,7 +5,7 @@ import styles from './video-lesson.module.scss';
 import { VideoLessonProps } from './types';
 
 /**
- * Компонент-карточка видео-урока. Видео вставляется в iframe.
+ * Компонент-карточка видео-урока. Видео вставляется в `iframe`.
  * */
 
 function VideoLesson({ source, className }: VideoLessonProps) {

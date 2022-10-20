@@ -1,18 +1,11 @@
-import { Heading } from '../../atoms/heading';
-import { TestAnswer } from '../../molecules/test-answer';
-import { TestResults } from '../../molecules/test-results';
+import { Heading } from 'components/atoms/heading';
+import { TestAnswer } from 'components/molecules/test-answer';
+import { TestResults } from 'components/molecules/test-results';
 import styles from './test-question.module.scss';
 import { TestQuestionProps } from './types';
 
 /**
- * @description Компонент тестового вопроса.
- *
- * @props
- * - question - obj, required - объект вопрос, содержит id, title и answers (массив ответов)
- * - index - number, required - index объекта
- * - type - enum ('checkbox' | 'radio'), required - тип вопроса
- * - isSubmitted - bool - необязательный пропс, true или false в зависимости от того, отправлена ли форма
- * - className - string - css-класс для стилизации компонента родителя (li)
+ * Компонент тестового вопроса.
  */
 
 function TestQuestion({

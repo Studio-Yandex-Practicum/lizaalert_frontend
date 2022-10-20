@@ -12,7 +12,7 @@ export type CourseCompletedProps = {
    * */
   courseSuccessDescription?: string;
   /**
-   * href ссылки для неудачного прохождения.
+   * URL ссылки для неудачного прохождения.
    * */
   linkHref: string;
   /**

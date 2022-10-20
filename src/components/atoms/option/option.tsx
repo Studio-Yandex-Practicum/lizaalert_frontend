@@ -1,10 +1,11 @@
-import classnames from 'classnames';
 import { KeyboardEvent } from 'react';
+import classnames from 'classnames';
 import styles from './option.module.scss';
 import { OptionProps } from './types';
 
 /**
  * Интерактивный компонент-опция для списков, селектов.
+ * Выполнен тегом `li`.
  */
 
 function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {

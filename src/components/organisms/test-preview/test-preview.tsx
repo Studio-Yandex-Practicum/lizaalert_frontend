@@ -1,16 +1,12 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { TextWithIcon } from '../../molecules/text-with-icon';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { TextWithIcon } from 'components/molecules/text-with-icon';
 import styles from './test-preview.module.scss';
 import { TextPreviewProps } from './types';
 
 /**
- * @description Компонент превью теста
- *
- * @props
- * - test - obj, required - объект теста содержит id, description, passingScore, retries, deadline, inProgress
- * - toggleRender - function, required - функция возврата к тесту
+ * Компонент-карточка превью теста.
  */
 
 function TestPreview({ test, toggleRender }: TextPreviewProps) {
