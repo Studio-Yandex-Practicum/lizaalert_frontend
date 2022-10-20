@@ -1,13 +1,10 @@
-import { Card } from '../../atoms/card';
+import { Card } from 'components/atoms/card';
 import { TheoryLessonProps } from './types';
 
 // Временный компонент-заглушка, необходимо переписать
 
 /**
- * @description Компонент теоретического урока
- *
- * @props
- * - content - string - HTML-разметка теории
+ * Компонент теоретического урока.
  * */
 
 function TheoryLesson({ content }: TheoryLessonProps) {

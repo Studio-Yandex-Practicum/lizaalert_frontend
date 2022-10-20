@@ -1,17 +1,17 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { TestSuccessRate } from '../../molecules/test-success-rate';
-import { TestQuestion, TestQuestionType } from '../test-question';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { TestSuccessRate } from 'components/molecules/test-success-rate';
+import {
+  TestQuestion,
+  TestQuestionType,
+} from 'components/organisms/test-question';
 import styles from './test.module.scss';
 import { TestProps } from './types';
 import useTest from './hooks/use-test';
 
 /**
- * @description Компонент-карточка теста с вопросами
- *
- * @props
- * - toggleRender - function, required - функция возврата к превью теста
+ * Компонент-карточка теста с вопросами.
  * */
 
 function Test({ toggleRender }: TestProps) {

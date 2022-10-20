@@ -1,30 +1,37 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading, selectTest } from '../../../../store/test/selectors';
-import { selectLesson } from '../../../../store/lesson/selectors';
-import fetchTest from '../../../../store/test/thunk';
-import { TestType } from '../../test-preview';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectIsLoading, selectTest } from 'store/test/selectors';
+import { selectLesson } from 'store/lesson/selectors';
+import fetchTest from 'store/test/thunk';
+import { Controls } from 'utils/constants';
+import { TestType } from 'components/organisms/test-preview';
 import { TestQuestionListType } from '../types';
-import { Controls } from '../../../../utils/constants';
+
+/**
+ * Хук реализует логику прохождения теста.
+ * Возвращает объект данных и обработчков для отображения их в интерфейсе.
+ *
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState \}
+ * */
 
 const useTest = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
-  const test = useSelector<unknown, TestQuestionListType>(selectTest);
-  const isLoading = useSelector<unknown, boolean>(selectIsLoading);
-  const { passingScore } = useSelector<unknown, TestType>(selectLesson);
-  const dispatch = useDispatch();
+  const test = useAppSelector<TestQuestionListType>(selectTest);
+  const isLoading = useAppSelector<boolean>(selectIsLoading);
+  const { passingScore } = useAppSelector<TestType>(selectLesson);
+  const dispatch = useAppDispatch();
 
   const setInitialState = () => {
-    dispatch(fetchTest());
+    void dispatch(fetchTest());
     setIsSubmitted(false);
   };
 
   useEffect(() => {
     setInitialState();
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (test.questions?.length >= 0) {

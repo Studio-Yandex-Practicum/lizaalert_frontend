@@ -22,11 +22,11 @@ export type SelectProps = {
    * */
   options: OptionType[];
   /**
-   * Обработчик выбора опции
+   * Обработчик выбора опции.
    * */
   onSelect: (name: string, option: OptionType) => void;
   /**
-   * Изначально выбранная опция
+   * Изначально выбранная опция.
    * */
   initialOption: OptionType;
 };

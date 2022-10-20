@@ -1,19 +1,10 @@
 import classnames from 'classnames';
-import { Button } from '../../molecules/button';
+import { Button } from 'components/molecules/button';
 import styles from './navigation-buttons.module.scss';
 import { NavigationButtonsProps } from './types';
 
 /**
- * @description Компонент кнопок навигации по уроку.
- *
- * @props
- * - classNameForContainer - string - класс-миксин для контейнера
- * - classNameForButtons - string - класс-миксин для кнопок
- * - view - enum ('main' | 'finish') - текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'
- * - disabledBack - boolean - дизейбл кнопки "Назад"
- * - disabledForward - boolean - дизейбл кнопки "Далее"
- * - onClickBack - function, required - функция-обработчик клика на левую кнопку (назад)
- * - onClickForward - function, required - функция-обработчик клика на правую кнопку (вперед)
+ * Компонент кнопок навигации по уроку.
  */
 
 function NavigationButtons({

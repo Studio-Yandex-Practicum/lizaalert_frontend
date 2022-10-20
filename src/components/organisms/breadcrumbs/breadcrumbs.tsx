@@ -1,15 +1,12 @@
 import classnames from 'classnames';
-import { Icon } from '../../atoms/icon';
-import { StyledLink } from '../../molecules/styled-link';
+import { Icon } from 'components/atoms/icon';
+import { StyledLink } from 'components/molecules/styled-link';
 import styles from './breadcrumbs.module.scss';
 import { BreadcrumbsProps } from './types';
 import useBreadcrumbs from './hooks/use-breadcrumbs';
 
 /**
- * @description Компонент хлебных крошек, создает цепочку вложенных роутов.
- *
- * @props
- * - className - string - класс-миксин для стилизации контейнера
+ * Компонент хлебных крошек, создает цепочку вложенных роутов.
  * */
 
 function Breadcrumbs({ className = '' }: BreadcrumbsProps) {

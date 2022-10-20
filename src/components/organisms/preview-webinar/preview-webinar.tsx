@@ -1,20 +1,17 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { StyledLink } from '../../molecules/styled-link';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { StyledLink } from 'components/molecules/styled-link';
+import { convertDate } from 'utils/convert-date';
 import styles from './preview-webinar.module.scss';
 import { PreviewWebinarProps } from './types';
-import { convertDate } from '../../../utils/convert-date';
 
 /**
- * @description Компонент превью вебинара.
- *
- * @props
- * - date - string, required - дата вебинара
- * - link - string, required - ссылка на вебинар
+ * Компонент-карточка превью вебинара.
  */
 
-function PreviewWebinar({ date, link }: PreviewWebinarProps) {
+function PreviewWebinar({ date, link, className }: PreviewWebinarProps) {
   const webinarDate = (
     <span key={1} className={styles.accent}>
       {convertDate(date)}
@@ -27,7 +24,7 @@ function PreviewWebinar({ date, link }: PreviewWebinarProps) {
   );
 
   return (
-    <Card className={styles.card} htmlTag="section">
+    <Card className={classnames(styles.card, className)} htmlTag="section">
       <Heading size="l" className={styles.title} title="Вебинар" />
       <p className={styles.text}>
         {['Вебинар стартует ', webinarDate, ' в ', webinarTime, ' МСК (GTM+3)']}

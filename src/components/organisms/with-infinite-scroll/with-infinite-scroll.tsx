@@ -1,20 +1,12 @@
 import { useRef, useState } from 'react';
 import { Loader } from 'components/molecules/loader';
 import { DEFAULT_PAGE_SIZE } from 'utils/constants';
+import styles from './with-infinite-scroll.module.scss';
 import useIntersectionObserver from './hooks/use-intersection-observer';
 import { PaginationState, WithInfiniteScrollConfig } from './types';
-import styles from './with-infinite-scroll.module.scss';
 
 /**
- * @description HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
- *
- * @props
- * - initialPageSize - number - начальный стейт пагинации, по умолчанию берется из констант
- * - data - array, required - типизируемый массив с данными
- * - total - number, required - общее количество элементов в базе
- * - isLoading - boolean, required - флаг индикатора загрузки, по нему появляется прелоадер последнего элемента
- * - children - ReactNode, required - то, что нужно отобразить из родителя
- * - actionOnIntersect - (state: PaginationState) => void, required - коллбек для загрузки данных при прокрутке вниз
+ * HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  * */
 
 function WithInfiniteScroll<T>({
@@ -28,7 +20,6 @@ function WithInfiniteScroll<T>({
 }: WithInfiniteScrollConfig<T>) {
   const loadMoreRef = useRef(null);
   const [pagination, setPagination] = useState<PaginationState>({
-    // следующая страница
     page: data.length / initialPageSize + 1,
     pageSize: initialPageSize,
   });

@@ -9,6 +9,14 @@ import { UseAccordionReturnType } from '../types';
 
 const ANIMATION_DURATION = 300;
 
+/**
+ * Хук для управления логикой аккордеона.
+ *
+ * @param open - флаг, открыт ли аккордеон в текущий момент.
+ *
+ * @returns \{ isOpen, height, toggleAccordion, contentRef \}
+ * */
+
 const useAccordion = (open: boolean): UseAccordionReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(open);
   const [height, setHeight] = useState(open ? 'auto' : '0px');

@@ -11,9 +11,9 @@ import {
   NotFound,
   Profile,
   Register,
-} from '../components/pages';
-import { BaseLayout } from '../components/templates/base-layout';
-import { routes } from '../config';
+} from 'components/pages';
+import { BaseLayout } from 'components/templates/base-layout';
+import { routes } from 'config';
 
 function RouterAdmin() {
   const {

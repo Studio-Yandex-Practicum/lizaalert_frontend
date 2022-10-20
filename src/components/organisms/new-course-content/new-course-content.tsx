@@ -1,3 +1,7 @@
+/**
+ * Компонент создания контента нового курса.
+ * */
+
 function NewCourseContent() {
   return (
     <div>

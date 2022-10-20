@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { CoursesService } from 'services/courses/courses.service';
-import { GetCoursesDataModel } from '../../services/courses/types';
+import { GetCoursesDataModel } from 'services/courses/types';
 
 const fetchCoursesAction = createAsyncThunk(
   'courses/fetch',

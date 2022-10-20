@@ -1,11 +1,11 @@
 import classnames from 'classnames';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Accordion } from '../../molecules/accordion';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Accordion } from 'components/molecules/accordion';
 import styles from './course-description.module.scss';
 import { CourseDescriptionProps } from './types';
 
-const defaultProps = {
+export const defaultProps = {
   description:
     'Наряду с профессиональными отрядами спасателей у нас активно развивается движение волонтёров. Мы начали готовить первых собак-спасателей в начале 2000-х и продолжаем заниматься этим непростым делом до сих пор. С 2018 года, совместно с руководством отряда «ЛизаАлерт» было принято решение о развитии кинологического направления в рамках отряда.',
   tasks: [
@@ -18,12 +18,7 @@ const defaultProps = {
 };
 
 /**
- * @description Компонент описания курса
- *
- * @props
- * - description - string - описание курса
- * - tasks - array of string - список задач курса
- * - className - string - класс-миксин для внешнего контейнера
+ * Компонент текстового описания курса.
  */
 
 function CourseDescription({

@@ -1,1 +1,1 @@
-export type ActiveTabs = 'main' | 'description' | 'content';
+export type ActiveTab = 'main' | 'description' | 'content';

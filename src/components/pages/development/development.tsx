@@ -5,7 +5,7 @@ import { routes } from 'config';
 import styles from './development.module.scss';
 
 /**
- * @description Заглушка для тех страниц, что находятся в разработке и пока не готовы для прода.
+ * Заглушка для тех страниц, что находятся в разработке и пока не готовы для прода.
  * */
 
 function Development() {

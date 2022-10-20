@@ -1,3 +1,7 @@
+/**
+ * Компонент создания нового курса.
+ * */
+
 function NewCourseMain() {
   return (
     <div>

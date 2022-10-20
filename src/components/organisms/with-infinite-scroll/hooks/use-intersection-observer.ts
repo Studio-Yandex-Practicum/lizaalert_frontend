@@ -1,22 +1,8 @@
-import { MutableRefObject, useLayoutEffect, useRef } from 'react';
-
-type IntersectionObserverConfig = {
-  elementRef: MutableRefObject<null>;
-  callbackOnIntersect: () => void;
-  callbackOnHide?: () => void;
-  rootMargin?: string;
-  threshold?: number;
-};
+import { useLayoutEffect, useRef } from 'react';
+import { IntersectionObserverConfig } from '../types';
 
 /**
- * @description Хук используется для подгрузки данных и других манипуляций при появлении elementRef во вьюпорте
- *
- * @props
- * - elementRef - ref - ref элемента, за которым нужно наблюдать (из useRef)
- * - callbackOnIntersect - function - коллбек, срабатывающий при появлении элемента во вьюпорте
- * - callbackOnHide - function - коллбек, срабатывающий при скрытии элемента из вьюпорта
- * - rootMargin - string - отступы вокруг элемента
- * - threshold - number - процент от высоты элемента, которая может быть показана, прежде чем сработает обработчик
+ * Хук используется для подгрузки данных и других манипуляций при появлении `elementRef` во вьюпорте.
  * */
 
 const useIntersectionObserver = ({

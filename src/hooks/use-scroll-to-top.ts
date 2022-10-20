@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 /**
- * @description Хук прокручивает страницу наверх при обновлении зависимостей.
+ * Хук прокручивает страницу наверх при обновлении зависимостей.
  * */
 
 const useScrollToTop = (...deps: unknown[]) => {

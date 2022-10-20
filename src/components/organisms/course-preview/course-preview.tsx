@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
-import { CourseStatusButtons } from 'types/course-status-buttons.types';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/heading';
 import { Button } from 'components/molecules/button';
@@ -8,14 +7,12 @@ import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
+import { CourseStatusButtons } from 'types/course-status-buttons.types';
 import styles from './course-preview.module.scss';
 import { CoursePreviewProps } from './types';
 
 /**
- * @description Компонент предпросмотра курса
- *
- * @props
- * - course - obj, required - объект курса содержит id, level, title, description, image, duration, lessonsCount, status
+ * Компонент карточки предпросмотра курса.
  */
 
 function CoursePreview({ course }: CoursePreviewProps) {
