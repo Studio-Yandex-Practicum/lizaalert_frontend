@@ -8,11 +8,6 @@ import { CourseContentsProps } from './types';
 
 /**
  * Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
- *
- * @props
- * - content - array of objects, required - массив глав: `id`, `title` и массив `lessons`.
- * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
- * - className - string - класс-миксин для стилизации внешнего контейнера.
  * */
 
 function CourseContents({

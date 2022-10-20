@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
 import ContentsItem from './contents-item';
 
-const mockContents = {
+export const mockContents = {
   id: 1,
   title: 'Заголовок раздела',
   lessons: [

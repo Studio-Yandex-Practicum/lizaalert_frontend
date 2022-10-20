@@ -12,7 +12,7 @@ export type ContentsItemProps = {
    * */
   content: Chapter;
   /**
-   * При main контент широкий, при inner - узкий.
+   * Отображение содержания: при main контент широкий, при inner - узкий.
    * */
   type?: ContentsItemType;
   /**
