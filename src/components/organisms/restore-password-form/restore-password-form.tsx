@@ -1,15 +1,23 @@
 import { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { Input } from '../../molecules/input';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { Input } from 'components/molecules/input';
+import useFormWithValidation from 'hooks/use-form-with-validation';
+import { Patterns } from 'utils/constants';
 import styles from './restore-password-form.module.scss';
 import { RestorePasswordFormData } from './types';
-import useFormWithValidation from '../../../hooks/use-form-with-validation';
-import { Patterns } from '../../../utils/constants';
+
+/**
+ * Компонент-карточка формы восстановления пароля.
+ * Содержит поле ввода email, кнопку "Отправить новый пароль" и кнопку "Назад", которая ведет на предыдущий роут.
+ * */
 
 function RestorePasswordForm() {
+  const navigate = useNavigate();
+
   const { values, handleChange, errors, isValid } =
     useFormWithValidation<RestorePasswordFormData>();
 
@@ -19,12 +27,7 @@ function RestorePasswordForm() {
 
   return (
     <Card className={styles.card} htmlTag="section">
-      <Heading
-        level={2}
-        size="l"
-        title="Восстановить пароль"
-        className={styles.heading}
-      />
+      <Heading level={2} size="l" title="Восстановить пароль" />
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <Input
           labelName="Email"
@@ -32,6 +35,7 @@ function RestorePasswordForm() {
           value={values.email || ''}
           onChange={handleChange}
           error={errors.email}
+          isValid={!errors.email}
           pattern={Patterns.email}
           type="email"
           placeholder="Ведите адрес электронной почты"
@@ -49,6 +53,7 @@ function RestorePasswordForm() {
         iconPosition="back"
         iconName="arrowBack"
         className={classnames(styles.button, styles.backButton)}
+        onClick={() => navigate(-1)}
         text="Назад"
       />
     </Card>

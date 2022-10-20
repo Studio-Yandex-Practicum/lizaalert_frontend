@@ -1,18 +1,18 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { Input } from '../../molecules/input';
-import styles from './personal-data.module.scss';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { Input } from 'components/molecules/input';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectProfilePersonal } from 'store/profile/selectors';
+import { setPersonalData } from 'store/profile/slice';
+import useFormWithValidation from 'hooks/use-form-with-validation';
+import { Patterns } from 'utils/constants';
 import { PersonalFormData } from './types';
-import { selectProfilePersonal } from '../../../store/profile/selectors';
-import { setPersonalData } from '../../../store/profile/slice';
-import useFormWithValidation from '../../../hooks/use-form-with-validation';
-import { Patterns } from '../../../utils/constants';
+import styles from './personal-data.module.scss';
 
 /**
- * @description Компонент-виджет с редактируемой формой данных профиля.
+ * Компонент-виджет с редактируемой формой данных профиля.
  * */
 
 function PersonalData() {
@@ -26,11 +26,8 @@ function PersonalData() {
     setIsValid,
   } = useFormWithValidation<PersonalFormData>();
 
-  // TODO заменить первый аргумент на RootState после типизации Store
-  const personalData = useSelector<unknown, PersonalFormData>(
-    selectProfilePersonal
-  );
-  const dispatch = useDispatch();
+  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setValues(personalData);

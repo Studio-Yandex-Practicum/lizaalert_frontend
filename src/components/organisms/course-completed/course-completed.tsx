@@ -1,16 +1,12 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { StyledLink } from '../../molecules/styled-link';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { StyledLink } from 'components/molecules/styled-link';
 import styles from './course-completed.module.scss';
 import { CourseCompletedProps } from './types';
 
 /**
- * @description Компонент карточки завершения курса.
- *
- * - isCompleted - boolean - флаг успешного завершения курса
- * - courseName - string - название курса
- * - courseSuccessDescription - string - описание успешного прохождения курса
- * - linkHref - string - href ссылки для неудачного прохождения
+ * Компонент карточки завершения курса.
  */
 
 function CourseCompleted({
@@ -18,13 +14,14 @@ function CourseCompleted({
   courseName,
   courseSuccessDescription = '',
   linkHref,
+  className,
 }: CourseCompletedProps) {
   return (
-    <Card className={styles.card} htmlTag="section">
+    <Card className={classnames(styles.card, className)} htmlTag="section">
       <Heading size="l" className={styles.title} title="Курс завершен" />
 
       <div className={styles.content}>
-        <Heading className={styles.subtitle} level={3} size="xxl">
+        <Heading level={3} size="xxl">
           {isCompleted ? 'Поздравляем!' : 'Сожалеем'}
         </Heading>
 

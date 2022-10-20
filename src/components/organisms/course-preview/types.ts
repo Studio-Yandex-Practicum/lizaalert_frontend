@@ -1,29 +1,8 @@
 import { CoursePreviewType } from 'services/courses/types';
 
-export type LevelType = {
-  id: number;
-  name: string;
-  slug: string;
-};
-
-export type StatusType = {
-  id: number;
-  name: string;
-  buttonName: string;
-  slug: string;
-};
-
-export type CourseType = {
-  id: number;
-  level: LevelType;
-  title: string;
-  description: string;
-  image: string;
-  duration: number;
-  lessonsCount: number;
-  status: StatusType;
-};
-
 export type CoursePreviewProps = {
+  /**
+   * Объект курса содержит id, level, title, short_description, lessons_count, course_duration, course_status, cover_path.
+   * */
   course: CoursePreviewType;
 };

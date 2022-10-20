@@ -1,5 +1,13 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
+/**
+ * Хук реализует логику хранения и обработки данных формы.
+ * Можно типизировать возвращаемое значение через Generic.
+ * Возвращает объект собранных с формы значений, ошибок, различные флаги и обработчики.
+ *
+ * @returns \{ values, handleChange, handleChangeFiles, errors, sValid, resetForm, setValues, setIsValid \}
+ * */
+
 const useFormWithValidation = <T extends Record<string, unknown>>() => {
   const [values, setValues] = useState<Partial<T>>({});
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});

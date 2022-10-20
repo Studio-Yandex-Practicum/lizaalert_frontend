@@ -1,23 +1,23 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { Checkbox } from '../../molecules/checkbox';
-import { Input } from '../../molecules/input';
-import { StyledLink } from '../../molecules/styled-link';
-import styles from './login-form.module.scss';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { Checkbox } from 'components/molecules/checkbox';
+import { Input } from 'components/molecules/input';
+import { StyledLink } from 'components/molecules/styled-link';
+import { useAppDispatch, useAppSelector } from 'store';
+import { fetchAuth } from 'store/auth/thunk';
+import { selectIsAuth, selectIsLoading } from 'store/auth/selectors';
+import useFormWithValidation from 'hooks/use-form-with-validation';
+import { routes } from 'config';
+import { ErrorMessages, Patterns } from 'utils/constants';
 import { UserLoginFormData } from './types';
-import { fetchAuth } from '../../../store/auth/thunk';
-import { selectIsAuth, selectIsLoading } from '../../../store/auth/selectors';
-import useFormWithValidation from '../../../hooks/use-form-with-validation';
-import { routes } from '../../../config';
-import { ErrorMessages, Patterns } from '../../../utils/constants';
+import styles from './login-form.module.scss';
 
 /**
- * @description Компонент-форма логина пользователя.
+ * Компонент-форма логина пользователя.
  * */
 
 function LoginForm() {
@@ -28,9 +28,9 @@ function LoginForm() {
   const navigate = useNavigate();
   const { profile } = routes;
 
-  const dispatch = useDispatch();
-  const isLoading = useSelector<unknown, boolean>(selectIsLoading);
-  const isAuth = useSelector<unknown, boolean>(selectIsAuth);
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector<boolean>(selectIsLoading);
+  const isAuth = useAppSelector<boolean>(selectIsAuth);
 
   useEffect(() => {
     if (isAuth) {
@@ -51,7 +51,7 @@ function LoginForm() {
     // TODO пофиксить тайпинги после типизации стора
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    dispatch(fetchAuth(data));
+    void dispatch(fetchAuth(data));
   };
 
   return (

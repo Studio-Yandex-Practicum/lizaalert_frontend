@@ -4,7 +4,7 @@ export type TagProps = {
    * */
   text: string | number;
   /**
-   * Функция-обработчик клика, "поднимает" наверх значение пропса value
+   * Функция-обработчик клика, "поднимает" наверх значение пропса value.
    * */
   onClick?: (value: string) => void;
   /**

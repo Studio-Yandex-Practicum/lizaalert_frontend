@@ -1,10 +1,10 @@
 import classnames from 'classnames';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Accordion } from '../../molecules/accordion';
-import { Button } from '../../molecules/button';
-import { Checkbox } from '../../molecules/checkbox';
-import { Tag } from '../../molecules/tag';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Accordion } from 'components/molecules/accordion';
+import { Button } from 'components/molecules/button';
+import { Checkbox } from 'components/molecules/checkbox';
+import { Tag } from 'components/molecules/tag';
 import styles from './filter.module.scss';
 import { FilterProps } from './types';
 import { useFilter } from './hooks/use-filter';
@@ -12,9 +12,6 @@ import { filters } from './constants';
 
 /**
  * Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
- *
- * @props
- * - className - string - класс-миксин для внешнего контейнера
  */
 
 function Filter({ className = '' }: FilterProps) {

@@ -2,15 +2,15 @@ import { IconType } from 'components/atoms/icon';
 
 export type HeaderLinkProps = {
   /**
-   * Текст ссылки
+   * Текст ссылки.
    * */
   text: string;
   /**
-   * Тип иконки из объекта icons
+   * Тип иконки из объекта icons.
    * */
   iconType: IconType;
   /**
-   * Атрибут href ссылки
+   * URL ссылки.
    * */
   link: string;
   /**

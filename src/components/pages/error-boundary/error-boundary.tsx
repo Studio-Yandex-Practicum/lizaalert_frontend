@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import errorCat from 'assets/images/error-cat.png';
 import { Heading } from 'components/atoms/heading';
 import { Button } from 'components/molecules/button';
 import { routes } from 'config';
-import errorCat from 'assets/images/error-cat.png';
 import styles from './error-boundary.module.scss';
 import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 

@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react';
 import classnames from 'classnames';
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Button } from '../../molecules/button';
-import { NewCourseContent } from '../../organisms/new-course-content';
-import { NewCourseDescription } from '../../organisms/new-course-description';
-import { NewCourseMain } from '../../organisms/new-course-main';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Button } from 'components/molecules/button';
+import { NewCourseContent } from 'components/organisms/new-course-content';
+import { NewCourseDescription } from 'components/organisms/new-course-description';
+import { NewCourseMain } from 'components/organisms/new-course-main';
 import styles from './create-course.module.scss';
-import { ActiveTabs } from './types';
+import { ActiveTab } from './types';
 
 function CreateCourse() {
-  const [activeTab, setActiveTab] = useState<ActiveTabs>('main');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('main');
 
   const handleMain = useCallback(() => {
     setActiveTab('main');

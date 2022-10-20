@@ -1,11 +1,12 @@
-import { Card } from '../../atoms/card';
-import { Heading } from '../../atoms/heading';
-import { Icon } from '../../atoms/icon';
-import { Accordion } from '../../molecules/accordion';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/heading';
+import { Icon } from 'components/atoms/icon';
+import { Accordion } from 'components/molecules/accordion';
 import styles from './course-benefits.module.scss';
 import { CourseBenefitsProps } from './types';
 
-const defaultList = [
+export const defaultList = [
   {
     id: 0,
     title: 'Поисково-спасательная работа',
@@ -27,15 +28,15 @@ const defaultList = [
 ];
 
 /**
- * Компонент тем курса
- *
- * @props
- * - benefitsList - arr - массив объектов. Объект темы содержит id, title, description
+ * Компонент для отображения списка изучаемых навыков курса.
  */
 
-function CourseBenefits({ benefitsList = defaultList }: CourseBenefitsProps) {
+function CourseBenefits({
+  benefitsList = defaultList,
+  className,
+}: CourseBenefitsProps) {
   return (
-    <Card className={styles.benefits} htmlTag="section">
+    <Card className={classnames(styles.benefits, className)} htmlTag="section">
       <Accordion button="text" title="Чему вы научитесь" open>
         <ul className={styles.benefitsList}>
           {benefitsList &&

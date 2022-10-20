@@ -4,6 +4,11 @@ import { useAppDispatch } from 'store';
 import { checkAuth } from 'store/auth/thunk';
 import { ProviderComponent } from './types';
 
+/**
+ * Провайдер реализует логику проверки текущей авторизации пользователя при загрузке страницы.
+ * Во время проверки на странице крутится лоадер.
+ * */
+
 export const withAuth = (Component: ProviderComponent) => () => {
   const dispatch = useAppDispatch();
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
