@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import styles from './restore-password-form.module.scss';
 import { RestorePasswordFormData } from './types';
 
+/**
+ * Компонент-карточка формы восстановления пароля.
+ * Содержит поле ввода email, кнопку "Отправить новый пароль" и кнопку "Назад", которая ведет на предыдущий роут.
+ * */
+
 function RestorePasswordForm() {
   const navigate = useNavigate();
 
