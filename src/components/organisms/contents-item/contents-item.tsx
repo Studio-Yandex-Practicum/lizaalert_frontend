@@ -16,12 +16,6 @@ const mapSlugToIcon: Record<string, IconType> = {
 
 /**
  * Компонент элемента содержания курса. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
- *
- * @props
- * - index - number, required - индекс в списке, используется для нумерации элемента. Должен начинаться с 0.
- * - content - object, required - содержание главы: `id`, `title` и массив `lessons`.
- * - type - enum ('main' | 'inner') - при `main` контент широкий, при `inner` - узкий.
- * - className - string - класс-миксин для стилизации внешнего контейнера.
  * */
 
 function ContentsItem({
@@ -31,7 +25,7 @@ function ContentsItem({
   className = '',
 }: ContentsItemProps) {
   const { id, title, lessons } = content;
-  const { courseId = '', topicId } = useParams();
+  const { courseId = '', topicId = '' } = useParams();
 
   const lessonsList = (
     <div className={styles.list}>
@@ -48,7 +42,7 @@ function ContentsItem({
     );
   }
 
-  if (type === 'inner' && topicId) {
+  if (type === 'inner') {
     return (
       <Accordion
         title={`${index + 1}. ${content.title}`}

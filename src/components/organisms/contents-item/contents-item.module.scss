@@ -4,6 +4,7 @@
   display: flex;
   gap: 24px;
   padding: 32px 0;
+  font-family: vars.$mainFont;
   border-bottom: 1px solid vars.$borders-divider-disabled-bg;
 
   &:last-child {
