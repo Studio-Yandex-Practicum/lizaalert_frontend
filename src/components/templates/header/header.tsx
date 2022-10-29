@@ -2,7 +2,7 @@ import { Children } from 'react';
 import { Heading } from 'components/atoms/heading';
 import { HeaderLink } from 'components/molecules/header-link';
 import { StyledLink } from 'components/molecules/styled-link';
-import { RouteType } from 'types/route.types';
+import { RouteType } from 'router/types';
 import { isAdmin, routes } from 'config';
 import styles from './header.module.scss';
 
