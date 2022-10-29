@@ -1,5 +1,5 @@
-import defaultRoutes from './routes';
-import adminRoutes from './routes-admin';
+import defaultRoutes from '../router/routes';
+import adminRoutes from '../router/routes-admin';
 
 /** Получение env-переменной */
 const getEnvVar = (key: string) => process.env[key] || '';

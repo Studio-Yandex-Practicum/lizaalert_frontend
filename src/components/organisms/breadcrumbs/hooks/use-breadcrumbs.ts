@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { RouteType } from 'types/route.types';
+import { RouteType } from 'router/types';
 import { routes } from 'config';
 import { BreadcrumbType } from '../types';
 

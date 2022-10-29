@@ -16,38 +16,34 @@ import { BaseLayout } from 'components/templates/base-layout';
 import { routes } from 'config';
 
 function RouterAdmin() {
-  const {
-    courses,
-    profile,
-    register,
-    login,
-    notFound,
-    library,
-    users,
-    createCourse,
-    editCourse,
-    editLesson,
-  } = routes;
-
   return (
     <Routes>
-      <Route path={courses.path} element={<BaseLayout />}>
-        <Route index element={<Courses />} />
-        <Route path=":courseId" element={<Course />} />
-        <Route path=":courseId/:topicId" element={<Lesson />} />
-        <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
-        <Route path={createCourse.path} element={<CreateCourse />} />
-        <Route path={`${editCourse.path}/:courseId`} element={<EditCourse />} />
-        <Route path={`${editLesson.path}/:lessonId`} element={<EditLesson />} />
-      </Route>
       <Route element={<BaseLayout />}>
-        <Route path={profile.path} element={<Profile />} />
-        <Route path={login.path} element={<Login />} />
-        <Route path={notFound.path} element={<NotFound />} />
+        <Route path={routes.courses.path} element={<Courses />} />
+
+        <Route path={routes.course.path}>
+          <Route path=":courseId" element={<Course />} />
+          <Route path=":courseId/:topicId" element={<Lesson />} />
+          <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+          <Route path={routes.createCourse.path} element={<CreateCourse />} />
+          <Route
+            path={`${routes.editCourse.path}/:courseId`}
+            element={<EditCourse />}
+          />
+          <Route
+            path={`${routes.editLesson.path}/:lessonId`}
+            element={<EditLesson />}
+          />
+        </Route>
+
+        <Route path={routes.profile.path} element={<Profile />} />
+        <Route path={routes.login.path} element={<Login />} />
+        <Route path={routes.notFound.path} element={<NotFound />} />
       </Route>
-      <Route path={register.path} element={<Register />} />
-      <Route path={library.path} element={<Development />} />
-      <Route path={users.path} element={<Development />} />
+
+      <Route path={routes.register.path} element={<Register />} />
+      <Route path={routes.library.path} element={<Development />} />
+      <Route path={routes.users.path} element={<Development />} />
     </Routes>
   );
 }
