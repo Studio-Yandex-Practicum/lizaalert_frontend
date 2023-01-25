@@ -42,6 +42,7 @@
     },
     {
       "files": [
+        "**/*.stories.*",
         "**/*.provider.*"
       ],
       "rules": {
@@ -87,6 +88,15 @@
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.@(ts|tsx)",
+          "**/*.stories.@(ts|tsx)"
+        ]
+      }
+    ],
     "class-methods-use-this": "off",
     "no-use-before-define": [
       "error",

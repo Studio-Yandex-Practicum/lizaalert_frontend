@@ -4,24 +4,28 @@
 
 ## Полезные ссылки:
 
-[Notion](https://www.notion.so/Workspase-1078a8066a6e45fbb9ad07854f7e0f38)
+### [Notion](https://www.notion.so/Workspase-1078a8066a6e45fbb9ad07854f7e0f38)
 
-[Макет](https://www.figma.com/file/FasUcYffR2kJAhPvBGcACW/LizaAlert-Mockups?node-id=155%3A5905)
+### [Макет](https://www.figma.com/file/FasUcYffR2kJAhPvBGcACW/LizaAlert-Mockups?node-id=155%3A5905)
 
-[Deploy Base](http://51.250.75.176:8080/)
+### [Storybook](https://lizaalert-storybook.netlify.app/)
 
-[Deploy Admin](http://51.250.75.176:8081/)
+### [Deploy Base](http://51.250.75.176:8080/)
+
+### [Deploy Admin](http://51.250.75.176:8081/)
 
 ## Стек:
 
 - React
 - JavaScript, TypeScript
 - react-router-dom v6
-- PropTypes
-- SCSS
-- CSS module
+- Redux Toolkit
+- Axios
+- SCSS module
+- Docker & Nginx
+- Storybook
 
-## Стайлгайд: [тут](./docs/style-guide.md)
+## [Стайлгайд](./docs/style-guide.md)
 
 ## Файловая структура:
 
@@ -120,7 +124,7 @@ npm start
 npm run start:admin-win
 ```
 
-### На Linux & MacOS
+### На Linux & macOS
 
 - запуск базовой версии
 
@@ -133,3 +137,15 @@ npm start
 ```bash
 npm run start:admin
 ```
+
+Приложение откроется на порту `:3000`
+
+---
+
+### Запустить Storybook
+
+```bash
+npm run storybook
+```
+
+Storybook откроется на порту `:6006`
