@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "start:admin": "REACT_APP_IS_ADMIN=true npm start",
-    "start:admin-win": "set \"REACT_APP_IS_ADMIN=true\" && npm start",
+    "start:admin": "cross-env REACT_APP_IS_ADMIN=true npm start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build && npm run compress",
-    "build:admin": "REACT_APP_IS_ADMIN=true npm run build",
+    "build:admin": "cross-env REACT_APP_IS_ADMIN=true npm run build",
     "compress": "gzipper compress --verbose ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -15,7 +14,8 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "husky:init": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -34,6 +34,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">= 16.0.0"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.8.1",
@@ -72,6 +75,7 @@
     "@types/react-router": "5.1.18",
     "@types/react-router-dom": "5.3.3",
     "babel-plugin-named-exports-order": "0.0.2",
+    "cross-env": "7.0.3",
     "eslint": "8.12.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
@@ -82,6 +86,8 @@
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.3.0",
     "gzipper": "7.1.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.1.0",
     "prettier": "2.6.1",
     "sass": "1.49.9",
     "storybook-addon-react-router-v6": "0.2.1",
