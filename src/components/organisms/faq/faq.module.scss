@@ -5,28 +5,17 @@
   color: vars.$dark-primary;
 }
 
-.list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.content {
+  max-width: 808px;
+  padding: 32px 0 33px;
+  border-bottom: 1px solid vars.$borders-divider-disabled-bg;
 
-  &__item {
-    max-width: 808px;
-    padding: 32px 0 33px;
-    border-bottom: 1px solid vars.$borders-divider-disabled-bg;
-
-    &:last-child {
-      padding: 32px 0 0;
-      border: none;
-    }
+  &:last-child {
+    padding: 32px 0 0;
+    border: none;
   }
 }
 
 .answer {
-  margin: 0;
   padding-top: 16px;
-  font-family: vars.$mainFont;
-  font-weight: 400;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 }

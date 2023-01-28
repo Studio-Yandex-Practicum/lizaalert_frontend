@@ -6,7 +6,7 @@
   align-items: center;
   height: 24px;
   background-color: vars.$borders-divider-disabled-bg;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   column-gap: 4px;
   padding: 0 8px;
   font-family: vars.$mainFont;
@@ -18,11 +18,6 @@
 
 .text {
   max-width: 250px;
-  text-overflow: ellipsis;
-  margin: 0;
-  overflow: hidden;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 }
 
 .button {

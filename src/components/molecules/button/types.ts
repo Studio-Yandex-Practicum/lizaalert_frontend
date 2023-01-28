@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { IconSize, IconType } from 'components/atoms/icon';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { IconSize, IconType } from 'components/atoms/icon';
 
 export type ButtonView = 'primary' | 'secondary' | 'tertiary' | 'text';
 export type ButtonHover = 'default' | 'border';
@@ -26,9 +26,9 @@ export type ButtonProps = {
    * */
   iconName?: IconType;
   /**
-   * Позиционирование иконки слева/справа от текста.
+   * Позиционирование иконки слева/справа от текста. По умолчанию `left`.
    * */
-  iconPosition?: 'back' | 'forward';
+  iconPosition?: 'left' | 'right';
   /**
    * Миксин для стилизации, присваивается элементу button. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
@@ -41,8 +41,4 @@ export type ButtonProps = {
    * Размер иконки.
    * */
   iconSize?: IconSize;
-  /**
-   * Тип кнопки.
-   * */
-  type?: 'button' | 'submit';
 } & ButtonHTMLAttributes<HTMLButtonElement>;

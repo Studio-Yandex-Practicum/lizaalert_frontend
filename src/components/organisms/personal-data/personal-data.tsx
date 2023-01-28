@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -8,7 +8,7 @@ import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
-import { PersonalFormData } from './types';
+import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
 /**
@@ -45,7 +45,8 @@ function PersonalData() {
 
   return (
     <Card className={styles.personalData}>
-      <Heading size="l" title="Личные данные" className={styles.heading} />
+      <Typography htmlTag="h2" size="l" text="Личные данные" weight="bold" />
+
       <form
         name="personalDataForm"
         className={styles.form}

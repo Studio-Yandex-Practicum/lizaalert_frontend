@@ -1,5 +1,3 @@
-import { Nullable } from 'types';
-
 export type CourseOverviewProps = {
   /**
    * id курса.
@@ -28,5 +26,5 @@ export type CourseOverviewProps = {
   /**
    * Обработчик клика по кнопке.
    * */
-  onClick?: () => void;
+  onClick?: VoidFunction;
 };

@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
+import { Typography } from 'components/atoms/typography';
 import styles from './text-with-icon.module.scss';
-import { TextWithIconProps } from './types';
+import type { TextWithIconProps } from './types';
 
 /**
  * Компонент текста с иконкой. По умолчанию иконка расположена слева от текста.
@@ -13,6 +14,9 @@ function TextWithIcon({
   isReverse = false,
   color,
   className = '',
+  weight = 'normal',
+  withOverflow = false,
+  htmlTag = 'p',
 }: TextWithIconProps) {
   const classNames = classnames(styles.textWithIcon, className, {
     [styles.reverse]: isReverse,
@@ -25,7 +29,9 @@ function TextWithIcon({
   return (
     <div className={classNames} style={colorStyle}>
       <Icon type={iconType} className={styles.icon} />
-      <p className={styles.text}>{text}</p>
+      <Typography withOverflow={withOverflow} weight={weight} htmlTag={htmlTag}>
+        {text}
+      </Typography>
     </div>
   );
 }

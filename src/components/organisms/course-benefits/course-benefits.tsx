@@ -1,31 +1,11 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-benefits.module.scss';
-import { CourseBenefitsProps } from './types';
-
-export const defaultList = [
-  {
-    id: 0,
-    title: 'Поисково-спасательная работа',
-    description:
-      'Оказание помощи гражданам, оказавшимся в зонах бедствия или пропавшим в безлюдной местности',
-  },
-  {
-    id: 1,
-    title: 'Следовая работа',
-    description:
-      'Обучение животного идти как по горячему, так и по остывшему следу',
-  },
-  {
-    id: 2,
-    title: 'Поиск тел погибших',
-    description:
-      'Поиск тел и их остатков с применением специально обученных собак',
-  },
-];
+import { defaultList } from './constants';
+import type { CourseBenefitsProps } from './types';
 
 /**
  * Компонент для отображения списка изучаемых навыков курса.
@@ -39,16 +19,16 @@ function CourseBenefits({
     <Card className={classnames(styles.benefits, className)} htmlTag="section">
       <Accordion button="text" title="Чему вы научитесь" open>
         <ul className={styles.benefitsList}>
-          {benefitsList &&
-            benefitsList.map((item) => (
-              <li key={item.id} className={styles.benefit}>
-                <Heading level={3} size="m" className={styles.heading}>
-                  <Icon type="checkSolid" />
-                  <span>{item.title}</span>
-                </Heading>
-                <p className={styles.text}>{item.description}</p>
-              </li>
-            ))}
+          {benefitsList?.map((item) => (
+            <li key={item.id} className={styles.benefit}>
+              <Typography htmlTag="h3" weight="bold" className={styles.heading}>
+                <Icon type="checkSolid" />
+                <span>{item.title}</span>
+              </Typography>
+
+              <Typography text={item.description} />
+            </li>
+          ))}
         </ul>
       </Accordion>
     </Card>

@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import { IconType } from 'components/atoms/icon';
+import type { IconType } from 'components/atoms/icon';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { TestAnswerType } from 'components/molecules/test-answer';
+import type { TestAnswerType } from 'components/molecules/test-answer';
 import styles from './test-results.module.scss';
-import { TestResultsProps } from './types';
+import type { TestResultsProps } from './types';
 
 const CORRECT_SELECTED_ANSWER = 'checkSolid';
 const CORRECT_UNSELECTED_ANSWER = 'check';

@@ -13,6 +13,9 @@ export const isAdmin = !!getEnvVar('REACT_APP_IS_ADMIN');
 /** Режим разработки */
 export const isDevEnv = NODE_ENV === 'development';
 
+/** Режим мокинга данных */
+export const isMockEnv = isDevEnv && !!getEnvVar('REACT_APP_MOCKING');
+
 /** Режим продакшена */
 export const isProdEnv = NODE_ENV === 'production';
 

@@ -1,4 +1,4 @@
-import { TestType } from 'components/organisms/test-preview';
+import type { TestType } from 'components/organisms/test-preview';
 
 export type TestContentProps = {
   /**

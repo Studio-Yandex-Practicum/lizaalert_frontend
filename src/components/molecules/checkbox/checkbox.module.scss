@@ -7,11 +7,7 @@
   align-items: center;
   max-width: fit-content;
   gap: 8px;
-  font-family: vars.$mainFont;
   color: vars.$dark-primary;
-  font-weight: 400;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 
   &:hover {
     color: vars.$color-hover;
@@ -51,7 +47,6 @@
 }
 
 .labelText {
-  margin: 0;
   transition: color vars.$trans-300;
 }
 
@@ -67,4 +62,12 @@
 
 .input:checked ~ .labelText {
   color: vars.$color-hover;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
 }

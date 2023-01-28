@@ -1,8 +1,9 @@
-import { Ref } from 'react';
+import type { Ref } from 'react';
 import classnames from 'classnames';
+import { Typography } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
-import { AccordionProps } from './types';
+import type { AccordionProps } from './types';
 import useAccordion from './hooks/use-accordion';
 
 /**
@@ -27,15 +28,13 @@ function Accordion({
   return (
     <div className={classList}>
       <button type="button" className={styles.handle} onClick={toggleAccordion}>
-        <span
-          className={classnames(
-            styles.title,
-            styles[`title_size_${titleSize}`],
-            styles[`title_weight_${titleWeight}`]
-          )}
-        >
-          {title}
-        </span>
+        <Typography
+          htmlTag="span"
+          weight={titleWeight}
+          size={titleSize}
+          text={title}
+        />
+
         <span className={classnames(styles.btn, styles[button])}>
           {button === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}
           {button === 'icon' && <Icon type="arrowDown" />}

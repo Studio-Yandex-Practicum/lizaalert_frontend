@@ -1,0 +1,16 @@
+@use 'src/styles/variables' as vars;
+
+.card {
+  margin: 80px auto 132px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.text {
+  margin-top: vars.$grid-gap;
+}
+
+.button {
+  margin: 0 auto;
+  width: 184px;
+}

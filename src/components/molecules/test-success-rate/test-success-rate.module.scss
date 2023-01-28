@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: vars.$grid-gap;
   width: 100%;
   margin: 0 auto;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   box-sizing: border-box;
   font-family: vars.$mainFont;
   padding: 32px 64px 24px;
@@ -35,12 +35,7 @@
 }
 
 .result__text {
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
-  font-weight: 400;
-  margin: 0;
-
   &:first-of-type {
-    margin-bottom: 24px;
+    margin-bottom: vars.$grid-gap;
   }
 }

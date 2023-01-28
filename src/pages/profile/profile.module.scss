@@ -1,0 +1,44 @@
+@use 'src/styles/variables' as vars;
+
+.profileHeadline {
+  padding-top: vars.$grid-gap;
+  margin-bottom: 32px;
+}
+
+.content {
+  display: flex;
+  gap: vars.$grid-gap;
+  padding-bottom: 40px;
+}
+
+.aside {
+  max-width: 312px;
+  width: 100%;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$grid-gap;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: auto fit-content(100%);
+  gap: vars.$grid-gap;
+}
+
+.description {
+  max-width: 312px;
+  width: 100%;
+  color: vars.$dark-secondary;
+  display: flex;
+  flex-direction: column;
+  row-gap: 18px;
+}
+
+.list {
+  padding: 0 0 0 30px;
+  margin: 0;
+}

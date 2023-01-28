@@ -1,3 +1,5 @@
+import { Controls } from 'utils/constants';
+
 export type TestAnswerType = {
   /**
    * id ответа.
@@ -17,7 +19,7 @@ export type TestAnswerType = {
   isChecked: boolean;
 };
 
-export type TestAnswerOptionsType = 'checkbox' | 'radio';
+export type TestAnswerOptionsType = Controls.RADIO | Controls.CHECKBOX;
 
 export type TestAnswerProps = {
   /**

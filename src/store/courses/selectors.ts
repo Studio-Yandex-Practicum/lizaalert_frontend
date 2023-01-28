@@ -1,4 +1,4 @@
-import { AppState } from '../types';
+import type { AppState } from '../types';
 
 const selectCourses = (state: AppState) => state.courses.results;
 const selectCoursesTotal = (state: AppState) => state.courses.count;

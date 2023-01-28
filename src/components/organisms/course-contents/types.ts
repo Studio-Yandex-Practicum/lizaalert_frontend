@@ -1,11 +1,11 @@
-import { Chapter } from 'services/course/types';
-import { ContentsItemType } from 'components/organisms/contents-item';
+import type { ChapterModel } from 'api/course';
+import type { ContentsItemType } from 'components/organisms/contents-item';
 
 export type CourseContentsProps = {
   /**
    * Массив глав: id, title с массивом lessons.
    * */
-  content: Chapter[];
+  content: ChapterModel[];
   /**
    * Отображение содержания: при main контент широкий, при inner - узкий.
    * */

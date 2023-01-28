@@ -2,26 +2,24 @@
 
 .test {
   max-width: 872px;
+}
 
-  &__container {
-    display: flex;
-    justify-content: space-between;
-    column-gap: 8px;
-  }
+.container {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 8px;
+}
 
-  &__heading {
-    max-width: 615px;
-  }
+.heading {
+  max-width: 615px;
 }
 
 .list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 
-  &__item {
+  &Item {
     padding-top: 32px;
 
     &:not(:last-of-type) {

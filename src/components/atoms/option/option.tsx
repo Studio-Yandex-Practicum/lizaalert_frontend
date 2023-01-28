@@ -1,7 +1,8 @@
-import { KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import classnames from 'classnames';
+import { KeyboardKeys } from 'utils/constants';
 import styles from './option.module.scss';
-import { OptionProps } from './types';
+import type { OptionProps } from './types';
 
 /**
  * Интерактивный компонент-опция для списков, селектов.
@@ -14,7 +15,7 @@ function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
   };
 
   const onOptionKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
-    if (evt.key === 'Escape') {
+    if (evt.key === KeyboardKeys.ESCAPE) {
       onOptionClick();
     }
     onKeyDown(evt);

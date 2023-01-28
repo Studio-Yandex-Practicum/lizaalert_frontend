@@ -1,4 +1,4 @@
-import { OptionType } from 'components/atoms/option';
+import type { OptionType } from 'components/atoms/option';
 
 export type SelectProps = {
   /**

@@ -1,4 +1,4 @@
-import { Filters, Levels, Statuses } from '../../../utils/constants';
+import { Filters, Levels, Statuses } from 'utils/constants';
 
 export type FilterItem = {
   label: string;

@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { ContentsItem } from 'components/organisms/contents-item';
 import styles from './course-contents.module.scss';
-import { CourseContentsProps } from './types';
+import type { CourseContentsProps } from './types';
 
 /**
  * Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
@@ -29,11 +29,16 @@ function CourseContents({
           <ul className={styles.list}>{contentItems}</ul>
         </Accordion>
       )}
+
       {type !== 'main' && (
         <>
-          <Heading level={2} size="l" className={styles.heading}>
-            Содержание
-          </Heading>
+          <Typography
+            htmlTag="h2"
+            size="l"
+            weight="bold"
+            className={styles.heading}
+            text="Содержание"
+          />
           {contentItems}
         </>
       )}

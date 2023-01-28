@@ -11,7 +11,7 @@ import {
   NotFound,
   Profile,
   Register,
-} from 'components/pages';
+} from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
 import { routes } from 'config';
 

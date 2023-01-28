@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
-import { CardProps } from './types';
+import type { CardProps } from './types';
 
 /**
  * Компонент карточки.

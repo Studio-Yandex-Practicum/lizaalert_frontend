@@ -1,11 +1,12 @@
 import defaultImg from 'assets/images/profile.jpg';
 import { Card } from 'components/atoms/card';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { useAppSelector } from 'store';
 import { selectProfileOverview } from 'store/profile/selectors';
 import styles from './account-overview.module.scss';
-import { AccountOverviewType } from './types';
+import type { AccountOverviewType } from './types';
 
 /**
  * Компонент-карточка с информацией профиля пользователя.
@@ -23,17 +24,28 @@ function AccountOverview() {
         <img className={styles.avatar} src={defaultImg} alt="Фото профиля" />
       </div>
 
-      <p className={styles.personalData}>{accountOverview.userName}</p>
+      <Typography htmlTag="h3" weight="bold" className={styles.personalData}>
+        {accountOverview.userName}
+      </Typography>
 
       <ul className={styles.accountMeta}>
         <li className={styles.accountMetaItem}>
-          <TextWithIcon text={accountOverview.userStatus} iconType="rank" />
-        </li>
-        <li className={styles.accountMetaItem}>
-          <TextWithIcon text={accountOverview.userOccupation} iconType="role" />
+          <TextWithIcon
+            htmlTag="span"
+            text={accountOverview.userStatus}
+            iconType="rank"
+          />
         </li>
         <li className={styles.accountMetaItem}>
           <TextWithIcon
+            htmlTag="span"
+            text={accountOverview.userOccupation}
+            iconType="role"
+          />
+        </li>
+        <li className={styles.accountMetaItem}>
+          <TextWithIcon
+            htmlTag="span"
             text={`Пройдено ${accountOverview.coursesFinished} курса`}
             iconType="course"
           />
@@ -44,7 +56,6 @@ function AccountOverview() {
         view="secondary"
         hover="border"
         iconName="logout"
-        iconPosition="back"
         className={styles.logout}
         text="Выйти из аккаунта"
       />

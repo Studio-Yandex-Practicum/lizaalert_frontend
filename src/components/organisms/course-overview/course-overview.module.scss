@@ -16,7 +16,7 @@
     display: block;
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 16px;
+    border-radius: vars.$border-radius;
   }
 
   &Meta {
@@ -31,8 +31,6 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
-      font-size: vars.$font-size-m;
-      line-height: vars.$line-height-m;
 
       &:last-child {
         margin-bottom: 0;

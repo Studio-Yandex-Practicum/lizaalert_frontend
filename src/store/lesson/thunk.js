@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SPINNER_DELAY } from '../../utils/constants';
-import mockLessons from '../../services/mock/lessons.json';
+import mockLessons from '../../api/mock/lessons.json';
 
 const fetchLessonByIdAction = createAsyncThunk(
   'lesson/fetch',

@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ReactNode } from 'react';
 
 export type StyledLinkProps = {
   /**
@@ -22,7 +22,7 @@ export type StyledLinkProps = {
   /**
    * Начертаие шрифта.
    * */
-  weight?: 'bold' | 'semibold' | 'normal';
+  weight?: 'bold' | 'medium' | 'normal';
   /**
    * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */

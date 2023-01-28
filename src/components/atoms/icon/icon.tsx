@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import styles from './icon.module.scss';
-import { IconProps } from './types';
+import type { IconProps } from './types';
 import { icons } from './icons';
 
 /**

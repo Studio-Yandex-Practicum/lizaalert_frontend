@@ -1,14 +1,14 @@
 import { FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
 import useFormWithValidation from 'hooks/use-form-with-validation';
-import { AccountFormData } from './types';
 import styles from './account-data.module.scss';
+import type { AccountFormData } from './types';
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
@@ -33,7 +33,8 @@ function AccountData() {
 
   return (
     <Card className={styles.accountData}>
-      <Heading size="l" title="Аккаунт" className={styles.heading} />
+      <Typography htmlTag="h3" size="l" weight="bold" text="Аккаунт" />
+
       <form
         name="accountDataForm"
         onSubmit={handleFormSubmit}

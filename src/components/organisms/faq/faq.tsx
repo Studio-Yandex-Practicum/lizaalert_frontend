@@ -1,28 +1,10 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
+import { Typography } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './faq.module.scss';
-import { FAQProps } from './types';
-
-export const initialData = [
-  {
-    id: 1,
-    question: 'Как проходит обучение?',
-    answer:
-      'После записи на курс вам открывается доступ к учебными материалам. В конце каждой учебной главы необходимо сдать тест, и набрать пороговое значение баллов.',
-  },
-  {
-    id: 2,
-    question: 'Что если я не набрал достаточное количество баллов?',
-    answer:
-      'У вас будет несколько попыток пересдачи теста. Если вы безуспешно используете все попытки, то материалы курса становятся недоступными.',
-  },
-  {
-    id: 3,
-    question: 'Как долго доступны материалы?',
-    answer: 'После окончания материалы доступны бессрочно.',
-  },
-];
+import { initialData } from './constants';
+import type { FAQProps } from './types';
 
 /**
  * Компонент карточки "Часто задаваемые вопросы" со списком-аккордеоном.
@@ -32,15 +14,13 @@ function FAQ({ questions = initialData, className }: FAQProps) {
   return (
     <Card className={classnames(styles.card, className)} htmlTag="section">
       <Accordion title="FAQ" button="text" open>
-        <ul className={styles.list}>
-          {questions.map((list) => (
-            <li key={list.id} className={styles.list__item}>
-              <Accordion title={list.question} button="icon" titleSize="m">
-                <p className={styles.answer}>{list.answer}</p>
-              </Accordion>
-            </li>
-          ))}
-        </ul>
+        {questions?.map((item) => (
+          <div key={item.id} className={styles.content}>
+            <Accordion title={item.question} button="icon" titleSize="m">
+              <Typography text={item.answer} className={styles.answer} />
+            </Accordion>
+          </div>
+        ))}
       </Accordion>
     </Card>
   );

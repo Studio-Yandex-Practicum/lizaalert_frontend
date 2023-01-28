@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CoursesType } from 'services/courses/types';
+import type { CoursesModel } from 'api/courses/types';
 import fetchCoursesAction from './thunk';
-import { CoursesReducerType } from './types';
+import type { CoursesState } from './types';
 
-const initialState: CoursesReducerType = {
+const initialState: CoursesState = {
   count: null,
   results: [],
   isLoading: false,
@@ -23,7 +23,7 @@ export const coursesSlice = createSlice({
     },
     [fetchCoursesAction.fulfilled.type]: (
       state,
-      { payload }: PayloadAction<CoursesType>
+      { payload }: PayloadAction<CoursesModel>
     ) => {
       if (state.results.length < Number(payload.count)) {
         state.results = [...state.results, ...payload.results];

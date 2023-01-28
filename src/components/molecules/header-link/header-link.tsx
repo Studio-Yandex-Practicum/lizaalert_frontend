@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import classnames from 'classnames';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import styles from './header-link.module.scss';
-import { HeaderLinkProps } from './types';
+import type { HeaderLinkProps } from './types';
 
 /**
  * Компонент ссылки для навигации сайта, подсвечивает активный роут.
@@ -17,6 +17,8 @@ function HeaderLink({ text, iconType, link, className }: HeaderLinkProps) {
           text={text}
           iconType={iconType}
           color={isActive ? 'color-hover' : 'dark-primary'}
+          weight="medium"
+          withOverflow
         />
       )}
     </NavLink>

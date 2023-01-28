@@ -1,7 +1,7 @@
-import { Course } from 'services/course/types';
+import type { CourseModel } from 'api/course';
 
-export type CourseReducerType = {
-  course: Course;
+export type CourseState = {
+  course: CourseModel;
   isLoading: boolean;
   error: string | null;
 };

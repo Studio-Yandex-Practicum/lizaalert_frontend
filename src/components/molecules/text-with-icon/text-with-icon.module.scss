@@ -14,15 +14,6 @@
   flex-direction: row-reverse;
 }
 
-.text {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin: 0;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
-  overflow-wrap: anywhere;
-}
-
 .icon {
   align-self: flex-start;
 }

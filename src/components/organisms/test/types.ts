@@ -1,4 +1,4 @@
-import { TestQuestionType } from 'components/organisms/test-question';
+import type { TestQuestionType } from 'components/organisms/test-question';
 
 export type TestQuestionListType = {
   /**
@@ -15,5 +15,5 @@ export type TestProps = {
   /**
    * Функция возврата к превью теста.
    * */
-  toggleRender: (...args: unknown[]) => void;
+  toggleRender: VoidFunction;
 };

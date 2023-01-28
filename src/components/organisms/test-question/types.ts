@@ -1,4 +1,4 @@
-import {
+import type {
   TestAnswerOptionsType,
   TestAnswerType,
 } from 'components/molecules/test-answer';

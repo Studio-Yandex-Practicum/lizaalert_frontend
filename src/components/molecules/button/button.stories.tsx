@@ -3,7 +3,7 @@ import { iconKeys } from 'components/atoms/icon';
 import { exportConfig } from 'stories/config';
 import { utils } from 'stories/utils';
 import Button from './button';
-import { ButtonProps } from './types';
+import type { ButtonProps } from './types';
 
 export default {
   ...exportConfig,
@@ -18,7 +18,7 @@ export default {
       control: 'select',
     },
     hover: { defaultValue: 'default' },
-    iconPosition: { defaultValue: 'back' },
+    iconPosition: { defaultValue: 'left' },
     iconSize: { defaultValue: 'default' },
     type: { defaultValue: 'button' },
     disabled: { type: 'boolean', defaultValue: false },

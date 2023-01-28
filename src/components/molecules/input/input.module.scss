@@ -38,7 +38,7 @@
   box-sizing: border-box;
   padding: 11px 52px 11px 16px;
   border: 1.2px solid vars.$borders-divider-disabled-bg;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   font-family: inherit;
   font-weight: 400;
   color: vars.$dark-primary;
@@ -87,7 +87,7 @@
     cursor: pointer;
   }
 
-  &[type=date] {
+  &[type='date'] {
     cursor: text;
 
     &::-webkit-calendar-picker-indicator {

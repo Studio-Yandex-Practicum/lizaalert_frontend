@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import styles from './password-updated.module.scss';
-import { PasswordUpdatedProps } from './types';
+import type { PasswordUpdatedProps } from './types';
 
 /**
  * Компонент-сообщение отправки нового пароля. Стилизован под карточку.
@@ -13,21 +13,15 @@ import { PasswordUpdatedProps } from './types';
 function PasswordUpdated({ onButtonClick, className }: PasswordUpdatedProps) {
   return (
     <Card className={classnames(styles.container, className)}>
-      <Heading
-        className={styles.heading}
-        level={3}
-        title="Пароль отправлен"
-        size="l"
+      <Typography htmlTag="h3" weight="bold" text="Пароль отправлен" size="l" />
+
+      <Typography
+        textAlign="center"
+        className={styles.text}
+        text="Мы отправили новый пароль на вашу электронную почту"
       />
-      <p className={styles.text}>
-        Мы отправили новый пароль на вашу электронную почту
-      </p>
-      <Button
-        type="button"
-        iconPosition="back"
-        text="Войти"
-        onClick={onButtonClick}
-      />
+
+      <Button type="button" text="Войти" onClick={onButtonClick} />
     </Card>
   );
 }

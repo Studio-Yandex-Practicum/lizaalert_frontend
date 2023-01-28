@@ -2,7 +2,7 @@ import { Checkbox } from 'components/molecules/checkbox';
 import { useAppDispatch } from 'store';
 import { change } from 'store/test/slice';
 import { Controls } from 'utils/constants';
-import { TestAnswerProps } from './types';
+import type { TestAnswerProps } from './types';
 
 /**
  * Компонент чекбокса для теста.

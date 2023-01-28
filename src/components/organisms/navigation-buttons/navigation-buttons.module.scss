@@ -1,7 +1,9 @@
+@use 'src/styles/variables' as vars;
+
 .navButtons {
   display: flex;
   justify-content: flex-end;
-  gap: 24px;
+  gap: vars.$grid-gap;
   padding-right: 32px;
 }
 

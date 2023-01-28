@@ -1,4 +1,4 @@
-import { TestAnswerType } from 'components/molecules/test-answer';
+import type { TestAnswerType } from '../test-answer';
 
 export type TestResultsProps = {
   /**

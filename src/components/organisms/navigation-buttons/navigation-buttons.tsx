@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { Button } from 'components/molecules/button';
 import styles from './navigation-buttons.module.scss';
-import { NavigationButtonsProps } from './types';
+import type { NavigationButtonsProps } from './types';
 
 /**
  * Компонент кнопок навигации по уроку.
@@ -23,7 +23,6 @@ function NavigationButtons({
       <Button
         view="secondary"
         iconName="arrowBack"
-        iconPosition="back"
         onClick={onClickBack}
         className={buttonClasses}
         disabled={disabledBack}
@@ -33,7 +32,7 @@ function NavigationButtons({
       {view === 'main' && (
         <Button
           iconName="arrowForward"
-          iconPosition="forward"
+          iconPosition="right"
           onClick={onClickForward}
           className={buttonClasses}
           disabled={disabledForward}

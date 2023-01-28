@@ -1,9 +1,8 @@
-import { ReactNode, RefObject } from 'react';
-import { Nullable } from 'types';
+import type { ReactNode, RefObject } from 'react';
 
 export type AccordionButton = 'text' | 'icon';
 export type TitleSize = 'l' | 'm';
-export type TitleWeight = 'bold' | 'regular';
+export type TitleWeight = 'bold' | 'normal';
 
 export type AccordionProps = {
   /**

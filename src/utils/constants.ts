@@ -23,10 +23,21 @@ export const SPINNER_DELAY = 300;
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 
-export const Controls = {
-  CHECKBOX: 'checkbox',
-  RADIO: 'radio',
-};
+export enum Controls {
+  CHECKBOX = 'checkbox',
+  RADIO = 'radio',
+}
+
+export enum KeyboardKeys {
+  ESCAPE = 'Escape',
+}
+
+export enum CourseStatusButtons {
+  'active' = 'Записаться',
+  'inactive' = 'Не активный',
+  'finished' = 'Пройден',
+  'booked' = 'Продолжить',
+}
 
 export const ErrorMessages = {
   email: 'Введите эл. адрес в формате: anna@liza-alert.ru',

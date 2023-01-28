@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
+import { Typography } from 'components/atoms/typography';
 import styles from './tag.module.scss';
-import { TagProps } from './types';
+import type { TagProps } from './types';
 
 /**
  * Компонент тега, включает в себя две разновидности: обычный и с кнопкой в виде крестика справа.
@@ -17,7 +18,10 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
   if (onClick && value) {
     return (
       <div className={classNames}>
-        <p className={styles.text}>{text}</p>
+        <Typography withOverflow className={styles.text}>
+          {text}
+        </Typography>
+
         <button
           className={styles.button}
           type="button"
@@ -31,7 +35,9 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
 
   return (
     <div className={classNames}>
-      <p className={styles.text}>{text}</p>
+      <Typography withOverflow className={styles.text}>
+        {text}
+      </Typography>
     </div>
   );
 }

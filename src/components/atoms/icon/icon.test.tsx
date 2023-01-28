@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import Icon from './icon';
 import styles from './icon.module.scss';
-import { IconProps } from './types';
+import type { IconProps } from './types';
 
 const createIcon = (props?: Omit<IconProps, 'type'>) =>
   render(<Icon type="arrowBack" {...props} />);

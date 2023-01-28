@@ -3,7 +3,7 @@ import { exportConfig } from 'stories/config';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { utils } from 'stories/utils';
 import StyledLink from './styled-link';
-import { StyledLinkProps } from './types';
+import type { StyledLinkProps } from './types';
 
 export default {
   ...exportConfig,
@@ -15,7 +15,7 @@ export default {
     href: { type: 'string', defaultValue: '/123' },
     children: { control: false },
     isExternal: { type: 'boolean', defaultValue: false },
-    weight: { defaultValue: 'semibold' },
+    weight: { defaultValue: 'medium' },
   },
 } as ComponentMeta<typeof StyledLink>;
 
@@ -38,9 +38,9 @@ export const Weights: ComponentStory<typeof StyledLink> = ({
     />
     <StyledLink
       isExternal={isExternal}
-      linkText="Semibold"
+      linkText="Medium"
       href={href}
-      weight="semibold"
+      weight="medium"
     />
     <StyledLink
       isExternal={isExternal}

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { StyledLink } from 'components/molecules/styled-link';
 import styles from './breadcrumbs.module.scss';
-import { BreadcrumbsProps } from './types';
+import type { BreadcrumbsProps } from './types';
 import useBreadcrumbs from './hooks/use-breadcrumbs';
 
 /**

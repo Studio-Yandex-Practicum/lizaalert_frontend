@@ -1,8 +1,8 @@
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
 import styles from './test-question.module.scss';
-import { TestQuestionProps } from './types';
+import type { TestQuestionProps } from './types';
 
 /**
  * Компонент тестового вопроса.
@@ -35,7 +35,12 @@ function TestQuestion({
 
   return (
     <>
-      <Heading level={3} title={`${index + 1}. ${question.title}`} size="m" />
+      <Typography
+        htmlTag="h3"
+        text={`${index + 1}. ${question.title}`}
+        weight="bold"
+      />
+
       <ul className={styles.list}>
         {isSubmitted ? [resultsList] : [answersList]}
       </ul>

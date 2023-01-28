@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './input.module.scss';
-import { InputProps } from './types';
+import type { InputProps } from './types';
 
 /**
  * Компонент-инпут с основной стилизацией. Может отображать текст ошибки.

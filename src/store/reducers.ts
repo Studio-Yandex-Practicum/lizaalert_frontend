@@ -1,5 +1,5 @@
 import { Action, CombinedState, combineReducers } from '@reduxjs/toolkit';
-import { AppState } from './types';
+import type { AppState } from './types';
 import coursesReducer from './courses/slice';
 import testReducer from './test/slice';
 import courseReducer from './course/slice';

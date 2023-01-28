@@ -1,16 +1,9 @@
-@use "src/styles/font-variables" as vars;
+@use 'src/styles/font-variables' as vars;
 
 .container {
   display: flex;
   flex-direction: column;
   row-gap: 32px;
-}
-
-.paragraph {
-  padding: 0;
-  margin: 0;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 }
 
 .properties {

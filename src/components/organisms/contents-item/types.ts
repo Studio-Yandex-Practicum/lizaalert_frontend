@@ -1,4 +1,4 @@
-import { Chapter, Lesson } from 'services/course/types';
+import type { ChapterModel, LessonModel } from 'api/course';
 
 export type ContentsItemType = 'main' | 'inner';
 
@@ -10,7 +10,7 @@ export type ContentsItemProps = {
   /**
    * Содержание главы: id, title и массив lessons.
    * */
-  content: Chapter;
+  content: ChapterModel;
   /**
    * Отображение содержания: при main контент широкий, при inner - узкий.
    * */
@@ -21,7 +21,7 @@ export type ContentsItemProps = {
   className?: string;
 };
 
-export type LessonType = Lesson & {
+export type LessonType = LessonModel & {
   /**
    * Статус прохождения урока.
    * */

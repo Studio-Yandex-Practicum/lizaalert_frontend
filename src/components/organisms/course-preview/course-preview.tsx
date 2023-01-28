@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { CourseStatusButtons } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
-import { CourseStatusButtons } from 'types/course-status-buttons.types';
 import styles from './course-preview.module.scss';
-import { CoursePreviewProps } from './types';
+import type { CoursePreviewProps } from './types';
 
 /**
  * Компонент карточки предпросмотра курса.
@@ -30,9 +30,19 @@ function CoursePreview({ course }: CoursePreviewProps) {
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
-      <Heading level={3} size="l" title={title} className={styles.title} />
-      <p className={styles.description}>{description}</p>
+      <Typography
+        htmlTag="h3"
+        size="l"
+        weight="bold"
+        text={title}
+        withOverflow
+        className={styles.title}
+      />
+
+      <Typography lines={3} className={styles.description} text={description} />
+
       <Tag className={styles.level} text={level} />
+
       {duration && (
         <TextWithIcon
           className={styles.duration}
@@ -40,11 +50,13 @@ function CoursePreview({ course }: CoursePreviewProps) {
           iconType="duration"
         />
       )}
+
       <TextWithIcon
         className={styles.lessons}
         text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
         iconType="lessons"
       />
+
       <Button
         className={styles.button}
         disabled={status === 'finished' || status === 'inactive'}
@@ -53,6 +65,7 @@ function CoursePreview({ course }: CoursePreviewProps) {
       >
         {CourseStatusButtons[status]}
       </Button>
+
       <img
         src={coverPath || placeholderCover}
         alt={title}

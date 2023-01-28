@@ -2,7 +2,7 @@
 
 .content {
   display: flex;
-  gap: 24px;
+  gap: vars.$grid-gap;
   padding: 32px 0;
   font-family: vars.$mainFont;
   border-bottom: 1px solid vars.$borders-divider-disabled-bg;
@@ -16,10 +16,7 @@
 .text {
   width: 50%;
   padding: 0 40px 0 0;
-  margin: 0;
   box-sizing: border-box;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
 }
 
 .list {

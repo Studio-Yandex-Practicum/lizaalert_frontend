@@ -1,8 +1,8 @@
-import { CoursesType } from 'services/courses/types';
+import type { CoursesModel } from 'api/courses/types';
 
-export type CoursesThunkType = {
+export type CoursesThunkState = {
   isLoading: boolean;
   error: string | null;
 };
 
-export type CoursesReducerType = CoursesThunkType & CoursesType;
+export type CoursesState = CoursesThunkState & CoursesModel;

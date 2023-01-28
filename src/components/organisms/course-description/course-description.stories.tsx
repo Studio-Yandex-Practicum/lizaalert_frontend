@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
-import CourseDescription, { defaultProps } from './course-description';
+import CourseDescription from './course-description';
+import { defaultProps } from './constants';
 
 export default {
   ...exportConfig,
