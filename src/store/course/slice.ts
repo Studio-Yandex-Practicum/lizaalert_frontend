@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Course } from 'services/course/types';
+import type { CourseModel } from 'api/course';
 import fetchCourseAction from './thunk';
-import { CourseReducerType } from './types';
+import type { CourseState } from './types';
 
-const initialState: CourseReducerType = {
-  course: {} as Course,
+const initialState: CourseState = {
+  course: {} as CourseModel,
   isLoading: false,
   error: null,
 };
@@ -20,7 +20,7 @@ export const courseSlice = createSlice({
     },
     [fetchCourseAction.fulfilled.type]: (
       state,
-      { payload }: PayloadAction<Course>
+      { payload }: PayloadAction<CourseModel>
     ) => {
       state.course = payload;
       state.isLoading = false;
@@ -29,7 +29,7 @@ export const courseSlice = createSlice({
       state,
       { payload }: PayloadAction<string>
     ) => {
-      state.course = {} as Course;
+      state.course = {} as CourseModel;
       state.isLoading = false;
       state.error = payload;
     },

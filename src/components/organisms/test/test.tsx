@@ -1,5 +1,5 @@
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import {
@@ -7,7 +7,7 @@ import {
   TestQuestionType,
 } from 'components/organisms/test-question';
 import styles from './test.module.scss';
-import { TestProps } from './types';
+import type { TestProps } from './types';
 import useTest from './hooks/use-test';
 
 /**
@@ -33,14 +33,23 @@ function Test({ toggleRender }: TestProps) {
 
   return (
     <Card className={styles.test} htmlTag="section">
-      <div className={styles.test__container}>
-        <Heading title="Тест" size="l" className={styles.test__heading} />
+      <div className={styles.container}>
+        <Typography
+          htmlTag="h2"
+          text="Тест"
+          size="l"
+          weight="bold"
+          className={styles.heading}
+        />
+
         <Button view="text" onClick={toggleRender} text="Посмотреть условия" />
       </div>
+
       <form onSubmit={onSubmit} name="testForm" className={styles.form}>
         <ul className={styles.list}>
           {renderQuestionsList(test.questions, isSubmitted)}
         </ul>
+
         {isSubmitted ? (
           <>
             <TestSuccessRate
@@ -52,7 +61,6 @@ function Test({ toggleRender }: TestProps) {
               type="button"
               iconName="retry"
               onClick={setInitialState}
-              iconPosition="back"
               text="Пересдать"
             />
           </>
@@ -78,7 +86,7 @@ function renderQuestionsList(
 ) {
   if (questions?.length > 0) {
     return questions.map((question, index) => (
-      <li className={styles.list__item} key={question.id}>
+      <li className={styles.listItem} key={question.id}>
         <TestQuestion
           question={question}
           type={question.type}

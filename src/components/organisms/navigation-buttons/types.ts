@@ -22,9 +22,9 @@ export type NavigationButtonsProps = {
   /**
    * Функция-обработчик клика по кнопке 'Назад'.
    * */
-  onClickBack: (...args: unknown[]) => void;
+  onClickBack: VoidFunction;
   /**
    * Функция-обработчик клика по кнопке 'Вперед'.
    * */
-  onClickForward: (...args: unknown[]) => void;
+  onClickForward: VoidFunction;
 };

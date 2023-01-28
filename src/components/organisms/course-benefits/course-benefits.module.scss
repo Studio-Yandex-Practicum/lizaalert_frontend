@@ -18,7 +18,7 @@
   max-width: 808px;
   display: grid;
   grid-template-columns: repeat(2, 2fr);
-  gap: 32px 24px;
+  gap: 32px vars.$grid-gap;
   padding: 0;
   margin: 32px 0 0;
 }
@@ -28,10 +28,5 @@
   display: flex;
   flex-direction: column;
   list-style-type: none;
-}
-
-.text {
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
-  margin: 16px 0 0;
+  row-gap: 16px;
 }

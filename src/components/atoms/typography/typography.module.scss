@@ -1,0 +1,58 @@
+@use 'src/styles/variables' as vars;
+
+.typography {
+  font-family: vars.$mainFont;
+  font-style: normal;
+  color: inherit;
+  margin: 0;
+}
+
+.xxl {
+  font-size: vars.$font-size-xxl;
+  line-height: vars.$line-height-xxl;
+}
+
+.xl {
+  font-size: vars.$font-size-xl;
+  line-height: vars.$line-height-xl;
+}
+
+.l {
+  font-size: vars.$font-size-l;
+  line-height: vars.$line-height-l;
+}
+
+.m {
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.s {
+  font-size: vars.$font-size-s;
+  line-height: vars.$line-height-s;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.lineClamp {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { IntersectionObserverConfig } from '../types';
+import type { IntersectionObserverConfig } from '../types';
 
 /**
  * Хук используется для подгрузки данных и других манипуляций при появлении `elementRef` во вьюпорте.

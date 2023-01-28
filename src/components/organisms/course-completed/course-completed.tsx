@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { StyledLink } from 'components/molecules/styled-link';
 import styles from './course-completed.module.scss';
-import { CourseCompletedProps } from './types';
+import type { CourseCompletedProps } from './types';
 
 /**
  * Компонент карточки завершения курса.
@@ -18,28 +18,34 @@ function CourseCompleted({
 }: CourseCompletedProps) {
   return (
     <Card className={classnames(styles.card, className)} htmlTag="section">
-      <Heading size="l" className={styles.title} title="Курс завершен" />
+      <Typography
+        htmlTag="h2"
+        size="l"
+        weight="bold"
+        className={styles.title}
+        text="Курс завершен"
+      />
 
       <div className={styles.content}>
-        <Heading level={3} size="xxl">
+        <Typography htmlTag="h3" size="xxl" weight="bold">
           {isCompleted ? 'Поздравляем!' : 'Сожалеем'}
-        </Heading>
+        </Typography>
 
         {isCompleted && (
           <>
-            <p
-              className={styles.text}
-            >{`Вы успешно завершили курс «${courseName}».`}</p>
-            <p className={styles.text}>{courseSuccessDescription}</p>
+            <Typography text={`Вы успешно завершили курс «${courseName}».`} />
+            <Typography text={courseSuccessDescription} />
           </>
         )}
 
         {!isCompleted && (
           <>
-            <p className={styles.text}>
-              Курс <span>{`«${courseName}»`}</span> не пройден.
-            </p>
-            <p className={styles.text}>
+            <Typography>
+              Курс <span className={styles.accent}>{`«${courseName}»`}</span> не
+              пройден.
+            </Typography>
+
+            <Typography>
               Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
               сложным. Вы&nbsp;можете попробовать себя
@@ -49,7 +55,7 @@ function CourseCompleted({
                 linkText=" в других направлениях"
               />
               .
-            </p>
+            </Typography>
           </>
         )}
       </div>

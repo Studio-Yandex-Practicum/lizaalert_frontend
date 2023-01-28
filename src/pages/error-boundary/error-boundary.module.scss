@@ -1,0 +1,16 @@
+@use 'src/styles/variables' as vars;
+
+.error {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.image {
+  border-radius: vars.$border-radius;
+  width: 100%;
+  max-width: 400px;
+}

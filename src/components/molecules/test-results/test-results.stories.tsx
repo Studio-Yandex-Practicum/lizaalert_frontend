@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
 import { utils } from 'stories/utils';
 import TestResults from './test-results';
-import { TestResultsProps } from './types';
+import type { TestResultsProps } from './types';
 
 const mockStates = [
   {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Test } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import { TestContentProps } from './types';
+import type { TestContentProps } from './types';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.

@@ -3,7 +3,7 @@
 .container {
   width: 100%;
   display: flex;
-  gap: 24px;
+  gap: vars.$grid-gap;
   align-items: center;
   font-family: vars.$mainFont;
   font-size: vars.$font-size-m;
@@ -28,7 +28,7 @@
   border: 1px solid vars.$borders-divider-disabled-bg;
   background-color: vars.$bg-primary;
   padding: 12px 16px;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   outline: none;
   position: relative;
   cursor: pointer;
@@ -68,6 +68,6 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   overflow: hidden;
 }

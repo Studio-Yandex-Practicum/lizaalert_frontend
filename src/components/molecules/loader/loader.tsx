@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import styles from './loader.module.scss';
-import { LoaderProps } from './types';
+import type { LoaderProps } from './types';
 
 const settings = {
   cx: 25,

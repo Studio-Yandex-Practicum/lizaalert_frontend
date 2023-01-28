@@ -1,4 +1,4 @@
-import { AppState } from '../types';
+import type { AppState } from '../types';
 
 const selectCourse = (state: AppState) => state.course.course;
 const selectCourseTitle = (state: AppState) => state.course.course.title;

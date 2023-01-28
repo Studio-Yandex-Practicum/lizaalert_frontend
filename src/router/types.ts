@@ -1,4 +1,4 @@
-import { IconType } from 'components/atoms/icon';
+import type { IconType } from 'components/atoms/icon';
 
 export type RouteType = {
   title: string;

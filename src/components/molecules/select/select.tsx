@@ -2,8 +2,9 @@ import { KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
 import { Option, OptionType } from 'components/atoms/option';
 import { Icon } from 'components/atoms/icon';
+import { KeyboardKeys } from 'utils/constants';
 import styles from './select.module.scss';
-import { SelectProps } from './types';
+import type { SelectProps } from './types';
 
 const DUMMY_OPTIONS = [
   { id: 1, name: 'Кинологическое' },
@@ -34,7 +35,7 @@ function Select({
   };
 
   const handleEscDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Escape') {
+    if (event.key === KeyboardKeys.ESCAPE) {
       setIsShowed(false);
     }
   };

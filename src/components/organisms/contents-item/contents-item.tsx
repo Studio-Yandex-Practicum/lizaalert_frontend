@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Icon, IconType } from 'components/atoms/icon';
+import { Typography } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import styles from './contents-item.module.scss';
-import { ContentsItemProps, LessonType } from './types';
+import type { ContentsItemProps, LessonType } from './types';
 
 const mapSlugToIcon: Record<string, IconType> = {
   Lesson: 'document',
@@ -36,7 +37,10 @@ function ContentsItem({
   if (type === 'main') {
     return (
       <li className={classnames(styles.content, className)}>
-        <p className={styles.text}>{`${index + 1}. ${title}`}</p>
+        <Typography className={styles.text}>
+          {`${index + 1}. ${title}`}
+        </Typography>
+
         {lessonsList}
       </li>
     );
@@ -47,7 +51,7 @@ function ContentsItem({
       <Accordion
         title={`${index + 1}. ${content.title}`}
         titleSize="m"
-        titleWeight="regular"
+        titleWeight="normal"
         className={classnames(styles.accordion, className)}
         open={content.id === +topicId}
       >
@@ -77,6 +81,7 @@ function ContentsItem({
               }
             />
           </StyledLink>
+
           {type === 'main' && (
             <Icon type="checkSolid" className={styles.completed} />
           )}

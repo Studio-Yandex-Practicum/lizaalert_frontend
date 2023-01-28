@@ -36,5 +36,5 @@ WithTextButton.args = {
 export const WithMediumTitle = Template.bind({});
 WithMediumTitle.args = {
   titleSize: 'm',
-  titleWeight: 'regular',
+  titleWeight: 'normal',
 };

@@ -1,0 +1,28 @@
+@use 'src/styles/variables' as vars;
+
+.heading {
+  padding-top: vars.$grid-gap;
+  margin-bottom: 32px;
+}
+
+.courses {
+  display: flex;
+  width: 100%;
+  column-gap: vars.$grid-gap;
+  padding-bottom: 40px;
+}
+
+.filters {
+  max-width: 312px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 984px;
+  display: flex;
+  flex-direction: column;
+  row-gap: vars.$grid-gap;
+}

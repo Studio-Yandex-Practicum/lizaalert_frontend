@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
@@ -13,8 +13,8 @@ import { selectIsAuth, selectIsLoading } from 'store/auth/selectors';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
-import { UserLoginFormData } from './types';
 import styles from './login-form.module.scss';
+import type { UserLoginFormData } from './types';
 
 /**
  * Компонент-форма логина пользователя.
@@ -56,12 +56,14 @@ function LoginForm() {
 
   return (
     <Card className={styles.container} htmlTag="section">
-      <Heading
-        level={3}
-        title="Войти в профиль"
+      <Typography
+        htmlTag="h3"
+        text="Войти в профиль"
         size="l"
+        weight="bold"
         className={styles.heading}
       />
+
       <form onSubmit={handleSubmit} name="authForm" className={styles.form}>
         <Input
           labelName="Email"
@@ -98,9 +100,11 @@ function LoginForm() {
           onChange={handleChange}
           required
         />
+
         <div className={styles.linksContainer}>
           <Checkbox
             className={styles.checkbox}
+            weight="medium"
             name="isSavedData"
             value="Сохранить"
             labelText="Сохранить данные входа"
@@ -113,22 +117,20 @@ function LoginForm() {
             linkText="Забыли пароль?"
           />
         </div>
+
         <Button
           className={styles.button}
           type="submit"
-          iconPosition="back"
           disabled={!isValid || isLoading}
-        >
-          {isLoading ? 'Вход...' : 'Войти'}
-        </Button>
+          text={isLoading ? 'Вход...' : 'Войти'}
+        />
       </form>
+
       <Button
         className={classnames(styles.button)}
         classNameIcon={styles.icon}
-        type="button"
         view="tertiary"
         iconName="yandex"
-        iconPosition="back"
         iconSize="medium"
         text="Войти c Яндекс ID"
       />

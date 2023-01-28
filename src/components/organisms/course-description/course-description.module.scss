@@ -6,17 +6,15 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  color: vars.$dark-primary;
 }
 
 .text {
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
-  color: vars.$dark-primary;
   margin: 32px 0 0;
 }
 
 .titleTasks {
-  margin-top: 32px;
+  margin: 32px 0 16px;
 }
 
 .tasksList {
@@ -26,7 +24,8 @@
 
 .task {
   margin-top: 18px;
-  color: vars.$dark-primary;
-  font-size: vars.$font-size-m;
-  line-height: vars.$line-height-m;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 }

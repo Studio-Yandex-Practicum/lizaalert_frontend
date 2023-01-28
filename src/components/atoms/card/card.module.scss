@@ -1,9 +1,10 @@
-@use "src/styles/variables" as vars;
+@use 'src/styles/variables' as vars;
 
 .card {
   box-sizing: border-box;
-  border-radius: 16px;
-  box-shadow: 0 0 4px vars.$drop-shadow-small, 0 4px 16px vars.$drop-shadow-small;
+  border-radius: vars.$border-radius;
+  box-shadow: 0 0 4px vars.$drop-shadow-small,
+    0 4px 16px vars.$drop-shadow-small;
   background-color: vars.$bg-primary;
   padding: 32px;
   font-family: vars.$mainFont;

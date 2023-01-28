@@ -1,0 +1,11 @@
+export { default as Course } from './course/course';
+export { default as Courses } from './courses/courses';
+export { default as Lesson } from './lesson/lesson';
+export { default as Login } from './login/login';
+export { default as NotFound } from './not-found/not-found';
+export { default as Profile } from './profile/profile';
+export { default as Register } from './register/register';
+export { default as CreateCourse } from './create-course/create-course';
+export { default as EditCourse } from './edit-course/edit-course';
+export { default as EditLesson } from './edit-lesson/edit-lesson';
+export { default as Development } from './development/development';

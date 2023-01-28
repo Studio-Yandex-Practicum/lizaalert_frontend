@@ -3,7 +3,7 @@ import { exportConfig } from 'stories/config';
 import { utils } from 'stories/utils';
 import Icon from './icon';
 import { iconKeys } from './icons';
-import { IconProps } from './types';
+import type { IconProps } from './types';
 
 export default {
   ...exportConfig,

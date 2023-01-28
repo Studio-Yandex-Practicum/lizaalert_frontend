@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import styles from './video-lesson.module.scss';
-import { VideoLessonProps } from './types';
+import type { VideoLessonProps } from './types';
 
 /**
  * Компонент-карточка видео-урока. Видео вставляется в `iframe`.
@@ -11,7 +11,14 @@ import { VideoLessonProps } from './types';
 function VideoLesson({ source, className }: VideoLessonProps) {
   return (
     <Card className={classnames(styles.container, className)}>
-      <Heading size="l" className={styles.heading} title="Видео" />
+      <Typography
+        htmlTag="h2"
+        size="l"
+        weight="bold"
+        className={styles.heading}
+        text="Видео"
+      />
+
       <iframe
         className={styles.video}
         src={source}

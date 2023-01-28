@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { exportConfig } from 'stories/config';
-import FAQ, { initialData } from './faq';
+import FAQ from './faq';
+import { initialData } from './constants';
 
 export default {
   ...exportConfig,

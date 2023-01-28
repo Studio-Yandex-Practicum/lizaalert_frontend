@@ -1,0 +1,8 @@
+export { CourseApi } from './course.api';
+export type {
+  CourseModel,
+  ChapterModel,
+  LessonModel,
+  LessonType,
+  LessonStatus,
+} from './types';

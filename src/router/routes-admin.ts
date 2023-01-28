@@ -1,4 +1,4 @@
-import { RouteType } from './types';
+import type { RouteType } from './types';
 import defaultRoutes from './routes';
 
 const adminRoutes: Record<string, RouteType> = {

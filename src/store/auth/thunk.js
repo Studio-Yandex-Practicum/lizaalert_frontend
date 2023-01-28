@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import mockAuth from '../../services/mock/auth.json';
+import mockAuth from '../../api/mock/auth.json';
 
 export const fetchAuth = createAsyncThunk(
   'auth/fetchAuth',

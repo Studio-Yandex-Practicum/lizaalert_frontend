@@ -1,40 +1,54 @@
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { convertDate } from 'utils/convert-date';
 import styles from './test-preview.module.scss';
-import { TextPreviewProps } from './types';
+import type { TextPreviewProps } from './types';
 
 /**
  * Компонент-карточка превью теста.
  */
 
 function TestPreview({ test, toggleRender }: TextPreviewProps) {
-  const date = new Date(test.deadline);
+  const date = convertDate(test.deadline);
+  const time = convertDate(test.deadline, { onlyTime: true });
 
   return (
     <Card htmlTag="section" className={styles.container}>
       <div className={styles.propertiesRow}>
-        <Heading level={2} size="l" title="Тест" />
+        <Typography htmlTag="h2" size="l" weight="bold" text="Тест" />
+
         {test.inProgress && (
           <Button view="text" onClick={toggleRender} text="Вернуться к тесту" />
         )}
       </div>
-      <p className={styles.paragraph}>{test.description}</p>
+
+      <Typography text={test.description} />
+
       <ul className={styles.properties}>
         <li className={styles.propertiesRow}>
-          <TextWithIcon iconType="check" text="Проходной балл:" />
-          <p className={styles.paragraph}>{`${test.passingScore}%`}</p>
+          <TextWithIcon
+            htmlTag="span"
+            iconType="check"
+            text="Проходной балл:"
+          />
+          <Typography htmlTag="span" text={`${test.passingScore}%`} />
         </li>
         <li className={styles.propertiesRow}>
-          <TextWithIcon iconType="retry" text="Количество попыток:" />
-          <p className={styles.paragraph}>{test.retries}</p>
+          <TextWithIcon
+            htmlTag="span"
+            iconType="retry"
+            text="Количество попыток:"
+          />
+          <Typography htmlTag="span" text={test.retries} />
         </li>
         <li className={styles.propertiesRow}>
-          <TextWithIcon iconType="time" text="Срок сдачи:" />
-          <time className={styles.paragraph}>{date.toLocaleString()}</time>
+          <TextWithIcon htmlTag="span" iconType="time" text="Срок сдачи:" />
+          <Typography htmlTag="time" text={`${date} г. ${time} (GMT+3)`} />
         </li>
       </ul>
+
       {!test.inProgress && (
         <Button
           className={styles.button}

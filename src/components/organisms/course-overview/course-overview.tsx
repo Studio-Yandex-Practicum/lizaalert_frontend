@@ -1,11 +1,12 @@
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
 import styles from './course-overview.module.scss';
-import { CourseOverviewProps } from './types';
+import type { CourseOverviewProps } from './types';
 
 /**
  * Карточка краткого описания курса.
@@ -29,22 +30,25 @@ function CourseOverview({
       />
 
       <ul className={styles.courseMeta}>
-        <li className={styles.courseMetaItem}>
+        <Typography htmlTag="li" className={styles.courseMetaItem}>
           <TextWithIcon text="Уровень:" iconType="rank" />
           {level}
-        </li>
-        <li className={styles.courseMetaItem}>
+        </Typography>
+
+        <Typography className={styles.courseMetaItem}>
           <TextWithIcon text="Количество занятий:" iconType="lessons" />
           {lessonsCount}
-        </li>
-        <li className={styles.courseMetaItem}>
+        </Typography>
+
+        <Typography className={styles.courseMetaItem}>
           <TextWithIcon text="Продолжительность:" iconType="duration" />
           {courseDuration ?? 0} ч
-        </li>
-        <li className={styles.courseMetaItem}>
+        </Typography>
+
+        <Typography className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
           {convertDate(startDate)} г
-        </li>
+        </Typography>
       </ul>
 
       <TextWithIcon

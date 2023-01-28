@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Filters, Statuses } from 'utils/constants';
-import { FilterItem, SectionType } from '../constants';
+import type { FilterItem, SectionType } from '../constants';
 
 /**
  * Хук реализует логику фильтрации для списка курсов.

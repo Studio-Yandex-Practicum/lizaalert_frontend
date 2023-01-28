@@ -51,7 +51,6 @@ import { ReactComponent as Webinar } from 'assets/icons/webinar.svg';
 import { ReactComponent as XSmall } from 'assets/icons/x-small.svg';
 import { ReactComponent as XSolid } from 'assets/icons/x-solid.svg';
 import { ReactComponent as Yandex } from 'assets/icons/yandex.svg';
-import { Nullable } from 'types';
 
 const defaultAttributes = {
   width: '100%',

@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { UseAccordionReturnType } from '../types';
+import type { UseAccordionReturnType } from '../types';
 
 const ANIMATION_DURATION = 300;
 

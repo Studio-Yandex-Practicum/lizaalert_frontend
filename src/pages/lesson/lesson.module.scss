@@ -1,0 +1,25 @@
+@use 'src/styles/variables' as vars;
+
+.lesson {
+  display: flex;
+  align-items: flex-start;
+  column-gap: vars.$grid-gap;
+  padding-bottom: 97px;
+}
+
+.lessonContent {
+  width: calc(68% - #{vars.$grid-gap});
+  display: flex;
+  flex-direction: column;
+  row-gap: vars.$grid-gap;
+}
+
+.courseContent {
+  width: 32%;
+  min-width: 300px;
+}
+
+.breadcrumbs {
+  margin-bottom: 32px;
+  margin-top: vars.$grid-gap;
+}

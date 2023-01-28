@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SPINNER_DELAY } from '../../utils/constants';
-import mockTest from '../../services/mock/test.json';
+import mockTest from '../../api/mock/test.json';
 
 const fetchTest = createAsyncThunk(
   'test/fetchTest',
@@ -11,6 +11,7 @@ const fetchTest = createAsyncThunk(
         // eslint-disable-next-line no-promise-executor-return
         return new Promise((resolve) => setTimeout(resolve, SPINNER_DELAY));
       }
+
       await timeout();
       return mockTest;
     } catch (error) {

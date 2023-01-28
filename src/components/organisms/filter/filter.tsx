@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Tag } from 'components/molecules/tag';
 import styles from './filter.module.scss';
-import { FilterProps } from './types';
+import type { FilterProps } from './types';
 import { useFilter } from './hooks/use-filter';
 import { filters } from './constants';
 
@@ -27,18 +27,18 @@ function Filter({ className = '' }: FilterProps) {
     <aside className={classnames(styles.filters, className)}>
       <Card className={styles.card}>
         <div className={styles.header}>
-          <Heading size="l" level={3} title="Фильтры" />
+          <Typography size="l" htmlTag="h3" weight="bold" text="Фильтры" />
+
           {selection.length > 0 && (
-            <Button view="text" onClick={resetFilters}>
-              Очистить
-            </Button>
+            <Button view="text" onClick={resetFilters} text="Очистить" />
           )}
         </div>
+
         {filters.map((section) => (
           <Accordion
             title={countSectionSelection(section)}
             titleSize="m"
-            titleWeight="regular"
+            titleWeight="normal"
             key={section.name.value}
             className={styles.filterAccordion}
           >
@@ -60,6 +60,7 @@ function Filter({ className = '' }: FilterProps) {
           </Accordion>
         ))}
       </Card>
+
       <div className={styles.selection}>
         {selection.map((filter) => (
           <Tag

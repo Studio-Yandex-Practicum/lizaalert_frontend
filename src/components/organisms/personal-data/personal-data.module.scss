@@ -1,3 +1,5 @@
+@use 'src/styles/variables' as vars;
+
 .personalData {
   max-width: 648px;
   box-sizing: border-box;
@@ -15,7 +17,7 @@
   max-width: 246px;
   padding: 12px 24px;
   align-self: center;
-  border-radius: 16px;
+  border-radius: vars.$border-radius;
   text-align: center;
   white-space: nowrap;
 }

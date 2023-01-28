@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './styled-link.module.scss';
-import { StyledLinkProps } from './types';
+import type { StyledLinkProps } from './types';
 
 /**
  * Компонент для оборачивания компонента или текста в стилизованную ссылку.
@@ -13,7 +13,7 @@ function StyledLink({
   linkText = '',
   isExternal = false,
   href,
-  weight = 'semibold',
+  weight = 'medium',
   className = '',
   ...props
 }: StyledLinkProps) {

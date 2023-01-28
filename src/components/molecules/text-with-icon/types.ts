@@ -1,5 +1,9 @@
-import { IconType } from 'components/atoms/icon';
-import { ColorVariables } from 'types';
+import type { IconType } from 'components/atoms/icon';
+import type {
+  TypographyTag,
+  TypographyWeight,
+} from 'components/atoms/typography';
+import type { ColorVariables } from 'types';
 
 export type TextWithIconProps = {
   /**
@@ -22,4 +26,16 @@ export type TextWithIconProps = {
    * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
    * */
   className?: string;
+  /**
+   * Начертание текста, по умолчанию `normal`.
+   * */
+  weight?: TypographyWeight;
+  /**
+   * Флаг добавляет в конце многоточие при переполнении.
+   * */
+  withOverflow?: boolean;
+  /**
+   * Тег для текста. По умолчанию `<p>`.
+   * */
+  htmlTag?: TypographyTag;
 };

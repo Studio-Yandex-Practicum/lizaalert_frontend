@@ -1,6 +1,5 @@
-import { IconType } from 'components/atoms/icon';
-import { Nullable } from 'types';
-import { InputHTMLAttributes } from 'react';
+import type { IconType } from 'components/atoms/icon';
+import type { InputHTMLAttributes } from 'react';
 
 export type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
 

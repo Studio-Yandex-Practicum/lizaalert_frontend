@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SPINNER_DELAY } from '../../utils/constants';
-import mockProfile from '../../services/mock/profile.json';
+import mockProfile from '../../api/mock/profile.json';
 
 const fetchProfileAction = createAsyncThunk(
   'profile/fetch',

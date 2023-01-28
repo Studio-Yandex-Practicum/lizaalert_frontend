@@ -2,13 +2,13 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/heading';
+import { Typography } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
 import styles from './restore-password-form.module.scss';
-import { RestorePasswordFormData } from './types';
+import type { RestorePasswordFormData } from './types';
 
 /**
  * Компонент-карточка формы восстановления пароля.
@@ -27,7 +27,13 @@ function RestorePasswordForm() {
 
   return (
     <Card className={styles.card} htmlTag="section">
-      <Heading level={2} size="l" title="Восстановить пароль" />
+      <Typography
+        htmlTag="h2"
+        weight="bold"
+        size="l"
+        text="Восстановить пароль"
+      />
+
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <Input
           labelName="Email"
@@ -50,7 +56,6 @@ function RestorePasswordForm() {
 
       <Button
         view="secondary"
-        iconPosition="back"
         iconName="arrowBack"
         className={classnames(styles.button, styles.backButton)}
         onClick={() => navigate(-1)}

@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode } from 'react';
+import type { MutableRefObject, ReactNode } from 'react';
 
 export type IntersectionObserverConfig = {
   /**
@@ -8,11 +8,11 @@ export type IntersectionObserverConfig = {
   /**
    * Функция-коллбек, срабатывающая при появлении элемента во вьюпорте.
    * */
-  callbackOnIntersect: () => void;
+  callbackOnIntersect: VoidFunction;
   /**
    * Функция-коллбек, срабатывающая при скрытии элемента из вьюпорта.
    * */
-  callbackOnHide?: () => void;
+  callbackOnHide?: VoidFunction;
   /**
    * Отступы вокруг элемента.
    * */
