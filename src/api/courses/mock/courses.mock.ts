@@ -1,4 +1,4 @@
-import { CoursesModel } from '../types';
+import type { CoursesModel } from '../types';
 
 const courses = new Promise<CoursesModel>((resolve) => {
   resolve({
