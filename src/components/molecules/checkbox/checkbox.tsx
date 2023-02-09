@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
-import { Typography } from 'components/atoms/typography';
+import { P } from 'components/atoms/typography';
 import { Controls } from 'utils/constants';
 import styles from './checkbox.module.scss';
 import type { CheckboxProps } from './types';
@@ -38,7 +38,7 @@ function Checkbox({
         className={styles.pseudo}
         type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
       />
-      <Typography className={styles.labelText} text={labelText} />
+      <P className={styles.labelText} text={labelText} />
     </label>
   );
 }

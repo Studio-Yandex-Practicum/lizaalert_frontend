@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import errorCat from 'assets/images/error-cat.png';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { routes } from 'config';
 import styles from './error-boundary.module.scss';
@@ -38,8 +38,8 @@ class ErrorBoundary extends React.Component<
     if (hasError) {
       return (
         <div className={styles.error}>
-          <Typography
-            htmlTag="h1"
+          <Heading
+            level={1}
             weight="bold"
             size="xl"
             text="Простите, мы всё сломали"

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
@@ -30,8 +30,8 @@ function CoursePreview({ course }: CoursePreviewProps) {
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
-      <Typography
-        htmlTag="h3"
+      <Heading
+        level={3}
         size="l"
         weight="bold"
         text={title}
@@ -39,7 +39,7 @@ function CoursePreview({ course }: CoursePreviewProps) {
         className={styles.title}
       />
 
-      <Typography lines={3} className={styles.description} text={description} />
+      <P lines={3} className={styles.description} text={description} />
 
       <Tag className={styles.level} text={level} />
 

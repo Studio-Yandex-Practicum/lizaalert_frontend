@@ -1,5 +1,5 @@
 import { Children } from 'react';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { HeaderLink } from 'components/molecules/header-link';
 import { StyledLink } from 'components/molecules/styled-link';
 import type { RouteType } from 'router/types';
@@ -20,7 +20,7 @@ function Header() {
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
         <StyledLink href={routes.courses.path}>
-          <Typography htmlTag="h1" weight="bold" text="Учебная платформа" />
+          <Heading level={1} weight="bold" text="Учебная платформа" />
         </StyledLink>
 
         <nav>

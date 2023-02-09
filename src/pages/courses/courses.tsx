@@ -1,4 +1,4 @@
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Filter } from 'components/organisms/filter';
 import {
   PaginationState,
@@ -31,8 +31,8 @@ function Courses() {
 
   return (
     <>
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         size="xxl"
         weight="bold"
         text={routes.courses.title}

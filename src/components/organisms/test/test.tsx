@@ -1,5 +1,5 @@
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import {
@@ -34,8 +34,8 @@ function Test({ toggleRender }: TestProps) {
   return (
     <Card className={styles.test} htmlTag="section">
       <div className={styles.container}>
-        <Typography
-          htmlTag="h2"
+        <Heading
+          level={2}
           text="Тест"
           size="l"
           weight="bold"

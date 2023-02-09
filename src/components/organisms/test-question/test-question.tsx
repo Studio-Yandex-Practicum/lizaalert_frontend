@@ -1,4 +1,4 @@
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
 import styles from './test-question.module.scss';
@@ -35,8 +35,8 @@ function TestQuestion({
 
   return (
     <>
-      <Typography
-        htmlTag="h3"
+      <Heading
+        level={3}
         text={`${index + 1}. ${question.title}`}
         weight="bold"
       />

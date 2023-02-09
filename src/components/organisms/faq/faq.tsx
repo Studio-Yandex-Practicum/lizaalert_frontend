@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './faq.module.scss';
 import { initialData } from './constants';
@@ -17,7 +17,7 @@ function FAQ({ questions = initialData, className }: FAQProps) {
         {questions?.map((item) => (
           <div key={item.id} className={styles.content}>
             <Accordion title={item.question} button="icon" titleSize="m">
-              <Typography text={item.answer} className={styles.answer} />
+              <P text={item.answer} className={styles.answer} />
             </Accordion>
           </div>
         ))}

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, Li, P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-description.module.scss';
 import { defaultProps } from './constants';
@@ -26,10 +26,10 @@ function CourseDescription({
         className={styles.title}
         open
       >
-        <Typography className={styles.text} text={description} />
+        <P className={styles.text} text={description} />
 
-        <Typography
-          htmlTag="h3"
+        <Heading
+          level={3}
           text="Основные задачи нашего подразделения:"
           size="m"
           weight="bold"
@@ -39,9 +39,9 @@ function CourseDescription({
         {tasks?.length > 0 && (
           <ul className={styles.tasksList}>
             {tasks.map((task) => (
-              <Typography key={task} htmlTag="li" className={styles.task}>
+              <Li key={task} className={styles.task}>
                 {task}
-              </Typography>
+              </Li>
             ))}
           </ul>
         )}

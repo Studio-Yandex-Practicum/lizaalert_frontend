@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-benefits.module.scss';
@@ -21,12 +21,12 @@ function CourseBenefits({
         <ul className={styles.benefitsList}>
           {benefitsList?.map((item) => (
             <li key={item.id} className={styles.benefit}>
-              <Typography htmlTag="h3" weight="bold" className={styles.heading}>
+              <Heading level={3} weight="bold" className={styles.heading}>
                 <Icon type="checkSolid" />
                 <span>{item.title}</span>
-              </Typography>
+              </Heading>
 
-              <Typography text={item.description} />
+              <P text={item.description} />
             </li>
           ))}
         </ul>

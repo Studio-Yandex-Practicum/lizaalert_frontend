@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -45,7 +45,7 @@ function PersonalData() {
 
   return (
     <Card className={styles.personalData}>
-      <Typography htmlTag="h2" size="l" text="Личные данные" weight="bold" />
+      <Heading level={3} size="l" text="Личные данные" weight="bold" />
 
       <form
         name="personalDataForm"
