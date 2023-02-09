@@ -7,3 +7,4 @@ declare module '*.svg';
 
 declare type Nullable<T> = T | null | undefined;
 declare type VoidFunction = (...args: unknown[]) => void;
+declare type AnyFunction = (...args: any) => any;

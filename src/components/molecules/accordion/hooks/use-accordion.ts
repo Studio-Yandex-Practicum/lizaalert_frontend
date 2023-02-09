@@ -1,10 +1,5 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEvent } from 'hooks/use-event';
 import type { UseAccordionReturnType } from '../types';
 
 const ANIMATION_DURATION = 300;
@@ -23,11 +18,11 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
 
   const contentRef = useRef<HTMLElement>(null);
 
-  const updateContentHeight = useCallback(() => {
+  const updateContentHeight = useEvent(() => {
     if (contentRef.current) {
       setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
     }
-  }, [contentRef.current, isOpen]);
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,19 +30,16 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
     }, ANIMATION_DURATION);
   }, [contentRef.current]);
 
-  const handleInnerAccordion = useCallback(
-    (evt: CustomEvent<HTMLElement>) => {
-      const target = evt.target as HTMLElement;
-      if (contentRef.current && target && target !== contentRef.current) {
-        setHeight(
-          isOpen
-            ? `${contentRef.current.scrollHeight + target.scrollHeight}px`
-            : '0px'
-        );
-      }
-    },
-    [contentRef.current]
-  );
+  const handleInnerAccordion = useEvent((evt: CustomEvent<HTMLElement>) => {
+    const target = evt.target as HTMLElement;
+    if (contentRef.current && target && target !== contentRef.current) {
+      setHeight(
+        isOpen
+          ? `${contentRef.current.scrollHeight + target.scrollHeight}px`
+          : '0px'
+      );
+    }
+  });
 
   useLayoutEffect(() => {
     if (contentRef.current) {
@@ -69,7 +61,7 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
     };
   }, [contentRef.current, handleInnerAccordion, updateContentHeight]);
 
-  const toggleAccordion = () => {
+  const toggleAccordion = useEvent(() => {
     if (contentRef.current) {
       setIsOpen(!isOpen);
       setHeight(isOpen ? '0px' : `${contentRef.current.scrollHeight}px`);
@@ -77,7 +69,7 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
       const event = new Event('accordionToggle', { bubbles: true });
       contentRef.current.dispatchEvent(event);
     }
-  };
+  });
 
   return {
     isOpen,
