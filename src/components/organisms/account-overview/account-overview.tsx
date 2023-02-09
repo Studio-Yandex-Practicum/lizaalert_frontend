@@ -1,6 +1,6 @@
 import defaultImg from 'assets/images/profile.jpg';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { useAppSelector } from 'store';
@@ -24,9 +24,9 @@ function AccountOverview() {
         <img className={styles.avatar} src={defaultImg} alt="Фото профиля" />
       </div>
 
-      <Typography htmlTag="h3" weight="bold" className={styles.personalData}>
+      <Heading level={3} weight="bold" className={styles.personalData}>
         {accountOverview.userName}
-      </Typography>
+      </Heading>
 
       <ul className={styles.accountMeta}>
         <li className={styles.accountMetaItem}>

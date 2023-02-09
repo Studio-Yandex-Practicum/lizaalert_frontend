@@ -1,6 +1,6 @@
 import type { Ref } from 'react';
 import classnames from 'classnames';
-import { Typography } from 'components/atoms/typography';
+import { Span } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
 import type { AccordionProps } from './types';
@@ -28,12 +28,7 @@ function Accordion({
   return (
     <div className={classList}>
       <button type="button" className={styles.handle} onClick={toggleAccordion}>
-        <Typography
-          htmlTag="span"
-          weight={titleWeight}
-          size={titleSize}
-          text={title}
-        />
+        <Span weight={titleWeight} size={titleSize} text={title} />
 
         <span className={classnames(styles.btn, styles[button])}>
           {button === 'text' && (isOpen ? 'Свернуть' : 'Развернуть')}

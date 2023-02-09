@@ -1,5 +1,5 @@
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { convertDate } from 'utils/convert-date';
@@ -17,14 +17,14 @@ function TestPreview({ test, toggleRender }: TextPreviewProps) {
   return (
     <Card htmlTag="section" className={styles.container}>
       <div className={styles.propertiesRow}>
-        <Typography htmlTag="h2" size="l" weight="bold" text="Тест" />
+        <Heading level={2} size="l" weight="bold" text="Тест" />
 
         {test.inProgress && (
           <Button view="text" onClick={toggleRender} text="Вернуться к тесту" />
         )}
       </div>
 
-      <Typography text={test.description} />
+      <P text={test.description} />
 
       <ul className={styles.properties}>
         <li className={styles.propertiesRow}>
@@ -33,7 +33,7 @@ function TestPreview({ test, toggleRender }: TextPreviewProps) {
             iconType="check"
             text="Проходной балл:"
           />
-          <Typography htmlTag="span" text={`${test.passingScore}%`} />
+          <Span text={`${test.passingScore}%`} />
         </li>
         <li className={styles.propertiesRow}>
           <TextWithIcon
@@ -41,11 +41,11 @@ function TestPreview({ test, toggleRender }: TextPreviewProps) {
             iconType="retry"
             text="Количество попыток:"
           />
-          <Typography htmlTag="span" text={test.retries} />
+          <Span text={test.retries} />
         </li>
         <li className={styles.propertiesRow}>
           <TextWithIcon htmlTag="span" iconType="time" text="Срок сдачи:" />
-          <Typography htmlTag="time" text={`${date} г. ${time} (GMT+3)`} />
+          <Span text={`${date} г. ${time} (GMT+3)`} />
         </li>
       </ul>
 

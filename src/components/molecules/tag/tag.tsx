@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
-import { Typography } from 'components/atoms/typography';
+import { P } from 'components/atoms/typography';
 import styles from './tag.module.scss';
 import type { TagProps } from './types';
 
@@ -18,9 +18,9 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
   if (onClick && value) {
     return (
       <div className={classNames}>
-        <Typography withOverflow className={styles.text}>
+        <P withOverflow className={styles.text}>
           {text}
-        </Typography>
+        </P>
 
         <button
           className={styles.button}
@@ -35,9 +35,9 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
 
   return (
     <div className={classNames}>
-      <Typography withOverflow className={styles.text}>
+      <P withOverflow className={styles.text}>
         {text}
-      </Typography>
+      </P>
     </div>
   );
 }

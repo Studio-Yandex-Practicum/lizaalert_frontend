@@ -1,6 +1,6 @@
 import { FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -33,7 +33,7 @@ function AccountData() {
 
   return (
     <Card className={styles.accountData}>
-      <Typography htmlTag="h3" size="l" weight="bold" text="Аккаунт" />
+      <Heading level={3} size="l" weight="bold" text="Аккаунт" />
 
       <form
         name="accountDataForm"

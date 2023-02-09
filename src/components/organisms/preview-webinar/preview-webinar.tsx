@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { StyledLink } from 'components/molecules/styled-link';
 import { convertDate } from 'utils/convert-date';
@@ -25,17 +25,17 @@ function PreviewWebinar({ date, link, className }: PreviewWebinarProps) {
 
   return (
     <Card className={classnames(styles.card, className)} htmlTag="section">
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         weight="bold"
         size="l"
         className={styles.title}
         text="Вебинар"
       />
 
-      <Typography>
+      <P>
         {['Вебинар стартует ', webinarDate, ' в ', webinarTime, ' МСК (GTM+3)']}
-      </Typography>
+      </P>
 
       <StyledLink href={link} isExternal>
         <Button className={styles.button} text="Подключиться" />

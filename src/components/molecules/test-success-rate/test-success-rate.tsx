@@ -1,6 +1,6 @@
 import { Children } from 'react';
 import classnames from 'classnames';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import styles from './test-success-rate.module.scss';
 import type { TestSuccessRateProps } from './types';
 
@@ -36,8 +36,8 @@ function TestSuccessRate({
         className
       )}
     >
-      <Typography
-        htmlTag="h3"
+      <Heading
+        level={3}
         text={`${testResultPercent}%`}
         size="xxl"
         weight="bold"
@@ -45,9 +45,7 @@ function TestSuccessRate({
 
       <div className={styles.result__description}>
         {Children.toArray(
-          texts.map((text) => (
-            <Typography text={text} className={styles.result__text} />
-          ))
+          texts.map((text) => <P text={text} className={styles.result__text} />)
         )}
       </div>
     </div>

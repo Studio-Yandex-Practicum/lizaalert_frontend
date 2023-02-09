@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import { StyledLink } from 'components/molecules/styled-link';
 import styles from './course-completed.module.scss';
 import type { CourseCompletedProps } from './types';
@@ -18,8 +18,8 @@ function CourseCompleted({
 }: CourseCompletedProps) {
   return (
     <Card className={classnames(styles.card, className)} htmlTag="section">
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         size="l"
         weight="bold"
         className={styles.title}
@@ -27,25 +27,25 @@ function CourseCompleted({
       />
 
       <div className={styles.content}>
-        <Typography htmlTag="h3" size="xxl" weight="bold">
+        <Heading level={3} size="xxl" weight="bold">
           {isCompleted ? 'Поздравляем!' : 'Сожалеем'}
-        </Typography>
+        </Heading>
 
         {isCompleted && (
           <>
-            <Typography text={`Вы успешно завершили курс «${courseName}».`} />
-            <Typography text={courseSuccessDescription} />
+            <P text={`Вы успешно завершили курс «${courseName}».`} />
+            <P text={courseSuccessDescription} />
           </>
         )}
 
         {!isCompleted && (
           <>
-            <Typography>
+            <P>
               Курс <span className={styles.accent}>{`«${courseName}»`}</span> не
               пройден.
-            </Typography>
+            </P>
 
-            <Typography>
+            <P>
               Мы предъявляем очень строгие требования к участникам
               поисково-спасательных мероприятий, из-за чего обучение может быть
               сложным. Вы&nbsp;можете попробовать себя
@@ -55,7 +55,7 @@ function CourseCompleted({
                 linkText=" в других направлениях"
               />
               .
-            </Typography>
+            </P>
           </>
         )}
       </div>

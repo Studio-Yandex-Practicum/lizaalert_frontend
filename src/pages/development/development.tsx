@@ -1,4 +1,4 @@
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { routes } from 'config';
@@ -11,8 +11,8 @@ import styles from './development.module.scss';
 function Development() {
   return (
     <main className={styles.development}>
-      <Typography
-        htmlTag="h1"
+      <Heading
+        level={1}
         size="xl"
         weight="bold"
         text="Страница находится в разработке"

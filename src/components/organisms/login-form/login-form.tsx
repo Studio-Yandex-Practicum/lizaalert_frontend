@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
@@ -56,8 +56,8 @@ function LoginForm() {
 
   return (
     <Card className={styles.container} htmlTag="section">
-      <Typography
-        htmlTag="h3"
+      <Heading
+        level={3}
         text="Войти в профиль"
         size="l"
         weight="bold"

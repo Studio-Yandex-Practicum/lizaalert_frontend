@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
@@ -27,7 +27,7 @@ function Filter({ className = '' }: FilterProps) {
     <aside className={classnames(styles.filters, className)}>
       <Card className={styles.card}>
         <div className={styles.header}>
-          <Typography size="l" htmlTag="h3" weight="bold" text="Фильтры" />
+          <Heading level={3} size="l" weight="bold" text="Фильтры" />
 
           {selection.length > 0 && (
             <Button view="text" onClick={resetFilters} text="Очистить" />

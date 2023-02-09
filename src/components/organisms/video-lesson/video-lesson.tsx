@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import styles from './video-lesson.module.scss';
 import type { VideoLessonProps } from './types';
 
@@ -11,8 +11,8 @@ import type { VideoLessonProps } from './types';
 function VideoLesson({ source, className }: VideoLessonProps) {
   return (
     <Card className={classnames(styles.container, className)}>
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         size="l"
         weight="bold"
         className={styles.heading}

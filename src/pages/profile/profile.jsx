@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '../../components/atoms/typography';
+import { Heading, Li, P } from '../../components/atoms/typography';
 import { AccountData } from '../../components/organisms/account-data';
 import { AccountOverview } from '../../components/organisms/account-overview';
 import { PersonalData } from '../../components/organisms/personal-data';
@@ -21,8 +21,8 @@ function Profile() {
   }
   return (
     <>
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         size="xxl"
         weight="bold"
         text={routes.profile.title}
@@ -39,28 +39,24 @@ function Profile() {
             <PersonalData />
 
             <div className={styles.description}>
-              <Typography>
+              <P>
                 Просьба указывать настоящие ФИО, это нужно для получения
                 сертификатов
-              </Typography>
-              <Typography>
+              </P>
+              <P>
                 Географический регион влияет на&nbsp;доступность некоторых
                 курсов и&nbsp;занятий
-              </Typography>
-              <Typography>
+              </P>
+              <P>
                 Если вы&nbsp;не&nbsp;хотите, чтобы другие пользователи видели
                 ваши ФИО, укажите позывной на&nbsp;форуме&nbsp;&mdash;
                 он&nbsp;будет отображаться вместо ваших настоящих данных
-              </Typography>
-              <Typography>Требования к&nbsp;загружаемому фото:</Typography>
+              </P>
+              <P>Требования к&nbsp;загружаемому фото:</P>
 
               <ul className={styles.list}>
-                <Typography htmlTag="li">
-                  разрешение не&nbsp;менее 640&times;640px
-                </Typography>
-                <Typography htmlTag="li">
-                  размер не&nbsp;более 3&nbsp;МБ
-                </Typography>
+                <Li>разрешение не&nbsp;менее 640&times;640px</Li>
+                <Li>размер не&nbsp;более 3&nbsp;МБ</Li>
               </ul>
             </div>
           </section>
@@ -69,16 +65,16 @@ function Profile() {
             <AccountData />
 
             <div className={styles.description}>
-              <Typography>
+              <P>
                 Номер телефона используется как уникальный идентификатор
                 пользователя, поэтому его нельзя поменять вручную
-              </Typography>
-              <Typography>
+              </P>
+              <P>
                 Если по&nbsp;какой-то причине у&nbsp;вас нет доступа
                 к&nbsp;номеру телефона на&nbsp;который вы&nbsp;регистрировали
                 аккаунт, напишите в&nbsp;поддержку
-              </Typography>
-              <Typography>Email нужен для восстановления пароля</Typography>
+              </P>
+              <P>Email нужен для восстановления пароля</P>
             </div>
           </section>
         </div>

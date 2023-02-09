@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { ContentsItem } from 'components/organisms/contents-item';
 import styles from './course-contents.module.scss';
@@ -32,8 +32,8 @@ function CourseContents({
 
       {type !== 'main' && (
         <>
-          <Typography
-            htmlTag="h2"
+          <Heading
+            level={2}
             size="l"
             weight="bold"
             className={styles.heading}

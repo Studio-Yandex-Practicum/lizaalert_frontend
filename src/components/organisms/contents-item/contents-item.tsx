@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Icon, IconType } from 'components/atoms/icon';
-import { Typography } from 'components/atoms/typography';
+import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
@@ -37,9 +37,7 @@ function ContentsItem({
   if (type === 'main') {
     return (
       <li className={classnames(styles.content, className)}>
-        <Typography className={styles.text}>
-          {`${index + 1}. ${title}`}
-        </Typography>
+        <P className={styles.text}>{`${index + 1}. ${title}`}</P>
 
         {lessonsList}
       </li>

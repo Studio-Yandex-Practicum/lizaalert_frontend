@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
 import { CourseBenefits } from 'components/organisms/course-benefits';
 import { CourseContents } from 'components/organisms/course-contents';
@@ -44,8 +44,8 @@ function Course() {
 
   return (
     <>
-      <Typography
-        htmlTag="h2"
+      <Heading
+        level={2}
         size="xxl"
         weight="bold"
         className={styles.heading}

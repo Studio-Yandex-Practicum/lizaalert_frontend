@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { P } from '../../components/atoms/typography';
 import { Breadcrumbs } from '../../components/organisms/breadcrumbs';
 import { CourseContents } from '../../components/organisms/course-contents';
 import { NavigationButtons } from '../../components/organisms/navigation-buttons';
@@ -57,7 +58,7 @@ function Lesson() {
       <div className={styles.lesson}>
         <div className={styles.lessonContent}>
           {!lesson ? (
-            <div>Данные отсутствуют</div>
+            <P>Данные отсутствуют</P>
           ) : (
             <>
               {lesson.slug === 'lesson' && (

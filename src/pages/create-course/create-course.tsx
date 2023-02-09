@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { NewCourseContent } from 'components/organisms/new-course-content';
 import { NewCourseDescription } from 'components/organisms/new-course-description';
@@ -40,8 +40,8 @@ function CreateCourse() {
   return (
     <>
       <div className={styles.header}>
-        <Typography
-          htmlTag="h2"
+        <Heading
+          level={2}
           weight="bold"
           size="xxl"
           text="Создание нового курса"

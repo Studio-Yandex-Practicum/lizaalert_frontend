@@ -2,7 +2,7 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import useFormWithValidation from 'hooks/use-form-with-validation';
@@ -27,12 +27,7 @@ function RestorePasswordForm() {
 
   return (
     <Card className={styles.card} htmlTag="section">
-      <Typography
-        htmlTag="h2"
-        weight="bold"
-        size="l"
-        text="Восстановить пароль"
-      />
+      <Heading level={2} weight="bold" size="l" text="Восстановить пароль" />
 
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <Input

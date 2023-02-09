@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
-import { Typography } from 'components/atoms/typography';
+import { Heading, P } from 'components/atoms/typography';
 import { StyledLink } from 'components/molecules/styled-link';
 import { Button } from 'components/molecules/button';
 import { routes } from 'config';
@@ -12,24 +12,24 @@ function NotFound() {
   return (
     <>
       <Card className={styles.card} htmlTag="section">
-        <Typography
-          htmlTag="h2"
+        <Heading
+          level={2}
           size="xxl"
           weight="bold"
           text="Что-то пошло не так"
           textAlign="center"
         />
 
-        <Typography
+        <P
           textAlign="center"
           text="Страница потерялась."
           className={styles.text}
         />
 
-        <Typography textAlign="center" className={styles.text}>
+        <P textAlign="center" className={styles.text}>
           А пока мы её ищем, ознакомьтесь с
           <StyledLink href={routes.courses.path} linkText=" нашими курсами" />
-        </Typography>
+        </P>
       </Card>
 
       <Button
