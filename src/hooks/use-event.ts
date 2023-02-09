@@ -17,10 +17,10 @@ export function useEvent<T extends AnyFunction>(callback: T): T {
   const stableRef = useRef<T | null>(null);
 
   if (!stableRef.current) {
-    stableRef.current = function handler(this: any) {
-      // Выключаем правило для универсальности
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-return,prefer-rest-params
-      return latestRef.current.apply(this, arguments as any);
+    stableRef.current = function handler(this: never) {
+      // Здесь не нужны rest-параметры
+      // eslint-disable-next-line prefer-rest-params
+      return latestRef.current.apply(this, arguments as never);
     } as T;
   }
 
