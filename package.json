@@ -8,7 +8,7 @@
     "start:mock": "webpack serve --env REACT_APP_MOCKING=true --config ./.webpack/webpack.dev.js",
     "build": "webpack --config ./.webpack/webpack.prod.js",
     "test": "jest ./",
-    "prettier": "prettier --write src/**/*.js",
+    "prettier": "prettier --write src/**/*",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },
@@ -48,6 +48,7 @@
     "@babel/preset-env": "7.20.2",
     "@babel/preset-react": "7.18.6",
     "@babel/preset-typescript": "7.18.6",
+    "@evilmartians/lefthook": "1.2.9",
     "@svgr/webpack": "6.5.1",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
