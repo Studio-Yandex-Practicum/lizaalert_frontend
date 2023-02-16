@@ -43,7 +43,7 @@ const defaultRoutes: Record<string, RouteType> = {
   },
   notFound: {
     title: 'Страница не найдена',
-    path: '*',
+    path: '/notFound',
     icon: 'xSolid',
   },
 };

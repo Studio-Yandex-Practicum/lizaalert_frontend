@@ -4,11 +4,11 @@
     "level": {
       "id": 2,
       "name": "Бывалый",
-      "slug":"experienced"
+      "slug": "experienced"
     },
     "title": "Кинологическое направление",
     "description": "Поисково-спасательная работа, следовая работа, а так же поиск тел погибших с помощью собак.",
-    "image" : "https://i.ibb.co/VttHZb2/1.png",
+    "image": "https://i.ibb.co/VttHZb2/1.png",
     "duration": 144,
     "lessonsCount": 144,
     "status": {
@@ -23,11 +23,11 @@
     "level": {
       "id": 3,
       "name": "Профессионал",
-      "slug":"professional"
+      "slug": "professional"
     },
     "title": "Оперативные дежурные и прочие плюшки и сладости",
     "description": "Оперативное реагирование, контроль поступающих заявок и звонков, распределение задач, помощь в решении вопросов, удалённое взаимодействие, проактивный бег, замедленный снег, горячий чай, незамысловатый текст, призванный разорвать контейнер, поскольку это очень длинный текст и он никогда не кончится.",
-    "image" : "https://i.ibb.co/7rb0FZs/2.png",
+    "image": "https://i.ibb.co/7rb0FZs/2.png",
     "duration": 124,
     "lessonsCount": 101,
     "status": {
@@ -42,11 +42,11 @@
     "level": {
       "id": 2,
       "name": "Бывалый",
-      "slug":"experienced"
+      "slug": "experienced"
     },
     "title": "Беспилотные летательные аппараты",
     "description": "Применение БПЛА в поиске людей, а так же передача полученной с помощью техники информации спасательным службам.",
-    "image" : "https://i.ibb.co/0DQNPbT/3.png",
+    "image": "https://i.ibb.co/0DQNPbT/3.png",
     "duration": 152,
     "lessonsCount": 84,
     "status": {
@@ -61,11 +61,11 @@
     "level": {
       "id": 2,
       "name": "Бывалый",
-      "slug":"experienced"
+      "slug": "experienced"
     },
     "title": "Первая помощь",
     "description": "Основы оказания первой помощи на поиске, юридические аспекты, базовые алгоритмы, разбор ошибок при оказания помощи на поиске.",
-    "image" : "https://i.ibb.co/bvySqGp/4.png",
+    "image": "https://i.ibb.co/bvySqGp/4.png",
     "duration": 204,
     "lessonsCount": 164,
     "status": {
@@ -80,11 +80,11 @@
     "level": {
       "id": 1,
       "name": "Новичок",
-      "slug":"novice"
+      "slug": "novice"
     },
     "title": "Инфогруппа",
     "description": "Создание ориентировок, заказ карт, связь через мини АТС, обеспечение поиска.",
-    "image" : "https://i.ibb.co/rsCGK20/5.png",
+    "image": "https://i.ibb.co/rsCGK20/5.png",
     "duration": 90,
     "lessonsCount": 87,
     "status": {
@@ -99,11 +99,11 @@
     "level": {
       "id": 1,
       "name": "Новичок",
-      "slug":"novice"
+      "slug": "novice"
     },
     "title": "Операторы 8-800",
     "description": "Приём заявок на поиск людей с последующей передачей информации инфоргам.",
-    "image" : "https://i.ibb.co/XJJQ1tq/6.png",
+    "image": "https://i.ibb.co/XJJQ1tq/6.png",
     "duration": 120,
     "lessonsCount": 99,
     "status": {
@@ -118,7 +118,7 @@
     "level": {
       "id": 1,
       "name": "Новичок",
-      "slug":"novice"
+      "slug": "novice"
     },
     "title": "Группа коротких прозвонов",
     "description": "Прозвон больниц, ОВД, различных ведомств, иногда свидетелей и возможных свидетелей.",
@@ -137,11 +137,11 @@
     "level": {
       "id": 1,
       "name": "Новичок",
-      "slug":"novice"
+      "slug": "novice"
     },
     "title": "Новичковая",
     "description": "Короткое описание курса. Поиск людей в лесу и в городе. Все поисковые мероприятия организуются силами добровольцев «ЛизаАлерт».",
-    "image" : "https://i.ibb.co/p1yrc4Y/8.png",
+    "image": "https://i.ibb.co/p1yrc4Y/8.png",
     "duration": 50,
     "lessonsCount": 30,
     "status": {
