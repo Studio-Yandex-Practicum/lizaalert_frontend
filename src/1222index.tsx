@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { isDevEnv } from './config';
-import { configureAxios } from './config/configure-axios';
-import { importBuildTarget } from './config/import-build-target';
-import reportWebVitals from './reportWebVitals';
+import {configureAxios} from './config/configure-axios';
+import {importBuildTarget} from './config/import-build-target';
 import './styles/index.scss';
 
 configureAxios();
 
 importBuildTarget()
-  .then(({ default: Environment }) => {
+  .then(({default: Environment}) => {
     ReactDOM.render(
       <React.StrictMode>
-        <Environment />
+        <Environment/>
       </React.StrictMode>,
       document.getElementById('root')
     );
@@ -20,7 +18,3 @@ importBuildTarget()
   .catch(() => {
     /* TODO: показать окошко, что все пропало */
   });
-
-if (isDevEnv) {
-  reportWebVitals();
-}
