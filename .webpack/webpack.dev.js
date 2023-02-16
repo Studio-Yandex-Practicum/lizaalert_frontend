@@ -8,22 +8,27 @@ const { mapEnv } = require('./utils')
 
 const { parsed } = dotenv.config({ path: path.resolve(__dirname, '..', './.env.development') });
 
-module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, '..', 'build'),
+module.exports = (env) => {
+  return merge(common, {
+    mode: 'development',
+    devtool: 'inline-source-map',
+    devServer: {
+      static: {
+        directory: path.resolve(__dirname, '..', 'build'),
+      },
+      watchFiles: path.resolve(__dirname, '..', 'src'),
+      port: 3000,
+      open: true,
+      hot: true,
+      historyApiFallback: true,
     },
-    watchFiles: path.resolve(__dirname, '..', 'src'),
-    port: 3000,
-    open: true,
-    hot: true,
-    historyApiFallback: true,
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': mapEnv(parsed),
-    }),
-  ],
-});
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          ...mapEnv(parsed),
+          REACT_APP_MOCKING: env.REACT_APP_MOCKING,
+        },
+      }),
+    ],
+  });
+}

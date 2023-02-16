@@ -1,8 +1,10 @@
 /.git
 /.vscode
 /.idea
+/.jest
 dist
 build
 node_modules
 public
 webpack.*
+*.config.*
