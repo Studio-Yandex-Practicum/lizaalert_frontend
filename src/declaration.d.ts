@@ -3,10 +3,25 @@ declare module '*.scss' {
   export default content;
 }
 
-declare module '*.svg';
-declare module '*.png';
-declare module '*.jpg';
-declare module '*.jpeg';
+declare module '*.svg' {
+  const content: string;
+  export default content;
+}
+
+declare module '*.png' {
+  const content: string;
+  export default content;
+}
+
+declare module '*.jpg' {
+  const content: string;
+  export default content;
+}
+
+declare module '*.jpeg' {
+  const content: string;
+  export default content;
+}
 
 declare type Nullable<T> = T | null | undefined;
 declare type VoidFunction = (...args: unknown[]) => void;
