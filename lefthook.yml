@@ -2,8 +2,8 @@ pre-commit:
   parallel: true
   commands:
     format:
-      glob: '*.{scss}'
+      glob: '*.{css,scss}'
       run: npm run prettier --ignore-unknown --write {staged_files} && git add {staged_files}
     lint:
-      glob: '*.{ts,tsx,js,jsx}'
-      run: npm run eslint --fix {staged_files} && yarn prettier --ignore-unknown --write {staged_files} && git add {staged_files}
+      glob: '*.{ts,tsx}'
+      run: npm run eslint --fix {staged_files} && git add {staged_files}
