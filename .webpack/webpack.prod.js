@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -14,6 +15,9 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': mapEnv(parsed),
+    }),
+    new CompressionPlugin({
+      algorithm: "gzip",
     }),
   ],
   optimization: {
