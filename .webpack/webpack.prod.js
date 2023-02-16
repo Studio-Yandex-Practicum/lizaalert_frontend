@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -15,4 +16,21 @@ module.exports = merge(common, {
       'process.env': mapEnv(parsed),
     }),
   ],
+  optimization: {
+    minimizer: [
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ['gifsicle', { interlaced: true }],
+              ['jpegtran', { progressive: true }],
+              ['optipng', { optimizationLevel: 5 }],
+              ['svgo', { name: 'preset-default' }],
+            ]
+          }
+        }
+      })
+    ]
+  }
 });
