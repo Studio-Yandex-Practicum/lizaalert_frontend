@@ -2,7 +2,7 @@ pre-commit:
   parallel: true
   commands:
     format:
-      glob: '*.{css,scss}'
+      glob: '*.{css,scss,md}'
       run: npx prettier --ignore-unknown --write {staged_files} && git add {staged_files}
     lint:
       glob: '*.{ts,tsx,js,jsx}'
