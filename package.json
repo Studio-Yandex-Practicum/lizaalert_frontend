@@ -10,9 +10,7 @@
     "test": "jest ./",
     "prettier": "prettier --write src/**/*.js",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "lint:fix": "eslint src/ --fix"
   },
   "eslintConfig": {
     "extends": [

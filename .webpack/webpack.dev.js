@@ -4,9 +4,11 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 const common = require('./webpack.common');
-const { mapEnv } = require('./utils')
+const { mapEnv } = require('./utils');
 
-const { parsed } = dotenv.config({ path: path.resolve(__dirname, '..', './.env.development') });
+const { parsed } = dotenv.config({
+  path: path.resolve(__dirname, '..', './.env.development'),
+});
 
 module.exports = (env) => {
   return merge(common, {
@@ -31,4 +33,4 @@ module.exports = (env) => {
       }),
     ],
   });
-}
+};
