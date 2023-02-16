@@ -11,7 +11,7 @@ function TheoryLesson({ content }: TheoryLessonProps) {
   return (
     <Card>
       {/* eslint-disable-next-line */}
-      <div dangerouslySetInnerHTML={{__html: content}}/>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </Card>
   );
 }

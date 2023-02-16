@@ -8,7 +8,7 @@
     "start:mock": "webpack serve --env REACT_APP_MOCKING=true --config ./.webpack/webpack.dev.js",
     "build": "webpack --config ./.webpack/webpack.prod.js",
     "test": "jest ./",
-    "prettier": "prettier --write src/**/*",
+    "format": "prettier --write src/**/*",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },
