@@ -7,8 +7,8 @@ $font-size-l: 24px;
 $font-size-m: 18px;
 $font-size-s: 16px;
 
-$line-height-xxl: (52 / 48);
-$line-height-xl: (36 / 32);
-$line-height-l: (28 / 24);
-$line-height-m: (24 / 18);
-$line-height-s: (20 / 16);
+$line-height-xxl: calc(52 / 48);
+$line-height-xl: calc(36 / 32);
+$line-height-l: calc(28 / 24);
+$line-height-m: calc(24 / 18);
+$line-height-s: calc(20 / 16);
