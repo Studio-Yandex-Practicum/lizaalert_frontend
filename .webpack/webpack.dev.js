@@ -10,7 +10,7 @@ const { parsed } = dotenv.config({ path: path.resolve(__dirname, '..', './.env.d
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'cheap-source-map',
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, '..', 'build'),
@@ -19,6 +19,7 @@ module.exports = merge(common, {
     port: 3000,
     open: true,
     hot: true,
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.DefinePlugin({

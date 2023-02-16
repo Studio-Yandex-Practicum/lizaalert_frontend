@@ -9,7 +9,7 @@ import {
   Register,
 } from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
-import { routes } from 'config';
+import routes from './routes';
 
 function Router() {
   return (
@@ -25,7 +25,7 @@ function Router() {
 
         <Route path={routes.profile.path} element={<Profile />} />
         <Route path={routes.login.path} element={<Login />} />
-        <Route path={routes.notFound.path} element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
       <Route path={routes.register.path} element={<Register />} />
     </Routes>

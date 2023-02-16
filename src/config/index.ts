@@ -20,6 +20,7 @@ export const isProdEnv = NODE_ENV === 'production';
 
 /** Единая точка выхода для роутов проекта */
 export const routes = isAdmin ? adminRoutes : defaultRoutes;
+console.log({ routes });
 
 const BACKEND_ORIGIN_ENV: Record<string, string> = {
   development: 'DEV',
