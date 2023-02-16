@@ -51,7 +51,8 @@ function Courses() {
           error={error}
         >
           <ul className={styles.list}>
-            {courses.length > 0 &&
+            {courses &&
+              courses.length > 0 &&
               courses.map((course) => (
                 <li key={course.id}>
                   <CoursePreview course={course} />

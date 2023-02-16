@@ -2,7 +2,7 @@ import { isAdmin } from './index';
 
 export const importBuildTarget = () => {
   if (isAdmin) {
-    return import('../app/app-admin');
+    return import(/* webpackChunkName: "appAdmin" */ '../app/app-admin');
   }
-  return import('../app/app');
+  return import(/* webpackChunkName: "app" */ '../app/app');
 };

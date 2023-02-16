@@ -20,12 +20,12 @@ function WithInfiniteScroll<T>({
 }: WithInfiniteScrollConfig<T>) {
   const loadMoreRef = useRef(null);
   const [pagination, setPagination] = useState<PaginationState>({
-    page: data.length / initialPageSize + 1,
+    page: data ? data.length / initialPageSize + 1 : 1,
     pageSize: initialPageSize,
   });
 
   const fetchData = async (paginationState: PaginationState) => {
-    if (data.length === 0 || data.length < total) {
+    if (!data || data.length < total) {
       await actionOnIntersect(paginationState);
       setPagination((prevState) => ({
         ...prevState,
@@ -47,7 +47,7 @@ function WithInfiniteScroll<T>({
 
       {isLoading && <Loader />}
 
-      {!isLoading && !error && (data.length === 0 || data.length < total) && (
+      {!isLoading && !error && (!data || data.length < total) && (
         <span aria-hidden ref={loadMoreRef} />
       )}
     </div>

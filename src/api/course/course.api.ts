@@ -7,9 +7,9 @@ import type { CourseModel } from './types';
 export class CourseApi {
   static getCourse(id: number): Promise<CourseModel> {
     if (isMockEnv) {
-      return import('./mock/course.mock').then((res) =>
-        unpackModule<CourseModel>(res)
-      );
+      return import(
+        /* webpackChunkName: "courseMock" */ './mock/course.mock'
+      ).then((res) => unpackModule<CourseModel>(res));
     }
 
     return axios.get<unknown, CourseModel>(`/courses/${id}/`);

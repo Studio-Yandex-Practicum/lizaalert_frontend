@@ -42,7 +42,7 @@ export type WithInfiniteScrollConfig<T> = {
   /**
    * Типизируемый через Generic массив с данными.
    * */
-  data: T[];
+  data: Nullable<T[]>;
   /**
    * Общее количество элементов, которое будет отображено.
    * */

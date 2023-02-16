@@ -10,9 +10,9 @@ export class CoursesApi {
     pageSize,
   }: GetCoursesDataModel): Promise<CoursesModel> {
     if (isMockEnv) {
-      return import('./mock/courses.mock').then((res) =>
-        unpackModule<CoursesModel>(res)
-      );
+      return import(
+        /* webpackChunkName: "coursesMock" */ './mock/courses.mock'
+      ).then((res) => unpackModule<CoursesModel>(res));
     }
 
     return axios.get<unknown, CoursesModel>('/courses/', {
