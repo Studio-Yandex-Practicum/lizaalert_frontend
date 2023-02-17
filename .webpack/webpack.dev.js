@@ -32,7 +32,6 @@ module.exports = (env) => {
           use: [
             'style-loader',
             'css-loader',
-            'postcss-loader',
             'sass-loader',
           ],
         },
@@ -48,7 +47,6 @@ module.exports = (env) => {
                 },
               },
             },
-            'postcss-loader',
             'sass-loader',
           ],
         },

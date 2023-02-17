@@ -78,6 +78,7 @@
     "jest-environment-jsdom": "29.4.3",
     "lefthook": "1.2.9",
     "mini-css-extract-plugin": "2.7.2",
+    "postcss": "8.4.21",
     "postcss-loader": "7.0.2",
     "postcss-preset-env": "8.0.1",
     "prettier": "2.8.4",
