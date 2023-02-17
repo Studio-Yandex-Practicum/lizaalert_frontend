@@ -29,11 +29,7 @@ module.exports = (env) => {
         {
           test: /\.(scss|css)$/,
           exclude: /\.module\.(scss|css)$/i,
-          use: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
-          ],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         {
           test: /\.module\.scss$/i,
@@ -43,7 +39,7 @@ module.exports = (env) => {
               loader: 'css-loader',
               options: {
                 modules: {
-                  localIdentName: '[local]_[hash:base64:5]'
+                  localIdentName: '[local]_[hash:base64:5]',
                 },
               },
             },

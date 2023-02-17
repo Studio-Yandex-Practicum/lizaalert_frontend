@@ -4,6 +4,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -41,6 +42,11 @@ module.exports = merge(common, {
     ],
   },
   optimization: {
-    minimizer: [new CssMinimizerPlugin(), new HtmlMinimizerPlugin()],
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new HtmlMinimizerPlugin(),
+      new TerserPlugin(),
+    ],
   },
 });
