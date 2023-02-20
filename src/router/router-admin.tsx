@@ -13,7 +13,7 @@ import {
   Register,
 } from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
-import { routes } from 'config';
+import routes from './routes-admin';
 
 function RouterAdmin() {
   return (

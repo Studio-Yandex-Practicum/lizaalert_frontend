@@ -41,12 +41,12 @@ describe('Компонент Option', () => {
   });
 
   describe('Тестирование слушателей событий', () => {
-    it('Клик отрабатывает корректно', () => {
+    it('Клик отрабатывает корректно', async () => {
       const handleClick = jest.fn();
       createOption({
         onClick: handleClick,
       });
-      userEvent.click(screen.getByText(mockOption.name));
+      await userEvent.click(screen.getByText(mockOption.name));
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
