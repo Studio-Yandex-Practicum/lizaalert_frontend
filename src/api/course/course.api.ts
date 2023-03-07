@@ -1,19 +1,14 @@
-import axios from 'axios';
-
-import { isMockEnv } from 'config';
-import { unpackModule } from 'utils/unpack-module';
+import { BaseApi } from '../base';
 import type { CourseModel } from './types';
 
-export class CourseApi {
-  static getCourse(id: number): Promise<CourseModel> {
-    if (isMockEnv) {
-      return import(
-        /* webpackChunkName: "courseMock" */ './mock/course.mock'
-      ).then((res) => unpackModule<CourseModel>(res));
-    }
+const SERVICE_URL = '/course/';
 
-    return axios.get<unknown, CourseModel>(`/courses/${id}/`);
-  }
+class CourseApi extends BaseApi {
+  getCourse = (id: number) =>
+    this.createRequest<CourseModel>({
+      request: this.api.get(`${SERVICE_URL}${id}/`),
+      mock: () => import('./mock/course.mock'),
+    });
 
   // create course
 
@@ -21,3 +16,5 @@ export class CourseApi {
 
   // delete course???
 }
+
+export const courseApi = new CourseApi();

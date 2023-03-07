@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CourseApi } from 'api/course';
+import { courseApi } from 'api/course';
 
 export const fetchCourse = createAsyncThunk(
   'course/fetch',
   async (courseId: number) => {
-    const course = await CourseApi.getCourse(courseId);
+    const course = await courseApi.getCourse(courseId);
     return course;
   }
 );
