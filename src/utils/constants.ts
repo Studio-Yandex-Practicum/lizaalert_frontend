@@ -23,6 +23,8 @@ export const SPINNER_DELAY = 300;
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 
+export const GENERAL_ERROR = 'Что-то пошло не так';
+
 export enum Controls {
   CHECKBOX = 'checkbox',
   RADIO = 'radio',

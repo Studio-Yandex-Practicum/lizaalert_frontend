@@ -10,10 +10,10 @@ import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourses,
   selectCoursesError,
-  selectCoursesLoading,
+  selectCoursesIsLoading,
   selectCoursesTotal,
 } from 'store/courses/selectors';
-import fetchCoursesAction from 'store/courses/thunk';
+import { fetchCourses } from 'store/courses/thunk';
 import styles from './courses.module.scss';
 
 const initialPageSize = 8;
@@ -22,11 +22,11 @@ function Courses() {
   const dispatch = useAppDispatch();
   const courses = useAppSelector(selectCourses);
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
-  const isLoading = useAppSelector(selectCoursesLoading);
+  const isLoading = useAppSelector(selectCoursesIsLoading);
   const error = useAppSelector(selectCoursesError);
 
-  const fetchCourses = async (paginationState: PaginationState) => {
-    void dispatch(fetchCoursesAction(paginationState));
+  const fetchCoursesOnIntersect = async (paginationState: PaginationState) => {
+    void dispatch(fetchCourses(paginationState));
   };
 
   return (
@@ -46,7 +46,7 @@ function Courses() {
           initialPageSize={initialPageSize}
           data={courses}
           isLoading={isLoading}
-          actionOnIntersect={fetchCourses}
+          actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={error}
         >
