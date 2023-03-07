@@ -1,6 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
 import type { CourseModel } from 'api/course';
-import fetchCourseAction from './thunk';
+import { GENERAL_ERROR } from 'utils/constants';
+import { fetchCourse } from './thunk';
 import type { CourseState } from './types';
 
 const initialState: CourseState = {
@@ -13,26 +19,22 @@ export const courseSlice = createSlice({
   name: 'course',
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchCourseAction.pending.type]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchCourse.fulfilled, (state, { payload }) => {
+      state.course = payload;
+    });
+    builder.addMatcher(isPending(fetchCourse), (state) => {
       state.isLoading = true;
       state.error = null;
-    },
-    [fetchCourseAction.fulfilled.type]: (
-      state,
-      { payload }: PayloadAction<CourseModel>
-    ) => {
-      state.course = payload;
+    });
+    builder.addMatcher(isFulfilled(fetchCourse), (state) => {
       state.isLoading = false;
-    },
-    [fetchCourseAction.rejected.type]: (
-      state,
-      { payload }: PayloadAction<string>
-    ) => {
-      state.course = {} as CourseModel;
+      state.error = null;
+    });
+    builder.addMatcher(isRejected(fetchCourse), (state, { error }) => {
       state.isLoading = false;
-      state.error = payload;
-    },
+      state.error = error.message ?? GENERAL_ERROR;
+    });
   },
 });
 

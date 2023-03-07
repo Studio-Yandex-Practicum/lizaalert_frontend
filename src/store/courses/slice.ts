@@ -4,13 +4,13 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR } from '../../utils/constants';
+import { GENERAL_ERROR } from 'utils/constants';
 import type { CoursesState } from './types';
 import { fetchCourses } from './thunk';
 
 const initialState: CoursesState = {
   count: null,
-  results: null,
+  courses: null,
   isLoading: false,
   error: null,
 };
@@ -23,12 +23,12 @@ export const coursesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCourses.fulfilled, (state, { payload }) => {
-      if (!state.results) {
-        state.results = payload.results;
+      if (!state.courses) {
+        state.courses = payload.results;
       }
 
-      if (state.results.length < Number(payload.count)) {
-        state.results = [...state.results, ...payload.results];
+      if (state.courses.length < Number(payload.count)) {
+        state.courses = [...state.courses, ...payload.results];
       }
 
       state.count = payload.count;
