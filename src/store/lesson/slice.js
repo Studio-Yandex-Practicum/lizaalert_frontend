@@ -1,5 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import fetchLessonByIdAction from './thunk';
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
+import { GENERAL_ERROR } from '../../utils/constants';
+import { fetchLessonById } from './thunk';
 
 const lessonSlice = createSlice({
   name: 'lesson',
@@ -9,21 +15,22 @@ const lessonSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: {
-    [fetchLessonByIdAction.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchLessonById.fulfilled, (state, { payload }) => {
+      state.lesson = payload;
+    });
+    builder.addMatcher(isPending(fetchLessonById), (state) => {
       state.isLoading = true;
       state.error = null;
-    },
-    [fetchLessonByIdAction.fulfilled]: (state, { payload }) => {
-      state.lesson = payload;
+    });
+    builder.addMatcher(isFulfilled(fetchLessonById), (state) => {
       state.isLoading = false;
       state.error = null;
-    },
-    [fetchLessonByIdAction.rejected]: (state, { payload }) => {
-      state.lesson = {};
+    });
+    builder.addMatcher(isRejected(fetchLessonById), (state, { error }) => {
       state.isLoading = false;
-      state.error = payload;
-    },
+      state.error = error.message ?? GENERAL_ERROR;
+    });
   },
 });
 
