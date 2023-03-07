@@ -21,7 +21,7 @@ export abstract class BaseApi {
     mock,
     request,
   }: BaseApiRequest): Promise<T> => {
-    if (isMockEnv) {
+    if (isMockEnv && mock) {
       return mock().then(
         (module: { readonly default: Promise<T> }) => module.default
       );
