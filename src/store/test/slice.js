@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import fetchTest from './thunk';
-import { Controls } from '../../utils/constants';
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
+import { Controls, GENERAL_ERROR } from '../../utils/constants';
+import { fetchTest } from './thunk';
 
 const initialState = {
   test: {},
@@ -12,8 +17,10 @@ export const testSlice = createSlice({
   name: 'test',
   initialState,
   reducers: {
+    // TODO переименовать на понятный метод -- change... что именно?
     change: (state, action) => {
       state.test.questions = [
+        // TODO Нечитаемый код переписать
         ...state.test.questions.map((question) => {
           if (question.id === action.payload.questionId) {
             return {
@@ -23,9 +30,11 @@ export const testSlice = createSlice({
                   if (answer.id === action.payload.answerId) {
                     return { ...answer, isChecked: !answer.isChecked };
                   }
+
                   if (question.type === Controls.RADIO) {
                     return { ...answer, isChecked: false };
                   }
+
                   return answer;
                 }),
               ],
@@ -36,35 +45,39 @@ export const testSlice = createSlice({
       ];
     },
   },
-  extraReducers: {
-    [fetchTest.pending.type]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [fetchTest.fulfilled.type]: (state, { payload }) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchTest.fulfilled, (state, { payload }) => {
       state.test = {
         ...payload,
         questions: [
           ...payload.questions.map((question) => {
             let countCorrectAnswers = 0;
+
             question.answers.forEach((answer) => {
               if (answer.isCorrect) countCorrectAnswers += 1;
             });
+
             if (countCorrectAnswers > 1) {
               return { ...question, type: Controls.CHECKBOX };
             }
+
             return { ...question, type: Controls.RADIO };
           }),
         ],
       };
+    });
+    builder.addMatcher(isPending(fetchTest), (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addMatcher(isFulfilled(fetchTest), (state) => {
       state.isLoading = false;
       state.error = null;
-    },
-    [fetchTest.rejected.type]: (state, { payload }) => {
-      state.test = {};
+    });
+    builder.addMatcher(isRejected(fetchTest), (state, { error }) => {
       state.isLoading = false;
-      state.error = payload;
-    },
+      state.error = error.message ?? GENERAL_ERROR;
+    });
   },
 });
 

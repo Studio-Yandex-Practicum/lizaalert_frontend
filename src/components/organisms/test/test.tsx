@@ -8,7 +8,7 @@ import {
 } from 'components/organisms/test-question';
 import styles from './test.module.scss';
 import type { TestProps } from './types';
-import useTest from './hooks/use-test';
+import { useTest } from './hooks/use-test';
 
 /**
  * Компонент-карточка теста с вопросами.
@@ -16,10 +16,12 @@ import useTest from './hooks/use-test';
 
 function Test({ toggleRender }: TestProps) {
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     isLoading,
     isSubmitted,
     isSuccess,
     testResultPercent,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     test,
     onSubmit,
     handleButtonDisabledState,
@@ -47,6 +49,7 @@ function Test({ toggleRender }: TestProps) {
 
       <form onSubmit={onSubmit} name="testForm" className={styles.form}>
         <ul className={styles.list}>
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access */}
           {renderQuestionsList(test.questions, isSubmitted)}
         </ul>
 
