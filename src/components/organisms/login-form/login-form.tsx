@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-unsafe-assignment, @typescript-eslint/ban-ts-comment */
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
@@ -9,7 +10,7 @@ import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
-import { selectIsAuth, selectIsLoading } from 'store/auth/selectors';
+import { selectAuth } from 'store/auth/selectors';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
@@ -29,8 +30,7 @@ function LoginForm() {
   const { profile } = routes;
 
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector<boolean>(selectIsLoading);
-  const isAuth = useAppSelector<boolean>(selectIsAuth);
+  const { isAuth, isLoading } = useAppSelector(selectAuth);
 
   useEffect(() => {
     if (isAuth) {
@@ -49,7 +49,6 @@ function LoginForm() {
       isRememberMe: isCheckedRememberMe,
     };
     // TODO пофиксить тайпинги после типизации стора
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     void dispatch(fetchAuth(data));
   };
