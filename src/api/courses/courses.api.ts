@@ -1,5 +1,5 @@
-import { CoursesModel, GetCoursesDataModel } from './types';
 import { BaseApi } from '../base';
+import type { CoursesModel, GetCoursesDataModel } from './types';
 
 const SERVICE_URL = '/courses/';
 
