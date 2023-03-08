@@ -9,27 +9,20 @@ import { CourseOverview } from 'components/organisms/course-overview';
 import { FAQ } from 'components/organisms/faq';
 import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
-import {
-  selectCourse,
-  selectCourseError,
-  selectCourseLoading,
-  selectCourseTitle,
-} from 'store/course/selectors';
-import fetchCourseAction from 'store/course/thunk';
+import { selectCourse, selectCourseTitle } from 'store/course/selectors';
+import { fetchCourse } from 'store/course/thunk';
 import styles from './course.module.scss';
 
 function Course() {
   const { courseId } = useParams();
   const dispatch = useAppDispatch();
 
-  const course = useAppSelector(selectCourse);
+  const { course, isLoading, error } = useAppSelector(selectCourse);
   const title = useAppSelector(selectCourseTitle);
-  const isLoading = useAppSelector(selectCourseLoading);
-  const error = useAppSelector(selectCourseError);
 
   useEffect(() => {
     if (courseId) {
-      void dispatch(fetchCourseAction(+courseId));
+      void dispatch(fetchCourse(+courseId));
     }
   }, [courseId]);
 

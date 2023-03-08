@@ -5,20 +5,23 @@ import { AccountData } from '../../components/organisms/account-data';
 import { AccountOverview } from '../../components/organisms/account-overview';
 import { PersonalData } from '../../components/organisms/personal-data';
 import styles from './profile.module.scss';
-import { selectProfileLoading } from '../../store/profile/selectors';
-import fetchProfileAction from '../../store/profile/thunk';
+import { selectProfile } from '../../store/profile/selectors';
+import { fetchProfile } from '../../store/profile/thunk';
 import { routes } from '../../config';
 
 function Profile() {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(fetchProfileAction(0));
+    dispatch(fetchProfile('0'));
   }, [dispatch]);
-  const isLoading = useSelector(selectProfileLoading);
+
+  const { isLoading } = useSelector(selectProfile);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
   }
+
   return (
     <>
       <Heading

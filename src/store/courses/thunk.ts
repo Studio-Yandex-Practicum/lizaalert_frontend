@@ -1,18 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import type { GetCoursesDataModel } from 'api/courses';
-import { CoursesApi } from 'api/courses';
+import { coursesApi } from 'api/courses';
 
-const fetchCoursesAction = createAsyncThunk(
+export const fetchCourses = createAsyncThunk(
   'courses/fetch',
-  async (coursesData: GetCoursesDataModel, { rejectWithValue }) => {
-    try {
-      const courses = await CoursesApi.getCourses(coursesData);
-      return courses;
-    } catch (error) {
-      return rejectWithValue((error as AxiosError).message);
-    }
+  async (coursesData: GetCoursesDataModel) => {
+    const courses = await coursesApi.getCourses(coursesData);
+    return courses;
   }
 );
-
-export default fetchCoursesAction;

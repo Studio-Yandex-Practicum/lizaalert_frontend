@@ -1,4 +1,4 @@
-export { CoursesApi } from './courses.api';
+export { coursesApi } from './courses.api';
 export type {
   CoursesModel,
   CoursePreviewModel,

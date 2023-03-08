@@ -1,25 +1,19 @@
-import axios from 'axios';
+import { BaseApi } from '../base';
+import type { CoursesModel, GetCoursesDataModel } from './types';
 
-import { isMockEnv } from 'config';
-import { unpackModule } from 'utils/unpack-module';
-import { CoursesModel, GetCoursesDataModel } from './types';
+const SERVICE_URL = '/courses/';
 
-export class CoursesApi {
-  static getCourses({
-    page,
-    pageSize,
-  }: GetCoursesDataModel): Promise<CoursesModel> {
-    if (isMockEnv) {
-      return import(
-        /* webpackChunkName: "coursesMock" */ './mock/courses.mock'
-      ).then((res) => unpackModule<CoursesModel>(res));
-    }
-
-    return axios.get<unknown, CoursesModel>('/courses/', {
-      params: {
-        page,
-        page_size: pageSize,
-      },
+class CoursesApi extends BaseApi {
+  getCourses = ({ page, pageSize }: GetCoursesDataModel) =>
+    this.createRequest<CoursesModel>({
+      request: this.api.get(SERVICE_URL, {
+        params: {
+          page,
+          page_size: pageSize,
+        },
+      }),
+      mock: () => import('./mock/courses.mock'),
     });
-  }
 }
+
+export const coursesApi = new CoursesApi();

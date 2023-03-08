@@ -11,14 +11,14 @@ import { VideoLesson } from '../../components/organisms/video-lesson';
 import { TheoryLesson } from '../../components/organisms/theory-lesson';
 import styles from './lesson.module.scss';
 import { selectLesson } from '../../store/lesson/selectors';
-import fetchLessonByIdAction from '../../store/lesson/thunk';
+import { fetchLessonById } from '../../store/lesson/thunk';
 import { usePathnames } from '../../hooks/use-pathnames';
 import mockCourseContent from '../../api/mock/course-content.json';
 
 function Lesson() {
   const { lessonId, topicId, courseId } = useParams();
   const dispatch = useDispatch();
-  const lesson = useSelector(selectLesson);
+  const { lesson } = useSelector(selectLesson);
   const navigation = useNavigate();
   const [backLink, setBackLink] = useState('');
   const [forwardLink, setForwardLink] = useState('');
@@ -28,7 +28,7 @@ function Lesson() {
   const pathnamesArray = usePathnames(mockCourseContent, courseId);
 
   useEffect(() => {
-    dispatch(fetchLessonByIdAction(lessonId));
+    dispatch(fetchLessonById(lessonId));
     getNavigationOptions();
   }, [dispatch, lessonId]);
 
