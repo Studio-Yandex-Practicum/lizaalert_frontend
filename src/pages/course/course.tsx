@@ -9,7 +9,14 @@ import { CourseOverview } from 'components/organisms/course-overview';
 import { FAQ } from 'components/organisms/faq';
 import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourse, selectCourseTitle } from 'store/course/selectors';
+import {
+  selectCourse,
+  selectCourseContents,
+  selectCourseDescription,
+  selectCourseError,
+  selectCourseTitle,
+  selectIsCourseLoading,
+} from 'store/course/selectors';
 import { fetchCourse } from 'store/course/thunk';
 import styles from './course.module.scss';
 
@@ -17,8 +24,12 @@ function Course() {
   const { courseId } = useParams();
   const dispatch = useAppDispatch();
 
-  const { course, isLoading, error } = useAppSelector(selectCourse);
-  const title = useAppSelector(selectCourseTitle);
+  const course = useAppSelector(selectCourse);
+  const courseTitle = useAppSelector(selectCourseTitle);
+  const courseDescription = useAppSelector(selectCourseDescription);
+  const courseContents = useAppSelector(selectCourseContents);
+  const isCourseLoading = useAppSelector(selectIsCourseLoading);
+  const courseError = useAppSelector(selectCourseError);
 
   useEffect(() => {
     if (courseId) {
@@ -26,11 +37,11 @@ function Course() {
     }
   }, [courseId]);
 
-  if (isLoading) {
+  if (isCourseLoading) {
     return <Loader isAbsolute />;
   }
 
-  if (error) {
+  if (courseError) {
     // При ошибке редиректим на 404
     return <Navigate to={routes.notFound.path} />;
   }
@@ -42,16 +53,21 @@ function Course() {
         size="xxl"
         weight="bold"
         className={styles.heading}
-        text={title}
+        text={courseTitle}
       />
 
       <div className={styles.content}>
         <div className={styles.main}>
-          <CourseDescription />
-          <CourseBenefits />
-          {course.chapters?.length > 0 && (
-            <CourseContents content={course.chapters} />
+          {courseDescription && (
+            <CourseDescription description={courseDescription} />
           )}
+
+          <CourseBenefits />
+
+          {courseContents?.length > 0 && (
+            <CourseContents content={courseContents} />
+          )}
+
           <FAQ />
         </div>
 

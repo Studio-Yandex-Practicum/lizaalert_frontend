@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { P } from '../../components/atoms/typography';
 import { Breadcrumbs } from '../../components/organisms/breadcrumbs';
@@ -9,17 +8,21 @@ import { PreviewWebinar } from '../../components/organisms/preview-webinar';
 import { TestContent } from '../../components/organisms/test-content';
 import { VideoLesson } from '../../components/organisms/video-lesson';
 import { TheoryLesson } from '../../components/organisms/theory-lesson';
-import styles from './lesson.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { selectLesson } from '../../store/lesson/selectors';
 import { fetchLessonById } from '../../store/lesson/thunk';
 import { usePathnames } from '../../hooks/use-pathnames';
 import mockCourseContent from '../../api/mock/course-content.json';
+import styles from './lesson.module.scss';
 
 function Lesson() {
   const { lessonId, topicId, courseId } = useParams();
-  const dispatch = useDispatch();
-  const { lesson } = useSelector(selectLesson);
+
+  const dispatch = useAppDispatch();
+  const lesson = useAppSelector(selectLesson);
+
   const navigation = useNavigate();
+
   const [backLink, setBackLink] = useState('');
   const [forwardLink, setForwardLink] = useState('');
   const [backIsDisabled, setBackIsDisabled] = useState(false);
@@ -28,9 +31,9 @@ function Lesson() {
   const pathnamesArray = usePathnames(mockCourseContent, courseId);
 
   useEffect(() => {
-    dispatch(fetchLessonById(lessonId));
+    void dispatch(fetchLessonById(lessonId));
     getNavigationOptions();
-  }, [dispatch, lessonId]);
+  }, [dispatch, lessonId, mockCourseContent]);
 
   function getNavigationOptions() {
     const index = pathnamesArray.indexOf(`${courseId}/${topicId}/${lessonId}`);

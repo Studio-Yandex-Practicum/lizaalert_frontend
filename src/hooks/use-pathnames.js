@@ -6,16 +6,14 @@ import { useMemo } from 'react';
  * Нужна доработка после интеграции с бекендом.
  * */
 
-export const usePathnames = (mockCourseContent, courseId) => {
-  const pathnamesArray = useMemo(() => {
-    const modifiedCourseContent = mockCourseContent.map((topic) =>
-      topic.lessons.map((les) => `${courseId}/${topic.id}/${les.id}`)
-    );
+export const usePathnames = (courseContent, courseId) =>
+  useMemo(() => {
+    if (courseContent) {
+      const modifiedCourseContent = courseContent.map((topic) =>
+        topic.lessons.map((les) => `${courseId}/${topic.id}/${les.id}`)
+      );
 
-    return modifiedCourseContent.reduce((init, curr) => init.concat(curr));
-  }, [mockCourseContent, courseId]);
-
-  return pathnamesArray;
-};
-
-export default usePathnames;
+      return modifiedCourseContent.reduce((init, curr) => init.concat(curr));
+    }
+    return [];
+  }, [courseContent, courseId]);

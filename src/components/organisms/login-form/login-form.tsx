@@ -1,4 +1,3 @@
-/* eslint-disable  @typescript-eslint/no-unsafe-assignment, @typescript-eslint/ban-ts-comment */
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
@@ -10,7 +9,7 @@ import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
-import { selectAuth } from 'store/auth/selectors';
+import { selectIsAuth, selectIsAuthLoading } from 'store/auth/selectors';
 import useFormWithValidation from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
@@ -30,7 +29,9 @@ function LoginForm() {
   const { profile } = routes;
 
   const dispatch = useAppDispatch();
-  const { isAuth, isLoading } = useAppSelector(selectAuth);
+  // TODO удалить типы после типизации стора
+  const isAuthLoading = useAppSelector<boolean>(selectIsAuthLoading);
+  const isAuth = useAppSelector<boolean>(selectIsAuth);
 
   useEffect(() => {
     if (isAuth) {
@@ -49,6 +50,7 @@ function LoginForm() {
       isRememberMe: isCheckedRememberMe,
     };
     // TODO пофиксить тайпинги после типизации стора
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     void dispatch(fetchAuth(data));
   };
@@ -120,8 +122,8 @@ function LoginForm() {
         <Button
           className={styles.button}
           type="submit"
-          disabled={!isValid || isLoading}
-          text={isLoading ? 'Вход...' : 'Войти'}
+          disabled={!isValid || isAuthLoading}
+          text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
 

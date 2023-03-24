@@ -7,7 +7,12 @@ import {
 import { CoursePreview } from 'components/organisms/course-preview';
 import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourses } from 'store/courses/selectors';
+import {
+  selectCourses,
+  selectCoursesError,
+  selectCoursesTotal,
+  selectIsCoursesLoading,
+} from 'store/courses/selectors';
 import { fetchCourses } from 'store/courses/thunk';
 import styles from './courses.module.scss';
 
@@ -15,7 +20,11 @@ const initialPageSize = 8;
 
 function Courses() {
   const dispatch = useAppDispatch();
-  const { courses, error, isLoading, count } = useAppSelector(selectCourses);
+
+  const courses = useAppSelector(selectCourses);
+  const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
+  const isCoursesLoading = useAppSelector(selectIsCoursesLoading);
+  const coursesError = useAppSelector(selectCoursesError);
 
   const fetchCoursesOnIntersect = async (paginationState: PaginationState) => {
     void dispatch(fetchCourses(paginationState));
@@ -37,10 +46,10 @@ function Courses() {
         <WithInfiniteScroll
           initialPageSize={initialPageSize}
           data={courses}
-          isLoading={isLoading}
+          isLoading={isCoursesLoading}
           actionOnIntersect={fetchCoursesOnIntersect}
-          total={count ?? 0}
-          error={error}
+          total={coursesTotal}
+          error={coursesError}
         >
           <ul className={styles.list}>
             {courses &&

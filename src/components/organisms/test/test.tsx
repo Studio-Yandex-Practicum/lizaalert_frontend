@@ -16,12 +16,10 @@ import { useTest } from './hooks/use-test';
 
 function Test({ toggleRender }: TestProps) {
   const {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     isLoading,
     isSubmitted,
     isSuccess,
     testResultPercent,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     test,
     onSubmit,
     handleButtonDisabledState,
@@ -49,7 +47,6 @@ function Test({ toggleRender }: TestProps) {
 
       <form onSubmit={onSubmit} name="testForm" className={styles.form}>
         <ul className={styles.list}>
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access */}
           {renderQuestionsList(test.questions, isSubmitted)}
         </ul>
 

@@ -1,25 +1,26 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Li, P } from '../../components/atoms/typography';
+import { Loader } from '../../components/molecules/loader';
 import { AccountData } from '../../components/organisms/account-data';
 import { AccountOverview } from '../../components/organisms/account-overview';
 import { PersonalData } from '../../components/organisms/personal-data';
-import styles from './profile.module.scss';
-import { selectProfile } from '../../store/profile/selectors';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { selectIsProfileLoading } from '../../store/profile/selectors';
 import { fetchProfile } from '../../store/profile/thunk';
 import { routes } from '../../config';
+import styles from './profile.module.scss';
 
 function Profile() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProfile('0'));
+    void dispatch(fetchProfile('0'));
   }, [dispatch]);
 
-  const { isLoading } = useSelector(selectProfile);
+  const IsProfileLoading = useAppSelector(selectIsProfileLoading);
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
+  if (IsProfileLoading) {
+    return <Loader isAbsolute />;
   }
 
   return (

@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
 import { FormEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectTest } from 'store/test/selectors';
+import { selectIsTestLoading, selectTest } from 'store/test/selectors';
 import { selectLesson } from 'store/lesson/selectors';
 import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
+import type { TestType } from 'components/organisms/test-preview';
+import type { TestQuestionListType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -18,10 +19,11 @@ export const useTest = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
-  const { test, isLoading } = useAppSelector(selectTest);
-  const {
-    lesson: { passingScore },
-  } = useAppSelector(selectLesson);
+  // TODO удалить типы после типизации стора
+  const test = useAppSelector<TestQuestionListType>(selectTest);
+  const isLoading = useAppSelector<boolean>(selectIsTestLoading);
+  const { passingScore } = useAppSelector<TestType>(selectLesson);
+
   const dispatch = useAppDispatch();
 
   const setInitialState = () => {
@@ -37,7 +39,7 @@ export const useTest = () => {
     if (test.questions?.length >= 0) {
       const percentArr: number[] = [];
 
-      test.questions.forEach((question: { type: Controls; answers: any[] }) => {
+      test.questions.forEach((question) => {
         if (question.type === Controls.RADIO) {
           question.answers.forEach((answer) => {
             if (answer.isChecked && answer.isCorrect) percentArr.push(100);
@@ -72,7 +74,7 @@ export const useTest = () => {
     let isDisabled = false;
 
     if (test.questions?.length > 0) {
-      test.questions.forEach((question: { answers: any[] }) => {
+      test.questions.forEach((question) => {
         let checkedCount = 0;
 
         question.answers.forEach((answer) => {
