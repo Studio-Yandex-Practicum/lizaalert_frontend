@@ -1,7 +1,7 @@
 import { BaseApi } from '../base';
 import type { CourseModel } from './types';
 
-const SERVICE_URL = '/course/';
+const SERVICE_URL = '/courses/';
 
 class CourseApi extends BaseApi {
   getCourse = (id: number) =>

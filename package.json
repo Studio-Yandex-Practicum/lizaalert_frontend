@@ -4,9 +4,9 @@
   "description": "Frontend for LizaAlert courses platform",
   "private": true,
   "scripts": {
-    "start": "webpack serve --config ./.webpack/webpack.dev.js",
-    "start:mock": "webpack serve --env REACT_APP_MOCKING=true --config ./.webpack/webpack.dev.js",
-    "build": "webpack --config ./.webpack/webpack.prod.js",
+    "start": "webpack serve --env NODE_ENV=development --config ./.webpack/webpack.dev.js",
+    "start:mock": "webpack serve --env REACT_APP_MOCKING=true NODE_ENV=development --config ./.webpack/webpack.dev.js",
+    "build": "webpack --env NODE_ENV=production --config ./.webpack/webpack.prod.js",
     "test": "jest ./",
     "format": "prettier --write src/**/*",
     "lint": "eslint src/",

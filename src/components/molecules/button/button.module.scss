@@ -91,6 +91,10 @@
   &:hover {
     box-shadow: 0 4px 8px 0 vars.$drop-shadow-small;
   }
+
+  &:disabled {
+    box-shadow: none;
+  }
 }
 
 .hover-border {

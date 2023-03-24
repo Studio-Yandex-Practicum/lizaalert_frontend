@@ -1,19 +1,27 @@
-const { merge } = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const path = require('path');
 
 const common = require('./webpack.common');
-const { mapEnv } = require('./utils');
+const {mapEnv} = require('./utils');
 
-const { parsed } = dotenv.config({
+const {parsed} = dotenv.config({
   path: path.resolve(__dirname, '..', './.env.development'),
 });
 
-module.exports = (env) => {
-  return merge(common, {
+module.exports = (env) =>
+  merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          ...mapEnv(parsed),
+          ...mapEnv(env),
+        },
+      }),
+    ],
     devServer: {
       static: {
         directory: path.resolve(__dirname, '..', 'build'),
@@ -48,13 +56,4 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          ...mapEnv(parsed),
-          REACT_APP_MOCKING: env.REACT_APP_MOCKING,
-        },
-      }),
-    ],
   });
-};

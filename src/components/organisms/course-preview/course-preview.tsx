@@ -5,11 +5,12 @@ import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { routes } from 'config';
 import { CourseStatusButtons } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
-import styles from './course-preview.module.scss';
 import type { CoursePreviewProps } from './types';
+import styles from './course-preview.module.scss';
 
 /**
  * Компонент карточки предпросмотра курса.
@@ -17,6 +18,7 @@ import type { CoursePreviewProps } from './types';
 
 function CoursePreview({ course }: CoursePreviewProps) {
   const navigate = useNavigate();
+
   const {
     id,
     title,
@@ -27,6 +29,8 @@ function CoursePreview({ course }: CoursePreviewProps) {
     course_status: status,
     cover_path: coverPath,
   } = course;
+
+  const goToCourse = () => navigate(`${routes.course.path}/${id}`);
 
   return (
     <Card noPadding htmlTag="article" className={styles.article}>
@@ -61,7 +65,7 @@ function CoursePreview({ course }: CoursePreviewProps) {
         className={styles.button}
         disabled={status === 'finished' || status === 'inactive'}
         view={status === 'booked' ? 'primary' : 'secondary'}
-        onClick={() => navigate(`/${id}`)}
+        onClick={goToCourse}
       >
         {CourseStatusButtons[status]}
       </Button>
