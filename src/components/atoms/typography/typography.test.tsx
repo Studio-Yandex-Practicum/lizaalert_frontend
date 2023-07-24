@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Typography from './typography';
+import { Typography } from './typography';
 import styles from './typography.module.scss';
 
 const testText = 'Тестовый текст';

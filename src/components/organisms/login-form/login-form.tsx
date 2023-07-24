@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
@@ -10,7 +10,7 @@ import { StyledLink } from 'components/molecules/styled-link';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
 import { selectIsAuth, selectIsAuthLoading } from 'store/auth/selectors';
-import useFormWithValidation from 'hooks/use-form-with-validation';
+import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
 import styles from './login-form.module.scss';
@@ -20,7 +20,7 @@ import type { UserLoginFormData } from './types';
  * Компонент-форма логина пользователя.
  * */
 
-function LoginForm() {
+export const LoginForm: FC = () => {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
 
   const { values, handleChange, errors, isValid } =
@@ -127,6 +127,7 @@ function LoginForm() {
         />
       </form>
 
+      {/* TODO: вынести в компонент YandexOAuthButton */}
       <Button
         className={classnames(styles.button)}
         classNameIcon={styles.icon}
@@ -137,6 +138,4 @@ function LoginForm() {
       />
     </Card>
   );
-}
-
-export default LoginForm;
+};

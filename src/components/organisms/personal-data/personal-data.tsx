@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect } from 'react';
+import { ChangeEvent, FC, FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -6,7 +6,7 @@ import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
-import useFormWithValidation from 'hooks/use-form-with-validation';
+import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
@@ -15,7 +15,7 @@ import styles from './personal-data.module.scss';
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
 
-function PersonalData() {
+export const PersonalData: FC = () => {
   const {
     handleChange,
     isValid,
@@ -126,6 +126,4 @@ function PersonalData() {
       </form>
     </Card>
   );
-}
-
-export default PersonalData;
+};

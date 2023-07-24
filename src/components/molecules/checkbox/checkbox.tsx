@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Controls } from 'utils/constants';
+import { FC } from 'react';
 import styles from './checkbox.module.scss';
 import type { CheckboxProps } from './types';
 
@@ -10,15 +11,15 @@ import type { CheckboxProps } from './types';
  * Также в качестве props принимает все стандартные HTML-атрибуты для инпута.
  */
 
-function Checkbox({
-  isRadio = false,
+export const Checkbox: FC<CheckboxProps> = ({
+  isRadio,
   labelText = '',
-  className = '',
+  className,
   name = '',
   value = '',
   weight = 'normal',
   ...props
-}: CheckboxProps) {
+}) => {
   const checkboxId = `${Controls.CHECKBOX}-${name}-${value.toString()}`;
 
   return (
@@ -41,6 +42,4 @@ function Checkbox({
       <P className={styles.labelText} text={labelText} />
     </label>
   );
-}
-
-export default Checkbox;
+};

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './styled-link.module.scss';
@@ -8,15 +9,15 @@ import type { StyledLinkProps } from './types';
  * Может принимать в качестве пропсов стандартные атрибуты HTML для `<a>`.
  * */
 
-function StyledLink({
+export const StyledLink: FC<StyledLinkProps> = ({
   children = null,
   linkText = '',
-  isExternal = false,
+  isExternal,
   href,
   weight = 'medium',
-  className = '',
+  className,
   ...props
-}: StyledLinkProps) {
+}) => {
   if (!children && !linkText) {
     return null;
   }
@@ -42,6 +43,4 @@ function StyledLink({
       {children ?? linkText}
     </Link>
   );
-}
-
-export default StyledLink;
+};

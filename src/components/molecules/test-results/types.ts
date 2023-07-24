@@ -1,12 +1,8 @@
 import type { TestAnswerType } from '../test-answer';
 
 export type TestResultsProps = {
-  /**
-   * Объект ответа, содержит id (number), text (string), isChecked (boolean), isCorrect (boolean).
-   * */
+  /** Объект ответа, содержит id (number), text (string), isChecked (boolean), isCorrect (boolean). */
   answer: TestAnswerType;
-  /**
-   * Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента.
-   * */
+  /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
   className?: string;
 };

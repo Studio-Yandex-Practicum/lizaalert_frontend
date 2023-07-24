@@ -1,24 +1,24 @@
-import type { Ref } from 'react';
+import type { FC, Ref } from 'react';
 import classnames from 'classnames';
 import { Span } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import styles from './accordion.module.scss';
 import type { AccordionProps } from './types';
-import useAccordion from './hooks/use-accordion';
+import { useAccordion } from './hooks/use-accordion';
 
 /**
  * HOC-компонент аккордеона с минимальной стилизацией и плавным раскрытием. Раскрытие осуществляется по клику на весь заголовок.
  */
 
-function Accordion({
+export const Accordion: FC<AccordionProps> = ({
   children,
-  className = '',
+  className,
   title,
   titleSize = 'l',
   titleWeight = 'bold',
   button = 'icon',
   open = false,
-}: AccordionProps) {
+}) => {
   const { isOpen, height, contentRef, toggleAccordion } = useAccordion(open);
 
   const classList = classnames(styles.accordion, className, {
@@ -45,6 +45,4 @@ function Accordion({
       </div>
     </div>
   );
-}
-
-export default Accordion;
+};

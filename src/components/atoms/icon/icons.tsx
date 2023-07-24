@@ -1,3 +1,4 @@
+import type { SVGAttributes } from 'react';
 import ArrowBack from 'assets/icons/arrow-back.svg';
 import ArrowDown from 'assets/icons/arrow-down.svg';
 import ArrowForward from 'assets/icons/arrow-forward.svg';
@@ -52,7 +53,7 @@ import XSmall from 'assets/icons/x-small.svg';
 import XSolid from 'assets/icons/x-solid.svg';
 import Yandex from 'assets/icons/yandex.svg';
 
-const defaultAttributes = {
+const defaultAttributes: SVGAttributes<HTMLOrSVGElement> = {
   width: '100%',
   preserveAspectRatio: 'xMidYMid meet',
   style: { maxWidth: 'inherit', maxHeight: 'inherit', height: 'inherit' },

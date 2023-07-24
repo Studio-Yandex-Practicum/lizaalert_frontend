@@ -1,2 +1,2 @@
-export { default as Filter } from './filter';
+export { Filter } from './filter';
 export type { FilterProps } from './types';

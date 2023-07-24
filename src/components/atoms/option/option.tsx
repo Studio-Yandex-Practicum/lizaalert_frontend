@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from 'react';
+import type { FC, KeyboardEvent } from 'react';
 import classnames from 'classnames';
 import { KeyboardKeys } from 'utils/constants';
 import styles from './option.module.scss';
@@ -9,7 +9,12 @@ import type { OptionProps } from './types';
  * Выполнен тегом `li`.
  */
 
-function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
+export const Option: FC<OptionProps> = ({
+  option,
+  onClick,
+  onKeyDown,
+  className,
+}) => {
   const onOptionClick = () => {
     onClick(option);
   };
@@ -34,6 +39,4 @@ function Option({ option, onClick, onKeyDown, className = '' }: OptionProps) {
       {option.name}
     </li>
   );
-}
-
-export default Option;
+};

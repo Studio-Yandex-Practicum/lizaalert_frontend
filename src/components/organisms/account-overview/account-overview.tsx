@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import defaultImg from 'assets/images/profile.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -12,7 +13,7 @@ import type { AccountOverviewType } from './types';
  * Компонент-карточка с информацией профиля пользователя.
  * */
 
-function AccountOverview() {
+export const AccountOverview: FC = () => {
   const accountOverview = useAppSelector<AccountOverviewType>(
     selectProfileOverview
   );
@@ -61,6 +62,4 @@ function AccountOverview() {
       />
     </Card>
   );
-}
-
-export default AccountOverview;
+};

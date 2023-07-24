@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Heading } from 'components/atoms/typography';
 import { Filter } from 'components/organisms/filter';
 import {
@@ -18,7 +19,7 @@ import styles from './courses.module.scss';
 
 const initialPageSize = 8;
 
-function Courses() {
+const Courses: FC = () => {
   const dispatch = useAppDispatch();
 
   const courses = useAppSelector(selectCourses);
@@ -64,6 +65,6 @@ function Courses() {
       </div>
     </>
   );
-}
+};
 
 export default Courses;

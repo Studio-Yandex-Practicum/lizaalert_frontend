@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 // Тип кнопки типизирован и обозначено дефолтное значение.
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import styles from './button.module.scss';
@@ -11,19 +12,19 @@ import type { ButtonProps } from './types';
  * По умолчанию имеет type="button".
  */
 
-function Button({
+export const Button: FC<ButtonProps> = ({
   children = null,
   text = '',
   view = 'primary',
   hover = 'default',
   iconName = null,
   iconPosition = 'left',
-  className = '',
+  className,
   type = 'button',
-  classNameIcon = '',
+  classNameIcon,
   iconSize = 'default',
   ...props
-}: ButtonProps) {
+}) => {
   const btnClasses = classnames(
     styles.button,
     styles[`view-${view}`],
@@ -43,6 +44,4 @@ function Button({
       {children ?? text}
     </button>
   );
-}
-
-export default Button;
+};

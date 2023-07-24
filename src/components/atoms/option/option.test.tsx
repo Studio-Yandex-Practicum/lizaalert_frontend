@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Option from './option';
+import { Option } from './option';
 import styles from './option.module.scss';
 import type { OptionProps, OptionType } from './types';
 

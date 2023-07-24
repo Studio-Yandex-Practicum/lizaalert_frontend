@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Icon, IconType } from 'components/atoms/icon';
@@ -19,12 +20,12 @@ const mapSlugToIcon: Record<string, IconType> = {
  * Компонент элемента содержания курса. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
  * */
 
-function ContentsItem({
+export const ContentsItem: FC<ContentsItemProps> = ({
   content,
   index,
   type = 'main',
-  className = '',
-}: ContentsItemProps) {
+  className,
+}) => {
   const { id, title, lessons } = content;
   const { courseId = '', topicId = '' } = useParams();
 
@@ -102,6 +103,4 @@ function ContentsItem({
       </div>
     );
   }
-}
-
-export default ContentsItem;
+};

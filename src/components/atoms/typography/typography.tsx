@@ -1,4 +1,4 @@
-import { createElement, CSSProperties } from 'react';
+import { createElement, CSSProperties, FC } from 'react';
 import classnames from 'classnames';
 import styles from './typography.module.scss';
 import type { TypographyProps } from './types';
@@ -9,18 +9,18 @@ import type { TypographyProps } from './types';
  * По умолчанию возвращает `<p>` с размером `m` и начертанием `normal`.
  */
 
-function Typography({
+export const Typography: FC<TypographyProps> = ({
   text = '',
   children = null,
   size = 'm',
-  className = '',
+  className,
   htmlTag = 'p',
   weight = 'normal',
-  withOverflow = false,
+  withOverflow,
   lines = 0,
   textAlign = 'left',
   ...props
-}: TypographyProps) {
+}) => {
   const style: CSSProperties = {};
 
   if (lines > 0) {
@@ -49,6 +49,4 @@ function Typography({
     },
     children ?? text
   );
-}
-
-export default Typography;
+};

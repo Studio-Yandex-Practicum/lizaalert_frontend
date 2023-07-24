@@ -12,7 +12,7 @@ import type { BreadcrumbType } from '../types';
  * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
 
-const useBreadcrumbs = () => {
+export const useBreadcrumbs = () => {
   const { pathname } = useLocation();
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
 
@@ -63,5 +63,3 @@ const useBreadcrumbs = () => {
 
   return breadcrumbs;
 };
-
-export default useBreadcrumbs;

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import classnames from 'classnames';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
@@ -9,20 +10,21 @@ import type { HeaderLinkProps } from './types';
  * Всегда поставляется с иконкой, можно кастомизировать её тип.
  * */
 
-function HeaderLink({ text, iconType, link, className }: HeaderLinkProps) {
-  return (
-    <NavLink className={classnames(styles.link, className)} end to={link}>
-      {({ isActive }) => (
-        <TextWithIcon
-          text={text}
-          iconType={iconType}
-          color={isActive ? 'color-hover' : 'dark-primary'}
-          weight="medium"
-          withOverflow
-        />
-      )}
-    </NavLink>
-  );
-}
-
-export default HeaderLink;
+export const HeaderLink: FC<HeaderLinkProps> = ({
+  text,
+  iconType,
+  link,
+  className,
+}) => (
+  <NavLink className={classnames(styles.link, className)} end to={link}>
+    {({ isActive }) => (
+      <TextWithIcon
+        text={text}
+        iconType={iconType}
+        color={isActive ? 'color-hover' : 'dark-primary'}
+        weight="medium"
+        withOverflow
+      />
+    )}
+  </NavLink>
+);

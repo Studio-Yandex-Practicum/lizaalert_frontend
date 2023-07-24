@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Loader from './loader';
+import { Loader } from './loader';
 import styles from './loader.module.scss';
 
 describe('Компонент Loader', () => {

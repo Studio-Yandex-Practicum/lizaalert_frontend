@@ -1,2 +1,2 @@
-export { default as NavigationButtons } from './navigation-buttons';
+export { NavigationButtons } from './navigation-buttons';
 export type { NavigationButtonsProps } from './types';

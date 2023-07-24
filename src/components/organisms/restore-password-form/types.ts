@@ -1,6 +1,4 @@
 export type RestorePasswordFormData = {
-  /**
-   * Email пользователя.
-   * */
+  /** Email пользователя. */
   email: string;
 };

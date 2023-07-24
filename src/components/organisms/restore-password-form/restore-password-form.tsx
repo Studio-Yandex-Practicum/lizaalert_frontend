@@ -1,11 +1,11 @@
-import { FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
-import useFormWithValidation from 'hooks/use-form-with-validation';
+import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
 import styles from './restore-password-form.module.scss';
 import type { RestorePasswordFormData } from './types';
@@ -15,7 +15,7 @@ import type { RestorePasswordFormData } from './types';
  * Содержит поле ввода email, кнопку "Отправить новый пароль" и кнопку "Назад", которая ведет на предыдущий роут.
  * */
 
-function RestorePasswordForm() {
+export const RestorePasswordForm: FC = () => {
   const navigate = useNavigate();
 
   const { values, handleChange, errors, isValid } =
@@ -58,6 +58,4 @@ function RestorePasswordForm() {
       />
     </Card>
   );
-}
-
-export default RestorePasswordForm;
+};

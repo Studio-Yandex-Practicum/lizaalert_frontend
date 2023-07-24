@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -10,7 +11,7 @@ import type { TextPreviewProps } from './types';
  * Компонент-карточка превью теста.
  */
 
-function TestPreview({ test, toggleRender }: TextPreviewProps) {
+export const TestPreview: FC<TextPreviewProps> = ({ test, toggleRender }) => {
   const date = convertDate(test.deadline);
   const time = convertDate(test.deadline, { onlyTime: true });
 
@@ -58,6 +59,4 @@ function TestPreview({ test, toggleRender }: TextPreviewProps) {
       )}
     </Card>
   );
-}
-
-export default TestPreview;
+};

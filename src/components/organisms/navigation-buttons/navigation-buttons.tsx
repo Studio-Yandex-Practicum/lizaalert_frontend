@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Button } from 'components/molecules/button';
 import styles from './navigation-buttons.module.scss';
@@ -7,15 +8,15 @@ import type { NavigationButtonsProps } from './types';
  * Компонент кнопок навигации по уроку.
  */
 
-function NavigationButtons({
-  classNameForContainer = '',
-  classNameForButtons = '',
+export const NavigationButtons: FC<NavigationButtonsProps> = ({
+  classNameForContainer,
+  classNameForButtons,
   view = 'main',
-  disabledBack = false,
-  disabledForward = false,
+  disabledBack,
+  disabledForward,
   onClickBack,
   onClickForward,
-}: NavigationButtonsProps) {
+}) => {
   const buttonClasses = classnames(styles.button, classNameForButtons);
 
   return (
@@ -50,6 +51,4 @@ function NavigationButtons({
       )}
     </div>
   );
-}
-
-export default NavigationButtons;
+};

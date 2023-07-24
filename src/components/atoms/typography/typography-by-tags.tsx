@@ -1,4 +1,4 @@
-import Typography from './typography';
+import { Typography } from './typography';
 import type { TypographyProps, TypographyTag } from './types';
 
 type SpecificTagProps = Omit<TypographyProps, 'htmlTag'>;
