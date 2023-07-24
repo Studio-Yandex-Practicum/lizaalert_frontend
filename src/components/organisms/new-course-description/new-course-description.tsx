@@ -1,13 +1,11 @@
+import type { FC } from 'react';
+
 /**
  * Компонент создания описания нового курса.
  * */
 
-function NewCourseDescription() {
-  return (
-    <div>
-      <p>NewCourseDescription</p>
-    </div>
-  );
-}
-
-export default NewCourseDescription;
+export const NewCourseDescription: FC = () => (
+  <div>
+    <p>NewCourseDescription</p>
+  </div>
+);

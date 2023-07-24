@@ -1,4 +1,4 @@
-import { Children } from 'react';
+import { Children, FC } from 'react';
 import classnames from 'classnames';
 import { Heading, P } from 'components/atoms/typography';
 import styles from './test-success-rate.module.scss';
@@ -21,11 +21,11 @@ const testResultsTexts = {
  * Представляет собой плашку красного или зеленого цвета с заголовком и текстом.
  * */
 
-function TestSuccessRate({
+export const TestSuccessRate: FC<TestSuccessRateProps> = ({
   isSuccess,
   testResultPercent = 0,
-  className = '',
-}: TestSuccessRateProps) {
+  className,
+}) => {
   const texts = isSuccess ? testResultsTexts.success : testResultsTexts.failure;
 
   return (
@@ -50,6 +50,4 @@ function TestSuccessRate({
       </div>
     </div>
   );
-}
-
-export default TestSuccessRate;
+};

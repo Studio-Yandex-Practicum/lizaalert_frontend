@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from 'react';
+import { FC, KeyboardEvent, useState } from 'react';
 import classnames from 'classnames';
 import { Option, OptionType } from 'components/atoms/option';
 import { Icon } from 'components/atoms/icon';
@@ -6,25 +6,19 @@ import { KeyboardKeys } from 'utils/constants';
 import styles from './select.module.scss';
 import type { SelectProps } from './types';
 
-const DUMMY_OPTIONS = [
-  { id: 1, name: 'Кинологическое' },
-  { id: 2, name: 'Оперативное' },
-  { id: 3, name: 'Первая помощь' },
-];
-
 /**
  * Компонент стилизованного селекта. При нажатии выпадает список опций.
  * */
 
-function Select({
-  className = '',
+export const Select: FC<SelectProps> = ({
+  className,
   name,
   label,
   placeholder,
-  options = DUMMY_OPTIONS,
+  options,
   onSelect,
   initialOption,
-}: SelectProps) {
+}) => {
   const [isShowed, setIsShowed] = useState(false);
   const [currentOption, setCurrentOption] = useState<OptionType | null>(
     initialOption ?? null
@@ -86,6 +80,4 @@ function Select({
       </div>
     </div>
   );
-}
-
-export default Select;
+};

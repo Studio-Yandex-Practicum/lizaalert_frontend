@@ -1,2 +1,2 @@
-export { default as AccountOverview } from './account-overview';
+export { AccountOverview } from './account-overview';
 export type { AccountOverviewType } from './types';

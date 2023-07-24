@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import { createElement, FC } from 'react';
 import classnames from 'classnames';
 import styles from './card.module.scss';
 import type { CardProps } from './types';
@@ -8,13 +8,13 @@ import type { CardProps } from './types';
  * Визуальный элемент интерфейса с закругленными углами, тенью и паддингами, которые при необходимости обнуляются.
  */
 
-function Card({
-  className = '',
+export const Card: FC<CardProps> = ({
+  className,
   children,
-  noPadding = false,
+  noPadding,
   htmlTag = 'div',
-}: CardProps) {
-  return createElement(
+}) =>
+  createElement(
     htmlTag ?? 'div',
     {
       className: classnames(
@@ -25,6 +25,3 @@ function Card({
     },
     children
   );
-}
-
-export default Card;

@@ -1,4 +1,4 @@
-import RouterAdmin from 'router/router-admin';
+import { RouterAdmin } from 'router/router-admin';
 import { withProviders } from './providers';
 
 /**

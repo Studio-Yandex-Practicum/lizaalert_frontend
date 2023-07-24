@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Card } from 'components/atoms/card';
 import { TheoryLessonProps } from './types';
 
@@ -7,13 +8,9 @@ import { TheoryLessonProps } from './types';
  * Компонент теоретического урока.
  * */
 
-function TheoryLesson({ content }: TheoryLessonProps) {
-  return (
-    <Card>
-      {/* eslint-disable-next-line */}
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    </Card>
-  );
-}
-
-export default TheoryLesson;
+export const TheoryLesson: FC<TheoryLessonProps> = ({ content }) => (
+  <Card>
+    {/* eslint-disable-next-line */}
+      <div dangerouslySetInnerHTML={{__html: content}}/>
+  </Card>
+);

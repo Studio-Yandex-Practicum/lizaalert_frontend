@@ -1,1 +1,1 @@
-export { default as PasswordUpdated } from './password-updated';
+export { PasswordUpdated } from './password-updated';

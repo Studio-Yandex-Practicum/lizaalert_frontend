@@ -1,4 +1,4 @@
-import { Children } from 'react';
+import { Children, FC } from 'react';
 import { Heading } from 'components/atoms/typography';
 import { HeaderLink } from 'components/molecules/header-link';
 import { StyledLink } from 'components/molecules/styled-link';
@@ -10,7 +10,7 @@ import styles from './header.module.scss';
  * Компонент-шапка с заголовком h1, обернутым в ссылку, и списком навигационных ссылок.
  * */
 
-function Header() {
+export const Header: FC = () => {
   let headerRoutes: RouteType[] = [routes.courses, routes.profile];
   if (isAdmin) {
     headerRoutes = [routes.users, routes.library, ...headerRoutes];
@@ -41,6 +41,4 @@ function Header() {
       </div>
     </header>
   );
-}
-
-export default Header;
+};

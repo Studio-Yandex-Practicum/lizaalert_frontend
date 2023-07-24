@@ -1,7 +1,7 @@
 @use 'src/styles/variables' as vars;
 
 .tag {
-  display: flex;
+  display: inline-flex;
   max-width: fit-content;
   align-items: center;
   height: 24px;
@@ -17,6 +17,7 @@
 }
 
 .text {
+  width: fit-content;
   max-width: 250px;
 }
 

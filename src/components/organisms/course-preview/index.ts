@@ -1,2 +1,2 @@
-export { default as CoursePreview } from './course-preview';
+export { CoursePreview } from './course-preview';
 export type { CoursePreviewProps } from './types';

@@ -15,7 +15,7 @@ import { usePathnames } from '../../hooks/use-pathnames';
 import mockCourseContent from '../../api/mock/course-content.json';
 import styles from './lesson.module.scss';
 
-function Lesson() {
+const Lesson = () => {
   const { lessonId, topicId, courseId } = useParams();
 
   const dispatch = useAppDispatch();
@@ -98,6 +98,6 @@ function Lesson() {
       </div>
     </>
   );
-}
+};
 
 export default Lesson;

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {
   Course,
@@ -13,39 +14,35 @@ import {
   Register,
 } from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
-import routes from './routes-admin';
+import { adminRoutes as routes } from './routes-admin';
 
-function RouterAdmin() {
-  return (
-    <Routes>
-      <Route element={<BaseLayout />}>
-        <Route path={routes.courses.path} element={<Courses />} />
+export const RouterAdmin: FC = () => (
+  <Routes>
+    <Route element={<BaseLayout />}>
+      <Route path={routes.courses.path} element={<Courses />} />
 
-        <Route path={routes.course.path}>
-          <Route path=":courseId" element={<Course />} />
-          <Route path=":courseId/:topicId" element={<Lesson />} />
-          <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
-          <Route path={routes.createCourse.path} element={<CreateCourse />} />
-          <Route
-            path={`${routes.editCourse.path}/:courseId`}
-            element={<EditCourse />}
-          />
-          <Route
-            path={`${routes.editLesson.path}/:lessonId`}
-            element={<EditLesson />}
-          />
-        </Route>
-
-        <Route path={routes.profile.path} element={<Profile />} />
-        <Route path={routes.login.path} element={<Login />} />
-        <Route path={routes.notFound.path} element={<NotFound />} />
+      <Route path={routes.course.path}>
+        <Route path=":courseId" element={<Course />} />
+        <Route path=":courseId/:topicId" element={<Lesson />} />
+        <Route path=":courseId/:topicId/:lessonId" element={<Lesson />} />
+        <Route path={routes.createCourse.path} element={<CreateCourse />} />
+        <Route
+          path={`${routes.editCourse.path}/:courseId`}
+          element={<EditCourse />}
+        />
+        <Route
+          path={`${routes.editLesson.path}/:lessonId`}
+          element={<EditLesson />}
+        />
       </Route>
 
-      <Route path={routes.register.path} element={<Register />} />
-      <Route path={routes.library.path} element={<Development />} />
-      <Route path={routes.users.path} element={<Development />} />
-    </Routes>
-  );
-}
+      <Route path={routes.profile.path} element={<Profile />} />
+      <Route path={routes.login.path} element={<Login />} />
+      <Route path={routes.notFound.path} element={<NotFound />} />
+    </Route>
 
-export default RouterAdmin;
+    <Route path={routes.register.path} element={<Register />} />
+    <Route path={routes.library.path} element={<Development />} />
+    <Route path={routes.users.path} element={<Development />} />
+  </Routes>
+);

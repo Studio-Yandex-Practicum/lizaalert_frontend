@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -6,7 +7,7 @@ import { Button } from 'components/molecules/button';
 import { routes } from 'config';
 import styles from './not-found.module.scss';
 
-function NotFound() {
+const NotFound: FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -42,6 +43,6 @@ function NotFound() {
       />
     </>
   );
-}
+};
 
 export default NotFound;

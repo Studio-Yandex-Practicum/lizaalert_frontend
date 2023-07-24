@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { Typography } from 'components/atoms/typography';
@@ -8,16 +9,16 @@ import type { TextWithIconProps } from './types';
  * Компонент текста с иконкой. По умолчанию иконка расположена слева от текста.
  */
 
-function TextWithIcon({
+export const TextWithIcon: FC<TextWithIconProps> = ({
   text,
   iconType,
-  isReverse = false,
+  isReverse,
   color,
-  className = '',
+  className,
   weight = 'normal',
-  withOverflow = false,
+  withOverflow,
   htmlTag = 'p',
-}: TextWithIconProps) {
+}) => {
   const classNames = classnames(styles.textWithIcon, className, {
     [styles.reverse]: isReverse,
   });
@@ -34,6 +35,4 @@ function TextWithIcon({
       </Typography>
     </div>
   );
-}
-
-export default TextWithIcon;
+};

@@ -5,7 +5,7 @@ import type { IntersectionObserverConfig } from '../types';
  * Хук используется для подгрузки данных и других манипуляций при появлении `elementRef` во вьюпорте.
  * */
 
-const useIntersectionObserver = ({
+export const useIntersectionObserver = ({
   elementRef,
   callbackOnIntersect,
   callbackOnHide,
@@ -40,5 +40,3 @@ const useIntersectionObserver = ({
     };
   }, [callbackOnIntersect, callbackOnHide, elementRef]);
 };
-
-export default useIntersectionObserver;

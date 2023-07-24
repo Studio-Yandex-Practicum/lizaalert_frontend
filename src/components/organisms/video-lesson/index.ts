@@ -1,2 +1,2 @@
-export { default as VideoLesson } from './video-lesson';
+export { VideoLesson } from './video-lesson';
 export type { VideoLessonProps } from './types';

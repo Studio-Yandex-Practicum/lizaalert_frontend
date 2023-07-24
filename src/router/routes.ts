@@ -1,6 +1,6 @@
 import type { RouteType } from './types';
 
-const defaultRoutes: Record<string, RouteType> = {
+export const defaultRoutes: Record<string, RouteType> = {
   courses: {
     title: 'Курсы',
     path: '/',
@@ -47,5 +47,3 @@ const defaultRoutes: Record<string, RouteType> = {
     icon: 'xSolid',
   },
 };
-
-export default defaultRoutes;

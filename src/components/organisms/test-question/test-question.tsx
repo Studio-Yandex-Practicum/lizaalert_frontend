@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
@@ -8,13 +9,13 @@ import type { TestQuestionProps } from './types';
  * Компонент тестового вопроса.
  */
 
-function TestQuestion({
+export const TestQuestion: FC<TestQuestionProps> = ({
   question,
   index,
   type,
   isSubmitted = false,
   className = '',
-}: TestQuestionProps) {
+}) => {
   // список ответов
   const answersList = question.answers.map((answer) => (
     <li className={className} key={answer.id}>
@@ -46,6 +47,4 @@ function TestQuestion({
       </ul>
     </>
   );
-}
-
-export default TestQuestion;
+};

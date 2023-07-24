@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
@@ -20,7 +20,7 @@ import {
 import { fetchCourse } from 'store/course/thunk';
 import styles from './course.module.scss';
 
-function Course() {
+const Course: FC = () => {
   const { courseId } = useParams();
   const dispatch = useAppDispatch();
 
@@ -84,6 +84,6 @@ function Course() {
       </div>
     </>
   );
-}
+};
 
 export default Course;

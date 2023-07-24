@@ -1,6 +1,4 @@
 export type TheoryLessonProps = {
-  /**
-   * HTML-разметка теории.
-   * */
+  /** HTML-разметка теории. */
   content: string;
 };

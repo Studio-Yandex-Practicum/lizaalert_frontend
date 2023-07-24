@@ -1,6 +1,7 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
-import { P } from 'components/atoms/typography';
+import { Span } from 'components/atoms/typography';
 import styles from './tag.module.scss';
 import type { TagProps } from './types';
 
@@ -8,7 +9,7 @@ import type { TagProps } from './types';
  * Компонент тега, включает в себя две разновидности: обычный и с кнопкой в виде крестика справа.
  * */
 
-function Tag({ text, onClick, className = '', value }: TagProps) {
+export const Tag: FC<TagProps> = ({ text, onClick, className, value }) => {
   const classNames = classnames(
     styles.tag,
     { [styles.tag_type_withButton]: onClick && value },
@@ -18,9 +19,9 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
   if (onClick && value) {
     return (
       <div className={classNames}>
-        <P withOverflow className={styles.text}>
+        <Span withOverflow className={styles.text}>
           {text}
-        </P>
+        </Span>
 
         <button
           className={styles.button}
@@ -34,12 +35,8 @@ function Tag({ text, onClick, className = '', value }: TagProps) {
   }
 
   return (
-    <div className={classNames}>
-      <P withOverflow className={styles.text}>
-        {text}
-      </P>
-    </div>
+    <Span withOverflow className={classnames(classNames, styles.text)}>
+      {text}
+    </Span>
   );
-}
-
-export default Tag;
+};

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Card from './card';
+import { Card } from './card';
 import styles from './card.module.scss';
-import { CardProps } from './types';
+import type { CardProps } from './types';
 
 const testString = 'Тестовый компонент';
 

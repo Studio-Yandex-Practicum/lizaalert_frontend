@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import type { IconType } from 'components/atoms/icon';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
@@ -34,18 +35,14 @@ function handleIconType(answer: TestAnswerType): IconType {
  * - неправильный и не выбранный ответ
  */
 
-function TestResults({ answer, className = '' }: TestResultsProps) {
-  return (
-    <TextWithIcon
-      key={answer.id}
-      text={answer.text}
-      iconType={handleIconType(answer)}
-      className={classnames(className, styles.text, {
-        [styles.text__success]: answer.isCorrect && answer.isChecked,
-        [styles.text__warning]: !answer.isCorrect && answer.isChecked,
-      })}
-    />
-  );
-}
-
-export default TestResults;
+export const TestResults: FC<TestResultsProps> = ({ answer, className }) => (
+  <TextWithIcon
+    key={answer.id}
+    text={answer.text}
+    iconType={handleIconType(answer)}
+    className={classnames(className, styles.text, {
+      [styles.text__success]: answer.isCorrect && answer.isChecked,
+      [styles.text__warning]: !answer.isCorrect && answer.isChecked,
+    })}
+  />
+);

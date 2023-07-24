@@ -1,2 +1,2 @@
-export { default as CourseCompleted } from './course-completed';
+export { CourseCompleted } from './course-completed';
 export type { CourseCompletedProps } from './types';

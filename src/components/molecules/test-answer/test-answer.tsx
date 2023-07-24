@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Checkbox } from 'components/molecules/checkbox';
 import { useAppDispatch } from 'store';
 import { change } from 'store/test/slice';
@@ -9,7 +10,11 @@ import type { TestAnswerProps } from './types';
  * Реализует логику для выбора правильного/неправильного ответа.
  */
 
-function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
+export const TestAnswer: FC<TestAnswerProps> = ({
+  answer,
+  questionId,
+  answerOptions,
+}) => {
   const dispatch = useAppDispatch();
 
   const updateCheckStatus = () => {
@@ -30,6 +35,4 @@ function TestAnswer({ answer, questionId, answerOptions }: TestAnswerProps) {
       onChange={updateCheckStatus}
     />
   );
-}
-
-export default TestAnswer;
+};

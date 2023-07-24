@@ -1,13 +1,11 @@
+import type { FC } from 'react';
+
 /**
  * Компонент создания нового курса.
  * */
 
-function NewCourseMain() {
-  return (
-    <div>
-      <p>NewCourseMain</p>
-    </div>
-  );
-}
-
-export default NewCourseMain;
+export const NewCourseMain: FC = () => (
+  <div>
+    <p>NewCourseMain</p>
+  </div>
+);

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -24,7 +24,7 @@ const tabs: Record<Tab, { id: Tab; component: JSX.Element }> = {
   },
 };
 
-function CreateCourse() {
+const CreateCourse: FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(tabs.main.id);
 
   const handleMain = useCallback(() => {
@@ -91,6 +91,6 @@ function CreateCourse() {
       </Card>
     </>
   );
-}
+};
 
 export default CreateCourse;

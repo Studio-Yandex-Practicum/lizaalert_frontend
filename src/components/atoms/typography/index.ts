@@ -1,4 +1,4 @@
-export { default as Typography } from './typography';
+export { Typography } from './typography';
 export { P, Heading, Span, Time, Li } from './typography-by-tags';
 export type {
   TypographyProps,

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
@@ -12,59 +13,55 @@ import type { CourseOverviewProps } from './types';
  * Карточка краткого описания курса.
  * */
 
-function CourseOverview({
+export const CourseOverview: FC<CourseOverviewProps> = ({
   coverPath,
   level,
   lessonsCount,
   startDate,
   courseDuration,
   onClick,
-}: CourseOverviewProps) {
-  return (
-    <Card className={styles.courseOverview} htmlTag="article" noPadding>
-      <img
-        className={styles.courseImage}
-        src={coverPath ?? placeholderCover}
-        alt="Обложка курса"
-        onError={onImageLoadError}
-      />
+}) => (
+  <Card className={styles.courseOverview} htmlTag="article" noPadding>
+    <img
+      className={styles.courseImage}
+      src={coverPath ?? placeholderCover}
+      alt="Обложка курса"
+      onError={onImageLoadError}
+    />
 
-      <ul className={styles.courseMeta}>
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Уровень:" iconType="rank" />
-          {level}
-        </Li>
+    <ul className={styles.courseMeta}>
+      <Li className={styles.courseMetaItem}>
+        <TextWithIcon text="Уровень:" iconType="rank" />
+        {level}
+      </Li>
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Количество занятий:" iconType="lessons" />
-          {lessonsCount}
-        </Li>
+      <Li className={styles.courseMetaItem}>
+        <TextWithIcon text="Количество занятий:" iconType="lessons" />
+        {lessonsCount}
+      </Li>
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {courseDuration ?? 0} ч
-        </Li>
+      <Li className={styles.courseMetaItem}>
+        <TextWithIcon text="Продолжительность:" iconType="duration" />
+        {courseDuration ?? 0} ч
+      </Li>
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {convertDate(startDate)} г
-        </Li>
-      </ul>
+      <Li className={styles.courseMetaItem}>
+        <TextWithIcon text="Старт занятий:" iconType="calendar" />
+        {convertDate(startDate)} г
+      </Li>
+    </ul>
 
-      <TextWithIcon
-        className={styles.courseAlert}
-        text="Внимание! Количество попыток прохождения курса ограничено"
-        iconType="exclamationMark"
-        color="warning"
-      />
+    <TextWithIcon
+      className={styles.courseAlert}
+      text="Внимание! Количество попыток прохождения курса ограничено"
+      iconType="exclamationMark"
+      color="warning"
+    />
 
-      <Button
-        className={styles.courseEnroll}
-        onClick={onClick}
-        text="Записаться"
-      />
-    </Card>
-  );
-}
-
-export default CourseOverview;
+    <Button
+      className={styles.courseEnroll}
+      onClick={onClick}
+      text="Записаться"
+    />
+  </Card>
+);

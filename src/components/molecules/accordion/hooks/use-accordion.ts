@@ -12,7 +12,7 @@ const ANIMATION_DURATION = 300;
  * @returns \{ isOpen, height, toggleAccordion, contentRef \}
  * */
 
-const useAccordion = (open: boolean): UseAccordionReturnType => {
+export const useAccordion = (open: boolean): UseAccordionReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(open);
   const [height, setHeight] = useState(open ? 'auto' : '0px');
 
@@ -78,5 +78,3 @@ const useAccordion = (open: boolean): UseAccordionReturnType => {
     contentRef,
   };
 };
-
-export default useAccordion;

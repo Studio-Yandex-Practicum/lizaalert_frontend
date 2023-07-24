@@ -1,7 +1,7 @@
 import type { RouteType } from './types';
-import defaultRoutes from './routes';
+import { defaultRoutes } from './routes';
 
-const adminRoutes: Record<string, RouteType> = {
+export const adminRoutes: Record<string, RouteType> = {
   ...defaultRoutes,
   createCourse: {
     title: 'Создание нового курса',
@@ -29,5 +29,3 @@ const adminRoutes: Record<string, RouteType> = {
     icon: 'library',
   },
 };
-
-export default adminRoutes;

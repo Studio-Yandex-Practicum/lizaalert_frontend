@@ -1,1 +1,1 @@
-export { default as BaseLayout } from './base-layout';
+export { BaseLayout } from './base-layout';

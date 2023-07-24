@@ -2,14 +2,14 @@ import { useRef, useState } from 'react';
 import { Loader } from 'components/molecules/loader';
 import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 import styles from './with-infinite-scroll.module.scss';
-import useIntersectionObserver from './hooks/use-intersection-observer';
+import { useIntersectionObserver } from './hooks/use-intersection-observer';
 import type { PaginationState, WithInfiniteScrollConfig } from './types';
 
 /**
  * HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  * */
 
-function WithInfiniteScroll<T>({
+export function WithInfiniteScroll<T>({
   initialPageSize = DEFAULT_PAGE_SIZE,
   data,
   total,
@@ -53,5 +53,3 @@ function WithInfiniteScroll<T>({
     </div>
   );
 }
-
-export default WithInfiniteScroll;

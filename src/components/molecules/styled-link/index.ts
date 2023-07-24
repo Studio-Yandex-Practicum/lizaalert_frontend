@@ -1,2 +1,2 @@
-export { default as StyledLink } from './styled-link';
+export { StyledLink } from './styled-link';
 export type { StyledLinkProps } from './types';

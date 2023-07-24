@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -10,20 +11,19 @@ import type { PasswordUpdatedProps } from './types';
  * Имеет заголовок, текст сообщения и кнопку "Войти".
  * */
 
-function PasswordUpdated({ onButtonClick, className }: PasswordUpdatedProps) {
-  return (
-    <Card className={classnames(styles.container, className)}>
-      <Heading level={3} weight="bold" text="Пароль отправлен" size="l" />
+export const PasswordUpdated: FC<PasswordUpdatedProps> = ({
+  onButtonClick,
+  className,
+}) => (
+  <Card className={classnames(styles.container, className)}>
+    <Heading level={3} weight="bold" text="Пароль отправлен" size="l" />
 
-      <P
-        textAlign="center"
-        className={styles.text}
-        text="Мы отправили новый пароль на вашу электронную почту"
-      />
+    <P
+      textAlign="center"
+      className={styles.text}
+      text="Мы отправили новый пароль на вашу электронную почту"
+    />
 
-      <Button type="button" text="Войти" onClick={onButtonClick} />
-    </Card>
-  );
-}
-
-export default PasswordUpdated;
+    <Button type="button" text="Войти" onClick={onButtonClick} />
+  </Card>
+);

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -14,7 +15,7 @@ import { useTest } from './hooks/use-test';
  * Компонент-карточка теста с вопросами.
  * */
 
-function Test({ toggleRender }: TestProps) {
+export const Test: FC<TestProps> = ({ toggleRender }) => {
   const {
     isLoading,
     isSubmitted,
@@ -75,9 +76,7 @@ function Test({ toggleRender }: TestProps) {
       </form>
     </Card>
   );
-}
-
-export default Test;
+};
 
 /** Отрисовка списка вопросов */
 function renderQuestionsList(
@@ -97,5 +96,6 @@ function renderQuestionsList(
       </li>
     ));
   }
+
   return null;
 }

@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from 'react';
+import { FC, FormEvent, useEffect } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -6,7 +6,7 @@ import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
-import useFormWithValidation from 'hooks/use-form-with-validation';
+import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import styles from './account-data.module.scss';
 import type { AccountFormData } from './types';
 
@@ -14,7 +14,7 @@ import type { AccountFormData } from './types';
  * Компонент-виджет с редактируемой формой данных аккаунта.
  * */
 
-function AccountData() {
+export const AccountData: FC = () => {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
     useFormWithValidation<AccountFormData>();
 
@@ -81,6 +81,4 @@ function AccountData() {
       </form>
     </Card>
   );
-}
-
-export default AccountData;
+};

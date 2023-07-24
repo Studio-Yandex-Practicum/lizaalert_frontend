@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -10,11 +11,11 @@ import type { CourseContentsProps } from './types';
  * Компонент содержания курса. Представляет собой список со вложенным списком уроков или аккордеон.
  * */
 
-function CourseContents({
+export const CourseContents: FC<CourseContentsProps> = ({
   content,
   type = 'main',
-  className = '',
-}: CourseContentsProps) {
+  className,
+}) => {
   const classes = classnames(styles.contents, className);
 
   // Список уроков
@@ -44,6 +45,4 @@ function CourseContents({
       )}
     </Card>
   );
-}
-
-export default CourseContents;
+};

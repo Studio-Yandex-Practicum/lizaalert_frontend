@@ -1,2 +1,2 @@
-export { default as Option } from './option';
+export { Option } from './option';
 export type { OptionType, OptionProps } from './types';

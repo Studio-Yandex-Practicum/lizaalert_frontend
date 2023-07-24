@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
@@ -16,7 +17,7 @@ import styles from './course-preview.module.scss';
  * Компонент карточки предпросмотра курса.
  */
 
-function CoursePreview({ course }: CoursePreviewProps) {
+export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
   const navigate = useNavigate();
 
   const {
@@ -80,6 +81,4 @@ function CoursePreview({ course }: CoursePreviewProps) {
       />
     </Card>
   );
-}
-
-export default CoursePreview;
+};

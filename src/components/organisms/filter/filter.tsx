@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -14,7 +15,7 @@ import { filters } from './constants';
  * Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
  */
 
-function Filter({ className = '' }: FilterProps) {
+export const Filter: FC<FilterProps> = ({ className }) => {
   const {
     selection,
     resetFilters,
@@ -74,6 +75,4 @@ function Filter({ className = '' }: FilterProps) {
       </div>
     </aside>
   );
-}
-
-export default Filter;
+};

@@ -10,7 +10,7 @@ import { fetchProfile } from '../../store/profile/thunk';
 import { routes } from '../../config';
 import styles from './profile.module.scss';
 
-function Profile() {
+const Profile = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -85,6 +85,6 @@ function Profile() {
       </div>
     </>
   );
-}
+};
 
 export default Profile;

@@ -17,7 +17,7 @@ type ResetFunction<T> = (
  * @returns \{ values, handleChange, handleChangeFiles, errors, sValid, resetForm, setValues, setIsValid \}
  * */
 
-const useFormWithValidation = <T extends Record<string, unknown>>() => {
+export const useFormWithValidation = <T extends Record<string, unknown>>() => {
   const [values, setValues] = useState<Values<T>>({});
   const [errors, setErrors] = useState<Errors<T>>({});
   const [isValid, setIsValid] = useState(false);
@@ -77,5 +77,3 @@ const useFormWithValidation = <T extends Record<string, unknown>>() => {
     setIsValid,
   };
 };
-
-export default useFormWithValidation;

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -11,7 +12,11 @@ import type { PreviewWebinarProps } from './types';
  * Компонент-карточка превью вебинара.
  */
 
-function PreviewWebinar({ date, link, className }: PreviewWebinarProps) {
+export const PreviewWebinar: FC<PreviewWebinarProps> = ({
+  date,
+  link,
+  className,
+}) => {
   const webinarDate = (
     <span key={1} className={styles.accent}>
       {convertDate(date)}
@@ -42,6 +47,4 @@ function PreviewWebinar({ date, link, className }: PreviewWebinarProps) {
       </StyledLink>
     </Card>
   );
-}
-
-export default PreviewWebinar;
+};
