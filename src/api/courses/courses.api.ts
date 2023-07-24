@@ -12,7 +12,7 @@ class CoursesApi extends BaseApi {
           page_size: pageSize,
         },
       }),
-      mock: () => import('./mock/courses.mock'),
+      mock: () => import('./mock/courses'),
     });
 }
 
