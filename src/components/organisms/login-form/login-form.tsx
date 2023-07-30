@@ -26,7 +26,7 @@ export const LoginForm: FC = () => {
   const { values, handleChange, errors, isValid } =
     useFormWithValidation<UserLoginFormData>();
   const navigate = useNavigate();
-  const { profile } = routes;
+  const { profile, register } = routes;
 
   const dispatch = useAppDispatch();
   // TODO удалить типы после типизации стора
@@ -55,6 +55,8 @@ export const LoginForm: FC = () => {
     void dispatch(fetchAuth(data));
   };
 
+  const goToRegister = () => navigate(register.path);
+
   return (
     <Card className={styles.container} htmlTag="section">
       <Heading
@@ -75,18 +77,6 @@ export const LoginForm: FC = () => {
           pattern={Patterns.email}
           isValid={!errors.email}
           error={ErrorMessages.email}
-          onChange={handleChange}
-          required
-        />
-        <Input
-          labelName="Номер телефона"
-          name="tel"
-          type="tel"
-          value={values?.tel || ''}
-          placeholder="+7 ( ___ ) ___  -  ___"
-          pattern={Patterns.tel}
-          isValid={!errors.tel}
-          error={ErrorMessages.tel}
           onChange={handleChange}
           required
         />
@@ -126,6 +116,12 @@ export const LoginForm: FC = () => {
           text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
+
+      <Button
+        className={classnames(styles.button, styles.registerButton)}
+        text="Зарегистрироваться"
+        onClick={goToRegister}
+      />
 
       {/* TODO: вынести в компонент YandexOAuthButton */}
       <Button

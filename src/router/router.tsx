@@ -24,9 +24,9 @@ export const Router: FC = () => (
       </Route>
 
       <Route path={routes.profile.path} element={<Profile />} />
+      <Route path={routes.register.path} element={<Register />} />
       <Route path={routes.login.path} element={<Login />} />
       <Route path="*" element={<NotFound />} />
     </Route>
-    <Route path={routes.register.path} element={<Register />} />
   </Routes>
 );
