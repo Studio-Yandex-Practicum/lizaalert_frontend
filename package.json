@@ -4,9 +4,9 @@
   "description": "Frontend for LizaAlert courses platform",
   "private": true,
   "scripts": {
-    "start": "webpack serve --env NODE_ENV=development --config ./.webpack/webpack.dev.js",
-    "start:mock": "webpack serve --env REACT_APP_MOCKING=true NODE_ENV=development --config ./.webpack/webpack.dev.js",
-    "build": "webpack --env NODE_ENV=production --config ./.webpack/webpack.prod.js",
+    "start": "webpack serve --env mode=development",
+    "start:mock": "webpack serve --env mode=development mock=true",
+    "build": "webpack --env mode=production",
     "test": "jest ./",
     "format": "prettier --write src/**/*",
     "lint": "eslint src/",
@@ -58,6 +58,8 @@
     "@types/react-dom": "18.0.11",
     "@types/react-router": "5.1.20",
     "@types/react-router-dom": "5.3.3",
+    "@types/webpack": "5.28.1",
+    "@types/webpack-dev-server": "4.7.2",
     "babel-loader": "9.1.2",
     "compression-webpack-plugin": "10.0.0",
     "css-loader": "6.7.3",
@@ -88,10 +90,10 @@
     "svgo": "3.0.2",
     "ts-jest": "29.0.5",
     "ts-loader": "9.4.2",
+    "ts-node": "10.9.1",
     "typescript": "4.9.5",
     "webpack": "5.76.0",
     "webpack-cli": "5.0.1",
-    "webpack-dev-server": "4.11.1",
-    "webpack-merge": "5.8.0"
+    "webpack-dev-server": "4.11.1"
   }
 }
