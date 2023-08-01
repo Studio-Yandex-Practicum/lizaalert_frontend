@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./src/*"
+      ]
+    },
     "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "noImplicitAny": true,
     "sourceMap": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,7 +28,9 @@
     "noEmitOnError": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

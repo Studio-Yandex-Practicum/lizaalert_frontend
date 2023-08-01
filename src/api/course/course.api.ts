@@ -6,7 +6,7 @@ const SERVICE_URL = '/courses/';
 class CourseApi extends BaseApi {
   getCourse = (id: number) =>
     this.createRequest<CourseModel>({
-      request: this.api.get(`${SERVICE_URL}${id}/`),
+      request: () => this.api.get(`${SERVICE_URL}${id}/`),
       mock: () => import('./mock/course'),
     });
 

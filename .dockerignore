@@ -1,6 +1,17 @@
 .git
 .github
+.jest
 .vscode
 .idea
 node_modules
 build
+docs
+.dockerignore
+.editorconfig
+.eslintignore
+.eslintrc
+.gitignore
+.prettierrc
+jest.config.js
+lefthook.yml
+README.md

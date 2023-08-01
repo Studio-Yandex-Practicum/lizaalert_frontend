@@ -26,6 +26,6 @@ export abstract class BaseApi {
         (module: { readonly default: Promise<T> }) => module.default
       );
     }
-    return request;
+    return request();
   };
 }
