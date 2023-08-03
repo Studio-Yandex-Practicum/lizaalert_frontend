@@ -15,6 +15,7 @@ import styles from './course-preview.module.scss';
 
 /**
  * Компонент карточки предпросмотра курса.
+ * При нажатии на карточку открывается страница курса.
  */
 
 export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
@@ -34,7 +35,12 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
   const goToCourse = () => navigate(`${routes.course.path}/${id}`);
 
   return (
-    <Card noPadding htmlTag="article" className={styles.article}>
+    <Card
+      noPadding
+      htmlTag="article"
+      className={styles.article}
+      onClick={goToCourse}
+    >
       <Heading
         level={3}
         size="l"
