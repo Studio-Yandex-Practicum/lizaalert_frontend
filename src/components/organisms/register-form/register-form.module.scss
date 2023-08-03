@@ -1,6 +1,8 @@
 @use 'src/styles/variables' as vars;
 
 .container {
+  display: flex;
+  flex-direction: column;
   max-width: 648px;
   margin: 0 auto;
 }
@@ -10,11 +12,16 @@
 }
 
 .form {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .button {
   margin: 0 auto;
   width: 236px;
   padding: 0 22px;
+}
+
+.authLink {
+  color: vars.$dark-secondary;
+  margin: 0 auto;
 }

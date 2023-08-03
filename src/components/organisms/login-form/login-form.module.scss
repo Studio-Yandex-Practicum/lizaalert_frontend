@@ -1,6 +1,8 @@
 @use 'src/styles/variables' as vars;
 
 .container {
+  display: flex;
+  flex-direction: column;
   max-width: 648px;
   margin: 0 auto;
 }
@@ -33,11 +35,12 @@
   padding: 0 22px;
 }
 
-.registerButton {
-  margin-bottom: 16px;
-}
-
 .icon {
   background-color: vars.$bg-yandex-logo;
   border-radius: 50%;
+}
+
+.registerLink {
+  color: vars.$dark-secondary;
+  margin: 24px auto 0;
 }
