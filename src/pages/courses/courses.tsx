@@ -11,10 +11,11 @@ import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourses,
   selectCoursesError,
+  selectCoursesProcess,
   selectCoursesTotal,
-  selectIsCoursesLoading,
 } from 'store/courses/selectors';
 import { fetchCourses } from 'store/courses/thunk';
+import { ProcessEnum } from 'utils/constants';
 import styles from './courses.module.scss';
 
 const initialPageSize = 8;
@@ -24,7 +25,7 @@ const Courses: FC = () => {
 
   const courses = useAppSelector(selectCourses);
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
-  const isCoursesLoading = useAppSelector(selectIsCoursesLoading);
+  const coursesProcess = useAppSelector(selectCoursesProcess);
   const coursesError = useAppSelector(selectCoursesError);
 
   const fetchCoursesOnIntersect = async (paginationState: PaginationState) => {
@@ -47,7 +48,7 @@ const Courses: FC = () => {
         <WithInfiniteScroll
           initialPageSize={initialPageSize}
           data={courses}
-          isLoading={isCoursesLoading}
+          isLoading={coursesProcess === ProcessEnum.Requested}
           actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={coursesError}
