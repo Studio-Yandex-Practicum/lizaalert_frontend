@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -73,10 +73,10 @@ export const RegisterForm: FC = () => {
           labelName="Подтверждение пароля"
           name="сonfirmPassword"
           type="password"
-          value={values?.сonfirmPassword || ''}
+          value={values?.confirmPassword || ''}
           placeholder=""
-          isValid={values.password === values.сonfirmPassword}
-          error={ErrorMessages.сonfirmPassword}
+          isValid={values.password === values.confirmPassword}
+          error={ErrorMessages.confirmPassword}
           onChange={handleChange}
           required
         />

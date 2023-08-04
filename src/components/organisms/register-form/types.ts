@@ -6,5 +6,5 @@ export type UserRegisterFormData = {
   /** Пароль от аккаунта пользователя. */
   password: string;
   /** Подтверждение пароля */
-  сonfirmPassword: string;
+  confirmPassword: string;
 };
