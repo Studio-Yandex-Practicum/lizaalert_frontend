@@ -52,3 +52,31 @@ export const Patterns = {
   tel: '\\+7\\s?[0-9]{10}',
   image: /\.(gif|jpg|jpeg|tiff|png)$/i,
 };
+
+export enum ProcessEnum {
+  Initial = 'Initial',
+  Requested = 'Requested',
+  Succeeded = 'Succeeded',
+  Failed = 'Failed',
+}
+
+export const SHOULD_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
+  [ProcessEnum.Initial]: true,
+  [ProcessEnum.Requested]: false,
+  [ProcessEnum.Succeeded]: false,
+  [ProcessEnum.Failed]: false,
+};
+
+export const LOADING_PROCESS_MAP: Record<ProcessEnum, boolean> = {
+  [ProcessEnum.Initial]: false,
+  [ProcessEnum.Requested]: true,
+  [ProcessEnum.Succeeded]: false,
+  [ProcessEnum.Failed]: false,
+};
+
+export const AFTER_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
+  [ProcessEnum.Initial]: false,
+  [ProcessEnum.Requested]: false,
+  [ProcessEnum.Succeeded]: true,
+  [ProcessEnum.Failed]: true,
+};
