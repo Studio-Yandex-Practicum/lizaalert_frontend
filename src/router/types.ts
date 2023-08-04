@@ -10,3 +10,7 @@ export type RouteType = {
     mockTitle: string;
   }[];
 };
+
+export type AuthorizationProps = {
+  requireAuth?: boolean;
+};
