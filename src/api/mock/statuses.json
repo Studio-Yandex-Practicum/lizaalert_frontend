@@ -20,7 +20,7 @@
   {
     "id": 4,
     "name": "Не активный",
-    "buttonName": "Не активный",
+    "buttonName": "Записаться",
     "slug": "inactive"
   }
 ]
