@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Loader } from 'components/molecules/loader';
-import { ErrorLocker } from 'components/molecules/error-locker';
 import { P } from 'components/atoms/typography';
+import { Button } from 'components/molecules/button';
+import { Loader } from 'components/molecules/loader';
 import {
   DEFAULT_PAGE_SIZE,
-  GENERAL_ERROR,
   LOADING_PROCESS_MAP,
   ProcessEnum,
 } from 'utils/constants';
@@ -88,7 +87,13 @@ export const WithInfiniteScroll = <T,>({
 
       {!error && shouldLoad && <span aria-hidden ref={loadMoreRef} />}
 
-      {error && <ErrorLocker message={GENERAL_ERROR} onClick={requestData} />}
+      {error && (
+        <Button
+          className={styles.button}
+          text="Загрузить ещё"
+          onClick={requestData}
+        />
+      )}
     </div>
   );
 };
