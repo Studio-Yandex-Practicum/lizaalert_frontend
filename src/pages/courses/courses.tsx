@@ -15,7 +15,6 @@ import {
   selectCoursesTotal,
 } from 'store/courses/selectors';
 import { fetchCourses } from 'store/courses/thunk';
-import { ProcessEnum } from 'utils/constants';
 import styles from './courses.module.scss';
 
 const initialPageSize = 8;
@@ -48,14 +47,14 @@ const Courses: FC = () => {
         <WithInfiniteScroll
           initialPageSize={initialPageSize}
           data={courses}
-          isLoading={coursesProcess === ProcessEnum.Requested}
+          process={coursesProcess}
           actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={coursesError}
+          noDataMessage="Нет подходящих курсов"
         >
           <ul className={styles.list}>
-            {courses &&
-              courses.length > 0 &&
+            {courses.length > 0 &&
               courses.map((course) => (
                 <li key={course.id}>
                   <CoursePreview course={course} />

@@ -5,7 +5,7 @@ export type CoursesThunkState = {
   process: ProcessEnum;
   error: string | null;
   count: CoursesModel['count'];
-  courses: Nullable<CoursesModel['results']>;
+  courses: CoursesModel['results'];
 };
 
 export type CoursesState = CoursesThunkState;

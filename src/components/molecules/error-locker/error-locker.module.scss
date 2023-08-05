@@ -1,0 +1,9 @@
+@use 'src/styles/variables' as vars;
+
+.locker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: vars.$grid-gap;
+  padding: 32px;
+}

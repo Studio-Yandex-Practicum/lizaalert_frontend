@@ -10,7 +10,7 @@ import { fetchCourses } from './thunk';
 
 const initialState: CoursesState = {
   count: null,
-  courses: null,
+  courses: [],
   process: ProcessEnum.Initial,
   error: null,
 };
