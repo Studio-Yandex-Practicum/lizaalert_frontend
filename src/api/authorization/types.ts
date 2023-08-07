@@ -6,7 +6,3 @@ export type AuthorizationModel = {
     Authorization: string;
   };
 };
-
-export type GetTokenModel = {
-  token: string;
-};

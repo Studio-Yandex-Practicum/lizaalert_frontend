@@ -1,7 +1,7 @@
 import { BaseApi } from '../base';
 import type { AuthorizationModel } from './types';
 
-const SERVICE_URL = '/token/login/';
+const SERVICE_URL = 'http://127.0.0.1:8000/api/v1/auth/jwt/create/';
 
 class AuthorizationApi extends BaseApi {
   postRegistration = ({ email, password }: AuthorizationModel) =>
@@ -11,29 +11,21 @@ class AuthorizationApi extends BaseApi {
           email,
           password,
         },
+        // отдаем заголовок (?)
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: '',
         },
       }),
       mock: () => import('./mock/authorization'),
-    })
-      .then((response) => {
-        console.log('response Authorization ===', response);
-      })
-      .catch((error) => {
-        console.log('error Authorization ===', error);
-      });
+    });
+  //  обработка ответа должна уйти в редакс (отсюда удаляем все)?
+  // .then((response) => {
+  //   console.log('response Authorization ===', response);
+  // })
+  // .catch((error) => {
+  //   console.log('error Authorization ===', error);
+  // });
 }
-
-// Получаем токен
-// const SERVICE_URL_TOKEN = '/jwt/create/';
-// class CheckToken extends BaseApi {
-//   getToken = ({ token }: GetTokenModel) => {
-//     this.createRequest<GetTokenModel>({
-//       request: this.api.get(SERVICE_URL_TOKEN),
-//     });
-//   };
-// }
 
 export const authorizationApi = new AuthorizationApi();

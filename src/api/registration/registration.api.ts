@@ -19,12 +19,15 @@ class RegistrationApi extends BaseApi {
           password,
           re_password,
         },
+        // передаем заголовок запроса здесь особенно это важно при авторизации, когда нужно будет токен отдать?
+        //  как в таком случае выглядит типизация?
         // headers: {
         //   'Content-Type': 'application/json;charset=utf-8',
         // },
       }),
       mock: () => import('./mock/registration'),
     });
+  //  обработка ответа должна уйти в редакс (отсюда удаляем все)?
   // .then((response) => {
   //   console.log('response Registration ===', response);
   // })

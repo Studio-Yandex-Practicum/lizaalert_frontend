@@ -1,31 +1,16 @@
-version: "3"
+version: "3.9"
 
 services:
-  base_app:
-    image: base-app
+  frontend_base_app:
+    container_name: lizaalert-frontend-base-container
+    image: lizaalert-frontend-base
     build:
-      context: ./
-      dockerfile: Dockerfile_base
-    container_name: lizaalert-base
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PORT: 80
     restart: unless-stopped
     ports:
-      - "8080:80"
-    networks:
-      - app-network
-
-  admin_app:
-    image: admin-app
-    build:
-      context: ./
-      dockerfile: Dockerfile_admin
-    container_name: lizaalert-admin
-    restart: unless-stopped
-    ports:
-      - "8081:80"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
-    
+      - "80:80"
+    env_file:
+      - .env.production

@@ -4,16 +4,16 @@ import { adminRoutes } from '../router/routes-admin';
 /** Получение env-переменной */
 const getEnvVar = (key: string) => process.env[key] || '';
 
-export const NODE_ENV = getEnvVar('NODE_ENV');
+export const REACT_APP_NODE_ENV = getEnvVar('REACT_APP_NODE_ENV');
 
 /** Режим разработки */
-export const isDevEnv = NODE_ENV === 'development';
+export const isDevEnv = REACT_APP_NODE_ENV === 'development';
 
 /** Режим продакшена */
-export const isProdEnv = NODE_ENV === 'production';
+export const isProdEnv = REACT_APP_NODE_ENV === 'production';
 
 /** Режим мокинга данных */
-export const isMockEnv = isDevEnv && !!getEnvVar('REACT_APP_MOCKING');
+export const isMockEnv = isDevEnv && getEnvVar('REACT_APP_MOCKING') === 'true';
 
 /** Режим админки */
 export const isAdmin = !!getEnvVar('REACT_APP_IS_ADMIN');

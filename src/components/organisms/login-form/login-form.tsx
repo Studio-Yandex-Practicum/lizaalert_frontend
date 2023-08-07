@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -9,7 +8,7 @@ import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
-import { selectIsAuth, selectIsAuthLoading } from 'store/auth/selectors';
+import { selectIsAuthLoading } from 'store/auth/selectors';
 import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
@@ -25,19 +24,10 @@ export const LoginForm: FC = () => {
 
   const { values, handleChange, errors, isValid } =
     useFormWithValidation<UserLoginFormData>();
-  const navigate = useNavigate();
-  const { profile } = routes;
 
   const dispatch = useAppDispatch();
   // TODO удалить типы после типизации стора
   const isAuthLoading = useAppSelector<boolean>(selectIsAuthLoading);
-  const isAuth = useAppSelector<boolean>(selectIsAuth);
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate(profile.path);
-    }
-  }, [isAuth]);
 
   const handleChangeCheckbox = (evt: ChangeEvent<HTMLInputElement>) => {
     setIsCheckedRememberMe(evt.target.checked);
@@ -75,18 +65,6 @@ export const LoginForm: FC = () => {
           pattern={Patterns.email}
           isValid={!errors.email}
           error={ErrorMessages.email}
-          onChange={handleChange}
-          required
-        />
-        <Input
-          labelName="Номер телефона"
-          name="tel"
-          type="tel"
-          value={values?.tel || ''}
-          placeholder="+7 ( ___ ) ___  -  ___"
-          pattern={Patterns.tel}
-          isValid={!errors.tel}
-          error={ErrorMessages.tel}
           onChange={handleChange}
           required
         />
@@ -135,6 +113,12 @@ export const LoginForm: FC = () => {
         iconName="yandex"
         iconSize="medium"
         text="Войти c Яндекс ID"
+      />
+
+      <StyledLink
+        href={routes.register.path}
+        className={styles.registerLink}
+        linkText="Зарегистрироваться"
       />
     </Card>
   );

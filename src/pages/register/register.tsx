@@ -1,68 +1,21 @@
-import { registrationApi } from 'api/registration';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { Heading } from 'components/atoms/typography';
+import { RegisterForm } from 'components/organisms/register-form';
+import React from 'react';
+import styles from './register.module.scss';
 
-const Register: FC = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    re_password: '',
-  });
-
-  const handleChange = (e: { target: { name: string; value: string } }) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
-    // Выполнить API запрос при отправке формы
-    registrationApi
-      .postRegistration(formData)
-      .then((response) => {
-        // Обработать успешный ответ
-        console.log('Успешный ответ:', response);
-      })
-      .catch((error) => {
-        // Обработать ошибку
-        console.error('Ошибка:', error);
-      });
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="re_password"
-        value={formData.re_password}
-        onChange={handleChange}
-      />
-      <button type="submit">Зарегистрироваться</button>
-    </form>
-  );
-};
+const Register: FC = () => (
+  <>
+    <Heading
+      level={2}
+      text="Регистрация"
+      size="xxl"
+      weight="bold"
+      textAlign="center"
+      className={styles.heading}
+    />
+    <RegisterForm />
+  </>
+);
 
 export default Register;
