@@ -1,8 +1,8 @@
 export type AuthorizationModel = {
-  email: string;
-  password: string;
-  headers: {
-    'Content-Type': string;
-    Authorization: string;
-  };
+  email: string | undefined;
+  password: string | undefined;
+  // headers: {
+  //   'Content-Type': string;
+  //   Authorization: string;
+  // };
 };

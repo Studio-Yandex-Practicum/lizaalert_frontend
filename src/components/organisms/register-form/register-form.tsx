@@ -24,8 +24,10 @@ export const RegisterForm: FC = () => {
     username: values.email, // вместо имени передаем почту
     email: values.email,
     password: values.password,
-    re_password: values.confirmPassword,
+    re_password: values.password,
   };
+
+  // console.log(formData)
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -35,11 +37,13 @@ export const RegisterForm: FC = () => {
     registrationApi
       .postRegistration(formData)
       .then((response) => {
+        console.log('formData', formData);
         // Обработать успешный ответ
         console.log('Успешный ответ:', response);
       })
       .catch((error) => {
         // Обработать ошибку
+        console.log('formData catch', formData);
         console.error('Ошибка:', error);
       });
   };
@@ -100,7 +104,7 @@ export const RegisterForm: FC = () => {
           isValid={values.password === values.confirmPassword}
           error={ErrorMessages.confirmPassword}
           onChange={handleChange}
-          required
+          // required
         />
         <Button
           className={styles.button}

@@ -6,12 +6,14 @@ import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
-import { useAppDispatch, useAppSelector } from 'store';
-import { fetchAuth } from 'store/auth/thunk';
+// import { useAppDispatch, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
+// import { fetchAuth } from 'store/auth/thunk';
 import { selectIsAuthLoading } from 'store/auth/selectors';
 import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
+import { authorizationApi } from 'api/authorization';
 import styles from './login-form.module.scss';
 import type { UserLoginFormData } from './types';
 
@@ -25,7 +27,8 @@ export const LoginForm: FC = () => {
   const { values, handleChange, errors, isValid } =
     useFormWithValidation<UserLoginFormData>();
 
-  const dispatch = useAppDispatch();
+  // временно закомментирован диспач для тестирования запросов
+  // const dispatch = useAppDispatch();
   // TODO удалить типы после типизации стора
   const isAuthLoading = useAppSelector<boolean>(selectIsAuthLoading);
 
@@ -35,14 +38,33 @@ export const LoginForm: FC = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const data = {
-      user: values,
-      isRememberMe: isCheckedRememberMe,
-    };
+    // const data = {
+    //   user: values,
+    //   isRememberMe: isCheckedRememberMe,
+    // };
     // TODO пофиксить тайпинги после типизации стора
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    void dispatch(fetchAuth(data));
+    // void dispatch(fetchAuth(data));
+
+    // временное решение для проверки работоспособности кода регистрации
+    const formData = {
+      email: values.email,
+      password: values.password,
+    };
+
+    authorizationApi
+      .postAuthorization(formData)
+      .then((response) => {
+        console.log('Data', formData);
+        // Обработать успешный ответ
+        console.log('Успешный ответ:', response);
+      })
+      .catch((error) => {
+        // Обработать ошибку
+        console.log('Data catch', formData);
+        console.error('Ошибка:', error);
+      });
   };
 
   return (

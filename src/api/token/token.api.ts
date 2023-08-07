@@ -6,11 +6,12 @@ const SERVICE_URL_TOKEN = 'http://127.0.0.1:8000/api/v1/auth/jwt/verify/';
 class CheckToken extends BaseApi {
   getToken = ({ token }: GetTokenModel) => {
     this.createRequest<GetTokenModel>({
-      request: this.api.post(SERVICE_URL_TOKEN, {
-        data: {
-          token,
-        },
-      }),
+      request: () =>
+        this.api.post(SERVICE_URL_TOKEN, {
+          data: {
+            token,
+          },
+        }),
     })
       //  обработка ответа должна уйти в редакс (отсюда удаляем все)?
       .then((response) => {
