@@ -81,8 +81,7 @@ export const RegisterForm: FC = () => {
           isValid={!errors.tel}
           error={ErrorMessages.tel}
           onChange={handleChange}
-          // убираем телефон, как обязательное поле
-          // required
+          required
         />
         <Input
           labelName="Пароль"
