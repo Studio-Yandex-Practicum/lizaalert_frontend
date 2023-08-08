@@ -7,19 +7,10 @@ class AuthorizationApi extends BaseApi {
   postAuthorization = ({ email, password }: AuthorizationModel) =>
     this.createRequest<AuthorizationModel>({
       request: () =>
-        this.api.post(
-          SERVICE_URL,
-          {
-            email,
-            password,
-          }
-          // отдаем заголовок (?)
-          // headers: {
-          //   'Content-Type': 'application/json;charset=utf-8',
-          //   Authorization: '',
-          // },
-          // }
-        ),
+        this.api.post(SERVICE_URL, {
+          email,
+          password,
+        }),
       mock: () => import('./mock/authorization'),
     });
 }

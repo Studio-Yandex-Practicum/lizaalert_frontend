@@ -104,6 +104,7 @@ export const RegisterForm: FC = () => {
           isValid={values.password === values.confirmPassword}
           error={ErrorMessages.confirmPassword}
           onChange={handleChange}
+          // не работает форма для заполнения  - для тестирования запроса убрала это поле, как обязательное
           // required
         />
         <Button
