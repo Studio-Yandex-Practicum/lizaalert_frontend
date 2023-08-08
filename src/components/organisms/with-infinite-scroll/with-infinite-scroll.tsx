@@ -15,7 +15,7 @@ import styles from './with-infinite-scroll.module.scss';
  * HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  * */
 
-export const WithInfiniteScroll = <T,>({
+export const WithInfiniteScroll = <T extends Record<string, unknown>>({
   initialPageSize = DEFAULT_PAGE_SIZE,
   data,
   total,
