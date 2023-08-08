@@ -13,7 +13,6 @@ export const Card: FC<CardProps> = ({
   children,
   noPadding,
   htmlTag = 'div',
-  onClick,
 }) =>
   createElement(
     htmlTag ?? 'div',
@@ -23,7 +22,6 @@ export const Card: FC<CardProps> = ({
         { [styles.cardNoPadding]: noPadding },
         className
       ),
-      onClick,
     },
     children
   );
