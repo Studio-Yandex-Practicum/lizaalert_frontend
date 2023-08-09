@@ -1,12 +1,14 @@
-import type { FC } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Heading } from 'components/atoms/typography';
-import { Filter } from 'components/organisms/filter';
+import { Filter, FilterParams } from 'components/organisms/filter';
 import {
   PaginationState,
   WithInfiniteScroll,
 } from 'components/organisms/with-infinite-scroll';
 import { CoursePreview } from 'components/organisms/course-preview';
 import { routes } from 'config';
+import { AFTER_LOAD_PROCESS_MAP } from 'utils/constants';
+import type { GetCoursesData } from 'api/courses';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourses,
@@ -14,12 +16,21 @@ import {
   selectCoursesProcess,
   selectCoursesTotal,
 } from 'store/courses/selectors';
+import {
+  selectFilters,
+  selectFiltersProcess,
+} from 'store/courses-filters/selectors';
 import { fetchCourses } from 'store/courses/thunk';
+import { fetchFilters } from 'store/courses-filters/thunk';
+import { resetCoursesState } from 'store/courses/slice';
+import { useEvent } from 'hooks/use-event';
 import styles from './courses.module.scss';
 
 const initialPageSize = 8;
 
 const Courses: FC = () => {
+  const [filterParams, setFilterParams] = useState({});
+
   const dispatch = useAppDispatch();
 
   const courses = useAppSelector(selectCourses);
@@ -27,9 +38,35 @@ const Courses: FC = () => {
   const coursesProcess = useAppSelector(selectCoursesProcess);
   const coursesError = useAppSelector(selectCoursesError);
 
-  const fetchCoursesOnIntersect = async (paginationState: PaginationState) => {
-    void dispatch(fetchCourses(paginationState));
-  };
+  const filters = useAppSelector(selectFilters);
+  const filtersProcess = useAppSelector(selectFiltersProcess);
+
+  const handleFilters = useEvent((params: FilterParams) => {
+    if (AFTER_LOAD_PROCESS_MAP[coursesProcess]) {
+      dispatch(resetCoursesState());
+      setFilterParams(params);
+    }
+  });
+
+  const fetchCoursesFilters = useCallback(() => {
+    void dispatch(fetchFilters());
+  }, []);
+
+  const fetchCoursesOnIntersect = useEvent(
+    async (paginationState: PaginationState) => {
+      let parameters: GetCoursesData = paginationState;
+
+      if (AFTER_LOAD_PROCESS_MAP[filtersProcess]) {
+        parameters = { ...paginationState, params: filterParams };
+      }
+
+      void dispatch(fetchCourses(parameters));
+    }
+  );
+
+  useEffect(() => {
+    fetchCoursesFilters();
+  }, []);
 
   return (
     <>
@@ -42,7 +79,13 @@ const Courses: FC = () => {
       />
 
       <div className={styles.courses}>
-        <Filter className={styles.filters} />
+        <Filter
+          className={styles.filters}
+          filters={filters}
+          process={filtersProcess}
+          onFilterSelection={handleFilters}
+          onError={fetchCoursesFilters}
+        />
 
         <WithInfiniteScroll
           initialPageSize={initialPageSize}
@@ -51,7 +94,6 @@ const Courses: FC = () => {
           actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={coursesError}
-          noDataMessage="Нет подходящих курсов"
         >
           <ul className={styles.list}>
             {courses.length > 0 &&

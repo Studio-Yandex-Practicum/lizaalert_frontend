@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef } from 'react';
  * - Имеет доступ к текущим значениям переменных снаружи
  */
 
-export function useEvent<T extends AnyFunction>(callback: T): T {
+export function useEvent<T extends AnyFunction<ReturnType<T>>>(callback: T): T {
   const latestRef = useRef<T>(callback);
 
   useLayoutEffect(() => {
