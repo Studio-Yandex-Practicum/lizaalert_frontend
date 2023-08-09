@@ -36,7 +36,7 @@ export enum KeyboardKeys {
 
 export enum CourseStatusButtons {
   'active' = 'Записаться',
-  'inactive' = 'Не активный',
+  'inactive' = 'Записаться',
   'finished' = 'Пройден',
   'booked' = 'Продолжить',
 }

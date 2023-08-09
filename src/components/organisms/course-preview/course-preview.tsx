@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -15,6 +15,12 @@ import styles from './course-preview.module.scss';
 
 /**
  * Компонент карточки предпросмотра курса.
+ * При нажатии на карточку открывается страница курса.
+ * Содержит кнопку статуса курса, которая имеет четыре состояния:
+ * - Активная кнопка "Записаться" - для курсов, на которые запись открыта;
+ * - Неактивная кнопка "Записаться" - для курсов, на которые запись пока закрыта;
+ * - Неактивная кнопка "Пройден" - для курсов, которые пользователь уже прошел;
+ * - Активная кнопка "Продолжить" - для курсов, на которые пользователь уже записан; перенаправляет пользователя на текущий урок.
  */
 
 export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
@@ -34,34 +40,46 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
   const goToCourse = () => navigate(`${routes.course.path}/${id}`);
 
   return (
-    <Card noPadding htmlTag="article" className={styles.article}>
-      <Heading
-        level={3}
-        size="l"
-        weight="bold"
-        text={title}
-        withOverflow
-        className={styles.title}
-      />
+    <article className={styles.article}>
+      <Link className={styles.link} to={`${routes.course.path}/${id}`}>
+        <Card className={styles.card} noPadding>
+          <Heading
+            level={3}
+            size="l"
+            weight="bold"
+            text={title}
+            withOverflow
+            className={styles.title}
+          />
 
-      <P lines={3} className={styles.description} text={description} />
+          <P lines={3} className={styles.description} text={description} />
 
-      <Tag className={styles.level} text={level} />
+          <Tag className={styles.level} text={level} />
 
-      {duration && (
-        <TextWithIcon
-          className={styles.duration}
-          text={`${duration} ч`}
-          iconType="duration"
-        />
-      )}
+          {duration && (
+            <TextWithIcon
+              className={styles.duration}
+              text={`${duration} ч`}
+              iconType="duration"
+            />
+          )}
 
-      <TextWithIcon
-        className={styles.lessons}
-        text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
-        iconType="lessons"
-      />
+          <TextWithIcon
+            className={styles.lessons}
+            text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
+            iconType="lessons"
+          />
 
+          <img
+            src={coverPath || placeholderCover}
+            alt={title}
+            draggable={false}
+            loading="lazy"
+            className={styles.cover}
+            onError={onImageLoadError}
+          />
+        </Card>
+      </Link>
       <Button
         className={styles.button}
         disabled={status === 'finished' || status === 'inactive'}
@@ -70,15 +88,6 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
       >
         {CourseStatusButtons[status]}
       </Button>
-
-      <img
-        src={coverPath || placeholderCover}
-        alt={title}
-        draggable={false}
-        loading="lazy"
-        className={styles.cover}
-        onError={onImageLoadError}
-      />
-    </Card>
+    </article>
   );
 };
