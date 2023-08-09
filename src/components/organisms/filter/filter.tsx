@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from 'react';
+import { ChangeEvent, FC, memo } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -7,8 +7,10 @@ import { Checkbox } from 'components/molecules/checkbox';
 import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { Loader } from 'components/molecules/loader';
+import { ErrorLocker } from 'components/organisms/error-locker';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
-import type { FilterProps } from './types';
+import { useEvent } from 'hooks/use-event';
+import type { FilterProps, RemoveFilterArgs } from './types';
 import { useFilter } from './hooks/use-filter';
 import styles from './filter.module.scss';
 
@@ -17,7 +19,7 @@ import styles from './filter.module.scss';
  */
 
 export const Filter: FC<FilterProps> = memo(
-  ({ className, filters, onFilterSelection, process }) => {
+  ({ className, filters, onFilterSelection, process, onError }) => {
     const {
       tags,
       selection,
@@ -28,17 +30,38 @@ export const Filter: FC<FilterProps> = memo(
       getQueryParams,
     } = useFilter();
 
-    useEffect(() => {
-      onFilterSelection(getQueryParams(selection));
-    }, [selection, tags]);
-
     const isLoading = LOADING_PROCESS_MAP[process];
     const isError = process === ProcessEnum.Failed;
+
+    const handleSelectFilter = useEvent(
+      (evt: ChangeEvent<HTMLInputElement>) => {
+        selectFilter(evt);
+        onFilterSelection(getQueryParams(selection));
+      }
+    );
+
+    const handleRemoveFilter = useEvent((args: RemoveFilterArgs) => {
+      removeFilter(args);
+      onFilterSelection(getQueryParams(selection));
+    });
+
+    const handleResetFilters = useEvent(() => {
+      resetFilters();
+      onFilterSelection(getQueryParams(selection));
+    });
 
     return (
       <aside className={classnames(styles.filters, className)}>
         <Card className={styles.card}>
           {isLoading && <Loader />}
+
+          {isError && (
+            <ErrorLocker
+              heading="Ой! Фильтры не загрузились"
+              onClick={onError}
+              className={styles.error}
+            />
+          )}
 
           {!isLoading && !isError && (
             <>
@@ -46,7 +69,11 @@ export const Filter: FC<FilterProps> = memo(
                 <Heading level={3} size="l" weight="bold" text="Фильтры" />
 
                 {!!tags.length && (
-                  <Button view="text" onClick={resetFilters} text="Очистить" />
+                  <Button
+                    view="text"
+                    onClick={handleResetFilters}
+                    text="Очистить"
+                  />
                 )}
               </div>
 
@@ -69,7 +96,7 @@ export const Filter: FC<FilterProps> = memo(
                       value={option.slug}
                       labelText={option.name}
                       checked={!!selection[section.slug]?.has(option.slug)}
-                      onChange={selectFilter}
+                      onChange={handleSelectFilter}
                     />
                   ))}
                 </Accordion>
@@ -84,7 +111,7 @@ export const Filter: FC<FilterProps> = memo(
               key={tag.slug}
               text={tag.name}
               value={tag}
-              onClick={removeFilter}
+              onClick={handleRemoveFilter}
               className={styles.tag}
             />
           ))}

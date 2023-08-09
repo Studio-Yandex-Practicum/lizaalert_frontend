@@ -7,7 +7,10 @@ import {
 } from 'components/organisms/with-infinite-scroll';
 import { CoursePreview } from 'components/organisms/course-preview';
 import { routes } from 'config';
-import { AFTER_LOAD_PROCESS_MAP } from 'utils/constants';
+import {
+  AFTER_LOAD_PROCESS_MAP,
+  SHOULD_LOAD_PROCESS_MAP,
+} from 'utils/constants';
 import type { GetCoursesData } from 'api/courses';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
@@ -45,8 +48,8 @@ const Courses: FC = () => {
   const handleFilters = useDebounce(
     useEvent((params: FilterParams) => {
       if (AFTER_LOAD_PROCESS_MAP[coursesProcess]) {
-        dispatch(resetCoursesState());
         setFilterParams(params);
+        dispatch(resetCoursesState());
       }
     })
   );
@@ -68,7 +71,9 @@ const Courses: FC = () => {
   );
 
   useEffect(() => {
-    fetchCoursesFilters();
+    if (SHOULD_LOAD_PROCESS_MAP[filtersProcess]) {
+      fetchCoursesFilters();
+    }
   }, []);
 
   return (
@@ -97,6 +102,7 @@ const Courses: FC = () => {
           actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={coursesError}
+          noDataMessage="Нет подходящих курсов"
         >
           <ul className={styles.list}>
             {courses.length > 0 &&

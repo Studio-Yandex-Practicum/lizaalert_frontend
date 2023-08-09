@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useEvent } from 'hooks/use-event';
 import type {
   FilterLabelsMap,
@@ -17,7 +17,7 @@ export const useFilter = () => {
   const [selection, setSelection] = useState<FilterSelection>({});
   const labelsMap = useRef<FilterLabelsMap>({});
 
-  const removeFilter = useEvent(({ section, slug }: RemoveFilterArgs) => {
+  const removeFilter = ({ section, slug }: RemoveFilterArgs) => {
     setSelection((prevSelection) => {
       const newSelection = { ...prevSelection };
       newSelection[section] = new Set(prevSelection[section]);
@@ -30,9 +30,9 @@ export const useFilter = () => {
 
       return newSelection;
     });
-  });
+  };
 
-  const selectFilter = useEvent(({ target }: ChangeEvent<HTMLInputElement>) => {
+  const selectFilter = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const name = target.dataset.label ?? '';
     const slug = target.value;
     const section = target.name;
@@ -61,9 +61,9 @@ export const useFilter = () => {
       newSelection[section].add(slug);
       return newSelection;
     });
-  });
+  };
 
-  const resetFilters = useCallback(() => setSelection({}), []);
+  const resetFilters = () => setSelection({});
 
   const countSectionSelection = useEvent((sectionName: string, size?: number) =>
     size && size > 0 ? `${sectionName} (${size})` : sectionName

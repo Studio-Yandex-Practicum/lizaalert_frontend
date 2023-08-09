@@ -6,6 +6,11 @@ import { Button } from 'components/molecules/button';
 import type { ErrorLockerProps } from './types';
 import styles from './error-locker.module.scss';
 
+/**
+ * Компонент-карточка или контейнер с заголовком, подзаголовком и кнопкой.
+ * Использовать для показа ошибки загрузки, чтобы по клику на кнопку можно было вручную повторить последний запрос.
+ * */
+
 export const ErrorLocker: FC<ErrorLockerProps> = ({
   heading,
   subheading,
