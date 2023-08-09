@@ -24,6 +24,7 @@ import { fetchCourses } from 'store/courses/thunk';
 import { fetchFilters } from 'store/courses-filters/thunk';
 import { resetCoursesState } from 'store/courses/slice';
 import { useEvent } from 'hooks/use-event';
+import { useDebounce } from 'hooks/use-debounce';
 import styles from './courses.module.scss';
 
 const initialPageSize = 8;
@@ -41,12 +42,14 @@ const Courses: FC = () => {
   const filters = useAppSelector(selectFilters);
   const filtersProcess = useAppSelector(selectFiltersProcess);
 
-  const handleFilters = useEvent((params: FilterParams) => {
-    if (AFTER_LOAD_PROCESS_MAP[coursesProcess]) {
-      dispatch(resetCoursesState());
-      setFilterParams(params);
-    }
-  });
+  const handleFilters = useDebounce(
+    useEvent((params: FilterParams) => {
+      if (AFTER_LOAD_PROCESS_MAP[coursesProcess]) {
+        dispatch(resetCoursesState());
+        setFilterParams(params);
+      }
+    })
+  );
 
   const fetchCoursesFilters = useCallback(() => {
     void dispatch(fetchFilters());
