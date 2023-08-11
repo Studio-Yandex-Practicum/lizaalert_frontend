@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { Heading } from 'components/atoms/typography';
 import { RegisterForm } from 'components/organisms/register-form';
-import React from 'react';
 import styles from './register.module.scss';
 
 const Register: FC = () => (

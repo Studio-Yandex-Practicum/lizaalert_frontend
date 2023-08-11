@@ -9,7 +9,6 @@ import { routes } from 'config';
 import { ErrorMessages, Patterns } from 'utils/constants';
 import type { UserRegisterFormData } from './types';
 import styles from './register-form.module.scss';
-import { registrationApi } from '../../../api/registration/registration.api';
 
 /**
  * Компонент-форма регистрации пользователя.
@@ -19,33 +18,10 @@ export const RegisterForm: FC = () => {
   const { values, handleChange, errors, isValid } =
     useFormWithValidation<UserRegisterFormData>();
 
-  // временное решение для проверки работоспособности кода регистрации
-  const formData = {
-    username: values.email, // вместо имени передаем почту
-    email: values.email,
-    password: values.password,
-    re_password: values.password,
-  };
-
-  // console.log(formData)
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // TODO запрос на регистрацию
 
-    // временное решение для проверки работоспособности кода регистрации
-    registrationApi
-      .postRegistration(formData)
-      .then((response) => {
-        console.log('formData', formData);
-        // Обработать успешный ответ
-        console.log('Успешный ответ:', response);
-      })
-      .catch((error) => {
-        // Обработать ошибку
-        console.log('formData catch', formData);
-        console.error('Ошибка:', error);
-      });
+    // TODO запрос на регистрацию
   };
 
   return (
@@ -81,7 +57,7 @@ export const RegisterForm: FC = () => {
           isValid={!errors.tel}
           error={ErrorMessages.tel}
           onChange={handleChange}
-          required
+          // required
         />
         <Input
           labelName="Пароль"
@@ -96,15 +72,14 @@ export const RegisterForm: FC = () => {
         />
         <Input
           labelName="Подтверждение пароля"
-          name="сonfirmPassword"
+          name="confirmPassword"
           type="password"
           value={values?.confirmPassword || ''}
           placeholder=""
           isValid={values.password === values.confirmPassword}
           error={ErrorMessages.confirmPassword}
           onChange={handleChange}
-          // не работает форма для заполнения  - для тестирования запроса убрала это поле, как обязательное
-          // required
+          required
         />
         <Button
           className={styles.button}

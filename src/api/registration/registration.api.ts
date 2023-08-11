@@ -1,23 +1,12 @@
 import { BaseApi } from '../base';
-import type { RegistrationModel } from './types';
+import type { RegistrationModel, RegistrationFormData } from './types';
 
-const BASE_URL = 'http://127.0.0.1:8000/api/v1/auth/users/';
+const SERVICE_URL = '/auth/';
 
 class RegistrationApi extends BaseApi {
-  postRegistration = ({
-    username,
-    email,
-    password,
-    re_password,
-  }: RegistrationModel) =>
+  postRegistration = (registrationData: RegistrationFormData) =>
     this.createRequest<RegistrationModel>({
-      request: () =>
-        this.api.post(BASE_URL, {
-          username,
-          email,
-          password,
-          re_password,
-        }),
+      request: () => this.api.post(`${SERVICE_URL}users/`, registrationData),
       mock: () => import('./mock/registration'),
     });
 }

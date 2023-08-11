@@ -6,9 +6,7 @@ const registrationData = new Promise<RegistrationModel>((resolve) => {
     email: 'example@mail.ru',
     password: 'Qwerty123',
     re_password: 'Qwerty123',
-    // headers: {
-    //   'Content-Type': 'application/json;charset=utf-8',
-    // },
+    id: 99999999999999,
   });
 });
 

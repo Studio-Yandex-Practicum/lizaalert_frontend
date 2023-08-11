@@ -1,17 +1,13 @@
 import { BaseApi } from '../base';
-import type { AuthorizationModel } from './types';
+import type { AuthorizationModel, LoginFormData } from './types';
 
-const SERVICE_URL = 'http://127.0.0.1:8000/api/v1/auth/jwt/create/';
+const SERVICE_URL = '/auth/';
 
 class AuthorizationApi extends BaseApi {
-  postAuthorization = ({ email, password }: AuthorizationModel) =>
+  login = (loginData: LoginFormData) =>
     this.createRequest<AuthorizationModel>({
-      request: () =>
-        this.api.post(SERVICE_URL, {
-          email,
-          password,
-        }),
-      mock: () => import('./mock/authorization'),
+      request: () => this.api.post(`${SERVICE_URL}jwt/create/`, loginData),
+      mock: () => import('./mock/login'),
     });
 }
 
