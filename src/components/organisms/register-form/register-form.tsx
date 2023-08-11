@@ -57,7 +57,7 @@ export const RegisterForm: FC = () => {
           isValid={!errors.tel}
           error={ErrorMessages.tel}
           onChange={handleChange}
-          // required
+          required
         />
         <Input
           labelName="Пароль"
