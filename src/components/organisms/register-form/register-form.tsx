@@ -20,6 +20,7 @@ export const RegisterForm: FC = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     // TODO запрос на регистрацию
   };
 
@@ -71,7 +72,7 @@ export const RegisterForm: FC = () => {
         />
         <Input
           labelName="Подтверждение пароля"
-          name="сonfirmPassword"
+          name="confirmPassword"
           type="password"
           value={values?.confirmPassword || ''}
           placeholder=""
