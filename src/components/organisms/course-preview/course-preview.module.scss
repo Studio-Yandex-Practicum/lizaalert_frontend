@@ -1,6 +1,16 @@
 @use 'src/styles/variables' as vars;
 
 .article {
+  position: relative;
+  min-width: 654px;
+}
+
+.link {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.card {
   height: 240px;
   display: grid;
   grid-template-columns: 200px 24px minmax(150px, auto) minmax(24px, 56px) 224px 32px;
@@ -49,8 +59,9 @@
 }
 
 .button {
-  grid-row: 6;
-  grid-column: 5;
+  width: 224px;
   height: 48px;
-  align-self: end;
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
 }
