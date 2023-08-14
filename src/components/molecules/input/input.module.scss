@@ -111,12 +111,9 @@
 
 .error {
   box-sizing: border-box;
-  padding-left: 16px;
-  margin-top: 3px;
-  min-height: 32px;
-  color: vars.$warning;
   width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  min-height: 32px;
+  margin-top: 3px;
+  padding-left: 16px;
+  color: vars.$warning;
 }
