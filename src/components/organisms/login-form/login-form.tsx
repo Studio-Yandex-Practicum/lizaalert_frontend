@@ -49,10 +49,13 @@ export const LoginForm: FC = () => {
       user: values,
       isRememberMe: isCheckedRememberMe,
     };
+
     // TODO пофиксить тайпинги после типизации стора
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     void dispatch(fetchAuth(data));
+
+    // TODO запрос на авторизацию
   };
 
   const formik = useFormik<UserLoginFormData>({
