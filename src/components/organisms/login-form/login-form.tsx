@@ -1,4 +1,5 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -9,11 +10,17 @@ import { StyledLink } from 'components/molecules/styled-link';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
 import { selectIsAuthLoading } from 'store/auth/selectors';
-import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { routes } from 'config';
-import { ErrorMessages, Patterns } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
 import styles from './login-form.module.scss';
 import type { UserLoginFormData } from './types';
+
+const schema = getValidationSchema<UserLoginFormData>('email', 'password');
+
+const initialValues: UserLoginFormData = {
+  email: '',
+  password: '',
+};
 
 /**
  * Компонент-форма логина пользователя.
@@ -21,9 +28,6 @@ import type { UserLoginFormData } from './types';
 
 export const LoginForm: FC = () => {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
-
-  const { values, handleChange, errors, isValid } =
-    useFormWithValidation<UserLoginFormData>();
 
   const dispatch = useAppDispatch();
   // TODO удалить типы после типизации стора
@@ -33,8 +37,14 @@ export const LoginForm: FC = () => {
     setIsCheckedRememberMe(evt.target.checked);
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const handleSubmit = async (
+    values: UserLoginFormData,
+    { validateForm }: FormikHelpers<UserLoginFormData>
+  ) => {
+    await validateForm(values);
+    console.log(values);
+    // TODO запрос на авторизацию
+
     const data = {
       user: values,
       isRememberMe: isCheckedRememberMe,
@@ -44,6 +54,15 @@ export const LoginForm: FC = () => {
     // @ts-ignore
     void dispatch(fetchAuth(data));
   };
+
+  const formik = useFormik<UserLoginFormData>({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
+
+  const areAllValuesSet =
+    Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   return (
     <Card className={styles.container} htmlTag="section">
@@ -55,29 +74,31 @@ export const LoginForm: FC = () => {
         className={styles.heading}
       />
 
-      <form onSubmit={handleSubmit} name="authForm" className={styles.form}>
+      <form
+        onSubmit={formik.handleSubmit}
+        name="authForm"
+        className={styles.form}
+        noValidate
+      >
         <Input
           labelName="Email"
           name="email"
           type="email"
-          value={values?.email || ''}
+          value={formik.values.email}
           placeholder="Введите адрес электронной почты"
-          pattern={Patterns.email}
-          isValid={!errors.email}
-          error={ErrorMessages.email}
-          onChange={handleChange}
-          required
+          isValid={!formik.touched.email || !formik.errors.email}
+          error={formik.errors.email}
+          onChange={formik.handleChange}
         />
         <Input
           labelName="Пароль"
           name="password"
           type="password"
-          value={values?.password || ''}
+          value={formik.values.password}
           placeholder=""
-          isValid={!errors.password}
-          error={errors.password}
-          onChange={handleChange}
-          required
+          isValid={!formik.touched.password || !formik.errors.password}
+          error={formik.errors.password}
+          onChange={formik.handleChange}
         />
 
         <div className={styles.linksContainer}>
@@ -100,7 +121,7 @@ export const LoginForm: FC = () => {
         <Button
           className={styles.button}
           type="submit"
-          disabled={!isValid || isAuthLoading}
+          disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
