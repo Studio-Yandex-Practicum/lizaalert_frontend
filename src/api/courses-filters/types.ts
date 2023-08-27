@@ -2,7 +2,7 @@ export type FilterOptionModel = {
   /** Название опции фильтра */
   name: string;
   /** Код опции фильтра */
-  slug: string;
+  id: number;
 };
 
 export type FilterModel = {
@@ -14,9 +14,4 @@ export type FilterModel = {
   options: FilterOptionModel[];
 };
 
-export type CoursesFiltersModel = {
-  /** Общее количество фильтров в базе данных. */
-  count: number | null;
-  /** Список фильтров. */
-  results: FilterModel[];
-};
+export type CoursesFiltersModel = FilterModel[];

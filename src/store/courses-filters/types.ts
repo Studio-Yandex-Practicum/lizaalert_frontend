@@ -4,8 +4,7 @@ import { ProcessEnum } from 'utils/constants';
 export type CoursesFiltersThunkState = {
   process: ProcessEnum;
   error: string | null;
-  count: CoursesFiltersModel['count'];
-  filters: CoursesFiltersModel['results'];
+  filters: CoursesFiltersModel;
 };
 
 export type CoursesFiltersState = CoursesFiltersThunkState;

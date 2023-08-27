@@ -1,12 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Loader } from 'components/molecules/loader';
-import {
-  DEFAULT_PAGE_SIZE,
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-} from 'utils/constants';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useIntersectionObserver } from 'hooks/use-intersection-observer';
 import type { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
@@ -15,8 +11,9 @@ import styles from './with-infinite-scroll.module.scss';
  * HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  * */
 
-export const WithInfiniteScroll = <T extends Record<string, unknown>>({
-  initialPageSize = DEFAULT_PAGE_SIZE,
+export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
+  pagination,
+  setPagination,
   data,
   total,
   error,
@@ -24,7 +21,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
   children,
   actionOnIntersect,
   noDataMessage,
-}: WithInfiniteScrollConfig<T>): JSX.Element => {
+}: WithInfiniteScrollConfig<T, State>): JSX.Element => {
   const loadMoreRef = useRef(null);
   const isInitialRender = useRef(true);
 
@@ -34,12 +31,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
   const shouldLoad =
     process === ProcessEnum.Initial || (hasMoreData && !isLoading);
 
-  const [pagination, setPagination] = useState<PaginationState>({
-    page: Math.ceil(data.length / initialPageSize + 1),
-    pageSize: initialPageSize,
-  });
-
-  const fetchData = (paginationState: PaginationState) => {
+  const fetchData = (paginationState: PaginationState<State>) => {
     if (shouldLoad) {
       void actionOnIntersect(paginationState);
     }
@@ -54,7 +46,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
     callbackOnIntersect: requestData,
   });
 
-  const getNextPage = (prevState: PaginationState) => {
+  const getNextPage = (prevState: PaginationState<State>) => {
     if (process === ProcessEnum.Initial) {
       return 1;
     }

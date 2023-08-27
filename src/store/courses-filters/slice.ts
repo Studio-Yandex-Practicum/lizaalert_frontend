@@ -9,7 +9,6 @@ import type { CoursesFiltersState } from './types';
 import { fetchFilters } from './thunk';
 
 const initialState: CoursesFiltersState = {
-  count: null,
   filters: [],
   process: ProcessEnum.Initial,
   error: null,
@@ -28,8 +27,7 @@ export const coursesFiltersSlice = createSlice({
     });
     builder.addMatcher(isFulfilled(fetchFilters), (state, { payload }) => {
       state.process = ProcessEnum.Succeeded;
-      state.count = payload.count;
-      state.filters = payload.results;
+      state.filters = payload;
       state.error = null;
     });
     builder.addMatcher(isRejected(fetchFilters), (state, { error }) => {

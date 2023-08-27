@@ -1,60 +1,57 @@
 import type { CoursesFiltersModel } from '../types';
 
-const filters: CoursesFiltersModel = {
-  count: 3,
-  results: [
-    {
-      slug: 'course_format',
-      name: 'Тематика',
-      options: [
-        {
-          name: 'Инфогруппа',
-          slug: 'infogroup',
-        },
-      ],
-    },
-    {
-      slug: 'level',
-      name: 'Уровень',
-      options: [
-        {
-          name: 'Новичок',
-          slug: 'novice',
-        },
-        {
-          name: 'Бывалый',
-          slug: 'experienced',
-        },
-        {
-          name: 'Профессионал',
-          slug: 'professional',
-        },
-      ],
-    },
-    {
-      slug: 'course_status',
-      name: 'Статус',
-      options: [
-        {
-          name: 'Активный',
-          slug: 'active',
-        },
-        {
-          name: 'Неактивный',
-          slug: 'inactive',
-        },
-        {
-          name: 'Вы записаны',
-          slug: 'booked',
-        },
-        {
-          name: 'Пройден',
-          slug: 'finished',
-        },
-      ],
-    },
-  ],
-};
+const filters: CoursesFiltersModel = [
+  {
+    slug: 'course_format',
+    name: 'Тематика',
+    options: [
+      {
+        name: 'Инфогруппа',
+        id: 1,
+      },
+    ],
+  },
+  {
+    slug: 'level',
+    name: 'Уровень',
+    options: [
+      {
+        name: 'Новичок',
+        id: 1,
+      },
+      {
+        name: 'Бывалый',
+        id: 2,
+      },
+      {
+        name: 'Профессионал',
+        id: 3,
+      },
+    ],
+  },
+  {
+    slug: 'course_status',
+    name: 'Статус',
+    options: [
+      {
+        name: 'Активный',
+        id: 1,
+      },
+      {
+        name: 'Неактивный',
+        id: 2,
+      },
+      {
+        name: 'Вы записаны',
+        id: 3,
+      },
+      {
+        name: 'Пройден',
+        id: 4,
+      },
+    ],
+  },
+];
 
 const coursesFilters = new Promise((resolve) => {
   resolve(filters);

@@ -1,7 +1,7 @@
 import { BaseApi } from '../base';
 import type { CoursesFiltersModel } from './types';
 
-const SERVICE_URL = '/courses_filters/';
+const SERVICE_URL = '/filters/';
 
 class CoursesFiltersApi extends BaseApi {
   getFilters = () =>
