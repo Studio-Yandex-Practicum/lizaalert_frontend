@@ -58,7 +58,7 @@ const Courses: FC = () => {
     useEvent((params: FilterParams) => {
       if (AFTER_LOAD_PROCESS_MAP[coursesProcess]) {
         setPagination((prevState) => ({ ...prevState, filters: params }));
-        dispatch(resetCoursesState());
+        void dispatch(resetCoursesState());
       }
     })
   );
@@ -86,6 +86,10 @@ const Courses: FC = () => {
     if (SHOULD_LOAD_PROCESS_MAP[filtersProcess]) {
       fetchCoursesFilters();
     }
+
+    return () => {
+      void dispatch(resetCoursesState());
+    };
   }, []);
 
   return (
@@ -107,7 +111,7 @@ const Courses: FC = () => {
           onError={fetchCoursesFilters}
         />
 
-        <WithInfiniteScroll<CoursePreviewModel, { filters: FilterParams }>
+        <WithInfiniteScroll<CoursePreviewModel, FiltersState>
           pagination={pagination}
           setPagination={setPagination}
           data={courses}
