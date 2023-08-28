@@ -2,6 +2,11 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 import type { PaginationState, UsePaginationStateConfig } from '../types';
 
+/**
+ * Хук для управления пагинацией при использовании бесконечной прокрутки.
+ * Возможно расширение стейта через проп `state`.
+ * */
+
 export const usePaginationState = <State>({
   dataLength,
   initialPageSize = DEFAULT_PAGE_SIZE,

@@ -11,38 +11,38 @@ import styles from './checkbox.module.scss';
  * Также в качестве props принимает все стандартные HTML-атрибуты для инпута.
  */
 
-export const Checkbox: FC<CheckboxProps> = memo(
-  ({
-    isRadio,
-    labelText = '',
-    className,
-    name = '',
-    value = '',
-    weight = 'normal',
-    ...props
-  }) => {
-    const checkboxId = `${Controls.CHECKBOX}-${name}-${value.toString()}`;
+const CheckboxComponent: FC<CheckboxProps> = ({
+  isRadio,
+  labelText = '',
+  className,
+  name = '',
+  value = '',
+  weight = 'normal',
+  ...props
+}) => {
+  const checkboxId = `${Controls.CHECKBOX}-${name}-${value.toString()}`;
 
-    return (
-      <label
-        className={classnames(styles.checkbox, styles[weight], className)}
-        htmlFor={checkboxId}
-      >
-        <input
-          {...props}
-          id={checkboxId}
-          className={styles.input}
-          type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
-          name={name}
-          value={value}
-          data-label={labelText}
-        />
-        <Icon
-          className={styles.pseudo}
-          type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
-        />
-        <P className={styles.labelText} text={labelText} />
-      </label>
-    );
-  }
-);
+  return (
+    <label
+      className={classnames(styles.checkbox, styles[weight], className)}
+      htmlFor={checkboxId}
+    >
+      <input
+        {...props}
+        id={checkboxId}
+        className={styles.input}
+        type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
+        name={name}
+        value={value}
+        data-label={labelText}
+      />
+      <Icon
+        className={styles.pseudo}
+        type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
+      />
+      <P className={styles.labelText} text={labelText} />
+    </label>
+  );
+};
+
+export const Checkbox = memo(CheckboxComponent);
