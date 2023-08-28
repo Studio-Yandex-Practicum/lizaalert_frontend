@@ -1,7 +1,6 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { useEvent } from 'hooks/use-event';
 import type {
-  FilterLabelsMap,
   FilterParams,
   FilterSelection,
   RemoveFilterArgs,
@@ -15,16 +14,14 @@ import type {
 
 export const useFilter = () => {
   const [selection, setSelection] = useState<FilterSelection>({});
-  const labelsMap = useRef<FilterLabelsMap>({});
 
   const removeFilter = useEvent(({ section, slug }: RemoveFilterArgs) => {
     setSelection((prevSelection) => {
       const newSelection = { ...prevSelection };
-      newSelection[section] = new Set(prevSelection[section]);
+      newSelection[section] = { ...prevSelection[section] };
+      delete newSelection[section][slug];
 
-      newSelection[section].delete(slug);
-
-      if (!newSelection[section].size) {
+      if (!Object.keys(newSelection[section]).length) {
         delete newSelection[section];
       }
 
@@ -36,29 +33,24 @@ export const useFilter = () => {
     const name = target.dataset.label ?? '';
     const slug = target.value;
     const section = target.name;
-    const filters = selection[section];
+    const options = selection[section];
 
-    if (!labelsMap.current[slug]) {
-      labelsMap.current[slug] = name;
-    }
-
-    if (!filters) {
+    if (!options) {
       setSelection((prevSelection) => ({
         ...prevSelection,
-        [section]: new Set([slug]),
+        [section]: { [slug]: name },
       }));
       return;
     }
 
-    if (filters.has(slug)) {
+    if (options[slug]) {
       removeFilter({ section, slug });
       return;
     }
 
     setSelection((prevSelection) => {
       const newSelection = { ...prevSelection };
-      newSelection[section] = new Set(prevSelection[section]);
-      newSelection[section].add(slug);
+      newSelection[section] = { ...prevSelection[section], [slug]: name };
       return newSelection;
     });
   });
@@ -72,7 +64,7 @@ export const useFilter = () => {
   const getQueryParams = useEvent((filters: FilterSelection) =>
     Object.keys(filters).reduce((acc, curr) => {
       // eslint-disable-next-line no-param-reassign
-      acc[curr] = Array.from(filters[curr]).join(',');
+      acc[curr] = Object.keys(filters[curr]).join(',');
       return acc;
     }, {} as FilterParams)
   );
@@ -80,15 +72,15 @@ export const useFilter = () => {
   const getTags = useEvent((filters: FilterSelection) => {
     const selected: TagType[] = [];
 
-    Object.keys(filters).forEach((section) =>
-      filters[section].forEach((slug) =>
+    Object.keys(filters).forEach((section) => {
+      Object.keys(filters[section]).forEach((slug) =>
         selected.push({
           section,
           slug,
-          name: labelsMap.current[slug],
+          name: filters[section][slug],
         })
-      )
-    );
+      );
+    });
 
     return selected;
   });

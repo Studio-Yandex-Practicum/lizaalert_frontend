@@ -79,7 +79,7 @@ export const Filter: FC<FilterProps> = memo(
                     key={section.slug}
                     title={countSectionSelection(
                       section.name,
-                      selection[section.slug]?.size
+                      Object.keys(selection[section.slug] || {})?.length
                     )}
                     titleSize="m"
                     titleWeight="normal"
@@ -92,7 +92,7 @@ export const Filter: FC<FilterProps> = memo(
                         name={section.slug}
                         value={option.id}
                         labelText={option.name}
-                        checked={!!selection[section.slug]?.has(`${option.id}`)}
+                        checked={!!selection[section.slug]?.[option.id]}
                         onChange={selectFilter}
                       />
                     ))}
@@ -106,7 +106,7 @@ export const Filter: FC<FilterProps> = memo(
         <div className={styles.selection}>
           {tags.map((tag) => (
             <Tag
-              key={tag.slug}
+              key={`${tag.slug}-${tag.name}`}
               text={tag.name}
               value={tag}
               onClick={removeFilter}

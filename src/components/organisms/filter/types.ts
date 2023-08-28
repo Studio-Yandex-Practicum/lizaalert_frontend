@@ -2,11 +2,7 @@ import type { FilterModel } from 'api/courses-filters';
 import { ProcessEnum } from 'utils/constants';
 
 export type FilterSelection = {
-  [key: string]: Set<string>;
-};
-
-export type FilterLabelsMap = {
-  [key: string]: string;
+  [key: string]: { [key: string]: string };
 };
 
 export type FilterParams = {
