@@ -1,24 +1,5 @@
-export const Filters = {
-  CATEGORY: 'category',
-  THEME: 'theme',
-  LEVEL: 'level',
-  STATUS: 'status',
-};
-
-export const Statuses = {
-  ACTIVE: 'active',
-  INACTIVE: 'inactive',
-  FINISHED: 'finished',
-  BOOKED: 'booked',
-};
-
-export const Levels = {
-  NEW: 'novice',
-  EXPERIENCED: 'experienced',
-  PRO: 'professional',
-};
-
 export const SPINNER_DELAY = 300;
+export const DELAY_DEBOUNCE = 300;
 
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
@@ -64,7 +45,7 @@ export const SHOULD_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
   [ProcessEnum.Initial]: true,
   [ProcessEnum.Requested]: false,
   [ProcessEnum.Succeeded]: false,
-  [ProcessEnum.Failed]: false,
+  [ProcessEnum.Failed]: true,
 };
 
 export const LOADING_PROCESS_MAP: Record<ProcessEnum, boolean> = {

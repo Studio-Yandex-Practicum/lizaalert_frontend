@@ -1,17 +1,17 @@
+import { FC, memo } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Controls } from 'utils/constants';
-import { FC } from 'react';
-import styles from './checkbox.module.scss';
 import type { CheckboxProps } from './types';
+import styles from './checkbox.module.scss';
 
 /**
- * Компонент чекбокса или радио с текстом-лейблом.
+ * Мемоизированный компонент чекбокса или радио с текстом-лейблом.
  * Также в качестве props принимает все стандартные HTML-атрибуты для инпута.
  */
 
-export const Checkbox: FC<CheckboxProps> = ({
+const CheckboxComponent: FC<CheckboxProps> = ({
   isRadio,
   labelText = '',
   className,
@@ -34,6 +34,7 @@ export const Checkbox: FC<CheckboxProps> = ({
         type={isRadio ? Controls.RADIO : Controls.CHECKBOX}
         name={name}
         value={value}
+        data-label={labelText}
       />
       <Icon
         className={styles.pseudo}
@@ -43,3 +44,5 @@ export const Checkbox: FC<CheckboxProps> = ({
     </label>
   );
 };
+
+export const Checkbox = memo(CheckboxComponent);

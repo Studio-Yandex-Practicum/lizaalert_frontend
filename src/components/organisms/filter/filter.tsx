@@ -1,73 +1,119 @@
-import type { FC } from 'react';
+import { FC, memo, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
-import { Button } from 'components/molecules/button';
 import { Checkbox } from 'components/molecules/checkbox';
+import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
-import styles from './filter.module.scss';
+import { Loader } from 'components/molecules/loader';
+import { ErrorLocker } from 'components/organisms/error-locker';
+import {
+  AFTER_LOAD_PROCESS_MAP,
+  LOADING_PROCESS_MAP,
+  ProcessEnum,
+} from 'utils/constants';
 import type { FilterProps } from './types';
 import { useFilter } from './hooks/use-filter';
-import { filters } from './constants';
+import styles from './filter.module.scss';
 
 /**
- * Компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
+ * Мемоизированный компонент-фильтр со списком чекбоксов, оформленный аккордеоном.
  */
 
-export const Filter: FC<FilterProps> = ({ className }) => {
+const FilterComponent: FC<FilterProps> = ({
+  className,
+  filters,
+  onFilterSelection,
+  process,
+  onError,
+}) => {
   const {
+    tags,
     selection,
     resetFilters,
     countSectionSelection,
     selectFilter,
     removeFilter,
+    getQueryParams,
   } = useFilter();
+
+  const isInitialRender = useRef(true);
+
+  const isLoading = LOADING_PROCESS_MAP[process];
+  const isError = process === ProcessEnum.Failed;
+
+  useEffect(() => {
+    if (!isInitialRender.current && AFTER_LOAD_PROCESS_MAP[process]) {
+      onFilterSelection(getQueryParams(selection));
+    }
+
+    isInitialRender.current = false;
+  }, [selection]);
 
   return (
     <aside className={classnames(styles.filters, className)}>
       <Card className={styles.card}>
-        <div className={styles.header}>
-          <Heading level={3} size="l" weight="bold" text="Фильтры" />
+        {isLoading && <Loader />}
 
-          {selection.length > 0 && (
-            <Button view="text" onClick={resetFilters} text="Очистить" />
-          )}
-        </div>
+        {isError && (
+          <ErrorLocker
+            heading="Ой! Фильтры не загрузились"
+            onClick={onError}
+            className={styles.error}
+          />
+        )}
 
-        {filters.map((section) => (
-          <Accordion
-            title={countSectionSelection(section)}
-            titleSize="m"
-            titleWeight="normal"
-            key={section.name.value}
-            className={styles.filterAccordion}
-          >
-            {section.options.map((checkbox) => (
-              <Checkbox
-                key={checkbox.value}
-                className={styles.checkbox}
-                name={section.name.value}
-                value={checkbox.value}
-                labelText={checkbox.label}
-                checked={selection.some(
-                  (filter) =>
-                    filter.name === checkbox.name &&
-                    filter.value === checkbox.value
-                )}
-                onChange={() => selectFilter(checkbox)}
-              />
-            ))}
-          </Accordion>
-        ))}
+        {!isLoading && !isError && (
+          <>
+            <div className={styles.header}>
+              <Heading level={3} size="l" weight="bold" text="Фильтры" />
+
+              {!!tags.length && (
+                <Button view="text" onClick={resetFilters} text="Очистить" />
+              )}
+            </div>
+
+            {filters.map((section) => {
+              if (!section.options.length) {
+                return null;
+              }
+
+              return (
+                <Accordion
+                  key={section.slug}
+                  title={countSectionSelection(
+                    section.name,
+                    Object.keys(selection[section.slug] || {})?.length
+                  )}
+                  titleSize="m"
+                  titleWeight="normal"
+                  className={styles.filterAccordion}
+                >
+                  {section.options.map((option) => (
+                    <Checkbox
+                      key={option.id}
+                      className={styles.checkbox}
+                      name={section.slug}
+                      value={option.id}
+                      labelText={option.name}
+                      checked={!!selection[section.slug]?.[option.id]}
+                      onChange={selectFilter}
+                    />
+                  ))}
+                </Accordion>
+              );
+            })}
+          </>
+        )}
       </Card>
 
       <div className={styles.selection}>
-        {selection.map((filter) => (
+        {tags.map((tag) => (
           <Tag
-            key={filter.value}
-            text={filter.label}
-            value={filter.value}
+            key={`${tag.slug}-${tag.name}`}
+            text={tag.name}
+            value={tag}
             onClick={removeFilter}
             className={styles.tag}
           />
@@ -76,3 +122,5 @@ export const Filter: FC<FilterProps> = ({ className }) => {
     </aside>
   );
 };
+
+export const Filter = memo(FilterComponent);

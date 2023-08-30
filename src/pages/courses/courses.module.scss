@@ -13,7 +13,10 @@
 }
 
 .filters {
-  max-width: 312px;
+  position: sticky;
+  top: vars.$grid-gap;
+  width: 312px;
+  height: fit-content;
 }
 
 .list {
