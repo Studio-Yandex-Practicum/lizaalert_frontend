@@ -6,18 +6,15 @@ on:
       - enhancement/ci-cd
 
 jobs:
-  build-fontend-image:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Build liza_frontend image
         run: docker build . -t cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
 
-  push-image-to-yandexCR:
-    needs: build-fontend-image
-    runs-on: ubuntu-latest
-    steps:
       - name: Login to Yandex Container Registry
         env:
           YCR_PRIVATE_KEY: ${{ secrets.YCR_PRIVATE_KEY }}
@@ -26,8 +23,8 @@ jobs:
       - name: Push Docker image to YCR
         run: docker push cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
 
-  deploy-image-and-run-container:
-    needs: push-image-to-yandexCR
+  CD:
+    needs: CI
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Remote Server
