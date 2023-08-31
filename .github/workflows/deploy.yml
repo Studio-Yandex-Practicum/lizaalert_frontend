@@ -2,9 +2,7 @@ name: CI/CD
 
 on:
   workflow_run:
-    workflows: [ CI Lint ]
     branches: [ enhancement/ci-cd ]
-    types: [ completed ]
 
 jobs:
   build:
