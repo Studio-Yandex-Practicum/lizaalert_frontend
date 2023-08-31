@@ -6,21 +6,30 @@ on:
       - enhancement/ci-cd
 
 jobs:
-  build:
+  build-fontend-image:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Build liza_frontend image
         run: docker build . -t cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
 
+  push-image-to-yandexCR:
+    needs: build-fontend-image
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to Yandex Container Registry
         env:
           YCR_PRIVATE_KEY: ${{ secrets.YCR_PRIVATE_KEY }}
         run: echo "$YCR_PRIVATE_KEY" | docker login --username json_key --password-stdin cr.yandex
 
-      - name: Build and Push Docker image
+      - name: Push Docker image to YCR
         run: docker push cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
 
+  deploy-image-and-run-container:
+    needs: push-image-to-yandexCR
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to Remote Server
         uses: appleboy/ssh-action@master
         with:
@@ -29,6 +38,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker rmi -f lizaalert_frontend:latest
+            sudo docker rmi -f cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
             sudo docker pull cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
             sudo bash -c "docker-compose -f /root/liza_frontend/docker-compose.production.yml up -d"
