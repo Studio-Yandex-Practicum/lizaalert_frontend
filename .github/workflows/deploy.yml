@@ -1,0 +1,35 @@
+name: CI/CD
+
+on:
+  workflow_run:
+    workflows: [ CI Lint ]
+    branches: [ enhancement/ci-cd ]
+    types: [ completed ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build liza_frontend image
+        run: docker build . -t cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
+
+      - name: Login to Yandex Container Registry
+        env:
+          YCR_PRIVATE_KEY: ${{ secrets.YCR_PRIVATE_KEY }}
+        run: echo "$YCR_PRIVATE_KEY" | docker login --username json_key --password-stdin cr.yandex
+
+      - name: Build and Push Docker image
+        run: docker push cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
+
+      - name: Deploy to Remote Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            sudo docker rmi -f lizaalert_frontend:latest
+            sudo docker pull cr.yandex/crpabbati0r6r7i5ee8c/lizaalert_frontend:latest
+            sudo bash -c "docker-compose -f /root/liza_frontend/docker-compose.production.yml up -d"
