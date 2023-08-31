@@ -1,8 +1,9 @@
 name: CI/CD
 
 on:
-  workflow_run:
-    branches: [ enhancement/ci-cd ]
+  push:
+    branches:
+      - enhancement/ci-cd
 
 jobs:
   build:
