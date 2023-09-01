@@ -13,6 +13,7 @@ import {
   selectCourse,
   selectCourseContents,
   selectCourseDescription,
+  selectCourseBenefits,
   selectCourseError,
   selectCourseTitle,
   selectIsCourseLoading,
@@ -27,6 +28,7 @@ const Course: FC = () => {
   const course = useAppSelector(selectCourse);
   const courseTitle = useAppSelector(selectCourseTitle);
   const courseDescription = useAppSelector(selectCourseDescription);
+  const courseBenefits = useAppSelector(selectCourseBenefits);
   const courseContents = useAppSelector(selectCourseContents);
   const isCourseLoading = useAppSelector(selectIsCourseLoading);
   const courseError = useAppSelector(selectCourseError);
@@ -62,7 +64,9 @@ const Course: FC = () => {
             <CourseDescription description={courseDescription} />
           )}
 
-          <CourseBenefits />
+          {courseBenefits?.length > 0 && (
+            <CourseBenefits benefitsList={courseBenefits} />
+          )}
 
           {courseContents?.length > 0 && (
             <CourseContents content={courseContents} />

@@ -2,6 +2,15 @@ export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
 
 export type LessonStatus = 'Ready' | 'Draft' | 'Published';
 
+export type KnowledgeModel = {
+  /** id навыка. */
+  id: number;
+  /** Заголовок-название навыка. */
+  title: string;
+  /** Описание навыка. */
+  description: string;
+};
+
 export type LessonModel = {
   /** id урока курса. */
   id: number;
@@ -35,8 +44,8 @@ export type CourseModel = {
   level: string;
   /** Короткое описание курса. */
   full_description: string;
-  /** ??? */
-  knowledge: null;
+  /** Список навыков, получаемых на курсе */
+  knowledge: KnowledgeModel[];
   /** Дата начала прохождения курса. */
   start_date: string;
   /** URL к обложке курса. */

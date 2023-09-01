@@ -5,7 +5,6 @@ import { Heading, P } from 'components/atoms/typography';
 import { Icon } from 'components/atoms/icon';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-benefits.module.scss';
-import { defaultList } from './constants';
 import type { CourseBenefitsProps } from './types';
 
 /**
@@ -13,7 +12,7 @@ import type { CourseBenefitsProps } from './types';
  */
 
 export const CourseBenefits: FC<CourseBenefitsProps> = ({
-  benefitsList = defaultList,
+  benefitsList,
   className,
 }) => (
   <Card className={classnames(styles.benefits, className)} htmlTag="section">
