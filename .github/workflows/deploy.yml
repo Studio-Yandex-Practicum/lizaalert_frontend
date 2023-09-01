@@ -1,9 +1,10 @@
 name: CI/CD
 
 on:
-  push:
-    branches:
-      - enhancement/ci-cd
+  workflow_run:
+    workflows: [ CI Lint ]
+    branches: [ master ]
+    types: [ completed ]
 
 jobs:
   CI:
