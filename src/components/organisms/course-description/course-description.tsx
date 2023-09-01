@@ -4,7 +4,6 @@ import { Card } from 'components/atoms/card';
 import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-description.module.scss';
-import { defaultProps } from './constants';
 import type { CourseDescriptionProps } from './types';
 
 /**
@@ -12,7 +11,7 @@ import type { CourseDescriptionProps } from './types';
  */
 
 export const CourseDescription: FC<CourseDescriptionProps> = ({
-  description = defaultProps.description,
+  description,
   className,
 }) => (
   <Card className={classnames(styles.description, className)} htmlTag="section">
