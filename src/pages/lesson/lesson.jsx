@@ -35,18 +35,16 @@ const Lesson = () => {
   const [courseContents, setCourseContents] = useState([]);
 
   useEffect(() => {
-    getContent();
+    void getContent();
   }, [topicId]);
 
-  function getContent() {
-    contentApi
-      .getContent(topicId)
-      .then((response) => {
-        setCourseContents(response.chapters);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  async function getContent() {
+    try {
+      const response = await contentApi.getContent(topicId);
+      setCourseContents(response.chapters);
+    } catch (error) {
+      throw new Error('Ошибка загрузки данных Содержания');
+    }
   }
 
   // ===========
