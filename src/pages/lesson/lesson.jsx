@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { contentApi } from '../../api/content';
+import { courseApi } from '../../api/course';
 import { P } from '../../components/atoms/typography';
 import { Breadcrumbs } from '../../components/organisms/breadcrumbs';
 import { CourseContents } from '../../components/organisms/course-contents';
@@ -31,7 +31,7 @@ const Lesson = () => {
 
   const pathnamesArray = usePathnames(mockCourseContent, courseId);
 
-  // ====== для отображения Содержания
+  // TODO - нужно перенести это в redux
   const [courseContents, setCourseContents] = useState([]);
 
   useEffect(() => {
@@ -40,14 +40,12 @@ const Lesson = () => {
 
   async function getContent() {
     try {
-      const response = await contentApi.getContent(topicId);
+      const response = await courseApi.getCourse(topicId);
       setCourseContents(response.chapters);
     } catch (error) {
       throw new Error('Ошибка загрузки данных Содержания');
     }
   }
-
-  // ===========
 
   useEffect(() => {
     void dispatch(fetchLessonById(lessonId));
