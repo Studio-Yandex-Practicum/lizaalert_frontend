@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { courseApi } from '../../api/course';
 import { P } from '../../components/atoms/typography';
 import { Breadcrumbs } from '../../components/organisms/breadcrumbs';
 import { CourseContents } from '../../components/organisms/course-contents';
@@ -29,6 +30,22 @@ const Lesson = () => {
   const [forwardIsDisabled, setForwardIsDisabled] = useState(false);
 
   const pathnamesArray = usePathnames(mockCourseContent, courseId);
+
+  // TODO - нужно перенести это в redux
+  const [courseContents, setCourseContents] = useState([]);
+
+  useEffect(() => {
+    void getContent();
+  }, [topicId]);
+
+  async function getContent() {
+    try {
+      const response = await courseApi.getCourse(topicId);
+      setCourseContents(response.chapters);
+    } catch (error) {
+      throw new Error('Ошибка загрузки данных Содержания');
+    }
+  }
 
   useEffect(() => {
     void dispatch(fetchLessonById(lessonId));
@@ -90,11 +107,19 @@ const Lesson = () => {
           />
         </div>
 
-        <CourseContents
-          content={mockCourseContent}
-          type="inner"
-          className={styles.courseContent}
-        />
+        {courseContents?.length > 0 ? (
+          <CourseContents
+            content={courseContents}
+            type="inner"
+            className={styles.courseContent}
+          />
+        ) : (
+          <CourseContents
+            content={mockCourseContent}
+            type="inner"
+            className={styles.courseContent}
+          />
+        )}
       </div>
     </>
   );
