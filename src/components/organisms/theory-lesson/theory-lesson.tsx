@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Card } from 'components/atoms/card';
 import { TheoryLessonProps } from './types';
 
@@ -10,7 +11,6 @@ import { TheoryLessonProps } from './types';
 
 export const TheoryLesson: FC<TheoryLessonProps> = ({ content }) => (
   <Card>
-    {/* eslint-disable-next-line */}
-      <div dangerouslySetInnerHTML={{__html: content}}/>
+    <ReactMarkdown>{content}</ReactMarkdown>
   </Card>
 );
