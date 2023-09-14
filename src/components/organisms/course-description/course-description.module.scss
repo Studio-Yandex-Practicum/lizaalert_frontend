@@ -10,7 +10,9 @@
 }
 
 .text {
-  margin: 32px 0 0;
+  p {
+    margin: 32px 0 0;
+  }
 }
 
 .titleTasks {
@@ -18,14 +20,16 @@
 }
 
 .tasksList {
-  margin: 0;
-  padding-left: 27px;
-}
+  ul {
+    margin: 0;
+    padding-left: 27px;
 
-.task {
-  margin-top: 18px;
+    li {
+      margin-top: 18px;
 
-  &:first-of-type {
-    margin-top: 0;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
   }
 }
