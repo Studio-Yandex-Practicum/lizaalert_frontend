@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import classnames from 'classnames';
+import ReactMarkdown from 'react-markdown';
 import { Card } from 'components/atoms/card';
-import { Heading, Li, P } from 'components/atoms/typography';
+import { Heading } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import styles from './course-description.module.scss';
 import { defaultProps } from './constants';
@@ -23,24 +24,19 @@ export const CourseDescription: FC<CourseDescriptionProps> = ({
       className={styles.title}
       open
     >
-      <P className={styles.text} text={description} />
+      <ReactMarkdown className={styles.text}>{description}</ReactMarkdown>
 
-      <Heading
-        level={3}
-        text="Основные задачи нашего подразделения:"
-        size="m"
-        weight="bold"
-        className={styles.titleTasks}
-      />
-
-      {tasks?.length > 0 && (
-        <ul className={styles.tasksList}>
-          {tasks.map((task) => (
-            <Li key={task} className={styles.task}>
-              {task}
-            </Li>
-          ))}
-        </ul>
+      {!!tasks && (
+        <>
+          <Heading
+            level={3}
+            text="Основные задачи нашего подразделения:"
+            size="m"
+            weight="bold"
+            className={styles.titleTasks}
+          />
+          <ReactMarkdown className={styles.tasksList}>{tasks}</ReactMarkdown>
+        </>
       )}
     </Accordion>
   </Card>
