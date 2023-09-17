@@ -11,6 +11,8 @@ const initialState = {
   isAuth: false,
   isLoading: true,
   error: null,
+  // ввдение токена
+  token: null,
 };
 
 export const authSlice = createSlice({
@@ -18,8 +20,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAuth.fulfilled, (state) => {
+    builder.addCase(fetchAuth.fulfilled, (state, { payload }) => {
       state.isAuth = true;
+      state.token = payload.token;
+      console.log('state.token', state.token);
     });
     builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
       state.isAuth = payload;

@@ -8,11 +8,6 @@ export const fetchAuth = createAsyncThunk('auth/fetch', async (authData) => {
 
   try {
     const token = await authorizationApi.login(user);
-    console.log('token:::', token);
-
-    // предложение по решению сохранения токена - код старый, просто перенесен внутрь
-    // положительной авторизации. Главный вопрос - зачем ждать выполнение функции timeout?
-    const jwt = await timeout();
     if (isRememberMe) {
       localStorage.setItem('jwt.access', token.access);
       localStorage.setItem('jwt.refresh', token.refresh);
@@ -20,28 +15,11 @@ export const fetchAuth = createAsyncThunk('auth/fetch', async (authData) => {
       sessionStorage.setItem('jwt.access', token.access);
       sessionStorage.setItem('jwt.refresh', token.refresh);
     }
-    console.log('jwt', jwt);
-    return jwt;
+    console.log('jwt', token);
+    return token;
   } catch (error) {
     throw new Error('Ошибка авторизации');
   }
-
-  // ЗАЧЕМ ЗДЕСЬ ФУНКЦИЯ timeout?
-  // eslint-disable-next-line no-inner-declarations
-  async function timeout() {
-    // eslint-disable-next-line no-promise-executor-return,@typescript-eslint/no-implied-eval
-    return new Promise((resolve) => setTimeout(resolve(authData), 2000));
-  }
-
-  // ТАК БЫЛО
-  // const jwt = await timeout();
-  // if (isRememberMe) {
-  //   localStorage.setItem('jwt', jwt.token);
-  // } else {
-  //   sessionStorage.setItem('jwt', jwt.token);
-  // }
-  // console.log('jwt', jwt);
-  // return jwt;
 });
 
 export const checkAuth = createAsyncThunk('auth/check', async () => {
