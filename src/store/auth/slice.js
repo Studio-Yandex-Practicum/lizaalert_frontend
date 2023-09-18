@@ -6,12 +6,12 @@ import {
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR } from '../../utils/constants';
 import { checkAuth, fetchAuth } from './thunk';
+// import { AuthState } from './types';
 
 const initialState = {
   isAuth: false,
   isLoading: true,
   error: null,
-  // ввдение токена
   token: null,
 };
 
@@ -22,8 +22,7 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAuth.fulfilled, (state, { payload }) => {
       state.isAuth = true;
-      state.token = payload.token;
-      console.log('state.token', state.token);
+      state.token = payload;
     });
     builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
       state.isAuth = payload;

@@ -15,8 +15,8 @@ export const fetchAuth = createAsyncThunk('auth/fetch', async (authData) => {
       sessionStorage.setItem('jwt.access', token.access);
       sessionStorage.setItem('jwt.refresh', token.refresh);
     }
-    console.log('jwt', token);
-    return token;
+    console.log('token.access', token.access);
+    return token.access;
   } catch (error) {
     throw new Error('Ошибка авторизации');
   }
@@ -57,14 +57,4 @@ export const checkAuth = createAsyncThunk('auth/check', async () => {
 
   await verifyToken();
   return true;
-
-  // ТО ЧТО БЫЛО
-  // eslint-disable-next-line no-inner-declarations
-  // async function timeout() {
-  //   // eslint-disable-next-line no-promise-executor-return
-  //   return new Promise((resolve) => setTimeout(resolve, 2000));
-  // }
-
-  // await timeout();
-  // return false;
 });

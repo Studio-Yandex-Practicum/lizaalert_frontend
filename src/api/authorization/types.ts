@@ -1,4 +1,6 @@
 export type AuthorizationModel = {
+  token: string | null;
+  // token: null;
   access: string;
   refresh: string;
 };
