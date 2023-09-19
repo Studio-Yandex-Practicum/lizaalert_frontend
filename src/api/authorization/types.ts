@@ -1,6 +1,4 @@
 export type AuthorizationModel = {
-  token: string | null;
-  // token: null;
   access: string;
   refresh: string;
 };
@@ -30,6 +28,6 @@ export type RefreshTokenData = {
   refresh: string;
 };
 
-export type TokenModel = {
-  access: string;
+export type AccessTokenModel = {
+  token: string;
 };

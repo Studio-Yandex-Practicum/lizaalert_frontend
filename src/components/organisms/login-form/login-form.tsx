@@ -42,16 +42,11 @@ export const LoginForm: FC = () => {
     { validateForm }: FormikHelpers<UserLoginFormData>
   ) => {
     await validateForm(values);
-    // console.log(values);
-    // TODO запрос на авторизацию
 
     const data = {
       user: values,
       isRememberMe: isCheckedRememberMe,
     };
-
-    console.log('data about user::::', data);
-
     // TODO пофиксить тайпинги после типизации стора
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

@@ -5,7 +5,7 @@ import type {
   RegistrationFormData,
   RegistrationModel,
   RefreshTokenData,
-  TokenModel,
+  AccessTokenModel,
 } from './types';
 
 const SERVICE_URL = '/auth/';
@@ -23,16 +23,15 @@ class AuthorizationApi extends BaseApi {
       mock: () => import('./mock/registration'),
     });
 
-  checkToken = (checkTokenData: TokenModel) =>
-    this.createRequest<TokenModel>({
+  checkToken = (checkTokenData: AccessTokenModel) =>
+    this.createRequest<AccessTokenModel>({
       request: () => this.api.post(`${SERVICE_URL}jwt/verify/`, checkTokenData),
     });
 
   refreshToken = (refreshTokenData: RefreshTokenData) =>
-    this.createRequest<AuthorizationModel>({
+    this.createRequest<AccessTokenModel>({
       request: () =>
         this.api.post(`${SERVICE_URL}jwt/refresh/`, refreshTokenData),
-      // надо заводить какие-то другие моки для этого запроса?
       mock: () => import('./mock/login'),
     });
 }
