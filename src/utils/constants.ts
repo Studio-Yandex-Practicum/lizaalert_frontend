@@ -6,6 +6,9 @@ export const DEFAULT_PAGE_SIZE = 10;
 
 export const GENERAL_ERROR = 'Что-то пошло не так';
 
+export const ACCESS_TOKEN = 'token.access';
+export const REFRESH_TOKEN = 'token.refresh';
+
 export enum Controls {
   CHECKBOX = 'checkbox',
   RADIO = 'radio',

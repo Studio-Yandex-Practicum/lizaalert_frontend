@@ -28,6 +28,6 @@ export type RefreshTokenData = {
   refresh: string;
 };
 
-export type AccessTokenModel = {
+export type VerifyTokenData = {
   token: string;
 };

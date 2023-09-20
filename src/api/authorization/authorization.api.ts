@@ -5,7 +5,7 @@ import type {
   RegistrationFormData,
   RegistrationModel,
   RefreshTokenData,
-  AccessTokenModel,
+  VerifyTokenData,
 } from './types';
 
 const SERVICE_URL = '/auth/';
@@ -23,16 +23,21 @@ class AuthorizationApi extends BaseApi {
       mock: () => import('./mock/registration'),
     });
 
-  checkToken = (checkTokenData: AccessTokenModel) =>
-    this.createRequest<AccessTokenModel>({
-      request: () => this.api.post(`${SERVICE_URL}jwt/verify/`, checkTokenData),
+  verifyToken = (verifyTokenData: VerifyTokenData) =>
+    this.createRequest({
+      request: () =>
+        this.api.post(`${SERVICE_URL}jwt/verify/`, verifyTokenData),
     });
 
   refreshToken = (refreshTokenData: RefreshTokenData) =>
-    this.createRequest<AccessTokenModel>({
+    this.createRequest<AuthorizationModel>({
       request: () =>
         this.api.post(`${SERVICE_URL}jwt/refresh/`, refreshTokenData),
       mock: () => import('./mock/login'),
     });
+
+  setAuthHeader = (token: string) => {
+    this.api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  };
 }
 export const authorizationApi = new AuthorizationApi();

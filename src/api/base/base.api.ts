@@ -1,7 +1,6 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import axios from 'axios';
 import { BACKEND_API, isMockEnv } from 'config';
-import { store } from 'store';
 import type { BaseApiRequest } from './types';
 
 export abstract class BaseApi {
@@ -10,16 +9,6 @@ export abstract class BaseApi {
   });
 
   constructor() {
-    this.api.interceptors.request.use((config) => {
-      const state = store.getState();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const { token } = state.auth;
-      if (token) {
-        // eslint-disable-next-line no-param-reassign, @typescript-eslint/restrict-template-expressions
-        config.headers.Authorization = `${token}`;
-      }
-      return config;
-    });
     this.api.interceptors.response.use(
       // Типизация возвращаемого значения производится в методах
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -37,6 +26,7 @@ export abstract class BaseApi {
         (module: { readonly default: Promise<T> }) => module.default
       );
     }
+
     return request();
   };
 }

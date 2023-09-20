@@ -1,58 +1,59 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-unresolved
 import { authorizationApi } from 'api/authorization';
-import { UserLoginFormData } from 'components/organisms/login-form';
+import type { LoginFormData } from 'api/authorization';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
 
 export const fetchAuth = createAsyncThunk(
   'auth/fetch',
-  async (authData: { user: UserLoginFormData; isRememberMe: boolean }) => {
+  async (authData: { user: LoginFormData; isRememberMe: boolean }) => {
     const { user, isRememberMe } = authData;
 
-    try {
-      const token = await authorizationApi.login(user);
-      if (isRememberMe) {
-        localStorage.setItem('token.access', token.access);
-        localStorage.setItem('token.refresh', token.refresh);
-      } else {
-        sessionStorage.setItem('token.access', token.access);
-        sessionStorage.setItem('token.refresh', token.refresh);
-      }
-      return token.access;
-    } catch (error) {
-      throw new Error('Ошибка авторизации');
-    }
+    const token = await authorizationApi.login(user);
+    const storage = isRememberMe ? localStorage : sessionStorage;
+
+    storage.setItem(ACCESS_TOKEN, token.access);
+    storage.setItem(REFRESH_TOKEN, token.refresh);
+
+    authorizationApi.setAuthHeader(token.access);
+    return token.access;
   }
 );
 
-export const checkAuth = createAsyncThunk('auth/check', async () => {
-  const tokenAccess = localStorage.getItem('token.access');
+export const refreshToken = createAsyncThunk('auth/refresh', async () => {
+  const tokenRefresh =
+    sessionStorage.getItem(REFRESH_TOKEN) ||
+    localStorage.getItem(REFRESH_TOKEN);
+  if (!tokenRefresh) {
+    return null;
+  }
+  const token = await authorizationApi.refreshToken({
+    refresh: tokenRefresh,
+  });
+  localStorage.setItem(ACCESS_TOKEN, token.access);
+  localStorage.setItem(REFRESH_TOKEN, token.refresh);
+  authorizationApi.setAuthHeader(token.access);
+  return token.access;
+});
 
-  const tokenRefresh = localStorage.getItem('token.refresh');
-
-  const currentTokenAccess = {
-    token: tokenAccess || '',
-  };
-
-  const currentTokenRefresh = {
-    refresh: tokenRefresh || '',
-  };
-
-  // верификация токена текущего пользователя
-  async function verifyToken() {
-    if (currentTokenAccess) {
-      try {
-        await authorizationApi.checkToken(currentTokenAccess);
-      } catch (error) {
-        console.log('token протух');
-        await authorizationApi.refreshToken(currentTokenRefresh);
-        // TODO замена в localStorage на новый токен
-      }
-    } else {
-      // TODO отправка на страницу авторизации
-      console.log('нет токена - авторизуйся');
+export const checkAuth = createAsyncThunk(
+  'auth/check',
+  async (_, { dispatch }) => {
+    const tokenAccess =
+      sessionStorage.getItem(ACCESS_TOKEN) ||
+      localStorage.getItem(ACCESS_TOKEN);
+    if (!tokenAccess) {
+      void dispatch(refreshToken());
+      return;
+    }
+    try {
+      await authorizationApi.verifyToken({
+        token: tokenAccess,
+      });
+      authorizationApi.setAuthHeader(tokenAccess);
+      // eslint-disable-next-line consistent-return
+      return tokenAccess;
+    } catch (err) {
+      void dispatch(refreshToken());
     }
   }
-
-  await verifyToken();
-  return true;
-});
+);
