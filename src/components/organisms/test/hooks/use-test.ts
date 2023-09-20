@@ -1,11 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsTestLoading, selectTest } from 'store/test/selectors';
 import { selectLesson } from 'store/lesson/selectors';
 import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
 import type { TestType } from 'components/organisms/test-preview';
-import type { TestQuestionListType } from '../types';
+import type { TestQuestionListType, TestAnswersAfterParseType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -15,6 +16,7 @@ import type { TestQuestionListType } from '../types';
  * */
 
 export const useTest = () => {
+  const { lessonId } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
@@ -27,28 +29,33 @@ export const useTest = () => {
   const dispatch = useAppDispatch();
 
   const setInitialState = () => {
-    void dispatch(fetchTest());
+    if (lessonId) {
+      void dispatch(fetchTest(+lessonId));
+    }
     setIsSubmitted(false);
   };
 
   useEffect(() => {
     setInitialState();
-  }, []);
+  }, [lessonId]);
 
   useEffect(() => {
     if (test.questions?.length >= 0) {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
+        const answersList = JSON.parse(
+          question.answers
+        ) as TestAnswersAfterParseType[];
         if (question.type === Controls.RADIO) {
-          question.answers.forEach((answer) => {
+          answersList.forEach((answer) => {
             if (answer.isChecked && answer.isCorrect) percentArr.push(100);
             if (answer.isChecked && !answer.isCorrect) percentArr.push(0);
           });
         } else {
-          const weight = 100 / question.answers.length;
+          const weight = 100 / answersList.length;
           let percent = 0;
-          question.answers.forEach((answer) => {
+          answersList.forEach((answer) => {
             if (
               (answer.isChecked && answer.isCorrect) ||
               (!answer.isChecked && !answer.isCorrect)
@@ -76,8 +83,11 @@ export const useTest = () => {
     if (test.questions?.length > 0) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
+        const answersList = JSON.parse(
+          question.answers
+        ) as TestAnswersAfterParseType[];
 
-        question.answers.forEach((answer) => {
+        answersList.forEach((answer) => {
           if (answer.isChecked) checkedCount += 1;
         });
 

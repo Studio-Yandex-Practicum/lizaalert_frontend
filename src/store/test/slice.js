@@ -52,8 +52,7 @@ export const testSlice = createSlice({
         questions: [
           ...payload.questions.map((question) => {
             let countCorrectAnswers = 0;
-
-            question.answers.forEach((answer) => {
+            JSON.parse(question.answers).forEach((answer) => {
               if (answer.isCorrect) countCorrectAnswers += 1;
             });
 
