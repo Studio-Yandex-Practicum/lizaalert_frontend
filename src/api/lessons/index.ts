@@ -1,8 +1,2 @@
-export { lessonsTestApi } from './lessons.api';
-// export type {
-//   CourseModel,
-//   ChapterModel,
-//   LessonModel,
-//   LessonType,
-//   LessonStatus,
-// } from './types';
+export { lessonsApi } from './lessons.api';
+export type { TestAnswerType, TestQuestionType, TestModel } from './types';

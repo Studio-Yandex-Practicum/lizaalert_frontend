@@ -19,9 +19,9 @@ export type TestQuestionType = {
   /** Вопрос в виде строки. */
   title: string;
   /** Тип вопроса: мультивыбор или единственный. */
-  type: TestAnswerOptionsType;
+  question_type: TestAnswerOptionsType;
   /** Массив ответов тестового вопроса: id, text, isCorrect, isChecked. */
-  answers: TestAnswerType[];
+  content: TestAnswerType[];
 };
 
 export type TestModel = {
@@ -29,14 +29,16 @@ export type TestModel = {
   id: number;
   /** Краткое описание теста. */
   description: string;
+  /** Статус теста */
+  status: string;
   /** Проходной балл в процентном выражении. */
-  passingScore: number;
+  passing_score: number;
   /** Количество попыток прохождения теста. */
   retries: number;
   /** Дедлайн прохождения теста. */
   deadline: string;
   /** Флаг, проходится ли в данный момент этот тест. */
-  inProgress: boolean;
+  in_progress: boolean;
   /** Вопросы к тесту */
   questions: TestQuestionType[];
 };

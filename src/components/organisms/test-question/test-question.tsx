@@ -3,7 +3,7 @@ import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
 import styles from './test-question.module.scss';
-import type { TestQuestionProps, TestAnswersAfterParseType } from './types';
+import type { TestQuestionProps } from './types';
 
 /**
  * Компонент тестового вопроса.
@@ -16,12 +16,11 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   isSubmitted = false,
   className = '',
 }) => {
-  const answers = JSON.parse(question.answers) as TestAnswersAfterParseType[];
   // список ответов
-  const answersList = answers.map((answer) => (
+  const answersList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
       <TestAnswer
-        answer={answer}
+        content={answer}
         questionId={question.id}
         answerOptions={type}
       />
@@ -29,9 +28,9 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   ));
 
   // список с проверкой ответов теста
-  const resultsList = answers.map((answer) => (
+  const resultsList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
-      <TestResults answer={answer} className={className} />
+      <TestResults content={answer} className={className} />
     </li>
   ));
 

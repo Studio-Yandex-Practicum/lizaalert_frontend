@@ -1,4 +1,7 @@
-import type { TestAnswerOptionsType } from 'components/molecules/test-answer';
+import type {
+  TestAnswerOptionsType,
+  TestAnswerType,
+} from 'components/molecules/test-answer';
 
 export type TestQuestionType = {
   /** id тестового вопроса. */
@@ -8,22 +11,11 @@ export type TestQuestionType = {
   /** Тип вопроса: мультивыбор или единственный. */
   type: TestAnswerOptionsType;
   /** Массив ответов тестового вопроса: id, text, isCorrect, isChecked. */
-  answers: string;
-};
-
-export type TestAnswersAfterParseType = {
-  /** id ответа. */
-  id: number;
-  /** Текст ответа. */
-  text: string;
-  /** Флаг правильности ответа. */
-  isCorrect: boolean;
-  /** Флаг, отмечен ли ответ пользователем. */
-  isChecked: boolean;
+  content: TestAnswerType[];
 };
 
 export type TestQuestionProps = {
-  /** Объект вопроса, содержит id, title, type и answers (массив ответов). */
+  /** Объект вопроса, содержит id, title, type и content (массив ответов). */
   question: TestQuestionType;
   /** index объекта в массиве вопросов. Нужен для нумерации в интерфейсе. */
   index: number;

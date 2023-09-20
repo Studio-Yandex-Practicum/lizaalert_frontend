@@ -6,7 +6,7 @@ import { selectLesson } from 'store/lesson/selectors';
 import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
 import type { TestType } from 'components/organisms/test-preview';
-import type { TestQuestionListType, TestAnswersAfterParseType } from '../types';
+import type { TestQuestionListType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -44,18 +44,15 @@ export const useTest = () => {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
-        const answersList = JSON.parse(
-          question.answers
-        ) as TestAnswersAfterParseType[];
         if (question.type === Controls.RADIO) {
-          answersList.forEach((answer) => {
+          question.content.forEach((answer) => {
             if (answer.isChecked && answer.isCorrect) percentArr.push(100);
             if (answer.isChecked && !answer.isCorrect) percentArr.push(0);
           });
         } else {
-          const weight = 100 / answersList.length;
+          const weight = 100 / question.content.length;
           let percent = 0;
-          answersList.forEach((answer) => {
+          question.content.forEach((answer) => {
             if (
               (answer.isChecked && answer.isCorrect) ||
               (!answer.isChecked && !answer.isCorrect)
@@ -83,11 +80,8 @@ export const useTest = () => {
     if (test.questions?.length > 0) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
-        const answersList = JSON.parse(
-          question.answers
-        ) as TestAnswersAfterParseType[];
 
-        answersList.forEach((answer) => {
+        question.content.forEach((answer) => {
           if (answer.isChecked) checkedCount += 1;
         });
 

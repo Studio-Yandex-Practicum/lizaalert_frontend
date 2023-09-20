@@ -25,8 +25,8 @@ export const testSlice = createSlice({
           if (question.id === action.payload.questionId) {
             return {
               ...question,
-              answers: [
-                ...question.answers.map((answer) => {
+              content: [
+                ...question.content.map((answer) => {
                   if (answer.id === action.payload.answerId) {
                     return { ...answer, isChecked: !answer.isChecked };
                   }
@@ -52,7 +52,7 @@ export const testSlice = createSlice({
         questions: [
           ...payload.questions.map((question) => {
             let countCorrectAnswers = 0;
-            JSON.parse(question.answers).forEach((answer) => {
+            question.content.forEach((answer) => {
               if (answer.isCorrect) countCorrectAnswers += 1;
             });
 

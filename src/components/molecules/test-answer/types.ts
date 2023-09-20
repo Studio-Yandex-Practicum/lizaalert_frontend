@@ -15,7 +15,7 @@ export type TestAnswerOptionsType = Controls.RADIO | Controls.CHECKBOX;
 
 export type TestAnswerProps = {
   /** Объект ответа, содержит id (number), text (string), isChecked (boolean), isCorrect (boolean). */
-  answer: TestAnswerType;
+  content: TestAnswerType;
   /** id вопроса, в котором содержится answer. */
   questionId: number;
   /** Тип чекбокса: мультивыбор или радио. */

@@ -1,14 +1,14 @@
-import { TestModel } from 'api/lessons/types';
 import { BaseApi } from '../base';
+import type { TestModel } from './types';
 
 const SERVICE_URL = '/lessons/';
 
-class LessonsTestApi extends BaseApi {
+class LessonsApi extends BaseApi {
   getTest = (id: number) =>
     this.createRequest<TestModel>({
       request: () => this.api.get(`${SERVICE_URL}${id}/quiz/`),
-      mock: () => import('./mock/lessons'),
+      mock: () => import('./mock/test'),
     });
 }
 
-export const lessonsTestApi = new LessonsTestApi();
+export const lessonsApi = new LessonsApi();
