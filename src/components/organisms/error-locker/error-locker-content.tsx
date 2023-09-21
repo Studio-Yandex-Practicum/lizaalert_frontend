@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
-import { ErrorLockerContentProps } from './types';
+import type { ErrorLockerContentProps } from './types';
+import styles from './error-locker.module.scss';
 
 export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
   heading,
@@ -18,6 +19,11 @@ export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
       text={heading}
     />
     {subheading && <P text={subheading} textAlign="center" />}
-    <Button text={buttonText} onClick={onClick} view="secondary" />
+    <Button
+      text={buttonText}
+      onClick={onClick}
+      view="secondary"
+      className={styles.button}
+    />
   </>
 );

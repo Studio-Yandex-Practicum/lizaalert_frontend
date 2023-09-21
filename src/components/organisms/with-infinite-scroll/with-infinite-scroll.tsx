@@ -2,8 +2,14 @@ import { useEffect, useRef } from 'react';
 import { P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Loader } from 'components/molecules/loader';
-import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import {
+  GENERAL_ERROR,
+  LOADING_PROCESS_MAP,
+  ProcessEnum,
+} from 'utils/constants';
 import { useIntersectionObserver } from 'hooks/use-intersection-observer';
+import { Card } from 'components/atoms/card';
+import { ErrorLocker } from 'components/organisms/error-locker';
 import type { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
 
@@ -32,7 +38,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
     process === ProcessEnum.Initial || (hasMoreData && !isLoading);
 
   const fetchData = (paginationState: PaginationState<State>) => {
-    if (shouldLoad) {
+    if (shouldLoad || (error && hasNoData)) {
       void actionOnIntersect(paginationState);
     }
   };
@@ -74,12 +80,18 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
       {isLoading && <Loader />}
 
       {hasNoData && noDataMessage && process === ProcessEnum.Succeeded && (
-        <P text={noDataMessage} textAlign="center" weight="bold" />
+        <Card>
+          <P text={noDataMessage} size="l" textAlign="center" weight="bold" />
+        </Card>
       )}
 
       {!error && shouldLoad && <span aria-hidden ref={loadMoreRef} />}
 
-      {error && (
+      {error && hasNoData && (
+        <ErrorLocker heading={GENERAL_ERROR} onClick={requestData} isCard />
+      )}
+
+      {error && !hasNoData && (
         <Button
           className={styles.button}
           text="Загрузить ещё"

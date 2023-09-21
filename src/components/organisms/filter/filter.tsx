@@ -42,6 +42,7 @@ const FilterComponent: FC<FilterProps> = ({
 
   const isLoading = LOADING_PROCESS_MAP[process];
   const isError = process === ProcessEnum.Failed;
+  const isSuccess = process === ProcessEnum.Succeeded;
 
   useEffect(() => {
     if (!isInitialRender.current && AFTER_LOAD_PROCESS_MAP[process]) {
@@ -53,15 +54,15 @@ const FilterComponent: FC<FilterProps> = ({
 
   return (
     <aside className={classnames(styles.filters, className)}>
-      <Card className={styles.card}>
+      <Card
+        className={classnames(styles.card, {
+          [styles.card_cropped]: isSuccess,
+        })}
+      >
         {isLoading && <Loader />}
 
         {isError && (
-          <ErrorLocker
-            heading="Ой! Фильтры не загрузились"
-            onClick={onError}
-            className={styles.error}
-          />
+          <ErrorLocker heading="Ой! Фильтры не загрузились" onClick={onError} />
         )}
 
         {!isLoading && !isError && (
