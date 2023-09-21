@@ -2,6 +2,9 @@
 
 .scrollContainer {
   width: 100%;
+}
+
+.flexContainer {
   display: flex;
   flex-direction: column;
   row-gap: vars.$grid-gap;

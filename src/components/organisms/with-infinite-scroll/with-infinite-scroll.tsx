@@ -1,15 +1,16 @@
 import { useEffect, useRef } from 'react';
-import { P } from 'components/atoms/typography';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Loader } from 'components/molecules/loader';
+import { ErrorLocker } from 'components/organisms/error-locker';
 import {
   GENERAL_ERROR,
   LOADING_PROCESS_MAP,
   ProcessEnum,
 } from 'utils/constants';
 import { useIntersectionObserver } from 'hooks/use-intersection-observer';
-import { Card } from 'components/atoms/card';
-import { ErrorLocker } from 'components/organisms/error-locker';
 import type { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
 
@@ -26,6 +27,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
   process,
   children,
   actionOnIntersect,
+  noDataHeading,
   noDataMessage,
 }: WithInfiniteScrollConfig<T, State>): JSX.Element => {
   const loadMoreRef = useRef(null);
@@ -36,6 +38,10 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
   const hasNoData = !data.length;
   const shouldLoad =
     process === ProcessEnum.Initial || (hasMoreData && !isLoading);
+  const showNoDataCard =
+    hasNoData &&
+    (noDataMessage || noDataHeading) &&
+    process === ProcessEnum.Succeeded;
 
   const fetchData = (paginationState: PaginationState<State>) => {
     if (shouldLoad || (error && hasNoData)) {
@@ -74,21 +80,35 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
   }, [process]);
 
   return (
-    <div className={styles.scrollContainer}>
+    <div className={classnames(styles.scrollContainer, styles.flexContainer)}>
       {!hasNoData && children}
 
       {isLoading && <Loader />}
 
-      {hasNoData && noDataMessage && process === ProcessEnum.Succeeded && (
-        <Card>
-          <P text={noDataMessage} size="l" textAlign="center" weight="bold" />
+      {showNoDataCard && (
+        <Card className={styles.flexContainer}>
+          {noDataHeading && (
+            <Heading
+              text={noDataHeading}
+              level={2}
+              size="l"
+              textAlign="center"
+              weight="bold"
+            />
+          )}
+          {noDataMessage && <P text={noDataMessage} textAlign="center" />}
         </Card>
       )}
 
       {!error && shouldLoad && <span aria-hidden ref={loadMoreRef} />}
 
       {error && hasNoData && (
-        <ErrorLocker heading={GENERAL_ERROR} onClick={requestData} isCard />
+        <ErrorLocker
+          className={styles.stubCard}
+          heading={GENERAL_ERROR}
+          onClick={requestData}
+          isCard
+        />
       )}
 
       {error && !hasNoData && (

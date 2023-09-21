@@ -119,7 +119,8 @@ const Courses: FC = () => {
           actionOnIntersect={fetchCoursesOnIntersect}
           total={coursesTotal}
           error={coursesError}
-          noDataMessage="Нет подходящих курсов"
+          noDataHeading="Нет подходящих курсов"
+          noDataMessage="Попробуйте выбрать другие фильтры"
         >
           <ul className={styles.list}>
             {courses.length > 0 &&
