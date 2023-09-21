@@ -4,7 +4,7 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR } from '../../utils/constants';
+import { GENERAL_ERROR } from 'utils/constants';
 import { checkAuth, fetchAuth, refreshToken } from './thunk';
 import type { AuthState } from './types';
 
