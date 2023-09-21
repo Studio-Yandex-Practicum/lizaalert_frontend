@@ -30,8 +30,7 @@ export const LoginForm: FC = () => {
   const [isCheckedRememberMe, setIsCheckedRememberMe] = useState(false);
 
   const dispatch = useAppDispatch();
-  // TODO удалить типы после типизации стора
-  const isAuthLoading = useAppSelector<boolean>(selectIsAuthLoading);
+  const isAuthLoading = useAppSelector(selectIsAuthLoading);
 
   const handleChangeCheckbox = (evt: ChangeEvent<HTMLInputElement>) => {
     setIsCheckedRememberMe(evt.target.checked);
@@ -42,17 +41,12 @@ export const LoginForm: FC = () => {
     { validateForm }: FormikHelpers<UserLoginFormData>
   ) => {
     await validateForm(values);
-    console.log(values);
-    // TODO запрос на авторизацию
 
     const data = {
       user: values,
       isRememberMe: isCheckedRememberMe,
     };
 
-    // TODO пофиксить тайпинги после типизации стора
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     void dispatch(fetchAuth(data));
   };
 

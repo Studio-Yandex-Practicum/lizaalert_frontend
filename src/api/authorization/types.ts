@@ -23,3 +23,11 @@ export type RegistrationFormData = {
   email: string;
   password: string;
 };
+
+export type RefreshTokenData = {
+  refresh: string;
+};
+
+export type VerifyTokenData = {
+  token: string;
+};
