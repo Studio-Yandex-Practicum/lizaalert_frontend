@@ -36,6 +36,8 @@ export type WithInfiniteScrollConfig<T, State> = {
   children: ReactNode;
   /** Функция-коллбек для загрузки данных при прокрутке вниз. */
   actionOnIntersect: (state: PaginationState<State>) => Promise<void>;
-  /** Сообщение при отсутствии данных */
+  /** Заголовок сообщения при отсутствии данных */
+  noDataHeading?: string;
+  /** Текст сообщения при отсутствии данных */
   noDataMessage?: string;
 };

@@ -6,8 +6,12 @@
 
 .card {
   width: inherit;
+  min-height: 192px;
   margin-bottom: 32px;
-  padding-bottom: 0;
+
+  &_cropped {
+    padding-bottom: 0;
+  }
 }
 
 .header {
@@ -45,8 +49,4 @@
 .tag {
   margin-right: 8px;
   margin-bottom: 12px;
-}
-
-.error {
-  padding-bottom: 32px;
 }
