@@ -10,6 +10,12 @@ class CourseApi extends BaseApi {
       mock: () => import('./mock/course'),
     });
 
+  setCourseStatus = (id: number) =>
+    this.createRequest<CourseModel>({
+      request: () => this.api.post(`${SERVICE_URL}${id}/enroll/`),
+      mock: () => import('./mock/course'),
+    });
+
   // create course
 
   // edit course

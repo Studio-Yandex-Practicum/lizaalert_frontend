@@ -39,6 +39,7 @@ const Courses: FC = () => {
   const dispatch = useAppDispatch();
 
   const courses = useAppSelector(selectCourses);
+  // console.log(courses);
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
   const coursesProcess = useAppSelector(selectCoursesProcess);
   const coursesError = useAppSelector(selectCoursesError);

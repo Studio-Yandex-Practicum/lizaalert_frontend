@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { type FC } from 'react';
+import { Link } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -10,6 +10,7 @@ import { routes } from 'config';
 import { CourseStatusButtons } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
+// import { courseApi } from '../../../api/course';
 import type { CoursePreviewProps } from './types';
 import styles from './course-preview.module.scss';
 
@@ -24,7 +25,7 @@ import styles from './course-preview.module.scss';
  */
 
 export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     id,
@@ -37,7 +38,14 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     cover_path: coverPath,
   } = course;
 
-  const goToCourse = () => navigate(`${routes.course.path}/${id}`);
+  // const [courseStatus, setCourseStatus] = useState(status);
+
+  // console.log(courseStatus);
+
+  // const goToCourse = async () => {
+  //   // const newStatus = await courseApi.setCourseStatus(id);
+  //   // navigate(`${routes.course.path}/${id}`);
+  // };
 
   return (
     <article className={styles.article}>
@@ -82,9 +90,9 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
       </Link>
       <Button
         className={styles.button}
-        disabled={status === 'finished' || status === 'inactive'}
+        // disabled={status === 'finished' || status === 'inactive'}
         view={status === 'booked' ? 'primary' : 'secondary'}
-        onClick={goToCourse}
+        // onClick={goToCourse}
       >
         {CourseStatusButtons[status]}
       </Button>
