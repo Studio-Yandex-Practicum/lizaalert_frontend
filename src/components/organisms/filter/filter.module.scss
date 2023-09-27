@@ -6,8 +6,12 @@
 
 .card {
   width: inherit;
+  min-height: 192px;
   margin-bottom: 32px;
-  padding-bottom: 0;
+
+  &_cropped {
+    padding-bottom: 0;
+  }
 }
 
 .header {

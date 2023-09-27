@@ -1,17 +1,15 @@
 import type { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {
-  Course,
-  Courses,
-  Lesson,
-  Login,
-  NotFound,
-  Profile,
-  Register,
-} from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
-import { defaultRoutes as routes } from './routes';
+import { Courses } from 'pages/courses';
+import { Course } from 'pages/course';
+import { Lesson } from 'pages/lesson';
+import { Profile } from 'pages/profile';
+import { Register } from 'pages/register';
+import { Login } from 'pages/login';
+import { NotFound } from 'pages/not-found';
 import { Authorization } from './authorization';
+import { defaultRoutes as routes } from './routes';
 
 export const Router: FC = () => (
   <Routes>

@@ -10,7 +10,11 @@
 }
 
 .text {
-  margin: 32px 0 0;
+  p {
+    margin: 32px 0 0;
+    font-size: vars.$font-size-m;
+    line-height: vars.$line-height-m;
+  }
 }
 
 .titleTasks {
@@ -18,14 +22,18 @@
 }
 
 .tasksList {
-  margin: 0;
-  padding-left: 27px;
-}
+  ul {
+    margin: 0;
+    padding-left: 27px;
+    font-size: vars.$font-size-m;
+    line-height: vars.$line-height-m;
 
-.task {
-  margin-top: 18px;
+    li {
+      margin-top: 18px;
 
-  &:first-of-type {
-    margin-top: 0;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
   }
 }

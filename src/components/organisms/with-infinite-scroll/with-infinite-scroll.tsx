@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { P } from 'components/atoms/typography';
+import { useEffect, useRef } from 'react';
+import classnames from 'classnames';
+import { Card } from 'components/atoms/card';
+import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Loader } from 'components/molecules/loader';
+import { ErrorLocker } from 'components/organisms/error-locker';
 import {
-  DEFAULT_PAGE_SIZE,
+  GENERAL_ERROR,
   LOADING_PROCESS_MAP,
   ProcessEnum,
 } from 'utils/constants';
@@ -15,16 +18,18 @@ import styles from './with-infinite-scroll.module.scss';
  * HOC для создания бесконечной прокрутки. Можно типизировать приходящие данные через Generic.
  * */
 
-export const WithInfiniteScroll = <T extends Record<string, unknown>>({
-  initialPageSize = DEFAULT_PAGE_SIZE,
+export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
+  pagination,
+  setPagination,
   data,
   total,
   error,
   process,
   children,
   actionOnIntersect,
+  noDataHeading,
   noDataMessage,
-}: WithInfiniteScrollConfig<T>): JSX.Element => {
+}: WithInfiniteScrollConfig<T, State>): JSX.Element => {
   const loadMoreRef = useRef(null);
   const isInitialRender = useRef(true);
 
@@ -33,14 +38,13 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
   const hasNoData = !data.length;
   const shouldLoad =
     process === ProcessEnum.Initial || (hasMoreData && !isLoading);
+  const showNoDataCard =
+    hasNoData &&
+    (noDataMessage || noDataHeading) &&
+    process === ProcessEnum.Succeeded;
 
-  const [pagination, setPagination] = useState<PaginationState>({
-    page: Math.ceil(data.length / initialPageSize + 1),
-    pageSize: initialPageSize,
-  });
-
-  const fetchData = (paginationState: PaginationState) => {
-    if (shouldLoad) {
+  const fetchData = (paginationState: PaginationState<State>) => {
+    if (shouldLoad || (error && hasNoData)) {
       void actionOnIntersect(paginationState);
     }
   };
@@ -54,7 +58,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
     callbackOnIntersect: requestData,
   });
 
-  const getNextPage = (prevState: PaginationState) => {
+  const getNextPage = (prevState: PaginationState<State>) => {
     if (process === ProcessEnum.Initial) {
       return 1;
     }
@@ -76,18 +80,38 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>>({
   }, [process]);
 
   return (
-    <div className={styles.scrollContainer}>
+    <div className={classnames(styles.scrollContainer, styles.flexContainer)}>
       {!hasNoData && children}
 
       {isLoading && <Loader />}
 
-      {hasNoData && noDataMessage && process === ProcessEnum.Succeeded && (
-        <P text={noDataMessage} textAlign="center" weight="bold" />
+      {showNoDataCard && (
+        <Card className={styles.flexContainer}>
+          {noDataHeading && (
+            <Heading
+              text={noDataHeading}
+              level={2}
+              size="l"
+              textAlign="center"
+              weight="bold"
+            />
+          )}
+          {noDataMessage && <P text={noDataMessage} textAlign="center" />}
+        </Card>
       )}
 
       {!error && shouldLoad && <span aria-hidden ref={loadMoreRef} />}
 
-      {error && (
+      {error && hasNoData && (
+        <ErrorLocker
+          className={styles.stubCard}
+          heading={GENERAL_ERROR}
+          onClick={requestData}
+          isCard
+        />
+      )}
+
+      {error && !hasNoData && (
         <Button
           className={styles.button}
           text="Загрузить ещё"

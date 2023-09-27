@@ -1,2 +1,2 @@
 export { Filter } from './filter';
-export type { FilterProps } from './types';
+export type { FilterProps, FilterParams } from './types';

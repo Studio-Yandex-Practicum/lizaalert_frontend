@@ -1,6 +1,2 @@
 export { coursesApi } from './courses.api';
-export type {
-  CoursesModel,
-  CoursePreviewModel,
-  GetCoursesDataModel,
-} from './types';
+export type { CoursesModel, CoursePreviewModel, GetCoursesData } from './types';

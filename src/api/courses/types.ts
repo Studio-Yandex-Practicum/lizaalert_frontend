@@ -17,11 +17,13 @@ export type CoursePreviewModel = {
   cover_path: string | null;
 };
 
-export type GetCoursesDataModel = {
+export type GetCoursesData = {
   /** Порядковый номер загружаемой страницы. */
   page: number;
   /** Количество сущностей, которые нужно запросить. */
   pageSize: number;
+  /** Остальные параметры */
+  params?: { [key: string]: string };
 };
 
 export type CoursesModel = {

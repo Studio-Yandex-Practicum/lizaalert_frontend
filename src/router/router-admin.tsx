@@ -1,19 +1,17 @@
 import type { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {
-  Course,
-  Courses,
-  CreateCourse,
-  Development,
-  EditCourse,
-  EditLesson,
-  Lesson,
-  Login,
-  NotFound,
-  Profile,
-  Register,
-} from 'pages';
 import { BaseLayout } from 'components/templates/base-layout';
+import { Courses } from 'pages/courses';
+import { Course } from 'pages/course';
+import { Lesson } from 'pages/lesson';
+import { CreateCourse } from 'pages/create-course';
+import { EditCourse } from 'pages/edit-course';
+import { EditLesson } from 'pages/edit-lesson';
+import { Profile } from 'pages/profile';
+import { Login } from 'pages/login';
+import { NotFound } from 'pages/not-found';
+import { Register } from 'pages/register';
+import { Development } from 'pages/development';
 import { adminRoutes as routes } from './routes-admin';
 
 export const RouterAdmin: FC = () => (

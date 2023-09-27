@@ -1,15 +1,19 @@
-import type { FC } from 'react';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { Span } from 'components/atoms/typography';
-import styles from './tag.module.scss';
 import type { TagProps } from './types';
+import styles from './tag.module.scss';
 
 /**
  * Компонент тега, включает в себя две разновидности: обычный и с кнопкой в виде крестика справа.
  * */
 
-export const Tag: FC<TagProps> = ({ text, onClick, className, value }) => {
+export const Tag = <T extends Record<string, unknown>>({
+  text,
+  onClick,
+  className,
+  value,
+}: TagProps<T>) => {
   const classNames = classnames(
     styles.tag,
     { [styles.tag_type_withButton]: onClick && value },

@@ -3,11 +3,13 @@ import { useLayoutEffect, useRef } from 'react';
 /**
  * Почти как useCallback, но с важными отличиями:
  * - Возвращаемая функция является стабильной ссылкой
- * - Нет спсика зависимостей
- * - Имеет доступ к текущим значениям переменных снаружи
+ * - Нет списка зависимостей
+ * - Имеет доступ к текущим значениям переменных компонента
  */
 
-export function useEvent<T extends AnyFunction>(callback: T): T {
+export const useEvent = <T extends AnyFunction<ReturnType<T>>>(
+  callback: T
+): T => {
   const latestRef = useRef<T>(callback);
 
   useLayoutEffect(() => {
@@ -25,4 +27,4 @@ export function useEvent<T extends AnyFunction>(callback: T): T {
   }
 
   return stableRef.current;
-}
+};

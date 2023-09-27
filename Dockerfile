@@ -5,6 +5,7 @@ FROM node:$NODE_VERSION-alpine as build
 
 WORKDIR /app
 COPY . .
+COPY .env.example .env.production
 
 RUN npm ci --silent
 RUN npm run build
