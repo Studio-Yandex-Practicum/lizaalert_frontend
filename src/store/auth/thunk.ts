@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { LoginFormData } from 'api/authorization';
-import { authorizationApi } from 'api/authorization';
+import { authorizationApi, LoginFormData } from 'api/authorization';
+import { ApiInterceptorConfig, HttpCodes, privateApi } from 'api/core';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
+import type { ApiThunkConfig, ThunkApiDispatch } from '../types';
+import { checkAuthToken, refreshAuthToken } from './helpers';
 
 export const fetchAuth = createAsyncThunk(
   'auth/fetch',
@@ -14,52 +16,52 @@ export const fetchAuth = createAsyncThunk(
     storage.setItem(ACCESS_TOKEN, token.access);
     storage.setItem(REFRESH_TOKEN, token.refresh);
 
-    authorizationApi.setAuthHeader(token.access);
-    return token.access;
+    privateApi.setAuthHeader(token.access);
+    return !!token.access;
   }
 );
 
-export const refreshToken = createAsyncThunk('auth/refresh', async () => {
-  const tokenRefresh =
-    sessionStorage.getItem(REFRESH_TOKEN) ||
-    localStorage.getItem(REFRESH_TOKEN);
-
-  if (!tokenRefresh) {
-    return null;
-  }
-
-  const token = await authorizationApi.refreshToken({
-    refresh: tokenRefresh,
-  });
-
-  localStorage.setItem(ACCESS_TOKEN, token.access);
-  localStorage.setItem(REFRESH_TOKEN, token.refresh);
-
-  authorizationApi.setAuthHeader(token.access);
-  return token.access;
+export const logout = createAsyncThunk('auth/logout', () => {
+  // TODO выполнить запрос на логаут
+  sessionStorage.clear();
+  localStorage.clear();
+  privateApi.removeAuthHeader();
+  return false;
 });
 
-export const checkAuth = createAsyncThunk(
-  'auth/check',
-  async (_, { dispatch }) => {
-    const tokenAccess =
-      sessionStorage.getItem(ACCESS_TOKEN) ||
-      localStorage.getItem(ACCESS_TOKEN);
-
-    if (!tokenAccess) {
-      void dispatch(refreshToken());
-      return;
+const getAuthInterceptor = (
+  dispatch: ThunkApiDispatch
+): ApiInterceptorConfig => ({
+  type: 'response',
+  name: 'auth/refresh-token',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  onFulfilled: (res) => res.data,
+  // eslint-disable-next-line consistent-return
+  onRejected: async (err) => {
+    if (err.response?.status !== HttpCodes.Unauthorized) {
+      return Promise.reject(err.response?.data);
     }
 
     try {
-      await authorizationApi.verifyToken({
-        token: tokenAccess,
-      });
-      authorizationApi.setAuthHeader(tokenAccess);
-      // eslint-disable-next-line consistent-return
-      return tokenAccess;
-    } catch (err) {
-      void dispatch(refreshToken());
+      const result = await refreshAuthToken();
+
+      if (!result || !err.config) {
+        throw new Error();
+      }
+
+      void privateApi.request(err.config);
+    } catch {
+      void dispatch(logout());
     }
+  },
+});
+
+export const checkAuth = createAsyncThunk<boolean, null, ApiThunkConfig>(
+  'auth/check',
+  async (_, { dispatch }) => {
+    privateApi.addInterceptor(getAuthInterceptor(dispatch));
+
+    const result = await checkAuthToken();
+    return result;
   }
 );

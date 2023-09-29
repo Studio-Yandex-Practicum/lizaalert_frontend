@@ -1,3 +1,4 @@
+import type { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import type { CoursesState } from './courses/types';
 import type { CourseState } from './course/types';
 import type { CoursesFiltersState } from './courses-filters/types';
@@ -12,4 +13,11 @@ export type AppState = {
   lesson: any;
   test: any;
   profile: any;
+};
+
+export type ThunkApiGetState = () => AppState;
+export type ThunkApiDispatch = ThunkDispatch<unknown, unknown, Action>;
+
+export type ApiThunkConfig = {
+  state: AppState;
 };
