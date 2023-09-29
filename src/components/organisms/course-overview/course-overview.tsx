@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react';
+import { courseApi } from 'api/course';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
@@ -14,16 +15,30 @@ import type { CourseOverviewProps } from './types';
  * */
 
 export const CourseOverview: FC<CourseOverviewProps> = ({
+  id,
   coverPath,
   level,
   lessonsCount,
   startDate,
   courseDuration,
   userStatus,
-  onClick,
 }) => {
   const [courseButtonText, setCourseButtonText] = useState('');
 
+  const setEnrolledCourse = async () => {
+    try {
+      await courseApi.setCourseStatus(id);
+      setCourseButtonText('Продолжить');
+    } catch (error) {
+      throw new Error('Ошибка подписки на Курс');
+    }
+  };
+
+  const onClick = () => {
+    if (userStatus === 'False') {
+      void setEnrolledCourse();
+    }
+  };
   useEffect(() => {
     if (userStatus === 'True') {
       setCourseButtonText('Продолжить');
