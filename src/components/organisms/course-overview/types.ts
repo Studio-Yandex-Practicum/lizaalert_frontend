@@ -9,6 +9,8 @@ export type CourseOverviewProps = {
   coverPath?: Nullable<string>;
   /** Количество уроков в курсе. */
   lessonsCount: number;
+  /** Статус подписки на курс. */
+  userStatus: string;
   /** Продолжительность курса в часах. */
   courseDuration?: Nullable<number>;
   /** Обработчик клика по кнопке. */

@@ -71,4 +71,6 @@ export type CourseModel = {
   course_duration: Nullable<number>;
   /** Список глав курса. */
   chapters: ChapterModel[];
+  /** Статус подписки на курс. */
+  user_status: string;
 };

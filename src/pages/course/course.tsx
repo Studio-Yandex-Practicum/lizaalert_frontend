@@ -85,6 +85,7 @@ const Course: FC = () => {
             level={course.level}
             coverPath={course.cover_path}
             startDate={course.start_date}
+            userStatus={course.user_status}
           />
         </aside>
       </div>
