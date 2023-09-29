@@ -4,22 +4,25 @@
   display: flex;
   align-items: flex-start;
   column-gap: vars.$grid-gap;
-  padding-bottom: 97px;
+  padding-bottom: 68px;
 }
 
-.lessonContent {
-  width: calc(68% - #{vars.$grid-gap});
+.content {
+  width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: vars.$grid-gap;
 }
 
-.courseContent {
-  width: 32%;
+.contents {
   min-width: 300px;
 }
 
 .breadcrumbs {
   margin-bottom: 32px;
   margin-top: vars.$grid-gap;
+}
+
+.error {
+  width: 100%;
 }

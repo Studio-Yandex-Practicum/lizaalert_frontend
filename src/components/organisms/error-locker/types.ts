@@ -1,6 +1,6 @@
 export type ErrorLockerContentProps = {
   /** Заголовок ошибки */
-  heading: string;
+  heading?: string;
   /** Подзаголовок-пояснение ошибки */
   subheading?: string;
   /** Текст кнопки */

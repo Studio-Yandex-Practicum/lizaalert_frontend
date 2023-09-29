@@ -24,7 +24,7 @@ export type KnowledgeModel = {
   description: string;
 };
 
-export type LessonModel = {
+export type LessonChapterModel = {
   /** id урока курса. */
   id: number;
   /** Номер урока в последовательности. */
@@ -45,7 +45,7 @@ export type ChapterModel = {
   /** Заголовок-название главы курса. */
   title: string;
   /** Список уроков главы курса. */
-  lessons: LessonModel[];
+  lessons: LessonChapterModel[];
 };
 
 export type CourseModel = {
@@ -71,4 +71,20 @@ export type CourseModel = {
   course_duration: Nullable<number>;
   /** Список глав курса. */
   chapters: ChapterModel[];
+};
+
+export type LessonModel = {
+  id?: number;
+  title: string;
+  description?: string;
+  lesson_type: LessonType;
+  tags: string;
+  duration: number;
+  additional?: boolean;
+  diploma?: boolean;
+};
+
+export type GetCourseLessonData = {
+  courseId: number;
+  lessonId: number;
 };
