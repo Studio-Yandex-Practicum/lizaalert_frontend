@@ -1,6 +1,11 @@
 export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
 
-export type LessonStatus = 'Ready' | 'Draft' | 'Published';
+/** Статус прохождения урока, где:
+ * "0" - "Не начат";
+ * "1" - "Начат";
+ * "2" - "Пройден";
+ */
+export type LessonProgress = '0' | '1' | '2';
 
 export type FAQModel = {
   /** id вопроса. */
@@ -31,8 +36,8 @@ export type LessonModel = {
   title: string;
   /** Тип урока. */
   lesson_type: LessonType;
-  /** Статус урока. */
-  lesson_status: LessonStatus;
+  /** Статус прогресса урока. */
+  lesson_progress: LessonProgress;
 };
 
 export type ChapterModel = {

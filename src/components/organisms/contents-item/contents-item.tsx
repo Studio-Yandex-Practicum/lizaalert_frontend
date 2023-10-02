@@ -31,7 +31,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
 
   const lessonsList = (
     <div className={styles.list}>
-      {lessons.map((lesson) => renderLesson(lesson as LessonType))}
+      {lessons.map((lesson) => renderLesson(lesson))}
     </div>
   );
 
@@ -62,7 +62,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   return null;
 
   function renderLesson(lesson: LessonType) {
-    if (lesson.status === 'finished') {
+    if (lesson.lesson_progress === '2') {
       return (
         <div
           className={classnames(styles.listItem, {
@@ -91,7 +91,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
     return (
       <div
         className={classnames(styles.listItem, {
-          [styles.active]: type === 'inner' && lesson.status === 'active',
+          [styles.active]: type === 'inner' && lesson.lesson_progress === '1',
         })}
         key={lesson.id}
       >

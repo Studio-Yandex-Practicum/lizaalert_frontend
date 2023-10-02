@@ -9,7 +9,7 @@
         "duration": 1,
         "title": "Дрессировка поисково-спасательных собак",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 2,
@@ -17,7 +17,7 @@
         "duration": 2,
         "title": "Видео",
         "lesson_type": "Videolesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 3,
@@ -25,7 +25,7 @@
         "duration": 1,
         "title": "Урок",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 4,
@@ -33,7 +33,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 5,
@@ -41,7 +41,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       }
     ]
   },
@@ -55,7 +55,7 @@
         "duration": 1,
         "title": "Дрессировка поисково-спасательных собак",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 4,
@@ -63,7 +63,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 3,
@@ -71,7 +71,7 @@
         "duration": 1,
         "title": "Урок",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 2,
@@ -79,7 +79,7 @@
         "duration": 2,
         "title": "Видео",
         "lesson_type": "Videolesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 5,
@@ -87,7 +87,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       }
     ]
   },
@@ -101,7 +101,7 @@
         "duration": 1,
         "title": "Дрессировка поисково-спасательных собак",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 2,
@@ -109,7 +109,7 @@
         "duration": 2,
         "title": "Видео",
         "lesson_type": "Videolesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 3,
@@ -117,7 +117,7 @@
         "duration": 1,
         "title": "Урок",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "2"
       },
       {
         "id": 4,
@@ -125,7 +125,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "1"
       },
       {
         "id": 5,
@@ -133,7 +133,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       }
     ]
   },
@@ -147,7 +147,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       }
     ]
   },
@@ -161,7 +161,7 @@
         "duration": 1,
         "title": "Дрессировка поисково-спасательных собак",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 2,
@@ -169,7 +169,7 @@
         "duration": 2,
         "title": "Видео",
         "lesson_type": "Videolesson",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 3,
@@ -177,7 +177,7 @@
         "duration": 1,
         "title": "Урок",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 4,
@@ -185,7 +185,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 5,
@@ -193,7 +193,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       }
     ]
   },
@@ -207,7 +207,7 @@
         "duration": 1,
         "title": "Дрессировка поисково-спасательных собак",
         "lesson_type": "Lesson",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 2,
@@ -215,7 +215,7 @@
         "duration": 2,
         "title": "Видео",
         "lesson_type": "Videolesson",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 4,
@@ -223,7 +223,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 5,
@@ -231,7 +231,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       }
     ]
   },
@@ -245,7 +245,7 @@
         "duration": 2,
         "title": "Вебинар",
         "lesson_type": "Webinar",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       },
       {
         "id": 5,
@@ -253,7 +253,7 @@
         "duration": 2,
         "title": "Тест",
         "lesson_type": "Quiz",
-        "lesson_status": "Published"
+        "lesson_progress": "0"
       }
     ]
   }

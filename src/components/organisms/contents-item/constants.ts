@@ -8,7 +8,7 @@ export const mockContents = {
       duration: 42,
       title: 'Заголовок урока',
       lesson_type: 'Lesson',
-      lesson_status: 'Published',
+      lesson_progress: '2',
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ export const mockContents = {
       duration: 42,
       title: 'Заголовок видеоурока',
       lesson_type: 'Videolesson',
-      lesson_status: 'Published',
+      lesson_progress: '2',
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ export const mockContents = {
       duration: 42,
       title: 'Заголовок вебинара',
       lesson_type: 'Webinar',
-      lesson_status: 'Published',
+      lesson_progress: '1',
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ export const mockContents = {
       duration: 42,
       title: 'Заголовок теста',
       lesson_type: 'Quiz',
-      lesson_status: 'Published',
+      lesson_progress: '0',
     },
   ],
 };
