@@ -15,8 +15,6 @@ export const Router: FC = () => (
   <Routes>
     <Route element={<BaseLayout />}>
       <Route element={<Authorization requireAuth />}>
-        <Route path={routes.courses.path} element={<Courses />} />
-
         <Route path={routes.course.path}>
           <Route path=":courseId" element={<Course />} />
           <Route path=":courseId/:topicId" element={<Lesson />} />
@@ -25,6 +23,8 @@ export const Router: FC = () => (
 
         <Route path={routes.profile.path} element={<Profile />} />
       </Route>
+
+      <Route path={routes.courses.path} element={<Courses />} />
 
       <Route element={<Authorization />}>
         <Route path={routes.register.path} element={<Register />} />
