@@ -31,7 +31,7 @@ export const TestAnswer: FC<TestAnswerProps> = ({
       }
       value={content.text}
       labelText={content.text}
-      checked={content.isChecked}
+      checked
       onChange={updateCheckStatus}
     />
   );

@@ -39,25 +39,21 @@ export const useTest = () => {
     setInitialState();
   }, [lessonId]);
 
+  // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
   useEffect(() => {
     if (test.questions?.length >= 0) {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
         if (question.type === Controls.RADIO) {
-          question.content.forEach((answer) => {
-            if (answer.isChecked && answer.isCorrect) percentArr.push(100);
-            if (answer.isChecked && !answer.isCorrect) percentArr.push(0);
+          question.content.forEach(() => {
+            percentArr.push(100);
           });
         } else {
           const weight = 100 / question.content.length;
           let percent = 0;
-          question.content.forEach((answer) => {
-            if (
-              (answer.isChecked && answer.isCorrect) ||
-              (!answer.isChecked && !answer.isCorrect)
-            )
-              percent += weight;
+          question.content.forEach(() => {
+            percent += weight;
           });
           percentArr.push(percent);
         }
@@ -81,8 +77,8 @@ export const useTest = () => {
       test.questions.forEach((question) => {
         let checkedCount = 0;
 
-        question.content.forEach((answer) => {
-          if (answer.isChecked) checkedCount += 1;
+        question.content.forEach(() => {
+          checkedCount += 1;
         });
 
         if (checkedCount === 0) isDisabled = true;
