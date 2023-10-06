@@ -10,7 +10,7 @@ export type CourseOverviewProps = {
   /** Количество уроков в курсе. */
   lessonsCount: number;
   /** Статус подписки на курс. */
-  userStatus: string;
+  userStatus: 'True' | 'False';
   /** Продолжительность курса в часах. */
   courseDuration?: Nullable<number>;
   /** Обработчик клика по кнопке. */
