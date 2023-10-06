@@ -27,7 +27,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
 
   const setEnrolledCourse = async () => {
     try {
-      await courseApi.setCourseStatus(id);
+      await courseApi.enroll(id);
       setCourseButtonText('Продолжить');
     } catch (error) {
       throw new Error('Ошибка подписки на Курс');

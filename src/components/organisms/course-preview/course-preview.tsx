@@ -54,7 +54,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
 
   const setEnrolledCourse = async () => {
     try {
-      await courseApi.setCourseStatus(id);
+      await courseApi.enroll(id);
       setUserStatus('True');
     } catch (error) {
       throw new Error('Ошибка подписки на Курс');
