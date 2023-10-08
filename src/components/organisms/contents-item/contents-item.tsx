@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Icon, IconType } from 'components/atoms/icon';
@@ -29,10 +30,13 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   const { id, title, lessons } = content;
   const { courseId = '', topicId = '' } = useParams();
 
-  const lessonsList = (
-    <div className={styles.list}>
-      {lessons.map((lesson) => renderLesson(lesson))}
-    </div>
+  const lessonsList = useMemo(
+    () => (
+      <div className={styles.list}>
+        {lessons.map((lesson) => renderLesson(lesson))}
+      </div>
+    ),
+    [lessons]
   );
 
   if (type === 'main') {

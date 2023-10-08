@@ -1,11 +1,10 @@
 export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
 
-/** Статус прохождения урока, где:
- * "0" - "Не начат";
- * "1" - "Начат";
- * "2" - "Пройден";
- */
-export type LessonProgress = '0' | '1' | '2';
+export enum LessonProgress {
+  NotStarted = '0',
+  Started = '1',
+  Finished = '2',
+}
 
 export type FAQModel = {
   /** id вопроса. */
