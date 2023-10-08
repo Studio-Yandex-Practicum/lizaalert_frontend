@@ -28,6 +28,7 @@ export const AccountData: FC = () => {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(setAccountData(values));
+    console.log('setAccountData(values)', values);
     setIsValid(false);
   };
 
