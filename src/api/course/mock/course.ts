@@ -6,8 +6,46 @@ const course = new Promise<CourseModel>((resolve) => {
     title: 'Кинологическое направление',
     level: 'Бывалый',
     full_description:
-      'Наряду с профессиональными отрядами спасателей у нас активно развивается движение волонтёров. Мы начали готовить первых собак-спасателей в начале 2000-х и продолжаем заниматься этим непростым делом до сих пор. С 2018 года, совместно с руководством отряда «ЛизаАлерт» было принято решение о развитии кинологического направления в рамках отряда.',
-    knowledge: null,
+      'Наряду с профессиональными отрядами спасателей у нас активно развивается движение волонтёров. Мы начали готовить первых собак-спасателей в начале 2000-х и продолжаем заниматься этим непростым делом до сих пор. С 2018 года, совместно с руководством отряда «ЛизаАлерт» было принято решение о развитии кинологического направления в рамках отряда.\n #### Основные задачи нашего подразделения:\n - Безвозмездное оказание помощи гражданам, оказавшимся в зонах бедствия или пропавшим в безлюдной местности с применением специально обученных собак;\n - Организация взаимодействия кинологов-волонтёров по всей стране\n - Организация систем обучения и подготовки кинологов-волонтёров к выполнению поисковых работ\n - Подготовка и проведение лесных испытаний для проверки готовности кинологических расчётов к выполнению работ по предназначению.\n - Выработка порядка взаимодействия с кинологическими расчётами в ходе проведения ПСР\n',
+    faq: [
+      {
+        id: 1,
+        question: 'Как проходит обучение?',
+        answer:
+          'После записи на курс вам открывается доступ к учебными материалам. В конце каждой учебной главы необходимо сдать тест, и набрать пороговое значение баллов.',
+      },
+      {
+        id: 2,
+        question: 'Что если я не набрал достаточное количество баллов?',
+        answer:
+          'У вас будет несколько попыток пересдачи теста. Если вы безуспешно используете все попытки, то материалы курса становятся недоступными.',
+      },
+      {
+        id: 3,
+        question: 'Как долго доступны материалы?',
+        answer: 'После окончания материалы доступны бессрочно.',
+      },
+    ],
+    knowledge: [
+      {
+        id: 0,
+        title: 'Поисково-спасательная работа',
+        description:
+          'Оказание помощи гражданам, оказавшимся в зонах бедствия или пропавшим в безлюдной местности',
+      },
+      {
+        id: 1,
+        title: 'Следовая работа',
+        description:
+          'Обучение животного идти как по горячему, так и по остывшему следу',
+      },
+      {
+        id: 2,
+        title: 'Поиск тел погибших',
+        description:
+          'Поиск тел и их остатков с применением специально обученных собак',
+      },
+    ],
     start_date: '2022-02-22',
     cover_path: null,
     lessons_count: 24,
@@ -24,7 +62,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Дрессировка поисково-спасательных собак',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 2,
@@ -32,7 +70,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Видео',
             lesson_type: 'Videolesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 3,
@@ -40,7 +78,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Урок',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 4,
@@ -48,7 +86,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 5,
@@ -56,7 +94,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
         ],
       },
@@ -71,7 +109,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Дрессировка поисково-спасательных собак',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 4,
@@ -79,7 +117,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 3,
@@ -87,7 +125,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Урок',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 2,
@@ -95,7 +133,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Видео',
             lesson_type: 'Videolesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 5,
@@ -103,7 +141,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
         ],
       },
@@ -118,7 +156,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Дрессировка поисково-спасательных собак',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 2,
@@ -126,7 +164,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Видео',
             lesson_type: 'Videolesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 3,
@@ -134,7 +172,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Урок',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '2',
           },
           {
             id: 4,
@@ -142,7 +180,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '1',
           },
           {
             id: 5,
@@ -150,7 +188,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
         ],
       },
@@ -165,7 +203,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
         ],
       },
@@ -180,7 +218,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Дрессировка поисково-спасательных собак',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 2,
@@ -188,7 +226,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Видео',
             lesson_type: 'Videolesson',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 3,
@@ -196,7 +234,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Урок',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 4,
@@ -204,7 +242,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 5,
@@ -212,7 +250,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
         ],
       },
@@ -227,7 +265,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 1,
             title: 'Дрессировка поисково-спасательных собак',
             lesson_type: 'Lesson',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 2,
@@ -235,7 +273,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Видео',
             lesson_type: 'Videolesson',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 4,
@@ -243,7 +281,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 5,
@@ -251,7 +289,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
         ],
       },
@@ -266,7 +304,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Вебинар',
             lesson_type: 'Webinar',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
           {
             id: 5,
@@ -274,7 +312,7 @@ const course = new Promise<CourseModel>((resolve) => {
             duration: 2,
             title: 'Тест',
             lesson_type: 'Quiz',
-            lesson_status: 'Published',
+            lesson_progress: '0',
           },
         ],
       },

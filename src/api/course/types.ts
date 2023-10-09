@@ -1,6 +1,28 @@
 export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
 
-export type LessonStatus = 'Ready' | 'Draft' | 'Published';
+export enum LessonProgress {
+  NotStarted = '0',
+  Started = '1',
+  Finished = '2',
+}
+
+export type FAQModel = {
+  /** id вопроса. */
+  id: number;
+  /** Вопрос в виде строки. */
+  question: string;
+  /** Ответ в виде строки. */
+  answer: string;
+};
+
+export type KnowledgeModel = {
+  /** id навыка. */
+  id: number;
+  /** Заголовок-название навыка. */
+  title: string;
+  /** Описание навыка. */
+  description: string;
+};
 
 export type LessonModel = {
   /** id урока курса. */
@@ -13,8 +35,8 @@ export type LessonModel = {
   title: string;
   /** Тип урока. */
   lesson_type: LessonType;
-  /** Статус урока. */
-  lesson_status: LessonStatus;
+  /** Статус прогресса урока. */
+  lesson_progress: LessonProgress;
 };
 
 export type ChapterModel = {
@@ -35,8 +57,10 @@ export type CourseModel = {
   level: string;
   /** Короткое описание курса. */
   full_description: string;
-  /** ??? */
-  knowledge: null;
+  /** Список часто задаваемых вопросов */
+  faq: FAQModel[];
+  /** Список навыков, получаемых на курсе */
+  knowledge: KnowledgeModel[];
   /** Дата начала прохождения курса. */
   start_date: string;
   /** URL к обложке курса. */

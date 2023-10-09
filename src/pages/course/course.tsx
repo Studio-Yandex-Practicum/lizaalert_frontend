@@ -13,8 +13,10 @@ import {
   selectCourse,
   selectCourseContents,
   selectCourseDescription,
+  selectCourseBenefits,
   selectCourseError,
   selectCourseTitle,
+  selectCourseFAQ,
   selectIsCourseLoading,
 } from 'store/course/selectors';
 import { fetchCourse } from 'store/course/thunk';
@@ -27,7 +29,9 @@ const Course: FC = () => {
   const course = useAppSelector(selectCourse);
   const courseTitle = useAppSelector(selectCourseTitle);
   const courseDescription = useAppSelector(selectCourseDescription);
+  const courseBenefits = useAppSelector(selectCourseBenefits);
   const courseContents = useAppSelector(selectCourseContents);
+  const courseFAQ = useAppSelector(selectCourseFAQ);
   const isCourseLoading = useAppSelector(selectIsCourseLoading);
   const courseError = useAppSelector(selectCourseError);
 
@@ -62,13 +66,15 @@ const Course: FC = () => {
             <CourseDescription description={courseDescription} />
           )}
 
-          <CourseBenefits />
+          {courseBenefits?.length > 0 && (
+            <CourseBenefits benefitsList={courseBenefits} />
+          )}
 
           {courseContents?.length > 0 && (
             <CourseContents content={courseContents} />
           )}
 
-          <FAQ />
+          {courseFAQ?.length > 0 && <FAQ questions={courseFAQ} />}
         </div>
 
         <aside className={styles.aside}>
