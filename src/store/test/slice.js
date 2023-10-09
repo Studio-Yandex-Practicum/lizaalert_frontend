@@ -20,13 +20,13 @@ export const testSlice = createSlice({
     // TODO переименовать на понятный метод -- change... что именно?
     change: (state, action) => {
       state.test.questions = [
-        // TODO Нечитаемый код переписать
+        // TODO Нечитаемый код переписать, isChecked больше не существует в answer
         ...state.test.questions.map((question) => {
           if (question.id === action.payload.questionId) {
             return {
               ...question,
-              answers: [
-                ...question.answers.map((answer) => {
+              content: [
+                ...question.content.map((answer) => {
                   if (answer.id === action.payload.answerId) {
                     return { ...answer, isChecked: !answer.isChecked };
                   }
@@ -52,9 +52,9 @@ export const testSlice = createSlice({
         questions: [
           ...payload.questions.map((question) => {
             let countCorrectAnswers = 0;
-
-            question.answers.forEach((answer) => {
-              if (answer.isCorrect) countCorrectAnswers += 1;
+            // TODO: установить условие для значения countCorrectAnswers, isCorrect больше не существует в answer
+            question.content.forEach(() => {
+              countCorrectAnswers += 1;
             });
 
             if (countCorrectAnswers > 1) {

@@ -10,12 +10,12 @@ export type TestQuestionType = {
   title: string;
   /** Тип вопроса: мультивыбор или единственный. */
   type: TestAnswerOptionsType;
-  /** Массив ответов тестового вопроса: id, text, isCorrect, isChecked. */
-  answers: TestAnswerType[];
+  /** Массив ответов тестового вопроса: id, text */
+  content: TestAnswerType[];
 };
 
 export type TestQuestionProps = {
-  /** Объект вопроса, содержит id, title, type и answers (массив ответов). */
+  /** Объект вопроса, содержит id, title, type и content (массив ответов). */
   question: TestQuestionType;
   /** index объекта в массиве вопросов. Нужен для нумерации в интерфейсе. */
   index: number;

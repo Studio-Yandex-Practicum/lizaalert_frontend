@@ -17,10 +17,10 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   className = '',
 }) => {
   // список ответов
-  const answersList = question.answers.map((answer) => (
+  const answersList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
       <TestAnswer
-        answer={answer}
+        content={answer}
         questionId={question.id}
         answerOptions={type}
       />
@@ -28,9 +28,9 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   ));
 
   // список с проверкой ответов теста
-  const resultsList = question.answers.map((answer) => (
+  const resultsList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
-      <TestResults answer={answer} className={className} />
+      <TestResults content={answer} className={className} />
     </li>
   ));
 

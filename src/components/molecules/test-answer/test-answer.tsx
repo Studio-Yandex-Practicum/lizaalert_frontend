@@ -11,14 +11,14 @@ import type { TestAnswerProps } from './types';
  */
 
 export const TestAnswer: FC<TestAnswerProps> = ({
-  answer,
+  content,
   questionId,
   answerOptions,
 }) => {
   const dispatch = useAppDispatch();
 
   const updateCheckStatus = () => {
-    dispatch(change({ answerId: answer.id, questionId }));
+    dispatch(change({ answerId: content.id, questionId }));
   };
 
   return (
@@ -26,12 +26,11 @@ export const TestAnswer: FC<TestAnswerProps> = ({
       isRadio={answerOptions === Controls.RADIO}
       name={
         answerOptions === Controls.CHECKBOX
-          ? `answer${answer.id}`
+          ? `answer${content.id}`
           : `answer${questionId}`
       }
-      value={answer.text}
-      labelText={answer.text}
-      checked={answer.isChecked}
+      value={content.text}
+      labelText={content.text}
       onChange={updateCheckStatus}
     />
   );
