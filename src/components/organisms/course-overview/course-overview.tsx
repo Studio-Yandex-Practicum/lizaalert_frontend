@@ -1,10 +1,11 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import { courseApi } from 'api/course';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { CourseStatusButtons } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
 import styles from './course-overview.module.scss';
@@ -23,12 +24,10 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   courseDuration,
   userStatus,
 }) => {
-  const [courseButtonText, setCourseButtonText] = useState('');
-
   const setEnrolledCourse = async () => {
     try {
       await courseApi.enroll(id);
-      setCourseButtonText('Продолжить');
+      // setCourseButtonText('Продолжить');
     } catch (error) {
       throw new Error('Ошибка подписки на Курс');
     }
@@ -39,13 +38,6 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
       void setEnrolledCourse();
     }
   };
-  useEffect(() => {
-    if (userStatus === 'True') {
-      setCourseButtonText('Продолжить');
-    } else {
-      setCourseButtonText('Записаться');
-    }
-  }, [setCourseButtonText]);
 
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
@@ -85,11 +77,9 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button
-        className={styles.courseEnroll}
-        onClick={onClick}
-        text={courseButtonText}
-      />
+      <Button className={styles.courseEnroll} onClick={onClick}>
+        {CourseStatusButtons[userStatus]}
+      </Button>
     </Card>
   );
 };
