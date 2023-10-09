@@ -14,21 +14,26 @@ import type { CourseBenefitsProps } from './types';
 export const CourseBenefits: FC<CourseBenefitsProps> = ({
   benefitsList,
   className,
-}) => (
-  <Card className={classnames(styles.benefits, className)} htmlTag="section">
-    <Accordion button="text" title="Чему вы научитесь" open>
-      <ul className={styles.benefitsList}>
-        {benefitsList?.map((item) => (
-          <li key={item.id} className={styles.benefit}>
-            <Heading level={3} weight="bold" className={styles.heading}>
-              <Icon type="checkSolid" />
-              <span>{item.title}</span>
-            </Heading>
+}) => {
+  if (!benefitsList?.length) {
+    return null;
+  }
+  return (
+    <Card className={classnames(styles.benefits, className)} htmlTag="section">
+      <Accordion button="text" title="Чему вы научитесь" open>
+        <ul className={styles.benefitsList}>
+          {benefitsList.map((item) => (
+            <li key={item.id} className={styles.benefit}>
+              <Heading level={3} weight="bold" className={styles.heading}>
+                <Icon type="checkSolid" />
+                <span>{item.title}</span>
+              </Heading>
 
-            <P text={item.description} />
-          </li>
-        ))}
-      </ul>
-    </Accordion>
-  </Card>
-);
+              <P text={item.description} />
+            </li>
+          ))}
+        </ul>
+      </Accordion>
+    </Card>
+  );
+};

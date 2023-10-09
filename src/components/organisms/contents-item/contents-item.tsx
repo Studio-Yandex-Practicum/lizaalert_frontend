@@ -17,6 +17,55 @@ const mapSlugToIcon: Record<string, IconType> = {
   Quiz: 'test',
 };
 
+function renderLesson(
+  lesson: LessonType,
+  type: string,
+  courseId: string,
+  chapterId: number
+) {
+  if (lesson.lesson_progress === '2') {
+    return (
+      <div
+        className={classnames(styles.listItem, {
+          [styles.finished]: type === 'inner',
+        })}
+        key={lesson.id}
+      >
+        <StyledLink
+          href={`/${courseId}/${chapterId}/${lesson.id}`}
+          weight="normal"
+        >
+          <TextWithIcon
+            text={lesson.title}
+            iconType={
+              type === 'main' ? mapSlugToIcon[lesson.lesson_type] : 'checkSolid'
+            }
+          />
+        </StyledLink>
+
+        {type === 'main' && (
+          <Icon type="checkSolid" className={styles.completed} />
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={classnames(styles.listItem, {
+        [styles.active]: type === 'inner' && lesson.lesson_progress === '1',
+      })}
+      key={lesson.id}
+    >
+      <TextWithIcon
+        key={lesson.id}
+        text={lesson.title}
+        iconType={mapSlugToIcon[lesson.lesson_type]}
+      />
+    </div>
+  );
+}
+
 /**
  * Компонент элемента содержания курса. Представляет собой элемент списка со вложенным списком уроков или аккордеон.
  * */
@@ -33,10 +82,10 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   const lessonsList = useMemo(
     () => (
       <div className={styles.list}>
-        {lessons.map((lesson) => renderLesson(lesson))}
+        {lessons.map((lesson) => renderLesson(lesson, type, courseId, id))}
       </div>
     ),
-    [lessons]
+    [lessons, renderLesson]
   );
 
   if (type === 'main') {
@@ -64,47 +113,4 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   }
 
   return null;
-
-  function renderLesson(lesson: LessonType) {
-    if (lesson.lesson_progress === '2') {
-      return (
-        <div
-          className={classnames(styles.listItem, {
-            [styles.finished]: type === 'inner',
-          })}
-          key={lesson.id}
-        >
-          <StyledLink href={`/${courseId}/${id}/${lesson.id}`} weight="normal">
-            <TextWithIcon
-              text={lesson.title}
-              iconType={
-                type === 'main'
-                  ? mapSlugToIcon[lesson.lesson_type]
-                  : 'checkSolid'
-              }
-            />
-          </StyledLink>
-
-          {type === 'main' && (
-            <Icon type="checkSolid" className={styles.completed} />
-          )}
-        </div>
-      );
-    }
-
-    return (
-      <div
-        className={classnames(styles.listItem, {
-          [styles.active]: type === 'inner' && lesson.lesson_progress === '1',
-        })}
-        key={lesson.id}
-      >
-        <TextWithIcon
-          key={lesson.id}
-          text={lesson.title}
-          iconType={mapSlugToIcon[lesson.lesson_type]}
-        />
-      </div>
-    );
-  }
 };
