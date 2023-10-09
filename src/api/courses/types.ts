@@ -15,6 +15,8 @@ export type CoursePreviewModel = {
   course_status: 'active' | 'inactive' | 'finished' | 'booked';
   /** URL к обложке курса. */
   cover_path: string | null;
+  /** Статус подписки пользователя на курс. */
+  user_status: 'True' | 'False';
 };
 
 export type GetCoursesData = {

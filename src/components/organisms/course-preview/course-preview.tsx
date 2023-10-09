@@ -1,4 +1,4 @@
-import { type FC, useState, useEffect } from 'react';
+import { type FC } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { courseApi } from 'api/course';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
@@ -39,23 +39,24 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     course_duration: duration,
     course_status: status,
     cover_path: coverPath,
+    user_status: userStatus,
   } = course;
 
-  const [userStatus, setUserStatus] = useState<string>('');
+  // const [userStatus, setUserStatus] = useState<string>('');
 
-  const getUserStatus = async () => {
-    try {
-      const curst = await courseApi.getCourse(id);
-      setUserStatus(curst.user_status);
-    } catch (error) {
-      throw new Error('Ошибка загрузки данных Курса');
-    }
-  };
+  // const getUserStatus = async () => {
+  //   try {
+  //     const curst = await courseApi.getCourse(id);
+  //     setUserStatus(curst.user_status);
+  //   } catch (error) {
+  //     throw new Error('Ошибка загрузки данных Курса');
+  //   }
+  // };
 
   const setEnrolledCourse = async () => {
     try {
       await courseApi.enroll(id);
-      setUserStatus('True');
+      // setUserStatus('True');
     } catch (error) {
       throw new Error('Ошибка подписки на Курс');
     }
@@ -68,9 +69,9 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     navigate(`${routes.course.path}/${id}`);
   };
 
-  useEffect(() => {
-    void getUserStatus();
-  }, []);
+  // useEffect(() => {
+  //   void getUserStatus();
+  // }, []);
 
   return (
     <article className={styles.article}>
@@ -118,6 +119,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
         // disabled={status === 'finished' || status === 'inactive'}
         view={status === 'booked' ? 'primary' : 'secondary'}
         onClick={goToCourse}
+        text={userStatus === 'False' ? 'Записаться' : 'Продолжить'}
       >
         {CourseStatusButtons[userStatus]}
       </Button>

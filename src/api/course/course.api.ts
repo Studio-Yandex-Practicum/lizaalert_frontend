@@ -12,7 +12,7 @@ class CourseApi extends BaseApi {
 
   enroll = (id: number) =>
     this.createRequest<CourseModel>({
-      request: () => this.api.post(`${SERVICE_URL}${id}/enroll/`),
+      request: () => privateApi.post(`${SERVICE_URL}${id}/enroll/`),
     });
 
   // create course

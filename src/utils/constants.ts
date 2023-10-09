@@ -21,10 +21,6 @@ export enum KeyboardKeys {
 export enum CourseStatusButtons {
   'False' = 'Записаться',
   'True' = 'Продолжить',
-  // 'active' = 'Записаться',
-  // 'inactive' = 'Записаться',
-  // 'finished' = 'Пройден',
-  // 'booked' = 'Продолжить',
 }
 
 export const ErrorMessages = {
