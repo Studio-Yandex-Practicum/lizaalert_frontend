@@ -17,12 +17,7 @@ import styles from './course-preview.module.scss';
 /**
  * Компонент карточки предпросмотра курса.
  * При нажатии на карточку открывается страница курса.
- * Содержит кнопку статуса курса, которая имело четыре состояния:
- * - Активная кнопка "Записаться" - для курсов, на которые запись открыта;
- * - Неактивная кнопка "Записаться" - для курсов, на которые запись пока закрыта;
- * - Неактивная кнопка "Пройден" - для курсов, которые пользователь уже прошел;
- * - Активная кнопка "Продолжить" - для курсов, на которые пользователь уже записан; перенаправляет пользователя на текущий урок.
- * Сейчас кнопка статуса курса содержит 2 состояния подписки на статус:
+ * Кнопка статуса курса содержит 2 состояния подписки на статус:
  * - Активная кнопка "Записаться" - для курсов, на которые пользователь не записан;;
  * - Активная кнопка "Продолжить" - для курсов, на которые пользователь записан;
  */
@@ -42,17 +37,6 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     user_status: userStatus,
   } = course;
 
-  // const [userStatus, setUserStatus] = useState<string>('');
-
-  // const getUserStatus = async () => {
-  //   try {
-  //     const curst = await courseApi.getCourse(id);
-  //     setUserStatus(curst.user_status);
-  //   } catch (error) {
-  //     throw new Error('Ошибка загрузки данных Курса');
-  //   }
-  // };
-
   const setEnrolledCourse = async () => {
     try {
       await courseApi.enroll(id);
@@ -68,10 +52,6 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     }
     navigate(`${routes.course.path}/${id}`);
   };
-
-  // useEffect(() => {
-  //   void getUserStatus();
-  // }, []);
 
   return (
     <article className={styles.article}>
@@ -119,7 +99,6 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
         // disabled={status === 'finished' || status === 'inactive'}
         view={status === 'booked' ? 'primary' : 'secondary'}
         onClick={goToCourse}
-        text={userStatus === 'False' ? 'Записаться' : 'Продолжить'}
       >
         {CourseStatusButtons[userStatus]}
       </Button>
