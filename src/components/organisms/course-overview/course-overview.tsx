@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import { courseApi } from 'api/course';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { CourseStatusButtons } from 'utils/constants';
+import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
+import { useAppDispatch } from 'store';
+import { enrollCourseById } from 'store/courses/thunk';
 import styles from './course-overview.module.scss';
 import type { CourseOverviewProps } from './types';
 
@@ -22,20 +23,23 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   lessonsCount,
   startDate,
   courseDuration,
+  enrollStatus,
   userStatus,
 }) => {
-  const setEnrolledCourse = async () => {
-    try {
-      await courseApi.enroll(id);
-      // setCourseButtonText('Продолжить');
-    } catch (error) {
-      throw new Error('Ошибка подписки на Курс');
-    }
+  const dispatch = useAppDispatch();
+
+  const buttonText: string =
+    enrollStatus?.process === ProcessEnum.Succeeded
+      ? CourseStatusButtons.True
+      : CourseStatusButtons[userStatus];
+
+  const enroll = () => {
+    void dispatch(enrollCourseById(id));
   };
 
   const onClick = () => {
     if (userStatus === 'False') {
-      void setEnrolledCourse();
+      void enroll();
     }
   };
 
@@ -78,7 +82,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
       />
 
       <Button className={styles.courseEnroll} onClick={onClick}>
-        {CourseStatusButtons[userStatus]}
+        {buttonText}
       </Button>
     </Card>
   );

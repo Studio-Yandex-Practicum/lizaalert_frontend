@@ -1,3 +1,5 @@
+import { ProcessEnum } from 'utils/constants';
+
 export type CourseOverviewProps = {
   /** id курса. */
   id: number;
@@ -10,6 +12,11 @@ export type CourseOverviewProps = {
   /** Количество уроков в курсе. */
   lessonsCount: number;
   /** Статус подписки на курс. */
+  enrollStatus: {
+    process: ProcessEnum;
+    error: string | null;
+  };
+  /** Статус подписки на курс c бэка. */
   userStatus: 'True' | 'False';
   /** Продолжительность курса в часах. */
   courseDuration?: Nullable<number>;

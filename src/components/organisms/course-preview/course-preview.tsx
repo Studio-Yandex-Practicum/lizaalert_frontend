@@ -52,7 +52,9 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
   };
 
   const goToCourse = () => {
-    void enroll();
+    if (userStatus === 'False') {
+      void enroll();
+    }
     navigate(`${routes.course.path}/${id}`);
   };
 
