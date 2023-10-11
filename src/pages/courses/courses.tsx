@@ -20,6 +20,7 @@ import {
   selectCoursesError,
   selectCoursesProcess,
   selectCoursesTotal,
+  selectEnrollStatus,
 } from 'store/courses/selectors';
 import {
   selectFilters,
@@ -39,6 +40,7 @@ const Courses: FC = () => {
   const dispatch = useAppDispatch();
 
   const courses = useAppSelector(selectCourses);
+  const enrollStatus = useAppSelector(selectEnrollStatus);
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
   const coursesProcess = useAppSelector(selectCoursesProcess);
   const coursesError = useAppSelector(selectCoursesError);
@@ -125,7 +127,10 @@ const Courses: FC = () => {
             {courses.length > 0 &&
               courses.map((course) => (
                 <li key={course.id}>
-                  <CoursePreview course={course} />
+                  <CoursePreview
+                    course={course}
+                    enrollStatus={enrollStatus[course.id]}
+                  />
                 </li>
               ))}
           </ul>

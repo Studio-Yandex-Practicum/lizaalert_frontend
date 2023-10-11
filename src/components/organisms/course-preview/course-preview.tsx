@@ -1,6 +1,5 @@
 import { type FC } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { courseApi } from 'api/course';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -8,9 +7,11 @@ import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { routes } from 'config';
-import { CourseStatusButtons } from 'utils/constants';
+import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
+import { useAppDispatch } from 'store';
+import { enrollCourseById } from 'store/courses/thunk';
 import type { CoursePreviewProps } from './types';
 import styles from './course-preview.module.scss';
 
@@ -22,8 +23,12 @@ import styles from './course-preview.module.scss';
  * - Активная кнопка "Продолжить" - для курсов, на которые пользователь записан;
  */
 
-export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
+export const CoursePreview: FC<CoursePreviewProps> = ({
+  course,
+  enrollStatus,
+}) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     id,
@@ -37,19 +42,17 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     user_status: userStatus,
   } = course;
 
-  const setEnrolledCourse = async () => {
-    try {
-      await courseApi.enroll(id);
-      // setUserStatus('True');
-    } catch (error) {
-      throw new Error('Ошибка подписки на Курс');
-    }
+  const buttonText: string =
+    enrollStatus?.process === ProcessEnum.Succeeded
+      ? CourseStatusButtons.True
+      : CourseStatusButtons[userStatus];
+
+  const enroll = () => {
+    void dispatch(enrollCourseById(id));
   };
 
   const goToCourse = () => {
-    if (userStatus === 'False') {
-      void setEnrolledCourse();
-    }
+    void enroll();
     navigate(`${routes.course.path}/${id}`);
   };
 
@@ -96,11 +99,10 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
       </Link>
       <Button
         className={styles.button}
-        // disabled={status === 'finished' || status === 'inactive'}
         view={status === 'booked' ? 'primary' : 'secondary'}
         onClick={goToCourse}
       >
-        {CourseStatusButtons[userStatus]}
+        {buttonText}
       </Button>
     </article>
   );

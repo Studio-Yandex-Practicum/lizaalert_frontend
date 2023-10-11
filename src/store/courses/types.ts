@@ -6,6 +6,12 @@ export type CoursesThunkState = {
   error: string | null;
   count: CoursesModel['count'];
   courses: CoursesModel['results'];
+  enrollStatus: {
+    [key: string]: {
+      process: ProcessEnum;
+      error: string | null;
+    };
+  };
 };
 
 export type CoursesState = CoursesThunkState;
