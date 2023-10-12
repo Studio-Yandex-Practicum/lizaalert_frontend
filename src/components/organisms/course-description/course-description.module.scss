@@ -9,10 +9,8 @@
   color: vars.$dark-primary;
 }
 
-.text {
-  p {
-    margin: 32px 0 0;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
+.accordion {
+  & > button {
+    margin-bottom: 32px;
   }
 }
