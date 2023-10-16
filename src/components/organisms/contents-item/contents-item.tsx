@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
+import { routes } from 'config';
 import { Icon, IconType } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
@@ -32,7 +33,8 @@ function renderLesson(
         key={lesson.id}
       >
         <StyledLink
-          href={`/${courseId}/${chapterId}/${lesson.id}`}
+          isExternal={false}
+          href={`../${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`}
           weight="normal"
         >
           <TextWithIcon
