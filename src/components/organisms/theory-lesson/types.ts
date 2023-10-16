@@ -1,4 +1,4 @@
 export type TheoryLessonProps = {
-  /** HTML-разметка теории. */
+  /** Разметка теории в формате Markdown. */
   content: string;
 };
