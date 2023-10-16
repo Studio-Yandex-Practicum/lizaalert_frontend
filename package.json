@@ -41,7 +41,7 @@
     "normalize.css": "8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-markdown": "^8.0.7",
+    "react-markdown": "8.0.7",
     "react-redux": "8.0.5",
     "react-router-dom": "6.14.2",
     "yup": "1.2.0"

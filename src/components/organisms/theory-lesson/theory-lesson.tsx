@@ -1,9 +1,7 @@
 import type { FC } from 'react';
-import ReactMarkdown from 'react-markdown';
 import { Card } from 'components/atoms/card';
-import { TheoryLessonProps } from './types';
-
-// Временный компонент-заглушка, необходимо переписать
+import { Markdown } from 'components/molecules/markdown';
+import type { TheoryLessonProps } from './types';
 
 /**
  * Компонент теоретического урока.
@@ -11,6 +9,6 @@ import { TheoryLessonProps } from './types';
 
 export const TheoryLesson: FC<TheoryLessonProps> = ({ content }) => (
   <Card>
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <Markdown>{content}</Markdown>
   </Card>
 );

@@ -1,0 +1,26 @@
+@use 'src/styles/variables' as vars;
+
+.typography-size-xxl {
+  font-size: vars.$font-size-xxl;
+  line-height: vars.$line-height-xxl;
+}
+
+.typography-size-xl {
+  font-size: vars.$font-size-xl;
+  line-height: vars.$line-height-xl;
+}
+
+.typography-size-l {
+  font-size: vars.$font-size-l;
+  line-height: vars.$line-height-l;
+}
+
+.typography-size-m {
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.typography-size-s {
+  font-size: vars.$font-size-s;
+  line-height: vars.$line-height-s;
+}
