@@ -95,8 +95,10 @@ const Lesson: FC = () => {
                   <Markdown>{lesson.description ?? ''}</Markdown>
                 )}
 
+                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/415 */}
                 {lessonType === 'Videolesson' && <VideoLesson source="" />}
 
+                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
                 {lessonType === 'Webinar' && <PreviewWebinar date="" link="" />}
               </Card>
             )}
