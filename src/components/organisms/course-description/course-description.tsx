@@ -23,13 +23,8 @@ export const CourseDescription: FC<CourseDescriptionProps> = ({
       className={classnames(styles.description, className)}
       htmlTag="section"
     >
-      <Accordion
-        button="text"
-        title="Описание курса"
-        className={styles.accordion}
-        open
-      >
-        <Markdown>{description}</Markdown>
+      <Accordion button="text" title="Описание курса" open>
+        <Markdown className={styles.markdown}>{description}</Markdown>
       </Accordion>
     </Card>
   );
