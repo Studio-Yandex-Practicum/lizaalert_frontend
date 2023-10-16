@@ -2,7 +2,7 @@ export { courseApi } from './course.api';
 export type {
   CourseModel,
   ChapterModel,
-  LessonModel,
+  LessonChapterModel,
   LessonType,
   LessonProgress,
 } from './types';

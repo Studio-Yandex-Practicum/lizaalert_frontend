@@ -72,19 +72,3 @@ export type CourseModel = {
   /** Список глав курса. */
   chapters: ChapterModel[];
 };
-
-export type LessonModel = {
-  id?: number;
-  title: string;
-  description?: string;
-  lesson_type: LessonType;
-  tags: string;
-  duration: number;
-  additional?: boolean;
-  diploma?: boolean;
-};
-
-export type GetCourseLessonData = {
-  courseId: number;
-  lessonId: number;
-};

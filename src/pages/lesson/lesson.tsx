@@ -1,13 +1,14 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
+import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
 import { Breadcrumbs } from 'components/organisms/breadcrumbs';
 import { CourseContents } from 'components/organisms/course-contents';
 import { NavigationButtons } from 'components/organisms/navigation-buttons';
+import { Markdown } from 'components/molecules/markdown';
 import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
-import { TheoryLesson } from 'components/organisms/theory-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import {
@@ -34,18 +35,8 @@ import styles from './lesson.module.scss';
 // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/396
 const noop = () => {};
 
-// TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/374
-const stub = {
-  deadline: '',
-  description: '',
-  id: 0,
-  inProgress: false,
-  passingScore: 0,
-  retries: 0,
-};
-
 const Lesson: FC = () => {
-  const { lessonId, courseId } = useParams();
+  const { courseId, lessonId } = useParams();
 
   const dispatch = useAppDispatch();
 
@@ -58,24 +49,20 @@ const Lesson: FC = () => {
   const error = useAppSelector(selectLessonError);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
+  const isQuiz = lessonType === 'Quiz';
 
   const fetchLesson = useEvent(() => {
-    if (lessonId && courseId) {
-      void dispatch(
-        fetchLessonById({
-          lessonId: +lessonId,
-          courseId: +courseId,
-        })
-      );
+    if (lessonId) {
+      void dispatch(fetchLessonById(+lessonId));
     }
   });
 
   useEffect(() => {
     fetchLesson();
-  }, [lessonId, courseId]);
+  }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && SHOULD_LOAD_PROCESS_MAP[lessonProcess]) {
+    if (courseId && SHOULD_LOAD_PROCESS_MAP[courseProcess]) {
       void dispatch(fetchCourse(+courseId));
     }
   }, [courseId, courseProcess]);
@@ -86,7 +73,7 @@ const Lesson: FC = () => {
 
       <div className={styles.lesson}>
         {(isLoading || error) && (
-          <Card className={styles.error}>
+          <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
             {error && <ErrorLocker onClick={fetchLesson} />}
           </Card>
@@ -94,15 +81,27 @@ const Lesson: FC = () => {
 
         {lessonProcess === ProcessEnum.Succeeded && (
           <div className={styles.content}>
-            {lessonType === 'Lesson' && lesson.description && (
-              <TheoryLesson content={lesson.description} />
+            {!isQuiz && (
+              <Card htmlTag="section">
+                <Heading
+                  level={2}
+                  size="l"
+                  weight="bold"
+                  className={styles.heading}
+                  text={lesson.title}
+                />
+
+                {lessonType === 'Lesson' && (
+                  <Markdown>{lesson.description ?? ''}</Markdown>
+                )}
+
+                {lessonType === 'Videolesson' && <VideoLesson source="" />}
+
+                {lessonType === 'Webinar' && <PreviewWebinar date="" link="" />}
+              </Card>
             )}
 
-            {lessonType === 'Videolesson' && <VideoLesson source="" />}
-
-            {lessonType === 'Webinar' && <PreviewWebinar date="" link="" />}
-
-            {lessonType === 'Quiz' && <TestContent test={stub} />}
+            {isQuiz && <TestContent />}
 
             <NavigationButtons onClickBack={noop} onClickForward={noop} />
           </div>

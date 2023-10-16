@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { courseApi, GetCourseLessonData } from 'api/course';
+import { lessonsApi } from 'api/lessons';
 
 export const fetchLessonById = createAsyncThunk(
   'lesson/fetch',
-  async (data: GetCourseLessonData) => {
-    const lesson = await courseApi.getCourseLesson(data);
+  async (id: number) => {
+    const lesson = await lessonsApi.getLesson(id);
     return lesson;
   }
 );

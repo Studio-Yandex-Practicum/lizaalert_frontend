@@ -10,6 +10,7 @@ import type { LessonState } from './types';
 
 const initialState: LessonState = {
   lesson: {
+    course_id: 0,
     title: '',
     lesson_type: 'Lesson',
     tags: '',

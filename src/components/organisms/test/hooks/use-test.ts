@@ -21,9 +21,11 @@ export const useTest = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
-  // TODO удалить типы после типизации стора
+  // TODO удалить типы после типизации стора, получение теста перенести в TestContent
   const test = useAppSelector<TestQuestionListType>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { passingScore } = useAppSelector<TestType>(selectLesson);
 
   const dispatch = useAppDispatch();

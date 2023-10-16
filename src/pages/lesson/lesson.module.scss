@@ -9,6 +9,7 @@
 
 .content {
   width: 100%;
+  max-width: 872px;
   display: flex;
   flex-direction: column;
   row-gap: vars.$grid-gap;
@@ -21,6 +22,17 @@
 .breadcrumbs {
   margin-bottom: 32px;
   margin-top: vars.$grid-gap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: vars.$dark-primary;
+}
+
+.heading {
+  margin-bottom: 32px;
 }
 
 .error {

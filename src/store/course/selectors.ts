@@ -1,8 +1,8 @@
-import { LOADING_PROCESS_MAP } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import type { AppState } from '../types';
 
 export const selectIsCourseLoading = (state: AppState) =>
-  LOADING_PROCESS_MAP[state.course.process];
+  state.course.process === ProcessEnum.Requested;
 export const selectCourseProcess = (state: AppState) => state.course.process;
 export const selectCourseError = (state: AppState) => state.course.error;
 export const selectCourse = (state: AppState) => state.course.course;
