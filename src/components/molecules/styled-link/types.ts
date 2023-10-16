@@ -13,7 +13,7 @@ export type StyledLinkProps = {
    * По умолчанию используется ссылка из react-router.
    * */
   isExternal?: boolean;
-  /** Начертаие шрифта. */
+  /** Начертание шрифта. */
   weight?: 'bold' | 'medium' | 'normal';
   /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
   className?: string;

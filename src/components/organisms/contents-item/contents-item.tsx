@@ -24,6 +24,8 @@ function renderLesson(
   courseId: string,
   chapterId: number
 ) {
+  const currentLessonRoute = `../${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
+
   if (lesson.lesson_progress === '2') {
     return (
       <div
@@ -32,11 +34,7 @@ function renderLesson(
         })}
         key={lesson.id}
       >
-        <StyledLink
-          isExternal={false}
-          href={`../${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`}
-          weight="normal"
-        >
+        <StyledLink href={currentLessonRoute} weight="normal">
           <TextWithIcon
             text={lesson.title}
             iconType={
@@ -52,13 +50,28 @@ function renderLesson(
     );
   }
 
+  if (lesson.lesson_progress === '1') {
+    return (
+      <div
+        className={classnames(styles.listItem, styles.active)}
+        key={lesson.id}
+      >
+        <StyledLink
+          href={currentLessonRoute}
+          weight="normal"
+          className="active"
+        >
+          <TextWithIcon
+            text={lesson.title}
+            iconType={mapSlugToIcon[lesson.lesson_type]}
+          />
+        </StyledLink>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={classnames(styles.listItem, {
-        [styles.active]: type === 'inner' && lesson.lesson_progress === '1',
-      })}
-      key={lesson.id}
-    >
+    <div className={classnames(styles.listItem)} key={lesson.id}>
       <TextWithIcon
         key={lesson.id}
         text={lesson.title}

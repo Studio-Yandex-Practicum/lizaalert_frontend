@@ -15,14 +15,14 @@ export const StyledLink: FC<StyledLinkProps> = ({
   isExternal,
   href,
   weight = 'medium',
-  className,
+  className = '',
   ...props
 }) => {
   if (!children && !linkText) {
     return null;
   }
 
-  const classNames = classnames(styles.link, styles[weight], className);
+  const classNames = classnames(styles.link, styles[weight], styles[className]);
 
   if (isExternal) {
     return (
