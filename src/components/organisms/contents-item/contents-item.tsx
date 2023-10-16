@@ -34,7 +34,7 @@ function renderLesson(
         })}
         key={lesson.id}
       >
-        <StyledLink href={currentLessonRoute} weight="normal">
+        <StyledLink href={currentLessonRoute} isNavigation weight="normal">
           <TextWithIcon
             text={lesson.title}
             iconType={
@@ -58,6 +58,7 @@ function renderLesson(
       >
         <StyledLink
           href={currentLessonRoute}
+          isNavigation
           weight="normal"
           className="active"
         >
