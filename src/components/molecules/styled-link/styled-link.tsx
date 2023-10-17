@@ -16,14 +16,20 @@ export const StyledLink: FC<StyledLinkProps> = ({
   isNavigation,
   href,
   weight = 'medium',
-  className = '',
+  color = 'default',
+  className,
   ...props
 }) => {
   if (!children && !linkText) {
     return null;
   }
 
-  const classNames = classnames(styles.link, styles[weight], styles[className]);
+  const classNames = classnames(
+    styles.link,
+    styles[weight],
+    styles[color],
+    className
+  );
 
   if (isExternal) {
     return (
@@ -44,7 +50,7 @@ export const StyledLink: FC<StyledLinkProps> = ({
       <NavLink
         {...props}
         className={({ isActive }) =>
-          isActive ? ` ${classNames} ${styles.active}` : classNames
+          classnames(classNames, { [styles.active]: isActive })
         }
         to={href}
         end

@@ -15,11 +15,13 @@ export type StyledLinkProps = {
   isExternal?: boolean;
   /**
    * Флаг того, является ли ссылка навигационной. При true используется ссылка NavLink из react-router.
-   * * По умолчанию используется ссылка Link из react-router.
+   * По умолчанию используется ссылка Link из react-router.
    * */
   isNavigation?: boolean;
   /** Начертание шрифта. */
   weight?: 'bold' | 'medium' | 'normal';
+  /** Цвет текста. */
+  color?: 'default' | 'active';
   /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
   className?: string;
 } & AnchorHTMLAttributes<HTMLAnchorElement>;

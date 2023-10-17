@@ -8,6 +8,7 @@ import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { LessonProgress } from 'api/course/types';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 
@@ -24,9 +25,9 @@ function renderLesson(
   courseId: string,
   chapterId: number
 ) {
-  const currentLessonRoute = `../${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
+  const currentLessonRoute = `${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
 
-  if (lesson.lesson_progress === '2') {
+  if (lesson.lesson_progress === LessonProgress.Finished) {
     return (
       <div
         className={classnames(styles.listItem, {
@@ -50,7 +51,7 @@ function renderLesson(
     );
   }
 
-  if (lesson.lesson_progress === '1') {
+  if (lesson.lesson_progress === LessonProgress.Started) {
     return (
       <div
         className={classnames(styles.listItem, styles.active)}
@@ -60,7 +61,7 @@ function renderLesson(
           href={currentLessonRoute}
           isNavigation
           weight="normal"
-          className="active"
+          color="active"
         >
           <TextWithIcon
             text={lesson.title}
