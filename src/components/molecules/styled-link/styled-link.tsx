@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './styled-link.module.scss';
 import type { StyledLinkProps } from './types';
@@ -13,8 +13,10 @@ export const StyledLink: FC<StyledLinkProps> = ({
   children = null,
   linkText = '',
   isExternal,
+  isNavigation,
   href,
   weight = 'medium',
+  color = 'default',
   className,
   ...props
 }) => {
@@ -22,7 +24,12 @@ export const StyledLink: FC<StyledLinkProps> = ({
     return null;
   }
 
-  const classNames = classnames(styles.link, styles[weight], className);
+  const classNames = classnames(
+    styles.link,
+    styles[weight],
+    styles[color],
+    className
+  );
 
   if (isExternal) {
     return (
@@ -35,6 +42,21 @@ export const StyledLink: FC<StyledLinkProps> = ({
       >
         {children ?? linkText}
       </a>
+    );
+  }
+
+  if (isNavigation) {
+    return (
+      <NavLink
+        {...props}
+        className={({ isActive }) =>
+          classnames(classNames, { [styles.active]: isActive })
+        }
+        to={href}
+        end
+      >
+        {children ?? linkText}
+      </NavLink>
     );
   }
 

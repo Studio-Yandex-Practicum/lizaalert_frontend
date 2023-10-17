@@ -2,11 +2,13 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import classnames from 'classnames';
 import { useParams } from 'react-router-dom';
+import { routes } from 'config';
 import { Icon, IconType } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { LessonProgress } from 'api/course/types';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 
@@ -23,7 +25,9 @@ function renderLesson(
   courseId: string,
   chapterId: number
 ) {
-  if (lesson.lesson_progress === '2') {
+  const currentLessonRoute = `${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
+
+  if (lesson.lesson_progress === LessonProgress.Finished) {
     return (
       <div
         className={classnames(styles.listItem, {
@@ -31,10 +35,7 @@ function renderLesson(
         })}
         key={lesson.id}
       >
-        <StyledLink
-          href={`/${courseId}/${chapterId}/${lesson.id}`}
-          weight="normal"
-        >
+        <StyledLink href={currentLessonRoute} isNavigation weight="normal">
           <TextWithIcon
             text={lesson.title}
             iconType={
@@ -50,13 +51,29 @@ function renderLesson(
     );
   }
 
+  if (lesson.lesson_progress === LessonProgress.Started) {
+    return (
+      <div
+        className={classnames(styles.listItem, styles.active)}
+        key={lesson.id}
+      >
+        <StyledLink
+          href={currentLessonRoute}
+          isNavigation
+          weight="normal"
+          color="active"
+        >
+          <TextWithIcon
+            text={lesson.title}
+            iconType={mapSlugToIcon[lesson.lesson_type]}
+          />
+        </StyledLink>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={classnames(styles.listItem, {
-        [styles.active]: type === 'inner' && lesson.lesson_progress === '1',
-      })}
-      key={lesson.id}
-    >
+    <div className={classnames(styles.listItem)} key={lesson.id}>
       <TextWithIcon
         key={lesson.id}
         text={lesson.title}
