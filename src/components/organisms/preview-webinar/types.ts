@@ -3,6 +3,4 @@ export type PreviewWebinarProps = {
   date: string;
   /** URL внешней ссылки на вебинар (открывается в новом окне). */
   link: string;
-  /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
-  className?: string;
 };

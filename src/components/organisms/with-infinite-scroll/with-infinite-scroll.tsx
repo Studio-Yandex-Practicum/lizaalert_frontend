@@ -5,11 +5,7 @@ import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Loader } from 'components/molecules/loader';
 import { ErrorLocker } from 'components/organisms/error-locker';
-import {
-  GENERAL_ERROR,
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-} from 'utils/constants';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useIntersectionObserver } from 'hooks/use-intersection-observer';
 import type { PaginationState, WithInfiniteScrollConfig } from './types';
 import styles from './with-infinite-scroll.module.scss';
@@ -103,12 +99,7 @@ export const WithInfiniteScroll = <T extends Record<string, unknown>, State>({
       {!error && shouldLoad && <span aria-hidden ref={loadMoreRef} />}
 
       {error && hasNoData && (
-        <ErrorLocker
-          className={styles.stubCard}
-          heading={GENERAL_ERROR}
-          onClick={requestData}
-          isCard
-        />
+        <ErrorLocker className={styles.stubCard} onClick={requestData} isCard />
       )}
 
       {error && !hasNoData && (

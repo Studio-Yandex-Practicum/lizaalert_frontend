@@ -1,11 +1,12 @@
 import type { FC } from 'react';
 import { Heading, P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
+import { GENERAL_ERROR } from 'utils/constants';
 import type { ErrorLockerContentProps } from './types';
 import styles from './error-locker.module.scss';
 
 export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
-  heading,
+  heading = GENERAL_ERROR,
   subheading,
   buttonText = 'Попробовать ещё раз',
   onClick,

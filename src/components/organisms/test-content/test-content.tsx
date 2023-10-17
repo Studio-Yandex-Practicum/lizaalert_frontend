@@ -1,14 +1,29 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Test } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import type { TestContentProps } from './types';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectTest } from 'store/test/selectors';
+import { fetchTest } from 'store/test/thunk';
+import { TestModel } from 'api/lessons';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
 
-export const TestContent: FC<TestContentProps> = ({ test }) => {
-  const [renderTest, setRenderTest] = useState(test.inProgress);
+export const TestContent: FC = () => {
+  const { lessonId } = useParams();
+  const dispatch = useAppDispatch();
+
+  const test = useAppSelector<TestModel>(selectTest);
+
+  useEffect(() => {
+    if (lessonId) {
+      void dispatch(fetchTest(+lessonId));
+    }
+  }, [lessonId]);
+
+  const [renderTest, setRenderTest] = useState(test.in_progress);
 
   const toggleRender = () => setRenderTest(!renderTest);
 
@@ -16,5 +31,7 @@ export const TestContent: FC<TestContentProps> = ({ test }) => {
     return <Test toggleRender={toggleRender} />;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return <TestPreview test={test} toggleRender={toggleRender} />;
 };
