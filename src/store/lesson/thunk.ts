@@ -3,7 +3,7 @@ import { lessonsApi } from 'api/lessons';
 
 export const fetchLessonById = createAsyncThunk(
   'lesson/fetch',
-  async (id: number) => {
+  async (id: string) => {
     const lesson = await lessonsApi.getLesson(id);
     return lesson;
   }

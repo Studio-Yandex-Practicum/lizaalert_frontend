@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
+import { Markdown } from 'components/molecules/markdown';
 import { Breadcrumbs } from 'components/organisms/breadcrumbs';
 import { CourseContents } from 'components/organisms/course-contents';
 import { NavigationButtons } from 'components/organisms/navigation-buttons';
-import { Markdown } from 'components/molecules/markdown';
 import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
@@ -27,7 +27,7 @@ import {
   selectLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
-import { fetchCourse } from 'store/course/thunk';
+import { fetchCourseById } from 'store/course/thunk';
 import { fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
 import styles from './lesson.module.scss';
@@ -53,7 +53,7 @@ const Lesson: FC = () => {
 
   const fetchLesson = useEvent(() => {
     if (lessonId) {
-      void dispatch(fetchLessonById(+lessonId));
+      void dispatch(fetchLessonById(lessonId));
     }
   });
 
@@ -63,7 +63,7 @@ const Lesson: FC = () => {
 
   useEffect(() => {
     if (courseId && SHOULD_LOAD_PROCESS_MAP[courseProcess]) {
-      void dispatch(fetchCourse(+courseId));
+      void dispatch(fetchCourseById(courseId));
     }
   }, [courseId, courseProcess]);
 

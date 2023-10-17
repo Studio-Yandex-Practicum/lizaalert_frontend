@@ -1,6 +1,6 @@
 import type { LessonModel } from '../types';
 
-const lessons: { [p: string]: { [k: string]: LessonModel } } = {
+const lessons: Record<string, Record<string, LessonModel>> = {
   1: {
     1: {
       id: 1,

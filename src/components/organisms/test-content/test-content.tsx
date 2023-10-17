@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Test } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectTest } from 'store/test/selectors';
 import { fetchTest } from 'store/test/thunk';

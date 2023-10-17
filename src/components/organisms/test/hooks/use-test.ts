@@ -22,6 +22,7 @@ export const useTest = () => {
   const [testResultPercent, setTestResultPercent] = useState(0);
 
   // TODO удалить типы после типизации стора, получение теста перенести в TestContent
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
   const test = useAppSelector<TestQuestionListType>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -11,15 +11,15 @@ import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourse,
+  selectCourseBenefits,
   selectCourseContents,
   selectCourseDescription,
-  selectCourseBenefits,
   selectCourseError,
-  selectCourseTitle,
   selectCourseFAQ,
+  selectCourseTitle,
   selectIsCourseLoading,
 } from 'store/course/selectors';
-import { fetchCourse } from 'store/course/thunk';
+import { fetchCourseById } from 'store/course/thunk';
 import styles from './course.module.scss';
 
 const Course: FC = () => {
@@ -37,7 +37,7 @@ const Course: FC = () => {
 
   useEffect(() => {
     if (courseId) {
-      void dispatch(fetchCourse(+courseId));
+      void dispatch(fetchCourseById(courseId));
     }
   }, [courseId]);
 
