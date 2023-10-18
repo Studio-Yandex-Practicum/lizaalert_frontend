@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
@@ -42,10 +42,13 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
     user_status: userStatus,
   } = course;
 
-  const buttonText: string =
-    enrollStatus?.process === ProcessEnum.Succeeded
-      ? CourseStatusButtons.True
-      : CourseStatusButtons[userStatus];
+  const buttonText: string = useMemo(
+    () =>
+      enrollStatus?.process === ProcessEnum.Succeeded
+        ? CourseStatusButtons.True
+        : CourseStatusButtons[userStatus],
+    [enrollStatus]
+  );
 
   const enroll = () => {
     void dispatch(enrollCourseById(id));

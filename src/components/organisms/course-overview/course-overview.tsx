@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
@@ -28,10 +28,13 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const buttonText: string =
-    enrollStatus?.process === ProcessEnum.Succeeded
-      ? CourseStatusButtons.True
-      : CourseStatusButtons[userStatus];
+  const buttonText: string = useMemo(
+    () =>
+      enrollStatus?.process === ProcessEnum.Succeeded
+        ? CourseStatusButtons.True
+        : CourseStatusButtons[userStatus],
+    [enrollStatus]
+  );
 
   const enroll = () => {
     void dispatch(enrollCourseById(id));
