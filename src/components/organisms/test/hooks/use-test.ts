@@ -1,51 +1,43 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsTestLoading, selectTest } from 'store/test/selectors';
-import { selectLesson } from 'store/lesson/selectors';
 import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
-import type { TestType } from 'components/organisms/test-preview';
-import type { TestQuestionListType } from '../types';
+import { TestModel } from 'api/lessons';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState, retake \}
  * */
 
 export const useTest = () => {
-  const { lessonId } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
   // TODO удалить типы после типизации стора
-  const test = useAppSelector<TestQuestionListType>(selectTest);
+  const test = useAppSelector<TestModel>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
-  const { passingScore } = useAppSelector<TestType>(selectLesson);
 
   const dispatch = useAppDispatch();
 
-  const setInitialState = () => {
-    if (lessonId) {
-      void dispatch(fetchTest(+lessonId));
-    }
+  const setInitialState = (lessonId: number) => {
+    void dispatch(fetchTest(lessonId));
     setIsSubmitted(false);
   };
 
-  useEffect(() => {
-    setInitialState();
-  }, [lessonId]);
+  // TODO Запрос на сервер на пересдачу теста
+  const retake = () => null;
 
   // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
   useEffect(() => {
-    if (test.questions?.length >= 0) {
+    if (test.passing_score && test.questions && test.questions.length >= 0) {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
-        if (question.type === Controls.RADIO) {
+        if (question.question_type === Controls.RADIO) {
           question.content.forEach(() => {
             percentArr.push(100);
           });
@@ -66,14 +58,14 @@ export const useTest = () => {
       const resultPercent = Math.round(middlePercent);
 
       setTestResultPercent(resultPercent);
-      setIsSuccess(resultPercent >= passingScore);
+      setIsSuccess(resultPercent >= test.passing_score);
     }
-  }, [passingScore, test.questions]);
+  }, [test.passing_score, test.questions]);
 
   const handleButtonDisabledState = () => {
     let isDisabled = false;
 
-    if (test.questions?.length > 0) {
+    if (test.questions && test.questions.length > 0) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
 
@@ -102,5 +94,6 @@ export const useTest = () => {
     onSubmit,
     setInitialState,
     handleButtonDisabledState,
+    retake,
   };
 };

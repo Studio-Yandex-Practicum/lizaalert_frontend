@@ -4,23 +4,23 @@ import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { convertDate } from 'utils/convert-date';
-import styles from './test-preview.module.scss';
+import { useTest } from '../test/hooks/use-test';
 import type { TextPreviewProps } from './types';
+import styles from './test-preview.module.scss';
 
 /**
  * Компонент-карточка превью теста.
  */
 
-export const TestPreview: FC<TextPreviewProps> = ({ test, toggleRender }) => {
-  const date = convertDate(test.deadline);
-  const time = convertDate(test.deadline, { onlyTime: true });
+export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
+  const { test } = useTest();
 
   return (
     <Card htmlTag="section" className={styles.container}>
       <div className={styles.propertiesRow}>
-        <Heading level={2} size="l" weight="bold" text="Тест" />
+        <Heading level={2} size="l" weight="bold" text={test.title} />
 
-        {test.inProgress && (
+        {test.in_progress && (
           <Button view="text" onClick={toggleRender} text="Вернуться к тесту" />
         )}
       </div>
@@ -28,29 +28,40 @@ export const TestPreview: FC<TextPreviewProps> = ({ test, toggleRender }) => {
       <P text={test.description} />
 
       <ul className={styles.properties}>
-        <li className={styles.propertiesRow}>
-          <TextWithIcon
-            htmlTag="span"
-            iconType="check"
-            text="Проходной балл:"
-          />
-          <Span text={`${test.passingScore}%`} />
-        </li>
-        <li className={styles.propertiesRow}>
-          <TextWithIcon
-            htmlTag="span"
-            iconType="retry"
-            text="Количество попыток:"
-          />
-          <Span text={test.retries} />
-        </li>
-        <li className={styles.propertiesRow}>
-          <TextWithIcon htmlTag="span" iconType="time" text="Срок сдачи:" />
-          <Span text={`${date} г. ${time} (GMT+3)`} />
-        </li>
+        {test.passing_score && (
+          <li className={styles.propertiesRow}>
+            <TextWithIcon
+              htmlTag="span"
+              iconType="check"
+              text="Проходной балл:"
+            />
+            <Span text={`${test.passing_score}%`} />
+          </li>
+        )}
+        {test.retries !== undefined && (
+          <li className={styles.propertiesRow}>
+            <TextWithIcon
+              htmlTag="span"
+              iconType="retry"
+              text="Количество попыток:"
+            />
+            <Span text={test.retries} />
+          </li>
+        )}
+        {test.deadline && (
+          <li className={styles.propertiesRow}>
+            <TextWithIcon htmlTag="span" iconType="time" text="Срок сдачи:" />
+            <Span
+              text={`${convertDate(test.deadline)} г. ${convertDate(
+                test.deadline,
+                { onlyTime: true }
+              )} (GMT+3)`}
+            />
+          </li>
+        )}
       </ul>
 
-      {!test.inProgress && (
+      {!test.in_progress && (
         <Button
           className={styles.button}
           onClick={toggleRender}

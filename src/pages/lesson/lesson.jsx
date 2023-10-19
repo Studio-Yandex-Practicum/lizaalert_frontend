@@ -90,7 +90,7 @@ const Lesson = () => {
               {lesson.slug === 'webinar' && (
                 <PreviewWebinar date={lesson.date} link={lesson.source} />
               )}
-              {lesson.slug === 'test' && <TestContent test={lesson} />}
+              {lesson.slug === 'test' && <TestContent lessonId={lesson.id} />}
             </>
           )}
 
