@@ -10,11 +10,10 @@ class CourseApi extends BaseApi {
       mock: () => import('./mock/course'),
     });
 
-  // create course
-
-  // edit course
-
-  // delete course???
+  enroll = (id: number) =>
+    this.createRequest({
+      request: () => privateApi.post(`${SERVICE_URL}${id}/enroll/`),
+    });
 }
 
 export const courseApi = new CourseApi();

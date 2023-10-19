@@ -8,7 +8,7 @@ import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { LessonProgress } from 'api/course/types';
+import { LessonProgress } from 'api/course';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 

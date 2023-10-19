@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -7,25 +7,25 @@ import { Button } from 'components/molecules/button';
 import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { routes } from 'config';
-import { CourseStatusButtons } from 'utils/constants';
+import { UserProgressStatus } from 'api/course';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
+import { useEnrollCourse } from 'hooks/use-enroll-course';
 import type { CoursePreviewProps } from './types';
 import styles from './course-preview.module.scss';
 
 /**
  * Компонент карточки предпросмотра курса.
  * При нажатии на карточку открывается страница курса.
- * Содержит кнопку статуса курса, которая имеет четыре состояния:
- * - Активная кнопка "Записаться" - для курсов, на которые запись открыта;
- * - Неактивная кнопка "Записаться" - для курсов, на которые запись пока закрыта;
- * - Неактивная кнопка "Пройден" - для курсов, которые пользователь уже прошел;
- * - Активная кнопка "Продолжить" - для курсов, на которые пользователь уже записан; перенаправляет пользователя на текущий урок.
+ * Кнопка статуса курса содержит 2 состояния подписки на статус:
+ * - Активная кнопка "Записаться" - для курсов, на которые пользователь не записан;;
+ * - Активная кнопка "Продолжить" - для курсов, на которые пользователь записан;
  */
 
-export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
-  const navigate = useNavigate();
-
+export const CoursePreview: FC<CoursePreviewProps> = ({
+  course,
+  enrollStatus,
+}) => {
   const {
     id,
     title,
@@ -33,11 +33,15 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
     short_description: description,
     lessons_count: lessonsCount,
     course_duration: duration,
-    course_status: status,
     cover_path: coverPath,
+    user_status: userStatus,
   } = course;
 
-  const goToCourse = () => navigate(`${routes.course.path}/${id}`);
+  const { isEnrolled, buttonText, handleEnroll } = useEnrollCourse({
+    id,
+    userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
+    enrollStatus,
+  });
 
   return (
     <article className={styles.article}>
@@ -82,11 +86,10 @@ export const CoursePreview: FC<CoursePreviewProps> = ({ course }) => {
       </Link>
       <Button
         className={styles.button}
-        disabled={status === 'finished' || status === 'inactive'}
-        view={status === 'booked' ? 'primary' : 'secondary'}
-        onClick={goToCourse}
+        view={isEnrolled ? 'primary' : 'secondary'}
+        onClick={handleEnroll}
       >
-        {CourseStatusButtons[status]}
+        {buttonText}
       </Button>
     </article>
   );
