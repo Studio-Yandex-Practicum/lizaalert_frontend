@@ -44,6 +44,7 @@ const Courses: FC = () => {
   const coursesTotal = useAppSelector(selectCoursesTotal) ?? 0;
   const coursesProcess = useAppSelector(selectCoursesProcess);
   const coursesError = useAppSelector(selectCoursesError);
+
   const filters = useAppSelector(selectFilters);
   const filtersProcess = useAppSelector(selectFiltersProcess);
 

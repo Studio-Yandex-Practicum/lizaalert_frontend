@@ -4,5 +4,5 @@ export type {
   ChapterModel,
   LessonChapterModel,
   LessonType,
-  LessonProgress,
 } from './types';
+export { UserProgressStatus, LessonProgress } from './types';

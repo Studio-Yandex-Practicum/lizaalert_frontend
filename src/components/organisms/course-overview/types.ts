@@ -1,4 +1,5 @@
 import { ProcessEnum } from 'utils/constants';
+import { UserProgressStatus } from 'api/course';
 
 export type CourseOverviewProps = {
   /** id курса. */
@@ -12,12 +13,12 @@ export type CourseOverviewProps = {
   /** Количество уроков в курсе. */
   lessonsCount: number;
   /** Статус подписки на курс. */
-  enrollStatus: {
+  enrollStatus?: {
     process: ProcessEnum;
     error: string | null;
   };
   /** Статус подписки на курс c бэка. */
-  userStatus: 'True' | 'False';
+  userStatus?: UserProgressStatus;
   /** Продолжительность курса в часах. */
   courseDuration?: Nullable<number>;
   /** Обработчик клика по кнопке. */

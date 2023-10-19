@@ -12,7 +12,7 @@ export const fetchCourses = createAsyncThunk(
 );
 
 export const enrollCourseById = createAsyncThunk(
-  'course/enroll',
+  'courses/enroll',
   async (courseId: number) => {
     await courseApi.enroll(courseId);
   }

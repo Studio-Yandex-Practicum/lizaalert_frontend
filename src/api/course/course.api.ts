@@ -11,15 +11,9 @@ class CourseApi extends BaseApi {
     });
 
   enroll = (id: number) =>
-    this.createRequest<CourseModel>({
+    this.createRequest({
       request: () => privateApi.post(`${SERVICE_URL}${id}/enroll/`),
     });
-
-  // create course
-
-  // edit course
-
-  // delete course???
 }
 
 export const courseApi = new CourseApi();

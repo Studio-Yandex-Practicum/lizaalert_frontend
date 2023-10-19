@@ -1,3 +1,5 @@
+import { UserProgressStatus } from 'api/course';
+
 export const SPINNER_DELAY = 300;
 export const DELAY_DEBOUNCE = 300;
 
@@ -18,10 +20,10 @@ export enum KeyboardKeys {
   ESCAPE = 'Escape',
 }
 
-export enum CourseStatusButtons {
-  'False' = 'Записаться',
-  'True' = 'Продолжить',
-}
+export const CourseStatusButtons: Record<UserProgressStatus, string> = {
+  [UserProgressStatus.NotEnrolled]: 'Записаться',
+  [UserProgressStatus.Enrolled]: 'Продолжить',
+};
 
 export const ErrorMessages = {
   email: 'Введите эл. адрес в формате: anna@liza-alert.ru',

@@ -1,3 +1,5 @@
+import { UserProgressStatus } from 'api/course';
+
 export type CoursePreviewModel = {
   /** id курса. */
   id: number;
@@ -16,7 +18,7 @@ export type CoursePreviewModel = {
   /** URL к обложке курса. */
   cover_path: string | null;
   /** Статус подписки пользователя на курс. */
-  user_status: 'True' | 'False';
+  user_status?: UserProgressStatus;
 };
 
 export type GetCoursesData = {

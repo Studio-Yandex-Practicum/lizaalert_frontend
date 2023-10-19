@@ -5,10 +5,11 @@ import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
-import { onImageLoadError } from 'utils/on-image-load-error';
-import { convertDate } from 'utils/convert-date';
+import { UserProgressStatus } from 'api/course';
 import { useAppDispatch } from 'store';
 import { enrollCourseById } from 'store/courses/thunk';
+import { onImageLoadError } from 'utils/on-image-load-error';
+import { convertDate } from 'utils/convert-date';
 import styles from './course-overview.module.scss';
 import type { CourseOverviewProps } from './types';
 
@@ -24,25 +25,25 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   startDate,
   courseDuration,
   enrollStatus,
-  userStatus,
+  userStatus = UserProgressStatus.NotEnrolled,
 }) => {
   const dispatch = useAppDispatch();
 
+  const isEnrolled =
+    userStatus === UserProgressStatus.Enrolled ||
+    enrollStatus?.process === ProcessEnum.Succeeded;
+
   const buttonText: string = useMemo(
     () =>
-      enrollStatus?.process === ProcessEnum.Succeeded
-        ? CourseStatusButtons.True
+      isEnrolled
+        ? CourseStatusButtons[UserProgressStatus.Enrolled]
         : CourseStatusButtons[userStatus],
-    [enrollStatus]
+    [userStatus, isEnrolled]
   );
 
-  const enroll = () => {
-    void dispatch(enrollCourseById(id));
-  };
-
-  const onClick = () => {
-    if (userStatus === 'False') {
-      void enroll();
+  const handleClick = () => {
+    if (!isEnrolled && enrollStatus?.process !== ProcessEnum.Requested) {
+      void dispatch(enrollCourseById(id));
     }
   };
 
@@ -84,7 +85,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} onClick={onClick}>
+      <Button className={styles.courseEnroll} onClick={handleClick}>
         {buttonText}
       </Button>
     </Card>

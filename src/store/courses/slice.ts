@@ -5,15 +5,15 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
-import type { CoursesState, EnrollStatusType } from './types';
-import { fetchCourses, enrollCourseById } from './thunk';
+import type { CoursesState } from './types';
+import { enrollCourseById, fetchCourses } from './thunk';
 
 const initialState: CoursesState = {
   count: null,
   courses: [],
   process: ProcessEnum.Initial,
   error: null,
-  enrollStatus: {} as EnrollStatusType,
+  enrollStatus: {},
 };
 
 export const coursesSlice = createSlice({
