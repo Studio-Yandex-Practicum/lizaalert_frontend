@@ -19,6 +19,7 @@ import {
   selectCourseTitle,
   selectIsCourseLoading,
 } from 'store/course/selectors';
+import { selectEnrollStatus } from 'store/courses/selectors';
 import { fetchCourseById } from 'store/course/thunk';
 import styles from './course.module.scss';
 
@@ -27,6 +28,7 @@ const Course: FC = () => {
   const dispatch = useAppDispatch();
 
   const course = useAppSelector(selectCourse);
+  const enrollStatus = useAppSelector(selectEnrollStatus);
   const courseTitle = useAppSelector(selectCourseTitle);
   const courseDescription = useAppSelector(selectCourseDescription);
   const courseBenefits = useAppSelector(selectCourseBenefits);
@@ -85,6 +87,7 @@ const Course: FC = () => {
             level={course.level}
             coverPath={course.cover_path}
             startDate={course.start_date}
+            enrollStatus={enrollStatus[course.id]}
             userStatus={course.user_status}
           />
         </aside>
