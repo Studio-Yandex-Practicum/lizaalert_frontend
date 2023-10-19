@@ -4,7 +4,7 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
-import { TestQuestionType } from 'api/lessons';
+import { TestQuestionModel } from 'api/lessons';
 import type { TestProps } from './types';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
@@ -80,7 +80,7 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
 
 /** Отрисовка списка вопросов */
 function renderQuestionsList(
-  questions: TestQuestionType[],
+  questions: TestQuestionModel[],
   isSubmitted: boolean
 ) {
   if (questions.length > 0) {

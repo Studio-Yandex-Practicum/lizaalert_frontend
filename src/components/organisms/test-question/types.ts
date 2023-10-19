@@ -1,9 +1,9 @@
-import { TestQuestionType } from 'api/lessons';
+import { TestQuestionModel } from 'api/lessons';
 import type { TestAnswerOptionsType } from 'components/molecules/test-answer';
 
 export type TestQuestionProps = {
   /** Объект вопроса, содержит id, title, question_type и content (массив ответов). */
-  question: TestQuestionType;
+  question: TestQuestionModel;
   /** index объекта в массиве вопросов. Нужен для нумерации в интерфейсе. */
   index: number;
   /** Тип вопроса: мультивыбор или единственный. */

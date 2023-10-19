@@ -1,2 +1,2 @@
 export { TestQuestion } from './test-question';
-export type { TestQuestionProps, TestQuestionType } from './types';
+export type { TestQuestionProps } from './types';

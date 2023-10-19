@@ -31,7 +31,5 @@ export const TestContent: FC = () => {
     return <Test toggleRender={toggleRender} />;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return <TestPreview test={test} toggleRender={toggleRender} />;
+  return <TestPreview toggleRender={toggleRender} />;
 };
