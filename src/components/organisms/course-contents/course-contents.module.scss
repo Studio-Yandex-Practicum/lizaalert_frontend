@@ -2,8 +2,16 @@
 
 .contents {
   box-sizing: border-box;
-  max-width: 872px;
+  min-width: 300px;
   width: 100%;
+}
+
+.main {
+  max-width: 872px;
+}
+
+.inner {
+  max-width: 424px;
 }
 
 .list {

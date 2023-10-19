@@ -52,6 +52,7 @@ const getAuthInterceptor = (
       void privateApi.request(err.config);
     } catch {
       void dispatch(logout());
+      throw new Error();
     }
   },
 });

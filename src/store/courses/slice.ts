@@ -6,13 +6,14 @@ import {
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
 import type { CoursesState } from './types';
-import { fetchCourses } from './thunk';
+import { enrollCourseById, fetchCourses } from './thunk';
 
 const initialState: CoursesState = {
   count: null,
   courses: [],
   process: ProcessEnum.Initial,
   error: null,
+  enrollStatus: {},
 };
 
 export const coursesSlice = createSlice({
@@ -33,6 +34,27 @@ export const coursesSlice = createSlice({
 
       state.count = payload.count;
     });
+    builder.addCase(enrollCourseById.pending, (state, { meta: { arg } }) => {
+      state.enrollStatus[arg] = {
+        process: ProcessEnum.Requested,
+        error: null,
+      };
+    });
+    builder.addCase(enrollCourseById.fulfilled, (state, { meta: { arg } }) => {
+      state.enrollStatus[arg] = {
+        process: ProcessEnum.Succeeded,
+        error: null,
+      };
+    });
+    builder.addCase(
+      enrollCourseById.rejected,
+      (state, { meta: { arg }, error }) => {
+        state.enrollStatus[arg] = {
+          process: ProcessEnum.Failed,
+          error: error.message ?? GENERAL_ERROR,
+        };
+      }
+    );
     builder.addMatcher(isPending(fetchCourses), (state) => {
       state.process = ProcessEnum.Requested;
       state.error = null;

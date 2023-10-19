@@ -16,7 +16,7 @@ export const CourseContents: FC<CourseContentsProps> = ({
   type = 'main',
   className,
 }) => {
-  const classes = classnames(styles.contents, className);
+  const classes = classnames(styles.contents, styles[type], className);
 
   // Список уроков
   const contentItems = content?.map((item, index) => (

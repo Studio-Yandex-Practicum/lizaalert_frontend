@@ -1,26 +1,37 @@
 import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Test } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import type { TestContentProps } from './types';
-import { useTest } from '../test/hooks/use-test';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectTest } from 'store/test/selectors';
+import { fetchTest } from 'store/test/thunk';
+import { TestModel } from 'api/lessons';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
 
-export const TestContent: FC<TestContentProps> = ({ lessonId }) => {
-  const [renderTest, setRenderTest] = useState(false);
-  const { setInitialState } = useTest();
+export const TestContent: FC = () => {
+  const { lessonId } = useParams();
+  const dispatch = useAppDispatch();
 
-  const toggleRender = () => setRenderTest(!renderTest);
+  const test = useAppSelector<TestModel>(selectTest);
 
   useEffect(() => {
-    setInitialState(lessonId);
+    if (lessonId) {
+      void dispatch(fetchTest(+lessonId));
+    }
   }, [lessonId]);
+
+  const [renderTest, setRenderTest] = useState(test.in_progress);
+
+  const toggleRender = () => setRenderTest(!renderTest);
 
   if (renderTest) {
     return <Test toggleRender={toggleRender} />;
   }
 
-  return <TestPreview toggleRender={toggleRender} />;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return <TestPreview test={test} toggleRender={toggleRender} />;
 };

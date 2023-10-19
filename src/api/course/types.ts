@@ -6,6 +6,11 @@ export enum LessonProgress {
   Finished = '2',
 }
 
+export enum UserProgressStatus {
+  Enrolled = 'True',
+  NotEnrolled = 'False',
+}
+
 export type FAQModel = {
   /** id вопроса. */
   id: number;
@@ -24,7 +29,7 @@ export type KnowledgeModel = {
   description: string;
 };
 
-export type LessonModel = {
+export type LessonChapterModel = {
   /** id урока курса. */
   id: number;
   /** Номер урока в последовательности. */
@@ -45,7 +50,7 @@ export type ChapterModel = {
   /** Заголовок-название главы курса. */
   title: string;
   /** Список уроков главы курса. */
-  lessons: LessonModel[];
+  lessons: LessonChapterModel[];
 };
 
 export type CourseModel = {
@@ -71,4 +76,6 @@ export type CourseModel = {
   course_duration: Nullable<number>;
   /** Список глав курса. */
   chapters: ChapterModel[];
+  /** Статус подписки на курс. */
+  user_status?: UserProgressStatus;
 };

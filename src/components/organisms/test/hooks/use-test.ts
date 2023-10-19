@@ -18,6 +18,7 @@ export const useTest = () => {
   const [testResultPercent, setTestResultPercent] = useState(0);
 
   // TODO удалить типы после типизации стора
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
   const test = useAppSelector<TestModel>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
 

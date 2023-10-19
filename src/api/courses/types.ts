@@ -1,3 +1,5 @@
+import { UserProgressStatus } from 'api/course';
+
 export type CoursePreviewModel = {
   /** id курса. */
   id: number;
@@ -15,6 +17,8 @@ export type CoursePreviewModel = {
   course_status: 'active' | 'inactive' | 'finished' | 'booked';
   /** URL к обложке курса. */
   cover_path: string | null;
+  /** Статус подписки пользователя на курс. */
+  user_status?: UserProgressStatus;
 };
 
 export type GetCoursesData = {

@@ -11,15 +11,16 @@ import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourse,
+  selectCourseBenefits,
   selectCourseContents,
   selectCourseDescription,
-  selectCourseBenefits,
   selectCourseError,
-  selectCourseTitle,
   selectCourseFAQ,
+  selectCourseTitle,
   selectIsCourseLoading,
 } from 'store/course/selectors';
-import { fetchCourse } from 'store/course/thunk';
+import { selectEnrollStatus } from 'store/courses/selectors';
+import { fetchCourseById } from 'store/course/thunk';
 import styles from './course.module.scss';
 
 const Course: FC = () => {
@@ -27,6 +28,7 @@ const Course: FC = () => {
   const dispatch = useAppDispatch();
 
   const course = useAppSelector(selectCourse);
+  const enrollStatus = useAppSelector(selectEnrollStatus);
   const courseTitle = useAppSelector(selectCourseTitle);
   const courseDescription = useAppSelector(selectCourseDescription);
   const courseBenefits = useAppSelector(selectCourseBenefits);
@@ -37,7 +39,7 @@ const Course: FC = () => {
 
   useEffect(() => {
     if (courseId) {
-      void dispatch(fetchCourse(+courseId));
+      void dispatch(fetchCourseById(courseId));
     }
   }, [courseId]);
 
@@ -85,6 +87,8 @@ const Course: FC = () => {
             level={course.level}
             coverPath={course.cover_path}
             startDate={course.start_date}
+            enrollStatus={enrollStatus[course.id]}
+            userStatus={course.user_status}
           />
         </aside>
       </div>
