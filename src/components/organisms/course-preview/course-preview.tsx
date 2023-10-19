@@ -1,5 +1,5 @@
-import { FC, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import type { FC } from 'react';
+import { Link } from 'react-router-dom';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
@@ -8,12 +8,9 @@ import { Tag } from 'components/molecules/tag';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { routes } from 'config';
 import { UserProgressStatus } from 'api/course';
-import { useAppDispatch, useAppSelector } from 'store';
-import { selectIsAuth } from 'store/auth/selectors';
-import { enrollCourseById } from 'store/courses/thunk';
-import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { GetDeclensionOf } from 'utils/get-declension-of';
+import { useEnrollCourse } from 'hooks/use-enroll-course';
 import type { CoursePreviewProps } from './types';
 import styles from './course-preview.module.scss';
 
@@ -29,11 +26,6 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
   course,
   enrollStatus,
 }) => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const isAuth = useAppSelector(selectIsAuth);
-
   const {
     id,
     title,
@@ -45,31 +37,11 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
     user_status: userStatus,
   } = course;
 
-  const isEnrolled =
-    userStatus === UserProgressStatus.Enrolled ||
-    enrollStatus?.process === ProcessEnum.Succeeded;
-
-  const buttonText: string = useMemo(
-    () =>
-      isEnrolled
-        ? CourseStatusButtons[UserProgressStatus.Enrolled]
-        : CourseStatusButtons[userStatus ?? UserProgressStatus.NotEnrolled],
-    [userStatus, isEnrolled]
-  );
-
-  const handleClick = () => {
-    if (enrollStatus?.process === ProcessEnum.Requested) {
-      return;
-    }
-
-    if (!isAuth) {
-      navigate(routes.login.path);
-    } else if (isEnrolled) {
-      navigate(`${routes.course.path}/${id}`);
-    } else {
-      void dispatch(enrollCourseById(id));
-    }
-  };
+  const { isEnrolled, buttonText, handleEnroll } = useEnrollCourse({
+    id,
+    userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
+    enrollStatus,
+  });
 
   return (
     <article className={styles.article}>
@@ -115,7 +87,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
       <Button
         className={styles.button}
         view={isEnrolled ? 'primary' : 'secondary'}
-        onClick={handleClick}
+        onClick={handleEnroll}
       >
         {buttonText}
       </Button>

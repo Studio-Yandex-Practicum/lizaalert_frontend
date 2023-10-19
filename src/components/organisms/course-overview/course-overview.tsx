@@ -1,15 +1,13 @@
-import { FC, useMemo } from 'react';
+import type { FC } from 'react';
 import placeholderCover from 'assets/images/course-placeholder.jpg';
 import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
-import { useAppDispatch } from 'store';
-import { enrollCourseById } from 'store/courses/thunk';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
+import { useEnrollCourse } from 'hooks/use-enroll-course';
 import styles from './course-overview.module.scss';
 import type { CourseOverviewProps } from './types';
 
@@ -27,25 +25,11 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   enrollStatus,
   userStatus = UserProgressStatus.NotEnrolled,
 }) => {
-  const dispatch = useAppDispatch();
-
-  const isEnrolled =
-    userStatus === UserProgressStatus.Enrolled ||
-    enrollStatus?.process === ProcessEnum.Succeeded;
-
-  const buttonText: string = useMemo(
-    () =>
-      isEnrolled
-        ? CourseStatusButtons[UserProgressStatus.Enrolled]
-        : CourseStatusButtons[userStatus],
-    [userStatus, isEnrolled]
-  );
-
-  const handleClick = () => {
-    if (!isEnrolled && enrollStatus?.process !== ProcessEnum.Requested) {
-      void dispatch(enrollCourseById(id));
-    }
-  };
+  const { buttonText, handleEnroll } = useEnrollCourse({
+    id,
+    userStatus,
+    enrollStatus,
+  });
 
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
@@ -85,7 +69,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} onClick={handleClick}>
+      <Button className={styles.courseEnroll} onClick={handleEnroll}>
         {buttonText}
       </Button>
     </Card>
