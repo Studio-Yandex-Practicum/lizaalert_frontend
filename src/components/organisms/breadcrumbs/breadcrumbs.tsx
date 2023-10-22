@@ -3,26 +3,37 @@ import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
 import { StyledLink } from 'components/molecules/styled-link';
 import styles from './breadcrumbs.module.scss';
-import type { BreadcrumbsProps } from './types';
+import type { BreadcrumbsProps, ClientBreadcrumbs } from './types';
 import { useBreadcrumbs } from './hooks/use-breadcrumbs';
 
 /**
  * Компонент хлебных крошек, создает цепочку вложенных роутов.
  * */
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({ className }) => {
-  const breadcrumbs = useBreadcrumbs();
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({
+  className,
+  breadcrumbs,
+  currentLessonId,
+  currentLessonTitle,
+}) => {
+  const currentLesson: Pick<ClientBreadcrumbs, 'lesson'> = {
+    lesson: {
+      path: `${currentLessonId}`,
+      title: currentLessonTitle,
+    },
+  };
+  const breadcrumbsArray = useBreadcrumbs(breadcrumbs, currentLesson);
 
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
-      {breadcrumbs.map((link, i) => (
-        <span className={styles.breadcrumb} key={link.path}>
+      {breadcrumbsArray.map((breadcrumb, i) => (
+        <span className={styles.breadcrumb} key={breadcrumb.path}>
           <StyledLink
             className={styles.link}
-            href={link.path}
-            linkText={link.title}
+            href={breadcrumb.path}
+            linkText={breadcrumb.title}
           />
-          {i + 1 !== breadcrumbs.length && <Icon type="arrowRight" />}
+          {i + 1 !== breadcrumbsArray.length && <Icon type="arrowRight" />}
         </span>
       ))}
     </div>

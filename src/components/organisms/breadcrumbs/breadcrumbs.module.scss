@@ -23,7 +23,8 @@
   overflow: hidden;
 }
 
-.breadcrumb:last-of-type .link {
+.breadcrumb:last-of-type .link,
+.breadcrumb:nth-last-of-type(2) .link {
   color: vars.$dark-secondary;
   pointer-events: none;
 }

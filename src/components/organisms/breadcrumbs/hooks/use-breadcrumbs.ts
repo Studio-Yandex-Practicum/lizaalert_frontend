@@ -1,65 +1,64 @@
 import { useEffect, useState } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
-import type { RouteType } from 'router/types';
 import { routes } from 'config';
-import type { BreadcrumbType } from '../types';
+import type {
+  ClientBreadcrumbData,
+  ClientBreadcrumbs,
+  ServerBreadcrumbs,
+} from '../types';
 
 /**
  * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
- * Пока рассчитан только на страницу Курса и возвращает моковые данные.
- * Нужна доработка после интеграции с бекендом.
+ * Принимает объект ServerBreadcrumbs и объект с данными текущего урока.
  *
  * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
 
-export const useBreadcrumbs = () => {
-  const { pathname } = useLocation();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
-
-  const match = (path: string) => matchPath({ path, end: false }, pathname);
+export const useBreadcrumbs = <
+  T extends ServerBreadcrumbs,
+  H extends Pick<ClientBreadcrumbs, 'lesson'>
+>(
+  breadcrumbs: T,
+  currentLesson: H
+) => {
+  const [breadcrumbsArray, setBreadcrumbsArray] = useState<
+    ClientBreadcrumbData[]
+  >([]);
+  const coursesBreadcrumb: ClientBreadcrumbData = {
+    path: `${routes.courses.path}`,
+    title: routes.courses.title,
+  };
+  const courseBreadcrumb: ClientBreadcrumbData = {
+    path: `${routes.course.path}/${breadcrumbs.course.id}`,
+    title: breadcrumbs.course.title,
+  };
+  const chapterBreadcrumb: ClientBreadcrumbData = {
+    path: `${routes.course.path}/${breadcrumbs.course.id}/${breadcrumbs.chapter.id}`,
+    title: breadcrumbs.chapter.title,
+  };
+  const lessonBreadcrumb: ClientBreadcrumbData = {
+    path: `${routes.course.path}/${breadcrumbs.course.id}/${breadcrumbs.chapter.id}/${currentLesson.lesson.path}`,
+    title: currentLesson.lesson.title,
+  };
 
   const clearBreadcrumbs = () => {
-    if (breadcrumbs.length > 0) {
-      setBreadcrumbs([]);
+    if (!breadcrumbs) {
+      setBreadcrumbsArray([]);
     }
   };
 
-  const updateBreadcrumbs = (routesArray: RouteType[]) => {
-    routesArray.forEach((route) => {
-      if (route.path !== routes.notFound.path) {
-        // корень
-        const root = match(route.path);
-        if (root) {
-          setBreadcrumbs((prevState) => [
-            ...prevState,
-            {
-              path: root.pathname,
-              title: routes.courses.title,
-            },
-          ]);
-
-          // вложенные маршруты
-          route.children?.forEach((childRoute) => {
-            const childPath = match(`${route.path}/${childRoute.path}`);
-            if (childPath) {
-              setBreadcrumbs((prevState) => [
-                ...prevState,
-                {
-                  path: childPath.pathname,
-                  title: childRoute.mockTitle,
-                },
-              ]);
-            }
-          });
-        }
-      }
-    });
+  const updateBreadcrumbs = () => {
+    setBreadcrumbsArray([
+      coursesBreadcrumb,
+      courseBreadcrumb,
+      chapterBreadcrumb,
+      lessonBreadcrumb,
+    ]);
   };
 
   useEffect(() => {
     clearBreadcrumbs();
-    updateBreadcrumbs(Object.values(routes));
-  }, [pathname]);
+    updateBreadcrumbs();
+  }, []);
 
-  return breadcrumbs;
+  return breadcrumbsArray;
 };

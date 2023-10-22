@@ -1,5 +1,6 @@
 import { Controls } from 'utils/constants';
 import type { LessonType } from 'api/course';
+import { ServerBreadcrumbs } from 'components/organisms/breadcrumbs/types';
 
 export type TestAnswerOptionsType =
   | Controls.RADIO
@@ -47,7 +48,7 @@ export type TestModel = {
 
 export type LessonModel = {
   /** id урока */
-  id?: number;
+  id: number;
   /** id курса */
   course_id: number;
   /** id главы */
@@ -66,4 +67,6 @@ export type LessonModel = {
   additional?: boolean;
   /** Флаг, является ли урок дипломным */
   diploma?: boolean;
+  /** Объект хлебных крошек */
+  breadcrumbs: ServerBreadcrumbs;
 };

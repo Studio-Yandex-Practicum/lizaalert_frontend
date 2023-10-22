@@ -69,7 +69,14 @@ const Lesson: FC = () => {
 
   return (
     <>
-      <Breadcrumbs className={styles.breadcrumbs} />
+      {lesson.breadcrumbs && (
+        <Breadcrumbs
+          className={styles.breadcrumbs}
+          breadcrumbs={lesson.breadcrumbs}
+          currentLessonId={lesson.id}
+          currentLessonTitle={lesson.title}
+        />
+      )}
 
       <div className={styles.lesson}>
         {(isLoading || error) && (
