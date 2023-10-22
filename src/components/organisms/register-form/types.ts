@@ -1,4 +1,5 @@
 export type UserRegisterFormData = {
+  name?: string | number | readonly string[] | undefined;
   /** Email пользователя. */
   email: string;
   /** Номер телефона пользователя. */
