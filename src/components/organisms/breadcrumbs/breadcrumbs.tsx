@@ -16,13 +16,13 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
   currentLessonId,
   currentLessonTitle,
 }) => {
-  const currentLesson: Pick<ClientBreadcrumbs, 'lesson'> = {
+  const currentLessonBreadcrumb: Pick<ClientBreadcrumbs, 'lesson'> = {
     lesson: {
       path: `${currentLessonId}`,
       title: currentLessonTitle,
     },
   };
-  const breadcrumbsArray = useBreadcrumbs(breadcrumbs, currentLesson);
+  const breadcrumbsArray = useBreadcrumbs(breadcrumbs, currentLessonBreadcrumb);
 
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
