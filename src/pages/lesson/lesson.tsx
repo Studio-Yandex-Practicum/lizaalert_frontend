@@ -30,7 +30,9 @@ import {
 import { fetchCourseById } from 'store/course/thunk';
 import { fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
+import { routes } from 'config';
 import styles from './lesson.module.scss';
+import { LessonBreadcrumbs } from './types';
 
 // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/396
 const noop = () => {};
@@ -67,14 +69,45 @@ const Lesson: FC = () => {
     }
   }, [courseId, courseProcess]);
 
+  const breadcrumbs = () => {
+    if (lesson.id && lesson.breadcrumbs) {
+      const breadcrumbsObject: LessonBreadcrumbs = {
+        courses: {
+          path: `${routes.courses.path}`,
+          title: routes.courses.title,
+        },
+        course: {
+          path: `${routes.course.path}/${lesson.breadcrumbs.course.id}`,
+          title: lesson.breadcrumbs.course.title,
+        },
+        chapter: {
+          path: `${lesson.breadcrumbs.chapter.id}`,
+          title: lesson.breadcrumbs.chapter.title,
+          notActive: true,
+        },
+        currentLesson: {
+          path: `${lesson.id}`,
+          title: lesson.title,
+        },
+      };
+
+      const breadcrumbsToRender = [
+        breadcrumbsObject.courses,
+        breadcrumbsObject.course,
+        breadcrumbsObject.chapter,
+        breadcrumbsObject.currentLesson,
+      ];
+      return breadcrumbsToRender;
+    }
+    return [];
+  };
+
   return (
     <>
       {lesson.breadcrumbs && (
         <Breadcrumbs
           className={styles.breadcrumbs}
-          breadcrumbs={lesson.breadcrumbs}
-          currentLessonId={lesson.id}
-          currentLessonTitle={lesson.title}
+          breadcrumbs={breadcrumbs()}
         />
       )}
 

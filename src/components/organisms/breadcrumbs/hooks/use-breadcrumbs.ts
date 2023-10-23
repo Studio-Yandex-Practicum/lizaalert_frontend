@@ -1,10 +1,6 @@
+/* eslint-disable arrow-body-style */
 import { useEffect, useState } from 'react';
-import { routes } from 'config';
-import type {
-  ClientBreadcrumbData,
-  ClientBreadcrumbs,
-  ServerBreadcrumbs,
-} from '../types';
+import { BreadcrumbsType } from '../types';
 
 /**
  * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
@@ -13,32 +9,34 @@ import type {
  * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
 
-export const useBreadcrumbs = <
-  T extends ServerBreadcrumbs,
-  H extends Pick<ClientBreadcrumbs, 'lesson'>
->(
-  breadcrumbs: T,
-  currentLesson: H
-) => {
-  const [breadcrumbsArray, setBreadcrumbsArray] = useState<
-    ClientBreadcrumbData[]
-  >([]);
-  const coursesBreadcrumb: ClientBreadcrumbData = {
-    path: `${routes.courses.path}`,
-    title: routes.courses.title,
-  };
-  const courseBreadcrumb: ClientBreadcrumbData = {
-    path: `${routes.course.path}/${breadcrumbs.course.id}`,
-    title: breadcrumbs.course.title,
-  };
-  const chapterBreadcrumb: ClientBreadcrumbData = {
-    path: `${routes.course.path}/${breadcrumbs.course.id}/${breadcrumbs.chapter.id}`,
-    title: breadcrumbs.chapter.title,
-  };
-  const lessonBreadcrumb: ClientBreadcrumbData = {
-    path: `${routes.course.path}/${breadcrumbs.course.id}/${breadcrumbs.chapter.id}/${currentLesson.lesson.path}`,
-    title: currentLesson.lesson.title,
-  };
+export const useBreadcrumbs = <T extends BreadcrumbsType>(breadcrumbs: T) => {
+  const [breadcrumbsArray, setBreadcrumbsArray] = useState<BreadcrumbsType>([]);
+
+  /*
+  TODO изменить реализацию хука, если изменится дефолтный роутинг.
+  В данный момент роутинг реализован так:
+  / - все курсы
+  /courses - роуты курса, урока и т.д.
+  При конкатенации этих двух строк, роут получается формата //route
+  */
+  const breadcrumbsToRender = breadcrumbs.reduce((arr, breadcrumb, i) => {
+    if (i === 0 || i === 1) {
+      const crumb = {
+        path: breadcrumb.path,
+        title: breadcrumb.title,
+        notActive: breadcrumb.notActive || false,
+      };
+      arr.push(crumb);
+    } else {
+      const crumb = {
+        path: `${arr[i - 1].path}/${breadcrumb.path}`,
+        title: breadcrumb.title,
+        notActive: breadcrumb.notActive || false,
+      };
+      arr.push(crumb);
+    }
+    return arr;
+  }, [] as BreadcrumbsType);
 
   const clearBreadcrumbs = () => {
     if (!breadcrumbs) {
@@ -47,12 +45,7 @@ export const useBreadcrumbs = <
   };
 
   const updateBreadcrumbs = () => {
-    setBreadcrumbsArray([
-      coursesBreadcrumb,
-      courseBreadcrumb,
-      chapterBreadcrumb,
-      lessonBreadcrumb,
-    ]);
+    setBreadcrumbsArray(breadcrumbsToRender);
   };
 
   useEffect(() => {
