@@ -1,5 +1,6 @@
 import { BaseApi, privateApi } from '../core';
 import type { LessonModel, TestModel } from './types';
+import renderLesson from './mock/lesson';
 
 const SERVICE_URL = '/lessons/';
 
@@ -7,7 +8,7 @@ class LessonsApi extends BaseApi {
   getLesson = (id: string) =>
     this.createRequest<LessonModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/`),
-      mock: () => import('./mock/lesson'),
+      mock: () => renderLesson(),
     });
 
   getTest = (id: number) =>
