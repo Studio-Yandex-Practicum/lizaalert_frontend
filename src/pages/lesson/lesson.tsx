@@ -32,7 +32,7 @@ import { fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
 import { routes } from 'config';
 import styles from './lesson.module.scss';
-import { LessonBreadcrumbs } from './types';
+import type { LessonBreadcrumbs } from './types';
 
 // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/396
 const noop = () => {};

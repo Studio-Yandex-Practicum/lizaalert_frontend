@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 import { useEffect, useState } from 'react';
-import { BreadcrumbsType } from '../types';
+import type { BreadcrumbsType } from '../types';
 
 /**
  * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
