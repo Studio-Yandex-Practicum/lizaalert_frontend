@@ -4,13 +4,15 @@ import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { convertDate } from 'utils/convert-date';
-import { useTest } from '../test/hooks/use-test';
+import { useTest } from '../test';
 import type { TextPreviewProps } from './types';
 import styles from './test-preview.module.scss';
 
 /**
  * Компонент-карточка превью теста.
  */
+
+const DATE_OPTIONS = { onlyTime: true };
 
 export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
   const { test } = useTest();
@@ -54,14 +56,14 @@ export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
             <Span
               text={`${convertDate(test.deadline)} г. ${convertDate(
                 test.deadline,
-                { onlyTime: true }
+                DATE_OPTIONS
               )} (GMT+3)`}
             />
           </li>
         )}
       </ul>
 
-      {!test.in_progress && (
+      {!test.in_progress && test.questions?.length && (
         <Button
           className={styles.button}
           onClick={toggleRender}

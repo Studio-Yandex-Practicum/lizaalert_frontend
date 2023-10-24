@@ -1,15 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
 import { selectIsTestLoading, selectTest } from 'store/test/selectors';
-import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
-import { TestModel } from 'api/lessons';
+import type { TestModel } from 'api/lessons';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState, retake \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake \}
  * */
 
 export const useTest = () => {
@@ -22,14 +21,8 @@ export const useTest = () => {
   const test = useAppSelector<TestModel>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
 
-  const dispatch = useAppDispatch();
-
-  const setInitialState = (lessonId: number) => {
-    void dispatch(fetchTest(lessonId));
-    setIsSubmitted(false);
-  };
-
-  // TODO Запрос на сервер на пересдачу теста
+  // TODO Функционал на пересдачу теста
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
   const retake = () => null;
 
   // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
@@ -93,7 +86,6 @@ export const useTest = () => {
     testResultPercent,
     test,
     onSubmit,
-    setInitialState,
     handleButtonDisabledState,
     retake,
   };

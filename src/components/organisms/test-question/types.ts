@@ -1,4 +1,4 @@
-import { TestQuestionModel } from 'api/lessons';
+import type { TestQuestionModel } from 'api/lessons';
 import type { TestAnswerOptionsType } from 'components/molecules/test-answer';
 
 export type TestQuestionProps = {

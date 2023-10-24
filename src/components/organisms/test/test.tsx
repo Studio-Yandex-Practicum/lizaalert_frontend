@@ -15,7 +15,6 @@ import styles from './test.module.scss';
 
 export const Test: FC<TestProps> = ({ toggleRender }) => {
   const {
-    isLoading,
     isSubmitted,
     isSuccess,
     testResultPercent,
@@ -25,17 +24,12 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
     retake,
   } = useTest();
 
-  // заменить на компонент Loader
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Card className={styles.test} htmlTag="section">
       <div className={styles.container}>
         <Heading
           level={2}
-          text="Тест"
+          text={test.title}
           size="l"
           weight="bold"
           className={styles.heading}
@@ -45,11 +39,11 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
       </div>
 
       <form onSubmit={onSubmit} name="testForm" className={styles.form}>
-        {test.questions ? (
+        {test.questions && (
           <ul className={styles.list}>
             {renderQuestionsList(test.questions, isSubmitted)}
           </ul>
-        ) : null}
+        )}
 
         {isSubmitted ? (
           <>

@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Test } from 'components/organisms/test';
+import { Test, useTest } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import { useAppDispatch, useAppSelector } from 'store';
-import { selectTest } from 'store/test/selectors';
+import { useAppDispatch } from 'store';
 import { fetchTest } from 'store/test/thunk';
-import { TestModel } from 'api/lessons';
+import { Loader } from 'components/molecules/loader';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
@@ -15,7 +14,7 @@ export const TestContent: FC = () => {
   const { lessonId } = useParams();
   const dispatch = useAppDispatch();
 
-  const test = useAppSelector<TestModel>(selectTest);
+  const { isLoading, test } = useTest();
 
   useEffect(() => {
     if (lessonId) {
@@ -23,9 +22,17 @@ export const TestContent: FC = () => {
     }
   }, [lessonId]);
 
-  const [renderTest, setRenderTest] = useState(test.in_progress);
+  const [renderTest, setRenderTest] = useState<boolean | undefined>(false);
+
+  useEffect(() => {
+    setRenderTest(test.in_progress);
+  }, [test.in_progress]);
 
   const toggleRender = () => setRenderTest(!renderTest);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (renderTest) {
     return <Test toggleRender={toggleRender} />;
