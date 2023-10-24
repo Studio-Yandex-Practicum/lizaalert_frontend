@@ -23,6 +23,7 @@ export const Router: FC = () => (
 
         <Route path={routes.profile.path} element={<Profile />} />
       </Route>
+
       <Route path={routes.courses.path} element={<Courses />} />
 
       <Route element={<Authorization />}>

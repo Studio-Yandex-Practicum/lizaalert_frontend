@@ -5,7 +5,7 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR } from 'utils/constants';
-import { checkAuth, fetchAuth, logout } from './thunk';
+import { checkAuth, fetchAuth, fetchRegistration, logout } from './thunk';
 import type { AuthState } from './types';
 
 const initialState: AuthState = {
@@ -19,6 +19,13 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // добавила здесь builder.addCase только со статусами ошибок и загрузки. почему нам не нужено
+    // состояние регистрации пользователя?
+    builder.addCase(fetchRegistration.fulfilled, (state) => {
+      state.isLoading = false;
+      state.error = null;
+    });
+
     builder.addMatcher(isPending(checkAuth, fetchAuth, logout), (state) => {
       state.isLoading = true;
       state.error = null;

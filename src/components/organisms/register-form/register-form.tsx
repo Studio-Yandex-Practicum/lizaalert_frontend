@@ -8,8 +8,7 @@ import { StyledLink } from 'components/molecules/styled-link';
 import { routes } from 'config';
 import { getValidationSchema } from 'utils/validation';
 import { useAppDispatch } from 'store';
-import { fetchRegistration } from 'store/registration/thunk';
-import { fetchAuth } from 'store/auth/thunk';
+import { fetchRegistration } from 'store/auth/thunk';
 import type { UserRegisterFormData } from './types';
 import styles from './register-form.module.scss';
 
@@ -40,21 +39,21 @@ export const RegisterForm: FC = () => {
   ) => {
     await validateForm(values);
 
-    const data = {
-      username: values.email,
-      email: values.email,
-      password: values.password,
-    };
-    const registrationResult = await dispatch(fetchRegistration(data));
+    // const data = {
+    //   username: values.email,
+    //   email: values.email,
+    //   password: values.password,
+    // };
 
-    if (registrationResult) {
-      const authResult = await dispatch(
-        fetchAuth({ user: data, isRememberMe: true })
-      );
-      console.log('authResult::', authResult);
-    } else {
-      console.log('ошибка при регистрации');
-    }
+    // Изменила данные, чтобы передавать значение username
+    const data = {
+      ...values,
+      username: values.email,
+    };
+
+    console.log('data', data);
+
+    void dispatch(fetchRegistration(data));
   };
 
   const formik = useFormik<UserRegisterFormData>({

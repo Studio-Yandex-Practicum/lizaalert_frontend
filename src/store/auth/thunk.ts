@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authorizationApi, LoginFormData } from 'api/authorization';
+import {
+  authorizationApi,
+  LoginFormData,
+  RegistrationFormData,
+} from 'api/authorization';
 import { ApiInterceptorConfig, HttpCodes, privateApi } from 'api/core';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
+// import { UserRegisterFormData } from 'components/organisms/register-form';
 import type { ApiThunkConfig, ThunkApiDispatch } from '../types';
 import { checkAuthToken, refreshAuthToken } from './helpers';
 
@@ -64,5 +69,18 @@ export const checkAuth = createAsyncThunk<boolean, null, ApiThunkConfig>(
 
     const result = await checkAuthToken();
     return result;
+  }
+);
+
+// Почему мы отдаем в createAsyncThunk вторым параметром отдаем null?
+// я так понимаю, что из-за этого формируется ошибки  async (user: RegistrationFormData, { dispatch }) => {
+export const fetchRegistration = createAsyncThunk<void, null, ApiThunkConfig>(
+  'auth/register',
+  async (user: RegistrationFormData, { dispatch }) => {
+    const result = await authorizationApi.register(user);
+    if (!result.user.id) {
+      throw new Error();
+    }
+    void dispatch(fetchAuth({ user, isRememberMe: false }));
   }
 );

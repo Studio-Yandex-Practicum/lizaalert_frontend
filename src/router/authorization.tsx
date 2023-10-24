@@ -7,6 +7,7 @@ import type { AuthorizationProps } from './types';
 
 export const Authorization: FC<AuthorizationProps> = ({ requireAuth }) => {
   const isAuth = useAppSelector<boolean>(selectIsAuth);
+
   if (!requireAuth && isAuth) {
     return <Navigate to={routes.courses.path} />;
   }
