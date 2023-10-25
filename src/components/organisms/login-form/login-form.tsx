@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
+import { YandexOAuthButton } from 'components/molecules/yandex-oauth-button/yandex-oauth-button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
@@ -121,15 +122,7 @@ export const LoginForm: FC = () => {
         />
       </form>
 
-      {/* TODO: вынести в компонент YandexOAuthButton */}
-      <Button
-        className={classnames(styles.button)}
-        classNameIcon={styles.icon}
-        view="tertiary"
-        iconName="yandex"
-        iconSize="medium"
-        text="Войти c Яндекс ID"
-      />
+      <YandexOAuthButton className={classnames(styles.button)} />
 
       <StyledLink
         href={routes.register.path}
