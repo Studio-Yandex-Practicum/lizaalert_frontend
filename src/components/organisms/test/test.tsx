@@ -4,7 +4,7 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
-import { TestQuestionModel } from 'api/lessons';
+import type { TestQuestionModel } from 'api/lessons';
 import type { TestProps } from './types';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
@@ -24,6 +24,10 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
     retake,
   } = useTest();
 
+  if (!test.questions?.length) {
+    return null;
+  }
+
   return (
     <Card className={styles.test} htmlTag="section">
       <div className={styles.container}>
@@ -39,13 +43,11 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
       </div>
 
       <form onSubmit={onSubmit} name="testForm" className={styles.form}>
-        {test.questions && (
-          <ul className={styles.list}>
-            {renderQuestionsList(test.questions, isSubmitted)}
-          </ul>
-        )}
+        <ul className={styles.list}>
+          {renderQuestionsList(test.questions, isSubmitted)}
+        </ul>
 
-        {isSubmitted ? (
+        {isSubmitted && (
           <>
             <TestSuccessRate
               isSuccess={isSuccess}
@@ -59,7 +61,9 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
               text="Пересдать"
             />
           </>
-        ) : (
+        )}
+
+        {!isSubmitted && (
           <Button
             className={styles.button}
             type="submit"
@@ -77,19 +81,15 @@ function renderQuestionsList(
   questions: TestQuestionModel[],
   isSubmitted: boolean
 ) {
-  if (questions.length > 0) {
-    return questions.map((question, index) => (
-      <li className={styles.listItem} key={question.id}>
-        <TestQuestion
-          question={question}
-          type={question.question_type}
-          index={index}
-          isSubmitted={isSubmitted}
-          className={styles.checkbox}
-        />
-      </li>
-    ));
-  }
-
-  return null;
+  return questions.map((question, index) => (
+    <li className={styles.listItem} key={question.id}>
+      <TestQuestion
+        question={question}
+        type={question.question_type}
+        index={index}
+        isSubmitted={isSubmitted}
+        className={styles.checkbox}
+      />
+    </li>
+  ));
 }

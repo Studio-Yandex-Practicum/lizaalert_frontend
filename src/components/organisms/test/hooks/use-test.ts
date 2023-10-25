@@ -59,7 +59,7 @@ export const useTest = () => {
   const handleButtonDisabledState = () => {
     let isDisabled = false;
 
-    if (test.questions && test.questions.length > 0) {
+    if (test.questions?.length) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
 

@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loader } from 'components/molecules/loader';
 import { Test, useTest } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
 import { useAppDispatch } from 'store';
 import { fetchTest } from 'store/test/thunk';
-import { Loader } from 'components/molecules/loader';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.

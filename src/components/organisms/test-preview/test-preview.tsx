@@ -8,11 +8,11 @@ import { useTest } from '../test';
 import type { TextPreviewProps } from './types';
 import styles from './test-preview.module.scss';
 
+const DATE_OPTIONS = { onlyTime: true };
+
 /**
  * Компонент-карточка превью теста.
  */
-
-const DATE_OPTIONS = { onlyTime: true };
 
 export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
   const { test } = useTest();
@@ -40,7 +40,7 @@ export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
             <Span text={`${test.passing_score}%`} />
           </li>
         )}
-        {test.retries !== undefined && (
+        {typeof test.retries === 'number' && (
           <li className={styles.propertiesRow}>
             <TextWithIcon
               htmlTag="span"
