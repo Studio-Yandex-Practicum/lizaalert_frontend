@@ -5,6 +5,8 @@ export type TestAnswerType = {
   id: number;
   /** Текст ответа. */
   text: string;
+  /** Статус, выбран ли ответ */
+  isChecked?: boolean;
 };
 
 export type TestAnswerOptionsType =

@@ -88,7 +88,7 @@ function renderQuestionsList(
       <li className={styles.listItem} key={question.id}>
         <TestQuestion
           question={question}
-          type={question.type}
+          type={question.question_type}
           index={index}
           isSubmitted={isSubmitted}
           className={styles.checkbox}

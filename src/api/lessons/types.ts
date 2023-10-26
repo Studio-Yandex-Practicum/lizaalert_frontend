@@ -6,6 +6,20 @@ export type TestAnswerOptionsType =
   | Controls.CHECKBOX
   | 'text_answer';
 
+export type TestOnValidationData = {
+  /** id ответа. */
+  answer_id: number[];
+  /** id вопроса. */
+  question_id: number;
+};
+
+export type AnswersOnValidationModel = {
+  /** id урока. */
+  lessonId: number;
+  /** объект с выбранными ответами на тест. */
+  answersData: TestOnValidationData[];
+};
+
 export type TestAnswerModel = {
   /** id ответа. */
   id: number;

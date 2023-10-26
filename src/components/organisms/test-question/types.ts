@@ -9,7 +9,7 @@ export type TestQuestionType = {
   /** Вопрос в виде строки. */
   title: string;
   /** Тип вопроса: мультивыбор или единственный. */
-  type: TestAnswerOptionsType;
+  question_type: TestAnswerOptionsType;
   /** Массив ответов тестового вопроса: id, text */
   content: TestAnswerType[];
 };

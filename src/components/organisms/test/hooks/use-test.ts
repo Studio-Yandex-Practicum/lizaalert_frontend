@@ -1,12 +1,16 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectIsTestLoading, selectTest } from 'store/test/selectors';
+import {
+  selectIsTestLoading,
+  selectTest,
+  selectAnswersOnValidate,
+} from 'store/test/selectors';
 import { selectLesson } from 'store/lesson/selectors';
-import { fetchTest } from 'store/test/thunk';
+import { fetchTest, validateTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
 import type { TestType } from 'components/organisms/test-preview';
-import type { TestQuestionListType } from '../types';
+import type { TestAnswerListType, TestQuestionListType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -24,6 +28,7 @@ export const useTest = () => {
   // TODO удалить типы после типизации стора, получение теста перенести в TestContent
   // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
   const test = useAppSelector<TestQuestionListType>(selectTest);
+  const answers = useAppSelector<TestAnswerListType>(selectAnswersOnValidate);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -38,6 +43,10 @@ export const useTest = () => {
     setIsSubmitted(false);
   };
 
+  const sendTestOnValidation = () => {
+    void dispatch(validateTest(lessonId, answers));
+  };
+
   useEffect(() => {
     setInitialState();
   }, [lessonId]);
@@ -48,7 +57,7 @@ export const useTest = () => {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
-        if (question.type === Controls.RADIO) {
+        if (question.question_type === Controls.RADIO) {
           question.content.forEach(() => {
             percentArr.push(100);
           });
@@ -94,6 +103,8 @@ export const useTest = () => {
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setIsSubmitted(true);
+    sendTestOnValidation();
+    // await dispatch(validateTest(2, answers));
   };
 
   return {

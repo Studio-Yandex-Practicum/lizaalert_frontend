@@ -9,6 +9,7 @@ import { fetchTest } from './thunk';
 
 const initialState = {
   test: {},
+  answersOnValidate: [],
   isLoading: false,
   error: null,
 };
@@ -31,10 +32,9 @@ export const testSlice = createSlice({
                     return { ...answer, isChecked: !answer.isChecked };
                   }
 
-                  if (question.type === Controls.RADIO) {
+                  if (question.question_type === Controls.RADIO) {
                     return { ...answer, isChecked: false };
                   }
-
                   return answer;
                 }),
               ],
@@ -43,6 +43,14 @@ export const testSlice = createSlice({
           return question;
         }),
       ];
+      state.answersOnValidate = state.test.questions.map((question) => ({
+        question_id: question.id,
+        answer_id: [
+          ...question.content.map((answer) =>
+            answer.isChecked ? answer.id : null
+          ),
+        ].filter((id) => id !== null),
+      }));
     },
   },
   extraReducers: (builder) => {

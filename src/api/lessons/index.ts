@@ -4,4 +4,6 @@ export type {
   TestAnswerModel,
   TestQuestionModel,
   TestModel,
+  TestOnValidationData,
+  AnswersOnValidationModel,
 } from './types';

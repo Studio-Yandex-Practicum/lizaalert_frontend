@@ -1,5 +1,10 @@
 import { BaseApi, privateApi } from '../core';
-import type { LessonModel, TestModel } from './types';
+import type {
+  LessonModel,
+  TestModel,
+  TestOnValidationData,
+  AnswersOnValidationModel,
+} from './types';
 
 const SERVICE_URL = '/lessons/';
 
@@ -13,7 +18,12 @@ class LessonsApi extends BaseApi {
   getTest = (id: number) =>
     this.createRequest<TestModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/quiz/`),
-      mock: () => import('./mock/test'),
+      // mock: () => import('./mock/test'),
+    });
+
+  postTest = (id: number, answer: TestOnValidationData[]) =>
+    this.createRequest<AnswersOnValidationModel>({
+      request: () => privateApi.post(`${SERVICE_URL}${id}/quiz/run/`, answer),
     });
 }
 
