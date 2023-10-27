@@ -1,8 +1,4 @@
-export type BreadcrumbData = {
-  path: string;
-  title: string;
-  notActive?: boolean;
-};
+import type { BreadcrumbData } from '../../components/organisms/breadcrumbs/index';
 
 export type LessonBreadcrumbs = {
   courses: BreadcrumbData;

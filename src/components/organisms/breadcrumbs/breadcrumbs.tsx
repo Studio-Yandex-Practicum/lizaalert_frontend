@@ -20,8 +20,9 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
       {breadcrumbsToRender.map((breadcrumb, i) => (
         <span className={styles.breadcrumb} key={breadcrumb.path}>
           <StyledLink
-            className={`${styles.link} 
-            ${breadcrumb.notActive ? styles.notActive : ''}`}
+            className={classnames(styles.link, {
+              [styles.notActive]: breadcrumb.notActive,
+            })}
             href={breadcrumb.path}
             linkText={breadcrumb.title}
           />

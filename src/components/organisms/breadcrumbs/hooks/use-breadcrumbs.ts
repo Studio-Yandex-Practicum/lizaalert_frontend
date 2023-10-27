@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import { useEffect, useState } from 'react';
 import type { BreadcrumbsType } from '../types';
 
@@ -19,24 +18,27 @@ export const useBreadcrumbs = <T extends BreadcrumbsType>(breadcrumbs: T) => {
   /courses - роуты курса, урока и т.д.
   При конкатенации этих двух строк, роут получается формата //route
   */
-  const breadcrumbsToRender = breadcrumbs.reduce((arr, breadcrumb, i) => {
-    if (i === 0 || i === 1) {
-      const crumb = {
-        path: breadcrumb.path,
-        title: breadcrumb.title,
-        notActive: breadcrumb.notActive || false,
-      };
-      arr.push(crumb);
-    } else {
-      const crumb = {
-        path: `${arr[i - 1].path}/${breadcrumb.path}`,
-        title: breadcrumb.title,
-        notActive: breadcrumb.notActive || false,
-      };
-      arr.push(crumb);
-    }
-    return arr;
-  }, [] as BreadcrumbsType);
+  const breadcrumbsToRender = breadcrumbs.reduce<BreadcrumbsType>(
+    (arr, breadcrumb, i) => {
+      if (i === 0 || i === 1) {
+        const crumb = {
+          path: breadcrumb.path,
+          title: breadcrumb.title,
+          notActive: breadcrumb.notActive || false,
+        };
+        arr.push(crumb);
+      } else {
+        const crumb = {
+          path: `${arr[i - 1].path}/${breadcrumb.path}`,
+          title: breadcrumb.title,
+          notActive: breadcrumb.notActive ?? false,
+        };
+        arr.push(crumb);
+      }
+      return arr;
+    },
+    []
+  );
 
   const clearBreadcrumbs = () => {
     if (!breadcrumbs) {
