@@ -34,11 +34,11 @@ export type TestModel = {
   /** Статус теста */
   status: string;
   /** Проходной балл в процентном выражении. */
-  passing_score?: number;
+  passing_score: Nullable<number>;
   /** Количество попыток прохождения теста. */
-  retries?: number;
+  retries: Nullable<number>;
   /** Дедлайн прохождения теста. */
-  deadline: string;
+  deadline: Nullable<string>;
   /** Флаг, проходится ли в данный момент этот тест. */
   in_progress?: boolean;
   /** Вопросы к тесту */
