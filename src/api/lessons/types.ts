@@ -15,7 +15,7 @@ export type TestOnValidationData = {
 
 export type AnswersOnValidationModel = {
   /** id урока. */
-  lessonId: number;
+  id: number;
   /** объект с выбранными ответами на тест. */
   answersData: TestOnValidationData[];
 };

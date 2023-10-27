@@ -2,7 +2,7 @@ import { BaseApi, privateApi } from '../core';
 import type {
   LessonModel,
   TestModel,
-  TestOnValidationData,
+  // TestOnValidationData,
   AnswersOnValidationModel,
 } from './types';
 
@@ -21,9 +21,10 @@ class LessonsApi extends BaseApi {
       // mock: () => import('./mock/test'),
     });
 
-  postTest = (id: number, answer: TestOnValidationData[]) =>
+  postTest = (data: AnswersOnValidationModel) =>
     this.createRequest<AnswersOnValidationModel>({
-      request: () => privateApi.post(`${SERVICE_URL}${id}/quiz/run/`, answer),
+      request: () =>
+        privateApi.post(`${SERVICE_URL}${data.id}/quiz/run/`, data.answersData),
     });
 }
 

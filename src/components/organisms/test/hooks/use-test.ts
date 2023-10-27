@@ -20,7 +20,7 @@ import type { TestAnswerListType, TestQuestionListType } from '../types';
  * */
 
 export const useTest = () => {
-  const { lessonId } = useParams();
+  const { lessonId }: { lessonId?: number } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
@@ -28,7 +28,7 @@ export const useTest = () => {
   // TODO удалить типы после типизации стора, получение теста перенести в TestContent
   // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
   const test = useAppSelector<TestQuestionListType>(selectTest);
-  const answers = useAppSelector<TestAnswerListType>(selectAnswersOnValidate);
+  const answers = useAppSelector<TestAnswerListType[]>(selectAnswersOnValidate);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -44,7 +44,9 @@ export const useTest = () => {
   };
 
   const sendTestOnValidation = () => {
-    void dispatch(validateTest(lessonId, answers));
+    if (lessonId) {
+      void dispatch(validateTest({ id: lessonId, answersData: answers }));
+    }
   };
 
   useEffect(() => {

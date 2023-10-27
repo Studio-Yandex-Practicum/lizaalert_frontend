@@ -11,9 +11,15 @@ export const fetchTest = createAsyncThunk(
 
 export const validateTest = createAsyncThunk(
   'test/validate',
-  async (lessonId: number, answersData: TestOnValidationData[]) => {
-    // console.log(answersData);
-    const test = await lessonsApi.postTest(lessonId, answersData);
+  async ({
+    id,
+    answersData,
+  }: {
+    id: number;
+    answersData: TestOnValidationData[];
+  }) => {
+    console.log(answersData);
+    const test = await lessonsApi.postTest({ id, answersData });
     return test;
   }
 );
