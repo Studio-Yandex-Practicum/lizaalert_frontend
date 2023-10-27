@@ -67,12 +67,10 @@ const lessons: Record<string, Record<string, LessonModel>> = {
   },
 };
 
-const renderLesson = () =>
-  new Promise((resolve) => {
-    const [, chapterId, lessonId] =
-      window.location.pathname.match(/[1-9]/g) ?? [];
-    const chapter = lessons[chapterId] ?? lessons[1];
-    resolve(chapter[lessonId] ?? chapter[1]);
-  });
+export default Promise.resolve(() => {
+  const [, chapterId, lessonId] =
+    window.location.pathname.match(/[1-9]/g) ?? [];
+  const chapter = lessons[chapterId] ?? lessons[1];
 
-export default renderLesson;
+  return chapter[lessonId] ?? chapter[1];
+});
