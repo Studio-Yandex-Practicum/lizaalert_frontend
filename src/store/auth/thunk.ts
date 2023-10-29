@@ -6,7 +6,6 @@ import {
 } from 'api/authorization';
 import { ApiInterceptorConfig, HttpCodes, privateApi } from 'api/core';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
-// import { UserRegisterFormData } from 'components/organisms/register-form';
 import type { ApiThunkConfig, ThunkApiDispatch } from '../types';
 import { checkAuthToken, refreshAuthToken } from './helpers';
 
