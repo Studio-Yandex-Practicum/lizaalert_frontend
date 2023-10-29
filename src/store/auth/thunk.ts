@@ -72,15 +72,16 @@ export const checkAuth = createAsyncThunk<boolean, null, ApiThunkConfig>(
   }
 );
 
-// Почему мы отдаем в createAsyncThunk вторым параметром отдаем null?
-// я так понимаю, что из-за этого формируется ошибки  async (user: RegistrationFormData, { dispatch }) => {
-export const fetchRegistration = createAsyncThunk<void, null, ApiThunkConfig>(
-  'auth/register',
-  async (user: RegistrationFormData, { dispatch }) => {
-    const result = await authorizationApi.register(user);
-    if (!result.user.id) {
-      throw new Error();
-    }
-    void dispatch(fetchAuth({ user, isRememberMe: false }));
+export const fetchRegistration = createAsyncThunk<
+  void,
+  RegistrationFormData,
+  ApiThunkConfig
+>('auth/register', async (user: RegistrationFormData, { dispatch }) => {
+  const result = await authorizationApi.register(user);
+
+  if (!result.id) {
+    throw new Error();
   }
-);
+
+  void dispatch(fetchAuth({ user, isRememberMe: false }));
+});

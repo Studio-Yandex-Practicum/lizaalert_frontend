@@ -19,17 +19,17 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // добавила здесь builder.addCase только со статусами ошибок и загрузки. почему нам не нужено
-    // состояние регистрации пользователя?
     builder.addCase(fetchRegistration.fulfilled, (state) => {
       state.isLoading = false;
       state.error = null;
     });
-
-    builder.addMatcher(isPending(checkAuth, fetchAuth, logout), (state) => {
-      state.isLoading = true;
-      state.error = null;
-    });
+    builder.addMatcher(
+      isPending(checkAuth, fetchAuth, fetchRegistration, logout),
+      (state) => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    );
     builder.addMatcher(
       isFulfilled(checkAuth, fetchAuth, logout),
       (state, { payload }) => {
@@ -39,7 +39,7 @@ export const authSlice = createSlice({
       }
     );
     builder.addMatcher(
-      isRejected(checkAuth, fetchAuth, logout),
+      isRejected(checkAuth, fetchAuth, fetchRegistration, logout),
       (state, { error }) => {
         state.isAuth = false;
         state.isLoading = false;

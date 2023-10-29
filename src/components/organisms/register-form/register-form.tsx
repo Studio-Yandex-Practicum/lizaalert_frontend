@@ -39,19 +39,10 @@ export const RegisterForm: FC = () => {
   ) => {
     await validateForm(values);
 
-    // const data = {
-    //   username: values.email,
-    //   email: values.email,
-    //   password: values.password,
-    // };
-
-    // Изменила данные, чтобы передавать значение username
     const data = {
       ...values,
       username: values.email,
     };
-
-    console.log('data', data);
 
     void dispatch(fetchRegistration(data));
   };
