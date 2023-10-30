@@ -1,11 +1,6 @@
-import {
-  createSlice,
-  isFulfilled,
-  isPending,
-  isRejected,
-} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
-import { fetchLessonById } from './thunk';
+import { completeLesson, fetchLessonById } from './thunk';
 import type { LessonState } from './types';
 
 const initialState: LessonState = {
@@ -15,8 +10,12 @@ const initialState: LessonState = {
     lesson_type: 'Lesson',
     tags: '',
     duration: 0,
+    next_lesson: null,
+    prev_lesson: null,
   },
   process: ProcessEnum.Initial,
+  completeLessonProcess: ProcessEnum.Initial,
+  completeLessonError: null,
   error: null,
 };
 
@@ -25,18 +24,28 @@ const lessonSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchLessonById.fulfilled, (state, { payload }) => {
-      state.lesson = payload;
+    builder.addCase(completeLesson.pending, (state) => {
+      state.completeLessonProcess = ProcessEnum.Requested;
+      state.completeLessonError = null;
     });
-    builder.addMatcher(isPending(fetchLessonById), (state) => {
+    builder.addCase(completeLesson.fulfilled, (state) => {
+      state.completeLessonProcess = ProcessEnum.Succeeded;
+      state.completeLessonError = null;
+    });
+    builder.addCase(completeLesson.rejected, (state, { error }) => {
+      state.completeLessonProcess = ProcessEnum.Failed;
+      state.completeLessonError = error.message ?? GENERAL_ERROR;
+    });
+    builder.addCase(fetchLessonById.pending, (state) => {
       state.process = ProcessEnum.Requested;
       state.error = null;
     });
-    builder.addMatcher(isFulfilled(fetchLessonById), (state) => {
+    builder.addCase(fetchLessonById.fulfilled, (state, { payload }) => {
+      state.lesson = payload;
       state.process = ProcessEnum.Succeeded;
       state.error = null;
     });
-    builder.addMatcher(isRejected(fetchLessonById), (state, { error }) => {
+    builder.addCase(fetchLessonById.rejected, (state, { error }) => {
       state.process = ProcessEnum.Failed;
       state.error = error.message ?? GENERAL_ERROR;
     });

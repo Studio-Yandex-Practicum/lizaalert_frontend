@@ -8,3 +8,10 @@ export const fetchLessonById = createAsyncThunk(
     return lesson;
   }
 );
+
+export const completeLesson = createAsyncThunk(
+  'lesson/complete',
+  async (id: string) => {
+    await lessonsApi.completeLesson(id);
+  }
+);

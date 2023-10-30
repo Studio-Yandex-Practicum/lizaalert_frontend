@@ -11,8 +11,8 @@ import type { NavigationButtonsProps } from './types';
 export const NavigationButtons: FC<NavigationButtonsProps> = ({
   className,
   view = 'default',
-  disabledPrev,
-  disabledNext,
+  isDisabledPrev,
+  isDisabledNext,
   onClickPrev,
   onClickNext,
 }) => (
@@ -22,18 +22,18 @@ export const NavigationButtons: FC<NavigationButtonsProps> = ({
       iconName="arrowBack"
       onClick={onClickPrev}
       className={styles.button}
-      disabled={disabledPrev}
+      disabled={isDisabledPrev}
       text="Назад"
     />
 
     {view === 'default' && (
       <Button
+        className={styles.button}
+        onClick={onClickNext}
+        disabled={isDisabledNext}
+        text="Далее"
         iconName="arrowForward"
         iconPosition="right"
-        onClick={onClickNext}
-        className={styles.button}
-        disabled={disabledNext}
-        text="Далее"
       />
     )}
 
@@ -41,7 +41,7 @@ export const NavigationButtons: FC<NavigationButtonsProps> = ({
       <Button
         className={styles.button}
         onClick={onClickNext}
-        disabled={disabledNext}
+        disabled={isDisabledNext}
         text="Завершить"
       />
     )}

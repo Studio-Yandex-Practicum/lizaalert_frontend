@@ -17,19 +17,21 @@ import {
   ProcessEnum,
   SHOULD_LOAD_PROCESS_MAP,
 } from 'utils/constants';
+import { UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourseContents,
   selectCourseProcess,
 } from 'store/course/selectors';
 import {
+  selectCompleteLessonProcess,
   selectLesson,
   selectLessonError,
   selectLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
 import { fetchCourseById } from 'store/course/thunk';
-import { fetchLessonById } from 'store/lesson/thunk';
+import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
 import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
@@ -48,6 +50,8 @@ const Lesson: FC = () => {
   const lessonProcess = useAppSelector(selectLessonProcess);
   const lessonType = useAppSelector(selectLessonType);
   const error = useAppSelector(selectLessonError);
+
+  const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
   const isQuiz = lessonType === 'Quiz';
@@ -106,8 +110,28 @@ const Lesson: FC = () => {
   };
 
   const goToNextLesson = () => {
+    if (!lessonId) {
+      return;
+    }
+
+    if (lesson.user_lesson_progress === UserLessonProgress.InProgress) {
+      void dispatch(completeLesson(lessonId));
+      return;
+    }
+
     navigate(getNextOrPrevRoute(lesson, 'next'));
   };
+
+  useEffect(() => {
+    if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
+      void dispatch(fetchCourseById(courseId));
+      navigate(getNextOrPrevRoute(lesson, 'next'));
+    }
+  }, [completeLessonProcess]);
+
+  const isNextButtonDisabled =
+    lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
+    LOADING_PROCESS_MAP[completeLessonProcess];
 
   return (
     <>
@@ -152,6 +176,7 @@ const Lesson: FC = () => {
             <NavigationButtons
               onClickPrev={goToPrevLesson}
               onClickNext={goToNextLesson}
+              isDisabledNext={isNextButtonDisabled}
             />
           </div>
         )}
