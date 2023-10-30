@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
-import { YandexOAuthButton } from 'components/molecules/yandex-oauth-button/yandex-oauth-button';
+import { YandexOAuthButton } from 'components/molecules/yandex-oauth-button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
@@ -115,14 +115,14 @@ export const LoginForm: FC = () => {
         </div>
 
         <Button
-          className={styles.button}
+          className={classnames(styles.button, styles.button_margin)}
           type="submit"
           disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
 
-      <YandexOAuthButton className={classnames(styles.button)} />
+      <YandexOAuthButton className={styles.button_margin} />
 
       <StyledLink
         href={routes.register.path}

@@ -7,19 +7,19 @@ import type { YandexOAuthButtonProps } from './types';
 /**
  * Компонент кнопки авторизации через Яндекс ID с иконкой-логотипом Яндекса.
  * Содержит собственную разметку, т.к. дизайн кнопки строго регламентирован Яндексом и не зависит от остальных кнопок проекта.
+ * Документация оформления кнопки: https://yandex.ru/dev/id/doc/ru/codes/buttons-design
  */
 
 export const YandexOAuthButton: FC<YandexOAuthButtonProps> = ({
-  text = 'Войти c Яндекс ID',
   className,
-  iconSize = 'medium',
   ...props
-}) => {
-  const btnClasses = classnames(styles.button, className);
-  return (
-    <button {...props} className={btnClasses} type="button">
-      <Icon type="yandex" size={iconSize} className={styles.icon} />
-      {text}
-    </button>
-  );
-};
+}) => (
+  <button
+    {...props}
+    className={classnames(styles.button, className)}
+    type="button"
+  >
+    <Icon type="yandex" className={styles.icon} />
+    Войти c Яндекс ID
+  </button>
+);

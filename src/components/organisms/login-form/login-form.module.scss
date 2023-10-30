@@ -30,9 +30,12 @@
 }
 
 .button {
-  margin: 0 auto;
   width: 236px;
   padding: 0 22px;
+
+  &_margin {
+    margin: 0 auto;
+  }
 }
 
 .registerLink {
