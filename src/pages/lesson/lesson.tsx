@@ -1,5 +1,5 @@
-import { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { FC, useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
@@ -11,35 +11,36 @@ import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
+import { routes } from 'config';
 import {
   LOADING_PROCESS_MAP,
   ProcessEnum,
   SHOULD_LOAD_PROCESS_MAP,
 } from 'utils/constants';
+import { UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourseContents,
   selectCourseProcess,
 } from 'store/course/selectors';
 import {
+  selectCompleteLessonProcess,
   selectLesson,
   selectLessonError,
   selectLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
 import { fetchCourseById } from 'store/course/thunk';
-import { fetchLessonById } from 'store/lesson/thunk';
+import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
-import { routes } from 'config';
 import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
-
-// TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/396
-const noop = () => {};
+import { getNextOrPrevRoute } from './utils';
 
 const Lesson: FC = () => {
   const { courseId, lessonId } = useParams();
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const contents = useAppSelector(selectCourseContents);
@@ -49,6 +50,8 @@ const Lesson: FC = () => {
   const lessonProcess = useAppSelector(selectLessonProcess);
   const lessonType = useAppSelector(selectLessonType);
   const error = useAppSelector(selectLessonError);
+
+  const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
   const isQuiz = lessonType === 'Quiz';
@@ -69,7 +72,7 @@ const Lesson: FC = () => {
     }
   }, [courseId, courseProcess]);
 
-  const breadcrumbs = () => {
+  const breadcrumbs = useMemo(() => {
     if (!lesson.id || !lesson.breadcrumbs) {
       return [];
     }
@@ -100,15 +103,43 @@ const Lesson: FC = () => {
       breadcrumbsObject.chapter,
       breadcrumbsObject.currentLesson,
     ];
+  }, [lesson.id, lesson.breadcrumbs]);
+
+  const goToPrevLesson = () => {
+    navigate(
+      getNextOrPrevRoute(lesson, 'prev') ||
+        `${routes.course.path}/${lesson.course_id}`
+    );
   };
+
+  const goToNextLesson = () => {
+    if (!lessonId) {
+      return;
+    }
+
+    if (lesson.user_lesson_progress === UserLessonProgress.InProgress) {
+      void dispatch(completeLesson(lessonId));
+      return;
+    }
+
+    navigate(getNextOrPrevRoute(lesson, 'next'));
+  };
+
+  useEffect(() => {
+    if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
+      void dispatch(fetchCourseById(courseId));
+      navigate(getNextOrPrevRoute(lesson, 'next'));
+    }
+  }, [completeLessonProcess]);
+
+  const isNextButtonDisabled =
+    lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
+    LOADING_PROCESS_MAP[completeLessonProcess];
 
   return (
     <>
       {lesson.breadcrumbs && (
-        <Breadcrumbs
-          className={styles.breadcrumbs}
-          breadcrumbs={breadcrumbs()}
-        />
+        <Breadcrumbs className={styles.breadcrumbs} breadcrumbs={breadcrumbs} />
       )}
 
       <div className={styles.lesson}>
@@ -145,7 +176,11 @@ const Lesson: FC = () => {
 
             {isQuiz && <TestContent />}
 
-            <NavigationButtons onClickBack={noop} onClickForward={noop} />
+            <NavigationButtons
+              onClickPrev={goToPrevLesson}
+              onClickNext={goToNextLesson}
+              isDisabledNext={isNextButtonDisabled}
+            />
           </div>
         )}
 

@@ -11,6 +11,10 @@ export abstract class BaseApi {
         .then((fn) => fn());
     }
 
+    if (isMockEnv) {
+      return Promise.resolve<T>({} as T);
+    }
+
     return request();
   };
 }

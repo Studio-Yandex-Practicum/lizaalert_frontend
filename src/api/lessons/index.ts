@@ -5,3 +5,4 @@ export type {
   TestQuestionModel,
   TestModel,
 } from './types';
+export { UserLessonProgress } from './types';

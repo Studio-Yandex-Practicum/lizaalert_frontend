@@ -56,6 +56,17 @@ export type LessonBreadcrumbsModel = {
   };
 };
 
+export type NextLessonModel = {
+  id: number;
+  chapter_id: number;
+};
+
+export enum UserLessonProgress {
+  NotStarted,
+  InProgress,
+  Finished,
+}
+
 export type LessonModel = {
   /** id урока */
   id?: number;
@@ -79,4 +90,10 @@ export type LessonModel = {
   diploma?: boolean;
   /** Объект хлебных крошек */
   breadcrumbs?: LessonBreadcrumbsModel;
+  /** Статус прохождения урока */
+  user_lesson_progress?: UserLessonProgress;
+  /** Объект с информацией о след. уроке */
+  next_lesson: Nullable<NextLessonModel>;
+  /** Объект с информацией о пред. уроке */
+  prev_lesson: Nullable<NextLessonModel>;
 };

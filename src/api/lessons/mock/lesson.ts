@@ -1,4 +1,5 @@
 import type { LessonModel } from '../types';
+import { UserLessonProgress } from '../types';
 
 const lessons: Record<string, Record<string, LessonModel>> = {
   1: {
@@ -24,6 +25,12 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           title: 'Курс',
         },
       },
+      user_lesson_progress: UserLessonProgress.Finished,
+      next_lesson: {
+        id: 2,
+        chapter_id: 1,
+      },
+      prev_lesson: null,
     },
     2: {
       id: 2,
@@ -45,6 +52,15 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           id: 1,
           title: 'Курс',
         },
+      },
+      user_lesson_progress: UserLessonProgress.Finished,
+      next_lesson: {
+        id: 3,
+        chapter_id: 1,
+      },
+      prev_lesson: {
+        id: 1,
+        chapter_id: 1,
       },
     },
     3: {
@@ -69,6 +85,15 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           title: 'Курс',
         },
       },
+      user_lesson_progress: UserLessonProgress.Finished,
+      next_lesson: {
+        id: 4,
+        chapter_id: 1,
+      },
+      prev_lesson: {
+        id: 2,
+        chapter_id: 1,
+      },
     },
     4: {
       id: 4,
@@ -91,6 +116,15 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           title: 'Курс',
         },
       },
+      user_lesson_progress: UserLessonProgress.InProgress,
+      next_lesson: {
+        id: 5,
+        chapter_id: 1,
+      },
+      prev_lesson: {
+        id: 3,
+        chapter_id: 1,
+      },
     },
     5: {
       id: 5,
@@ -112,6 +146,12 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           id: 1,
           title: 'Курс',
         },
+      },
+      user_lesson_progress: UserLessonProgress.NotStarted,
+      next_lesson: null,
+      prev_lesson: {
+        id: 4,
+        chapter_id: 1,
       },
     },
   },

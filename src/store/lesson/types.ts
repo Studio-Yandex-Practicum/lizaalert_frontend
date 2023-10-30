@@ -5,4 +5,6 @@ export type LessonState = {
   lesson: LessonModel;
   process: ProcessEnum;
   error: string | null;
+  completeLessonProcess: ProcessEnum;
+  completeLessonError: string | null;
 };

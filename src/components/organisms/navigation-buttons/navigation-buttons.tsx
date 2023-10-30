@@ -9,46 +9,41 @@ import type { NavigationButtonsProps } from './types';
  */
 
 export const NavigationButtons: FC<NavigationButtonsProps> = ({
-  classNameForContainer,
-  classNameForButtons,
-  view = 'main',
-  disabledBack,
-  disabledForward,
-  onClickBack,
-  onClickForward,
-}) => {
-  const buttonClasses = classnames(styles.button, classNameForButtons);
+  className,
+  view = 'default',
+  isDisabledPrev,
+  isDisabledNext,
+  onClickPrev,
+  onClickNext,
+}) => (
+  <div className={classnames(styles.navButtons, className)}>
+    <Button
+      view="secondary"
+      iconName="arrowBack"
+      onClick={onClickPrev}
+      className={styles.button}
+      disabled={isDisabledPrev}
+      text="Назад"
+    />
 
-  return (
-    <div className={classnames(styles.navButtons, classNameForContainer)}>
+    {view === 'default' && (
       <Button
-        view="secondary"
-        iconName="arrowBack"
-        onClick={onClickBack}
-        className={buttonClasses}
-        disabled={disabledBack}
-        text="Назад"
+        className={styles.button}
+        onClick={onClickNext}
+        disabled={isDisabledNext}
+        text="Далее"
+        iconName="arrowForward"
+        iconPosition="right"
       />
+    )}
 
-      {view === 'main' && (
-        <Button
-          iconName="arrowForward"
-          iconPosition="right"
-          onClick={onClickForward}
-          className={buttonClasses}
-          disabled={disabledForward}
-          text="Далее"
-        />
-      )}
-
-      {view === 'finish' && (
-        <Button
-          className={buttonClasses}
-          onClick={onClickForward}
-          disabled={disabledForward}
-          text="Завершить"
-        />
-      )}
-    </div>
-  );
-};
+    {view === 'finish' && (
+      <Button
+        className={styles.button}
+        onClick={onClickNext}
+        disabled={isDisabledNext}
+        text="Завершить"
+      />
+    )}
+  </div>
+);

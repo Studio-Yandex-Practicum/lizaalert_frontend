@@ -53,7 +53,7 @@ export const useBreadcrumbs = <T extends BreadcrumbsType>(breadcrumbs: T) => {
   useEffect(() => {
     clearBreadcrumbs();
     updateBreadcrumbs();
-  }, []);
+  }, [breadcrumbs]);
 
   return breadcrumbsArray;
 };
