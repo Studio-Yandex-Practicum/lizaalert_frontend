@@ -15,6 +15,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
   breadcrumbs,
 }) => {
   const breadcrumbsToRender = useBreadcrumbs(breadcrumbs);
+
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
       {breadcrumbsToRender.map((breadcrumb, i) => (

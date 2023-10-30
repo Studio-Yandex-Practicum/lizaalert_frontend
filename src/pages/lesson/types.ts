@@ -1,4 +1,4 @@
-import type { BreadcrumbData } from '../../components/organisms/breadcrumbs/index';
+import type { BreadcrumbData } from 'components/organisms/breadcrumbs';
 
 export type LessonBreadcrumbs = {
   courses: BreadcrumbData;

@@ -3,7 +3,7 @@ import type { BreadcrumbsType } from '../types';
 
 /**
  * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
- * Принимает объект ServerBreadcrumbs и объект с данными текущего урока.
+ * Принимает объект с данными хлебных крошек текущего урока.
  *
  * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
@@ -24,7 +24,7 @@ export const useBreadcrumbs = <T extends BreadcrumbsType>(breadcrumbs: T) => {
         const crumb = {
           path: breadcrumb.path,
           title: breadcrumb.title,
-          notActive: breadcrumb.notActive || false,
+          notActive: breadcrumb.notActive ?? false,
         };
         arr.push(crumb);
       } else {

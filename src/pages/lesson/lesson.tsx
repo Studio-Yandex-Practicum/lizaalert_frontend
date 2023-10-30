@@ -70,36 +70,36 @@ const Lesson: FC = () => {
   }, [courseId, courseProcess]);
 
   const breadcrumbs = () => {
-    if (lesson.id && lesson.breadcrumbs) {
-      const breadcrumbsObject: LessonBreadcrumbs = {
-        courses: {
-          path: `${routes.courses.path}`,
-          title: routes.courses.title,
-        },
-        course: {
-          path: `${routes.course.path}/${lesson.breadcrumbs.course.id}`,
-          title: lesson.breadcrumbs.course.title,
-        },
-        chapter: {
-          path: `${lesson.breadcrumbs.chapter.id}`,
-          title: lesson.breadcrumbs.chapter.title,
-          notActive: true,
-        },
-        currentLesson: {
-          path: `${lesson.id}`,
-          title: lesson.title,
-        },
-      };
-
-      const breadcrumbsToRender = [
-        breadcrumbsObject.courses,
-        breadcrumbsObject.course,
-        breadcrumbsObject.chapter,
-        breadcrumbsObject.currentLesson,
-      ];
-      return breadcrumbsToRender;
+    if (!lesson.id || !lesson.breadcrumbs) {
+      return [];
     }
-    return [];
+
+    const breadcrumbsObject: LessonBreadcrumbs = {
+      courses: {
+        path: `${routes.courses.path}`,
+        title: routes.courses.title,
+      },
+      course: {
+        path: `${routes.course.path}/${lesson.breadcrumbs.course.id}`,
+        title: lesson.breadcrumbs.course.title,
+      },
+      chapter: {
+        path: `${lesson.breadcrumbs.chapter.id}`,
+        title: lesson.breadcrumbs.chapter.title,
+        notActive: true,
+      },
+      currentLesson: {
+        path: `${lesson.id}`,
+        title: lesson.title,
+      },
+    };
+
+    return [
+      breadcrumbsObject.courses,
+      breadcrumbsObject.course,
+      breadcrumbsObject.chapter,
+      breadcrumbsObject.currentLesson,
+    ];
   };
 
   return (
