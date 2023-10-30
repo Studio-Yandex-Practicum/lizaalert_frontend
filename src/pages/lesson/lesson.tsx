@@ -106,7 +106,10 @@ const Lesson: FC = () => {
   }, [lesson.id, lesson.breadcrumbs]);
 
   const goToPrevLesson = () => {
-    navigate(getNextOrPrevRoute(lesson, 'prev'));
+    navigate(
+      getNextOrPrevRoute(lesson, 'prev') ||
+        `${routes.course.path}/${lesson.course_id}`
+    );
   };
 
   const goToNextLesson = () => {
