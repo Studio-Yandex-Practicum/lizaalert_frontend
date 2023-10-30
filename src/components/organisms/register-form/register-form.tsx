@@ -7,6 +7,8 @@ import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
 import { routes } from 'config';
 import { getValidationSchema } from 'utils/validation';
+import { useAppDispatch } from 'store';
+import { fetchRegistration } from 'store/auth/thunk';
 import type { UserRegisterFormData } from './types';
 import styles from './register-form.module.scss';
 
@@ -29,13 +31,20 @@ const initialValues: UserRegisterFormData = {
  * */
 
 export const RegisterForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = async (
     values: UserRegisterFormData,
     { validateForm }: FormikHelpers<UserRegisterFormData>
   ) => {
     await validateForm(values);
-    console.log(values);
-    // TODO запрос на регистрацию
+
+    const data = {
+      ...values,
+      username: values.email,
+    };
+
+    void dispatch(fetchRegistration(data));
   };
 
   const formik = useFormik<UserRegisterFormData>({

@@ -1,13 +1,7 @@
 import type { RegistrationModel } from '../types';
 
 const registrationData: RegistrationModel = {
-  user: {
-    username: 'userexample',
-    email: 'example@mail.ru',
-    id: 2,
-  },
-  access_token: 'exampleaccesstoken',
-  refresh_token: 'examplerefreshtoken',
+  id: 2,
 };
 
 export default Promise.resolve(() => registrationData);
