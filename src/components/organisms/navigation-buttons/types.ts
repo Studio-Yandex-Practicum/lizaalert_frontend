@@ -1,16 +1,14 @@
 export type NavigationButtonsProps = {
-  /** Текст во второй кнопке: 'main' - 'Далее', 'finish' - 'Завершить'. */
-  view?: 'main' | 'finish';
+  /** Текст во второй кнопке: 'default' - 'Далее', 'finish' - 'Завершить'. */
+  view?: 'default' | 'finish';
   /** Флаг отключения кнопки 'Назад'. */
-  disabledBack?: boolean;
+  disabledPrev?: boolean;
   /** Флаг отключения кнопки 'Далее'. */
-  disabledForward?: boolean;
-  /** Миксин для стилизации внешнего контейнера. Используйте css-класс, чтобы изменить css-свойства элемента. */
-  classNameForContainer?: string;
-  /** Миксин для стилизации кнопок. Используйте css-класс, чтобы изменить css-свойства элемента. */
-  classNameForButtons?: string;
+  disabledNext?: boolean;
+  /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
+  className?: string;
   /** Функция-обработчик клика по кнопке 'Назад'. */
-  onClickBack: VoidFunction;
+  onClickPrev: VoidFunction;
   /** Функция-обработчик клика по кнопке 'Вперед'. */
-  onClickForward: VoidFunction;
+  onClickNext: VoidFunction;
 };

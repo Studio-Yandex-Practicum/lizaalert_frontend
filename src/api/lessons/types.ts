@@ -56,6 +56,11 @@ export type LessonBreadcrumbsModel = {
   };
 };
 
+export type NextLessonModel = {
+  id: number;
+  chapter_id: number;
+};
+
 export type LessonModel = {
   /** id урока */
   id?: number;
@@ -79,4 +84,8 @@ export type LessonModel = {
   diploma?: boolean;
   /** Объект хлебных крошек */
   breadcrumbs?: LessonBreadcrumbsModel;
+  /** Объект с информацией о след. уроке */
+  next_lesson: Nullable<NextLessonModel>;
+  /** Объект с информацией о пред. уроке */
+  prev_lesson: Nullable<NextLessonModel>;
 };

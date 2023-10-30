@@ -1,5 +1,5 @@
-import { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { FC, useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
@@ -11,6 +11,7 @@ import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
+import { routes } from 'config';
 import {
   LOADING_PROCESS_MAP,
   ProcessEnum,
@@ -30,16 +31,14 @@ import {
 import { fetchCourseById } from 'store/course/thunk';
 import { fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
-import { routes } from 'config';
 import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
-
-// TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/396
-const noop = () => {};
+import { getNextOrPrevRoute } from './utils';
 
 const Lesson: FC = () => {
   const { courseId, lessonId } = useParams();
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const contents = useAppSelector(selectCourseContents);
@@ -69,7 +68,7 @@ const Lesson: FC = () => {
     }
   }, [courseId, courseProcess]);
 
-  const breadcrumbs = () => {
+  const breadcrumbs = useMemo(() => {
     if (!lesson.id || !lesson.breadcrumbs) {
       return [];
     }
@@ -100,15 +99,20 @@ const Lesson: FC = () => {
       breadcrumbsObject.chapter,
       breadcrumbsObject.currentLesson,
     ];
+  }, [lesson.id, lesson.breadcrumbs]);
+
+  const goToPrevLesson = () => {
+    navigate(getNextOrPrevRoute(lesson, 'prev'));
+  };
+
+  const goToNextLesson = () => {
+    navigate(getNextOrPrevRoute(lesson, 'next'));
   };
 
   return (
     <>
       {lesson.breadcrumbs && (
-        <Breadcrumbs
-          className={styles.breadcrumbs}
-          breadcrumbs={breadcrumbs()}
-        />
+        <Breadcrumbs className={styles.breadcrumbs} breadcrumbs={breadcrumbs} />
       )}
 
       <div className={styles.lesson}>
@@ -145,7 +149,10 @@ const Lesson: FC = () => {
 
             {isQuiz && <TestContent />}
 
-            <NavigationButtons onClickBack={noop} onClickForward={noop} />
+            <NavigationButtons
+              onClickPrev={goToPrevLesson}
+              onClickNext={goToNextLesson}
+            />
           </div>
         )}
 
