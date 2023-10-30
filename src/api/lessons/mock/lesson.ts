@@ -14,6 +14,16 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       duration: 1,
       additional: false,
       diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
     },
     2: {
       id: 2,
@@ -26,6 +36,16 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       duration: 2,
       additional: false,
       diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
     },
     3: {
       id: 3,
@@ -39,6 +59,16 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       duration: 1,
       additional: false,
       diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
     },
     4: {
       id: 4,
@@ -51,6 +81,16 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       duration: 2,
       additional: false,
       diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
     },
     5: {
       id: 5,
@@ -63,6 +103,16 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       duration: 2,
       additional: false,
       diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
     },
   },
 };

@@ -1,65 +1,59 @@
 import { useEffect, useState } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
-import type { RouteType } from 'router/types';
-import { routes } from 'config';
-import type { BreadcrumbType } from '../types';
+import type { BreadcrumbsType } from '../types';
 
 /**
  * Хук `useBreadcrumbs` возвращает массив объектов для отрисовки ссылок в компоненте `Breadcrumbs`.
- * Пока рассчитан только на страницу Курса и возвращает моковые данные.
- * Нужна доработка после интеграции с бекендом.
+ * Принимает объект с данными хлебных крошек текущего урока.
  *
  * @returns \{ path, title \} - массив объектов хлебных крошек.
  * */
 
-export const useBreadcrumbs = () => {
-  const { pathname } = useLocation();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
+export const useBreadcrumbs = <T extends BreadcrumbsType>(breadcrumbs: T) => {
+  const [breadcrumbsArray, setBreadcrumbsArray] = useState<BreadcrumbsType>([]);
 
-  const match = (path: string) => matchPath({ path, end: false }, pathname);
+  /*
+  TODO изменить реализацию хука, если изменится дефолтный роутинг.
+  В данный момент роутинг реализован так:
+  / - все курсы
+  /courses - роуты курса, урока и т.д.
+  При конкатенации этих двух строк, роут получается формата //route
+  */
+  const breadcrumbsToRender = breadcrumbs.reduce<BreadcrumbsType>(
+    (arr, breadcrumb, i) => {
+      if (i === 0 || i === 1) {
+        const crumb = {
+          path: breadcrumb.path,
+          title: breadcrumb.title,
+          notActive: breadcrumb.notActive ?? false,
+        };
+        arr.push(crumb);
+      } else {
+        const crumb = {
+          path: `${arr[i - 1].path}/${breadcrumb.path}`,
+          title: breadcrumb.title,
+          notActive: breadcrumb.notActive ?? false,
+        };
+        arr.push(crumb);
+      }
+      return arr;
+    },
+    []
+  );
 
   const clearBreadcrumbs = () => {
-    if (breadcrumbs.length > 0) {
-      setBreadcrumbs([]);
+    if (!breadcrumbs) {
+      setBreadcrumbsArray([]);
     }
   };
 
-  const updateBreadcrumbs = (routesArray: RouteType[]) => {
-    routesArray.forEach((route) => {
-      if (route.path !== routes.notFound.path) {
-        // корень
-        const root = match(route.path);
-        if (root) {
-          setBreadcrumbs((prevState) => [
-            ...prevState,
-            {
-              path: root.pathname,
-              title: routes.courses.title,
-            },
-          ]);
-
-          // вложенные маршруты
-          route.children?.forEach((childRoute) => {
-            const childPath = match(`${route.path}/${childRoute.path}`);
-            if (childPath) {
-              setBreadcrumbs((prevState) => [
-                ...prevState,
-                {
-                  path: childPath.pathname,
-                  title: childRoute.mockTitle,
-                },
-              ]);
-            }
-          });
-        }
-      }
-    });
+  const updateBreadcrumbs = () => {
+    setBreadcrumbsArray(breadcrumbsToRender);
   };
 
   useEffect(() => {
     clearBreadcrumbs();
-    updateBreadcrumbs(Object.values(routes));
-  }, [pathname]);
+    updateBreadcrumbs();
+  }, []);
 
-  return breadcrumbs;
+  return breadcrumbsArray;
 };

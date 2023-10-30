@@ -45,6 +45,17 @@ export type TestModel = {
   questions?: TestQuestionModel[];
 };
 
+export type LessonBreadcrumbsModel = {
+  course: {
+    id: number;
+    title: string;
+  };
+  chapter: {
+    id: number;
+    title: string;
+  };
+};
+
 export type LessonModel = {
   /** id урока */
   id?: number;
@@ -66,4 +77,6 @@ export type LessonModel = {
   additional?: boolean;
   /** Флаг, является ли урок дипломным */
   diploma?: boolean;
+  /** Объект хлебных крошек */
+  breadcrumbs?: LessonBreadcrumbsModel;
 };

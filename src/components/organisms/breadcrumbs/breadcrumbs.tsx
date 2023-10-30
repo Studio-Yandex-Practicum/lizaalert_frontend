@@ -10,19 +10,24 @@ import { useBreadcrumbs } from './hooks/use-breadcrumbs';
  * Компонент хлебных крошек, создает цепочку вложенных роутов.
  * */
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({ className }) => {
-  const breadcrumbs = useBreadcrumbs();
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({
+  className,
+  breadcrumbs,
+}) => {
+  const breadcrumbsToRender = useBreadcrumbs(breadcrumbs);
 
   return (
     <div className={classnames(styles.breadcrumbs, className)}>
-      {breadcrumbs.map((link, i) => (
-        <span className={styles.breadcrumb} key={link.path}>
+      {breadcrumbsToRender.map((breadcrumb, i) => (
+        <span className={styles.breadcrumb} key={breadcrumb.path}>
           <StyledLink
-            className={styles.link}
-            href={link.path}
-            linkText={link.title}
+            className={classnames(styles.link, {
+              [styles.notActive]: breadcrumb.notActive,
+            })}
+            href={breadcrumb.path}
+            linkText={breadcrumb.title}
           />
-          {i + 1 !== breadcrumbs.length && <Icon type="arrowRight" />}
+          {i + 1 !== breadcrumbsToRender.length && <Icon type="arrowRight" />}
         </span>
       ))}
     </div>
