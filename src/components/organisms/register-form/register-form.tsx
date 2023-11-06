@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import InputMask from 'react-input-mask';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -82,16 +83,20 @@ export const RegisterForm: FC = () => {
           error={formik.errors.email}
           onChange={formik.handleChange}
         />
-        <Input
-          labelName="Номер телефона"
-          name="phone"
-          type="tel"
+        <InputMask
+          mask="+7 (999) 999-99-99"
           value={formik.values.phone}
-          placeholder="+7 ( ___ ) ___  -  ___"
-          isValid={!formik.touched.phone || !formik.errors.phone}
-          error={formik.errors.phone}
           onChange={formik.handleChange}
-        />
+        >
+          <Input
+            labelName="Номер телефона"
+            name="phone"
+            type="tel"
+            placeholder="+7 (___) ___-__-__"
+            isValid={!formik.touched.phone || !formik.errors.phone}
+            error={formik.errors.phone}
+          />
+        </InputMask>
         <Input
           labelName="Пароль"
           name="password"

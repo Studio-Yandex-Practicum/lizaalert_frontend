@@ -2,13 +2,13 @@ import type { Schema } from 'yup';
 import { object, ObjectSchema, ref, string } from 'yup';
 
 const regExps = {
-  phone: /^\+?\d+$/g,
+  phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
 };
 
 const messages = {
   required: 'Это поле обязательно',
   email: 'Введите действительный email адрес',
-  phone: 'Телефон должен состоять только из цифр',
+  phone: 'Телефон должен состоять из 11 цифр',
   confirmPassword: 'Пароли должны совпадать',
   min: (field: string, num: number) =>
     `Длина ${field} должна быть не менее ${num} символов`,
@@ -32,8 +32,6 @@ export const validationSchema = createValidationSchema({
   phone: string()
     .trim()
     .matches(regExps.phone, messages.phone)
-    .min(values.phone.min, messages.min('телефона', values.phone.min))
-    .max(values.phone.max, messages.max('телефона', values.phone.max))
     .required(messages.required),
   password: string()
     .trim()
