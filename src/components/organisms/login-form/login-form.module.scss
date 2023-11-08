@@ -29,13 +29,13 @@
   color: vars.$dark-secondary;
 }
 
+.submitButton {
+  padding: 0 24px;
+}
+
 .button {
   width: 236px;
-  padding: 0 22px;
-
-  &_margin {
-    margin: 0 auto;
-  }
+  margin: 0 auto;
 }
 
 .registerLink {

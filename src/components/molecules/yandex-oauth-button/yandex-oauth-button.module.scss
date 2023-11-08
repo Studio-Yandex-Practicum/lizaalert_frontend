@@ -1,17 +1,15 @@
 @use 'src/styles/variables' as vars;
 
 .button {
-  min-width: 228px;
-  min-height: 44px;
-  width: 236px;
+  width: 100%;
   height: 48px;
-  padding: 0 28px;
+  padding: 0 24px;
   box-sizing: border-box;
   background-color: vars.$bg-yandex;
   border: none;
   border-radius: vars.$border-radius;
   cursor: pointer;
-  color: vars.$bg-primary;
+  color: vars.$yandex-text-color;
   font-family: vars.$yandexFont;
   font-size: vars.$font-size-s;
   font-style: normal;
@@ -21,14 +19,9 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  transition: vars.$trans-300;
 
   &:focus {
     outline: none;
-  }
-
-  &:disabled {
-    box-shadow: none;
   }
 }
 

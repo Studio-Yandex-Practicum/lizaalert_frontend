@@ -115,14 +115,14 @@ export const LoginForm: FC = () => {
         </div>
 
         <Button
-          className={classnames(styles.button, styles.button_margin)}
+          className={classnames(styles.button, styles.submitButton)}
           type="submit"
           disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
 
-      <YandexOAuthButton className={styles.button_margin} />
+      <YandexOAuthButton className={styles.button} />
 
       <StyledLink
         href={routes.register.path}
