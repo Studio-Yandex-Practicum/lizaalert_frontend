@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import classnames from 'classnames';
 import styles from './input.module.scss';
-import { BaseInputProps } from './types';
+import type { BaseInputProps } from './types';
 
 export const BaseInput: FC<BaseInputProps> = ({
   name,
