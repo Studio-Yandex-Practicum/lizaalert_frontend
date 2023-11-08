@@ -83,14 +83,15 @@ export const RegisterForm: FC = () => {
           onChange={formik.handleChange}
         />
         <Input
+          mask="+7 (999) 999-99-99"
+          value={formik.values.phone}
+          onChange={formik.handleChange}
           labelName="Номер телефона"
           name="phone"
           type="tel"
-          value={formik.values.phone}
-          placeholder="+7 ( ___ ) ___  -  ___"
+          placeholder="+7 (___) ___-__-__"
           isValid={!formik.touched.phone || !formik.errors.phone}
           error={formik.errors.phone}
-          onChange={formik.handleChange}
         />
         <Input
           labelName="Пароль"
