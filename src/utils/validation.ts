@@ -17,7 +17,6 @@ const messages = {
 };
 
 const values = {
-  phone: { min: 11, max: 20 },
   password: { min: 8, max: 40 },
 };
 
