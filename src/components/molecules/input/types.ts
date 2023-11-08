@@ -24,3 +24,8 @@ export type InputProps = {
   /** необязательный пропс mask из библиотеки https://github.com/sanniassin/react-input-mask */
 } & Partial<Pick<InputMaskProps, 'mask'>> &
   InputHTMLAttributes<HTMLInputElement>;
+
+export type BaseInputProps = Omit<
+  InputProps,
+  'labelName' | 'isWithIcon' | 'iconType' | 'error' | 'className' | 'mask'
+>;
