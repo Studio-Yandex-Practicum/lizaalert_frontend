@@ -1,0 +1,31 @@
+@use 'src/styles/variables' as vars;
+
+.button {
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  background-color: vars.$bg-yandex;
+  border: none;
+  border-radius: vars.$border-radius;
+  cursor: pointer;
+  color: vars.$yandex-text-color;
+  font-family: vars.$yandexFont;
+  font-size: vars.$font-size-s;
+  font-style: normal;
+  font-weight: 500;
+  line-height: vars.$line-height-s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.icon {
+  background-color: vars.$bg-yandex-logo;
+  border-radius: 50%;
+}

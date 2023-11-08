@@ -29,15 +29,13 @@
   color: vars.$dark-secondary;
 }
 
-.button {
-  margin: 0 auto;
-  width: 236px;
-  padding: 0 22px;
+.submitButton {
+  padding: 0 24px;
 }
 
-.icon {
-  background-color: vars.$bg-yandex-logo;
-  border-radius: 50%;
+.button {
+  width: 236px;
+  margin: 0 auto;
 }
 
 .registerLink {
