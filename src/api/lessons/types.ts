@@ -78,6 +78,8 @@ export type LessonModel = {
   title: string;
   /** Описание/контент урока */
   description?: string;
+  /** URL ссылки на видео-урок с внешнего видео-хостинга. */
+  video_link: string;
   /** Тип урока */
   lesson_type: LessonType;
   /** Теги урока */
