@@ -166,7 +166,7 @@ const Lesson: FC = () => {
                   <Markdown>{lesson.description ?? ''}</Markdown>
                 )}
 
-                {lessonType === 'Videolesson' && (
+                {lessonType === 'Videolesson' && lesson.video_link !== null && (
                   <VideoLesson source={lesson.video_link} />
                 )}
 
