@@ -13,6 +13,10 @@ const courses: CoursesModel = {
       course_duration: 144,
       course_status: 'active',
       cover_path: 'https://i.ibb.co/VttHZb2/1.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 2,
@@ -24,6 +28,10 @@ const courses: CoursesModel = {
       course_duration: 124,
       course_status: 'active',
       cover_path: 'https://i.ibb.co/7rb0FZs/2.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 3,
@@ -35,6 +43,10 @@ const courses: CoursesModel = {
       course_duration: 152,
       course_status: 'active',
       cover_path: 'https://i.ibb.co/0DQNPbT/3.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 4,
@@ -46,6 +58,10 @@ const courses: CoursesModel = {
       course_duration: 204,
       course_status: 'active',
       cover_path: 'https://i.ibb.co/bvySqGp/4.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 5,
@@ -57,6 +73,10 @@ const courses: CoursesModel = {
       course_duration: 90,
       course_status: 'active',
       cover_path: 'https://i.ibb.co/rsCGK20/5.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 6,
@@ -68,6 +88,10 @@ const courses: CoursesModel = {
       course_duration: 120,
       course_status: 'booked',
       cover_path: 'https://i.ibb.co/XJJQ1tq/6.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 7,
@@ -79,6 +103,10 @@ const courses: CoursesModel = {
       course_duration: 87,
       course_status: 'inactive',
       cover_path: 'https://i.ibb.co/VjVRdY1/7.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
     {
       id: 8,
@@ -90,6 +118,10 @@ const courses: CoursesModel = {
       course_duration: 50,
       course_status: 'finished',
       cover_path: 'https://i.ibb.co/p1yrc4Y/8.png',
+      current_lesson: {
+        lesson: 2,
+        chapter: 1,
+      },
     },
   ],
 };

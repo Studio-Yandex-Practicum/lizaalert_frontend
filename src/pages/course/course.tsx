@@ -89,6 +89,7 @@ const Course: FC = () => {
             startDate={course.start_date}
             enrollStatus={enrollStatus[course.id]}
             userStatus={course.user_status}
+            currentLesson={course.current_lesson}
           />
         </aside>
       </div>

@@ -35,12 +35,14 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
     course_duration: duration,
     cover_path: coverPath,
     user_status: userStatus,
+    current_lesson: currentLesson,
   } = course;
 
   const { isEnrolled, buttonText, handleEnroll } = useEnrollCourse({
     id,
     userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
     enrollStatus,
+    currentLesson,
   });
 
   return (
