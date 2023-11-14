@@ -24,11 +24,13 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   courseDuration,
   enrollStatus,
   userStatus = UserProgressStatus.NotEnrolled,
+  currentLesson,
 }) => {
   const { buttonText, handleEnroll } = useEnrollCourse({
     id,
     userStatus,
     enrollStatus,
+    currentLesson,
   });
 
   return (

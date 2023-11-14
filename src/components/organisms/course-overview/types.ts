@@ -1,4 +1,5 @@
 import { UserProgressStatus } from 'api/course';
+import type { CurrentLessonModel } from 'api/course/types';
 import type { EnrollStatusType } from 'store/courses/types';
 
 export type CourseOverviewProps = {
@@ -20,4 +21,6 @@ export type CourseOverviewProps = {
   onClick?: VoidFunction;
   /** Объект статуса подписки на курс */
   enrollStatus?: EnrollStatusType;
+  /** Id текущего (последнего не пройденного) урока */
+  currentLesson: CurrentLessonModel;
 };

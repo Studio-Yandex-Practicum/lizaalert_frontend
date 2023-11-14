@@ -53,6 +53,11 @@ export type ChapterModel = {
   lessons: LessonChapterModel[];
 };
 
+export type CurrentLessonModel = {
+  lesson: number;
+  chapter: number;
+};
+
 export type CourseModel = {
   /** id курса. */
   id: number;
@@ -78,4 +83,6 @@ export type CourseModel = {
   chapters: ChapterModel[];
   /** Статус подписки на курс. */
   user_status?: UserProgressStatus;
+  /** Id текущего (последнего не пройденного) урока */
+  current_lesson: CurrentLessonModel;
 };

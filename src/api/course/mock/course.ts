@@ -316,6 +316,10 @@ const course: CourseModel = {
       ],
     },
   ],
+  current_lesson: {
+    lesson: 2,
+    chapter: 1,
+  },
 };
 
 export default Promise.resolve(() => course);

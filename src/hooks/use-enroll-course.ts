@@ -7,17 +7,20 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsAuth } from 'store/auth/selectors';
 import { enrollCourseById } from 'store/courses/thunk';
 import type { EnrollStatusType } from 'store/courses/types';
+import type { CurrentLessonModel } from 'api/course/types';
 
 type UseEnrollCourseConfig = {
   id: number;
   userStatus: UserProgressStatus;
   enrollStatus?: EnrollStatusType;
+  currentLesson: CurrentLessonModel;
 };
 
 export const useEnrollCourse = ({
   id,
   userStatus,
   enrollStatus,
+  currentLesson,
 }: UseEnrollCourseConfig) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -43,8 +46,10 @@ export const useEnrollCourse = ({
 
     if (!isAuth) {
       navigate(routes.login.path);
-    } else if (isEnrolled) {
-      navigate(`${routes.course.path}/${id}`);
+    } else if (isEnrolled && currentLesson.chapter && currentLesson.lesson) {
+      navigate(
+        `${routes.course.path}/${id}/${currentLesson.chapter}/${currentLesson.lesson}`
+      );
     } else {
       void dispatch(enrollCourseById(id));
     }
