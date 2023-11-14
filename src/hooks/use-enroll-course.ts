@@ -7,13 +7,13 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsAuth } from 'store/auth/selectors';
 import { enrollCourseById } from 'store/courses/thunk';
 import type { EnrollStatusType } from 'store/courses/types';
-import type { CurerntLessonModel } from 'api/course/types';
+import type { CurrentLessonModel } from 'api/course/types';
 
 type UseEnrollCourseConfig = {
   id: number;
   userStatus: UserProgressStatus;
   enrollStatus?: EnrollStatusType;
-  currentLesson: CurerntLessonModel;
+  currentLesson: CurrentLessonModel;
 };
 
 export const useEnrollCourse = ({
