@@ -1,5 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
@@ -55,6 +56,8 @@ const Lesson: FC = () => {
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
   const isQuiz = lessonType === 'Quiz';
+
+  const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
   const fetchLesson = useEvent(() => {
     if (lessonId) {
@@ -166,8 +169,10 @@ const Lesson: FC = () => {
                   <Markdown>{lesson.description ?? ''}</Markdown>
                 )}
 
-                {lessonType === 'Videolesson' && lesson.video_link !== null && (
-                  <VideoLesson source={lesson.video_link} />
+                {lessonType === 'Videolesson' && videoId && (
+                  <VideoLesson
+                    source={`https://www.youtube.com/embed/${videoId}`}
+                  />
                 )}
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}

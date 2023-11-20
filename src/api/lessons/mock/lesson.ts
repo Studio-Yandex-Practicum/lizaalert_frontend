@@ -39,8 +39,7 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       chapter_id: 1,
       title: 'Видео по теме',
       description: '',
-      video_link:
-        'https://www.youtube.com/embed/OFntCmDmuQQ?si=2eja4V-lyh56wynW',
+      video_link: 'https://youtu.be/OFntCmDmuQQ?si=6Dud9scypvaUxh7O',
       lesson_type: 'Videolesson',
       tags: "['onto', 'determine', 'avoid', 'yes', 'require']",
       duration: 2,
