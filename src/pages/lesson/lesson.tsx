@@ -172,6 +172,7 @@ const Lesson: FC = () => {
                 {lessonType === 'Videolesson' && videoId && (
                   <VideoLesson
                     source={`https://www.youtube.com/embed/${videoId}`}
+                    description={lesson.description}
                   />
                 )}
 
