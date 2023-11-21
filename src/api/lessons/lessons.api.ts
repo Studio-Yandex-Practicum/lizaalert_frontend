@@ -1,10 +1,5 @@
 import { BaseApi, privateApi } from '../core';
-import type {
-  LessonModel,
-  TestModel,
-  // TestOnValidationData,
-  AnswersOnValidationModel,
-} from './types';
+import type { LessonModel, TestModel, AnswersOnValidationModel } from './types';
 
 const SERVICE_URL = '/lessons/';
 

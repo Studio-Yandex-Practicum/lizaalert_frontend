@@ -49,7 +49,7 @@ export const testSlice = createSlice({
           ...question.content.map((answer) =>
             answer.isChecked ? answer.id : null
           ),
-        ].filter((id) => id !== null),
+        ],
       }));
     },
   },

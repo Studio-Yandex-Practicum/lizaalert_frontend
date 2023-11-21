@@ -106,7 +106,6 @@ export const useTest = () => {
     evt.preventDefault();
     setIsSubmitted(true);
     sendTestOnValidation();
-    // await dispatch(validateTest(2, answers));
   };
 
   return {

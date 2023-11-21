@@ -18,7 +18,6 @@ export const validateTest = createAsyncThunk(
     id: number;
     answersData: TestOnValidationData[];
   }) => {
-    console.log(answersData);
     const test = await lessonsApi.postTest({ id, answersData });
     return test;
   }
