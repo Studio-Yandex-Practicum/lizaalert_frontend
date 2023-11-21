@@ -23,7 +23,7 @@ export const VideoLesson: FC<VideoLessonProps> = ({
       )}
       src={source}
       title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />
     <Markdown>{description ?? ''}</Markdown>

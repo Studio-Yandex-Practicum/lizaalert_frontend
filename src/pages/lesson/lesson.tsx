@@ -29,11 +29,11 @@ import {
   selectLesson,
   selectLessonError,
   selectLessonProcess,
-  selectLessonType,
 } from 'store/lesson/selectors';
 import { fetchCourseById } from 'store/course/thunk';
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
+import { LessonType } from 'api/course';
 import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
 import { getNextOrPrevRoute } from './utils';
@@ -49,13 +49,16 @@ const Lesson: FC = () => {
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
-  const lessonType = useAppSelector(selectLessonType);
   const error = useAppSelector(selectLessonError);
 
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
-  const isQuiz = lessonType === 'Quiz';
+
+  const isQuiz = lesson.lesson_type === LessonType.Quiz;
+  const isVideolesson = lesson.lesson_type === LessonType.Videolesson;
+  const isWebinar = lesson.lesson_type === LessonType.Webinar;
+  const isLesson = lesson.lesson_type === LessonType.Lesson;
 
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
@@ -165,11 +168,9 @@ const Lesson: FC = () => {
                   text={lesson.title}
                 />
 
-                {lessonType === 'Lesson' && (
-                  <Markdown>{lesson.description ?? ''}</Markdown>
-                )}
+                {isLesson && <Markdown>{lesson.description ?? ''}</Markdown>}
 
-                {lessonType === 'Videolesson' && videoId && (
+                {isVideolesson && videoId && (
                   <VideoLesson
                     source={`https://www.youtube.com/embed/${videoId}`}
                     description={lesson.description}
@@ -177,7 +178,7 @@ const Lesson: FC = () => {
                 )}
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {lessonType === 'Webinar' && <PreviewWebinar date="" link="" />}
+                {isWebinar && <PreviewWebinar date="" link="" />}
               </Card>
             )}
 
