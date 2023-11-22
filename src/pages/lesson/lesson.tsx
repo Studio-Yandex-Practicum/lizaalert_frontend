@@ -18,6 +18,7 @@ import {
   ProcessEnum,
   SHOULD_LOAD_PROCESS_MAP,
 } from 'utils/constants';
+import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
@@ -29,14 +30,14 @@ import {
   selectLesson,
   selectLessonError,
   selectLessonProcess,
+  selectLessonType,
 } from 'store/lesson/selectors';
 import { fetchCourseById } from 'store/course/thunk';
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
-import { LessonType } from 'api/course';
-import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
 import { getNextOrPrevRoute } from './utils';
+import styles from './lesson.module.scss';
 
 const Lesson: FC = () => {
   const { courseId, lessonId } = useParams();
@@ -49,16 +50,17 @@ const Lesson: FC = () => {
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
+  const lessonType = useAppSelector(selectLessonType);
   const error = useAppSelector(selectLessonError);
 
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
 
-  const isQuiz = lesson.lesson_type === LessonType.Quiz;
-  const isVideolesson = lesson.lesson_type === LessonType.Videolesson;
-  const isWebinar = lesson.lesson_type === LessonType.Webinar;
-  const isLesson = lesson.lesson_type === LessonType.Lesson;
+  const isQuiz = lessonType === LessonType.Quiz;
+  const isVideolesson = lessonType === LessonType.Videolesson;
+  const isWebinar = lessonType === LessonType.Webinar;
+  const isLesson = lessonType === LessonType.Lesson;
 
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
@@ -168,7 +170,9 @@ const Lesson: FC = () => {
                   text={lesson.title}
                 />
 
-                {isLesson && <Markdown>{lesson.description ?? ''}</Markdown>}
+                {isLesson && lesson.description && (
+                  <Markdown>{lesson.description}</Markdown>
+                )}
 
                 {isVideolesson && videoId && (
                   <VideoLesson

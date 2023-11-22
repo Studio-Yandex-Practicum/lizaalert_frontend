@@ -16,16 +16,14 @@ export const VideoLesson: FC<VideoLessonProps> = ({
 }) => (
   <>
     <iframe
-      className={classnames(
-        styles.video,
-        { [styles.addMargin]: description },
-        className
-      )}
+      className={classnames(styles.video, className)}
       src={source}
       title="YouTube video player"
       allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />
-    <Markdown>{description ?? ''}</Markdown>
+    {description && (
+      <Markdown className={styles.markdown}>{description}</Markdown>
+    )}
   </>
 );
