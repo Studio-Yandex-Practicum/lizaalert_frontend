@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { LessonType } from 'api/course';
 import { completeLesson, fetchLessonById } from './thunk';
 import type { LessonState } from './types';
 
@@ -7,7 +8,8 @@ const initialState: LessonState = {
   lesson: {
     course_id: 0,
     title: '',
-    lesson_type: 'Lesson',
+    video_link: null,
+    lesson_type: LessonType.Lesson,
     tags: '',
     duration: 0,
     next_lesson: null,

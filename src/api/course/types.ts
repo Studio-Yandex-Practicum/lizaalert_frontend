@@ -1,4 +1,9 @@
-export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
+export enum LessonType {
+  Quiz = 'Quiz',
+  Videolesson = 'Videolesson',
+  Webinar = 'Webinar',
+  Lesson = 'Lesson',
+}
 
 export enum LessonProgress {
   NotStarted = '0',

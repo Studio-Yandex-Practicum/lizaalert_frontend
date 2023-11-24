@@ -1,5 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
@@ -17,6 +18,7 @@ import {
   ProcessEnum,
   SHOULD_LOAD_PROCESS_MAP,
 } from 'utils/constants';
+import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
@@ -33,9 +35,9 @@ import {
 import { fetchCourseById } from 'store/course/thunk';
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { useEvent } from 'hooks/use-event';
-import styles from './lesson.module.scss';
 import type { LessonBreadcrumbs } from './types';
 import { getNextOrPrevRoute } from './utils';
+import styles from './lesson.module.scss';
 
 const Lesson: FC = () => {
   const { courseId, lessonId } = useParams();
@@ -54,7 +56,13 @@ const Lesson: FC = () => {
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
 
   const isLoading = LOADING_PROCESS_MAP[lessonProcess];
-  const isQuiz = lessonType === 'Quiz';
+
+  const isQuiz = lessonType === LessonType.Quiz;
+  const isVideolesson = lessonType === LessonType.Videolesson;
+  const isWebinar = lessonType === LessonType.Webinar;
+  const isLesson = lessonType === LessonType.Lesson;
+
+  const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
   const fetchLesson = useEvent(() => {
     if (lessonId) {
@@ -162,15 +170,19 @@ const Lesson: FC = () => {
                   text={lesson.title}
                 />
 
-                {lessonType === 'Lesson' && (
-                  <Markdown>{lesson.description ?? ''}</Markdown>
+                {isLesson && lesson.description && (
+                  <Markdown>{lesson.description}</Markdown>
                 )}
 
-                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/415 */}
-                {lessonType === 'Videolesson' && <VideoLesson source="" />}
+                {isVideolesson && videoId && (
+                  <VideoLesson
+                    source={`https://www.youtube.com/embed/${videoId}`}
+                    description={lesson.description}
+                  />
+                )}
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {lessonType === 'Webinar' && <PreviewWebinar date="" link="" />}
+                {isWebinar && <PreviewWebinar date="" link="" />}
               </Card>
             )}
 

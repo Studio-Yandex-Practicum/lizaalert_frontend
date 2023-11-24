@@ -1,4 +1,4 @@
-import { CourseModel, LessonProgress } from '../types';
+import { CourseModel, LessonType, LessonProgress } from '../types';
 
 const course: CourseModel = {
   id: 1,
@@ -60,7 +60,7 @@ const course: CourseModel = {
           order_number: 0,
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -68,7 +68,7 @@ const course: CourseModel = {
           order_number: 1,
           duration: 2,
           title: 'Видео',
-          lesson_type: 'Videolesson',
+          lesson_type: LessonType.Videolesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -76,7 +76,7 @@ const course: CourseModel = {
           order_number: 2,
           duration: 1,
           title: 'Урок',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -84,7 +84,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -92,7 +92,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.Finished,
         },
       ],
@@ -107,7 +107,7 @@ const course: CourseModel = {
           order_number: 0,
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -115,7 +115,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -123,7 +123,7 @@ const course: CourseModel = {
           order_number: 2,
           duration: 1,
           title: 'Урок',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -131,7 +131,7 @@ const course: CourseModel = {
           order_number: 1,
           duration: 2,
           title: 'Видео',
-          lesson_type: 'Videolesson',
+          lesson_type: LessonType.Videolesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -139,7 +139,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.Finished,
         },
       ],
@@ -154,7 +154,7 @@ const course: CourseModel = {
           order_number: 0,
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -162,7 +162,7 @@ const course: CourseModel = {
           order_number: 1,
           duration: 2,
           title: 'Видео',
-          lesson_type: 'Videolesson',
+          lesson_type: LessonType.Videolesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -170,7 +170,7 @@ const course: CourseModel = {
           order_number: 2,
           duration: 1,
           title: 'Урок',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.Finished,
         },
         {
@@ -178,7 +178,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.Started,
         },
         {
@@ -186,7 +186,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.NotStarted,
         },
       ],
@@ -201,7 +201,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.NotStarted,
         },
       ],
@@ -216,7 +216,7 @@ const course: CourseModel = {
           order_number: 0,
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -224,7 +224,7 @@ const course: CourseModel = {
           order_number: 1,
           duration: 2,
           title: 'Видео',
-          lesson_type: 'Videolesson',
+          lesson_type: LessonType.Videolesson,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -232,7 +232,7 @@ const course: CourseModel = {
           order_number: 2,
           duration: 1,
           title: 'Урок',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -240,7 +240,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -248,7 +248,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.NotStarted,
         },
       ],
@@ -263,7 +263,7 @@ const course: CourseModel = {
           order_number: 0,
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
-          lesson_type: 'Lesson',
+          lesson_type: LessonType.Lesson,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -271,7 +271,7 @@ const course: CourseModel = {
           order_number: 1,
           duration: 2,
           title: 'Видео',
-          lesson_type: 'Videolesson',
+          lesson_type: LessonType.Videolesson,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -279,7 +279,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -287,7 +287,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.NotStarted,
         },
       ],
@@ -302,7 +302,7 @@ const course: CourseModel = {
           order_number: 3,
           duration: 2,
           title: 'Вебинар',
-          lesson_type: 'Webinar',
+          lesson_type: LessonType.Webinar,
           lesson_progress: LessonProgress.NotStarted,
         },
         {
@@ -310,7 +310,7 @@ const course: CourseModel = {
           order_number: 4,
           duration: 2,
           title: 'Тест',
-          lesson_type: 'Quiz',
+          lesson_type: LessonType.Quiz,
           lesson_progress: LessonProgress.NotStarted,
         },
       ],
