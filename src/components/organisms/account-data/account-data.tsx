@@ -1,4 +1,5 @@
-import { FC, FormEvent, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -6,30 +7,55 @@ import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
-import { useFormWithValidation } from 'hooks/use-form-with-validation';
-import styles from './account-data.module.scss';
+import { getValidationSchema } from 'utils/validation';
 import type { AccountFormData } from './types';
+import styles from './account-data.module.scss';
+
+const schema = getValidationSchema<AccountFormData>(
+  'email',
+  'phone',
+  'password'
+);
+
+const initialValues: AccountFormData = {
+  email: '',
+  phoneNumber: '',
+  password: '',
+};
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
  * */
 
 export const AccountData: FC = () => {
-  const { handleChange, isValid, errors, values, setValues, setIsValid } =
-    useFormWithValidation<AccountFormData>();
-
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
 
+  const handleSubmit = async (
+    values: AccountFormData,
+    { validateForm }: FormikHelpers<AccountFormData>
+  ) => {
+    await validateForm(values);
+
+    const data = {
+      ...values,
+    };
+
+    void dispatch(setAccountData(data));
+  };
+
+  const formik = useFormik<AccountFormData>({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
+
   useEffect(() => {
-    setValues(accountData);
+    void formik.setValues(accountData);
   }, [accountData]);
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(setAccountData(values));
-    setIsValid(false);
-  };
+  const areAllValuesSet =
+    Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   return (
     <Card className={styles.accountData}>
@@ -37,15 +63,16 @@ export const AccountData: FC = () => {
 
       <form
         name="accountDataForm"
-        onSubmit={handleFormSubmit}
+        onSubmit={formik.handleSubmit}
         className={styles.form}
+        noValidate
       >
         <Input
           labelName="Номер телефона"
           type="tel"
           name="phoneNumber"
-          value={values.phoneNumber || ''}
-          onChange={handleChange}
+          value={formik.values.phoneNumber}
+          onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
           disabled
         />
@@ -53,28 +80,25 @@ export const AccountData: FC = () => {
           labelName="Email"
           type="email"
           name="email"
-          value={values.email || ''}
-          onChange={handleChange}
-          isValid={!errors.email}
-          error={errors.email}
-          isWithIcon
+          value={formik.values.email}
+          onChange={formik.handleChange}
           placeholder="Ваш email"
+          disabled
         />
         <Input
           labelName="Пароль"
           type="password"
           name="password"
-          value={values.password || ''}
-          onChange={handleChange}
+          value={formik.values.password}
+          onChange={formik.handleChange}
           placeholder="Ваш пароль"
           isWithIcon
-          minLength={8}
-          isValid={!errors.password}
-          error={errors.password}
+          isValid={!formik.touched.password || !formik.errors.password}
+          error={formik.errors.password}
         />
         <Button
           type="submit"
-          disabled={!isValid}
+          disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           className={styles.submitButton}
           text="Сохранить изменения"
         />

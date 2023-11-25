@@ -10,6 +10,8 @@ const messages = {
   email: 'Введите действительный email адрес',
   phone: 'Телефон должен состоять из 11 цифр',
   confirmPassword: 'Пароли должны совпадать',
+  dateOfBirth: (minDate: string, maxDate: string) =>
+    `Введите верную дату рождения между ${minDate} и ${maxDate}`,
   min: (field: string, num: number) =>
     `Длина ${field} должна быть не менее ${num} символов`,
   max: (field: string, num: number) =>
@@ -18,6 +20,10 @@ const messages = {
 
 const values = {
   password: { min: 8, max: 40 },
+  name: { min: 2 },
+  region: { min: 2 },
+  nickname: { min: 2 },
+  dateOfBirth: { min: '1900-01-01', max: '2050-12-31' },
 };
 
 type ValidationRule = {
@@ -41,6 +47,32 @@ export const validationSchema = createValidationSchema({
     .trim()
     .oneOf([ref('password')], messages.confirmPassword)
     .required(messages.required),
+  name: string()
+    .trim()
+    .min(values.name.min, messages.min('ФИО', values.name.min))
+    .required(messages.required),
+  dateOfBirth: string()
+    .test(
+      'dateOfBirth',
+      messages.dateOfBirth(values.dateOfBirth.min, values.dateOfBirth.max),
+      (value) =>
+        !value ||
+        (new Date(value) >= new Date(values.dateOfBirth.min) &&
+          new Date(value) <= new Date(values.dateOfBirth.max))
+    )
+    .required(messages.required),
+  region: string()
+    .trim()
+    .min(
+      values.region.min,
+      messages.min('названия географического региона', values.region.min)
+    )
+    .required(messages.required),
+  nickname: string()
+    .trim()
+    .min(values.region.min, messages.min('позывного', values.region.min))
+    .required(messages.required),
+  avatar: string().required(messages.required),
 });
 
 export type FieldsTypes = keyof typeof validationSchema;

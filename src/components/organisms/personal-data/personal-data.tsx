@@ -1,4 +1,5 @@
-import { ChangeEvent, FC, FormEvent, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
@@ -6,42 +7,59 @@ import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
-import { useFormWithValidation } from 'hooks/use-form-with-validation';
-import { Patterns } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
+
+const schema = getValidationSchema<PersonalFormData>(
+  'name',
+  'dateOfBirth',
+  'region',
+  'nickname',
+  'avatar'
+);
+
+const initialValues: PersonalFormData = {
+  name: '',
+  dateOfBirth: '',
+  region: '',
+  nickname: '',
+  avatar: '',
+};
 
 /**
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
 
 export const PersonalData: FC = () => {
-  const {
-    handleChange,
-    isValid,
-    errors,
-    handleChangeFiles,
-    values,
-    setValues,
-    setIsValid,
-  } = useFormWithValidation<PersonalFormData>();
-
-  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
   const dispatch = useAppDispatch();
+  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
+
+  const handleSubmit = async (
+    values: PersonalFormData,
+    { validateForm }: FormikHelpers<PersonalFormData>
+  ) => {
+    await validateForm(values);
+
+    const data = {
+      ...values,
+    };
+
+    void dispatch(setPersonalData(data));
+  };
+
+  const formik = useFormik<PersonalFormData>({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
 
   useEffect(() => {
-    setValues(personalData);
+    void formik.setValues(personalData);
   }, [personalData]);
 
-  const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
-    handleChangeFiles(evt, Patterns.image);
-  };
-
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(setPersonalData(values));
-    setIsValid(false);
-  };
+  const areAllValuesSet =
+    Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   return (
     <Card className={styles.personalData}>
@@ -50,75 +68,69 @@ export const PersonalData: FC = () => {
       <form
         name="personalDataForm"
         className={styles.form}
-        onSubmit={handleFormSubmit}
+        onSubmit={formik.handleSubmit}
+        noValidate
       >
         <Input
           labelName="ФИО"
           type="text"
           name="name"
-          value={values.name || ''}
-          onChange={handleChange}
+          value={formik.values.name}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
-          isValid={!errors.name}
-          error={errors.name}
-          minLength={2}
-          required
+          isValid={!formik.touched.name || !formik.errors.name}
+          error={formik.errors.name}
         />
         <Input
           labelName="Дата рождения"
           type="date"
           name="dateOfBirth"
-          value={values.dateOfBirth || ''}
-          onChange={handleChange}
+          value={formik.values.dateOfBirth}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
           max="2050-12-31"
           min="1900-01-01"
-          isValid={!errors.dateOfBirth}
-          error={errors.dateOfBirth}
-          required
+          isValid={!formik.touched.dateOfBirth || !formik.errors.dateOfBirth}
+          error={formik.errors.dateOfBirth}
         />
         <Input
           labelName="Географический регион"
           type="text"
           name="region"
-          value={values.region || ''}
-          onChange={handleChange}
+          value={formik.values.region}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Регион проживания"
-          isValid={!errors.region}
-          error={errors.region}
-          minLength={2}
-          required
+          isValid={!formik.touched.region || !formik.errors.region}
+          error={formik.errors.region}
         />
         <Input
           labelName="Позывной на форуме"
           type="text"
           name="nickname"
-          value={values.nickname || ''}
-          onChange={handleChange}
+          value={formik.values.nickname}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
-          isValid={!errors.nickname}
-          error={errors.nickname}
-          minLength={2}
-          required
+          isValid={!formik.touched.nickname || !formik.errors.nickname}
+          error={formik.errors.nickname}
         />
         <Input
           labelName="Фото"
           type="file"
           accept="image/*"
           name="avatar"
-          value={values.avatar || ''}
-          onChange={onChangeFile}
-          isValid={!errors.avatar}
-          error={errors.avatar}
+          value={formik.values.avatar}
+          onChange={formik.handleChange}
+          isValid={!formik.touched.avatar || !formik.errors.avatar}
+          error={formik.errors.avatar}
           isWithIcon
           placeholder="Ваше фото"
         />
         <Button
-          disabled={!isValid}
+          disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"
