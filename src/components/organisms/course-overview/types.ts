@@ -16,7 +16,7 @@ export type CourseOverviewProps = {
   /** Статус подписки на курс c бэка. */
   userStatus?: UserProgressStatus;
   /** Продолжительность курса в часах. */
-  courseDuration?: Nullable<number>;
+  courseDuration: number;
   /** Обработчик клика по кнопке. */
   onClick?: VoidFunction;
   /** Объект статуса подписки на курс */

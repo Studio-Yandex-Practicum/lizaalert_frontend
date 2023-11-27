@@ -83,7 +83,7 @@ export type CourseModel = {
   /** Количество уроков в курсе. */
   lessons_count: number;
   /** Продолжительность курса в часах. */
-  course_duration: Nullable<number>;
+  course_duration: number;
   /** Список глав курса. */
   chapters: ChapterModel[];
   /** Статус подписки на курс. */

@@ -62,7 +62,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
 
           <Tag className={styles.level} text={level} />
 
-          {duration && (
+          {duration > 0 && (
             <TextWithIcon
               className={styles.duration}
               text={`${duration} ч`}
@@ -70,11 +70,13 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
             />
           )}
 
-          <TextWithIcon
-            className={styles.lessons}
-            text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
-            iconType="lessons"
-          />
+          {lessonsCount > 0 && (
+            <TextWithIcon
+              className={styles.lessons}
+              text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
+              iconType="lessons"
+            />
+          )}
 
           <img
             src={coverPath || placeholderCover}
