@@ -17,9 +17,6 @@ import styles from './account-overview.module.scss';
  * */
 
 export const AccountOverview: FC = () => {
-  // const accountOverview = useAppSelector<AccountOverviewType>(
-  //   selectProfileOverview
-  // );
   const userName = useAppSelector(selectProfileName);
   const coursesFinished = useAppSelector(selectIsProfileCountPassCourse);
   const userOccupation = useAppSelector(selectIsProfileDepartment);
@@ -40,7 +37,7 @@ export const AccountOverview: FC = () => {
           <TextWithIcon
             htmlTag="span"
             // text={accountOverview.userStatus}
-            text="text"
+            text="текст профессионализма"
             iconType="rank"
           />
         </li>

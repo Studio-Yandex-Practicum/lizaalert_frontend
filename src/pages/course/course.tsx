@@ -11,13 +11,16 @@ import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCourse,
+  selectCourseBenefits,
   selectCourseContents,
   selectCourseDescription,
   selectCourseError,
+  selectCourseFAQ,
   selectCourseTitle,
   selectIsCourseLoading,
 } from 'store/course/selectors';
-import { fetchCourse } from 'store/course/thunk';
+import { selectEnrollStatus } from 'store/courses/selectors';
+import { fetchCourseById } from 'store/course/thunk';
 import styles from './course.module.scss';
 
 const Course: FC = () => {
@@ -25,15 +28,18 @@ const Course: FC = () => {
   const dispatch = useAppDispatch();
 
   const course = useAppSelector(selectCourse);
+  const enrollStatus = useAppSelector(selectEnrollStatus);
   const courseTitle = useAppSelector(selectCourseTitle);
   const courseDescription = useAppSelector(selectCourseDescription);
+  const courseBenefits = useAppSelector(selectCourseBenefits);
   const courseContents = useAppSelector(selectCourseContents);
+  const courseFAQ = useAppSelector(selectCourseFAQ);
   const isCourseLoading = useAppSelector(selectIsCourseLoading);
   const courseError = useAppSelector(selectCourseError);
 
   useEffect(() => {
     if (courseId) {
-      void dispatch(fetchCourse(+courseId));
+      void dispatch(fetchCourseById(courseId));
     }
   }, [courseId]);
 
@@ -62,13 +68,15 @@ const Course: FC = () => {
             <CourseDescription description={courseDescription} />
           )}
 
-          <CourseBenefits />
+          {courseBenefits?.length > 0 && (
+            <CourseBenefits benefitsList={courseBenefits} />
+          )}
 
           {courseContents?.length > 0 && (
             <CourseContents content={courseContents} />
           )}
 
-          <FAQ />
+          {courseFAQ?.length > 0 && <FAQ questions={courseFAQ} />}
         </div>
 
         <aside className={styles.aside}>
@@ -79,6 +87,9 @@ const Course: FC = () => {
             level={course.level}
             coverPath={course.cover_path}
             startDate={course.start_date}
+            enrollStatus={enrollStatus[course.id]}
+            userStatus={course.user_status}
+            currentLesson={course.current_lesson}
           />
         </aside>
       </div>

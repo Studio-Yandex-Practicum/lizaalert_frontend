@@ -50,7 +50,7 @@ export const AccountData: FC = () => {
           labelName="Номер телефона"
           type="tel"
           name="phoneNumber"
-          value={values.phone_number || ''}
+          value={values.phoneNumber || ''}
           onChange={handleChange}
           placeholder="Номер телефона начиная с +7"
           disabled

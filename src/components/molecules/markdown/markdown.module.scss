@@ -1,0 +1,80 @@
+@use 'src/styles/variables' as vars;
+@import 'src/styles/typography';
+
+.markdown {
+  font-family: vars.$mainFont;
+  white-space: pre-wrap;
+
+  h1,
+  h2,
+  h3 {
+    margin: 32px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h1 {
+    @extend .typography-size-xxl;
+  }
+
+  h2 {
+    @extend .typography-size-xl;
+  }
+
+  h3 {
+    @extend .typography-size-l;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @extend .typography-size-m;
+    margin: 32px 0 16px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    @extend .typography-size-m;
+    margin: 0 0 24px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul,
+  ol {
+    @extend .typography-size-m;
+    margin: 0 0 32px;
+    padding-left: 27px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-top: 18px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+  a {
+    @extend .typography-size-m;
+    font-weight: 500;
+    color: vars.$dark-primary;
+    text-decoration: none;
+    transition: color vars.$trans-300;
+
+    &:hover {
+      color: vars.$color-hover;
+    }
+  }
+}

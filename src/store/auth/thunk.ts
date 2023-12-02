@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authorizationApi, LoginFormData } from 'api/authorization';
+import {
+  authorizationApi,
+  LoginFormData,
+  RegistrationFormData,
+} from 'api/authorization';
 import { ApiInterceptorConfig, HttpCodes, privateApi } from 'api/core';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
 import type { ApiThunkConfig, ThunkApiDispatch } from '../types';
@@ -52,6 +56,7 @@ const getAuthInterceptor = (
       void privateApi.request(err.config);
     } catch {
       void dispatch(logout());
+      throw new Error();
     }
   },
 });
@@ -65,3 +70,17 @@ export const checkAuth = createAsyncThunk<boolean, null, ApiThunkConfig>(
     return result;
   }
 );
+
+export const fetchRegistration = createAsyncThunk<
+  void,
+  RegistrationFormData,
+  ApiThunkConfig
+>('auth/register', async (user: RegistrationFormData, { dispatch }) => {
+  const result = await authorizationApi.register(user);
+
+  if (!result.id) {
+    throw new Error();
+  }
+
+  void dispatch(fetchAuth({ user, isRememberMe: false }));
+});

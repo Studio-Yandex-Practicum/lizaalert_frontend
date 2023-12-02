@@ -1,5 +1,4 @@
 export type ProfileModel = {
-  /** уточнить какие данные приходят, когда заработает запрос */
   id: number;
   photo: string;
   full_name: string;

@@ -1,4 +1,4 @@
-import type { ChapterModel, LessonModel } from 'api/course';
+import type { ChapterModel, LessonChapterModel } from 'api/course';
 
 export type ContentsItemType = 'main' | 'inner';
 
@@ -13,7 +13,4 @@ export type ContentsItemProps = {
   className?: string;
 };
 
-export type LessonType = LessonModel & {
-  /** Статус прохождения урока. */
-  status: 'finished' | 'active' | 'coming';
-};
+export type LessonType = LessonChapterModel;

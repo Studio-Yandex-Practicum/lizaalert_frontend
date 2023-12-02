@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import type { IconSize, IconType } from 'components/atoms/icon';
 
-export type ButtonView = 'primary' | 'secondary' | 'tertiary' | 'text';
+export type ButtonView = 'primary' | 'secondary' | 'text';
 export type ButtonHover = 'default' | 'border';
 
 export type ButtonProps = {

@@ -1,8 +1,40 @@
-export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
+export enum LessonType {
+  Quiz = 'Quiz',
+  Videolesson = 'Videolesson',
+  Webinar = 'Webinar',
+  Lesson = 'Lesson',
+}
 
-export type LessonStatus = 'Ready' | 'Draft' | 'Published';
+export enum LessonProgress {
+  NotStarted = '0',
+  Started = '1',
+  Finished = '2',
+}
 
-export type LessonModel = {
+export enum UserProgressStatus {
+  Enrolled = 'True',
+  NotEnrolled = 'False',
+}
+
+export type FAQModel = {
+  /** id вопроса. */
+  id: number;
+  /** Вопрос в виде строки. */
+  question: string;
+  /** Ответ в виде строки. */
+  answer: string;
+};
+
+export type KnowledgeModel = {
+  /** id навыка. */
+  id: number;
+  /** Заголовок-название навыка. */
+  title: string;
+  /** Описание навыка. */
+  description: string;
+};
+
+export type LessonChapterModel = {
   /** id урока курса. */
   id: number;
   /** Номер урока в последовательности. */
@@ -13,8 +45,8 @@ export type LessonModel = {
   title: string;
   /** Тип урока. */
   lesson_type: LessonType;
-  /** Статус урока. */
-  lesson_status: LessonStatus;
+  /** Статус прогресса урока. */
+  lesson_progress: LessonProgress;
 };
 
 export type ChapterModel = {
@@ -23,7 +55,12 @@ export type ChapterModel = {
   /** Заголовок-название главы курса. */
   title: string;
   /** Список уроков главы курса. */
-  lessons: LessonModel[];
+  lessons: LessonChapterModel[];
+};
+
+export type CurrentLessonModel = {
+  lesson: number;
+  chapter: number;
 };
 
 export type CourseModel = {
@@ -35,8 +72,10 @@ export type CourseModel = {
   level: string;
   /** Короткое описание курса. */
   full_description: string;
-  /** ??? */
-  knowledge: null;
+  /** Список часто задаваемых вопросов */
+  faq: FAQModel[];
+  /** Список навыков, получаемых на курсе */
+  knowledge: KnowledgeModel[];
   /** Дата начала прохождения курса. */
   start_date: string;
   /** URL к обложке курса. */
@@ -47,4 +86,8 @@ export type CourseModel = {
   course_duration: Nullable<number>;
   /** Список глав курса. */
   chapters: ChapterModel[];
+  /** Статус подписки на курс. */
+  user_status?: UserProgressStatus;
+  /** Id текущего (последнего не пройденного) урока */
+  current_lesson: CurrentLessonModel;
 };

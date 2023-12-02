@@ -1,17 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
 import { selectIsTestLoading, selectTest } from 'store/test/selectors';
-import { selectLesson } from 'store/lesson/selectors';
-import { fetchTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
-import type { TestType } from 'components/organisms/test-preview';
-import type { TestQuestionListType } from '../types';
+import type { TestModel } from 'api/lessons';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake \}
  * */
 
 export const useTest = () => {
@@ -20,40 +17,29 @@ export const useTest = () => {
   const [testResultPercent, setTestResultPercent] = useState(0);
 
   // TODO удалить типы после типизации стора
-  const test = useAppSelector<TestQuestionListType>(selectTest);
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
+  const test = useAppSelector<TestModel>(selectTest);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
-  const { passingScore } = useAppSelector<TestType>(selectLesson);
 
-  const dispatch = useAppDispatch();
+  // TODO Функционал на пересдачу теста
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
+  const retake = () => null;
 
-  const setInitialState = () => {
-    void dispatch(fetchTest());
-    setIsSubmitted(false);
-  };
-
+  // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
   useEffect(() => {
-    setInitialState();
-  }, []);
-
-  useEffect(() => {
-    if (test.questions?.length >= 0) {
+    if (test.passing_score && test.questions && test.questions.length >= 0) {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
-        if (question.type === Controls.RADIO) {
-          question.answers.forEach((answer) => {
-            if (answer.isChecked && answer.isCorrect) percentArr.push(100);
-            if (answer.isChecked && !answer.isCorrect) percentArr.push(0);
+        if (question.question_type === Controls.RADIO) {
+          question.content.forEach(() => {
+            percentArr.push(100);
           });
         } else {
-          const weight = 100 / question.answers.length;
+          const weight = 100 / question.content.length;
           let percent = 0;
-          question.answers.forEach((answer) => {
-            if (
-              (answer.isChecked && answer.isCorrect) ||
-              (!answer.isChecked && !answer.isCorrect)
-            )
-              percent += weight;
+          question.content.forEach(() => {
+            percent += weight;
           });
           percentArr.push(percent);
         }
@@ -66,19 +52,19 @@ export const useTest = () => {
       const resultPercent = Math.round(middlePercent);
 
       setTestResultPercent(resultPercent);
-      setIsSuccess(resultPercent >= passingScore);
+      setIsSuccess(resultPercent >= test.passing_score);
     }
-  }, [passingScore, test.questions]);
+  }, [test.passing_score, test.questions]);
 
   const handleButtonDisabledState = () => {
     let isDisabled = false;
 
-    if (test.questions?.length > 0) {
+    if (test.questions?.length) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
 
-        question.answers.forEach((answer) => {
-          if (answer.isChecked) checkedCount += 1;
+        question.content.forEach(() => {
+          checkedCount += 1;
         });
 
         if (checkedCount === 0) isDisabled = true;
@@ -100,7 +86,7 @@ export const useTest = () => {
     testResultPercent,
     test,
     onSubmit,
-    setInitialState,
     handleButtonDisabledState,
+    retake,
   };
 };

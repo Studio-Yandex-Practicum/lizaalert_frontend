@@ -5,13 +5,13 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import type { CourseModel } from 'api/course';
-import { GENERAL_ERROR } from 'utils/constants';
-import { fetchCourse } from './thunk';
+import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { fetchCourseById } from './thunk';
 import type { CourseState } from './types';
 
 const initialState: CourseState = {
   course: {} as CourseModel,
-  isLoading: false,
+  process: ProcessEnum.Initial,
   error: null,
 };
 
@@ -20,19 +20,19 @@ export const courseSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCourse.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchCourseById.fulfilled, (state, { payload }) => {
       state.course = payload;
     });
-    builder.addMatcher(isPending(fetchCourse), (state) => {
-      state.isLoading = true;
+    builder.addMatcher(isPending(fetchCourseById), (state) => {
+      state.process = ProcessEnum.Requested;
       state.error = null;
     });
-    builder.addMatcher(isFulfilled(fetchCourse), (state) => {
-      state.isLoading = false;
+    builder.addMatcher(isFulfilled(fetchCourseById), (state) => {
+      state.process = ProcessEnum.Succeeded;
       state.error = null;
     });
-    builder.addMatcher(isRejected(fetchCourse), (state, { error }) => {
-      state.isLoading = false;
+    builder.addMatcher(isRejected(fetchCourseById), (state, { error }) => {
+      state.process = ProcessEnum.Failed;
       state.error = error.message ?? GENERAL_ERROR;
     });
   },

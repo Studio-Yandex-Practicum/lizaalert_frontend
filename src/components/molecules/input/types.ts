@@ -1,5 +1,6 @@
 import type { IconType } from 'components/atoms/icon';
 import type { InputHTMLAttributes } from 'react';
+import type { Props as InputMaskProps } from 'react-input-mask';
 
 export type InputType = 'text' | 'date' | 'file' | 'tel' | 'email' | 'password';
 
@@ -20,4 +21,11 @@ export type InputProps = {
   className?: string;
   /** Флаг валидности данных в инпуте. При false показывается текст ошибки из пропа error. */
   isValid?: boolean;
-} & InputHTMLAttributes<HTMLInputElement>;
+  /** необязательный пропс mask из библиотеки https://github.com/sanniassin/react-input-mask */
+} & Partial<Pick<InputMaskProps, 'mask'>> &
+  InputHTMLAttributes<HTMLInputElement>;
+
+export type BaseInputProps = Omit<
+  InputProps,
+  'labelName' | 'isWithIcon' | 'iconType' | 'error' | 'className' | 'mask'
+>;

@@ -24,7 +24,3 @@ export const selectIsProfileCountPassCourse = (state: AppState) =>
   state.profile.profile.count_pass_course;
 export const selectIsProfileCallSign = (state: AppState) =>
   state.profile.profile.call_sign;
-// export const selectProfilePersonal = (state: AppState) =>
-//   state.profile.profile.personalData;
-// export const selectProfileAccount = (state: AppState) =>
-//   state.profile.profile.accountData;

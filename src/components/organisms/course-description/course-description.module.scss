@@ -9,31 +9,6 @@
   color: vars.$dark-primary;
 }
 
-.text {
-  p {
-    margin: 32px 0 0;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
-  }
-}
-
-.titleTasks {
-  margin: 32px 0 16px;
-}
-
-.tasksList {
-  ul {
-    margin: 0;
-    padding-left: 27px;
-    font-size: vars.$font-size-m;
-    line-height: vars.$line-height-m;
-
-    li {
-      margin-top: 18px;
-
-      &:first-of-type {
-        margin-top: 0;
-      }
-    }
-  }
+.markdown {
+  margin-top: 32px;
 }

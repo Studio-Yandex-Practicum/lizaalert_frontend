@@ -5,12 +5,6 @@
   font-family: vars.$mainFont;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
-  color: vars.$dark-primary;
-  transition: color vars.$trans-300;
-
-  &:hover {
-    color: vars.$color-hover;
-  }
 }
 
 .normal {
@@ -23,4 +17,17 @@
 
 .medium {
   font-weight: 500;
+}
+
+.default {
+  color: vars.$dark-primary;
+  transition: color vars.$trans-300;
+
+  &:hover {
+    color: vars.$color-hover;
+  }
+}
+
+.active {
+  color: vars.$color-hover;
 }

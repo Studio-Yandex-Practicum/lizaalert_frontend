@@ -1,30 +1,29 @@
 import type { FC } from 'react';
 import classnames from 'classnames';
-import { Card } from 'components/atoms/card';
-import { Heading } from 'components/atoms/typography';
-import styles from './video-lesson.module.scss';
+import { Markdown } from 'components/molecules/markdown';
 import type { VideoLessonProps } from './types';
+import styles from './video-lesson.module.scss';
 
 /**
  * Компонент-карточка видео-урока. Видео вставляется в `iframe`.
+ * Содержит опциональное описание видео.
  * */
 
-export const VideoLesson: FC<VideoLessonProps> = ({ source, className }) => (
-  <Card className={classnames(styles.container, className)}>
-    <Heading
-      level={2}
-      size="l"
-      weight="bold"
-      className={styles.heading}
-      text="Видео"
-    />
-
+export const VideoLesson: FC<VideoLessonProps> = ({
+  source,
+  description,
+  className,
+}) => (
+  <>
     <iframe
-      className={styles.video}
+      className={classnames(styles.video, className)}
       src={source}
       title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />
-  </Card>
+    {description && (
+      <Markdown className={styles.markdown}>{description}</Markdown>
+    )}
+  </>
 );

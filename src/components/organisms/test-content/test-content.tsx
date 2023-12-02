@@ -1,20 +1,42 @@
-import { FC, useState } from 'react';
-import { Test } from 'components/organisms/test';
+import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Loader } from 'components/molecules/loader';
+import { Test, useTest } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import type { TestContentProps } from './types';
+import { useAppDispatch } from 'store';
+import { fetchTest } from 'store/test/thunk';
 
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
 
-export const TestContent: FC<TestContentProps> = ({ test }) => {
-  const [renderTest, setRenderTest] = useState(test.inProgress);
+export const TestContent: FC = () => {
+  const { lessonId } = useParams();
+  const dispatch = useAppDispatch();
+
+  const { isLoading, test } = useTest();
+
+  useEffect(() => {
+    if (lessonId) {
+      void dispatch(fetchTest(+lessonId));
+    }
+  }, [lessonId]);
+
+  const [renderTest, setRenderTest] = useState<boolean | undefined>(false);
+
+  useEffect(() => {
+    setRenderTest(test.in_progress);
+  }, [test.in_progress]);
 
   const toggleRender = () => setRenderTest(!renderTest);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (renderTest) {
     return <Test toggleRender={toggleRender} />;
   }
 
-  return <TestPreview test={test} toggleRender={toggleRender} />;
+  return <TestPreview toggleRender={toggleRender} />;
 };

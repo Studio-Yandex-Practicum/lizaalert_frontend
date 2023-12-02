@@ -1,6 +1,8 @@
 import type { FC } from 'react';
+import InputMask from 'react-input-mask';
 import classnames from 'classnames';
 import { Icon } from 'components/atoms/icon';
+import { BaseInput } from './base-input';
 import styles from './input.module.scss';
 import type { InputProps } from './types';
 
@@ -13,53 +15,45 @@ export const Input: FC<InputProps> = ({
   labelName = null,
   isWithIcon = false,
   iconType = 'edit',
-  type,
   error = null,
   className,
   isValid = true,
-  name,
-  value,
-  placeholder,
-  disabled,
+  mask,
   ...props
 }) => (
   <div className={classnames(styles.container, className)}>
-    <label htmlFor={name} className={styles.label}>
+    <label htmlFor={props.name} className={styles.label}>
       {labelName && <span className={styles.labelText}>{labelName}</span>}
 
       <div className={styles.inputContainer}>
         {isWithIcon && (
           <Icon
-            type={type === 'file' ? 'attachment' : iconType}
+            type={props.type === 'file' ? 'attachment' : iconType}
             className={styles.icon}
           />
         )}
 
-        <input
-          {...props}
-          id={name}
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          className={classnames(styles.input, {
-            [styles.input_hidden]: type === 'file',
-            [styles.input_warned]: !isValid && !disabled,
-          })}
-          disabled={disabled}
-          type={type}
-        />
+        {mask && (
+          <InputMask mask={mask} onChange={props.onChange} value={props.value}>
+            <BaseInput isValid={isValid} {...props} />
+          </InputMask>
+        )}
 
-        {type === 'file' && (
+        {!mask && <BaseInput isValid={isValid} {...props} />}
+
+        {props.type === 'file' && (
           <span
             className={classnames(styles.input, styles.input_type_file, {
-              [styles.placeholder]: !value,
+              [styles.placeholder]: !props.value,
             })}
           >
-            {value || placeholder}
+            {props.value || props.placeholder}
           </span>
         )}
       </div>
     </label>
-    <span className={styles.error}>{!isValid && !disabled ? error : ''}</span>
+    <span className={styles.error}>
+      {!isValid && !props.disabled ? error : ''}
+    </span>
   </div>
 );

@@ -5,7 +5,7 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR } from 'utils/constants';
-import { checkAuth, fetchAuth, logout } from './thunk';
+import { checkAuth, fetchAuth, fetchRegistration, logout } from './thunk';
 import type { AuthState } from './types';
 
 const initialState: AuthState = {
@@ -19,10 +19,17 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(isPending(checkAuth, fetchAuth, logout), (state) => {
-      state.isLoading = true;
+    builder.addCase(fetchRegistration.fulfilled, (state) => {
+      state.isLoading = false;
       state.error = null;
     });
+    builder.addMatcher(
+      isPending(checkAuth, fetchAuth, fetchRegistration, logout),
+      (state) => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    );
     builder.addMatcher(
       isFulfilled(checkAuth, fetchAuth, logout),
       (state, { payload }) => {
@@ -32,7 +39,7 @@ export const authSlice = createSlice({
       }
     );
     builder.addMatcher(
-      isRejected(checkAuth, fetchAuth, logout),
+      isRejected(checkAuth, fetchAuth, fetchRegistration, logout),
       (state, { error }) => {
         state.isAuth = false;
         state.isLoading = false;
