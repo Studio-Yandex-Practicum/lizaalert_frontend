@@ -1,23 +1,13 @@
 export type Profile = {
-  accountOverview: {
-    avatar: string;
-    userName: string;
-    userStatus: string;
-    userOccupation: string;
-    coursesFinished: number;
-  };
-  personalData: {
-    name: string;
-    dateOfBirth: string;
-    region: string;
-    nickname: string;
-    avatar: string;
-  };
-  accountData: {
-    phoneNumber: string;
-    email: string;
-    password: string;
-  };
+  photo: string;
+  full_name: string;
+  department: string;
+  count_pass_course: string;
+  birth_date: string;
+  location: string;
+  call_sign: string;
+  phone_number: string;
+  email: string;
 };
 
 export type ProfileState = {

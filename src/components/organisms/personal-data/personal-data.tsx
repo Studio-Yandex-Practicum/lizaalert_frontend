@@ -4,10 +4,16 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectProfilePersonal } from 'store/profile/selectors';
-import { setPersonalData } from 'store/profile/slice';
+import {
+  selectProfileName,
+  selectIsProfileDateOfBirth,
+  selectIsProfileLocation,
+  selectIsProfilePhoto,
+  selectIsProfileCallSign,
+} from 'store/profile/selectors';
 import { useFormWithValidation } from 'hooks/use-form-with-validation';
 import { Patterns } from 'utils/constants';
+import { fetchProfile } from 'store/profile/thunk';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
@@ -26,12 +32,18 @@ export const PersonalData: FC = () => {
     setIsValid,
   } = useFormWithValidation<PersonalFormData>();
 
-  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
+  const name = useAppSelector(selectProfileName);
+  const dateOfBirth = useAppSelector(selectIsProfileDateOfBirth);
+  const location = useAppSelector(selectIsProfileLocation);
+  const nickname = useAppSelector(selectIsProfileCallSign);
+  const avatar = useAppSelector(selectIsProfilePhoto);
+
+  const personalData = { name, dateOfBirth, location, nickname, avatar };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setValues(personalData);
-  }, [personalData]);
+  }, []);
 
   const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
     handleChangeFiles(evt, Patterns.image);
@@ -39,7 +51,7 @@ export const PersonalData: FC = () => {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(setPersonalData(values));
+    void dispatch(fetchProfile());
     setIsValid(false);
   };
 

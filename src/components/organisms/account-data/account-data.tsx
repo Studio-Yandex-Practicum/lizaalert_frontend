@@ -4,9 +4,12 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useAppDispatch, useAppSelector } from 'store';
-import { setAccountData } from 'store/profile/slice';
-import { selectProfileAccount } from 'store/profile/selectors';
+import {
+  selectProfileEmail,
+  selectProfilePhone,
+} from 'store/profile/selectors';
 import { useFormWithValidation } from 'hooks/use-form-with-validation';
+import { fetchProfile } from 'store/profile/thunk';
 import styles from './account-data.module.scss';
 import type { AccountFormData } from './types';
 
@@ -18,17 +21,19 @@ export const AccountData: FC = () => {
   const { handleChange, isValid, errors, values, setValues, setIsValid } =
     useFormWithValidation<AccountFormData>();
 
-  const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
+  const email = useAppSelector(selectProfileEmail);
+  const phoneNumber = useAppSelector(selectProfilePhone);
+
+  const accountData = { email, phoneNumber };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setValues(accountData);
-  }, [accountData]);
+  }, []);
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(setAccountData(values));
-    console.log('setAccountData(values)', values);
+    void dispatch(fetchProfile());
     setIsValid(false);
   };
 
@@ -45,7 +50,7 @@ export const AccountData: FC = () => {
           labelName="Номер телефона"
           type="tel"
           name="phoneNumber"
-          value={values.phoneNumber || ''}
+          value={values.phone_number || ''}
           onChange={handleChange}
           placeholder="Номер телефона начиная с +7"
           disabled

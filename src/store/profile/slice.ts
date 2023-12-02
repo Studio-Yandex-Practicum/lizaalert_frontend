@@ -1,13 +1,13 @@
-import {
-  PayloadAction,
-  createSlice,
-  isFulfilled,
-  isPending,
-  isRejected,
-} from '@reduxjs/toolkit';
-import { GENERAL_ERROR } from '../../utils/constants';
-import { fetchProfile } from './thunk';
-import type { Profile, ProfileState } from './types';
+// import {
+//   PayloadAction,
+//   createSlice,
+//   isFulfilled,
+//   isPending,
+//   isRejected,
+// } from '@reduxjs/toolkit';
+// import { GENERAL_ERROR } from '../../utils/constants';
+// import { fetchProfile } from './thunk';
+// import type { Profile, ProfileState } from './types';
 
 // export const profileSlice = createSlice({
 //   name: 'profile',
@@ -47,27 +47,28 @@ import type { Profile, ProfileState } from './types';
 
 // export default profileSlice.reducer;
 
+import {
+  // PayloadAction,
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
+import { GENERAL_ERROR } from '../../utils/constants';
+import { fetchProfile } from './thunk';
+import type { ProfileState } from './types';
+
 const initialState: ProfileState = {
   profile: {
-    accountOverview: {
-      avatar: '',
-      userName: '',
-      userStatus: '',
-      userOccupation: '',
-      coursesFinished: 0,
-    },
-    personalData: {
-      name: '',
-      dateOfBirth: '',
-      region: '',
-      nickname: '',
-      avatar: '',
-    },
-    accountData: {
-      phoneNumber: '',
-      email: '',
-      password: '',
-    },
+    photo: '',
+    full_name: '',
+    department: '',
+    count_pass_course: '',
+    birth_date: '',
+    location: '',
+    call_sign: '',
+    phone_number: '',
+    email: '',
   },
   isLoading: false,
   error: null,
@@ -76,26 +77,7 @@ const initialState: ProfileState = {
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {
-    setPersonalData: (
-      state,
-      action: PayloadAction<Partial<Profile['personalData']>>
-    ) => {
-      state.profile.personalData = {
-        ...state.profile.personalData,
-        ...action.payload,
-      };
-    },
-    setAccountData: (
-      state,
-      action: PayloadAction<Partial<Profile['accountData']>>
-    ) => {
-      state.profile.accountData = {
-        ...state.profile.accountData,
-        ...action.payload,
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProfile.fulfilled, (state, { payload }) => {
       state.profile = payload;
@@ -117,6 +99,6 @@ export const profileSlice = createSlice({
   },
 });
 
-export const { setPersonalData, setAccountData } = profileSlice.actions;
+// export const { setPersonalData, setAccountData } = profileSlice.actions;
 
 export default profileSlice.reducer;
