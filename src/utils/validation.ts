@@ -5,13 +5,20 @@ const regExps = {
   phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
 };
 
+const currentDate = new Date();
+const currentDay = String(currentDate.getDate()).padStart(2, '0');
+const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+const currentYear = currentDate.getFullYear();
+const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
+
 const messages = {
   required: 'Это поле обязательно',
   email: 'Введите действительный email адрес',
   phone: 'Телефон должен состоять из 11 цифр',
   confirmPassword: 'Пароли должны совпадать',
+  avatar: 'Допустимы только изображения',
   dateOfBirth: (minDate: string, maxDate: string) =>
-    `Введите верную дату рождения между ${minDate} и ${maxDate}`,
+    `Введите корректную дату рождения между ${minDate} и ${maxDate}`,
   min: (field: string, num: number) =>
     `Длина ${field} должна быть не менее ${num} символов`,
   max: (field: string, num: number) =>
@@ -23,7 +30,7 @@ const values = {
   name: { min: 2 },
   region: { min: 2 },
   nickname: { min: 2 },
-  dateOfBirth: { min: '1900-01-01', max: '2050-12-31' },
+  dateOfBirth: { min: '01.01.1900', max: formattedCurrentDate },
 };
 
 type ValidationRule = {
@@ -72,7 +79,16 @@ export const validationSchema = createValidationSchema({
     .trim()
     .min(values.region.min, messages.min('позывного', values.region.min))
     .required(messages.required),
-  avatar: string().required(messages.required),
+  avatar: string()
+    .test('avatar', messages.avatar, (value) => {
+      if (!value) {
+        return false;
+      }
+      const allowedExtensions = ['jpg', 'jpeg', 'png'];
+      const extension = (value.split('.') || []).pop();
+      return !!extension && allowedExtensions.includes(extension.toLowerCase());
+    })
+    .required(messages.required),
 });
 
 export type FieldsTypes = keyof typeof validationSchema;

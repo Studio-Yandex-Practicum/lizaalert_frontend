@@ -40,12 +40,7 @@ export const PersonalData: FC = () => {
     { validateForm }: FormikHelpers<PersonalFormData>
   ) => {
     await validateForm(values);
-
-    const data = {
-      ...values,
-    };
-
-    void dispatch(setPersonalData(data));
+    void dispatch(setPersonalData(values));
   };
 
   const formik = useFormik<PersonalFormData>({
@@ -90,8 +85,6 @@ export const PersonalData: FC = () => {
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
-          max="2050-12-31"
-          min="1900-01-01"
           isValid={!formik.touched.dateOfBirth || !formik.errors.dateOfBirth}
           error={formik.errors.dateOfBirth}
         />

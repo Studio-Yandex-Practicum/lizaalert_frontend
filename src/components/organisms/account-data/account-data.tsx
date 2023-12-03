@@ -1,3 +1,4 @@
+// import { FC, useState, useEffect } from 'react';
 import { FC, useEffect } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
@@ -31,17 +32,15 @@ export const AccountData: FC = () => {
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
 
+  // const [isFormChanged, setIsFormChanged] = useState(false);
+
   const handleSubmit = async (
     values: AccountFormData,
     { validateForm }: FormikHelpers<AccountFormData>
   ) => {
     await validateForm(values);
-
-    const data = {
-      ...values,
-    };
-
-    void dispatch(setAccountData(data));
+    void dispatch(setAccountData(values));
+    // setIsFormChanged(false);
   };
 
   const formik = useFormik<AccountFormData>({
@@ -50,12 +49,18 @@ export const AccountData: FC = () => {
     onSubmit: handleSubmit,
   });
 
-  useEffect(() => {
-    void formik.setValues(accountData);
-  }, [accountData]);
-
   const areAllValuesSet =
     Object.keys(formik.values).length === Object.keys(formik.touched).length;
+
+  // const handleInputChange = () => {
+  //   setIsFormChanged(true);
+  // };
+
+  useEffect(() => {
+    void formik.setValues(accountData);
+
+    // setIsFormChanged(areAllValuesSet);
+  }, [accountData, formik.values]);
 
   return (
     <Card className={styles.accountData}>
@@ -98,7 +103,9 @@ export const AccountData: FC = () => {
         />
         <Button
           type="submit"
-          disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
+          disabled={
+            !areAllValuesSet && (formik.isSubmitting || !formik.isValid)
+          }
           className={styles.submitButton}
           text="Сохранить изменения"
         />
