@@ -13,7 +13,7 @@ export type CoursePreviewModel = {
   /** Количество уроков в курсе. */
   lessons_count: number;
   /** Продолжительность курса в часах. */
-  course_duration: number;
+  course_duration: Nullable<number>;
   /** Статус курса. */
   course_status: 'active' | 'inactive' | 'finished' | 'booked';
   /** URL к обложке курса. */
