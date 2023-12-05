@@ -1,5 +1,4 @@
-// import { FC, useState, useEffect } from 'react';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -29,38 +28,41 @@ const initialValues: AccountFormData = {
  * */
 
 export const AccountData: FC = () => {
+  const [isNewAccountData, setIsNewAccountData] = useState(false);
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
-
-  // const [isFormChanged, setIsFormChanged] = useState(false);
 
   const handleSubmit = async (
     values: AccountFormData,
     { validateForm }: FormikHelpers<AccountFormData>
   ) => {
     await validateForm(values);
-    void dispatch(setAccountData(values));
-    // setIsFormChanged(false);
+    if (Object.keys(validateForm(values)).length === 0) {
+      void dispatch(setAccountData(values));
+    }
+  };
+
+  const validate = (values: AccountFormData) => {
+    if (values.password !== accountData.password) {
+      setIsNewAccountData(true);
+    } else {
+      setIsNewAccountData(false);
+    }
   };
 
   const formik = useFormik<AccountFormData>({
     initialValues,
     validationSchema: schema,
+    validate,
     onSubmit: handleSubmit,
   });
 
-  const areAllValuesSet =
-    Object.keys(formik.values).length === Object.keys(formik.touched).length;
-
-  // const handleInputChange = () => {
-  //   setIsFormChanged(true);
-  // };
+  // const areAllValuesSet =
+  //   Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   useEffect(() => {
     void formik.setValues(accountData);
-
-    // setIsFormChanged(areAllValuesSet);
-  }, [accountData, formik.values]);
+  }, [accountData]);
 
   return (
     <Card className={styles.accountData}>
@@ -104,7 +106,7 @@ export const AccountData: FC = () => {
         <Button
           type="submit"
           disabled={
-            !areAllValuesSet && (formik.isSubmitting || !formik.isValid)
+            !isNewAccountData && (formik.isSubmitting || !formik.isValid)
           }
           className={styles.submitButton}
           text="Сохранить изменения"

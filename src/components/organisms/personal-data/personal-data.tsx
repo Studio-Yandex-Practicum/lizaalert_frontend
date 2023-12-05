@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -32,6 +32,7 @@ const initialValues: PersonalFormData = {
  * */
 
 export const PersonalData: FC = () => {
+  const [isNewPersonalData, setIsNewPersonalData] = useState(false);
   const dispatch = useAppDispatch();
   const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
 
@@ -40,21 +41,40 @@ export const PersonalData: FC = () => {
     { validateForm }: FormikHelpers<PersonalFormData>
   ) => {
     await validateForm(values);
-    void dispatch(setPersonalData(values));
+    if (Object.keys(validateForm(values)).length === 0) {
+      void dispatch(setPersonalData(values));
+    }
+  };
+
+  const validate = (values: PersonalFormData) => {
+    if (values.name !== personalData.name) {
+      setIsNewPersonalData(true);
+    } else if (values.dateOfBirth !== personalData.dateOfBirth) {
+      setIsNewPersonalData(true);
+    } else if (values.region !== personalData.region) {
+      setIsNewPersonalData(true);
+    } else if (values.nickname !== personalData.nickname) {
+      setIsNewPersonalData(true);
+    } else if (values.avatar !== personalData.avatar) {
+      setIsNewPersonalData(true);
+    } else {
+      setIsNewPersonalData(false);
+    }
   };
 
   const formik = useFormik<PersonalFormData>({
     initialValues,
     validationSchema: schema,
+    validate,
     onSubmit: handleSubmit,
   });
+
+  // const areAllValuesSet =
+  //   Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   useEffect(() => {
     void formik.setValues(personalData);
   }, [personalData]);
-
-  const areAllValuesSet =
-    Object.keys(formik.values).length === Object.keys(formik.touched).length;
 
   return (
     <Card className={styles.personalData}>
@@ -123,7 +143,9 @@ export const PersonalData: FC = () => {
           placeholder="Ваше фото"
         />
         <Button
-          disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
+          disabled={
+            !isNewPersonalData && (formik.isSubmitting || !formik.isValid)
+          }
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"
