@@ -57,8 +57,8 @@ export type LessonBreadcrumbsModel = {
 };
 
 export type NextLessonModel = {
-  id: number;
-  chapter_id: number;
+  chapter_id: Nullable<number>;
+  lesson_id: Nullable<number>;
 };
 
 export enum UserLessonProgress {
@@ -95,7 +95,7 @@ export type LessonModel = {
   /** Статус прохождения урока */
   user_lesson_progress?: UserLessonProgress;
   /** Объект с информацией о след. уроке */
-  next_lesson: Nullable<NextLessonModel>;
+  next_lesson: NextLessonModel;
   /** Объект с информацией о пред. уроке */
-  prev_lesson: Nullable<NextLessonModel>;
+  prev_lesson: NextLessonModel;
 };

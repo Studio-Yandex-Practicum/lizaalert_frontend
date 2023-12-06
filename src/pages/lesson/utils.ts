@@ -8,9 +8,9 @@ export const getNextOrPrevRoute = (
   const nextOrPrevLesson =
     type === 'prev' ? lesson.prev_lesson : lesson.next_lesson;
 
-  if (!nextOrPrevLesson) {
+  if (!nextOrPrevLesson.lesson_id || !nextOrPrevLesson.chapter_id) {
     return '';
   }
 
-  return `${routes.course.path}/${lesson.course_id}/${nextOrPrevLesson.chapter_id}/${nextOrPrevLesson.id}`;
+  return `${routes.course.path}/${lesson.course_id}/${nextOrPrevLesson.chapter_id}/${nextOrPrevLesson.lesson_id}`;
 };
