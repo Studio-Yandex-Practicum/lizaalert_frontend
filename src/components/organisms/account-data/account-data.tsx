@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -19,7 +19,7 @@ const schema = getValidationSchema<AccountFormData>(
 
 const initialValues: AccountFormData = {
   email: '',
-  phoneNumber: '',
+  phone: '',
   password: '',
 };
 
@@ -28,7 +28,7 @@ const initialValues: AccountFormData = {
  * */
 
 export const AccountData: FC = () => {
-  const [isNewAccountData, setIsNewAccountData] = useState(false);
+  // const [isNewAccountData, setIsNewAccountData] = useState(false);
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
 
@@ -37,25 +37,35 @@ export const AccountData: FC = () => {
     { validateForm }: FormikHelpers<AccountFormData>
   ) => {
     await validateForm(values);
-    if (Object.keys(validateForm(values)).length === 0) {
-      void dispatch(setAccountData(values));
-    }
+    // if (Object.keys(validateForm(values))  {
+    void dispatch(setAccountData(values));
+    // }
   };
 
-  const validate = (values: AccountFormData) => {
-    if (values.password !== accountData.password) {
-      setIsNewAccountData(true);
-    } else {
-      setIsNewAccountData(false);
-    }
-  };
+  // const validate = (values: AccountFormData) => {
+  //   if (values.password !== accountData.password) {
+  //     setIsNewAccountData(true);
+  //   } else {
+  //     setIsNewAccountData(false);
+  //   }
+  // };
 
   const formik = useFormik<AccountFormData>({
     initialValues,
     validationSchema: schema,
-    validate,
+    // validate,
     onSubmit: handleSubmit,
   });
+
+  const compareObjectFields = (
+    first: Record<string, unknown>,
+    second: Record<string, unknown>,
+    fields: string[]
+  ): boolean => fields.every((key) => first[key] === second[key]);
+
+  const areSameValues = compareObjectFields(accountData, formik.values, [
+    'password',
+  ]);
 
   // const areAllValuesSet =
   //   Object.keys(formik.values).length === Object.keys(formik.touched).length;
@@ -78,7 +88,7 @@ export const AccountData: FC = () => {
           labelName="Номер телефона"
           type="tel"
           name="phoneNumber"
-          value={formik.values.phoneNumber}
+          value={formik.values.phone}
           onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
           disabled
@@ -105,9 +115,7 @@ export const AccountData: FC = () => {
         />
         <Button
           type="submit"
-          disabled={
-            !isNewAccountData && (formik.isSubmitting || !formik.isValid)
-          }
+          disabled={areSameValues && (formik.isSubmitting || !formik.isValid)}
           className={styles.submitButton}
           text="Сохранить изменения"
         />

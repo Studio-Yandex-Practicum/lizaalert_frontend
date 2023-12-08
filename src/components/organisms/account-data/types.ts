@@ -1,6 +1,6 @@
 export type AccountFormData = {
   /** Номер телефона пользователя. */
-  phoneNumber: string;
+  phone: string;
   /** Email пользователя. */
   email: string;
   /** Пароль от аккаунта пользователя. */
