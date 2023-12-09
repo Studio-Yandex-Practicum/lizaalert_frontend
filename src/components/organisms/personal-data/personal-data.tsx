@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
 import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
@@ -32,7 +33,6 @@ const initialValues: PersonalFormData = {
  * */
 
 export const PersonalData: FC = () => {
-  const [isNewPersonalData, setIsNewPersonalData] = useState(false);
   const dispatch = useAppDispatch();
   const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
 
@@ -41,36 +41,28 @@ export const PersonalData: FC = () => {
     { validateForm }: FormikHelpers<PersonalFormData>
   ) => {
     await validateForm(values);
-    if (Object.keys(validateForm(values)).length === 0) {
-      void dispatch(setPersonalData(values));
-    }
-  };
-
-  const validate = (values: PersonalFormData) => {
-    if (values.name !== personalData.name) {
-      setIsNewPersonalData(true);
-    } else if (values.dateOfBirth !== personalData.dateOfBirth) {
-      setIsNewPersonalData(true);
-    } else if (values.region !== personalData.region) {
-      setIsNewPersonalData(true);
-    } else if (values.nickname !== personalData.nickname) {
-      setIsNewPersonalData(true);
-    } else if (values.avatar !== personalData.avatar) {
-      setIsNewPersonalData(true);
-    } else {
-      setIsNewPersonalData(false);
-    }
+    void dispatch(setPersonalData(values));
   };
 
   const formik = useFormik<PersonalFormData>({
     initialValues,
     validationSchema: schema,
-    validate,
     onSubmit: handleSubmit,
   });
 
-  // const areAllValuesSet =
-  //   Object.keys(formik.values).length === Object.keys(formik.touched).length;
+  const fieldsToCompare = [
+    'name',
+    'dateOfBirth',
+    'region',
+    'nickname',
+    'avatar',
+  ];
+
+  const areSameValues = compareObjectFields(
+    personalData,
+    formik.values,
+    fieldsToCompare
+  );
 
   useEffect(() => {
     void formik.setValues(personalData);
@@ -143,9 +135,7 @@ export const PersonalData: FC = () => {
           placeholder="Ваше фото"
         />
         <Button
-          disabled={
-            !isNewPersonalData && (formik.isSubmitting || !formik.isValid)
-          }
+          disabled={areSameValues && (formik.isSubmitting || !formik.isValid)}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"

@@ -1,5 +1,6 @@
 import type { Schema } from 'yup';
 import { object, ObjectSchema, ref, string } from 'yup';
+import { Patterns } from './constants';
 
 const regExps = {
   phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
@@ -84,9 +85,7 @@ export const validationSchema = createValidationSchema({
       if (!value) {
         return false;
       }
-      const allowedExtensions = ['jpg', 'jpeg', 'png'];
-      const extension = (value.split('.') || []).pop();
-      return !!extension && allowedExtensions.includes(extension.toLowerCase());
+      return Patterns.image.test(value);
     })
     .required(messages.required),
 });

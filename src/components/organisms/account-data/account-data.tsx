@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
 import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
@@ -28,7 +29,6 @@ const initialValues: AccountFormData = {
  * */
 
 export const AccountData: FC = () => {
-  // const [isNewAccountData, setIsNewAccountData] = useState(false);
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
 
@@ -37,38 +37,22 @@ export const AccountData: FC = () => {
     { validateForm }: FormikHelpers<AccountFormData>
   ) => {
     await validateForm(values);
-    // if (Object.keys(validateForm(values))  {
     void dispatch(setAccountData(values));
-    // }
   };
-
-  // const validate = (values: AccountFormData) => {
-  //   if (values.password !== accountData.password) {
-  //     setIsNewAccountData(true);
-  //   } else {
-  //     setIsNewAccountData(false);
-  //   }
-  // };
 
   const formik = useFormik<AccountFormData>({
     initialValues,
     validationSchema: schema,
-    // validate,
     onSubmit: handleSubmit,
   });
 
-  const compareObjectFields = (
-    first: Record<string, unknown>,
-    second: Record<string, unknown>,
-    fields: string[]
-  ): boolean => fields.every((key) => first[key] === second[key]);
+  const fieldsToCompare = ['phone'];
 
-  const areSameValues = compareObjectFields(accountData, formik.values, [
-    'password',
-  ]);
-
-  // const areAllValuesSet =
-  //   Object.keys(formik.values).length === Object.keys(formik.touched).length;
+  const areSameValues = compareObjectFields(
+    accountData,
+    formik.values,
+    fieldsToCompare
+  );
 
   useEffect(() => {
     void formik.setValues(accountData);
@@ -87,11 +71,11 @@ export const AccountData: FC = () => {
         <Input
           labelName="Номер телефона"
           type="tel"
-          name="phoneNumber"
+          name="phone"
           value={formik.values.phone}
           onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
-          disabled
+          isWithIcon
         />
         <Input
           labelName="Email"
@@ -101,17 +85,6 @@ export const AccountData: FC = () => {
           onChange={formik.handleChange}
           placeholder="Ваш email"
           disabled
-        />
-        <Input
-          labelName="Пароль"
-          type="password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          placeholder="Ваш пароль"
-          isWithIcon
-          isValid={!formik.touched.password || !formik.errors.password}
-          error={formik.errors.password}
         />
         <Button
           type="submit"
