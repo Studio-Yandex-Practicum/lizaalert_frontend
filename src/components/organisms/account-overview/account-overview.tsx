@@ -37,12 +37,20 @@ export const AccountOverview: FC = () => {
           <TextWithIcon
             htmlTag="span"
             // text={accountOverview.userStatus}
-            text="текст профессионализма"
+            text="Дефолтный новичок"
             iconType="rank"
           />
         </li>
         <li className={styles.accountMetaItem}>
-          <TextWithIcon htmlTag="span" text={userOccupation} iconType="role" />
+          <TextWithIcon
+            htmlTag="span"
+            text={
+              userOccupation !== null && userOccupation !== undefined
+                ? `${userOccupation}`
+                : 'Дефолтный картограф'
+            }
+            iconType="role"
+          />
         </li>
         <li className={styles.accountMetaItem}>
           <TextWithIcon
