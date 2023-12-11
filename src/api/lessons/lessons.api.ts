@@ -12,7 +12,7 @@ class LessonsApi extends BaseApi {
 
   completeLesson = (id: string) =>
     this.createRequest({
-      request: () => privateApi.get(`${SERVICE_URL}${id}/complete`),
+      request: () => privateApi.post(`${SERVICE_URL}${id}/complete/`),
     });
 
   getTest = (id: number) =>
