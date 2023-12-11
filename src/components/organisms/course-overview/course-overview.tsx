@@ -55,7 +55,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
           </Li>
         )}
 
-        {courseDuration && courseDuration > 0 && (
+        {courseDuration && (
           <Li className={styles.courseMetaItem}>
             <TextWithIcon text="Продолжительность:" iconType="duration" />
             {courseDuration} ч

@@ -62,7 +62,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
 
           <Tag className={styles.level} text={level} />
 
-          {duration && duration > 0 && (
+          {duration && (
             <TextWithIcon
               className={styles.duration}
               text={`${duration} ч`}
