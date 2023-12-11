@@ -87,7 +87,7 @@ export const validationSchema = createValidationSchema({
       }
       return Patterns.image.test(value);
     })
-    .required(messages.required),
+    .optional(),
 });
 
 export type FieldsTypes = keyof typeof validationSchema;
@@ -100,7 +100,9 @@ export const getValidationSchema = <
   const schema: Partial<typeof validationSchema> = {};
 
   fields.forEach((field) => {
-    schema[field] = validationSchema[field];
+    if (field !== 'avatar') {
+      schema[field] = validationSchema[field];
+    }
   });
 
   return object(schema) as ObjectSchema<T>;

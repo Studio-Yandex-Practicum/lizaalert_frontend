@@ -64,3 +64,13 @@ export const AFTER_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
   [ProcessEnum.Succeeded]: true,
   [ProcessEnum.Failed]: true,
 };
+
+export const PHONE_MASK = '+7 (999) 999-99-99';
+
+export const USER_DATA = {
+  name: 'name',
+  dateOfBirth: 'dateOfBirth',
+  region: 'region',
+  nickname: 'nickname',
+  avatar: 'avatar',
+};

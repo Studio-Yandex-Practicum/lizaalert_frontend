@@ -28,6 +28,7 @@ const initialValues: PersonalFormData = {
   avatar: '',
 };
 
+const fieldsToCompare = ['name', 'dateOfBirth', 'region', 'nickname', 'avatar'];
 /**
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
@@ -49,14 +50,6 @@ export const PersonalData: FC = () => {
     validationSchema: schema,
     onSubmit: handleSubmit,
   });
-
-  const fieldsToCompare = [
-    'name',
-    'dateOfBirth',
-    'region',
-    'nickname',
-    'avatar',
-  ];
 
   const areSameValues = compareObjectFields(
     personalData,
@@ -135,7 +128,7 @@ export const PersonalData: FC = () => {
           placeholder="Ваше фото"
         />
         <Button
-          disabled={areSameValues && (formik.isSubmitting || !formik.isValid)}
+          disabled={areSameValues || formik.isSubmitting}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"

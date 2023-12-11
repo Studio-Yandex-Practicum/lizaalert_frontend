@@ -9,20 +9,18 @@ import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
+import { PHONE_MASK } from 'utils/constants';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
-const schema = getValidationSchema<AccountFormData>(
-  'email',
-  'phone',
-  'password'
-);
+const schema = getValidationSchema<AccountFormData>('email', 'phone');
 
 const initialValues: AccountFormData = {
   email: '',
   phone: '',
-  password: '',
 };
+
+const fieldsToCompare = ['phone'];
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
@@ -46,8 +44,6 @@ export const AccountData: FC = () => {
     onSubmit: handleSubmit,
   });
 
-  const fieldsToCompare = ['phone'];
-
   const areSameValues = compareObjectFields(
     accountData,
     formik.values,
@@ -69,6 +65,7 @@ export const AccountData: FC = () => {
         noValidate
       >
         <Input
+          mask={PHONE_MASK}
           labelName="Номер телефона"
           type="tel"
           name="phone"
@@ -88,7 +85,7 @@ export const AccountData: FC = () => {
         />
         <Button
           type="submit"
-          disabled={areSameValues && (formik.isSubmitting || !formik.isValid)}
+          disabled={areSameValues || formik.isSubmitting}
           className={styles.submitButton}
           text="Сохранить изменения"
         />

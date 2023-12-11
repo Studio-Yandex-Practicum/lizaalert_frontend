@@ -9,6 +9,7 @@ import { routes } from 'config';
 import { getValidationSchema } from 'utils/validation';
 import { useAppDispatch } from 'store';
 import { fetchRegistration } from 'store/auth/thunk';
+import { PHONE_MASK } from 'utils/constants';
 import type { UserRegisterFormData } from './types';
 import styles from './register-form.module.scss';
 
@@ -83,7 +84,7 @@ export const RegisterForm: FC = () => {
           onChange={formik.handleChange}
         />
         <Input
-          mask="+7 (999) 999-99-99"
+          mask={PHONE_MASK}
           value={formik.values.phone}
           onChange={formik.handleChange}
           labelName="Номер телефона"
