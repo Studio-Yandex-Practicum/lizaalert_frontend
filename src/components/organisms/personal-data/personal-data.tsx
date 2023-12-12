@@ -62,6 +62,10 @@ export const PersonalData: FC = () => {
     void formik.setValues(personalData);
   }, [personalData]);
 
+  console.log('formik.isValid', formik.isValid);
+  console.log('formik.isSubmitting', formik.isSubmitting);
+  console.log('areSameValues', areSameValues);
+
   return (
     <Card className={styles.personalData}>
       <Heading level={3} size="l" text="Личные данные" weight="bold" />
@@ -129,7 +133,7 @@ export const PersonalData: FC = () => {
           placeholder="Ваше фото"
         />
         <Button
-          disabled={areSameValues || formik.isSubmitting}
+          disabled={areSameValues || !formik.isValid}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"

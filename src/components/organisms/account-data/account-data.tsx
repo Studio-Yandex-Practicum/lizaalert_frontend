@@ -88,7 +88,7 @@ export const AccountData: FC = () => {
         />
         <Button
           type="submit"
-          disabled={areSameValues || formik.isSubmitting}
+          disabled={areSameValues || !formik.isValid}
           className={styles.submitButton}
           text="Сохранить изменения"
         />
