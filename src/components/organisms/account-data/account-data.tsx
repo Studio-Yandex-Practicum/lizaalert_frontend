@@ -9,11 +9,14 @@ import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
-import { PHONE_MASK } from 'utils/constants';
+import { PHONE_MASK, UserData } from 'utils/constants';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
-const schema = getValidationSchema<AccountFormData>('email', 'phone');
+const schema = getValidationSchema<AccountFormData>(
+  UserData.email,
+  UserData.phone
+);
 
 const initialValues: AccountFormData = {
   email: '',

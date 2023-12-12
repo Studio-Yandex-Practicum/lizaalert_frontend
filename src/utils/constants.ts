@@ -67,10 +67,12 @@ export const AFTER_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
 
 export const PHONE_MASK = '+7 (999) 999-99-99';
 
-export const USER_DATA = {
-  name: 'name',
-  dateOfBirth: 'dateOfBirth',
-  region: 'region',
-  nickname: 'nickname',
-  avatar: 'avatar',
-};
+export enum UserData {
+  name = 'name',
+  dateOfBirth = 'dateOfBirth',
+  region = 'region',
+  nickname = 'nickname',
+  avatar = 'avatar',
+  email = 'email',
+  phone = 'phone',
+}

@@ -9,15 +9,16 @@ import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
+import { UserData } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
 const schema = getValidationSchema<PersonalFormData>(
-  'name',
-  'dateOfBirth',
-  'region',
-  'nickname',
-  'avatar'
+  UserData.name,
+  UserData.dateOfBirth,
+  UserData.region,
+  UserData.nickname,
+  UserData.avatar
 );
 
 const initialValues: PersonalFormData = {
