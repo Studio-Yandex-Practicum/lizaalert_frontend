@@ -48,15 +48,19 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
           {level}
         </Li>
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Количество занятий:" iconType="lessons" />
-          {lessonsCount}
-        </Li>
+        {lessonsCount > 0 && (
+          <Li className={styles.courseMetaItem}>
+            <TextWithIcon text="Количество занятий:" iconType="lessons" />
+            {lessonsCount}
+          </Li>
+        )}
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {courseDuration ?? 0} ч
-        </Li>
+        {courseDuration && (
+          <Li className={styles.courseMetaItem}>
+            <TextWithIcon text="Продолжительность:" iconType="duration" />
+            {courseDuration} ч
+          </Li>
+        )}
 
         <Li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />

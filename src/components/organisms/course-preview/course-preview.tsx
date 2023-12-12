@@ -70,11 +70,13 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
             />
           )}
 
-          <TextWithIcon
-            className={styles.lessons}
-            text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
-            iconType="lessons"
-          />
+          {lessonsCount > 0 && (
+            <TextWithIcon
+              className={styles.lessons}
+              text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
+              iconType="lessons"
+            />
+          )}
 
           <img
             src={coverPath || placeholderCover}
