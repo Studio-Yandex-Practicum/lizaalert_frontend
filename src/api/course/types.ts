@@ -12,8 +12,8 @@ export enum LessonProgress {
 }
 
 export enum UserProgressStatus {
-  Enrolled = 'True',
-  NotEnrolled = 'False',
+  Enrolled = 'enrolled',
+  NotEnrolled = 'not_enrolled',
 }
 
 export type FAQModel = {
