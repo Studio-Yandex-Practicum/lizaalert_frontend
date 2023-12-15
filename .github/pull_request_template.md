@@ -1,6 +1,6 @@
-## Связанная задача: [Название задачи](Сюда вставить ссылку на задачу в notion: жмём на карточку задачи, жмём на три точки в правом верхнем углу, нажимаем Copy link)
+## Связанная задача: [Название задачи буквами](Сюда вставить ссылку на задачу)
 
-### [Чеклист](https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/blob/master/docs/style-guide.md)
+### [Стайлгайд](https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/blob/master/docs/style-guide.md)
 
 ### Описание выполненной работы:
 
