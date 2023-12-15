@@ -1,0 +1,29 @@
+@use 'variables' as vars;
+
+@mixin lesson-layout {
+  display: flex;
+  align-items: flex-start;
+  column-gap: vars.$grid-gap;
+  margin-top: 32px;
+  padding-bottom: 68px;
+}
+
+@mixin lesson-content {
+  width: 100%;
+  max-width: 872px;
+  display: flex;
+  flex-direction: column;
+  row-gap: vars.$grid-gap;
+}
+
+@mixin lesson-contents {
+  min-width: 300px;
+}
+
+@mixin breadcrumbs {
+  margin-top: 32px;
+}
+
+@mixin error {
+  width: 100%;
+}

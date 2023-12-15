@@ -94,7 +94,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   className,
 }) => {
   const { id, title, lessons } = content;
-  const { courseId = '', topicId = '' } = useParams();
+  const { courseId = '', chapterId = '' } = useParams();
 
   const lessonsList = useMemo(
     () => (
@@ -122,7 +122,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
         titleSize="m"
         titleWeight="normal"
         className={classnames(styles.accordion, className)}
-        open={content.id === +topicId}
+        open={content.id === +chapterId}
       >
         {lessonsList}
       </Accordion>

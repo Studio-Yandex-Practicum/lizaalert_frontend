@@ -29,10 +29,13 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       },
       user_lesson_progress: UserLessonProgress.Finished,
       next_lesson: {
-        id: 2,
+        lesson_id: 2,
         chapter_id: 1,
       },
-      prev_lesson: null,
+      prev_lesson: {
+        lesson_id: null,
+        chapter_id: null,
+      },
     },
     2: {
       id: 2,
@@ -58,11 +61,11 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       },
       user_lesson_progress: UserLessonProgress.Finished,
       next_lesson: {
-        id: 3,
+        lesson_id: 3,
         chapter_id: 1,
       },
       prev_lesson: {
-        id: 1,
+        lesson_id: 1,
         chapter_id: 1,
       },
     },
@@ -91,11 +94,11 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       },
       user_lesson_progress: UserLessonProgress.Finished,
       next_lesson: {
-        id: 4,
+        lesson_id: 4,
         chapter_id: 1,
       },
       prev_lesson: {
-        id: 2,
+        lesson_id: 2,
         chapter_id: 1,
       },
     },
@@ -121,13 +124,13 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           title: 'Курс',
         },
       },
-      user_lesson_progress: UserLessonProgress.InProgress,
+      user_lesson_progress: UserLessonProgress.Finished,
       next_lesson: {
-        id: 5,
+        lesson_id: 5,
         chapter_id: 1,
       },
       prev_lesson: {
-        id: 3,
+        lesson_id: 3,
         chapter_id: 1,
       },
     },
@@ -153,10 +156,13 @@ const lessons: Record<string, Record<string, LessonModel>> = {
           title: 'Курс',
         },
       },
-      user_lesson_progress: UserLessonProgress.NotStarted,
-      next_lesson: null,
+      user_lesson_progress: UserLessonProgress.InProgress,
+      next_lesson: {
+        lesson_id: null,
+        chapter_id: null,
+      },
       prev_lesson: {
-        id: 4,
+        lesson_id: 4,
         chapter_id: 1,
       },
     },
