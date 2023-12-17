@@ -1,16 +1,12 @@
 import type { Schema } from 'yup';
 import { object, ObjectSchema, ref, string } from 'yup';
-import { Patterns } from './constants';
+import { Patterns, UserDataFieldNames } from './constants';
 
 const regExps = {
   phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
 };
 
 const currentDate = new Date();
-const currentDay = String(currentDate.getDate()).padStart(2, '0');
-const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-const currentYear = currentDate.getFullYear();
-const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
 
 const messages = {
   required: 'Это поле обязательно',
@@ -31,7 +27,7 @@ const values = {
   name: { min: 2 },
   region: { min: 2 },
   nickname: { min: 2 },
-  dateOfBirth: { min: '01.01.1900', max: formattedCurrentDate },
+  dateOfBirth: { min: new Date('1900-01-01'), max: currentDate },
 };
 
 type ValidationRule = {
@@ -41,46 +37,52 @@ type ValidationRule = {
 const createValidationSchema = <T extends ValidationRule>(rule: T) => rule;
 
 export const validationSchema = createValidationSchema({
-  email: string().trim().email(messages.email).required(messages.required),
-  phone: string()
+  [UserDataFieldNames.Email]: string()
+    .trim()
+    .email(messages.email)
+    .required(messages.required),
+  [UserDataFieldNames.Phone]: string()
     .trim()
     .matches(regExps.phone, messages.phone)
     .required(messages.required),
-  password: string()
+  [UserDataFieldNames.Password]: string()
     .trim()
     .min(values.password.min, messages.min('пароля', values.password.min))
     .max(values.password.max, messages.min('пароля', values.password.max))
     .required(messages.required),
-  confirmPassword: string()
+  [UserDataFieldNames.ConfirmPassword]: string()
     .trim()
     .oneOf([ref('password')], messages.confirmPassword)
     .required(messages.required),
-  name: string()
+  [UserDataFieldNames.Name]: string()
     .trim()
     .min(values.name.min, messages.min('ФИО', values.name.min))
     .required(messages.required),
-  dateOfBirth: string()
+  [UserDataFieldNames.DateOfBirth]: string()
     .test(
       'dateOfBirth',
-      messages.dateOfBirth(values.dateOfBirth.min, values.dateOfBirth.max),
+      messages.dateOfBirth(
+        formatDate(values.dateOfBirth.min),
+        formatDate(values.dateOfBirth.max)
+      ),
       (value) =>
         !value ||
-        (new Date(value) >= new Date(values.dateOfBirth.min) &&
-          new Date(value) <= new Date(values.dateOfBirth.max))
+        (new Date(value) >= values.dateOfBirth.min &&
+          new Date(value) <= values.dateOfBirth.max)
     )
     .required(messages.required),
-  region: string()
+  [UserDataFieldNames.Region]: string()
     .trim()
     .min(
       values.region.min,
       messages.min('названия географического региона', values.region.min)
     )
     .required(messages.required),
-  nickname: string()
+  [UserDataFieldNames.Nickname]: string()
     .trim()
     .min(values.region.min, messages.min('позывного', values.region.min))
     .required(messages.required),
-  avatar: string()
+  [UserDataFieldNames.Avatar]: string()
     .test('avatar', messages.avatar, (value) => {
       if (!value) {
         return false;
@@ -89,6 +91,13 @@ export const validationSchema = createValidationSchema({
     })
     .optional(),
 });
+
+function formatDate(date: Date): string {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
 
 export type FieldsTypes = keyof typeof validationSchema;
 
@@ -100,7 +109,7 @@ export const getValidationSchema = <
   const schema: Partial<typeof validationSchema> = {};
 
   fields.forEach((field) => {
-    if (field !== 'avatar') {
+    if (field !== UserDataFieldNames.Avatar) {
       schema[field] = validationSchema[field];
     }
   });

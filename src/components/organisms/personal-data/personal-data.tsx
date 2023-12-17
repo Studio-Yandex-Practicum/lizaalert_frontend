@@ -9,27 +9,33 @@ import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
-import { UserData } from 'utils/constants';
+import { UserDataFieldNames } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
 const schema = getValidationSchema<PersonalFormData>(
-  UserData.name,
-  UserData.dateOfBirth,
-  UserData.region,
-  UserData.nickname,
-  UserData.avatar
+  UserDataFieldNames.Name,
+  UserDataFieldNames.DateOfBirth,
+  UserDataFieldNames.Region,
+  UserDataFieldNames.Nickname,
+  UserDataFieldNames.Avatar
 );
 
 const initialValues: PersonalFormData = {
-  name: '',
-  dateOfBirth: '',
-  region: '',
-  nickname: '',
-  avatar: '',
+  [UserDataFieldNames.Name]: '',
+  [UserDataFieldNames.DateOfBirth]: '',
+  [UserDataFieldNames.Region]: '',
+  [UserDataFieldNames.Nickname]: '',
+  [UserDataFieldNames.Avatar]: '',
 };
 
-const fieldsToCompare = ['name', 'dateOfBirth', 'region', 'nickname', 'avatar'];
+const fieldsToCompare = [
+  UserDataFieldNames.Name,
+  UserDataFieldNames.DateOfBirth,
+  UserDataFieldNames.Region,
+  UserDataFieldNames.Nickname,
+  UserDataFieldNames.Avatar,
+];
 /**
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
@@ -62,10 +68,6 @@ export const PersonalData: FC = () => {
     void formik.setValues(personalData);
   }, [personalData]);
 
-  console.log('formik.isValid', formik.isValid);
-  console.log('formik.isSubmitting', formik.isSubmitting);
-  console.log('areSameValues', areSameValues);
-
   return (
     <Card className={styles.personalData}>
       <Heading level={3} size="l" text="Личные данные" weight="bold" />
@@ -79,8 +81,8 @@ export const PersonalData: FC = () => {
         <Input
           labelName="ФИО"
           type="text"
-          name="name"
-          value={formik.values.name}
+          name={UserDataFieldNames.Name}
+          value={formik.values[UserDataFieldNames.Name]}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
@@ -90,8 +92,8 @@ export const PersonalData: FC = () => {
         <Input
           labelName="Дата рождения"
           type="date"
-          name="dateOfBirth"
-          value={formik.values.dateOfBirth}
+          name={UserDataFieldNames.DateOfBirth}
+          value={formik.values[UserDataFieldNames.DateOfBirth]}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
@@ -101,8 +103,8 @@ export const PersonalData: FC = () => {
         <Input
           labelName="Географический регион"
           type="text"
-          name="region"
-          value={formik.values.region}
+          name={UserDataFieldNames.Region}
+          value={formik.values[UserDataFieldNames.Region]}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Регион проживания"
@@ -112,8 +114,8 @@ export const PersonalData: FC = () => {
         <Input
           labelName="Позывной на форуме"
           type="text"
-          name="nickname"
-          value={formik.values.nickname}
+          name={UserDataFieldNames.Nickname}
+          value={formik.values[UserDataFieldNames.Nickname]}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
@@ -124,8 +126,8 @@ export const PersonalData: FC = () => {
           labelName="Фото"
           type="file"
           accept="image/*"
-          name="avatar"
-          value={formik.values.avatar}
+          name={UserDataFieldNames.Avatar}
+          value={formik.values[UserDataFieldNames.Avatar]}
           onChange={formik.handleChange}
           isValid={!formik.touched.avatar || !formik.errors.avatar}
           error={formik.errors.avatar}
@@ -133,7 +135,7 @@ export const PersonalData: FC = () => {
           placeholder="Ваше фото"
         />
         <Button
-          disabled={areSameValues || !formik.isValid}
+          disabled={areSameValues || formik.isSubmitting}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"

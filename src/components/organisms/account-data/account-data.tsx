@@ -9,21 +9,21 @@ import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
-import { PHONE_MASK, UserData } from 'utils/constants';
+import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
 const schema = getValidationSchema<AccountFormData>(
-  UserData.email,
-  UserData.phone
+  UserDataFieldNames.Email,
+  UserDataFieldNames.Phone
 );
 
 const initialValues: AccountFormData = {
-  email: '',
-  phone: '',
+  [UserDataFieldNames.Email]: '',
+  [UserDataFieldNames.Phone]: '',
 };
 
-const fieldsToCompare = ['phone'];
+const fieldsToCompare = [UserDataFieldNames.Phone];
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
@@ -71,8 +71,8 @@ export const AccountData: FC = () => {
           mask={PHONE_MASK}
           labelName="Номер телефона"
           type="tel"
-          name="phone"
-          value={formik.values.phone}
+          name={UserDataFieldNames.Phone}
+          value={formik.values[UserDataFieldNames.Phone]}
           onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
           isWithIcon
@@ -80,15 +80,15 @@ export const AccountData: FC = () => {
         <Input
           labelName="Email"
           type="email"
-          name="email"
-          value={formik.values.email}
+          name={UserDataFieldNames.Email}
+          value={formik.values[UserDataFieldNames.Email]}
           onChange={formik.handleChange}
           placeholder="Ваш email"
           disabled
         />
         <Button
           type="submit"
-          disabled={areSameValues || !formik.isValid}
+          disabled={areSameValues || formik.isSubmitting}
           className={styles.submitButton}
           text="Сохранить изменения"
         />

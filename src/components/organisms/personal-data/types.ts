@@ -1,12 +1,14 @@
+import { UserDataFieldNames } from 'utils/constants';
+
 export type PersonalFormData = {
   /** ФИО пользователя. */
-  name: string;
+  [UserDataFieldNames.Name]: string;
   /** Дата рождения пользователя в формате YYYY-MM-DD. */
-  dateOfBirth: string;
+  [UserDataFieldNames.DateOfBirth]: string;
   /** Регион проживания пользователя. */
-  region: string;
+  [UserDataFieldNames.Region]: string;
   /** Позывной пользователя в организации. */
-  nickname: string;
+  [UserDataFieldNames.Nickname]: string;
   /** URL к аватару пользователя. */
-  avatar: string;
+  [UserDataFieldNames.Avatar]: string;
 };
