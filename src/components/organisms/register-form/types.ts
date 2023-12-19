@@ -1,10 +1,12 @@
+import { UserDataFieldNames } from 'utils/constants';
+
 export type UserRegisterFormData = {
   /** Email пользователя. */
-  email: string;
+  [UserDataFieldNames.Email]: string;
   /** Номер телефона пользователя. */
-  phone: string;
+  [UserDataFieldNames.Phone]: string;
   /** Пароль от аккаунта пользователя. */
-  password: string;
+  [UserDataFieldNames.Password]: string;
   /** Подтверждение пароля */
-  confirmPassword: string;
+  [UserDataFieldNames.ConfirmPassword]: string;
 };

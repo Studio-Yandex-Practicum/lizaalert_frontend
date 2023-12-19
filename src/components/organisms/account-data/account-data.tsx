@@ -1,35 +1,61 @@
-import { FC, FormEvent, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
+import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
-import { useFormWithValidation } from 'hooks/use-form-with-validation';
-import styles from './account-data.module.scss';
 import type { AccountFormData } from './types';
+import styles from './account-data.module.scss';
+
+const initialValues: AccountFormData = {
+  [UserDataFieldNames.Email]: '',
+  [UserDataFieldNames.Phone]: '',
+};
+
+const fieldsToCompare = [UserDataFieldNames.Phone];
+
+const schema = getValidationSchema<AccountFormData>(
+  UserDataFieldNames.Email,
+  ...fieldsToCompare
+);
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
  * */
 
 export const AccountData: FC = () => {
-  const { handleChange, isValid, errors, values, setValues, setIsValid } =
-    useFormWithValidation<AccountFormData>();
-
   const accountData = useAppSelector<AccountFormData>(selectProfileAccount);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    setValues(accountData);
-  }, [accountData]);
-
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(setAccountData(values));
-    setIsValid(false);
+  const handleSubmit = async (
+    values: AccountFormData,
+    { validateForm }: FormikHelpers<AccountFormData>
+  ) => {
+    await validateForm(values);
+    void dispatch(setAccountData(values));
   };
+
+  const formik = useFormik<AccountFormData>({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
+
+  const areSameValues = compareObjectFields(
+    accountData,
+    formik.values,
+    fieldsToCompare
+  );
+
+  useEffect(() => {
+    void formik.setValues(accountData);
+  }, [accountData]);
 
   return (
     <Card className={styles.accountData}>
@@ -37,44 +63,37 @@ export const AccountData: FC = () => {
 
       <form
         name="accountDataForm"
-        onSubmit={handleFormSubmit}
+        onSubmit={formik.handleSubmit}
         className={styles.form}
+        noValidate
       >
         <Input
+          mask={PHONE_MASK}
           labelName="Номер телефона"
           type="tel"
-          name="phoneNumber"
-          value={values.phoneNumber || ''}
-          onChange={handleChange}
+          name={UserDataFieldNames.Phone}
+          value={formik.values[UserDataFieldNames.Phone]}
+          isValid={
+            !formik.touched[UserDataFieldNames.Phone] ||
+            !formik.errors[UserDataFieldNames.Phone]
+          }
+          error={formik.errors[UserDataFieldNames.Phone]}
+          onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
-          disabled
+          isWithIcon
         />
         <Input
           labelName="Email"
           type="email"
-          name="email"
-          value={values.email || ''}
-          onChange={handleChange}
-          isValid={!errors.email}
-          error={errors.email}
-          isWithIcon
+          name={UserDataFieldNames.Email}
+          value={formik.values[UserDataFieldNames.Email]}
+          onChange={formik.handleChange}
           placeholder="Ваш email"
-        />
-        <Input
-          labelName="Пароль"
-          type="password"
-          name="password"
-          value={values.password || ''}
-          onChange={handleChange}
-          placeholder="Ваш пароль"
-          isWithIcon
-          minLength={8}
-          isValid={!errors.password}
-          error={errors.password}
+          disabled
         />
         <Button
           type="submit"
-          disabled={!isValid}
+          disabled={areSameValues || formik.isSubmitting}
           className={styles.submitButton}
           text="Сохранить изменения"
         />

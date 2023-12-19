@@ -31,9 +31,9 @@ export const ErrorMessages = {
   confirmPassword: 'Пароли не совпадают',
 };
 
-export const Patterns = {
+export const RegExpPatterns = {
   email: '[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$',
-  tel: '\\+7\\s?[0-9]{10}',
+  phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
   image: /\.(gif|jpg|jpeg|tiff|png)$/i,
 };
 
@@ -64,3 +64,17 @@ export const AFTER_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
   [ProcessEnum.Succeeded]: true,
   [ProcessEnum.Failed]: true,
 };
+
+export const PHONE_MASK = '+7 (999) 999-99-99';
+
+export enum UserDataFieldNames {
+  Name = 'name',
+  DateOfBirth = 'dateOfBirth',
+  Region = 'region',
+  Nickname = 'nickname',
+  Avatar = 'avatar',
+  Email = 'email',
+  Phone = 'phone',
+  Password = 'password',
+  ConfirmPassword = 'confirmPassword',
+}
