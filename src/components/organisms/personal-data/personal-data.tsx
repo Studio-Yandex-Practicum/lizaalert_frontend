@@ -4,12 +4,12 @@ import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
+import { UserDataFieldNames } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
-import { getValidationSchema } from 'utils/validation';
-import { compareObjectFields } from 'utils/compare-object-fields';
-import { UserDataFieldNames } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 

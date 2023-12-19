@@ -4,12 +4,12 @@ import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
+import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
 import { setAccountData } from 'store/profile/slice';
 import { selectProfileAccount } from 'store/profile/selectors';
-import { getValidationSchema } from 'utils/validation';
-import { compareObjectFields } from 'utils/compare-object-fields';
-import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
