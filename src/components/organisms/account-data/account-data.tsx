@@ -13,17 +13,17 @@ import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
 
-const schema = getValidationSchema<AccountFormData>(
-  UserDataFieldNames.Email,
-  UserDataFieldNames.Phone
-);
-
 const initialValues: AccountFormData = {
   [UserDataFieldNames.Email]: '',
   [UserDataFieldNames.Phone]: '',
 };
 
 const fieldsToCompare = [UserDataFieldNames.Phone];
+
+const schema = getValidationSchema<AccountFormData>(
+  UserDataFieldNames.Email,
+  ...fieldsToCompare
+);
 
 /**
  * Компонент-виджет с редактируемой формой данных аккаунта.
@@ -73,6 +73,11 @@ export const AccountData: FC = () => {
           type="tel"
           name={UserDataFieldNames.Phone}
           value={formik.values[UserDataFieldNames.Phone]}
+          isValid={
+            !formik.touched[UserDataFieldNames.Phone] ||
+            !formik.errors[UserDataFieldNames.Phone]
+          }
+          error={formik.errors[UserDataFieldNames.Phone]}
           onChange={formik.handleChange}
           placeholder="Номер телефона начиная с +7"
           isWithIcon

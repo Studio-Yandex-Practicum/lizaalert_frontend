@@ -13,14 +13,6 @@ import { UserDataFieldNames } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
-const schema = getValidationSchema<PersonalFormData>(
-  UserDataFieldNames.Name,
-  UserDataFieldNames.DateOfBirth,
-  UserDataFieldNames.Region,
-  UserDataFieldNames.Nickname,
-  UserDataFieldNames.Avatar
-);
-
 const initialValues: PersonalFormData = {
   [UserDataFieldNames.Name]: '',
   [UserDataFieldNames.DateOfBirth]: '',
@@ -36,6 +28,9 @@ const fieldsToCompare = [
   UserDataFieldNames.Nickname,
   UserDataFieldNames.Avatar,
 ];
+
+const schema = getValidationSchema<PersonalFormData>(...fieldsToCompare);
+
 /**
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
@@ -86,8 +81,11 @@ export const PersonalData: FC = () => {
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
-          isValid={!formik.touched.name || !formik.errors.name}
-          error={formik.errors.name}
+          isValid={
+            !formik.touched[UserDataFieldNames.Name] ||
+            !formik.errors[UserDataFieldNames.Name]
+          }
+          error={formik.errors[UserDataFieldNames.Name]}
         />
         <Input
           labelName="Дата рождения"
@@ -97,8 +95,11 @@ export const PersonalData: FC = () => {
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
-          isValid={!formik.touched.dateOfBirth || !formik.errors.dateOfBirth}
-          error={formik.errors.dateOfBirth}
+          isValid={
+            !formik.touched[UserDataFieldNames.DateOfBirth] ||
+            !formik.errors[UserDataFieldNames.DateOfBirth]
+          }
+          error={formik.errors[UserDataFieldNames.DateOfBirth]}
         />
         <Input
           labelName="Географический регион"
@@ -108,8 +109,11 @@ export const PersonalData: FC = () => {
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Регион проживания"
-          isValid={!formik.touched.region || !formik.errors.region}
-          error={formik.errors.region}
+          isValid={
+            !formik.touched[UserDataFieldNames.Region] ||
+            !formik.errors[UserDataFieldNames.Region]
+          }
+          error={formik.errors[UserDataFieldNames.Region]}
         />
         <Input
           labelName="Позывной на форуме"
@@ -119,8 +123,11 @@ export const PersonalData: FC = () => {
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
-          isValid={!formik.touched.nickname || !formik.errors.nickname}
-          error={formik.errors.nickname}
+          isValid={
+            !formik.touched[UserDataFieldNames.Nickname] ||
+            !formik.errors[UserDataFieldNames.Nickname]
+          }
+          error={formik.errors[UserDataFieldNames.Nickname]}
         />
         <Input
           labelName="Фото"
@@ -129,8 +136,11 @@ export const PersonalData: FC = () => {
           name={UserDataFieldNames.Avatar}
           value={formik.values[UserDataFieldNames.Avatar]}
           onChange={formik.handleChange}
-          isValid={!formik.touched.avatar || !formik.errors.avatar}
-          error={formik.errors.avatar}
+          isValid={
+            !formik.touched[UserDataFieldNames.Avatar] ||
+            !formik.errors[UserDataFieldNames.Avatar]
+          }
+          error={formik.errors[UserDataFieldNames.Avatar]}
           isWithIcon
           placeholder="Ваше фото"
         />

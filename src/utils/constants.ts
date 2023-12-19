@@ -31,9 +31,9 @@ export const ErrorMessages = {
   confirmPassword: 'Пароли не совпадают',
 };
 
-export const Patterns = {
+export const RegExpPatterns = {
   email: '[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$',
-  tel: '\\+7\\s?[0-9]{10}',
+  phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
   image: /\.(gif|jpg|jpeg|tiff|png)$/i,
 };
 

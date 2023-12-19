@@ -6,7 +6,7 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { useFormWithValidation } from 'hooks/use-form-with-validation';
-import { Patterns } from 'utils/constants';
+import { RegExpPatterns } from 'utils/constants';
 import styles from './restore-password-form.module.scss';
 import type { RestorePasswordFormData } from './types';
 
@@ -37,7 +37,7 @@ export const RestorePasswordForm: FC = () => {
           onChange={handleChange}
           error={errors.email}
           isValid={!errors.email}
-          pattern={Patterns.email}
+          pattern={RegExpPatterns.email}
           type="email"
           placeholder="Ведите адрес электронной почты"
         />

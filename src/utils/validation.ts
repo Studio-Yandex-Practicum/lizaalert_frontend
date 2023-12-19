@@ -1,10 +1,6 @@
 import type { Schema } from 'yup';
 import { object, ObjectSchema, ref, string } from 'yup';
-import { Patterns, UserDataFieldNames } from './constants';
-
-const regExps = {
-  phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
-};
+import { RegExpPatterns, UserDataFieldNames } from './constants';
 
 const currentDate = new Date();
 
@@ -43,7 +39,7 @@ export const validationSchema = createValidationSchema({
     .required(messages.required),
   [UserDataFieldNames.Phone]: string()
     .trim()
-    .matches(regExps.phone, messages.phone)
+    .matches(RegExpPatterns.phone, messages.phone)
     .required(messages.required),
   [UserDataFieldNames.Password]: string()
     .trim()
@@ -52,7 +48,7 @@ export const validationSchema = createValidationSchema({
     .required(messages.required),
   [UserDataFieldNames.ConfirmPassword]: string()
     .trim()
-    .oneOf([ref('password')], messages.confirmPassword)
+    .oneOf([ref(UserDataFieldNames.Password)], messages.confirmPassword)
     .required(messages.required),
   [UserDataFieldNames.Name]: string()
     .trim()
@@ -60,7 +56,7 @@ export const validationSchema = createValidationSchema({
     .required(messages.required),
   [UserDataFieldNames.DateOfBirth]: string()
     .test(
-      'dateOfBirth',
+      UserDataFieldNames.DateOfBirth,
       messages.dateOfBirth(
         formatDate(values.dateOfBirth.min),
         formatDate(values.dateOfBirth.max)
@@ -83,11 +79,11 @@ export const validationSchema = createValidationSchema({
     .min(values.region.min, messages.min('позывного', values.region.min))
     .required(messages.required),
   [UserDataFieldNames.Avatar]: string()
-    .test('avatar', messages.avatar, (value) => {
+    .test(UserDataFieldNames.Avatar, messages.avatar, (value) => {
       if (!value) {
         return false;
       }
-      return Patterns.image.test(value);
+      return RegExpPatterns.image.test(value);
     })
     .optional(),
 });
