@@ -1,7 +1,7 @@
 @use 'src/styles/variables' as vars;
 @import 'src/styles/lesson-page';
 
-.lesson {
+.wrapper {
   @include lesson-layout;
 }
 
@@ -15,10 +15,6 @@
 
 .breadcrumbs {
   @include breadcrumbs;
-}
-
-.heading {
-  margin-bottom: 32px;
 }
 
 .error {

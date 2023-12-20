@@ -1,5 +1,12 @@
 import type { RouteType } from './types';
 
+export const SUBROUTES = {
+  courseId: ':courseId',
+  chapterId: ':chapterId',
+  lessonId: ':lessonId',
+  complete: 'complete',
+};
+
 export const defaultRoutes: Record<string, RouteType> = {
   courses: {
     title: 'Курсы',
@@ -10,21 +17,21 @@ export const defaultRoutes: Record<string, RouteType> = {
     title: 'Курс',
     path: '/course',
     icon: 'course',
-    children: [
-      {
-        path: ':courseId',
-        mockTitle: 'Кинологическое направление',
+    children: {
+      course: {
+        path: SUBROUTES.courseId,
       },
-      {
-        path: ':courseId/:topicId',
-        mockTitle:
-          '5. Работа «второго номера» совместно со следовым кинологическим расчётом',
+      chapter: {
+        path: `${SUBROUTES.courseId}/${SUBROUTES.chapterId}`,
       },
-      {
-        path: ':courseId/:topicId/:lessonId',
-        mockTitle: 'Дрессировка поисково-спасательных собак',
+      lesson: {
+        path: `${SUBROUTES.courseId}/${SUBROUTES.chapterId}/${SUBROUTES.lessonId}`,
       },
-    ],
+      complete: {
+        title: 'Курс завершен',
+        path: `${SUBROUTES.courseId}/${SUBROUTES.chapterId}/${SUBROUTES.lessonId}/${SUBROUTES.complete}`,
+      },
+    },
   },
   profile: {
     title: 'Профиль',
