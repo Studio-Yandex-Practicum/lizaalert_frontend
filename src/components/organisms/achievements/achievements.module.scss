@@ -1,0 +1,12 @@
+.achievements {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &Flex {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    align-self: end;
+  }
+}

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useEffect, type FC } from 'react';
 import defaultImg from 'assets/images/profile.jpg';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -6,6 +6,9 @@ import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { useAppSelector } from 'store';
 import { selectProfileOverview } from 'store/profile/selectors';
+import { Achievements } from 'components/organisms/achievements/achievements';
+import { useDispatch } from 'react-redux';
+import { fetchAchievement } from 'store/achievements/thunk';
 import styles from './account-overview.module.scss';
 import type { AccountOverviewType } from './types';
 
@@ -18,6 +21,12 @@ export const AccountOverview: FC = () => {
     selectProfileOverview
   );
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    void dispatch(fetchAchievement() as any);
+  }, []);
+
   return (
     <Card className={styles.accountOverview}>
       <div className={styles.avatarContainer}>
@@ -28,7 +37,13 @@ export const AccountOverview: FC = () => {
       <Heading level={3} weight="bold" className={styles.personalData}>
         {accountOverview.userName}
       </Heading>
-
+      <Achievements
+        // eslint-disable-next-line react/jsx-no-bind
+        onMouseEnter={function (): void {}}
+        // eslint-disable-next-line react/jsx-no-bind
+        onMouseLeave={function (): void {}}
+        key=""
+      />
       <ul className={styles.accountMeta}>
         <li className={styles.accountMetaItem}>
           <TextWithIcon
