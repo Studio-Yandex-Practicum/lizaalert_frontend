@@ -1,5 +1,5 @@
 import { BaseApi, privateApi } from '../core';
-import type { CourseModel } from './types';
+import type { CourseModel, EnrollModel } from './types';
 
 const SERVICE_URL = '/courses/';
 
@@ -11,8 +11,13 @@ class CourseApi extends BaseApi {
     });
 
   enroll = (id: number) =>
-    this.createRequest({
+    this.createRequest<EnrollModel>({
       request: () => privateApi.post(`${SERVICE_URL}${id}/enroll/`),
+    });
+
+  unroll = (id: number) =>
+    this.createRequest({
+      request: () => privateApi.post(`${SERVICE_URL}${id}/unroll/`),
     });
 }
 

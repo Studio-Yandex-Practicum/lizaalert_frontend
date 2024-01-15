@@ -5,15 +5,26 @@ import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsAuth } from 'store/auth/selectors';
-import { enrollCourseById } from 'store/courses/thunk';
+import { enrollCourseById, unrollCourseById } from 'store/courses/thunk';
 import type { EnrollStatusType } from 'store/courses/types';
 import type { CurrentLessonModel } from 'api/course/types';
 
 type UseEnrollCourseConfig = {
+  /** id курса */
   id: number;
+  /** Статус подписки на курс как есть */
   userStatus: UserProgressStatus;
+  /** Объект текущего урока из модели курса как есть */
+  currentLesson: Nullable<CurrentLessonModel>;
+  /** Изменяемые данные статуса подписки на курс из стора */
   enrollStatus?: EnrollStatusType;
-  currentLesson: CurrentLessonModel;
+};
+
+type UseEnrollCourse = {
+  isEnrolled: boolean;
+  buttonText: string;
+  handleEnroll: () => void;
+  handleUnroll: () => void;
 };
 
 export const useEnrollCourse = ({
@@ -21,23 +32,40 @@ export const useEnrollCourse = ({
   userStatus,
   enrollStatus,
   currentLesson,
-}: UseEnrollCourseConfig) => {
+}: UseEnrollCourseConfig): UseEnrollCourse => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(selectIsAuth);
 
   const isEnrolled =
-    userStatus === UserProgressStatus.Enrolled ||
-    enrollStatus?.process === ProcessEnum.Succeeded;
+    enrollStatus?.userStatus === UserProgressStatus.Enrolled ||
+    userStatus === UserProgressStatus.Enrolled;
 
-  const buttonText: string = useMemo(
+  const isNotEnrolled =
+    enrollStatus?.userStatus === UserProgressStatus.NotEnrolled ||
+    userStatus === UserProgressStatus.NotEnrolled;
+
+  const buttonText = useMemo(
     () =>
       isEnrolled
         ? CourseStatusButtons[UserProgressStatus.Enrolled]
         : CourseStatusButtons[userStatus ?? UserProgressStatus.NotEnrolled],
     [userStatus, isEnrolled]
   );
+
+  const isCurrentLessonAvailableAfterEnroll =
+    typeof enrollStatus?.currentLesson?.chapter_id === 'number' &&
+    typeof enrollStatus?.currentLesson?.lesson_id === 'number';
+
+  const lessonInProgress: CurrentLessonModel = {
+    chapter_id: isCurrentLessonAvailableAfterEnroll
+      ? enrollStatus?.currentLesson?.chapter_id
+      : currentLesson?.chapter_id,
+    lesson_id: isCurrentLessonAvailableAfterEnroll
+      ? enrollStatus?.currentLesson?.lesson_id
+      : currentLesson?.lesson_id,
+  };
 
   const handleEnroll = () => {
     if (enrollStatus?.process === ProcessEnum.Requested) {
@@ -46,18 +74,40 @@ export const useEnrollCourse = ({
 
     if (!isAuth) {
       navigate(routes.login.path);
-    } else if (isEnrolled && currentLesson.chapter && currentLesson.lesson) {
+      return;
+    }
+
+    const isCurrentLessonAvailable =
+      typeof lessonInProgress.chapter_id === 'number' &&
+      typeof lessonInProgress.lesson_id === 'number';
+
+    if (isEnrolled && !isCurrentLessonAvailable) {
+      navigate(`${routes.course.path}/${id}`);
+      return;
+    }
+
+    if (isEnrolled && isCurrentLessonAvailable) {
       navigate(
-        `${routes.course.path}/${id}/${currentLesson.chapter}/${currentLesson.lesson}`
+        // Проверка на число в переменной isCurrentLessonAvailable;
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `${routes.course.path}/${id}/${lessonInProgress.chapter_id}/${lessonInProgress.lesson_id}`
       );
-    } else {
+      return;
+    }
+
+    if (isNotEnrolled) {
       void dispatch(enrollCourseById(id));
     }
+  };
+
+  const handleUnroll = () => {
+    void dispatch(unrollCourseById(id));
   };
 
   return {
     isEnrolled,
     buttonText,
     handleEnroll,
+    handleUnroll,
   };
 };
