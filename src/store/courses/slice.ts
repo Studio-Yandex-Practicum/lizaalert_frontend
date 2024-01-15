@@ -22,6 +22,10 @@ export const coursesSlice = createSlice({
   initialState,
   reducers: {
     resetCoursesState: () => initialState,
+    resetEnrollStatus: (state) => ({
+      ...state,
+      enrollStatus: initialState.enrollStatus,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCourses.fulfilled, (state, { payload }) => {
@@ -81,6 +85,6 @@ export const coursesSlice = createSlice({
   },
 });
 
-export const { resetCoursesState } = coursesSlice.actions;
+export const { resetCoursesState, resetEnrollStatus } = coursesSlice.actions;
 
 export default coursesSlice.reducer;

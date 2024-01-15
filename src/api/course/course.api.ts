@@ -13,6 +13,7 @@ class CourseApi extends BaseApi {
   enroll = (id: number) =>
     this.createRequest<EnrollModel>({
       request: () => privateApi.post(`${SERVICE_URL}${id}/enroll/`),
+      mock: () => import('./mock/enroll'),
     });
 
   unroll = (id: number) =>

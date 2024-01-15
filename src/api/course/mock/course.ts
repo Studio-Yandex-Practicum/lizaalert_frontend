@@ -1,4 +1,4 @@
-import { CourseModel, LessonType, LessonProgress } from '../types';
+import { CourseModel, LessonProgress, LessonType } from '../types';
 
 const course: CourseModel = {
   id: 1,
@@ -317,8 +317,8 @@ const course: CourseModel = {
     },
   ],
   current_lesson: {
-    lesson: 2,
-    chapter: 1,
+    lesson_id: 2,
+    chapter_id: 1,
   },
 };
 
