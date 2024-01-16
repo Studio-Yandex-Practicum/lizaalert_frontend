@@ -21,7 +21,7 @@ export type CoursePreviewModel = {
   /** Статус подписки пользователя на курс. */
   user_status?: UserProgressStatus;
   /** Id текущего (последнего не пройденного) урока */
-  current_lesson: CurrentLessonModel;
+  current_lesson?: CurrentLessonModel;
 };
 
 export type GetCoursesData = {

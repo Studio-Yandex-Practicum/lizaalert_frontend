@@ -21,7 +21,6 @@ const initialState: CourseState = {
     lessons_count: 0,
     course_duration: 0,
     chapters: [],
-    current_lesson: { lesson: 0, chapter: 0 },
   },
   process: ProcessEnum.Initial,
   error: null,

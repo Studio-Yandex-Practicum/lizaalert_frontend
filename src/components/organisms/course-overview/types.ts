@@ -22,5 +22,5 @@ export type CourseOverviewProps = {
   /** Объект статуса подписки на курс */
   enrollStatus?: EnrollStatusType;
   /** Id текущего (последнего не пройденного) урока */
-  currentLesson: CurrentLessonModel;
+  currentLesson: Nullable<CurrentLessonModel>;
 };

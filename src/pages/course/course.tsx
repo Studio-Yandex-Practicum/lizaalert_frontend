@@ -21,6 +21,7 @@ import {
 } from 'store/course/selectors';
 import { selectEnrollStatus } from 'store/courses/selectors';
 import { fetchCourseById } from 'store/course/thunk';
+import { resetEnrollStatus } from 'store/courses/slice';
 import styles from './course.module.scss';
 
 const Course: FC = () => {
@@ -42,6 +43,13 @@ const Course: FC = () => {
       void dispatch(fetchCourseById(courseId));
     }
   }, [courseId]);
+
+  useEffect(
+    () => () => {
+      void dispatch(resetEnrollStatus());
+    },
+    []
+  );
 
   if (isCourseLoading) {
     return <Loader isAbsolute />;

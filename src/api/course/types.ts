@@ -59,8 +59,8 @@ export type ChapterModel = {
 };
 
 export type CurrentLessonModel = {
-  lesson: number;
-  chapter: number;
+  chapter_id: Nullable<number>;
+  lesson_id: Nullable<number>;
 };
 
 export type CourseModel = {
@@ -89,5 +89,7 @@ export type CourseModel = {
   /** Статус подписки на курс. */
   user_status?: UserProgressStatus;
   /** Id текущего (последнего не пройденного) урока */
-  current_lesson: CurrentLessonModel;
+  current_lesson?: CurrentLessonModel;
 };
+
+export type EnrollModel = CurrentLessonModel;

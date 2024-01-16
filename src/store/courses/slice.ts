@@ -5,6 +5,7 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { UserProgressStatus } from 'api/course';
 import type { CoursesState } from './types';
 import { enrollCourseById, fetchCourses } from './thunk';
 
@@ -21,6 +22,10 @@ export const coursesSlice = createSlice({
   initialState,
   reducers: {
     resetCoursesState: () => initialState,
+    resetEnrollStatus: (state) => ({
+      ...state,
+      enrollStatus: initialState.enrollStatus,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCourses.fulfilled, (state, { payload }) => {
@@ -38,20 +43,30 @@ export const coursesSlice = createSlice({
       state.enrollStatus[arg] = {
         process: ProcessEnum.Requested,
         error: null,
+        userStatus: UserProgressStatus.NotEnrolled,
+        currentLesson: null,
       };
     });
-    builder.addCase(enrollCourseById.fulfilled, (state, { meta: { arg } }) => {
-      state.enrollStatus[arg] = {
-        process: ProcessEnum.Succeeded,
-        error: null,
-      };
-    });
+    builder.addCase(
+      enrollCourseById.fulfilled,
+      (state, { meta: { arg }, payload }) => {
+        state.enrollStatus[arg] = {
+          process: ProcessEnum.Succeeded,
+          error: null,
+          // TODO для userStatus получать от бэка статус подписки в ответе метода enroll
+          userStatus: UserProgressStatus.Enrolled,
+          currentLesson: payload,
+        };
+      }
+    );
     builder.addCase(
       enrollCourseById.rejected,
       (state, { meta: { arg }, error }) => {
         state.enrollStatus[arg] = {
           process: ProcessEnum.Failed,
           error: error.message ?? GENERAL_ERROR,
+          userStatus: UserProgressStatus.NotEnrolled,
+          currentLesson: null,
         };
       }
     );
@@ -70,6 +85,6 @@ export const coursesSlice = createSlice({
   },
 });
 
-export const { resetCoursesState } = coursesSlice.actions;
+export const { resetCoursesState, resetEnrollStatus } = coursesSlice.actions;
 
 export default coursesSlice.reducer;
