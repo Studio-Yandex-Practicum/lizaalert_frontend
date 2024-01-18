@@ -7,14 +7,6 @@ export type AccountOverviewType = {
   userOccupation: string;
   /** Количество пройденный курсов. */
   coursesFinished: number;
-
-  // issuedFor: string;
-  key?: number;
-
-  // srcImg: string;
-
-  src: string;
-  // customClass?: string;
 };
 
 export type AchievementType = {

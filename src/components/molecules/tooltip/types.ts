@@ -1,10 +1,11 @@
 export type TooltipProps = {
-  src?: string;
-  srcImg?: string;
-  image?: string;
-  title?: string;
-  issuedFor?: string;
-  customClass?: string;
-  showToolTip?: boolean;
-  key?: number;
+  //  Данные, которые приходят с backend с ачивками:
+  // ссылка на изображение
+  src: string;
+  // название ачивки
+  title: string;
+  // за что выдана ачивка
+  issuedFor: string;
+  // значение для открытия/закрытия tooltip
+  showToolTip: boolean;
 };

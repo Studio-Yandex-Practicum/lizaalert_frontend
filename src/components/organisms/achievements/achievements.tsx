@@ -2,15 +2,14 @@ import { type FC } from 'react';
 import { Achievement } from 'components/molecules/achievement';
 import { useAppSelector } from 'store';
 import { selectAchievements } from 'store/achievements/selectors';
-import styles from './achievements.module.scss';
 import { AchievementsProps } from './types';
+import styles from './achievements.module.scss';
 
 /**
- * Компонент блока ачивок и всплывающего окна
+ * Компонент блока ачивок и всплывающего окна - tooltip
  */
 
 export const Achievements: FC<AchievementsProps> = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dataAchievements = useAppSelector(selectAchievements);
 
   return (
@@ -19,15 +18,10 @@ export const Achievements: FC<AchievementsProps> = () => {
         <div className={styles.achievementsFlex}>
           {dataAchievements.map((item) => (
             <Achievement
-              id={0}
-              // eslint-disable-next-line react/jsx-no-bind
-              onMouseEnter={function (): void {}}
-              // eslint-disable-next-line react/jsx-no-bind
-              onMouseLeave={function (): void {}}
               key={item.name}
-              {...item}
-              title={item.name}
-              src={item.image}
+              issued_for={item.issued_for}
+              name={item.name}
+              image={item.image}
             />
           ))}
         </div>

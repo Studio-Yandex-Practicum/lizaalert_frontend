@@ -1,14 +1,9 @@
 export type AchievementProps = {
-  /** src к ачивке   */
-  src: string;
+  // Данные к ачивке:
+  // ссылка на изображение ачивки
   image: string;
-  srcImg?: string;
-  showToolTip?: boolean;
-  onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => void;
-  onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => void;
-  id: number;
-  issued_for: string;
-  title?: string;
-  key?: string;
+  // название ачивки
   name: string;
+  // за что бывана ачивка
+  issued_for: string;
 };

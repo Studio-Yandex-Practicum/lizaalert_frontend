@@ -1,13 +1,17 @@
 import { useState, FC } from 'react';
-import styles from './achievement.module.scss';
-import type { AchievementProps } from './types';
 import { Tooltip } from '../tooltip/tooltip';
+import type { AchievementProps } from './types';
+import styles from './achievement.module.scss';
 
 /**
  * Компонент ачивки.
  */
 
-export const Achievement: FC<AchievementProps> = ({ src, ...item }) => {
+export const Achievement: FC<AchievementProps> = ({
+  image,
+  name,
+  issued_for,
+}) => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [title, setTitle] = useState('');
   const [issuedFor, setIssuedFor] = useState('');
@@ -17,9 +21,9 @@ export const Achievement: FC<AchievementProps> = ({ src, ...item }) => {
     : `${styles.achievement}`;
 
   const MouseEnterHendler = () => {
-    setSrcImg(item.image);
-    setTitle(item.name);
-    setIssuedFor(item.issued_for);
+    setSrcImg(image);
+    setTitle(name);
+    setIssuedFor(issued_for);
     setShowToolTip(true);
   };
 
@@ -49,7 +53,7 @@ export const Achievement: FC<AchievementProps> = ({ src, ...item }) => {
           MouseLeaveHendler();
         }}
       >
-        <img className={styles.achievementImg} src={src} alt="Награда" />
+        <img className={styles.achievementImg} src={image} alt="Награда" />
       </div>
     </>
   );

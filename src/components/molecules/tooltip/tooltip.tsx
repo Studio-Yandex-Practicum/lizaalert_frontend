@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import styles from './tooltip.module.scss';
 import type { TooltipProps } from './types';
+import styles from './tooltip.module.scss';
 
 /**
  * Компонент tooltip.
  */
-
 export const Tooltip: FC<TooltipProps> = ({
   title,
   issuedFor,
