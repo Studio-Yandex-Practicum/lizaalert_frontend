@@ -22,7 +22,10 @@ export enum KeyboardKeys {
 
 export const CourseStatusButtons: Record<UserProgressStatus, string> = {
   [UserProgressStatus.NotEnrolled]: 'Записаться',
-  [UserProgressStatus.Enrolled]: 'Продолжить',
+  [UserProgressStatus.Enrolled]: 'Скоро начнется',
+  [UserProgressStatus.Available]: 'Начать учиться',
+  [UserProgressStatus.InProgress]: 'Продолжить',
+  [UserProgressStatus.Completed]: 'Пройти еще раз',
 };
 
 export const ErrorMessages = {
