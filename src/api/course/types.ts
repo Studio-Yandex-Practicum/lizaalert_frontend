@@ -14,6 +14,9 @@ export enum LessonProgress {
 export enum UserProgressStatus {
   Enrolled = 'enrolled',
   NotEnrolled = 'not_enrolled',
+  Available = 'available',
+  InProgress = 'in_progress',
+  Completed = 'completed',
 }
 
 export type FAQModel = {
@@ -92,4 +95,6 @@ export type CourseModel = {
   current_lesson?: CurrentLessonModel;
 };
 
-export type EnrollModel = CurrentLessonModel;
+export type EnrollModel = CurrentLessonModel & {
+  user_status: UserProgressStatus;
+};

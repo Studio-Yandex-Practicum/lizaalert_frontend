@@ -14,6 +14,8 @@ type UseEnrollCourseConfig = {
   id: number;
   /** Статус подписки на курс как есть */
   userStatus: UserProgressStatus;
+  /** Дата начала курса. */
+  startDate: string;
   /** Объект текущего урока из модели курса как есть */
   currentLesson: Nullable<CurrentLessonModel>;
   /** Изменяемые данные статуса подписки на курс из стора */
@@ -22,6 +24,7 @@ type UseEnrollCourseConfig = {
 
 type UseEnrollCourse = {
   isEnrolled: boolean;
+  canStudy: boolean;
   buttonText: string;
   handleEnroll: () => void;
   handleUnroll: () => void;
@@ -30,6 +33,7 @@ type UseEnrollCourse = {
 export const useEnrollCourse = ({
   id,
   userStatus,
+  startDate,
   enrollStatus,
   currentLesson,
 }: UseEnrollCourseConfig): UseEnrollCourse => {
@@ -37,22 +41,20 @@ export const useEnrollCourse = ({
   const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(selectIsAuth);
+  const currentUserStatus = enrollStatus?.userStatus || userStatus;
 
-  const isEnrolled =
-    enrollStatus?.userStatus === UserProgressStatus.Enrolled ||
-    userStatus === UserProgressStatus.Enrolled;
+  const isEnrolled = currentUserStatus !== UserProgressStatus.NotEnrolled;
+  const canStudy = currentUserStatus !== UserProgressStatus.Enrolled;
 
-  const isNotEnrolled =
-    enrollStatus?.userStatus === UserProgressStatus.NotEnrolled ||
-    userStatus === UserProgressStatus.NotEnrolled;
-
-  const buttonText = useMemo(
-    () =>
-      isEnrolled
-        ? CourseStatusButtons[UserProgressStatus.Enrolled]
-        : CourseStatusButtons[userStatus ?? UserProgressStatus.NotEnrolled],
-    [userStatus, isEnrolled]
-  );
+  const buttonText = useMemo(() => {
+    const localStartDate = new Date(startDate).toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'short',
+    });
+    return currentUserStatus === UserProgressStatus.Enrolled
+      ? `Начнется ${localStartDate || 'скоро'}`
+      : CourseStatusButtons[currentUserStatus];
+  }, [currentUserStatus]);
 
   const isCurrentLessonAvailableAfterEnroll =
     typeof enrollStatus?.currentLesson?.chapter_id === 'number' &&
@@ -95,7 +97,7 @@ export const useEnrollCourse = ({
       return;
     }
 
-    if (isNotEnrolled) {
+    if (!isEnrolled) {
       void dispatch(enrollCourseById(id));
     }
   };
@@ -106,6 +108,7 @@ export const useEnrollCourse = ({
 
   return {
     isEnrolled,
+    canStudy,
     buttonText,
     handleEnroll,
     handleUnroll,

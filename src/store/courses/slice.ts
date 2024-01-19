@@ -7,7 +7,7 @@ import {
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
 import type { CoursesState } from './types';
-import { enrollCourseById, fetchCourses } from './thunk';
+import { enrollCourseById, unrollCourseById, fetchCourses } from './thunk';
 
 const initialState: CoursesState = {
   count: null,
@@ -47,15 +47,23 @@ export const coursesSlice = createSlice({
         currentLesson: null,
       };
     });
+    builder.addCase(unrollCourseById.fulfilled, (state, { meta: { arg } }) => {
+      state.enrollStatus[arg] = {
+        process: ProcessEnum.Succeeded,
+        error: null,
+        currentLesson: null,
+        userStatus: UserProgressStatus.NotEnrolled,
+      };
+    });
     builder.addCase(
       enrollCourseById.fulfilled,
       (state, { meta: { arg }, payload }) => {
+        const { user_status: userStatus, ...currentLesson } = payload;
         state.enrollStatus[arg] = {
           process: ProcessEnum.Succeeded,
           error: null,
-          // TODO для userStatus получать от бэка статус подписки в ответе метода enroll
-          userStatus: UserProgressStatus.Enrolled,
-          currentLesson: payload,
+          userStatus,
+          currentLesson,
         };
       }
     );

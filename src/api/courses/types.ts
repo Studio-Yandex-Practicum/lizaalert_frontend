@@ -12,6 +12,8 @@ export type CoursePreviewModel = {
   short_description: string;
   /** Количество уроков в курсе. */
   lessons_count: number;
+  /** Дата начала курса. */
+  start_date: string;
   /** Продолжительность курса в часах. */
   course_duration: Nullable<number>;
   /** Статус курса. */

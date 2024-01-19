@@ -27,12 +27,14 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   userStatus = UserProgressStatus.NotEnrolled,
   currentLesson,
 }) => {
-  const { buttonText, handleEnroll, handleUnroll } = useEnrollCourse({
-    id,
-    userStatus,
-    enrollStatus,
-    currentLesson,
-  });
+  const { buttonText, isEnrolled, canStudy, handleEnroll, handleUnroll } =
+    useEnrollCourse({
+      id,
+      userStatus,
+      startDate,
+      enrollStatus,
+      currentLesson,
+    });
 
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
@@ -76,11 +78,15 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} onClick={handleEnroll}>
+      <Button
+        className={styles.courseEnroll}
+        onClick={handleEnroll}
+        disabled={!canStudy}
+      >
         {buttonText}
       </Button>
 
-      {isDevEnv && (
+      {isDevEnv && isEnrolled && (
         <Button
           className={styles.courseEnroll}
           view="secondary"
