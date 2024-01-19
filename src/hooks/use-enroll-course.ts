@@ -46,13 +46,15 @@ export const useEnrollCourse = ({
   const isEnrolled = currentUserStatus !== UserProgressStatus.NotEnrolled;
   const canStudy = currentUserStatus !== UserProgressStatus.Enrolled;
 
-  const buttonText = useMemo(
-    () =>
-      currentUserStatus === UserProgressStatus.Enrolled
-        ? `Начнется ${startDate || 'скоро'}`
-        : CourseStatusButtons[currentUserStatus],
-    [currentUserStatus]
-  );
+  const buttonText = useMemo(() => {
+    const localStartDate = new Date(startDate).toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'short',
+    });
+    return currentUserStatus === UserProgressStatus.Enrolled
+      ? `Начнется ${localStartDate || 'скоро'}`
+      : CourseStatusButtons[currentUserStatus];
+  }, [currentUserStatus]);
 
   const isCurrentLessonAvailableAfterEnroll =
     typeof enrollStatus?.currentLesson?.chapter_id === 'number' &&

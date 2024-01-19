@@ -4,6 +4,7 @@ import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { isDevEnv } from 'config';
 import { UserProgressStatus } from 'api/course';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
@@ -85,7 +86,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         {buttonText}
       </Button>
 
-      {isEnrolled && (
+      {isDevEnv && isEnrolled && (
         <Button
           className={styles.courseEnroll}
           view="secondary"
