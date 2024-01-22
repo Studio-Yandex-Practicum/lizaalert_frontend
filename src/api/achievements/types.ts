@@ -5,8 +5,8 @@ export type AchievementModel = {
   badge_type: string;
   badge_category: string;
   issued_for: string;
-  threshold_courses: number | null;
-  threshold_course: number | null;
+  threshold_courses: Nullable<number>;
+  threshold_course: Nullable<number>;
 };
 
 export type AchievementsModel = AchievementModel[];

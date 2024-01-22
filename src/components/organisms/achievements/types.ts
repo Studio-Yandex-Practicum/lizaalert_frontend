@@ -1,1 +1,3 @@
-export type AchievementsProps = object;
+export type AchievementsProps = {
+  className: string;
+};

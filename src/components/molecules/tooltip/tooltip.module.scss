@@ -1,26 +1,48 @@
-@use 'src/styles/variables' as vars;
+@use 'src/styles/_variables' as vars;
+@use 'src/styles/_color-variables' as colors;
+@use 'src/styles/_font-variables' as fontSize;
 
 .tooltip {
-  font-family: vars.$yandexFont;
   position: absolute;
-  bottom: 60px;
-  left: -60px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #000;
-  width: 226px;
-  padding: 4px 4px;
-  border: 5px solid #fff;
-  border-radius: 15px;
-  justify-content: center;
-  color: #fff;
-  background-color: #fff;
-  // background-color: #333;
-  text-align: center;
-  font-weight: 500;
-  font-size: vars.$font-size-m;
-  color: #212329;
+  z-index: 2;
+  top: 0;
+  right: -98%;
+
+  @media (max-width: 961px) {
+    right: -115%;
+  }
+
+  &Rows {
+    font-family: vars.$yandexFont;
+    display: flex;
+    flex-direction: column;
+    width: 226px;
+    padding: 4px;
+    border: 5px solid colors.$yandex-text-color;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    justify-content: center;
+    color: colors.$yandex-text-color;
+    background-color: colors.$bg-primary;
+    text-align: center;
+    font-weight: 500;
+    font-size: vars.$font-size-m;
+    color: colors.$dark-primary;
+    border: 3px solid colors.$dark-secondary;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 23%;
+      right: 100%;
+      margin-top: -24px;
+      border-width: 13px;
+      border-style: solid;
+      border-color: transparent colors.$dark-secondary transparent transparent;
+    }
+  }
 
   &Row {
     &Title {
@@ -30,21 +52,23 @@
       padding: 10px;
       min-height: 20px;
       background-color: vars.$drop-shadow-small;
-      color: #212329;
+      color: colors.$dark-primary;
 
       &Img {
         width: 30px;
         height: 30px;
         object-fit: cover;
-        font-size: 7px;
-        border: 1px solid #fff;
+        font-size: fontSize.$font-size-alt;
+        border: 1px solid colors.$yandex-text-color;
         border-radius: 50%;
         margin: 0 20px 0 0;
       }
+
       &Text {
         margin: 5px;
       }
     }
+
     &Text {
       min-height: 30px;
       padding: 5px;

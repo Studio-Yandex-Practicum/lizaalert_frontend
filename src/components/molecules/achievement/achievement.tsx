@@ -10,11 +10,11 @@ import styles from './achievement.module.scss';
 export const Achievement: FC<AchievementProps> = ({
   image,
   name,
-  issued_for,
+  issuedFor,
 }) => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [title, setTitle] = useState('');
-  const [issuedFor, setIssuedFor] = useState('');
+  const [issuedForState, setIssuedForState] = useState('');
   const [srcImg, setSrcImg] = useState('');
   const toolTipClasses = showToolTip
     ? `${styles.achievement} ${styles.customClass}`
@@ -23,27 +23,25 @@ export const Achievement: FC<AchievementProps> = ({
   const MouseEnterHendler = () => {
     setSrcImg(image);
     setTitle(name);
-    setIssuedFor(issued_for);
+    setIssuedForState(issuedFor);
     setShowToolTip(true);
   };
 
   const MouseLeaveHendler = () => {
     setTitle('');
-    setIssuedFor('');
+    setIssuedForState('');
     setSrcImg('');
     setShowToolTip(false);
   };
 
   return (
     <>
-      <div>
-        <Tooltip
-          showToolTip={showToolTip}
-          issuedFor={issuedFor}
-          title={title}
-          src={srcImg}
-        />
-      </div>
+      <Tooltip
+        showToolTip={showToolTip}
+        issuedFor={issuedForState}
+        title={title}
+        src={srcImg}
+      />
       <div
         className={toolTipClasses}
         onMouseEnter={() => {

@@ -11,20 +11,14 @@ export const Tooltip: FC<TooltipProps> = ({
   showToolTip,
   src,
 }) => (
-  <div>
+  <div className={styles.tooltip}>
     {showToolTip && (
-      <div className={styles.tooltip}>
-        <div className={styles.tooltipRow}>
-          <div className={styles.tooltipRowTitle}>
-            <img
-              className={styles.tooltipRowTitleImg}
-              src={src}
-              alt="Награда"
-            />
-            <p className={styles.tooltipRowTitleText}>{title}</p>
-          </div>
-          <div className={styles.tooltipRowText}>{issuedFor}</div>
+      <div className={styles.tooltipRows}>
+        <div className={styles.tooltipRowTitle}>
+          <img className={styles.tooltipRowTitleImg} src={src} alt="Награда" />
+          <p className={styles.tooltipRowTitleText}>{title}</p>
         </div>
+        <div className={styles.tooltipRowText}>{issuedFor}</div>
       </div>
     )}
   </div>

@@ -10,22 +10,22 @@ import styles from './achievements.module.scss';
  */
 
 export const Achievements: FC<AchievementsProps> = () => {
-  const dataAchievements = useAppSelector(selectAchievements);
+  const achievements = useAppSelector(selectAchievements);
 
   return (
     <div className={styles.achievements}>
-      <div>
+      {achievements.length < 1 ? null : (
         <div className={styles.achievementsFlex}>
-          {dataAchievements.map((item) => (
+          {achievements.map((item) => (
             <Achievement
               key={item.name}
-              issued_for={item.issued_for}
+              issuedFor={item.issued_for}
               name={item.name}
               image={item.image}
             />
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 };
