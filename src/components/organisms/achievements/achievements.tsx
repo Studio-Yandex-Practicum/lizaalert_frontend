@@ -1,7 +1,7 @@
 import { type FC } from 'react';
-import { Achievement } from 'components/molecules/achievement';
 import { useAppSelector } from 'store';
 import { selectAchievements } from 'store/achievements/selectors';
+import { Tooltip } from 'components/molecules/tooltip/tooltip';
 import { AchievementsProps } from './types';
 import styles from './achievements.module.scss';
 
@@ -11,17 +11,16 @@ import styles from './achievements.module.scss';
 
 export const Achievements: FC<AchievementsProps> = () => {
   const achievements = useAppSelector(selectAchievements);
-
   return (
     <div className={styles.achievements}>
       {achievements.length < 1 ? null : (
         <div className={styles.achievementsFlex}>
           {achievements.map((item) => (
-            <Achievement
+            <Tooltip
               key={item.name}
               issuedFor={item.issued_for}
-              name={item.name}
-              image={item.image}
+              title={item.name}
+              src={item.image}
             />
           ))}
         </div>
