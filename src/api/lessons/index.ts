@@ -7,3 +7,4 @@ export type {
   TestOnValidationData,
   AnswersOnValidationModel,
 } from './types';
+export { UserLessonProgress } from './types';

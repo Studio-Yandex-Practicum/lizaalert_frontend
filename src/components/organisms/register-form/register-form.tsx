@@ -6,22 +6,25 @@ import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
 import { routes } from 'config';
+import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
 import { getValidationSchema } from 'utils/validation';
+import { useAppDispatch } from 'store';
+import { fetchRegistration } from 'store/auth/thunk';
 import type { UserRegisterFormData } from './types';
 import styles from './register-form.module.scss';
 
 const schema = getValidationSchema<UserRegisterFormData>(
-  'email',
-  'phone',
-  'password',
-  'confirmPassword'
+  UserDataFieldNames.Email,
+  UserDataFieldNames.Phone,
+  UserDataFieldNames.Password,
+  UserDataFieldNames.ConfirmPassword
 );
 
 const initialValues: UserRegisterFormData = {
-  email: '',
-  phone: '',
-  password: '',
-  confirmPassword: '',
+  [UserDataFieldNames.Email]: '',
+  [UserDataFieldNames.Phone]: '',
+  [UserDataFieldNames.Password]: '',
+  [UserDataFieldNames.ConfirmPassword]: '',
 };
 
 /**
@@ -29,13 +32,20 @@ const initialValues: UserRegisterFormData = {
  * */
 
 export const RegisterForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = async (
     values: UserRegisterFormData,
     { validateForm }: FormikHelpers<UserRegisterFormData>
   ) => {
     await validateForm(values);
-    console.log(values);
-    // TODO запрос на регистрацию
+
+    void dispatch(
+      fetchRegistration({
+        ...values,
+        username: values.email,
+      })
+    );
   };
 
   const formik = useFormik<UserRegisterFormData>({
@@ -65,44 +75,55 @@ export const RegisterForm: FC = () => {
       >
         <Input
           labelName="Email"
-          name="email"
+          name={UserDataFieldNames.Email}
           type="email"
-          value={formik.values.email}
+          value={formik.values[UserDataFieldNames.Email]}
           placeholder="Введите адрес электронной почты"
-          isValid={!formik.touched.email || !formik.errors.email}
-          error={formik.errors.email}
+          isValid={
+            !formik.touched[UserDataFieldNames.Email] ||
+            !formik.errors[UserDataFieldNames.Email]
+          }
+          error={formik.errors[UserDataFieldNames.Email]}
           onChange={formik.handleChange}
         />
         <Input
-          labelName="Номер телефона"
-          name="phone"
-          type="tel"
-          value={formik.values.phone}
-          placeholder="+7 ( ___ ) ___  -  ___"
-          isValid={!formik.touched.phone || !formik.errors.phone}
-          error={formik.errors.phone}
+          mask={PHONE_MASK}
+          value={formik.values[UserDataFieldNames.Phone]}
           onChange={formik.handleChange}
+          labelName="Номер телефона"
+          name={UserDataFieldNames.Phone}
+          type="tel"
+          placeholder="+7 (___) ___-__-__"
+          isValid={
+            !formik.touched[UserDataFieldNames.Phone] ||
+            !formik.errors[UserDataFieldNames.Phone]
+          }
+          error={formik.errors[UserDataFieldNames.Phone]}
         />
         <Input
           labelName="Пароль"
-          name="password"
+          name={UserDataFieldNames.Password}
           type="password"
           value={formik.values.password}
           placeholder=""
-          isValid={!formik.touched.password || !formik.errors.password}
-          error={formik.errors.password}
+          isValid={
+            !formik.touched[UserDataFieldNames.Password] ||
+            !formik.errors[UserDataFieldNames.Password]
+          }
+          error={formik.errors[UserDataFieldNames.Password]}
           onChange={formik.handleChange}
         />
         <Input
           labelName="Подтверждение пароля"
-          name="confirmPassword"
+          name={UserDataFieldNames.ConfirmPassword}
           type="password"
-          value={formik.values.confirmPassword}
+          value={formik.values[UserDataFieldNames.ConfirmPassword]}
           placeholder=""
           isValid={
-            !formik.touched.confirmPassword || !formik.errors.confirmPassword
+            !formik.touched[UserDataFieldNames.ConfirmPassword] ||
+            !formik.errors[UserDataFieldNames.ConfirmPassword]
           }
-          error={formik.errors.confirmPassword}
+          error={formik.errors[UserDataFieldNames.ConfirmPassword]}
           onChange={formik.handleChange}
         />
         <Button

@@ -1,34 +1,20 @@
 @use 'src/styles/variables' as vars;
+@import 'src/styles/lesson-page';
 
 .lesson {
-  display: flex;
-  align-items: flex-start;
-  column-gap: vars.$grid-gap;
-  padding-bottom: 68px;
+  @include lesson-layout;
 }
 
 .content {
-  width: 100%;
-  max-width: 872px;
-  display: flex;
-  flex-direction: column;
-  row-gap: vars.$grid-gap;
+  @include lesson-content;
 }
 
 .contents {
-  min-width: 300px;
+  @include lesson-contents;
 }
 
 .breadcrumbs {
-  margin-bottom: 32px;
-  margin-top: vars.$grid-gap;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: vars.$dark-primary;
+  @include breadcrumbs;
 }
 
 .heading {
@@ -36,5 +22,5 @@
 }
 
 .error {
-  width: 100%;
+  @include error;
 }

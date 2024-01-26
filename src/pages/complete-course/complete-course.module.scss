@@ -1,0 +1,22 @@
+@use 'src/styles/variables' as vars;
+@import 'src/styles/lesson-page';
+
+.wrapper {
+  @include lesson-layout;
+}
+
+.content {
+  @include lesson-content;
+}
+
+.contents {
+  @include lesson-contents;
+}
+
+.breadcrumbs {
+  @include breadcrumbs;
+}
+
+.error {
+  @include error;
+}

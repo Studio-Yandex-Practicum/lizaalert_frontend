@@ -53,8 +53,4 @@ const filters: CoursesFiltersModel = [
   },
 ];
 
-const coursesFilters = new Promise((resolve) => {
-  resolve(filters);
-});
-
-export default coursesFilters;
+export default Promise.resolve(() => filters);

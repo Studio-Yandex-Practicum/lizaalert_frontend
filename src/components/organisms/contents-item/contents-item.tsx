@@ -1,14 +1,14 @@
-import type { FC } from 'react';
-import { useMemo } from 'react';
+import { LessonProgress } from 'api/course';
 import classnames from 'classnames';
-import { useParams } from 'react-router-dom';
-import { routes } from 'config';
 import { Icon, IconType } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { LessonProgress } from 'api/course';
+import { routes } from 'config';
+import type { FC } from 'react';
+import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 
@@ -94,7 +94,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
   className,
 }) => {
   const { id, title, lessons } = content;
-  const { courseId = '', topicId = '' } = useParams();
+  const { courseId = '', chapterId = '' } = useParams();
 
   const lessonsList = useMemo(
     () => (
@@ -122,7 +122,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
         titleSize="m"
         titleWeight="normal"
         className={classnames(styles.accordion, className)}
-        open={content.id === +topicId}
+        open={content.id === +chapterId}
       >
         {lessonsList}
       </Accordion>

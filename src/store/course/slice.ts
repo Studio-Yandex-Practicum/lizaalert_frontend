@@ -4,13 +4,24 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import type { CourseModel } from 'api/course';
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
 import { fetchCourseById } from './thunk';
 import type { CourseState } from './types';
 
 const initialState: CourseState = {
-  course: {} as CourseModel,
+  course: {
+    id: 0,
+    title: '',
+    level: '',
+    full_description: '',
+    faq: [],
+    knowledge: [],
+    start_date: '',
+    cover_path: null,
+    lessons_count: 0,
+    course_duration: 0,
+    chapters: [],
+  },
   process: ProcessEnum.Initial,
   error: null,
 };

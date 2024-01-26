@@ -4,22 +4,27 @@ import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
+import { YandexOAuthButton } from 'components/molecules/yandex-oauth-button';
 import { Checkbox } from 'components/molecules/checkbox';
 import { Input } from 'components/molecules/input';
 import { StyledLink } from 'components/molecules/styled-link';
+import { routes } from 'config';
+import { UserDataFieldNames } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAuth } from 'store/auth/thunk';
 import { selectIsAuthLoading } from 'store/auth/selectors';
-import { routes } from 'config';
-import { getValidationSchema } from 'utils/validation';
-import styles from './login-form.module.scss';
 import type { UserLoginFormData } from './types';
+import styles from './login-form.module.scss';
 
-const schema = getValidationSchema<UserLoginFormData>('email', 'password');
+const schema = getValidationSchema<UserLoginFormData>(
+  UserDataFieldNames.Email,
+  UserDataFieldNames.Password
+);
 
 const initialValues: UserLoginFormData = {
-  email: '',
-  password: '',
+  [UserDataFieldNames.Email]: '',
+  [UserDataFieldNames.Password]: '',
 };
 
 /**
@@ -77,22 +82,28 @@ export const LoginForm: FC = () => {
       >
         <Input
           labelName="Email"
-          name="email"
+          name={UserDataFieldNames.Email}
           type="email"
-          value={formik.values.email}
+          value={formik.values[UserDataFieldNames.Email]}
           placeholder="Введите адрес электронной почты"
-          isValid={!formik.touched.email || !formik.errors.email}
-          error={formik.errors.email}
+          isValid={
+            !formik.touched[UserDataFieldNames.Email] ||
+            !formik.errors[UserDataFieldNames.Email]
+          }
+          error={formik.errors[UserDataFieldNames.Email]}
           onChange={formik.handleChange}
         />
         <Input
           labelName="Пароль"
-          name="password"
+          name={UserDataFieldNames.Password}
           type="password"
-          value={formik.values.password}
+          value={formik.values[UserDataFieldNames.Password]}
           placeholder=""
-          isValid={!formik.touched.password || !formik.errors.password}
-          error={formik.errors.password}
+          isValid={
+            !formik.touched[UserDataFieldNames.Password] ||
+            !formik.errors[UserDataFieldNames.Password]
+          }
+          error={formik.errors[UserDataFieldNames.Password]}
           onChange={formik.handleChange}
         />
 
@@ -114,22 +125,14 @@ export const LoginForm: FC = () => {
         </div>
 
         <Button
-          className={styles.button}
+          className={classnames(styles.button, styles.submitButton)}
           type="submit"
           disabled={areAllValuesSet && (formik.isSubmitting || !formik.isValid)}
           text={isAuthLoading ? 'Вход...' : 'Войти'}
         />
       </form>
 
-      {/* TODO: вынести в компонент YandexOAuthButton */}
-      <Button
-        className={classnames(styles.button)}
-        classNameIcon={styles.icon}
-        view="tertiary"
-        iconName="yandex"
-        iconSize="medium"
-        text="Войти c Яндекс ID"
-      />
+      <YandexOAuthButton className={styles.button} />
 
       <StyledLink
         href={routes.register.path}

@@ -3,18 +3,19 @@ import classnames from 'classnames';
 import { Card } from 'components/atoms/card';
 import { Heading, P } from 'components/atoms/typography';
 import { StyledLink } from 'components/molecules/styled-link';
-import styles from './course-completed.module.scss';
 import type { CourseCompletedProps } from './types';
+import styles from './course-completed.module.scss';
 
 /**
  * Компонент карточки завершения курса.
  */
 
 export const CourseCompleted: FC<CourseCompletedProps> = ({
+  title,
   isCompleted,
-  courseName,
-  courseSuccessDescription,
-  linkHref,
+  courseTitle,
+  successDescription,
+  href,
   className,
 }) => (
   <Card className={classnames(styles.card, className)} htmlTag="section">
@@ -23,7 +24,7 @@ export const CourseCompleted: FC<CourseCompletedProps> = ({
       size="l"
       weight="bold"
       className={styles.title}
-      text="Курс завершен"
+      text={title}
     />
 
     <div className={styles.content}>
@@ -33,15 +34,15 @@ export const CourseCompleted: FC<CourseCompletedProps> = ({
 
       {isCompleted && (
         <>
-          <P text={`Вы успешно завершили курс «${courseName}».`} />
-          <P text={courseSuccessDescription} />
+          <P text={`Вы успешно завершили курс «${courseTitle}».`} />
+          {successDescription && <P text={successDescription} />}
         </>
       )}
 
       {!isCompleted && (
         <>
           <P>
-            Курс <span className={styles.accent}>{`«${courseName}»`}</span> не
+            Курс <span className={styles.accent}>{`«${courseTitle}»`}</span> не
             пройден.
           </P>
 
@@ -50,7 +51,7 @@ export const CourseCompleted: FC<CourseCompletedProps> = ({
             поисково-спасательных мероприятий, из-за чего обучение может быть
             сложным. Вы&nbsp;можете попробовать себя
             <StyledLink
-              href={linkHref}
+              href={href}
               weight="bold"
               linkText=" в других направлениях"
             />

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { type TestOnValidationData, lessonsApi } from 'api/lessons';
+import { lessonsApi, type TestOnValidationData } from 'api/lessons';
 
 export const fetchTest = createAsyncThunk(
   'test/fetch',

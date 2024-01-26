@@ -33,14 +33,18 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
     short_description: description,
     lessons_count: lessonsCount,
     course_duration: duration,
+    start_date: startDate,
     cover_path: coverPath,
     user_status: userStatus,
+    current_lesson: currentLesson,
   } = course;
 
-  const { isEnrolled, buttonText, handleEnroll } = useEnrollCourse({
+  const { isEnrolled, canStudy, buttonText, handleEnroll } = useEnrollCourse({
     id,
     userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
+    startDate,
     enrollStatus,
+    currentLesson,
   });
 
   return (
@@ -68,11 +72,13 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
             />
           )}
 
-          <TextWithIcon
-            className={styles.lessons}
-            text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
-            iconType="lessons"
-          />
+          {lessonsCount > 0 && (
+            <TextWithIcon
+              className={styles.lessons}
+              text={`${lessonsCount} ${GetDeclensionOf.lessons(lessonsCount)}`}
+              iconType="lessons"
+            />
+          )}
 
           <img
             src={coverPath || placeholderCover}
@@ -86,6 +92,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
       </Link>
       <Button
         className={styles.button}
+        disabled={!canStudy}
         view={isEnrolled ? 'primary' : 'secondary'}
         onClick={handleEnroll}
       >

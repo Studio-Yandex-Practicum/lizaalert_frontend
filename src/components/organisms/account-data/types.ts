@@ -1,8 +1,8 @@
+import { UserDataFieldNames } from 'utils/constants';
+
 export type AccountFormData = {
   /** Номер телефона пользователя. */
-  phoneNumber: string;
+  [UserDataFieldNames.Phone]: string;
   /** Email пользователя. */
-  email: string;
-  /** Пароль от аккаунта пользователя. */
-  password: string;
+  [UserDataFieldNames.Email]: string;
 };

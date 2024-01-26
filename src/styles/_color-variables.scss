@@ -1,5 +1,6 @@
 $bg-primary: #ffffff;
 $bg-secondary: #fcfcfc;
+$bg-yandex: #000000;
 
 $dark-primary: #212329;
 $dark-secondary: #9397a3;
@@ -21,7 +22,8 @@ $success-bg: rgba(0, 128, 0, 0.12);
 // на сафари есть косяки с просто transparent
 $transparent: rgba(255, 255, 255, 0);
 
-$bg-yandex-logo: #e94f32;
+$bg-yandex-logo: #fc3f1d;
+$yandex-text-color: #fff;
 
 :export {
   dark-primary: $dark-primary;

@@ -1,4 +1,9 @@
-export type LessonType = 'Quiz' | 'Videolesson' | 'Webinar' | 'Lesson';
+export enum LessonType {
+  Quiz = 'Quiz',
+  Videolesson = 'Videolesson',
+  Webinar = 'Webinar',
+  Lesson = 'Lesson',
+}
 
 export enum LessonProgress {
   NotStarted = '0',
@@ -7,8 +12,11 @@ export enum LessonProgress {
 }
 
 export enum UserProgressStatus {
-  Enrolled = 'True',
-  NotEnrolled = 'False',
+  Enrolled = 'enrolled',
+  NotEnrolled = 'not_enrolled',
+  Available = 'available',
+  InProgress = 'in_progress',
+  Completed = 'completed',
 }
 
 export type FAQModel = {
@@ -53,6 +61,11 @@ export type ChapterModel = {
   lessons: LessonChapterModel[];
 };
 
+export type CurrentLessonModel = {
+  chapter_id: Nullable<number>;
+  lesson_id: Nullable<number>;
+};
+
 export type CourseModel = {
   /** id курса. */
   id: number;
@@ -78,4 +91,10 @@ export type CourseModel = {
   chapters: ChapterModel[];
   /** Статус подписки на курс. */
   user_status?: UserProgressStatus;
+  /** Id текущего (последнего не пройденного) урока */
+  current_lesson?: CurrentLessonModel;
+};
+
+export type EnrollModel = CurrentLessonModel & {
+  user_status: UserProgressStatus;
 };

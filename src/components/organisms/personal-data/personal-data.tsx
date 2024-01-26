@@ -1,47 +1,67 @@
-import { ChangeEvent, FC, FormEvent, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { Input } from 'components/molecules/input';
+import { UserDataFieldNames } from 'utils/constants';
+import { getValidationSchema } from 'utils/validation';
+import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
 import { setPersonalData } from 'store/profile/slice';
-import { useFormWithValidation } from 'hooks/use-form-with-validation';
-import { Patterns } from 'utils/constants';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
+
+const initialValues: PersonalFormData = {
+  [UserDataFieldNames.Name]: '',
+  [UserDataFieldNames.DateOfBirth]: '',
+  [UserDataFieldNames.Region]: '',
+  [UserDataFieldNames.Nickname]: '',
+  [UserDataFieldNames.Avatar]: '',
+};
+
+const fieldsToCompare = [
+  UserDataFieldNames.Name,
+  UserDataFieldNames.DateOfBirth,
+  UserDataFieldNames.Region,
+  UserDataFieldNames.Nickname,
+  UserDataFieldNames.Avatar,
+];
+
+const schema = getValidationSchema<PersonalFormData>(...fieldsToCompare);
 
 /**
  * Компонент-виджет с редактируемой формой данных профиля.
  * */
 
 export const PersonalData: FC = () => {
-  const {
-    handleChange,
-    isValid,
-    errors,
-    handleChangeFiles,
-    values,
-    setValues,
-    setIsValid,
-  } = useFormWithValidation<PersonalFormData>();
-
-  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
   const dispatch = useAppDispatch();
+  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
+
+  const handleSubmit = async (
+    values: PersonalFormData,
+    { validateForm }: FormikHelpers<PersonalFormData>
+  ) => {
+    await validateForm(values);
+    void dispatch(setPersonalData(values));
+  };
+
+  const formik = useFormik<PersonalFormData>({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: handleSubmit,
+  });
+
+  const areSameValues = compareObjectFields(
+    personalData,
+    formik.values,
+    fieldsToCompare
+  );
 
   useEffect(() => {
-    setValues(personalData);
+    void formik.setValues(personalData);
   }, [personalData]);
-
-  const onChangeFile = (evt: ChangeEvent<HTMLInputElement>) => {
-    handleChangeFiles(evt, Patterns.image);
-  };
-
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(setPersonalData(values));
-    setIsValid(false);
-  };
 
   return (
     <Card className={styles.personalData}>
@@ -50,75 +70,82 @@ export const PersonalData: FC = () => {
       <form
         name="personalDataForm"
         className={styles.form}
-        onSubmit={handleFormSubmit}
+        onSubmit={formik.handleSubmit}
+        noValidate
       >
         <Input
           labelName="ФИО"
           type="text"
-          name="name"
-          value={values.name || ''}
-          onChange={handleChange}
+          name={UserDataFieldNames.Name}
+          value={formik.values[UserDataFieldNames.Name]}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
-          isValid={!errors.name}
-          error={errors.name}
-          minLength={2}
-          required
+          isValid={
+            !formik.touched[UserDataFieldNames.Name] ||
+            !formik.errors[UserDataFieldNames.Name]
+          }
+          error={formik.errors[UserDataFieldNames.Name]}
         />
         <Input
           labelName="Дата рождения"
           type="date"
-          name="dateOfBirth"
-          value={values.dateOfBirth || ''}
-          onChange={handleChange}
+          name={UserDataFieldNames.DateOfBirth}
+          value={formik.values[UserDataFieldNames.DateOfBirth]}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
-          max="2050-12-31"
-          min="1900-01-01"
-          isValid={!errors.dateOfBirth}
-          error={errors.dateOfBirth}
-          required
+          isValid={
+            !formik.touched[UserDataFieldNames.DateOfBirth] ||
+            !formik.errors[UserDataFieldNames.DateOfBirth]
+          }
+          error={formik.errors[UserDataFieldNames.DateOfBirth]}
         />
         <Input
           labelName="Географический регион"
           type="text"
-          name="region"
-          value={values.region || ''}
-          onChange={handleChange}
+          name={UserDataFieldNames.Region}
+          value={formik.values[UserDataFieldNames.Region]}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Регион проживания"
-          isValid={!errors.region}
-          error={errors.region}
-          minLength={2}
-          required
+          isValid={
+            !formik.touched[UserDataFieldNames.Region] ||
+            !formik.errors[UserDataFieldNames.Region]
+          }
+          error={formik.errors[UserDataFieldNames.Region]}
         />
         <Input
           labelName="Позывной на форуме"
           type="text"
-          name="nickname"
-          value={values.nickname || ''}
-          onChange={handleChange}
+          name={UserDataFieldNames.Nickname}
+          value={formik.values[UserDataFieldNames.Nickname]}
+          onChange={formik.handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
-          isValid={!errors.nickname}
-          error={errors.nickname}
-          minLength={2}
-          required
+          isValid={
+            !formik.touched[UserDataFieldNames.Nickname] ||
+            !formik.errors[UserDataFieldNames.Nickname]
+          }
+          error={formik.errors[UserDataFieldNames.Nickname]}
         />
         <Input
           labelName="Фото"
           type="file"
           accept="image/*"
-          name="avatar"
-          value={values.avatar || ''}
-          onChange={onChangeFile}
-          isValid={!errors.avatar}
-          error={errors.avatar}
+          name={UserDataFieldNames.Avatar}
+          value={formik.values[UserDataFieldNames.Avatar]}
+          onChange={formik.handleChange}
+          isValid={
+            !formik.touched[UserDataFieldNames.Avatar] ||
+            !formik.errors[UserDataFieldNames.Avatar]
+          }
+          error={formik.errors[UserDataFieldNames.Avatar]}
           isWithIcon
           placeholder="Ваше фото"
         />
         <Button
-          disabled={!isValid}
+          disabled={areSameValues || formik.isSubmitting}
           type="submit"
           className={styles.submitButton}
           text="Сохранить изменения"

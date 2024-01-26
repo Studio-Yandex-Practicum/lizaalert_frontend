@@ -4,6 +4,7 @@ import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { isDevEnv } from 'config';
 import { UserProgressStatus } from 'api/course';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
@@ -24,12 +25,16 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   courseDuration,
   enrollStatus,
   userStatus = UserProgressStatus.NotEnrolled,
+  currentLesson,
 }) => {
-  const { buttonText, handleEnroll } = useEnrollCourse({
-    id,
-    userStatus,
-    enrollStatus,
-  });
+  const { buttonText, isEnrolled, canStudy, handleEnroll, handleUnroll } =
+    useEnrollCourse({
+      id,
+      userStatus,
+      startDate,
+      enrollStatus,
+      currentLesson,
+    });
 
   return (
     <Card className={styles.courseOverview} htmlTag="article" noPadding>
@@ -46,15 +51,19 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
           {level}
         </Li>
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Количество занятий:" iconType="lessons" />
-          {lessonsCount}
-        </Li>
+        {lessonsCount > 0 && (
+          <Li className={styles.courseMetaItem}>
+            <TextWithIcon text="Количество занятий:" iconType="lessons" />
+            {lessonsCount}
+          </Li>
+        )}
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Продолжительность:" iconType="duration" />
-          {courseDuration ?? 0} ч
-        </Li>
+        {courseDuration && (
+          <Li className={styles.courseMetaItem}>
+            <TextWithIcon text="Продолжительность:" iconType="duration" />
+            {courseDuration} ч
+          </Li>
+        )}
 
         <Li className={styles.courseMetaItem}>
           <TextWithIcon text="Старт занятий:" iconType="calendar" />
@@ -69,9 +78,22 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} onClick={handleEnroll}>
+      <Button
+        className={styles.courseEnroll}
+        onClick={handleEnroll}
+        disabled={!canStudy}
+      >
         {buttonText}
       </Button>
+
+      {isDevEnv && isEnrolled && (
+        <Button
+          className={styles.courseEnroll}
+          view="secondary"
+          text="Отписаться"
+          onClick={handleUnroll}
+        />
+      )}
     </Card>
   );
 };

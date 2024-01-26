@@ -10,6 +10,11 @@ class LessonsApi extends BaseApi {
       mock: () => import('./mock/lesson'),
     });
 
+  completeLesson = (id: string) =>
+    this.createRequest({
+      request: () => privateApi.post(`${SERVICE_URL}${id}/complete/`),
+    });
+
   getTest = (id: number) =>
     this.createRequest<TestModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/quiz/`),

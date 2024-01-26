@@ -1,15 +1,13 @@
-import type { FC } from 'react';
+import type { TestQuestionModel } from 'api/lessons';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
-import {
-  TestQuestion,
-  TestQuestionType,
-} from 'components/organisms/test-question';
+import { TestQuestion } from 'components/organisms/test-question';
+import type { FC } from 'react';
+import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
 import type { TestProps } from './types';
-import { useTest } from './hooks/use-test';
 
 /**
  * Компонент-карточка теста с вопросами.
@@ -17,19 +15,17 @@ import { useTest } from './hooks/use-test';
 
 export const Test: FC<TestProps> = ({ toggleRender }) => {
   const {
-    isLoading,
     isSubmitted,
     isSuccess,
     testResultPercent,
     test,
     onSubmit,
     handleButtonDisabledState,
-    setInitialState,
+    retake,
   } = useTest();
 
-  // заменить на компонент Loader
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (!test.questions?.length) {
+    return null;
   }
 
   return (
@@ -37,7 +33,7 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
       <div className={styles.container}>
         <Heading
           level={2}
-          text="Тест"
+          text={test.title}
           size="l"
           weight="bold"
           className={styles.heading}
@@ -51,7 +47,7 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
           {renderQuestionsList(test.questions, isSubmitted)}
         </ul>
 
-        {isSubmitted ? (
+        {isSubmitted && (
           <>
             <TestSuccessRate
               isSuccess={isSuccess}
@@ -61,11 +57,13 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
               className={styles.button}
               type="button"
               iconName="retry"
-              onClick={setInitialState}
+              onClick={retake}
               text="Пересдать"
             />
           </>
-        ) : (
+        )}
+
+        {!isSubmitted && (
           <Button
             className={styles.button}
             type="submit"
@@ -80,22 +78,18 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
 
 /** Отрисовка списка вопросов */
 function renderQuestionsList(
-  questions: TestQuestionType[],
+  questions: TestQuestionModel[],
   isSubmitted: boolean
 ) {
-  if (questions?.length > 0) {
-    return questions.map((question, index) => (
-      <li className={styles.listItem} key={question.id}>
-        <TestQuestion
-          question={question}
-          type={question.question_type}
-          index={index}
-          isSubmitted={isSubmitted}
-          className={styles.checkbox}
-        />
-      </li>
-    ));
-  }
-
-  return null;
+  return questions.map((question, index) => (
+    <li className={styles.listItem} key={question.id}>
+      <TestQuestion
+        question={question}
+        type={question.question_type}
+        index={index}
+        isSubmitted={isSubmitted}
+        className={styles.checkbox}
+      />
+    </li>
+  ));
 }

@@ -1,22 +1,21 @@
+import { TestModel } from 'api/lessons';
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
+  selectAnswersOnValidate,
   selectIsTestLoading,
   selectTest,
-  selectAnswersOnValidate,
 } from 'store/test/selectors';
-import { selectLesson } from 'store/lesson/selectors';
-import { fetchTest, validateTest } from 'store/test/thunk';
+import { validateTest } from 'store/test/thunk';
 import { Controls } from 'utils/constants';
-import type { TestType } from 'components/organisms/test-preview';
-import type { TestAnswerListType, TestQuestionListType } from '../types';
+import type { TestAnswerListType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, setInitialState, handleButtonDisabledState \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake \}
  * */
 
 export const useTest = () => {
@@ -25,23 +24,17 @@ export const useTest = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
-  // TODO удалить типы после типизации стора, получение теста перенести в TestContent
+  // TODO удалить типы после типизации стора
   // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
-  const test = useAppSelector<TestQuestionListType>(selectTest);
+  const test = useAppSelector<TestModel>(selectTest);
   const answers = useAppSelector<TestAnswerListType[]>(selectAnswersOnValidate);
   const isLoading = useAppSelector<boolean>(selectIsTestLoading);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { passingScore } = useAppSelector<TestType>(selectLesson);
 
   const dispatch = useAppDispatch();
 
-  const setInitialState = () => {
-    if (lessonId) {
-      void dispatch(fetchTest(+lessonId));
-    }
-    setIsSubmitted(false);
-  };
+  // TODO Функционал на пересдачу теста
+  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
+  const retake = () => null;
 
   const sendTestOnValidation = () => {
     if (lessonId) {
@@ -49,13 +42,9 @@ export const useTest = () => {
     }
   };
 
-  useEffect(() => {
-    setInitialState();
-  }, [lessonId]);
-
   // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
   useEffect(() => {
-    if (test.questions?.length >= 0) {
+    if (test.passing_score && test.questions && test.questions.length >= 0) {
       const percentArr: number[] = [];
 
       test.questions.forEach((question) => {
@@ -80,14 +69,14 @@ export const useTest = () => {
       const resultPercent = Math.round(middlePercent);
 
       setTestResultPercent(resultPercent);
-      setIsSuccess(resultPercent >= passingScore);
+      setIsSuccess(resultPercent >= test.passing_score);
     }
-  }, [passingScore, test.questions]);
+  }, [test.passing_score, test.questions]);
 
   const handleButtonDisabledState = () => {
     let isDisabled = false;
 
-    if (test.questions?.length > 0) {
+    if (test.questions?.length) {
       test.questions.forEach((question) => {
         let checkedCount = 0;
 
@@ -115,7 +104,7 @@ export const useTest = () => {
     testResultPercent,
     test,
     onSubmit,
-    setInitialState,
     handleButtonDisabledState,
+    retake,
   };
 };
