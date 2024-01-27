@@ -8,6 +8,7 @@ import styles from './error-locker.module.scss';
 export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
   heading = GENERAL_ERROR,
   subheading,
+  content,
   buttonText = 'Попробовать ещё раз',
   onClick,
 }) => (
@@ -20,6 +21,7 @@ export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
       text={heading}
     />
     {subheading && <P text={subheading} textAlign="center" />}
+    {content && <P text={content} textAlign="center" />}
     <Button
       text={buttonText}
       onClick={onClick}
