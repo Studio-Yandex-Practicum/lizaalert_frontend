@@ -3,6 +3,8 @@ export type ErrorLockerContentProps = {
   heading?: string;
   /** Подзаголовок-пояснение ошибки */
   subheading?: string;
+  /** Текст-пояснение ошибки */
+  content?: string;
   /** Текст кнопки */
   buttonText?: string;
   /** Функция-обработчик клика */
