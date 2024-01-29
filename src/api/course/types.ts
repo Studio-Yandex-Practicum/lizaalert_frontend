@@ -91,10 +91,8 @@ export type CourseModel = {
   chapters: ChapterModel[];
   /** Статус подписки на курс. */
   user_status?: UserProgressStatus;
-  /** Id текущего (последнего не пройденного) урока */
-  current_lesson?: CurrentLessonModel;
 };
 
-export type EnrollModel = CurrentLessonModel & {
+export type EnrollModel = {
   user_status: UserProgressStatus;
 };
