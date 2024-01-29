@@ -24,6 +24,7 @@ class CourseApi extends BaseApi {
   getCurrentLesson = (id: number) =>
     this.createRequest<CurrentLessonModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/current_lesson/`),
+      mock: () => import('./mock/current-lesson'),
     });
 }
 
