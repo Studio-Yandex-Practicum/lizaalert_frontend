@@ -1,9 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  TestResultModel,
-  lessonsApi,
-  type TestOnValidationData,
-} from 'api/lessons';
+import { TestResultModel, lessonsApi } from 'api/lessons';
+import { AnswersValidationData } from 'api/lessons/types';
 
 export const fetchTest = createAsyncThunk(
   'test/fetch',
@@ -15,9 +12,9 @@ export const fetchTest = createAsyncThunk(
 
 export const validateTest = createAsyncThunk<
   TestResultModel,
-  { id: string; answers: TestOnValidationData[] }
->('test/validate', async ({ id, answers }) => {
-  const test = await lessonsApi.postAnswers({ id, answers });
+  AnswersValidationData
+>('test/validate', async (data) => {
+  const test = await lessonsApi.postAnswers(data);
   return test;
 });
 
