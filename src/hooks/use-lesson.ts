@@ -2,15 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from 'config';
 import { SUBROUTES } from 'router/routes';
-import {
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-  SHOULD_LOAD_PROCESS_MAP,
-} from 'utils/constants';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourseProcess } from 'store/course/selectors';
+import { selectCourse } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLesson,
@@ -44,7 +40,7 @@ export const useLesson = (): UseLesson => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const courseProcess = useAppSelector(selectCourseProcess);
+  const course = useAppSelector(selectCourse);
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
@@ -98,10 +94,19 @@ export const useLesson = (): UseLesson => {
   }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && SHOULD_LOAD_PROCESS_MAP[courseProcess]) {
+    if (courseId && course.id !== Number(courseId)) {
       void dispatch(fetchCourseById(courseId));
     }
-  }, [courseId, courseProcess]);
+  }, [course, courseId]);
+
+  useEffect(() => {
+    if (
+      lessonProcess === ProcessEnum.Succeeded &&
+      lesson.course_id !== Number(courseId)
+    ) {
+      navigate(routes.notFound.path);
+    }
+  }, [lessonProcess, courseId]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
