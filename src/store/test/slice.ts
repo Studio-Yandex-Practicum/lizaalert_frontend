@@ -103,6 +103,16 @@ export const testSlice = createSlice({
     });
     builder.addCase(validateTest.fulfilled, (state, { payload }) => {
       state.testResult = payload;
+      state.isLoading = false;
+      state.error = null;
+    });
+    builder.addCase(validateTest.pending, (state) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(validateTest.rejected, (state, { error }) => {
+      state.isLoading = false;
+      state.error = error.message ?? GENERAL_ERROR;
     });
     builder.addMatcher(isPending(fetchTest), (state) => {
       state.isLoading = true;

@@ -10,6 +10,7 @@ import {
 import { updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
 import { calculatePercent } from 'utils/calculate-percent';
+import { AVERAGE_TEST_RESULT } from 'utils/constants';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -27,6 +28,7 @@ export const useTest = () => {
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
   const isLoading = useAppSelector(selectIsTestLoading);
+  const testResult = useAppSelector(selectTestResult);
 
   const dispatch = useAppDispatch();
 
@@ -52,8 +54,6 @@ export const useTest = () => {
     }
   };
 
-  const testResult = useAppSelector(selectTestResult);
-
   useEffect(() => {
     if (testResult) {
       const percent = calculatePercent(
@@ -61,7 +61,7 @@ export const useTest = () => {
         testResult.score
       );
       setTestResultPercent(percent);
-      setIsSuccess(percent >= 50);
+      setIsSuccess(percent >= AVERAGE_TEST_RESULT);
     }
   }, [testResult]);
 

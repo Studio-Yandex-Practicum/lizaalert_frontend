@@ -23,7 +23,7 @@ class LessonsApi extends BaseApi {
   getTest = (id: string) =>
     this.createRequest<TestModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/quiz/`),
-      // mock: () => import('./mock/test'),
+      mock: () => import('./mock/test'),
     });
 
   createTest = (id: string) =>
