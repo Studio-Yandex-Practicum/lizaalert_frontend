@@ -1,7 +1,7 @@
-import type { FC } from 'react';
 import { Checkbox } from 'components/molecules/checkbox';
+import type { FC } from 'react';
 import { useAppDispatch } from 'store';
-import { change } from 'store/test/slice';
+import { updateAnswer } from 'store/test/slice';
 import { Controls } from 'utils/constants';
 import type { TestAnswerProps } from './types';
 
@@ -18,7 +18,7 @@ export const TestAnswer: FC<TestAnswerProps> = ({
   const dispatch = useAppDispatch();
 
   const updateCheckStatus = () => {
-    dispatch(change({ answerId: content.id, questionId }));
+    dispatch(updateAnswer({ answerId: content.id, questionId }));
   };
 
   return (

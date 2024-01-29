@@ -7,15 +7,15 @@ export type TestAnswerOptionsType =
   | 'text_answer';
 
 export type TestOnValidationData = {
-  /** id ответа. */
-  answer_id: number[];
   /** id вопроса. */
   question_id: number;
+  /** id ответа. */
+  answer_id: number[];
 };
 
 export type AnswersOnValidationModel = {
   /** id урока. */
-  id: number;
+  id: string;
   /** объект с выбранными ответами на тест. */
   answersData: TestOnValidationData[];
 };
@@ -25,6 +25,8 @@ export type TestAnswerModel = {
   id: number;
   /** Текст ответа. */
   text: string;
+  /** Флаг ответа. */
+  selected: boolean;
 };
 
 export type TestQuestionModel = {
@@ -40,7 +42,7 @@ export type TestQuestionModel = {
 
 export type TestModel = {
   /** id теста. */
-  id?: number;
+  id: number;
   /** Наименование теста. */
   title: string;
   /** Краткое описание теста. */
