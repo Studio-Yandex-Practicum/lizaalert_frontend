@@ -47,7 +47,7 @@ export const useTest = () => {
 
   const sendTestOnValidation = async (): Promise<void> => {
     if (lessonId) {
-      await dispatch(validateTest({ id: lessonId, answersData: answers }));
+      await dispatch(validateTest({ id: lessonId, answers }));
       setIsSubmitted(true);
     }
   };
@@ -65,23 +65,10 @@ export const useTest = () => {
     }
   }, [testResult]);
 
-  const handleButtonDisabledState = () => {
-    let isDisabled = false;
-
-    if (test.questions?.length) {
-      test.questions.forEach((question) => {
-        let checkedCount = 0;
-
-        question.content.forEach(() => {
-          checkedCount += 1;
-        });
-
-        if (checkedCount === 0) isDisabled = true;
-      });
-    }
-
-    return isDisabled;
-  };
+  const handleButtonDisabledState = () =>
+    !test.questions?.some((question) =>
+      question.content.some((answer) => answer.selected)
+    );
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

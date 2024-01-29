@@ -15,9 +15,9 @@ export const fetchTest = createAsyncThunk(
 
 export const validateTest = createAsyncThunk<
   TestResultModel,
-  { id: string; answersData: TestOnValidationData[] }
->('test/validate', async ({ id, answersData }) => {
-  const test = await lessonsApi.postAnswers({ id, answersData });
+  { id: string; answers: TestOnValidationData[] }
+>('test/validate', async ({ id, answers }) => {
+  const test = await lessonsApi.postAnswers({ id, answers });
   return test;
 });
 
