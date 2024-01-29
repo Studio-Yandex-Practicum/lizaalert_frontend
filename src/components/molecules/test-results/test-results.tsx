@@ -1,5 +1,5 @@
-import type { FC } from 'react';
 import classnames from 'classnames';
+import type { FC } from 'react';
 // import type { IconType } from 'components/atoms/icon';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 // import type { TestAnswerType } from 'components/molecules/test-answer';

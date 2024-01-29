@@ -69,6 +69,19 @@ export const testSlice = createSlice({
         }));
       }
     },
+    updateAnswerReset: (state) => {
+      if (state.test && state.test.questions) {
+        state.test.questions = state.test.questions.map((question) => ({
+          ...question,
+          content: question.content.map((answer) => ({
+            ...answer,
+            selected: false,
+          })),
+        }));
+
+        state.answersOnValidate = [];
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -106,6 +119,6 @@ export const testSlice = createSlice({
   },
 });
 
-export const { updateAnswer } = testSlice.actions;
+export const { updateAnswer, updateAnswerReset } = testSlice.actions;
 
 export default testSlice.reducer;
