@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Loader } from 'components/molecules/loader';
 import { Test, useTest } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
+import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store';
 import { fetchTest } from 'store/test/thunk';
 
@@ -14,11 +14,11 @@ export const TestContent: FC = () => {
   const { lessonId } = useParams();
   const dispatch = useAppDispatch();
 
-  const { isLoading, test } = useTest();
+  const { isLoading, test, createNewTest } = useTest();
 
   useEffect(() => {
     if (lessonId) {
-      void dispatch(fetchTest(+lessonId));
+      void dispatch(fetchTest(lessonId));
     }
   }, [lessonId]);
 
@@ -28,7 +28,10 @@ export const TestContent: FC = () => {
     setRenderTest(test.in_progress);
   }, [test.in_progress]);
 
-  const toggleRender = () => setRenderTest(!renderTest);
+  const toggleRender = () => {
+    setRenderTest(!renderTest);
+    void createNewTest();
+  };
 
   if (isLoading) {
     return <Loader />;

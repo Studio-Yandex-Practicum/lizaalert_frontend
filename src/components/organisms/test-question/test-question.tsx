@@ -1,7 +1,7 @@
-import type { FC } from 'react';
 import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
+import type { FC } from 'react';
 import styles from './test-question.module.scss';
 import type { TestQuestionProps } from './types';
 
