@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { lessonsApi, type TestOnValidationData } from 'api/lessons';
-import { TestResultType } from 'components/organisms/test/types';
+import {
+  TestResultModel,
+  lessonsApi,
+  type TestOnValidationData,
+} from 'api/lessons';
 
 export const fetchTest = createAsyncThunk(
   'test/fetch',
@@ -11,7 +14,7 @@ export const fetchTest = createAsyncThunk(
 );
 
 export const validateTest = createAsyncThunk<
-  TestResultType,
+  TestResultModel,
   { id: string; answersData: TestOnValidationData[] }
 >('test/validate', async ({ id, answersData }) => {
   const test = await lessonsApi.postAnswers({ id, answersData });

@@ -1,6 +1,10 @@
-import { TestResultType } from 'components/organisms/test/types';
 import { BaseApi, privateApi } from '../core';
-import type { AnswersOnValidationModel, LessonModel, TestModel } from './types';
+import type {
+  AnswersValidationData,
+  LessonModel,
+  TestModel,
+  TestResultModel,
+} from './types';
 
 const SERVICE_URL = '/lessons/';
 
@@ -23,17 +27,14 @@ class LessonsApi extends BaseApi {
     });
 
   createTest = (id: string) =>
-    this.createRequest<AnswersOnValidationModel>({
+    this.createRequest<AnswersValidationData>({
       request: () => privateApi.post(`${SERVICE_URL}${id}/quiz/run/`),
     });
 
-  postAnswers = (data: AnswersOnValidationModel) =>
-    this.createRequest<TestResultType>({
+  postAnswers = (data: AnswersValidationData) =>
+    this.createRequest<TestResultModel>({
       request: () =>
-        privateApi.post(
-          `${SERVICE_URL}${data.id}/quiz/answer/`,
-          data.answersData
-        ),
+        privateApi.post(`${SERVICE_URL}${data.id}/quiz/answer/`, data.answers),
     });
 }
 

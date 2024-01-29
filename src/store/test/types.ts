@@ -1,10 +1,9 @@
-import { TestModel, TestOnValidationData } from 'api/lessons';
-import { TestResultType } from 'components/organisms/test/types';
+import { TestModel, TestOnValidationData, TestResultModel } from 'api/lessons';
 
 export type TestState = {
   isLoading: boolean;
   error: null | string;
   test: TestModel;
   answersOnValidate: TestOnValidationData[];
-  testResult: TestResultType | null;
+  testResult: TestResultModel | null;
 };

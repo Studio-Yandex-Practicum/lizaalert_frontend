@@ -13,11 +13,11 @@ export type TestOnValidationData = {
   answer_id: number[];
 };
 
-export type AnswersOnValidationModel = {
+export type AnswersValidationData = {
   /** id урока. */
   id: string;
   /** объект с выбранными ответами на тест. */
-  answersData: TestOnValidationData[];
+  answers: TestOnValidationData[];
 };
 
 export type TestAnswerModel = {
@@ -59,6 +59,53 @@ export type TestModel = {
   in_progress?: boolean;
   /** Вопросы к тесту */
   questions?: TestQuestionModel[];
+};
+
+export type TestResultListModel = {
+  /** id вопроса. */
+  question_id: number;
+  /** Массив правильных ответов. */
+  correct_answer_id: number[];
+  /** Флаг ответа. */
+  is_correct: boolean;
+};
+
+export type TestAnswerListModel = {
+  /** id вопроса. */
+  question_id: number;
+  /** Массив id выбранных ответов. */
+  answer_id: number[];
+};
+
+export type TestResultModel = {
+  /** id результата. */
+  id: number;
+  /** Оставшиеся попытки. */
+  remaining_retries: string;
+  /** Дата создания. */
+  created_at: string;
+  /** Дата обновления. */
+  updated_at: string;
+  /** Дата удаления. */
+  deleted_at: string;
+  /** Массив ответов пользователя. */
+  answers: TestAnswerListModel[];
+  /** Результат проверки ответов. */
+  result: TestResultListModel[];
+  /** Количество попыток. */
+  retry_count: number;
+  /** Счет правильных ответов. */
+  score: number;
+  /** Конечный результат. */
+  final_result: string;
+  /** Дата начала. */
+  start_date: string;
+  /** Дата окончания. */
+  end_date: string;
+  /** id пользователя. */
+  user: number;
+  /** id квиза. */
+  quiz: number;
 };
 
 export type LessonBreadcrumbsModel = {
