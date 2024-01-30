@@ -22,6 +22,7 @@ export const CourseContents: FC<CourseContentsProps> = ({
   const contentItems = content?.map((item, index) => (
     <ContentsItem key={item.id} content={item} index={index} type={type} />
   ));
+
   return (
     <Card className={classes} htmlTag={type === 'inner' ? 'aside' : 'section'}>
       {type === 'main' && (

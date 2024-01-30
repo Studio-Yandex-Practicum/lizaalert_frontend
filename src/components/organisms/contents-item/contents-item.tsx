@@ -104,6 +104,7 @@ export const ContentsItem: FC<ContentsItemProps> = ({
     ),
     [lessons, renderLesson]
   );
+
   if (type === 'main') {
     return (
       <li className={classnames(styles.content, className)}>
