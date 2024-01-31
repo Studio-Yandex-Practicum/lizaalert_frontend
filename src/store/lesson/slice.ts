@@ -24,7 +24,9 @@ const initialState: LessonState = {
 const lessonSlice = createSlice({
   name: 'lesson',
   initialState,
-  reducers: {},
+  reducers: {
+    resetLessonState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(completeLesson.pending, (state) => {
       state.completeLessonProcess = ProcessEnum.Requested;
@@ -53,5 +55,7 @@ const lessonSlice = createSlice({
     });
   },
 });
+
+export const { resetLessonState } = lessonSlice.actions;
 
 export default lessonSlice.reducer;
