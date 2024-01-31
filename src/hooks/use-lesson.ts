@@ -16,6 +16,7 @@ import {
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { fetchCourseById } from 'store/course/thunk';
 import { useEvent } from 'hooks/use-event';
+import { resetLessonState } from 'store/lesson/slice';
 
 type UseLesson = {
   courseId: string;
@@ -91,6 +92,9 @@ export const useLesson = (): UseLesson => {
     if (lessonId && lesson.id !== +lessonId) {
       fetchLesson();
     }
+    return () => {
+      dispatch(resetLessonState());
+    };
   }, [lessonId]);
 
   useEffect(() => {
@@ -101,12 +105,13 @@ export const useLesson = (): UseLesson => {
 
   useEffect(() => {
     if (
-      lessonProcess === ProcessEnum.Succeeded &&
-      lesson.course_id !== Number(courseId)
+      lesson.id &&
+      (lesson.chapter_id !== Number(chapterId) ||
+        lesson.course_id !== Number(courseId))
     ) {
       navigate(routes.notFound.path);
     }
-  }, [lessonProcess, courseId]);
+  }, [lesson]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
