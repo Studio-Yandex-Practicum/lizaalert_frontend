@@ -4,6 +4,7 @@ import type { CourseState } from './course/types';
 import type { CoursesFiltersState } from './courses-filters/types';
 import type { AuthState } from './auth/types';
 import type { LessonState } from './lesson/types';
+import { ProfileState } from './profile/types';
 
 // После типизации конкретного стора заменить any на тип стора
 export type AppState = {
@@ -13,7 +14,7 @@ export type AppState = {
   coursesFilters: CoursesFiltersState;
   lesson: LessonState;
   test: any;
-  profile: any;
+  profile: ProfileState;
 };
 
 export type ThunkApiGetState = () => AppState;

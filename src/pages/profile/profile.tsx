@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { LOADING_PROCESS_MAP } from 'utils/constants';
 import { Heading, Li, P } from '../../components/atoms/typography';
 import { Loader } from '../../components/molecules/loader';
 import { AccountData } from '../../components/organisms/account-data';
@@ -14,12 +15,13 @@ const Profile = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    void dispatch(fetchProfile('0'));
+    void dispatch(fetchProfile());
   }, [dispatch]);
 
-  const IsProfileLoading = useAppSelector(selectIsProfileLoading);
+  const profileProcess = useAppSelector(selectIsProfileLoading);
+  const isLoading = LOADING_PROCESS_MAP[profileProcess];
 
-  if (IsProfileLoading) {
+  if (isLoading) {
     return <Loader isAbsolute />;
   }
 

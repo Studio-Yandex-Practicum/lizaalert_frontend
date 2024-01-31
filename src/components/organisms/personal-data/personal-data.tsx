@@ -9,24 +9,24 @@ import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectProfilePersonal } from 'store/profile/selectors';
-import { setPersonalData } from 'store/profile/slice';
+import { editProfile } from 'store/profile/thunk';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
+
+// TODO: после добавления nickname в модель раскомментировать код
 
 const initialValues: PersonalFormData = {
   [UserDataFieldNames.Name]: '',
   [UserDataFieldNames.DateOfBirth]: '',
   [UserDataFieldNames.Region]: '',
-  [UserDataFieldNames.Nickname]: '',
-  [UserDataFieldNames.Avatar]: '',
+  // [UserDataFieldNames.Nickname]: '',
 };
 
 const fieldsToCompare = [
   UserDataFieldNames.Name,
   UserDataFieldNames.DateOfBirth,
   UserDataFieldNames.Region,
-  UserDataFieldNames.Nickname,
-  UserDataFieldNames.Avatar,
+  // UserDataFieldNames.Nickname,
 ];
 
 const schema = getValidationSchema<PersonalFormData>(...fieldsToCompare);
@@ -37,14 +37,26 @@ const schema = getValidationSchema<PersonalFormData>(...fieldsToCompare);
 
 export const PersonalData: FC = () => {
   const dispatch = useAppDispatch();
-  const personalData = useAppSelector<PersonalFormData>(selectProfilePersonal);
+  const personalData = useAppSelector<Omit<PersonalFormData, 'photo'>>(
+    selectProfilePersonal
+  );
 
   const handleSubmit = async (
     values: PersonalFormData,
     { validateForm }: FormikHelpers<PersonalFormData>
   ) => {
+    const formData = new FormData();
+
     await validateForm(values);
-    void dispatch(setPersonalData(values));
+
+    Object.keys(values).forEach((item) => {
+      formData.append(
+        item,
+        values[item as keyof typeof values] as string | Blob
+      );
+    });
+
+    void dispatch(editProfile(formData));
   };
 
   const formik = useFormik<PersonalFormData>({
@@ -77,7 +89,7 @@ export const PersonalData: FC = () => {
           labelName="ФИО"
           type="text"
           name={UserDataFieldNames.Name}
-          value={formik.values[UserDataFieldNames.Name]}
+          value={formik.values[UserDataFieldNames.Name] || ''}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Ваше ФИО"
@@ -91,7 +103,7 @@ export const PersonalData: FC = () => {
           labelName="Дата рождения"
           type="date"
           name={UserDataFieldNames.DateOfBirth}
-          value={formik.values[UserDataFieldNames.DateOfBirth]}
+          value={formik.values[UserDataFieldNames.DateOfBirth] || ''}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Дата рождения"
@@ -105,7 +117,7 @@ export const PersonalData: FC = () => {
           labelName="Географический регион"
           type="text"
           name={UserDataFieldNames.Region}
-          value={formik.values[UserDataFieldNames.Region]}
+          value={formik.values[UserDataFieldNames.Region] || ''}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Регион проживания"
@@ -115,11 +127,11 @@ export const PersonalData: FC = () => {
           }
           error={formik.errors[UserDataFieldNames.Region]}
         />
-        <Input
+        {/* <Input
           labelName="Позывной на форуме"
           type="text"
           name={UserDataFieldNames.Nickname}
-          value={formik.values[UserDataFieldNames.Nickname]}
+          value={formik.values[UserDataFieldNames.Nickname] || ''}
           onChange={formik.handleChange}
           isWithIcon
           placeholder="Позывной на форуме"
@@ -128,14 +140,17 @@ export const PersonalData: FC = () => {
             !formik.errors[UserDataFieldNames.Nickname]
           }
           error={formik.errors[UserDataFieldNames.Nickname]}
-        />
+        /> */}
         <Input
           labelName="Фото"
           type="file"
           accept="image/*"
           name={UserDataFieldNames.Avatar}
-          value={formik.values[UserDataFieldNames.Avatar]}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            if (e.currentTarget.files) {
+              void formik.setFieldValue('photo', e.currentTarget.files[0]);
+            }
+          }}
           isValid={
             !formik.touched[UserDataFieldNames.Avatar] ||
             !formik.errors[UserDataFieldNames.Avatar]

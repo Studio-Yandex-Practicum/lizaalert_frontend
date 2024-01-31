@@ -1,10 +1,12 @@
 export type AccountOverviewType = {
   /** ФИО пользователя. */
-  userName: string;
+  full_name: string | null;
   /** Ранг пользователя. */
-  userStatus: string;
+  call_sign: string | null;
   /** Роль пользователя. */
-  userOccupation: string;
+  department: string | null;
   /** Количество пройденный курсов. */
-  coursesFinished: number;
+  count_pass_course: number | null;
+  /** Аватар пользователя */
+  photo: string | null;
 };
