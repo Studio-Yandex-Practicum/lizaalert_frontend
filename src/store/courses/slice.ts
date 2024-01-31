@@ -7,7 +7,12 @@ import {
 import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
 import type { CoursesState } from './types';
-import { enrollCourseById, unrollCourseById, fetchCourses } from './thunk';
+import {
+  enrollCourseById,
+  fetchCourses,
+  getCurrentLesson,
+  unrollCourseById,
+} from './thunk';
 
 const initialState: CoursesState = {
   count: null,
@@ -41,29 +46,21 @@ export const coursesSlice = createSlice({
     });
     builder.addCase(enrollCourseById.pending, (state, { meta: { arg } }) => {
       state.enrollStatus[arg] = {
+        ...state.enrollStatus[arg],
         process: ProcessEnum.Requested,
         error: null,
-        userStatus: UserProgressStatus.NotEnrolled,
-        currentLesson: null,
-      };
-    });
-    builder.addCase(unrollCourseById.fulfilled, (state, { meta: { arg } }) => {
-      state.enrollStatus[arg] = {
-        process: ProcessEnum.Succeeded,
-        error: null,
-        currentLesson: null,
         userStatus: UserProgressStatus.NotEnrolled,
       };
     });
     builder.addCase(
       enrollCourseById.fulfilled,
       (state, { meta: { arg }, payload }) => {
-        const { user_status: userStatus, ...currentLesson } = payload;
+        const { user_status: userStatus } = payload;
         state.enrollStatus[arg] = {
+          ...state.enrollStatus[arg],
           process: ProcessEnum.Succeeded,
           error: null,
           userStatus,
-          currentLesson,
         };
       }
     );
@@ -71,10 +68,57 @@ export const coursesSlice = createSlice({
       enrollCourseById.rejected,
       (state, { meta: { arg }, error }) => {
         state.enrollStatus[arg] = {
+          ...state.enrollStatus[arg],
           process: ProcessEnum.Failed,
           error: error.message ?? GENERAL_ERROR,
           userStatus: UserProgressStatus.NotEnrolled,
-          currentLesson: null,
+        };
+      }
+    );
+    builder.addCase(unrollCourseById.fulfilled, (state, { meta: { arg } }) => {
+      state.enrollStatus[arg] = {
+        ...state.enrollStatus[arg],
+        process: ProcessEnum.Succeeded,
+        error: null,
+        userStatus: UserProgressStatus.NotEnrolled,
+      };
+    });
+    builder.addCase(getCurrentLesson.pending, (state, { meta: { arg } }) => {
+      state.enrollStatus[arg] = {
+        ...state.enrollStatus[arg],
+        currentLesson: {
+          process: ProcessEnum.Requested,
+          error: null,
+          lessonId: null,
+          chapterId: null,
+        },
+      };
+    });
+    builder.addCase(
+      getCurrentLesson.fulfilled,
+      (state, { meta: { arg }, payload }) => {
+        state.enrollStatus[arg] = {
+          ...state.enrollStatus[arg],
+          currentLesson: {
+            process: ProcessEnum.Succeeded,
+            error: null,
+            lessonId: payload.lesson_id,
+            chapterId: payload.chapter_id,
+          },
+        };
+      }
+    );
+    builder.addCase(
+      getCurrentLesson.rejected,
+      (state, { meta: { arg }, error }) => {
+        state.enrollStatus[arg] = {
+          ...state.enrollStatus[arg],
+          currentLesson: {
+            process: ProcessEnum.Failed,
+            error: error.message ?? GENERAL_ERROR,
+            lessonId: null,
+            chapterId: null,
+          },
         };
       }
     );

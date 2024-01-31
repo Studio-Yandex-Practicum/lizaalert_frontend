@@ -316,10 +316,6 @@ const course: CourseModel = {
       ],
     },
   ],
-  current_lesson: {
-    lesson_id: 2,
-    chapter_id: 1,
-  },
 };
 
 export default Promise.resolve(() => course);
