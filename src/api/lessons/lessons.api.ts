@@ -27,7 +27,7 @@ class LessonsApi extends BaseApi {
     });
 
   createTest = (id: string) =>
-    this.createRequest<AnswersValidationData>({
+    this.createRequest<TestResultModel>({
       request: () => privateApi.post(`${SERVICE_URL}${id}/quiz/run/`),
     });
 

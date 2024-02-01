@@ -1,8 +1,8 @@
+import type { FC } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import type { FC } from 'react';
 import { convertDate } from 'utils/convert-date';
 import { useTest } from '../test';
 import styles from './test-preview.module.scss';

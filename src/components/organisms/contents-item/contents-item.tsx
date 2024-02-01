@@ -1,14 +1,14 @@
-import { LessonProgress } from 'api/course';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 import classnames from 'classnames';
+import { useParams } from 'react-router-dom';
+import { routes } from 'config';
 import { Icon, IconType } from 'components/atoms/icon';
 import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { routes } from 'config';
-import type { FC } from 'react';
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { LessonProgress } from 'api/course';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 

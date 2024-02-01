@@ -1,5 +1,5 @@
-import { Checkbox } from 'components/molecules/checkbox';
 import type { FC } from 'react';
+import { Checkbox } from 'components/molecules/checkbox';
 import { useAppDispatch } from 'store';
 import { updateAnswer } from 'store/test/slice';
 import { Controls } from 'utils/constants';

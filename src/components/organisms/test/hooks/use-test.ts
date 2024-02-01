@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { calculatePercent } from 'utils/calculate-percent';
+import { AVERAGE_TEST_RESULT, LOADING_PROCESS_MAP } from 'utils/constants';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectAnswersOnValidate,
-  selectIsTestLoading,
+  selectProcessCreationTest,
   selectTest,
+  selectTestProcess,
   selectTestResult,
 } from 'store/test/selectors';
 import { updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
-import { calculatePercent } from 'utils/calculate-percent';
-import { AVERAGE_TEST_RESULT } from 'utils/constants';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -27,14 +28,20 @@ export const useTest = () => {
 
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
-  const isLoading = useAppSelector(selectIsTestLoading);
+  const testProcess = useAppSelector(selectTestProcess);
+  const isTestCreated = useAppSelector(selectProcessCreationTest);
   const testResult = useAppSelector(selectTestResult);
+
+  const isLoading = LOADING_PROCESS_MAP[testProcess];
 
   const dispatch = useAppDispatch();
 
   // TODO: Функционал на пересдачу теста
   // TODO: https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
   const retake = () => {
+    if (lessonId) {
+      void dispatch(createTest(lessonId));
+    }
     dispatch(updateAnswerReset());
     setIsSuccess(false);
     setTestResultPercent(0);
@@ -48,7 +55,7 @@ export const useTest = () => {
   };
 
   const sendTestOnValidation = async (): Promise<void> => {
-    if (lessonId) {
+    if (lessonId && isTestCreated) {
       await dispatch(validateTest({ id: lessonId, answers }));
       setIsSubmitted(true);
     }
@@ -66,6 +73,7 @@ export const useTest = () => {
   }, [testResult]);
 
   const handleButtonDisabledState = () =>
+    isTestCreated === 'Failed' ||
     !test.questions?.some((question) =>
       question.content.some((answer) => answer.selected)
     );

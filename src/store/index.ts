@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { isDevEnv } from 'config';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { isDevEnv } from 'config';
 import { rootReducer } from './reducers';
 import type { AppState } from './types';
 

@@ -26,7 +26,7 @@ export type TestAnswerModel = {
   /** Текст ответа. */
   text: string;
   /** Флаг ответа. */
-  selected: boolean;
+  selected?: boolean;
 };
 
 export type TestQuestionModel = {

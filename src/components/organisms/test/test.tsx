@@ -1,10 +1,10 @@
-import type { TestQuestionModel } from 'api/lessons';
+import type { FC } from 'react';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
-import type { FC } from 'react';
+import type { TestQuestionModel } from 'api/lessons';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
 import type { TestProps } from './types';

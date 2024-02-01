@@ -4,9 +4,9 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { Controls, GENERAL_ERROR } from '../../utils/constants';
-import { fetchTest, validateTest } from './thunk';
-import { TestState } from './types';
+import { Controls, GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { createTest, fetchTest, validateTest } from './thunk';
+import { TestState, UpdateAnswerAction } from './types';
 
 const initialState: TestState = {
   test: {
@@ -22,45 +22,38 @@ const initialState: TestState = {
   },
   answersOnValidate: [],
   testResult: null,
-  isLoading: false,
+  process: ProcessEnum.Initial,
+  processValidationTest: ProcessEnum.Initial,
+  processCreationTest: ProcessEnum.Initial,
   error: null,
 };
-
-interface UpdateAnswerAction {
-  type: string;
-  payload: {
-    questionId: number;
-    answerId: number;
-  };
-}
 
 export const testSlice = createSlice({
   name: 'test',
   initialState,
   reducers: {
     updateAnswer: (state, action: UpdateAnswerAction) => {
-      if (state.test && state.test.questions) {
+      if (state.processCreationTest && state.test && state.test.questions) {
         state.test.questions = state.test.questions.map((question) => {
           if (question.id === action.payload?.questionId) {
             return {
               ...question,
               content: question.content.map((answer) => {
                 if (answer.id === action.payload?.answerId) {
-                  return { ...answer, selected: !answer.selected };
+                  return {
+                    ...answer,
+                    selected: !answer.selected,
+                  };
                 }
-
                 if (question.question_type === Controls.RADIO) {
                   return { ...answer, selected: false };
                 }
-
                 return answer;
               }),
             };
           }
-
           return question;
         });
-
         state.answersOnValidate = state.test.questions.map((question) => ({
           question_id: question.id,
           answer_id: question.content
@@ -70,7 +63,7 @@ export const testSlice = createSlice({
       }
     },
     updateAnswerReset: (state) => {
-      if (state.test && state.test.questions) {
+      if (state.processCreationTest && state.test && state.test.questions) {
         state.test.questions = state.test.questions.map((question) => ({
           ...question,
           content: question.content.map((answer) => ({
@@ -78,12 +71,10 @@ export const testSlice = createSlice({
             selected: false,
           })),
         }));
-
         state.answersOnValidate = [];
       }
     },
   },
-
   extraReducers: (builder) => {
     builder.addCase(fetchTest.fulfilled, (state, { payload }) => {
       state.test = {
@@ -91,39 +82,49 @@ export const testSlice = createSlice({
         questions: payload.questions
           ? payload.questions.map((question) => {
               const countCorrectAnswers = question.content.length;
-
               if (countCorrectAnswers > 1) {
                 return { ...question, type: Controls.CHECKBOX };
               }
-
               return { ...question, type: Controls.RADIO };
             })
           : [],
       };
     });
+    builder.addCase(validateTest.pending, (state) => {
+      state.processValidationTest = ProcessEnum.Requested;
+      state.error = null;
+    });
     builder.addCase(validateTest.fulfilled, (state, { payload }) => {
       state.testResult = payload;
-      state.isLoading = false;
+      state.processValidationTest = ProcessEnum.Succeeded;
       state.error = null;
-    });
-    builder.addCase(validateTest.pending, (state) => {
-      state.error = null;
-      state.isLoading = true;
     });
     builder.addCase(validateTest.rejected, (state, { error }) => {
-      state.isLoading = false;
+      state.processValidationTest = ProcessEnum.Failed;
       state.error = error.message ?? GENERAL_ERROR;
     });
+
+    builder.addCase(createTest.pending, (state) => {
+      state.processCreationTest = ProcessEnum.Requested;
+    });
+    builder.addCase(createTest.fulfilled, (state) => {
+      state.processCreationTest = ProcessEnum.Succeeded;
+    });
+    builder.addCase(createTest.rejected, (state, { error }) => {
+      state.processCreationTest = ProcessEnum.Failed;
+      state.error = error.message ?? GENERAL_ERROR;
+    });
+
     builder.addMatcher(isPending(fetchTest), (state) => {
-      state.isLoading = true;
+      state.process = ProcessEnum.Requested;
       state.error = null;
     });
     builder.addMatcher(isFulfilled(fetchTest), (state) => {
-      state.isLoading = false;
+      state.process = ProcessEnum.Succeeded;
       state.error = null;
     });
     builder.addMatcher(isRejected(fetchTest), (state, { error }) => {
-      state.isLoading = false;
+      state.process = ProcessEnum.Failed;
       state.error = error.message ?? GENERAL_ERROR;
     });
   },
