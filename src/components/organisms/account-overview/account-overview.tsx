@@ -1,12 +1,12 @@
 import { useEffect, type FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { Achievements } from 'components/organisms/achievements/achievements';
-import { useAppSelector } from 'store';
+import { Achievements } from 'components/organisms/achievements';
+import { AppDispatch, useAppSelector } from 'store';
 import { selectProfileOverview } from 'store/profile/selectors';
-import { useDispatch } from 'react-redux';
 import { fetchAchievement } from 'store/achievements/thunk';
 import defaultImg from 'assets/images/profile.jpg';
 import type { AccountOverviewType } from './types';
@@ -21,10 +21,10 @@ export const AccountOverview: FC = () => {
     selectProfileOverview
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    void dispatch(fetchAchievement() as any);
+    void dispatch(fetchAchievement());
   }, []);
 
   return (
@@ -37,7 +37,7 @@ export const AccountOverview: FC = () => {
       <Heading level={3} weight="bold" className={styles.personalData}>
         {accountOverview.userName}
       </Heading>
-      <Achievements />
+      <Achievements className={styles.achievements} />
       <ul className={styles.accountMeta}>
         <li className={styles.accountMetaItem}>
           <TextWithIcon

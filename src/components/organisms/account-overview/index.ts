@@ -1,2 +1,2 @@
 export { AccountOverview } from './account-overview';
-export type { AccountOverviewType, AchievementType } from './types';
+export type { AccountOverviewType } from './types';

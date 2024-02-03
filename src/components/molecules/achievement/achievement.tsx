@@ -1,5 +1,5 @@
 import { FC } from 'react';
-// import { Tooltip } from '../tooltip/tooltip';
+import classNames from 'classnames';
 import type { AchievementProps } from './types';
 import styles from './achievement.module.scss';
 
@@ -9,29 +9,22 @@ import styles from './achievement.module.scss';
 
 export const Achievement: FC<AchievementProps> = ({
   image,
-  mouseEnterHandler,
-  mouseLeaveHandler,
+  handleMouseEnter,
+  handleMouseLeave,
   showToolTip,
   children,
-}) => {
-  const toolTipClasses = showToolTip
-    ? `${styles.achievement} ${styles.customClass}`
-    : `${styles.achievement}`;
-  return (
-    <>
-      {children}
-      <div
-        className={toolTipClasses}
-        onMouseEnter={() => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-          mouseEnterHandler();
-        }}
-        onMouseLeave={() => {
-          mouseLeaveHandler();
-        }}
-      >
-        <img className={styles.achievementImg} src={image} alt="Награда" />
-      </div>
-    </>
-  );
-};
+}) => (
+  <>
+    {children}
+    <div
+      className={classNames(
+        styles.achievement,
+        styles.customClass && showToolTip
+      )}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <img className={styles.image} src={image} alt="Награда" />
+    </div>
+  </>
+);

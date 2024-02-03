@@ -5,4 +5,6 @@ export type TooltipProps = {
   title: string;
   /** за что выдана ачивка */
   issuedFor: string;
+  /** отображение тутлтипа */
+  showToolTip: boolean;
 };

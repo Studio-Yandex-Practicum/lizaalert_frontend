@@ -43,3 +43,14 @@
 .logout {
   white-space: nowrap;
 }
+
+.achievements {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  align-self: end;
+  padding: 0 0 20px 0;
+}

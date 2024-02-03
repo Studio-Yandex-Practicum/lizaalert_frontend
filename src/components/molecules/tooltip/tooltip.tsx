@@ -1,4 +1,5 @@
 import { useState, FC } from 'react';
+import { Typography } from 'components/atoms/typography';
 import { Achievement } from '../achievement/achievement';
 import type { TooltipProps } from './types';
 import styles from './tooltip.module.scss';
@@ -6,35 +7,42 @@ import styles from './tooltip.module.scss';
 /**
  * Компонент tooltip.
  */
-export const Tooltip: FC<TooltipProps> = ({ title, issuedFor, src }) => {
-  // console.log('%cDATA', 'color: green');
-  const [showToolTip, setShowToolTip] = useState(false);
-  const [, setTitleState] = useState('');
-  const [, setIssuedForState] = useState('');
-  const [, setSrcImg] = useState('');
+export const Tooltip: FC<Omit<TooltipProps, 'showToolTip'>> = ({
+  title,
+  issuedFor,
+  src,
+}) => {
+  const initialTooltipProps: TooltipProps = {
+    showToolTip: false,
+    issuedFor: '',
+    title: '',
+    src,
+  };
+  const [tooltipProps, setTooltipProps] =
+    useState<TooltipProps>(initialTooltipProps);
 
-  const MouseEnterHandler = () => {
-    setSrcImg(src);
-    setTitleState(title);
-    setIssuedForState(issuedFor);
-    setShowToolTip(true);
+  const handleMouseEnter = () => {
+    setTooltipProps({
+      issuedFor,
+      showToolTip: true,
+      title,
+      src,
+    });
   };
 
-  const MouseLeaveHandler = () => {
-    setTitleState('');
-    setIssuedForState('');
-    setSrcImg('');
-    setShowToolTip(false);
+  const handleMouseLeave = () => {
+    setTooltipProps(initialTooltipProps);
   };
 
   return (
     <Achievement
-      mouseLeaveHandler={MouseLeaveHandler}
-      mouseEnterHandler={MouseEnterHandler}
-      showToolTip={false}
+      handleMouseLeave={handleMouseLeave}
+      handleMouseEnter={handleMouseEnter}
+      showToolTip={tooltipProps.showToolTip}
+      image={src}
     >
       <div className={styles.tooltip}>
-        {showToolTip && (
+        {tooltipProps.showToolTip && (
           <div className={styles.tooltipRows}>
             <div className={styles.tooltipRowTitle}>
               <img
@@ -42,9 +50,13 @@ export const Tooltip: FC<TooltipProps> = ({ title, issuedFor, src }) => {
                 src={src}
                 alt="Награда"
               />
-              <p className={styles.tooltipRowTitleText}>{title}</p>
+              <Typography className={styles.tooltipRowTitleText} htmlTag="p">
+                {title}
+              </Typography>
             </div>
-            <div className={styles.tooltipRowText}>{issuedFor}</div>
+            <Typography className={styles.tooltipRowText} htmlTag="p">
+              {issuedFor}
+            </Typography>
           </div>
         )}
       </div>

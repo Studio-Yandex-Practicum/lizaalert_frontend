@@ -12,12 +12,12 @@
   padding: 2px;
   border: 2px solid colors.$dark-primary;
   background-repeat: no-repeat;
+}
 
-  &Img {
-    width: 100%;
-    height: 100%;
-    font-size: fontSize.$font-size-alt;
-  }
+.image {
+  width: 100%;
+  height: 100%;
+  font-size: fontSize.$font-size-alt;
 }
 
 .customClass {
