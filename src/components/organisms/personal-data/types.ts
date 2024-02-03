@@ -1,5 +1,5 @@
 import { UserDataFieldNames } from 'utils/constants';
-// TODO: после добавления nickname в модель раскомментировать код
+// TODO: https://linear.app/lizaalert/issue/TM-40/dobavlenie-polya-nickname
 
 export type PersonalFormData = {
   /** ФИО пользователя. */

@@ -13,7 +13,7 @@ import { editProfile } from 'store/profile/thunk';
 import type { PersonalFormData } from './types';
 import styles from './personal-data.module.scss';
 
-// TODO: после добавления nickname в модель раскомментировать код
+// TODO: https://linear.app/lizaalert/issue/TM-40/dobavlenie-polya-nickname
 
 const initialValues: PersonalFormData = {
   [UserDataFieldNames.Name]: '',
@@ -148,7 +148,10 @@ export const PersonalData: FC = () => {
           name={UserDataFieldNames.Avatar}
           onChange={(e) => {
             if (e.currentTarget.files) {
-              void formik.setFieldValue('photo', e.currentTarget.files[0]);
+              void formik.setFieldValue(
+                UserDataFieldNames.Avatar,
+                e.currentTarget.files[0]
+              );
             }
           }}
           isValid={

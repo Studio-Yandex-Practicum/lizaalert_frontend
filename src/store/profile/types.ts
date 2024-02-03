@@ -2,7 +2,7 @@ import { ProcessEnum } from 'utils/constants';
 
 export type ProfileState = {
   profile: {
-    id: string;
+    id: number;
     personalData: {
       full_name: string | null;
       birth_date: string | null;

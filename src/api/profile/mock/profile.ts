@@ -1,8 +1,9 @@
+import profileMockImage from 'assets/images/profile-mock.jpg';
 import type { ProfileModel } from '../types';
 
 const profile: ProfileModel = {
-  id: '0',
-  photo: '../../../assets/images/profile-mock.jpg',
+  id: 0,
+  photo: profileMockImage,
   full_name: 'Иванова Анна Сидоровна',
   department: 'Профессионал',
   call_sign: 'Картограф',

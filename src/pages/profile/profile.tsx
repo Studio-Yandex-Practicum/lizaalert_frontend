@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
+import { Heading, Li, P } from 'components/atoms/typography';
+import { Loader } from 'components/molecules/loader';
+import { AccountData } from 'components/organisms/account-data';
+import { AccountOverview } from 'components/organisms/account-overview';
+import { PersonalData } from 'components/organisms/personal-data';
 import { LOADING_PROCESS_MAP } from 'utils/constants';
-import { Heading, Li, P } from '../../components/atoms/typography';
-import { Loader } from '../../components/molecules/loader';
-import { AccountData } from '../../components/organisms/account-data';
-import { AccountOverview } from '../../components/organisms/account-overview';
-import { PersonalData } from '../../components/organisms/personal-data';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { selectIsProfileLoading } from '../../store/profile/selectors';
-import { fetchProfile } from '../../store/profile/thunk';
-import { routes } from '../../config';
+import { useAppDispatch, useAppSelector } from 'store';
+import { selectFetchProfileProcess } from 'store/profile/selectors';
+import { fetchProfile } from 'store/profile/thunk';
+import { routes } from 'config';
 import styles from './profile.module.scss';
 
 const Profile = () => {
@@ -18,7 +18,7 @@ const Profile = () => {
     void dispatch(fetchProfile());
   }, [dispatch]);
 
-  const profileProcess = useAppSelector(selectIsProfileLoading);
+  const profileProcess = useAppSelector(selectFetchProfileProcess);
   const isLoading = LOADING_PROCESS_MAP[profileProcess];
 
   if (isLoading) {

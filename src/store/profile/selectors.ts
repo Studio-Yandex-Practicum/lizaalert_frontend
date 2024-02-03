@@ -1,6 +1,6 @@
 import type { AppState } from 'store/types';
 
-export const selectIsProfileLoading = (state: AppState) =>
+export const selectFetchProfileProcess = (state: AppState) =>
   state.profile.fetchProfileProcess;
 export const selectProfileError = (state: AppState) =>
   state.profile.fetchProfileError;

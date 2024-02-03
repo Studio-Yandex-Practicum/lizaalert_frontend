@@ -1,5 +1,5 @@
 export type ProfileModel = {
-  id: string;
+  id: number;
   /** URL к аватару пользователя. */
   photo: string | null;
   /** ФИО пользователя. */

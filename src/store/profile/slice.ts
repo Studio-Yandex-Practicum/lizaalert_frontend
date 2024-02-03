@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from '../../utils/constants';
+import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
 import { editProfile, fetchProfile } from './thunk';
 import type { ProfileState } from './types';
 
 const initialState: ProfileState = {
   profile: {
-    id: '',
+    id: 0,
     personalData: {
       full_name: '',
       birth_date: '',
