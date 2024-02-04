@@ -4,6 +4,7 @@ import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
 import styles from './test-question.module.scss';
 import type { TestQuestionProps } from './types';
+import { useTest } from '../test/hooks/use-test';
 
 /**
  * Компонент тестового вопроса.
@@ -16,6 +17,8 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   isSubmitted = false,
   className = '',
 }) => {
+  const { testResultData } = useTest();
+
   // список ответов
   const answersList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
@@ -27,10 +30,19 @@ export const TestQuestion: FC<TestQuestionProps> = ({
     </li>
   ));
 
+  const currentQuestionResult = testResultData.find(
+    (result) => result.questionId === question.id
+  );
+  const validateAnswers = currentQuestionResult?.validateAnswers || {};
+
   // список с проверкой ответов теста
   const resultsList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
-      <TestResults answer={answer} className={className} />
+      <TestResults
+        answer={answer}
+        validateAnswers={validateAnswers}
+        className={className}
+      />
     </li>
   ));
 

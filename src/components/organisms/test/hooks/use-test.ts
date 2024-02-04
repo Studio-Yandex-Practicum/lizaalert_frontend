@@ -12,12 +12,14 @@ import {
 } from 'store/test/selectors';
 import { updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
+import { validateAnswers } from 'utils/validateAnswers';
+import { TestValidateType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake, createNewTest \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake, createNewTest, testResultData \}
  * */
 
 export const useTest = () => {
@@ -25,6 +27,7 @@ export const useTest = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
+  const [testResultData, seTestResultData] = useState<TestValidateType[]>([]);
 
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
@@ -43,6 +46,7 @@ export const useTest = () => {
       void dispatch(createTest(lessonId));
     }
     dispatch(updateAnswerReset());
+    seTestResultData([]);
     setIsSuccess(false);
     setTestResultPercent(0);
     setIsSubmitted(false);
@@ -69,6 +73,26 @@ export const useTest = () => {
       );
       setTestResultPercent(percent);
       setIsSuccess(percent >= AVERAGE_TEST_RESULT);
+
+      const correctAnswers = testResult.result.map(
+        ({ question_id, correct_answer_id }) => ({
+          questionId: question_id,
+          correctAnswers: correct_answer_id,
+        })
+      );
+      const userAnswers = testResult.answers.map(
+        ({ question_id, answer_id }) => ({
+          questionId: question_id,
+          answerId: answer_id,
+        })
+      );
+
+      const validateResult: TestValidateType[] = validateAnswers(
+        correctAnswers,
+        userAnswers
+      );
+
+      seTestResultData(validateResult);
     }
   }, [testResult]);
 
@@ -94,5 +118,6 @@ export const useTest = () => {
     retake,
     createNewTest,
     testResult,
+    testResultData,
   };
 };

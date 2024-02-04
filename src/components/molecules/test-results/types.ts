@@ -5,4 +5,5 @@ export type TestResultsProps = {
   answer: TestAnswerType;
   /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */
   className?: string;
+  validateAnswers: Record<number, 'correct' | 'unanswered' | 'incorrect'>;
 };

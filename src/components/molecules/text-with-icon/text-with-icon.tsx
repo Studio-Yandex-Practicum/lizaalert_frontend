@@ -30,7 +30,12 @@ export const TextWithIcon: FC<TextWithIconProps> = ({
   return (
     <div className={classNames} style={colorStyle}>
       <Icon type={iconType} className={styles.icon} />
-      <Typography withOverflow={withOverflow} weight={weight} htmlTag={htmlTag}>
+      <Typography
+        withOverflow={withOverflow}
+        weight={weight}
+        htmlTag={htmlTag}
+        className={classNames}
+      >
         {text}
       </Typography>
     </div>
