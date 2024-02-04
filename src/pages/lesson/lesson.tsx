@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
@@ -28,6 +28,7 @@ import {
   selectLessonType,
 } from 'store/lesson/selectors';
 import { useLesson } from 'hooks/use-lesson';
+import { useTest } from 'components/organisms/test';
 import styles from './lesson.module.scss';
 
 const Lesson: FC = () => {
@@ -40,11 +41,15 @@ const Lesson: FC = () => {
     goToPrevLesson,
     goToNextLesson,
   } = useLesson();
+  const { testResultData } = useTest();
 
   const navigate = useNavigate();
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
+
+  const [isQuizDisabledCondition, setIsQuizDisabledCondition] =
+    useState<boolean>(false);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -80,9 +85,18 @@ const Lesson: FC = () => {
     ];
   }, [lesson.id, lesson.breadcrumbs]);
 
+  useEffect(() => {
+    const isQuizAndNoResults =
+      lesson.lesson_type === 'Quiz' && !testResultData.length;
+    setIsQuizDisabledCondition(isQuizAndNoResults);
+  }, [lesson, testResultData]);
+
+  const isNotStarted =
+    lesson.user_lesson_progress === UserLessonProgress.NotStarted;
+  const isLoadingProcess = LOADING_PROCESS_MAP[completeLessonProcess];
+
   const isNextButtonDisabled =
-    lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
-    LOADING_PROCESS_MAP[completeLessonProcess];
+    isNotStarted || isLoadingProcess || isQuizDisabledCondition;
 
   return (
     <>
