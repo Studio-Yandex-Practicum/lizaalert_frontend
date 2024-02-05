@@ -36,16 +36,15 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
     start_date: startDate,
     cover_path: coverPath,
     user_status: userStatus,
-    current_lesson: currentLesson,
   } = course;
 
-  const { isEnrolled, canStudy, buttonText, handleEnroll } = useEnrollCourse({
-    id,
-    userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
-    startDate,
-    enrollStatus,
-    currentLesson,
-  });
+  const { isEnrolled, isButtonDisabled, buttonText, handleEnroll } =
+    useEnrollCourse({
+      id,
+      userStatus: userStatus ?? UserProgressStatus.NotEnrolled,
+      startDate,
+      enrollStatus,
+    });
 
   return (
     <article className={styles.article}>
@@ -92,7 +91,7 @@ export const CoursePreview: FC<CoursePreviewProps> = ({
       </Link>
       <Button
         className={styles.button}
-        disabled={!canStudy}
+        disabled={isButtonDisabled}
         view={isEnrolled ? 'primary' : 'secondary'}
         onClick={handleEnroll}
       >

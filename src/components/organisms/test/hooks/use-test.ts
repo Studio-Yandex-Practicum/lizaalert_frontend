@@ -1,82 +1,90 @@
-import { FormEvent, useEffect, useState } from 'react';
-import { useAppSelector } from 'store';
-import { selectIsTestLoading, selectTest } from 'store/test/selectors';
-import { Controls } from 'utils/constants';
-import type { TestModel } from 'api/lessons';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { calculatePercent } from 'utils/calculate-percent';
+import {
+  AVERAGE_TEST_RESULT,
+  LOADING_PROCESS_MAP,
+  ProcessEnum,
+} from 'utils/constants';
+import { useAppDispatch, useAppSelector } from 'store';
+import {
+  selectAnswersOnValidate,
+  selectProcessCreationTest,
+  selectTest,
+  selectTestProcess,
+  selectTestResult,
+} from 'store/test/selectors';
+import { updateAnswerReset } from 'store/test/slice';
+import { createTest, validateTest } from 'store/test/thunk';
 
 /**
  * Хук реализует логику прохождения теста.
  * Возвращает объект данных и обработчков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake, createNewTest \}
  * */
 
 export const useTest = () => {
+  const { lessonId } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [testResultPercent, setTestResultPercent] = useState(0);
 
-  // TODO удалить типы после типизации стора
-  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/397
-  const test = useAppSelector<TestModel>(selectTest);
-  const isLoading = useAppSelector<boolean>(selectIsTestLoading);
+  const test = useAppSelector(selectTest);
+  const answers = useAppSelector(selectAnswersOnValidate);
+  const testProcess = useAppSelector(selectTestProcess);
+  const testCreationProcess = useAppSelector(selectProcessCreationTest);
+  const testResult = useAppSelector(selectTestResult);
 
-  // TODO Функционал на пересдачу теста
-  // TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
-  const retake = () => null;
+  const isLoading = LOADING_PROCESS_MAP[testProcess];
 
-  // TODO: настроить условия для percentArr.push, значений percent и checkedCount в связи с новой логикой валидации ответов с бэка, настроить условия для нового типа ответа 'text_answer'
-  useEffect(() => {
-    if (test.passing_score && test.questions && test.questions.length >= 0) {
-      const percentArr: number[] = [];
+  const dispatch = useAppDispatch();
 
-      test.questions.forEach((question) => {
-        if (question.question_type === Controls.RADIO) {
-          question.content.forEach(() => {
-            percentArr.push(100);
-          });
-        } else {
-          const weight = 100 / question.content.length;
-          let percent = 0;
-          question.content.forEach(() => {
-            percent += weight;
-          });
-          percentArr.push(percent);
-        }
-      });
-
-      const middlePercent =
-        percentArr.reduce((sum, percent) => sum + percent, 0) /
-        percentArr.length;
-
-      const resultPercent = Math.round(middlePercent);
-
-      setTestResultPercent(resultPercent);
-      setIsSuccess(resultPercent >= test.passing_score);
+  // TODO: Функционал на пересдачу теста
+  // TODO: https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
+  const retake = () => {
+    if (lessonId) {
+      void dispatch(createTest(lessonId));
     }
-  }, [test.passing_score, test.questions]);
-
-  const handleButtonDisabledState = () => {
-    let isDisabled = false;
-
-    if (test.questions?.length) {
-      test.questions.forEach((question) => {
-        let checkedCount = 0;
-
-        question.content.forEach(() => {
-          checkedCount += 1;
-        });
-
-        if (checkedCount === 0) isDisabled = true;
-      });
-    }
-
-    return isDisabled;
+    dispatch(updateAnswerReset());
+    setIsSuccess(false);
+    setTestResultPercent(0);
+    setIsSubmitted(false);
   };
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const createNewTest = async () => {
+    if (lessonId) {
+      await dispatch(createTest(lessonId));
+    }
+  };
+
+  const sendTestOnValidation = async (): Promise<void> => {
+    if (lessonId && testCreationProcess === ProcessEnum.Succeeded) {
+      await dispatch(validateTest({ id: lessonId, answers }));
+      setIsSubmitted(true);
+    }
+  };
+
+  useEffect(() => {
+    if (testResult) {
+      const percent = calculatePercent(
+        testResult.answers.length,
+        testResult.score
+      );
+      setTestResultPercent(percent);
+      setIsSuccess(percent >= AVERAGE_TEST_RESULT);
+    }
+  }, [testResult]);
+
+  const handleButtonDisabledState = () =>
+    testCreationProcess === ProcessEnum.Failed ||
+    !test.questions?.some((question) =>
+      question.content.some((answer) => answer.selected)
+    );
+
+  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    setIsSubmitted(true);
+    void sendTestOnValidation();
   };
 
   return {
@@ -88,5 +96,7 @@ export const useTest = () => {
     onSubmit,
     handleButtonDisabledState,
     retake,
+    createNewTest,
+    testResult,
   };
 };

@@ -30,7 +30,7 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   // список с проверкой ответов теста
   const resultsList = question.content.map((answer) => (
     <li className={className} key={answer.id}>
-      <TestResults content={answer} className={className} />
+      <TestResults answer={answer} className={className} />
     </li>
   ));
 

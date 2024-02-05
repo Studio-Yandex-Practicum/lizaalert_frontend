@@ -6,7 +6,10 @@ export const DELAY_DEBOUNCE = 300;
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 
+export const AVERAGE_TEST_RESULT = 50;
+
 export const GENERAL_ERROR = 'Что-то пошло не так';
+export const ERROR_403 = 'Ошибка 403';
 
 export const ACCESS_TOKEN = 'token.access';
 export const REFRESH_TOKEN = 'token.refresh';
@@ -34,6 +37,10 @@ export const ErrorMessages = {
   email: 'Введите эл. адрес в формате: anna@liza-alert.ru',
   tel: 'Введите номер телефона в формате: +7 (XXX) XXX XX XX',
   confirmPassword: 'Пароли не совпадают',
+};
+
+export const SERVER_API_ERRORS = {
+  FORBIDDEN: 'У вас недостаточно прав для выполнения данного действия.',
 };
 
 export const RegExpPatterns = {
