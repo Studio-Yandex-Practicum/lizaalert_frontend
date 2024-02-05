@@ -1,8 +1,12 @@
 export { lessonsApi } from './lessons.api';
+export { UserLessonProgress } from './types';
 export type {
   LessonModel,
+  TestAnswerListModel,
   TestAnswerModel,
-  TestQuestionModel,
   TestModel,
+  TestOnValidationData,
+  TestQuestionModel,
+  TestResultListModel,
+  TestResultModel,
 } from './types';
-export { UserLessonProgress } from './types';
