@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { calculatePercent } from 'utils/calculate-percent';
-import { AVERAGE_TEST_RESULT, LOADING_PROCESS_MAP } from 'utils/constants';
+import {
+  AVERAGE_TEST_RESULT,
+  LOADING_PROCESS_MAP,
+  ProcessEnum,
+} from 'utils/constants';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectAnswersOnValidate,
@@ -32,7 +36,7 @@ export const useTest = () => {
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
   const testProcess = useAppSelector(selectTestProcess);
-  const isTestCreated = useAppSelector(selectProcessCreationTest);
+  const testCreationProcess = useAppSelector(selectProcessCreationTest);
   const testResult = useAppSelector(selectTestResult);
 
   const isLoading = LOADING_PROCESS_MAP[testProcess];
@@ -59,7 +63,7 @@ export const useTest = () => {
   };
 
   const sendTestOnValidation = async (): Promise<void> => {
-    if (lessonId && isTestCreated) {
+    if (lessonId && testCreationProcess === ProcessEnum.Succeeded) {
       await dispatch(validateTest({ id: lessonId, answers }));
       setIsSubmitted(true);
     }
@@ -97,7 +101,7 @@ export const useTest = () => {
   }, [testResult]);
 
   const handleButtonDisabledState = () =>
-    isTestCreated === 'Failed' ||
+    testCreationProcess === ProcessEnum.Failed ||
     !test.questions?.some((question) =>
       question.content.some((answer) => answer.selected)
     );

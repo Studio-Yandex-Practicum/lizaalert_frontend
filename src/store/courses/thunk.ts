@@ -25,3 +25,11 @@ export const unrollCourseById = createAsyncThunk(
     await courseApi.unroll(courseId);
   }
 );
+
+export const getCurrentLesson = createAsyncThunk(
+  'courses/getCurrentLesson',
+  async (courseId: number) => {
+    const currentLesson = await courseApi.getCurrentLesson(courseId);
+    return currentLesson;
+  }
+);

@@ -27,7 +27,7 @@ function renderLesson(
 ) {
   const currentLessonRoute = `${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
 
-  if (lesson.lesson_progress === LessonProgress.Finished) {
+  if (lesson.user_lesson_progress === LessonProgress.Finished) {
     return (
       <div
         className={classnames(styles.listItem, {
@@ -51,7 +51,7 @@ function renderLesson(
     );
   }
 
-  if (lesson.lesson_progress === LessonProgress.Started) {
+  if (lesson.user_lesson_progress === LessonProgress.Started) {
     return (
       <div
         className={classnames(styles.listItem, styles.active)}

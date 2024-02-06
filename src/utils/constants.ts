@@ -14,6 +14,8 @@ export const ERROR_403 = 'Ошибка 403';
 export const ACCESS_TOKEN = 'token.access';
 export const REFRESH_TOKEN = 'token.refresh';
 
+export const COURSE_PLURAL = ['курс', 'курса', 'курсов'];
+
 export enum Controls {
   CHECKBOX = 'checkbox',
   RADIO = 'radio',
@@ -78,13 +80,13 @@ export const AFTER_LOAD_PROCESS_MAP: Record<ProcessEnum, boolean> = {
 export const PHONE_MASK = '+7 (999) 999-99-99';
 
 export enum UserDataFieldNames {
-  Name = 'name',
-  DateOfBirth = 'dateOfBirth',
-  Region = 'region',
+  Name = 'full_name',
+  DateOfBirth = 'birth_date',
+  Region = 'location',
   Nickname = 'nickname',
-  Avatar = 'avatar',
+  Avatar = 'photo',
   Email = 'email',
-  Phone = 'phone',
+  Phone = 'phone_number',
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
 }
