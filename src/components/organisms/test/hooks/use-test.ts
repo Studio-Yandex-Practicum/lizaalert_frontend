@@ -30,7 +30,9 @@ export const useTest = () => {
   const { lessonId } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [testResultPercent, setTestResultPercent] = useState(0);
+  const [testResultPercent, setTestResultPercent] = useState<
+    number | undefined
+  >();
   const [testResultData, seTestResultData] = useState<TestValidateType[]>([]);
 
   const test = useAppSelector(selectTest);
@@ -52,7 +54,7 @@ export const useTest = () => {
     dispatch(updateAnswerReset());
     seTestResultData([]);
     setIsSuccess(false);
-    setTestResultPercent(0);
+    setTestResultPercent(undefined);
     setIsSubmitted(false);
   };
 

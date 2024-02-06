@@ -14,6 +14,7 @@ import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import {
+  AVERAGE_TEST_RESULT,
   ERROR_403,
   LOADING_PROCESS_MAP,
   ProcessEnum,
@@ -41,7 +42,7 @@ const Lesson: FC = () => {
     goToPrevLesson,
     goToNextLesson,
   } = useLesson();
-  const { testResultData } = useTest();
+  const { testResultData, testResultPercent } = useTest();
 
   const navigate = useNavigate();
   const contents = useAppSelector(selectCourseContents);
@@ -86,10 +87,16 @@ const Lesson: FC = () => {
   }, [lesson.id, lesson.breadcrumbs]);
 
   useEffect(() => {
-    const isQuizAndNoResults =
-      lesson.lesson_type === 'Quiz' && !testResultData.length;
+    const isQuizType = lesson.lesson_type === 'Quiz';
+    const noResults = !testResultData.length;
+    const hasValidPercent =
+      testResultPercent !== undefined &&
+      testResultPercent < AVERAGE_TEST_RESULT;
+
+    const isQuizAndNoResults = (isQuizType && noResults) || hasValidPercent;
+
     setIsQuizDisabledCondition(isQuizAndNoResults);
-  }, [lesson, testResultData]);
+  }, [lesson, testResultData, testResultPercent]);
 
   const isNotStarted =
     lesson.user_lesson_progress === UserLessonProgress.NotStarted;
