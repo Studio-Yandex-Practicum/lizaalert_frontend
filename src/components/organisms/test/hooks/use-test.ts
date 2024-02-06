@@ -16,7 +16,7 @@ import {
 } from 'store/test/selectors';
 import { updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
-import { validateAnswers } from 'utils/validateAnswers';
+import { validateAnswers } from 'utils/validate-answers';
 import { TestValidateType } from '../types';
 
 /**
