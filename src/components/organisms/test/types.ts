@@ -1,3 +1,5 @@
+import { AnswerStatus } from 'utils/constants';
+
 export type TestProps = {
   /** Функция возврата к превью теста. */
   toggleRender: VoidFunction;
@@ -8,7 +10,14 @@ export type AnswerType = {
   answerId: number[];
 };
 
+export type ResultStatus =
+  | AnswerStatus.CORRECT
+  | AnswerStatus.UNANSWERED
+  | AnswerStatus.INCORRECT;
+
+export type ResultRecord = Record<number, ResultStatus>;
+
 export type TestValidateType = {
   questionId: number;
-  validateAnswers: Record<number, 'correct' | 'unanswered' | 'incorrect'>;
+  validateAnswers: ResultRecord;
 };

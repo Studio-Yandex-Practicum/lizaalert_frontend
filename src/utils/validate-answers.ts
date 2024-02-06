@@ -1,7 +1,9 @@
 import type {
   AnswerType,
+  ResultRecord,
   TestValidateType,
 } from 'components/organisms/test/types';
+import { AnswerStatus } from './constants';
 
 export function validateAnswers(
   correctAnswersList: { questionId: number; correctAnswers: number[] }[],
@@ -15,19 +17,19 @@ export function validateAnswers(
     const correctSet = new Set(correctAnswers);
     const userAnswerSet = new Set(userAnswer?.answerId || []);
 
-    const result: Record<number, 'correct' | 'unanswered' | 'incorrect'> = {};
+    const result: ResultRecord = {};
 
     correctSet.forEach((answerId) => {
       if (userAnswerSet.has(answerId)) {
-        result[answerId] = 'correct';
+        result[answerId] = AnswerStatus.CORRECT;
       } else {
-        result[answerId] = 'unanswered';
+        result[answerId] = AnswerStatus.UNANSWERED;
       }
     });
 
     userAnswerSet.forEach((answerId) => {
       if (!(answerId in result)) {
-        result[answerId] = 'incorrect';
+        result[answerId] = AnswerStatus.INCORRECT;
       }
     });
 

@@ -14,7 +14,6 @@ import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import {
-  AVERAGE_TEST_RESULT,
   ERROR_403,
   LOADING_PROCESS_MAP,
   ProcessEnum,
@@ -42,7 +41,7 @@ const Lesson: FC = () => {
     goToPrevLesson,
     goToNextLesson,
   } = useLesson();
-  const { testResultData, testResultPercent } = useTest();
+  const { testResultData } = useTest();
 
   const navigate = useNavigate();
   const contents = useAppSelector(selectCourseContents);
@@ -88,8 +87,7 @@ const Lesson: FC = () => {
 
   useEffect(() => {
     const isQuizAndNoResults =
-      (lesson.lesson_type === 'Quiz' && !testResultData.length) ||
-      testResultPercent < AVERAGE_TEST_RESULT;
+      lesson.lesson_type === 'Quiz' && !testResultData.length;
     setIsQuizDisabledCondition(isQuizAndNoResults);
   }, [lesson, testResultData]);
 
