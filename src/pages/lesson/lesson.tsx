@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -83,6 +83,10 @@ const Lesson: FC = () => {
   const isNextButtonDisabled =
     lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
     LOADING_PROCESS_MAP[completeLessonProcess];
+
+  if (lessonError && lessonError === SERVER_API_ERRORS.NOT_FOUND) {
+    return <Navigate to={routes.notFound.path} />;
+  }
 
   return (
     <>

@@ -41,6 +41,7 @@ export const ErrorMessages = {
 
 export const SERVER_API_ERRORS = {
   FORBIDDEN: 'У вас недостаточно прав для выполнения данного действия.',
+  NOT_FOUND: 'Страница не найдена.',
 };
 
 export const RegExpPatterns = {
