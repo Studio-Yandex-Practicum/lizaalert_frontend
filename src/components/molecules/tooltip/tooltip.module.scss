@@ -8,10 +8,6 @@
   top: 0;
   right: -98%;
 
-  @media (max-width: 961px) {
-    right: -115%;
-  }
-
   &Rows {
     font-family: vars.$mainFont;
     display: flex;
