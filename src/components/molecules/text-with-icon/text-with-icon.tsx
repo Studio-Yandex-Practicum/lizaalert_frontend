@@ -15,6 +15,7 @@ export const TextWithIcon: FC<TextWithIconProps> = ({
   isReverse,
   color,
   className,
+  textClassName,
   weight = 'normal',
   withOverflow,
   htmlTag = 'p',
@@ -34,7 +35,7 @@ export const TextWithIcon: FC<TextWithIconProps> = ({
         withOverflow={withOverflow}
         weight={weight}
         htmlTag={htmlTag}
-        className={classNames}
+        className={textClassName}
       >
         {text}
       </Typography>

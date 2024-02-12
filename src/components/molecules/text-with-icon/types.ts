@@ -22,4 +22,5 @@ export type TextWithIconProps = {
   withOverflow?: boolean;
   /** Тег для текста. По умолчанию `<p>`. */
   htmlTag?: TypographyTag;
+  textClassName?: string;
 };

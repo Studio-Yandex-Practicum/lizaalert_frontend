@@ -17,7 +17,7 @@ import {
 import { updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
 import { validateAnswers } from 'utils/validate-answers';
-import { TestValidateType } from '../types';
+import type { TestValidateType } from '../types';
 
 /**
  * Хук реализует логику прохождения теста.
@@ -33,7 +33,7 @@ export const useTest = () => {
   const [testResultPercent, setTestResultPercent] = useState<
     number | undefined
   >();
-  const [testResultData, seTestResultData] = useState<TestValidateType[]>([]);
+  const [testResultData, setTestResultData] = useState<TestValidateType[]>([]);
 
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
@@ -52,7 +52,7 @@ export const useTest = () => {
       void dispatch(createTest(lessonId));
     }
     dispatch(updateAnswerReset());
-    seTestResultData([]);
+    setTestResultData([]);
     setIsSuccess(false);
     setTestResultPercent(undefined);
     setIsSubmitted(false);
@@ -98,7 +98,7 @@ export const useTest = () => {
         userAnswers
       );
 
-      seTestResultData(validateResult);
+      setTestResultData(validateResult);
     }
   }, [testResult]);
 

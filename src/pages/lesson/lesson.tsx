@@ -87,7 +87,7 @@ const Lesson: FC = () => {
   }, [lesson.id, lesson.breadcrumbs]);
 
   useEffect(() => {
-    const isQuizType = lesson.lesson_type === 'Quiz';
+    const isQuizType = lesson.lesson_type === LessonType.Quiz;
     const noResults = !testResultData.length;
     const hasValidPercent =
       testResultPercent !== undefined &&
