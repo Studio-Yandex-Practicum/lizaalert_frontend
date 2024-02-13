@@ -42,3 +42,12 @@ export type ApiInterceptorConfig = (
   name: string;
   onRejected?: (error: AxiosError) => unknown;
 };
+
+export type SerializedErrorType = {
+  code?: string;
+  message?: string;
+};
+
+export type ErrorResponseDataModel = {
+  detail: string;
+};

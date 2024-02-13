@@ -1,3 +1,4 @@
+import { SerializedError } from 'api/core';
 import { ProcessEnum } from 'utils/constants';
 
 export type ProfileState = {
@@ -21,7 +22,7 @@ export type ProfileState = {
     };
   };
   editProfileProcess: ProcessEnum;
-  editProfileError: string | null;
+  editProfileError: SerializedError | null;
   fetchProfileProcess: ProcessEnum;
-  fetchProfileError: string | null;
+  fetchProfileError: SerializedError | null;
 };

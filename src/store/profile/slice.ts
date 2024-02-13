@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { editProfile, fetchProfile } from './thunk';
 import type { ProfileState } from './types';
 
@@ -44,7 +44,7 @@ export const profileSlice = createSlice({
     });
     builder.addCase(fetchProfile.rejected, (state, { error }) => {
       state.fetchProfileProcess = ProcessEnum.Failed;
-      state.fetchProfileError = error.message ?? GENERAL_ERROR;
+      state.fetchProfileError = error;
     });
     builder.addCase(editProfile.pending, (state) => {
       state.editProfileProcess = ProcessEnum.Requested;
@@ -56,7 +56,7 @@ export const profileSlice = createSlice({
     });
     builder.addCase(editProfile.rejected, (state, { error }) => {
       state.editProfileProcess = ProcessEnum.Failed;
-      state.editProfileError = error.message ?? GENERAL_ERROR;
+      state.editProfileError = error;
     });
   },
 });
