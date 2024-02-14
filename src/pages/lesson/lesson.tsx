@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -14,7 +14,7 @@ import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
-import { HttpCodes } from 'api/core';
+import { ErrorCodes } from 'api/core';
 import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
 import { useAppSelector } from 'store';
@@ -80,6 +80,10 @@ const Lesson: FC = () => {
     lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
     LOADING_PROCESS_MAP[completeLessonProcess];
 
+  if (lessonError?.code === ErrorCodes.NotFound) {
+    return <Navigate to={routes.notFound.path} replace />;
+  }
+
   return (
     <>
       {lesson.breadcrumbs && (
@@ -91,7 +95,7 @@ const Lesson: FC = () => {
           <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
             {lessonError &&
-              (lessonError.code === HttpCodes.Forbidden ? (
+              (lessonError.code === ErrorCodes.Forbidden ? (
                 <ErrorLocker
                   onClick={() => navigate(-1)}
                   heading={ERROR_403}

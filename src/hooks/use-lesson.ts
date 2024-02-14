@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from 'config';
 import { SUBROUTES } from 'router/routes';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
-import { HttpCodes, SerializedError } from 'api/core';
+import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -25,7 +25,7 @@ type UseLesson = {
   lesson: LessonModel;
   lessonProcess: ProcessEnum;
   isLoading: boolean;
-  lessonError: SerializedError | null;
+  lessonError: Nullable<SerializedError>;
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
@@ -106,17 +106,18 @@ export const useLesson = (): UseLesson => {
   }, [course, courseId]);
 
   useEffect(() => {
-    const isNotFoundServerError = lessonError?.code === HttpCodes.NotFound;
-    const isInconsistencyError =
-      lessonProcess === ProcessEnum.Succeeded &&
-      (lesson.id !== +lessonId ||
-        lesson.chapter_id !== +chapterId ||
-        lesson.course_id !== +courseId);
+    const isDataInconsistent =
+      lesson.id !== +lessonId ||
+      lesson.chapter_id !== +chapterId ||
+      lesson.course_id !== +courseId;
 
-    if (isNotFoundServerError || isInconsistencyError) {
+    const isInconsistencyError =
+      lessonProcess === ProcessEnum.Succeeded && isDataInconsistent;
+
+    if (isInconsistencyError) {
       navigate(routes.notFound.path, { replace: true });
     }
-  }, [lessonProcess, lesson, lessonError]);
+  }, [lessonProcess, lesson]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {

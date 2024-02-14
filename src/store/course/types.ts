@@ -5,5 +5,5 @@ import { ProcessEnum } from 'utils/constants';
 export type CourseState = {
   course: CourseModel;
   process: ProcessEnum;
-  error: SerializedError | null;
+  error: Nullable<SerializedError>;
 };

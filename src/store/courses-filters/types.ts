@@ -4,7 +4,7 @@ import { ProcessEnum } from 'utils/constants';
 
 export type CoursesFiltersThunkState = {
   process: ProcessEnum;
-  error: SerializedError | null;
+  error: Nullable<SerializedError>;
   filters: CoursesFiltersModel;
 };
 

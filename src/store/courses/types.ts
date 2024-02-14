@@ -5,11 +5,11 @@ import { ProcessEnum } from 'utils/constants';
 
 export type EnrollStatusType = {
   process: ProcessEnum;
-  error: SerializedError | null;
+  error: Nullable<SerializedError>;
   userStatus: UserProgressStatus;
   currentLesson?: {
     process: ProcessEnum;
-    error: SerializedError | null;
+    error: Nullable<SerializedError>;
     lessonId: CurrentLessonModel['lesson_id'];
     chapterId: CurrentLessonModel['chapter_id'];
   };
@@ -17,7 +17,7 @@ export type EnrollStatusType = {
 
 export type CoursesThunkState = {
   process: ProcessEnum;
-  error: SerializedError | null;
+  error: Nullable<SerializedError>;
   count: CoursesModel['count'];
   courses: CoursesModel['results'];
   enrollStatus: Record<string, EnrollStatusType>;

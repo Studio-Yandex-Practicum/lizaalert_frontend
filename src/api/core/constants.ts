@@ -6,7 +6,7 @@ export enum HttpStatusCodes {
   Internal = 500,
 }
 
-export enum HttpCodes {
+export enum ErrorCodes {
   BadRequest = 'BAD_REQUEST',
   Unauthorized = 'UNAUTHORIZED',
   Forbidden = 'FORBIDDEN',
@@ -14,10 +14,11 @@ export enum HttpCodes {
   Internal = 'INTERNAL',
 }
 
-export const httpStatusCodesMap: Record<HttpStatusCodes | number, HttpCodes> = {
-  [HttpStatusCodes.BadRequest]: HttpCodes.BadRequest,
-  [HttpStatusCodes.Unauthorized]: HttpCodes.Unauthorized,
-  [HttpStatusCodes.Forbidden]: HttpCodes.Forbidden,
-  [HttpStatusCodes.NotFound]: HttpCodes.NotFound,
-  [HttpStatusCodes.Internal]: HttpCodes.Internal,
-};
+export const httpStatusCodesMap: Record<HttpStatusCodes | number, ErrorCodes> =
+  {
+    [HttpStatusCodes.BadRequest]: ErrorCodes.BadRequest,
+    [HttpStatusCodes.Unauthorized]: ErrorCodes.Unauthorized,
+    [HttpStatusCodes.Forbidden]: ErrorCodes.Forbidden,
+    [HttpStatusCodes.NotFound]: ErrorCodes.NotFound,
+    [HttpStatusCodes.Internal]: ErrorCodes.Internal,
+  };
