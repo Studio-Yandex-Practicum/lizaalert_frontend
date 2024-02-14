@@ -2,15 +2,12 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from 'config';
 import { SUBROUTES } from 'router/routes';
-import {
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-  SHOULD_LOAD_PROCESS_MAP,
-} from 'utils/constants';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourseProcess } from 'store/course/selectors';
+import { selectCourse } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLesson,
@@ -20,6 +17,7 @@ import {
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
 import { fetchCourseById } from 'store/course/thunk';
 import { useEvent } from 'hooks/use-event';
+import { resetLessonState } from 'store/lesson/slice';
 
 type UseLesson = {
   courseId: string;
@@ -27,7 +25,7 @@ type UseLesson = {
   lesson: LessonModel;
   lessonProcess: ProcessEnum;
   isLoading: boolean;
-  lessonError: string | null;
+  lessonError: Nullable<SerializedError>;
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
@@ -44,7 +42,7 @@ export const useLesson = (): UseLesson => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const courseProcess = useAppSelector(selectCourseProcess);
+  const course = useAppSelector(selectCourse);
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
@@ -92,16 +90,34 @@ export const useLesson = (): UseLesson => {
   });
 
   useEffect(() => {
-    if (lessonId && lesson.id !== +lessonId) {
+    if (lessonId) {
       fetchLesson();
     }
+
+    return () => {
+      dispatch(resetLessonState());
+    };
   }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && SHOULD_LOAD_PROCESS_MAP[courseProcess]) {
+    if (courseId && course.id !== +courseId) {
       void dispatch(fetchCourseById(courseId));
     }
-  }, [courseId, courseProcess]);
+  }, [course, courseId]);
+
+  useEffect(() => {
+    const isDataInconsistent =
+      lesson.id !== +lessonId ||
+      lesson.chapter_id !== +chapterId ||
+      lesson.course_id !== +courseId;
+
+    const isInconsistencyError =
+      lessonProcess === ProcessEnum.Succeeded && isDataInconsistent;
+
+    if (isInconsistencyError) {
+      navigate(routes.notFound.path, { replace: true });
+    }
+  }, [lessonProcess, lesson]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {

@@ -1,43 +1,65 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'config';
 import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsAuth } from 'store/auth/selectors';
-import { enrollCourseById } from 'store/courses/thunk';
+import {
+  enrollCourseById,
+  getCurrentLesson,
+  unrollCourseById,
+} from 'store/courses/thunk';
 import type { EnrollStatusType } from 'store/courses/types';
-import type { CurrentLessonModel } from 'api/course/types';
 
 type UseEnrollCourseConfig = {
+  /** id курса */
   id: number;
+  /** Статус подписки на курс как есть */
   userStatus: UserProgressStatus;
+  /** Дата начала курса. */
+  startDate: string;
+  /** Изменяемые данные статуса подписки на курс из стора */
   enrollStatus?: EnrollStatusType;
-  currentLesson: CurrentLessonModel;
+};
+
+type UseEnrollCourse = {
+  isEnrolled: boolean;
+  isButtonDisabled: boolean;
+  buttonText: string;
+  handleEnroll: VoidFunction;
+  handleUnroll: VoidFunction;
 };
 
 export const useEnrollCourse = ({
   id,
   userStatus,
+  startDate,
   enrollStatus,
-  currentLesson,
-}: UseEnrollCourseConfig) => {
+}: UseEnrollCourseConfig): UseEnrollCourse => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const isAuth = useAppSelector(selectIsAuth);
+  const currentUserStatus = enrollStatus?.userStatus || userStatus;
+  const currentLesson = enrollStatus?.currentLesson;
 
-  const isEnrolled =
-    userStatus === UserProgressStatus.Enrolled ||
-    enrollStatus?.process === ProcessEnum.Succeeded;
+  const isEnrolled = currentUserStatus !== UserProgressStatus.NotEnrolled;
+  const canStudy = currentUserStatus !== UserProgressStatus.Enrolled;
+  const isButtonDisabled =
+    !canStudy ||
+    enrollStatus?.process === ProcessEnum.Requested ||
+    currentLesson?.process === ProcessEnum.Requested;
 
-  const buttonText: string = useMemo(
-    () =>
-      isEnrolled
-        ? CourseStatusButtons[UserProgressStatus.Enrolled]
-        : CourseStatusButtons[userStatus ?? UserProgressStatus.NotEnrolled],
-    [userStatus, isEnrolled]
-  );
+  const buttonText = useMemo(() => {
+    const localStartDate = new Date(startDate).toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'short',
+    });
+    return currentUserStatus === UserProgressStatus.Enrolled
+      ? `Начнется ${localStartDate || 'скоро'}`
+      : CourseStatusButtons[currentUserStatus];
+  }, [currentUserStatus]);
 
   const handleEnroll = () => {
     if (enrollStatus?.process === ProcessEnum.Requested) {
@@ -46,18 +68,37 @@ export const useEnrollCourse = ({
 
     if (!isAuth) {
       navigate(routes.login.path);
-    } else if (isEnrolled && currentLesson.chapter && currentLesson.lesson) {
-      navigate(
-        `${routes.course.path}/${id}/${currentLesson.chapter}/${currentLesson.lesson}`
-      );
+      return;
+    }
+
+    if (isEnrolled) {
+      void dispatch(getCurrentLesson(id));
     } else {
       void dispatch(enrollCourseById(id));
     }
   };
 
+  const handleUnroll = () => {
+    void dispatch(unrollCourseById(id));
+  };
+
+  useEffect(() => {
+    if (currentLesson && currentLesson.process === ProcessEnum.Succeeded) {
+      if (currentLesson.chapterId && currentLesson.lessonId) {
+        navigate(
+          `${routes.course.path}/${id}/${currentLesson.chapterId}/${currentLesson.lessonId}`
+        );
+      } else {
+        navigate(`${routes.course.path}/${id}`);
+      }
+    }
+  }, [currentLesson?.process]);
+
   return {
     isEnrolled,
+    isButtonDisabled,
     buttonText,
     handleEnroll,
+    handleUnroll,
   };
 };

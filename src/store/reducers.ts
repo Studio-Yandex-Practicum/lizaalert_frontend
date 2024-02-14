@@ -1,13 +1,13 @@
 import { Action, CombinedState, combineReducers } from '@reduxjs/toolkit';
-import type { AppState } from './types';
-import coursesReducer from './courses/slice';
-import coursesFiltersReducer from './courses-filters/slice';
-import testReducer from './test/slice';
+import authReducer from './auth/slice';
 import courseReducer from './course/slice';
+import coursesFiltersReducer from './courses-filters/slice';
+import coursesReducer from './courses/slice';
 import lessonReducer from './lesson/slice';
 import profileReducer from './profile/slice';
-import authReducer from './auth/slice';
+import testReducer from './test/slice';
 import achievementsReducer from './achievements/slice';
+import type { AppState } from './types';
 
 const appReducer = combineReducers<AppState>({
   courses: coursesReducer,
@@ -25,7 +25,6 @@ export const rootReducer = (
   action: Action
 ) => {
   if (action.type === 'courses/resetAllState') {
-    // Возврат стора к дефолтному состоянию
     return appReducer(undefined, action);
   }
 

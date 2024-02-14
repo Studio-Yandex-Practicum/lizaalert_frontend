@@ -14,6 +14,22 @@ export const fetchCourses = createAsyncThunk(
 export const enrollCourseById = createAsyncThunk(
   'courses/enroll',
   async (courseId: number) => {
-    await courseApi.enroll(courseId);
+    const data = await courseApi.enroll(courseId);
+    return data;
+  }
+);
+
+export const unrollCourseById = createAsyncThunk(
+  'courses/unroll',
+  async (courseId: number) => {
+    await courseApi.unroll(courseId);
+  }
+);
+
+export const getCurrentLesson = createAsyncThunk(
+  'courses/getCurrentLesson',
+  async (courseId: number) => {
+    const currentLesson = await courseApi.getCurrentLesson(courseId);
+    return currentLesson;
   }
 );

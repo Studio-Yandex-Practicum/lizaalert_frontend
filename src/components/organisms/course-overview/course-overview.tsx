@@ -4,6 +4,7 @@ import { Card } from 'components/atoms/card';
 import { Li } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { isDevEnv } from 'config';
 import { UserProgressStatus } from 'api/course';
 import { onImageLoadError } from 'utils/on-image-load-error';
 import { convertDate } from 'utils/convert-date';
@@ -24,13 +25,18 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
   courseDuration,
   enrollStatus,
   userStatus = UserProgressStatus.NotEnrolled,
-  currentLesson,
 }) => {
-  const { buttonText, handleEnroll } = useEnrollCourse({
+  const {
+    buttonText,
+    isEnrolled,
+    isButtonDisabled,
+    handleEnroll,
+    handleUnroll,
+  } = useEnrollCourse({
     id,
     userStatus,
+    startDate,
     enrollStatus,
-    currentLesson,
   });
 
   return (
@@ -75,9 +81,22 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
         color="warning"
       />
 
-      <Button className={styles.courseEnroll} onClick={handleEnroll}>
+      <Button
+        className={styles.courseEnroll}
+        onClick={handleEnroll}
+        disabled={isButtonDisabled}
+      >
         {buttonText}
       </Button>
+
+      {isDevEnv && isEnrolled && (
+        <Button
+          className={styles.courseEnroll}
+          view="secondary"
+          text="Отписаться"
+          onClick={handleUnroll}
+        />
+      )}
     </Card>
   );
 };

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { achievementApi } from 'api/achievements/achievements.api';
+import { achievementApi } from 'api/achievements';
 
 export const fetchAchievement = createAsyncThunk(
   'achievements/fetch',

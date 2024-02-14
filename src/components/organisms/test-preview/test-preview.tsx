@@ -5,8 +5,8 @@ import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { convertDate } from 'utils/convert-date';
 import { useTest } from '../test';
-import type { TextPreviewProps } from './types';
 import styles from './test-preview.module.scss';
+import type { TextPreviewProps } from './types';
 
 const DATE_OPTIONS = { onlyTime: true };
 

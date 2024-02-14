@@ -8,7 +8,7 @@ import { PHONE_MASK, UserDataFieldNames } from 'utils/constants';
 import { getValidationSchema } from 'utils/validation';
 import { compareObjectFields } from 'utils/compare-object-fields';
 import { useAppDispatch, useAppSelector } from 'store';
-import { setAccountData } from 'store/profile/slice';
+import { editProfile } from 'store/profile/thunk';
 import { selectProfileAccount } from 'store/profile/selectors';
 import type { AccountFormData } from './types';
 import styles from './account-data.module.scss';
@@ -38,7 +38,8 @@ export const AccountData: FC = () => {
     { validateForm }: FormikHelpers<AccountFormData>
   ) => {
     await validateForm(values);
-    void dispatch(setAccountData(values));
+
+    void dispatch(editProfile(values));
   };
 
   const formik = useFormik<AccountFormData>({

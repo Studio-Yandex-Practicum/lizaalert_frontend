@@ -4,7 +4,7 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { fetchCourseById } from './thunk';
 import type { CourseState } from './types';
 
@@ -21,7 +21,6 @@ const initialState: CourseState = {
     lessons_count: 0,
     course_duration: 0,
     chapters: [],
-    current_lesson: { lesson: 0, chapter: 0 },
   },
   process: ProcessEnum.Initial,
   error: null,
@@ -45,7 +44,7 @@ export const courseSlice = createSlice({
     });
     builder.addMatcher(isRejected(fetchCourseById), (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });

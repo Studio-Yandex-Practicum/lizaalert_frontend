@@ -5,9 +5,9 @@ import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
 import type { TestQuestionModel } from 'api/lessons';
-import type { TestProps } from './types';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
+import type { TestProps } from './types';
 
 /**
  * Компонент-карточка теста с вопросами.

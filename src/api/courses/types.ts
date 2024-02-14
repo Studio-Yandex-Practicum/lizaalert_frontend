@@ -1,5 +1,4 @@
 import { UserProgressStatus } from 'api/course';
-import type { CurrentLessonModel } from 'api/course/types';
 
 export type CoursePreviewModel = {
   /** id курса. */
@@ -12,6 +11,8 @@ export type CoursePreviewModel = {
   short_description: string;
   /** Количество уроков в курсе. */
   lessons_count: number;
+  /** Дата начала курса. */
+  start_date: string;
   /** Продолжительность курса в часах. */
   course_duration: Nullable<number>;
   /** Статус курса. */
@@ -20,8 +21,6 @@ export type CoursePreviewModel = {
   cover_path: string | null;
   /** Статус подписки пользователя на курс. */
   user_status?: UserProgressStatus;
-  /** Id текущего (последнего не пройденного) урока */
-  current_lesson: CurrentLessonModel;
 };
 
 export type GetCoursesData = {

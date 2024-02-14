@@ -6,14 +6,17 @@ export enum LessonType {
 }
 
 export enum LessonProgress {
-  NotStarted = '0',
-  Started = '1',
-  Finished = '2',
+  NotStarted = 0,
+  Started = 1,
+  Finished = 2,
 }
 
 export enum UserProgressStatus {
   Enrolled = 'enrolled',
   NotEnrolled = 'not_enrolled',
+  Available = 'available',
+  InProgress = 'in_progress',
+  Completed = 'completed',
 }
 
 export type FAQModel = {
@@ -46,7 +49,7 @@ export type LessonChapterModel = {
   /** Тип урока. */
   lesson_type: LessonType;
   /** Статус прогресса урока. */
-  lesson_progress: LessonProgress;
+  user_lesson_progress: LessonProgress;
 };
 
 export type ChapterModel = {
@@ -59,8 +62,8 @@ export type ChapterModel = {
 };
 
 export type CurrentLessonModel = {
-  lesson: number;
-  chapter: number;
+  chapter_id: Nullable<number>;
+  lesson_id: Nullable<number>;
 };
 
 export type CourseModel = {
@@ -88,6 +91,8 @@ export type CourseModel = {
   chapters: ChapterModel[];
   /** Статус подписки на курс. */
   user_status?: UserProgressStatus;
-  /** Id текущего (последнего не пройденного) урока */
-  current_lesson: CurrentLessonModel;
+};
+
+export type EnrollModel = {
+  user_status: UserProgressStatus;
 };

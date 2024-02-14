@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -12,7 +13,8 @@ import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
-import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { ErrorCodes } from 'api/core';
 import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
 import { useAppSelector } from 'store';
@@ -35,6 +37,7 @@ const Lesson: FC = () => {
     goToNextLesson,
   } = useLesson();
 
+  const navigate = useNavigate();
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
@@ -77,6 +80,10 @@ const Lesson: FC = () => {
     lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
     LOADING_PROCESS_MAP[completeLessonProcess];
 
+  if (lessonError?.code === ErrorCodes.NotFound) {
+    return <Navigate to={routes.notFound.path} replace />;
+  }
+
   return (
     <>
       {lesson.breadcrumbs && (
@@ -87,7 +94,18 @@ const Lesson: FC = () => {
         {(isLoading || lessonError) && (
           <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
-            {lessonError && <ErrorLocker onClick={fetchLesson} />}
+            {lessonError &&
+              (lessonError.code === ErrorCodes.Forbidden ? (
+                <ErrorLocker
+                  onClick={() => navigate(-1)}
+                  heading={ERROR_403}
+                  subheading="Доступ запрещен"
+                  content="У вас нет прав доступа к этой странице"
+                  buttonText="Назад"
+                />
+              ) : (
+                <ErrorLocker onClick={fetchLesson} />
+              ))}
           </Card>
         )}
 

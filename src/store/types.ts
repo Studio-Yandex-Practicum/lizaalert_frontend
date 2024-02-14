@@ -1,10 +1,12 @@
 import type { Action, ThunkDispatch } from '@reduxjs/toolkit';
-import type { CoursesState } from './courses/types';
+import type { AuthState } from './auth/types';
 import type { CourseState } from './course/types';
 import type { CoursesFiltersState } from './courses-filters/types';
-import type { AuthState } from './auth/types';
+import type { CoursesState } from './courses/types';
 import type { LessonState } from './lesson/types';
 import type { AchievementsState } from './achievements/types';
+import { ProfileState } from './profile/types';
+import type { TestState } from './test/types';
 
 // После типизации конкретного стора заменить any на тип стора
 export type AppState = {
@@ -13,8 +15,8 @@ export type AppState = {
   course: CourseState;
   coursesFilters: CoursesFiltersState;
   lesson: LessonState;
-  test: any;
-  profile: any;
+  test: TestState;
+  profile: ProfileState;
   achievements: AchievementsState;
 };
 

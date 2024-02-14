@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { LessonType } from 'api/course';
 import { completeLesson, fetchLessonById } from './thunk';
 import type { LessonState } from './types';
+
+const initialNextLesson: LessonState['lesson']['next_lesson'] = {
+  chapter_id: null,
+  lesson_id: null,
+};
 
 const initialState: LessonState = {
   lesson: {
@@ -12,8 +17,8 @@ const initialState: LessonState = {
     lesson_type: LessonType.Lesson,
     tags: '',
     duration: 0,
-    next_lesson: null,
-    prev_lesson: null,
+    next_lesson: initialNextLesson,
+    prev_lesson: initialNextLesson,
   },
   process: ProcessEnum.Initial,
   completeLessonProcess: ProcessEnum.Initial,
@@ -24,7 +29,9 @@ const initialState: LessonState = {
 const lessonSlice = createSlice({
   name: 'lesson',
   initialState,
-  reducers: {},
+  reducers: {
+    resetLessonState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(completeLesson.pending, (state) => {
       state.completeLessonProcess = ProcessEnum.Requested;
@@ -36,8 +43,9 @@ const lessonSlice = createSlice({
     });
     builder.addCase(completeLesson.rejected, (state, { error }) => {
       state.completeLessonProcess = ProcessEnum.Failed;
-      state.completeLessonError = error.message ?? GENERAL_ERROR;
+      state.completeLessonError = error;
     });
+
     builder.addCase(fetchLessonById.pending, (state) => {
       state.process = ProcessEnum.Requested;
       state.error = null;
@@ -49,9 +57,11 @@ const lessonSlice = createSlice({
     });
     builder.addCase(fetchLessonById.rejected, (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });
+
+export const { resetLessonState } = lessonSlice.actions;
 
 export default lessonSlice.reducer;
