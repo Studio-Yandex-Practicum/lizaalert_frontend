@@ -23,6 +23,6 @@ declare module '*.jpeg' {
   export default content;
 }
 
-declare type Nullable<T> = T | null | undefined;
+declare type Nullable<T> = T | null;
 declare type VoidFunction = (...args: unknown[]) => void;
 declare type AnyFunction<T> = (...args: never) => T;

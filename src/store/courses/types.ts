@@ -1,14 +1,15 @@
-import type { CoursesModel } from 'api/courses/types';
-import type { CurrentLessonModel, UserProgressStatus } from 'api/course/types';
+import { SerializedError } from 'api/core';
+import type { CoursesModel } from 'api/courses';
+import type { CurrentLessonModel, UserProgressStatus } from 'api/course';
 import { ProcessEnum } from 'utils/constants';
 
 export type EnrollStatusType = {
   process: ProcessEnum;
-  error: string | null;
+  error: Nullable<SerializedError>;
   userStatus: UserProgressStatus;
   currentLesson?: {
     process: ProcessEnum;
-    error: string | null;
+    error: Nullable<SerializedError>;
     lessonId: CurrentLessonModel['lesson_id'];
     chapterId: CurrentLessonModel['chapter_id'];
   };
@@ -16,7 +17,7 @@ export type EnrollStatusType = {
 
 export type CoursesThunkState = {
   process: ProcessEnum;
-  error: string | null;
+  error: Nullable<SerializedError>;
   count: CoursesModel['count'];
   courses: CoursesModel['results'];
   enrollStatus: Record<string, EnrollStatusType>;

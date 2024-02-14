@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from 'config';
 import { SUBROUTES } from 'router/routes';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -24,7 +25,7 @@ type UseLesson = {
   lesson: LessonModel;
   lessonProcess: ProcessEnum;
   isLoading: boolean;
-  lessonError: string | null;
+  lessonError: Nullable<SerializedError>;
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
@@ -89,29 +90,34 @@ export const useLesson = (): UseLesson => {
   });
 
   useEffect(() => {
-    if (lessonId && lesson.id !== +lessonId) {
+    if (lessonId) {
       fetchLesson();
     }
+
     return () => {
       dispatch(resetLessonState());
     };
   }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && course.id !== Number(courseId)) {
+    if (courseId && course.id !== +courseId) {
       void dispatch(fetchCourseById(courseId));
     }
   }, [course, courseId]);
 
   useEffect(() => {
-    if (
-      lesson.id &&
-      (lesson.chapter_id !== Number(chapterId) ||
-        lesson.course_id !== Number(courseId))
-    ) {
-      navigate(routes.notFound.path);
+    const isDataInconsistent =
+      lesson.id !== +lessonId ||
+      lesson.chapter_id !== +chapterId ||
+      lesson.course_id !== +courseId;
+
+    const isInconsistencyError =
+      lessonProcess === ProcessEnum.Succeeded && isDataInconsistent;
+
+    if (isInconsistencyError) {
+      navigate(routes.notFound.path, { replace: true });
     }
-  }, [lesson]);
+  }, [lessonProcess, lesson]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
