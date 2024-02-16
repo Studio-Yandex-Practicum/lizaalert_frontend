@@ -4,7 +4,7 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import type { CoursesFiltersState } from './types';
 import { fetchFilters } from './thunk';
 
@@ -32,7 +32,7 @@ export const coursesFiltersSlice = createSlice({
     });
     builder.addMatcher(isRejected(fetchFilters), (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });

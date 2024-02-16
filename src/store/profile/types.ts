@@ -1,19 +1,20 @@
+import { SerializedError } from 'api/core';
 import { ProcessEnum } from 'utils/constants';
 
 export type ProfileState = {
   profile: {
     id: number;
     personalData: {
-      full_name: string | null;
-      birth_date: string | null;
-      location: string | null;
+      full_name: Nullable<string>;
+      birth_date: Nullable<string>;
+      location: Nullable<string>;
     };
     accountOverview: {
       full_name: string;
-      count_pass_course: number | null;
-      department: string | null;
-      call_sign: string | null;
-      photo: string | null;
+      count_pass_course: Nullable<number>;
+      department: Nullable<string>;
+      call_sign: Nullable<string>;
+      photo: Nullable<string>;
     };
     accountData: {
       phone_number: string;
@@ -21,7 +22,7 @@ export type ProfileState = {
     };
   };
   editProfileProcess: ProcessEnum;
-  editProfileError: string | null;
+  editProfileError: Nullable<SerializedError>;
   fetchProfileProcess: ProcessEnum;
-  fetchProfileError: string | null;
+  fetchProfileError: Nullable<SerializedError>;
 };

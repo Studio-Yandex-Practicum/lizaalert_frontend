@@ -4,13 +4,13 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { checkAuth, fetchAuth, fetchRegistration, logout } from './thunk';
 import type { AuthState } from './types';
 
 const initialState: AuthState = {
   isAuth: false,
-  isLoading: true,
+  process: ProcessEnum.Initial,
   error: null,
 };
 
@@ -20,20 +20,20 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRegistration.fulfilled, (state) => {
-      state.isLoading = false;
+      state.process = ProcessEnum.Succeeded;
       state.error = null;
     });
     builder.addMatcher(
       isPending(checkAuth, fetchAuth, fetchRegistration, logout),
       (state) => {
-        state.isLoading = true;
+        state.process = ProcessEnum.Requested;
         state.error = null;
       }
     );
     builder.addMatcher(
       isFulfilled(checkAuth, fetchAuth, logout),
       (state, { payload }) => {
-        state.isLoading = false;
+        state.process = ProcessEnum.Succeeded;
         state.error = null;
         state.isAuth = payload;
       }
@@ -42,8 +42,8 @@ export const authSlice = createSlice({
       isRejected(checkAuth, fetchAuth, fetchRegistration, logout),
       (state, { error }) => {
         state.isAuth = false;
-        state.isLoading = false;
-        state.error = error.message ?? GENERAL_ERROR;
+        state.process = ProcessEnum.Failed;
+        state.error = error;
       }
     );
   },

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { FC, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -13,12 +14,12 @@ import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
+import { ErrorCodes } from 'api/core';
 import {
   AVERAGE_TEST_RESULT,
   ERROR_403,
   LOADING_PROCESS_MAP,
   ProcessEnum,
-  SERVER_API_ERRORS,
 } from 'utils/constants';
 import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
@@ -105,6 +106,10 @@ const Lesson: FC = () => {
   const isNextButtonDisabled =
     isNotStarted || isLoadingProcess || isQuizDisabledCondition;
 
+  if (lessonError?.code === ErrorCodes.NotFound) {
+    return <Navigate to={routes.notFound.path} replace />;
+  }
+
   return (
     <>
       {lesson.breadcrumbs && (
@@ -116,7 +121,7 @@ const Lesson: FC = () => {
           <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
             {lessonError &&
-              (lessonError === SERVER_API_ERRORS.FORBIDDEN ? (
+              (lessonError.code === ErrorCodes.Forbidden ? (
                 <ErrorLocker
                   onClick={() => navigate(-1)}
                   heading={ERROR_403}

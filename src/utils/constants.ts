@@ -33,16 +33,6 @@ export const CourseStatusButtons: Record<UserProgressStatus, string> = {
   [UserProgressStatus.Completed]: 'Пройти еще раз',
 };
 
-export const ErrorMessages = {
-  email: 'Введите эл. адрес в формате: anna@liza-alert.ru',
-  tel: 'Введите номер телефона в формате: +7 (XXX) XXX XX XX',
-  confirmPassword: 'Пароли не совпадают',
-};
-
-export const SERVER_API_ERRORS = {
-  FORBIDDEN: 'У вас недостаточно прав для выполнения данного действия.',
-};
-
 export const RegExpPatterns = {
   email: '[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$',
   phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,

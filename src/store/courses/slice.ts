@@ -4,7 +4,7 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
 import type { CoursesState } from './types';
 import {
@@ -44,6 +44,7 @@ export const coursesSlice = createSlice({
 
       state.count = payload.count;
     });
+
     builder.addCase(enrollCourseById.pending, (state, { meta: { arg } }) => {
       state.enrollStatus[arg] = {
         ...state.enrollStatus[arg],
@@ -70,11 +71,12 @@ export const coursesSlice = createSlice({
         state.enrollStatus[arg] = {
           ...state.enrollStatus[arg],
           process: ProcessEnum.Failed,
-          error: error.message ?? GENERAL_ERROR,
+          error,
           userStatus: UserProgressStatus.NotEnrolled,
         };
       }
     );
+
     builder.addCase(unrollCourseById.fulfilled, (state, { meta: { arg } }) => {
       state.enrollStatus[arg] = {
         ...state.enrollStatus[arg],
@@ -83,6 +85,7 @@ export const coursesSlice = createSlice({
         userStatus: UserProgressStatus.NotEnrolled,
       };
     });
+
     builder.addCase(getCurrentLesson.pending, (state, { meta: { arg } }) => {
       state.enrollStatus[arg] = {
         ...state.enrollStatus[arg],
@@ -115,13 +118,14 @@ export const coursesSlice = createSlice({
           ...state.enrollStatus[arg],
           currentLesson: {
             process: ProcessEnum.Failed,
-            error: error.message ?? GENERAL_ERROR,
+            error,
             lessonId: null,
             chapterId: null,
           },
         };
       }
     );
+
     builder.addMatcher(isPending(fetchCourses), (state) => {
       state.process = ProcessEnum.Requested;
       state.error = null;
@@ -132,7 +136,7 @@ export const coursesSlice = createSlice({
     });
     builder.addMatcher(isRejected(fetchCourses), (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });
