@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useMemo } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
@@ -15,22 +14,25 @@ import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
+import { LessonType } from 'api/course';
+import { UserLessonProgress } from 'api/lessons';
 import {
   AVERAGE_TEST_RESULT,
   ERROR_403,
   LOADING_PROCESS_MAP,
   ProcessEnum,
 } from 'utils/constants';
-import { LessonType } from 'api/course';
-import { UserLessonProgress } from 'api/lessons';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
+import {
+  selectTestResult,
+  selectTestResultPercent,
+} from 'store/test/selectors';
 import { useLesson } from 'hooks/use-lesson';
-import { useTest } from 'components/organisms/test';
 import styles from './lesson.module.scss';
 
 const Lesson: FC = () => {
@@ -43,15 +45,13 @@ const Lesson: FC = () => {
     goToPrevLesson,
     goToNextLesson,
   } = useLesson();
-  const { testResultData, testResultPercent } = useTest();
 
   const navigate = useNavigate();
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
-
-  const [isQuizDisabledCondition, setIsQuizDisabledCondition] =
-    useState<boolean>(false);
+  const testResultData = useAppSelector(selectTestResult);
+  const testResultPercent = useAppSelector(selectTestResultPercent);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -87,21 +87,20 @@ const Lesson: FC = () => {
     ];
   }, [lesson.id, lesson.breadcrumbs]);
 
-  useEffect(() => {
-    const isQuizType = lesson.lesson_type === LessonType.Quiz;
-    const noResults = !testResultData.length;
-    const hasValidPercent =
-      testResultPercent !== undefined &&
-      testResultPercent < AVERAGE_TEST_RESULT;
-
-    const isQuizAndNoResults = (isQuizType && noResults) || hasValidPercent;
-
-    setIsQuizDisabledCondition(isQuizAndNoResults);
-  }, [lesson, testResultData, testResultPercent]);
-
   const isNotStarted =
     lesson.user_lesson_progress === UserLessonProgress.NotStarted;
+
+  const isInProgress =
+    lesson.user_lesson_progress === UserLessonProgress.InProgress;
+
   const isLoadingProcess = LOADING_PROCESS_MAP[completeLessonProcess];
+
+  const hasValidTestPassScore =
+    typeof testResultPercent === 'number' &&
+    testResultPercent < AVERAGE_TEST_RESULT;
+
+  const isQuizDisabledCondition =
+    isInProgress && isQuiz && (!testResultData.length || hasValidTestPassScore);
 
   const isNextButtonDisabled =
     isNotStarted || isLoadingProcess || isQuizDisabledCondition;

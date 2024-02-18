@@ -81,15 +81,15 @@ export enum UserDataFieldNames {
   ConfirmPassword = 'confirmPassword',
 }
 
-export enum AnswerStatus {
-  CORRECT = 'correct',
-  INCORRECT = 'incorrect',
-  UNANSWERED = 'unanswered',
+export enum TestAnswerStatus {
+  Correct = 'correct',
+  Incorrect = 'incorrect',
+  Unanswered = 'unanswered',
 }
 
-export enum AnswerIcons {
-  CORRECT_SELECTED_ANSWER = 'checkSolid',
-  CORRECT_UNSELECTED_ANSWER = 'check',
-  INCORRECT_SELECTED_ANSWER = 'xSolid',
-  INCORRECT_UNSELECTED_ANSWER = 'xSmall',
+export enum TestAnswerIcons {
+  CorrectSelected = 'checkSolid',
+  CorrectUnselected = 'check',
+  IncorrectSelected = 'xSolid',
+  IncorrectUnselected = 'xSmall',
 }

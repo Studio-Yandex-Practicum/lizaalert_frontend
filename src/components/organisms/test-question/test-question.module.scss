@@ -1,15 +1,10 @@
 @use 'src/styles/variables' as vars;
 
 .list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
   list-style-type: none;
   margin: 0;
   padding: 0;
-
-  &__item {
-    padding: 32px 0;
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid vars.$borders-divider-disabled-bg;
-    }
-  }
 }

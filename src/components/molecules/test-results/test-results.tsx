@@ -1,10 +1,27 @@
 import type { FC } from 'react';
 import classnames from 'classnames';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { IconType } from 'components/atoms/icon';
-import { AnswerIcons, AnswerStatus } from 'utils/constants';
+import { TestAnswerIcons, TestAnswerStatus } from 'utils/constants';
 import styles from './test-results.module.scss';
-import type { TestResultsProps } from './types';
+import type { ResultType, TestResultsProps } from './types';
+
+const defaultResult: ResultType = {
+  resultIcon: TestAnswerIcons.IncorrectUnselected,
+};
+
+const resultMap: Record<TestAnswerStatus, ResultType> = {
+  [TestAnswerStatus.Correct]: {
+    resultClassName: styles.textSuccess,
+    resultIcon: TestAnswerIcons.CorrectSelected,
+  },
+  [TestAnswerStatus.Incorrect]: {
+    resultClassName: styles.textWarning,
+    resultIcon: TestAnswerIcons.IncorrectSelected,
+  },
+  [TestAnswerStatus.Unanswered]: {
+    resultIcon: TestAnswerIcons.CorrectUnselected,
+  },
+};
 
 /**
  * Компонент результата ответов теста.
@@ -19,38 +36,17 @@ import type { TestResultsProps } from './types';
 
 export const TestResults: FC<TestResultsProps> = ({
   answer,
-  validateAnswers,
+  validatedAnswers,
 }) => {
-  const defaultResult: { resultClass?: string; resultIcon: IconType } = {
-    resultIcon: AnswerIcons.INCORRECT_UNSELECTED_ANSWER,
-  };
-
-  const resultMap: Record<
-    AnswerStatus,
-    { resultClass?: string; resultIcon: IconType }
-  > = {
-    [AnswerStatus.CORRECT]: {
-      resultClass: styles.text__success,
-      resultIcon: AnswerIcons.CORRECT_SELECTED_ANSWER,
-    },
-    [AnswerStatus.INCORRECT]: {
-      resultClass: styles.text__warning,
-      resultIcon: AnswerIcons.INCORRECT_SELECTED_ANSWER,
-    },
-    [AnswerStatus.UNANSWERED]: {
-      resultIcon: AnswerIcons.CORRECT_UNSELECTED_ANSWER,
-    },
-  };
-
-  const statusData = resultMap[validateAnswers[answer.id]] || defaultResult;
-  const { resultClass, resultIcon } = statusData;
+  const statusData = resultMap[validatedAnswers[answer.id]] || defaultResult;
+  const { resultClassName, resultIcon } = statusData;
 
   return (
     <TextWithIcon
       key={answer.id}
       text={answer.text}
       iconType={resultIcon}
-      className={classnames(styles.text, resultClass)}
+      className={classnames(styles.text, resultClassName)}
     />
   );
 };

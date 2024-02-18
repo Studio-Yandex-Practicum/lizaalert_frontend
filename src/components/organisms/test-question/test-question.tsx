@@ -1,10 +1,12 @@
 import type { FC } from 'react';
+import classnames from 'classnames';
 import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
+import { useAppSelector } from 'store';
+import { selectTestResult } from 'store/test/selectors';
 import styles from './test-question.module.scss';
 import type { TestQuestionProps } from './types';
-import { useTest } from '../test/hooks/use-test';
 
 /**
  * Компонент тестового вопроса.
@@ -17,11 +19,11 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   isSubmitted = false,
   className = '',
 }) => {
-  const { testResultData } = useTest();
+  const testResult = useAppSelector(selectTestResult);
 
   // список ответов
   const answersList = question.content.map((answer) => (
-    <li className={className} key={answer.id}>
+    <li key={answer.id}>
       <TestAnswer
         content={answer}
         questionId={question.id}
@@ -30,19 +32,15 @@ export const TestQuestion: FC<TestQuestionProps> = ({
     </li>
   ));
 
-  const currentQuestionResult = testResultData.find(
+  const currentQuestionResult = testResult.find(
     (result) => result.questionId === question.id
   );
-  const validateAnswers = currentQuestionResult?.validateAnswers || {};
+  const validatedAnswers = currentQuestionResult?.validatedAnswers || {};
 
   // список с проверкой ответов теста
   const resultsList = question.content.map((answer) => (
-    <li className={className} key={answer.id}>
-      <TestResults
-        answer={answer}
-        validateAnswers={validateAnswers}
-        className={className}
-      />
+    <li key={answer.id}>
+      <TestResults answer={answer} validatedAnswers={validatedAnswers} />
     </li>
   ));
 
@@ -54,7 +52,7 @@ export const TestQuestion: FC<TestQuestionProps> = ({
         weight="bold"
       />
 
-      <ul className={styles.list}>
+      <ul className={classnames(styles.list, className)}>
         {isSubmitted ? [resultsList] : [answersList]}
       </ul>
     </>

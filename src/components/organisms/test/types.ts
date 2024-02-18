@@ -1,23 +1,16 @@
-import { AnswerStatus } from 'utils/constants';
+import type { TestResultRecord } from 'components/molecules/test-results';
 
 export type TestProps = {
   /** Функция возврата к превью теста. */
-  toggleRender: VoidFunction;
+  onShowPreview: VoidFunction;
 };
 
-export type AnswerType = {
+export type TestAnswerType = {
   questionId: number;
   answerId: number[];
 };
 
-export type ResultStatus =
-  | AnswerStatus.CORRECT
-  | AnswerStatus.UNANSWERED
-  | AnswerStatus.INCORRECT;
-
-export type ResultRecord = Record<number, ResultStatus>;
-
-export type TestValidateType = {
+export type TestValidatedType = {
   questionId: number;
-  validateAnswers: ResultRecord;
+  validatedAnswers: TestResultRecord;
 };

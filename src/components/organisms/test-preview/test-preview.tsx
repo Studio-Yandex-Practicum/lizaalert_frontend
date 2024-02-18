@@ -4,7 +4,8 @@ import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
 import { convertDate } from 'utils/convert-date';
-import { useTest } from '../test';
+import { useAppSelector } from 'store';
+import { selectTest } from 'store/test/selectors';
 import styles from './test-preview.module.scss';
 import type { TextPreviewProps } from './types';
 
@@ -14,8 +15,11 @@ const DATE_OPTIONS = { onlyTime: true };
  * Компонент-карточка превью теста.
  */
 
-export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
-  const { test } = useTest();
+export const TestPreview: FC<TextPreviewProps> = ({
+  onReturnToTest,
+  onTestStart,
+}) => {
+  const test = useAppSelector(selectTest);
 
   return (
     <Card htmlTag="section" className={styles.container}>
@@ -23,7 +27,11 @@ export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
         <Heading level={2} size="l" weight="bold" text={test.title} />
 
         {test.in_progress && (
-          <Button view="text" onClick={toggleRender} text="Вернуться к тесту" />
+          <Button
+            view="text"
+            onClick={onReturnToTest}
+            text="Вернуться к тесту"
+          />
         )}
       </div>
 
@@ -66,7 +74,7 @@ export const TestPreview: FC<TextPreviewProps> = ({ toggleRender }) => {
       {!test.in_progress && test.questions?.length && (
         <Button
           className={styles.button}
-          onClick={toggleRender}
+          onClick={onTestStart}
           text="Начать тест"
         />
       )}

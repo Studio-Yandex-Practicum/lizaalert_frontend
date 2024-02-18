@@ -4,9 +4,11 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { Controls, GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { Controls, ProcessEnum } from 'utils/constants';
+import { calculatePercent } from 'utils/calculate-percent';
+import { validateAnswers } from 'utils/validate-answers';
 import { createTest, fetchTest, validateTest } from './thunk';
-import { TestState, UpdateAnswerAction } from './types';
+import type { TestState, UpdateAnswerAction } from './types';
 
 const initialState: TestState = {
   test: {
@@ -21,10 +23,11 @@ const initialState: TestState = {
     questions: [],
   },
   answersOnValidate: [],
-  testResult: null,
+  testResult: [],
   process: ProcessEnum.Initial,
   processValidationTest: ProcessEnum.Initial,
   processCreationTest: ProcessEnum.Initial,
+  testResultPercent: null,
   error: null,
 };
 
@@ -74,6 +77,11 @@ export const testSlice = createSlice({
         state.answersOnValidate = [];
       }
     },
+    resetTestResult: (state) => {
+      state.testResult = initialState.testResult;
+      state.testResultPercent = initialState.testResultPercent;
+    },
+    resetTest: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTest.fulfilled, (state, { payload }) => {
@@ -95,24 +103,42 @@ export const testSlice = createSlice({
       state.error = null;
     });
     builder.addCase(validateTest.fulfilled, (state, { payload }) => {
-      state.testResult = payload;
+      const correctAnswers = payload.result.map(
+        ({ question_id, correct_answer_id }) => ({
+          questionId: question_id,
+          correctAnswers: correct_answer_id,
+        })
+      );
+      const userAnswers = payload.answers.map(({ question_id, answer_id }) => ({
+        questionId: question_id,
+        answerId: answer_id,
+      }));
+
+      state.testResult = validateAnswers(correctAnswers, userAnswers);
+      state.testResultPercent = calculatePercent(
+        payload.answers.length,
+        payload.score
+      );
       state.processValidationTest = ProcessEnum.Succeeded;
       state.error = null;
     });
     builder.addCase(validateTest.rejected, (state, { error }) => {
       state.processValidationTest = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
 
     builder.addCase(createTest.pending, (state) => {
       state.processCreationTest = ProcessEnum.Requested;
+      state.error = null;
     });
     builder.addCase(createTest.fulfilled, (state) => {
       state.processCreationTest = ProcessEnum.Succeeded;
+      state.test.in_progress = true;
+      state.error = null;
     });
     builder.addCase(createTest.rejected, (state, { error }) => {
       state.processCreationTest = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
 
     builder.addMatcher(isPending(fetchTest), (state) => {
@@ -125,11 +151,12 @@ export const testSlice = createSlice({
     });
     builder.addMatcher(isRejected(fetchTest), (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });
 
-export const { updateAnswer, updateAnswerReset } = testSlice.actions;
+export const { updateAnswer, updateAnswerReset, resetTestResult, resetTest } =
+  testSlice.actions;
 
 export default testSlice.reducer;

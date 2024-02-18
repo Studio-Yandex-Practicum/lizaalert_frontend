@@ -13,15 +13,15 @@ import type { TestProps } from './types';
  * Компонент-карточка теста с вопросами.
  * */
 
-export const Test: FC<TestProps> = ({ toggleRender }) => {
+export const Test: FC<TestProps> = ({ onShowPreview }) => {
   const {
     isSubmitted,
     isSuccess,
     testResultPercent,
     test,
-    onSubmit,
+    handleSubmitTest,
     handleButtonDisabledState,
-    retake,
+    handleRetakeTest,
   } = useTest();
 
   if (!test.questions?.length) {
@@ -39,10 +39,10 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
           className={styles.heading}
         />
 
-        <Button view="text" onClick={toggleRender} text="Посмотреть условия" />
+        <Button view="text" onClick={onShowPreview} text="Посмотреть условия" />
       </div>
 
-      <form onSubmit={onSubmit} name="testForm" className={styles.form}>
+      <form onSubmit={handleSubmitTest} name="testForm" className={styles.form}>
         <ul className={styles.list}>
           {renderQuestionsList(test.questions, isSubmitted)}
         </ul>
@@ -57,7 +57,7 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
               className={styles.button}
               type="button"
               iconName="retry"
-              onClick={retake}
+              onClick={handleRetakeTest}
               text="Пересдать"
             />
           </>
@@ -88,7 +88,6 @@ function renderQuestionsList(
         type={question.question_type}
         index={index}
         isSubmitted={isSubmitted}
-        className={styles.checkbox}
       />
     </li>
   ));

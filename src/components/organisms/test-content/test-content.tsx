@@ -6,6 +6,7 @@ import { Test, useTest } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
 import { useAppDispatch } from 'store';
 import { fetchTest } from 'store/test/thunk';
+
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
@@ -13,12 +14,17 @@ import { fetchTest } from 'store/test/thunk';
 export const TestContent: FC = () => {
   const { lessonId } = useParams();
   const dispatch = useAppDispatch();
-  const { isLoading, test, createNewTest } = useTest();
+  const { isTestLoading, test, createNewTest, handleResetTestStore } =
+    useTest();
 
   useEffect(() => {
     if (lessonId) {
       void dispatch(fetchTest(lessonId));
     }
+
+    return () => {
+      handleResetTestStore();
+    };
   }, [lessonId]);
 
   const [renderTest, setRenderTest] = useState<boolean | undefined>(false);
@@ -28,17 +34,23 @@ export const TestContent: FC = () => {
   }, [test.in_progress]);
 
   const toggleRender = () => {
-    void createNewTest();
     setRenderTest(!renderTest);
   };
 
-  if (isLoading) {
+  const handleStartTest = () => {
+    void createNewTest();
+    toggleRender();
+  };
+
+  if (isTestLoading) {
     return <Loader />;
   }
 
   if (renderTest) {
-    return <Test toggleRender={toggleRender} />;
+    return <Test onShowPreview={toggleRender} />;
   }
 
-  return <TestPreview toggleRender={toggleRender} />;
+  return (
+    <TestPreview onTestStart={handleStartTest} onReturnToTest={toggleRender} />
+  );
 };

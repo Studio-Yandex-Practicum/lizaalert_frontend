@@ -3,11 +3,11 @@
 .text {
   color: vars.$dark-primary;
 
-  &__success {
+  &Success {
     color: vars.$success;
   }
 
-  &__warning {
+  &Warning {
     color: vars.$warning;
   }
 }

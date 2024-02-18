@@ -1,15 +1,15 @@
 import type {
-  AnswerType,
-  ResultRecord,
-  TestValidateType,
-} from 'components/organisms/test/types';
-import { AnswerStatus } from './constants';
+  TestAnswerType,
+  TestValidatedType,
+} from 'components/organisms/test';
+import type { TestResultRecord } from 'components/molecules/test-results';
+import { TestAnswerStatus } from './constants';
 
-export function validateAnswers(
+export const validateAnswers = (
   correctAnswersList: { questionId: number; correctAnswers: number[] }[],
-  userAnswersList: AnswerType[]
-): TestValidateType[] {
-  return correctAnswersList.map(({ questionId, correctAnswers }) => {
+  userAnswersList: TestAnswerType[]
+): TestValidatedType[] =>
+  correctAnswersList.map(({ questionId, correctAnswers }) => {
     const userAnswer = userAnswersList.find(
       (user) => user.questionId === questionId
     );
@@ -17,25 +17,24 @@ export function validateAnswers(
     const correctSet = new Set(correctAnswers);
     const userAnswerSet = new Set(userAnswer?.answerId || []);
 
-    const result: ResultRecord = {};
+    const result: TestResultRecord = {};
 
     correctSet.forEach((answerId) => {
       if (userAnswerSet.has(answerId)) {
-        result[answerId] = AnswerStatus.CORRECT;
+        result[answerId] = TestAnswerStatus.Correct;
       } else {
-        result[answerId] = AnswerStatus.UNANSWERED;
+        result[answerId] = TestAnswerStatus.Unanswered;
       }
     });
 
     userAnswerSet.forEach((answerId) => {
       if (!(answerId in result)) {
-        result[answerId] = AnswerStatus.INCORRECT;
+        result[answerId] = TestAnswerStatus.Incorrect;
       }
     });
 
     return {
       questionId,
-      validateAnswers: result,
+      validatedAnswers: result,
     };
   });
-}
