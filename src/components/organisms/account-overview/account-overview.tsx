@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import defaultImg from 'assets/images/profile.png';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { Achievements } from 'components/organisms/achievements';
 import { COURSE_PLURAL } from 'utils/constants';
 import { pluralize } from 'utils/pluralize';
 import { useAppSelector } from 'store';
 import { selectProfileOverview } from 'store/profile/selectors';
-import type { AccountOverviewType } from './types';
+import defaultImg from 'assets/images/profile.png';
 import styles from './account-overview.module.scss';
 
 /**
@@ -16,9 +16,7 @@ import styles from './account-overview.module.scss';
  * */
 
 export const AccountOverview: FC = () => {
-  const accountOverview = useAppSelector<AccountOverviewType>(
-    selectProfileOverview
-  );
+  const accountOverview = useAppSelector(selectProfileOverview);
 
   return (
     <Card className={styles.accountOverview}>
@@ -30,9 +28,11 @@ export const AccountOverview: FC = () => {
         />
       </div>
 
-      <Heading level={3} weight="bold" className={styles.personalData}>
+      <Heading level={3} weight="bold" textAlign="center">
         {accountOverview.full_name}
       </Heading>
+
+      <Achievements className={styles.achievements} />
 
       <ul className={styles.accountMeta}>
         {accountOverview.call_sign && (
