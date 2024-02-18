@@ -5,10 +5,9 @@ import type { CoursesFiltersState } from './courses-filters/types';
 import type { CoursesState } from './courses/types';
 import type { LessonState } from './lesson/types';
 import type { AchievementsState } from './achievements/types';
-import { ProfileState } from './profile/types';
+import type { ProfileState } from './profile/types';
 import type { TestState } from './test/types';
 
-// После типизации конкретного стора заменить any на тип стора
 export type AppState = {
   auth: AuthState;
   courses: CoursesState;

@@ -1,3 +1,3 @@
 export type AchievementsProps = {
-  className: string;
+  className?: string;
 };

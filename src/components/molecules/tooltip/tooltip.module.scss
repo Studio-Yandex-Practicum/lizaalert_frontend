@@ -1,6 +1,4 @@
-@use 'src/styles/_variables' as vars;
-@use 'src/styles/_color-variables' as colors;
-@use 'src/styles/_font-variables' as fontSize;
+@use 'src/styles/variables' as vars;
 
 .tooltip {
   position: absolute;
@@ -16,12 +14,12 @@
     padding: 4px;
     border-radius: vars.$border-radius;
     justify-content: center;
-    background-color: colors.$bg-primary;
+    background-color: vars.$bg-primary;
     text-align: center;
     font-weight: 500;
     font-size: vars.$font-size-m;
-    color: colors.$dark-primary;
-    border: 3px solid colors.$dark-secondary;
+    color: vars.$dark-primary;
+    border: 3px solid vars.$dark-secondary;
 
     &::after {
       content: '';
@@ -31,7 +29,7 @@
       margin-top: -15px;
       border-width: 13px;
       border-style: solid;
-      border-color: transparent colors.$dark-secondary transparent transparent;
+      border-color: transparent vars.$dark-secondary transparent transparent;
     }
   }
 
@@ -43,14 +41,14 @@
       padding: 10px;
       min-height: 20px;
       background-color: vars.$drop-shadow-small;
-      color: colors.$dark-primary;
+      color: vars.$dark-primary;
 
       &Img {
         width: 30px;
         height: 30px;
         object-fit: cover;
-        font-size: fontSize.$font-size-alt;
-        border: 1px solid colors.$yandex-text-color;
+        font-size: vars.$font-size-alt;
+        border: 1px solid vars.$yandex-text-color;
         border-radius: 50%;
         margin: 0 20px 0 0;
       }

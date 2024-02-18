@@ -17,10 +17,9 @@ export const Achievement: FC<AchievementProps> = ({
   <>
     {children}
     <div
-      className={classNames(
-        styles.achievement,
-        styles.customClass && showToolTip
-      )}
+      className={classNames(styles.achievement, {
+        [styles.tooltipShown]: showToolTip,
+      })}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

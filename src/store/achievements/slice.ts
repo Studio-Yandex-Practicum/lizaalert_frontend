@@ -4,9 +4,9 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { GENERAL_ERROR, ProcessEnum } from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import type { AchievementsState } from './types';
-import { fetchAchievement } from './thunk';
+import { fetchAchievements } from './thunk';
 
 const initialState: AchievementsState = {
   achievements: [],
@@ -19,18 +19,18 @@ export const AchievementsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(isPending(fetchAchievement), (state) => {
+    builder.addMatcher(isPending(fetchAchievements), (state) => {
       state.process = ProcessEnum.Requested;
       state.error = null;
     });
-    builder.addMatcher(isFulfilled(fetchAchievement), (state, { payload }) => {
+    builder.addMatcher(isFulfilled(fetchAchievements), (state, { payload }) => {
       state.process = ProcessEnum.Succeeded;
       state.achievements = payload;
       state.error = null;
     });
-    builder.addMatcher(isRejected(fetchAchievement), (state, { error }) => {
+    builder.addMatcher(isRejected(fetchAchievements), (state, { error }) => {
       state.process = ProcessEnum.Failed;
-      state.error = error.message ?? GENERAL_ERROR;
+      state.error = error;
     });
   },
 });
