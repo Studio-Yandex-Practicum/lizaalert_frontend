@@ -80,6 +80,8 @@ export const testSlice = createSlice({
     resetTestResult: (state) => {
       state.testResult = initialState.testResult;
       state.testResultPercent = initialState.testResultPercent;
+      state.error = initialState.error;
+      state.processValidationTest = initialState.processValidationTest;
     },
     resetTest: () => initialState,
   },

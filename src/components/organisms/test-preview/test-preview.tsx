@@ -3,9 +3,10 @@ import { Card } from 'components/atoms/card';
 import { Heading, P, Span } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
+import { LOADING_PROCESS_MAP } from 'utils/constants';
 import { convertDate } from 'utils/convert-date';
 import { useAppSelector } from 'store';
-import { selectTest } from 'store/test/selectors';
+import { selectProcessCreationTest, selectTest } from 'store/test/selectors';
 import styles from './test-preview.module.scss';
 import type { TextPreviewProps } from './types';
 
@@ -20,6 +21,9 @@ export const TestPreview: FC<TextPreviewProps> = ({
   onTestStart,
 }) => {
   const test = useAppSelector(selectTest);
+  const testCreationProcess = useAppSelector(selectProcessCreationTest);
+
+  const startTestButtonDisabled = LOADING_PROCESS_MAP[testCreationProcess];
 
   return (
     <Card htmlTag="section" className={styles.container}>
@@ -75,6 +79,7 @@ export const TestPreview: FC<TextPreviewProps> = ({
         <Button
           className={styles.button}
           onClick={onTestStart}
+          disabled={startTestButtonDisabled}
           text="Начать тест"
         />
       )}

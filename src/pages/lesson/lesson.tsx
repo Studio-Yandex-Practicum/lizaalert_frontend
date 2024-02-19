@@ -16,12 +16,7 @@ import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
 import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
-import {
-  AVERAGE_TEST_RESULT,
-  ERROR_403,
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-} from 'utils/constants';
+import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
 import {
@@ -29,6 +24,7 @@ import {
   selectLessonType,
 } from 'store/lesson/selectors';
 import {
+  selectTestPassingScore,
   selectTestResult,
   selectTestResultPercent,
 } from 'store/test/selectors';
@@ -50,8 +46,9 @@ const Lesson: FC = () => {
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
-  const testResultData = useAppSelector(selectTestResult);
-  const testResultPercent = useAppSelector(selectTestResultPercent);
+  const quizResultData = useAppSelector(selectTestResult);
+  const quizResultPercent = useAppSelector(selectTestResultPercent);
+  const quizPassingScore = useAppSelector(selectTestPassingScore);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -95,12 +92,13 @@ const Lesson: FC = () => {
 
   const isLoadingProcess = LOADING_PROCESS_MAP[completeLessonProcess];
 
-  const hasValidTestPassScore =
-    typeof testResultPercent === 'number' &&
-    testResultPercent < AVERAGE_TEST_RESULT;
+  const hasValidQuizPassingScore =
+    typeof quizResultPercent === 'number' &&
+    typeof quizPassingScore === 'number' &&
+    quizResultPercent < quizPassingScore;
 
-  const isQuizDisabledCondition =
-    isInProgress && isQuiz && (!testResultData.length || hasValidTestPassScore);
+  const isQuizNotCompleted = !quizResultData.length || hasValidQuizPassingScore;
+  const isQuizDisabledCondition = isQuiz && isInProgress && isQuizNotCompleted;
 
   const isNextButtonDisabled =
     isNotStarted || isLoadingProcess || isQuizDisabledCondition;

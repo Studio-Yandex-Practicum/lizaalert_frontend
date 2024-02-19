@@ -15,13 +15,13 @@ import type { TestProps } from './types';
 
 export const Test: FC<TestProps> = ({ onShowPreview }) => {
   const {
-    isSubmitted,
     isSuccess,
+    isTestValidationSucceeded,
+    isSubmitButtonDisabled,
     testResultPercent,
     test,
     handleSubmitTest,
-    handleButtonDisabledState,
-    handleRetakeTest,
+    handleRetryTest,
   } = useTest();
 
   if (!test.questions?.length) {
@@ -44,10 +44,10 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
 
       <form onSubmit={handleSubmitTest} name="testForm" className={styles.form}>
         <ul className={styles.list}>
-          {renderQuestionsList(test.questions, isSubmitted)}
+          {renderQuestionsList(test.questions, isTestValidationSucceeded)}
         </ul>
 
-        {isSubmitted && (
+        {isTestValidationSucceeded && (
           <>
             <TestSuccessRate
               isSuccess={isSuccess}
@@ -57,17 +57,17 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
               className={styles.button}
               type="button"
               iconName="retry"
-              onClick={handleRetakeTest}
+              onClick={handleRetryTest}
               text="Пересдать"
             />
           </>
         )}
 
-        {!isSubmitted && (
+        {!isTestValidationSucceeded && (
           <Button
             className={styles.button}
             type="submit"
-            disabled={handleButtonDisabledState()}
+            disabled={isSubmitButtonDisabled}
             text="Показать результат"
           />
         )}

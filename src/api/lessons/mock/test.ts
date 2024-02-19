@@ -8,7 +8,7 @@ const lessonQuiz: TestModel = {
   status: '2',
   passing_score: 4,
   retries: 1,
-  in_progress: true,
+  in_progress: false,
   deadline: '2023-09-18T17:56:07+03:00',
   questions: [
     {
