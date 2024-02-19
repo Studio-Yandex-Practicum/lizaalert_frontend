@@ -1,4 +1,5 @@
-import { CourseModel, LessonProgress, LessonType } from '../types';
+import { LessonType, UserLessonProgress } from 'api/lessons';
+import type { CourseModel } from '../types';
 
 const course: CourseModel = {
   id: 1,
@@ -61,7 +62,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 2,
@@ -69,7 +70,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Видео',
           lesson_type: LessonType.Videolesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 3,
@@ -77,7 +78,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Урок',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 4,
@@ -85,7 +86,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 5,
@@ -93,7 +94,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
       ],
     },
@@ -108,7 +109,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 4,
@@ -116,7 +117,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 3,
@@ -124,7 +125,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Урок',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 2,
@@ -132,7 +133,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Видео',
           lesson_type: LessonType.Videolesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 5,
@@ -140,7 +141,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
       ],
     },
@@ -155,7 +156,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 2,
@@ -163,7 +164,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Видео',
           lesson_type: LessonType.Videolesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 3,
@@ -171,7 +172,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Урок',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.Finished,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
         {
           id: 4,
@@ -179,7 +180,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.Started,
+          user_lesson_progress: UserLessonProgress.InProgress,
         },
         {
           id: 5,
@@ -187,7 +188,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
       ],
     },
@@ -202,7 +203,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
       ],
     },
@@ -217,7 +218,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 2,
@@ -225,7 +226,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Видео',
           lesson_type: LessonType.Videolesson,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 3,
@@ -233,7 +234,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Урок',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 4,
@@ -241,7 +242,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 5,
@@ -249,7 +250,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
       ],
     },
@@ -264,7 +265,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Дрессировка поисково-спасательных собак',
           lesson_type: LessonType.Lesson,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 2,
@@ -272,7 +273,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Видео',
           lesson_type: LessonType.Videolesson,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 4,
@@ -280,7 +281,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 5,
@@ -288,7 +289,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
       ],
     },
@@ -303,7 +304,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Вебинар',
           lesson_type: LessonType.Webinar,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
         {
           id: 5,
@@ -311,7 +312,7 @@ const course: CourseModel = {
           duration: 2,
           title: 'Тест',
           lesson_type: LessonType.Quiz,
-          user_lesson_progress: LessonProgress.NotStarted,
+          user_lesson_progress: UserLessonProgress.NotStarted,
         },
       ],
     },

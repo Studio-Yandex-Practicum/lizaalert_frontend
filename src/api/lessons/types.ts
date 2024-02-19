@@ -1,5 +1,17 @@
-import type { LessonType } from 'api/course';
 import { Controls } from 'utils/constants';
+
+export enum LessonType {
+  Quiz = 'Quiz',
+  Videolesson = 'Videolesson',
+  Webinar = 'Webinar',
+  Lesson = 'Lesson',
+}
+
+export enum UserLessonProgress {
+  NotStarted,
+  InProgress,
+  Finished,
+}
 
 export type TestAnswerOptionsType =
   | Controls.RADIO
@@ -123,12 +135,6 @@ export type NextLessonModel = {
   chapter_id: Nullable<number>;
   lesson_id: Nullable<number>;
 };
-
-export enum UserLessonProgress {
-  NotStarted,
-  InProgress,
-  Finished,
-}
 
 export type LessonModel = {
   /** id урока */

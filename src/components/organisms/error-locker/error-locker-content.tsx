@@ -22,11 +22,13 @@ export const ErrorLockerContent: FC<ErrorLockerContentProps> = ({
     />
     {subheading && <P text={subheading} textAlign="center" />}
     {content && <P text={content} textAlign="center" />}
-    <Button
-      text={buttonText}
-      onClick={onClick}
-      view="secondary"
-      className={styles.button}
-    />
+    {onClick && (
+      <Button
+        text={buttonText}
+        onClick={onClick}
+        view="secondary"
+        className={styles.button}
+      />
+    )}
   </>
 );

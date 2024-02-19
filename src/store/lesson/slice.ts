@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ProcessEnum } from 'utils/constants';
-import { LessonType } from 'api/course';
+import { LessonType } from 'api/lessons';
 import { completeLesson, fetchLessonById } from './thunk';
 import type { LessonState } from './types';
 

@@ -29,7 +29,6 @@ type UseLesson = {
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
-  completeCourse: VoidFunction;
 };
 
 /**
@@ -68,7 +67,7 @@ export const useLesson = (): UseLesson => {
 
     navigate(
       nextRoute ||
-        `${routes.course.path}/${lesson.course_id}/${chapterId}/${lessonId}/${SUBROUTES.complete}`
+        `${routes.course.path}/${lesson.course_id}/${SUBROUTES.complete}`
     );
   });
 
@@ -83,10 +82,6 @@ export const useLesson = (): UseLesson => {
     }
 
     navigateToNextLesson();
-  });
-
-  const completeCourse = useEvent(() => {
-    navigate(routes.courses.path);
   });
 
   useEffect(() => {
@@ -136,6 +131,5 @@ export const useLesson = (): UseLesson => {
     fetchLesson,
     goToPrevLesson,
     goToNextLesson,
-    completeCourse,
   };
 };
