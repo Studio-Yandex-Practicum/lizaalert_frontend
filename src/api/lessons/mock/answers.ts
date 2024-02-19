@@ -11,8 +11,8 @@ const testAnswers: TestResultModel = {
     { question_id: 2, answer_id: [3] },
   ],
   result: [
-    { question_id: 8, correct_answer_id: [1, 2, 3], is_correct: true },
-    { question_id: 9, correct_answer_id: [3], is_correct: false },
+    { question_id: 1, correct_answer_id: [1, 2, 3], is_correct: true },
+    { question_id: 2, correct_answer_id: [3], is_correct: false },
   ],
   start_date: '2024-02-01T11:13:49.203366+03:00',
   end_date: '2024-02-01T11:13:52.759032+03:00',

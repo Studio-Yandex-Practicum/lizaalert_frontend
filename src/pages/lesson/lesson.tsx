@@ -13,16 +13,21 @@ import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
 import { ErrorLocker } from 'components/organisms/error-locker';
 import { routes } from 'config';
-import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { ErrorCodes } from 'api/core';
 import { LessonType } from 'api/course';
 import { UserLessonProgress } from 'api/lessons';
+import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
+import {
+  selectTestPassingScore,
+  selectTestResult,
+  selectTestResultPercent,
+} from 'store/test/selectors';
 import { useLesson } from 'hooks/use-lesson';
 import styles from './lesson.module.scss';
 
@@ -41,6 +46,9 @@ const Lesson: FC = () => {
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
+  const quizResultData = useAppSelector(selectTestResult);
+  const quizResultPercent = useAppSelector(selectTestResultPercent);
+  const quizPassingScore = useAppSelector(selectTestPassingScore);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -76,9 +84,24 @@ const Lesson: FC = () => {
     ];
   }, [lesson.id, lesson.breadcrumbs]);
 
+  const isNotStarted =
+    lesson.user_lesson_progress === UserLessonProgress.NotStarted;
+
+  const isInProgress =
+    lesson.user_lesson_progress === UserLessonProgress.InProgress;
+
+  const isLoadingProcess = LOADING_PROCESS_MAP[completeLessonProcess];
+
+  const hasValidQuizPassingScore =
+    typeof quizResultPercent === 'number' &&
+    typeof quizPassingScore === 'number' &&
+    quizResultPercent < quizPassingScore;
+
+  const isQuizNotCompleted = !quizResultData.length || hasValidQuizPassingScore;
+  const isQuizDisabledCondition = isQuiz && isInProgress && isQuizNotCompleted;
+
   const isNextButtonDisabled =
-    lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
-    LOADING_PROCESS_MAP[completeLessonProcess];
+    isNotStarted || isLoadingProcess || isQuizDisabledCondition;
 
   if (lessonError?.code === ErrorCodes.NotFound) {
     return <Navigate to={routes.notFound.path} replace />;

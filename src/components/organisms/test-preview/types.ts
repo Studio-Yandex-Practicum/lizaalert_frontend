@@ -1,4 +1,6 @@
 export type TextPreviewProps = {
   /** Функция возврата к тесту. */
-  toggleRender: VoidFunction;
+  onReturnToTest: VoidFunction;
+  /** Функция начала теста. */
+  onTestStart: VoidFunction;
 };

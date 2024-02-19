@@ -1,29 +1,27 @@
 import type { FC } from 'react';
 import classnames from 'classnames';
-// import type { IconType } from 'components/atoms/icon';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-// import type { TestAnswerType } from 'components/molecules/test-answer';
+import { TestAnswerIcons, TestAnswerStatus } from 'utils/constants';
 import styles from './test-results.module.scss';
-import type { TestResultsProps } from './types';
+import type { ResultType, TestResultsProps } from './types';
 
-// TODO: удалить закоментированный код, отрефакторить text-results в связи с новой логикой бэка по валидации ответов квиза, больше нет isCorrect и isChecked в TestAnswerType. Нужно установить условия для iconType и className в TextWithIcon (styles.text__success или styles.text__warning?).
-// const CORRECT_SELECTED_ANSWER = 'checkSolid';
-// const CORRECT_UNSELECTED_ANSWER = 'check';
-// const INCORRECT_SELECTED_ANSWER = 'xSolid';
-const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
+const defaultResult: ResultType = {
+  resultIcon: TestAnswerIcons.IncorrectUnselected,
+};
 
-// function handleIconType(answer: TestAnswerType): IconType {
-//   if (answer.isCorrect && answer.isChecked) {
-//     return CORRECT_SELECTED_ANSWER;
-//   }
-//   if (answer.isCorrect && !answer.isChecked) {
-//     return CORRECT_UNSELECTED_ANSWER;
-//   }
-//   if (!answer.isCorrect && answer.isChecked) {
-//     return INCORRECT_SELECTED_ANSWER;
-//   }
-//   return INCORRECT_UNSELECTED_ANSWER;
-// }
+const resultMap: Record<TestAnswerStatus, ResultType> = {
+  [TestAnswerStatus.Correct]: {
+    resultClassName: styles.textSuccess,
+    resultIcon: TestAnswerIcons.CorrectSelected,
+  },
+  [TestAnswerStatus.Incorrect]: {
+    resultClassName: styles.textWarning,
+    resultIcon: TestAnswerIcons.IncorrectSelected,
+  },
+  [TestAnswerStatus.Unanswered]: {
+    resultIcon: TestAnswerIcons.CorrectUnselected,
+  },
+};
 
 /**
  * Компонент результата ответов теста.
@@ -36,11 +34,19 @@ const INCORRECT_UNSELECTED_ANSWER = 'xSmall';
  * - неправильный и не выбранный ответ
  */
 
-export const TestResults: FC<TestResultsProps> = ({ answer, className }) => (
-  <TextWithIcon
-    key={answer.id}
-    text={answer.text}
-    iconType={INCORRECT_UNSELECTED_ANSWER}
-    className={classnames(className, styles.text, styles.text__success)}
-  />
-);
+export const TestResults: FC<TestResultsProps> = ({
+  answer,
+  validatedAnswers,
+}) => {
+  const statusData = resultMap[validatedAnswers[answer.id]] || defaultResult;
+  const { resultClassName, resultIcon } = statusData;
+
+  return (
+    <TextWithIcon
+      key={answer.id}
+      text={answer.text}
+      iconType={resultIcon}
+      className={classnames(styles.text, resultClassName)}
+    />
+  );
+};

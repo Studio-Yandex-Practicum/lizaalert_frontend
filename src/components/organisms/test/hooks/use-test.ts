@@ -1,102 +1,90 @@
-import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { calculatePercent } from 'utils/calculate-percent';
-import {
-  AVERAGE_TEST_RESULT,
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-} from 'utils/constants';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectAnswersOnValidate,
   selectProcessCreationTest,
+  selectProcessValidationTest,
   selectTest,
+  selectTestPassingScore,
   selectTestProcess,
-  selectTestResult,
+  selectTestResultPercent,
 } from 'store/test/selectors';
-import { updateAnswerReset } from 'store/test/slice';
+import { resetTestResult, updateAnswerReset } from 'store/test/slice';
 import { createTest, validateTest } from 'store/test/thunk';
 
 /**
- * Хук реализует логику прохождения теста.
- * Возвращает объект данных и обработчков для отображения их в интерфейсе.
+ * Хук реализует логику прохождения теста в компоненте Test.
+ * Возвращает объект данных и обработчиков для отображения их в интерфейсе.
  *
- * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake, createNewTest \}
+ * @returns \{ isSubmitted, isSuccess, isLoading, testResultPercent, test, onSubmit, handleButtonDisabledState, retake, createNewTest, testResultData \}
  * */
 
 export const useTest = () => {
   const { lessonId } = useParams();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [testResultPercent, setTestResultPercent] = useState(0);
 
   const test = useAppSelector(selectTest);
   const answers = useAppSelector(selectAnswersOnValidate);
   const testProcess = useAppSelector(selectTestProcess);
   const testCreationProcess = useAppSelector(selectProcessCreationTest);
-  const testResult = useAppSelector(selectTestResult);
+  const testValidationProcess = useAppSelector(selectProcessValidationTest);
+  const testResultPercent = useAppSelector(selectTestResultPercent);
+  const testPassingScore = useAppSelector(selectTestPassingScore);
+  const isSuccess =
+    typeof testResultPercent === 'number' &&
+    typeof testPassingScore === 'number' &&
+    testResultPercent >= testPassingScore;
 
-  const isLoading = LOADING_PROCESS_MAP[testProcess];
+  const isTestLoading = LOADING_PROCESS_MAP[testProcess];
+
+  const isTestCreationLoading = LOADING_PROCESS_MAP[testCreationProcess];
+  const isTestCreationFailed = testCreationProcess === ProcessEnum.Failed;
+  const isTestCreationSucceeded = testCreationProcess === ProcessEnum.Succeeded;
+
+  const isTestValidationLoading = LOADING_PROCESS_MAP[testValidationProcess];
+  const isTestValidationSucceeded =
+    testValidationProcess === ProcessEnum.Succeeded;
 
   const dispatch = useAppDispatch();
 
   // TODO: Функционал на пересдачу теста
   // TODO: https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/422
-  const retake = () => {
+  const handleRetryTest = () => {
     if (lessonId) {
       void dispatch(createTest(lessonId));
     }
     dispatch(updateAnswerReset());
-    setIsSuccess(false);
-    setTestResultPercent(0);
-    setIsSubmitted(false);
-  };
-
-  const createNewTest = async () => {
-    if (lessonId) {
-      await dispatch(createTest(lessonId));
-    }
+    dispatch(resetTestResult());
   };
 
   const sendTestOnValidation = async (): Promise<void> => {
-    if (lessonId && testCreationProcess === ProcessEnum.Succeeded) {
-      await dispatch(validateTest({ id: lessonId, answers }));
-      setIsSubmitted(true);
+    if (lessonId && isTestCreationSucceeded) {
+      void dispatch(validateTest({ id: lessonId, answers }));
     }
   };
 
-  useEffect(() => {
-    if (testResult) {
-      const percent = calculatePercent(
-        testResult.answers.length,
-        testResult.score
-      );
-      setTestResultPercent(percent);
-      setIsSuccess(percent >= AVERAGE_TEST_RESULT);
-    }
-  }, [testResult]);
-
-  const handleButtonDisabledState = () =>
-    testCreationProcess === ProcessEnum.Failed ||
+  const isSubmitButtonDisabled =
+    isTestCreationFailed ||
+    isTestCreationLoading ||
+    isTestValidationLoading ||
     !test.questions?.some((question) =>
       question.content.some((answer) => answer.selected)
     );
 
-  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitTest = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     void sendTestOnValidation();
   };
 
   return {
-    isSubmitted,
     isSuccess,
-    isLoading,
-    testResultPercent,
+    isTestLoading,
+    isTestValidationSucceeded,
+    isSubmitButtonDisabled,
     test,
-    onSubmit,
-    handleButtonDisabledState,
-    retake,
-    createNewTest,
-    testResult,
+    handleSubmitTest,
+    handleRetryTest,
+    testResultPercent,
   };
 };

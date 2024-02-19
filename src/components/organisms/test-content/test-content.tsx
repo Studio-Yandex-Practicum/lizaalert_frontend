@@ -1,11 +1,18 @@
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from 'components/molecules/loader';
-import { Test, useTest } from 'components/organisms/test';
+import { Test } from 'components/organisms/test';
 import { TestPreview } from 'components/organisms/test-preview';
-import { useAppDispatch } from 'store';
-import { fetchTest } from 'store/test/thunk';
+import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { useAppDispatch, useAppSelector } from 'store';
+import { createTest, fetchTest } from 'store/test/thunk';
+import {
+  selectIsTestInProgress,
+  selectProcessCreationTest,
+  selectTestProcess,
+} from 'store/test/selectors';
+import { resetTest } from 'store/test/slice';
+
 /**
  * Компонент-тогглер между превью теста и карточкой с вопросами.
  * */
@@ -13,32 +20,56 @@ import { fetchTest } from 'store/test/thunk';
 export const TestContent: FC = () => {
   const { lessonId } = useParams();
   const dispatch = useAppDispatch();
-  const { isLoading, test, createNewTest } = useTest();
+
+  const isTestInProgress = useAppSelector(selectIsTestInProgress);
+  const testProcess = useAppSelector(selectTestProcess);
+  const testCreationProcess = useAppSelector(selectProcessCreationTest);
+  const isTestLoading = LOADING_PROCESS_MAP[testProcess];
 
   useEffect(() => {
     if (lessonId) {
       void dispatch(fetchTest(lessonId));
     }
+
+    return () => {
+      dispatch(resetTest());
+    };
   }, [lessonId]);
 
-  const [renderTest, setRenderTest] = useState<boolean | undefined>(false);
+  const [isTestRendered, setIsTestRendered] = useState(false);
 
-  useEffect(() => {
-    setRenderTest(test.in_progress);
-  }, [test.in_progress]);
-
-  const toggleRender = () => {
-    void createNewTest();
-    setRenderTest(!renderTest);
+  const toggleRenderTest = () => {
+    setIsTestRendered(!isTestRendered);
   };
 
-  if (isLoading) {
+  const handleStartTest = () => {
+    if (lessonId) {
+      void dispatch(createTest(lessonId));
+    }
+  };
+
+  useEffect(() => {
+    setIsTestRendered(!!isTestInProgress);
+  }, [isTestInProgress]);
+
+  useEffect(() => {
+    if (testCreationProcess === ProcessEnum.Succeeded && !isTestRendered) {
+      toggleRenderTest();
+    }
+  }, [testCreationProcess]);
+
+  if (isTestLoading) {
     return <Loader />;
   }
 
-  if (renderTest) {
-    return <Test toggleRender={toggleRender} />;
+  if (isTestRendered) {
+    return <Test onShowPreview={toggleRenderTest} />;
   }
 
-  return <TestPreview toggleRender={toggleRender} />;
+  return (
+    <TestPreview
+      onTestStart={handleStartTest}
+      onReturnToTest={toggleRenderTest}
+    />
+  );
 };
