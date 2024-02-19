@@ -23,7 +23,7 @@ export const TestPreview: FC<TextPreviewProps> = ({
   const test = useAppSelector(selectTest);
   const testCreationProcess = useAppSelector(selectProcessCreationTest);
 
-  const startTestButtonDisabled = LOADING_PROCESS_MAP[testCreationProcess];
+  const isStartTestButtonDisabled = LOADING_PROCESS_MAP[testCreationProcess];
 
   return (
     <Card htmlTag="section" className={styles.container}>
@@ -79,7 +79,7 @@ export const TestPreview: FC<TextPreviewProps> = ({
         <Button
           className={styles.button}
           onClick={onTestStart}
-          disabled={startTestButtonDisabled}
+          disabled={isStartTestButtonDisabled}
           text="Начать тест"
         />
       )}

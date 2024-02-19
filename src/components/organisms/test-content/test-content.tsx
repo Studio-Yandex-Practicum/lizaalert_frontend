@@ -36,10 +36,10 @@ export const TestContent: FC = () => {
     };
   }, [lessonId]);
 
-  const [renderTest, setRenderTest] = useState(false);
+  const [isTestRendered, setIsTestRendered] = useState(false);
 
-  const toggleRender = () => {
-    setRenderTest(!renderTest);
+  const toggleRenderTest = () => {
+    setIsTestRendered(!isTestRendered);
   };
 
   const handleStartTest = () => {
@@ -49,12 +49,12 @@ export const TestContent: FC = () => {
   };
 
   useEffect(() => {
-    setRenderTest(!!isTestInProgress);
+    setIsTestRendered(!!isTestInProgress);
   }, [isTestInProgress]);
 
   useEffect(() => {
-    if (testCreationProcess === ProcessEnum.Succeeded && !renderTest) {
-      toggleRender();
+    if (testCreationProcess === ProcessEnum.Succeeded && !isTestRendered) {
+      toggleRenderTest();
     }
   }, [testCreationProcess]);
 
@@ -62,11 +62,14 @@ export const TestContent: FC = () => {
     return <Loader />;
   }
 
-  if (renderTest) {
-    return <Test onShowPreview={toggleRender} />;
+  if (isTestRendered) {
+    return <Test onShowPreview={toggleRenderTest} />;
   }
 
   return (
-    <TestPreview onTestStart={handleStartTest} onReturnToTest={toggleRender} />
+    <TestPreview
+      onTestStart={handleStartTest}
+      onReturnToTest={toggleRenderTest}
+    />
   );
 };
