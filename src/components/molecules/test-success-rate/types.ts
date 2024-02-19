@@ -1,6 +1,6 @@
 export type TestSuccessRateProps = {
   /** Результат прохождения теста в числовом выражении. */
-  testResultPercent: number;
+  testResultPercent?: Nullable<number>;
   /** Флаг того, что тест пройден успешно. */
   isSuccess: boolean;
   /** Миксин для стилизации. Используйте css-класс, чтобы изменить css-свойства элемента. */

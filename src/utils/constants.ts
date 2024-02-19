@@ -2,11 +2,10 @@ import { UserProgressStatus } from 'api/course';
 
 export const SPINNER_DELAY = 300;
 export const DELAY_DEBOUNCE = 300;
+export const LAST_INDEX = -1;
 
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
-
-export const AVERAGE_TEST_RESULT = 50;
 
 export const GENERAL_ERROR = 'Что-то пошло не так';
 export const ERROR_403 = 'Ошибка 403';
@@ -31,17 +30,6 @@ export const CourseStatusButtons: Record<UserProgressStatus, string> = {
   [UserProgressStatus.Available]: 'Начать учиться',
   [UserProgressStatus.InProgress]: 'Продолжить',
   [UserProgressStatus.Completed]: 'Пройти еще раз',
-};
-
-export const ErrorMessages = {
-  email: 'Введите эл. адрес в формате: anna@liza-alert.ru',
-  tel: 'Введите номер телефона в формате: +7 (XXX) XXX XX XX',
-  confirmPassword: 'Пароли не совпадают',
-};
-
-export const SERVER_API_ERRORS = {
-  FORBIDDEN: 'У вас недостаточно прав для выполнения данного действия.',
-  NOT_FOUND: 'Страница не найдена.',
 };
 
 export const RegExpPatterns = {
@@ -90,4 +78,17 @@ export enum UserDataFieldNames {
   Phone = 'phone_number',
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
+}
+
+export enum TestAnswerStatus {
+  Correct = 'correct',
+  Incorrect = 'incorrect',
+  Unanswered = 'unanswered',
+}
+
+export enum TestAnswerIcons {
+  CorrectSelected = 'checkSolid',
+  CorrectUnselected = 'check',
+  IncorrectSelected = 'xSolid',
+  IncorrectUnselected = 'xSmall',
 }

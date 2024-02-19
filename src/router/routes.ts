@@ -29,7 +29,7 @@ export const defaultRoutes: Record<string, RouteType> = {
       },
       complete: {
         title: 'Курс завершен',
-        path: `${SUBROUTES.courseId}/${SUBROUTES.chapterId}/${SUBROUTES.lessonId}/${SUBROUTES.complete}`,
+        path: `${SUBROUTES.courseId}/${SUBROUTES.complete}`,
       },
     },
   },

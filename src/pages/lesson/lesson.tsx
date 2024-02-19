@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import getYouTubeID from 'get-youtube-id';
 import { Card } from 'components/atoms/card';
 import { Heading } from 'components/atoms/typography';
@@ -11,22 +11,25 @@ import { NavigationButtons } from 'components/organisms/navigation-buttons';
 import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
-import { ErrorLocker } from 'components/organisms/error-locker';
-import { routes } from 'config';
 import {
-  ERROR_403,
-  LOADING_PROCESS_MAP,
-  ProcessEnum,
-  SERVER_API_ERRORS,
-} from 'utils/constants';
-import { LessonType } from 'api/course';
-import { UserLessonProgress } from 'api/lessons';
+  ErrorLocker,
+  forbiddenErrorPropsConfig,
+} from 'components/organisms/error-locker';
+import { routes } from 'config';
+import { ErrorCodes } from 'api/core';
+import { LessonType, UserLessonProgress } from 'api/lessons';
+import { LAST_INDEX, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLessonType,
 } from 'store/lesson/selectors';
+import {
+  selectTestPassingScore,
+  selectTestResult,
+  selectTestResultPercent,
+} from 'store/test/selectors';
 import { useLesson } from 'hooks/use-lesson';
 import styles from './lesson.module.scss';
 
@@ -45,12 +48,16 @@ const Lesson: FC = () => {
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
+  const quizResultData = useAppSelector(selectTestResult);
+  const quizResultPercent = useAppSelector(selectTestResultPercent);
+  const quizPassingScore = useAppSelector(selectTestPassingScore);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
   const isWebinar = lessonType === LessonType.Webinar;
   const isLesson = lessonType === LessonType.Lesson;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
+  const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
 
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
@@ -80,12 +87,29 @@ const Lesson: FC = () => {
     ];
   }, [lesson.id, lesson.breadcrumbs]);
 
-  const isNextButtonDisabled =
-    lesson.user_lesson_progress === UserLessonProgress.NotStarted ||
-    LOADING_PROCESS_MAP[completeLessonProcess];
+  const isNotStarted =
+    lesson.user_lesson_progress === UserLessonProgress.NotStarted;
 
-  if (lessonError && lessonError === SERVER_API_ERRORS.NOT_FOUND) {
-    return <Navigate to={routes.notFound.path} />;
+  const isInProgress =
+    lesson.user_lesson_progress === UserLessonProgress.InProgress;
+
+  const isLoadingProcess = LOADING_PROCESS_MAP[completeLessonProcess];
+
+  const hasValidQuizPassingScore =
+    typeof quizResultPercent === 'number' &&
+    typeof quizPassingScore === 'number' &&
+    quizResultPercent < quizPassingScore;
+
+  const isQuizNotCompleted = !quizResultData.length || hasValidQuizPassingScore;
+  const isQuizDisabledCondition = isQuiz && isInProgress && isQuizNotCompleted;
+
+  const isNextButtonDisabled =
+    isNotStarted || isLoadingProcess || isQuizDisabledCondition;
+
+  const handleForbiddenError = () => navigate(LAST_INDEX);
+
+  if (lessonError?.code === ErrorCodes.NotFound) {
+    return <Navigate to={routes.notFound.path} replace />;
   }
 
   return (
@@ -98,18 +122,12 @@ const Lesson: FC = () => {
         {(isLoading || lessonError) && (
           <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
-            {lessonError &&
-              (lessonError === SERVER_API_ERRORS.FORBIDDEN ? (
-                <ErrorLocker
-                  onClick={() => navigate(-1)}
-                  heading={ERROR_403}
-                  subheading="Доступ запрещен"
-                  content="У вас нет прав доступа к этой странице"
-                  buttonText="Назад"
-                />
-              ) : (
-                <ErrorLocker onClick={fetchLesson} />
-              ))}
+            {lessonError && (
+              <ErrorLocker
+                {...(isForbiddenError && forbiddenErrorPropsConfig)}
+                onClick={isForbiddenError ? handleForbiddenError : fetchLesson}
+              />
+            )}
           </Card>
         )}
 

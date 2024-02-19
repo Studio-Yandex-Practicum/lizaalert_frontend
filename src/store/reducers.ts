@@ -6,6 +6,7 @@ import coursesReducer from './courses/slice';
 import lessonReducer from './lesson/slice';
 import profileReducer from './profile/slice';
 import testReducer from './test/slice';
+import achievementsReducer from './achievements/slice';
 import type { AppState } from './types';
 
 const appReducer = combineReducers<AppState>({
@@ -16,6 +17,7 @@ const appReducer = combineReducers<AppState>({
   lesson: lessonReducer,
   profile: profileReducer,
   auth: authReducer,
+  achievements: achievementsReducer,
 });
 
 export const rootReducer = (

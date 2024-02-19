@@ -13,15 +13,15 @@ import type { TestProps } from './types';
  * Компонент-карточка теста с вопросами.
  * */
 
-export const Test: FC<TestProps> = ({ toggleRender }) => {
+export const Test: FC<TestProps> = ({ onShowPreview }) => {
   const {
-    isSubmitted,
     isSuccess,
+    isTestValidationSucceeded,
+    isSubmitButtonDisabled,
     testResultPercent,
     test,
-    onSubmit,
-    handleButtonDisabledState,
-    retake,
+    handleSubmitTest,
+    handleRetryTest,
   } = useTest();
 
   if (!test.questions?.length) {
@@ -39,15 +39,15 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
           className={styles.heading}
         />
 
-        <Button view="text" onClick={toggleRender} text="Посмотреть условия" />
+        <Button view="text" onClick={onShowPreview} text="Посмотреть условия" />
       </div>
 
-      <form onSubmit={onSubmit} name="testForm" className={styles.form}>
+      <form onSubmit={handleSubmitTest} name="testForm" className={styles.form}>
         <ul className={styles.list}>
-          {renderQuestionsList(test.questions, isSubmitted)}
+          {renderQuestionsList(test.questions, isTestValidationSucceeded)}
         </ul>
 
-        {isSubmitted && (
+        {isTestValidationSucceeded && (
           <>
             <TestSuccessRate
               isSuccess={isSuccess}
@@ -57,17 +57,17 @@ export const Test: FC<TestProps> = ({ toggleRender }) => {
               className={styles.button}
               type="button"
               iconName="retry"
-              onClick={retake}
+              onClick={handleRetryTest}
               text="Пересдать"
             />
           </>
         )}
 
-        {!isSubmitted && (
+        {!isTestValidationSucceeded && (
           <Button
             className={styles.button}
             type="submit"
-            disabled={handleButtonDisabledState()}
+            disabled={isSubmitButtonDisabled}
             text="Показать результат"
           />
         )}
@@ -88,7 +88,6 @@ function renderQuestionsList(
         type={question.question_type}
         index={index}
         isSubmitted={isSubmitted}
-        className={styles.checkbox}
       />
     </li>
   ));

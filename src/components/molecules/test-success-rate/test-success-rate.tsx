@@ -23,7 +23,7 @@ const testResultsTexts = {
 
 export const TestSuccessRate: FC<TestSuccessRateProps> = ({
   isSuccess,
-  testResultPercent = 0,
+  testResultPercent,
   className,
 }) => {
   const texts = isSuccess ? testResultsTexts.success : testResultsTexts.failure;
@@ -38,7 +38,7 @@ export const TestSuccessRate: FC<TestSuccessRateProps> = ({
     >
       <Heading
         level={3}
-        text={`${testResultPercent}%`}
+        text={`${testResultPercent ?? 0}%`}
         size="xxl"
         weight="bold"
       />

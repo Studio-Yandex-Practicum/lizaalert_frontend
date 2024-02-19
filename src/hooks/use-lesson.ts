@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from 'config';
 import { SUBROUTES } from 'router/routes';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -23,11 +24,10 @@ type UseLesson = {
   lesson: LessonModel;
   lessonProcess: ProcessEnum;
   isLoading: boolean;
-  lessonError: string | null;
+  lessonError: Nullable<SerializedError>;
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
-  completeCourse: VoidFunction;
 };
 
 /**
@@ -64,7 +64,7 @@ export const useLesson = (): UseLesson => {
 
     navigate(
       nextRoute ||
-        `${routes.course.path}/${lesson.course_id}/${chapterId}/${lessonId}/${SUBROUTES.complete}`
+        `${routes.course.path}/${lesson.course_id}/${SUBROUTES.complete}`
     );
   });
 
@@ -81,14 +81,11 @@ export const useLesson = (): UseLesson => {
     navigateToNextLesson();
   });
 
-  const completeCourse = useEvent(() => {
-    navigate(routes.courses.path);
-  });
-
   useEffect(() => {
-    if (lessonId && lesson.id !== +lessonId) {
+    if (lessonId) {
       fetchLesson();
     }
+
     return () => {
       dispatch(resetLessonState());
     };
@@ -101,14 +98,18 @@ export const useLesson = (): UseLesson => {
   }, [lessonProcess, courseId]);
 
   useEffect(() => {
-    if (
-      lesson.id &&
-      (lesson.chapter_id !== Number(chapterId) ||
-        lesson.course_id !== Number(courseId))
-    ) {
-      navigate(routes.notFound.path);
+    const isDataInconsistent =
+      lesson.id !== +lessonId ||
+      lesson.chapter_id !== +chapterId ||
+      lesson.course_id !== +courseId;
+
+    const isInconsistencyError =
+      lessonProcess === ProcessEnum.Succeeded && isDataInconsistent;
+
+    if (isInconsistencyError) {
+      navigate(routes.notFound.path, { replace: true });
     }
-  }, [lesson]);
+  }, [lessonProcess, lesson]);
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
@@ -126,6 +127,5 @@ export const useLesson = (): UseLesson => {
     fetchLesson,
     goToPrevLesson,
     goToNextLesson,
-    completeCourse,
   };
 };

@@ -1,0 +1,72 @@
+@use 'src/styles/variables' as vars;
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: -98%;
+
+  &Rows {
+    font-family: vars.$mainFont;
+    display: flex;
+    flex-direction: column;
+    width: 226px;
+    padding: 4px;
+    border-radius: vars.$border-radius;
+    justify-content: center;
+    background-color: vars.$bg-primary;
+    text-align: center;
+    font-weight: 500;
+    font-size: vars.$font-size-m;
+    color: vars.$dark-primary;
+    border: 3px solid vars.$dark-secondary;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 23%;
+      right: 100%;
+      margin-top: -15px;
+      border-width: 13px;
+      border-style: solid;
+      border-color: transparent vars.$dark-secondary transparent transparent;
+    }
+  }
+
+  &Row {
+    &Title {
+      border-top-right-radius: vars.$border-radius;
+      border-top-left-radius: vars.$border-radius;
+      display: flex;
+      padding: 10px;
+      min-height: 20px;
+      background-color: vars.$drop-shadow-small;
+      color: vars.$dark-primary;
+
+      &Img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        font-size: vars.$font-size-alt;
+        border: 1px solid vars.$yandex-text-color;
+        border-radius: 50%;
+        margin: 0 20px 0 0;
+      }
+
+      &Text {
+        margin: 5px;
+      }
+    }
+
+    &Text {
+      min-height: 30px;
+      padding: 5px;
+      background-color: vars.$color-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom-right-radius: vars.$border-radius;
+      border-bottom-left-radius: vars.$border-radius;
+    }
+  }
+}

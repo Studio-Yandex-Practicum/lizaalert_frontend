@@ -5,10 +5,11 @@ import { AccountData } from 'components/organisms/account-data';
 import { AccountOverview } from 'components/organisms/account-overview';
 import { PersonalData } from 'components/organisms/personal-data';
 import { LOADING_PROCESS_MAP } from 'utils/constants';
+import { routes } from 'config';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectFetchProfileProcess } from 'store/profile/selectors';
 import { fetchProfile } from 'store/profile/thunk';
-import { routes } from 'config';
+import { fetchAchievements } from 'store/achievements/thunk';
 import styles from './profile.module.scss';
 
 const Profile = () => {
@@ -16,6 +17,7 @@ const Profile = () => {
 
   useEffect(() => {
     void dispatch(fetchProfile());
+    void dispatch(fetchAchievements());
   }, [dispatch]);
 
   const profileProcess = useAppSelector(selectFetchProfileProcess);

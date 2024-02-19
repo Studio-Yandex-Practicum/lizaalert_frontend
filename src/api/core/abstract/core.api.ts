@@ -1,7 +1,14 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, {
+  type AxiosError,
+  AxiosRequestConfig,
+  type AxiosResponse,
+} from 'axios';
 import { BACKEND_API } from 'config';
-import type {
+import { HttpStatusCodes, httpStatusCodesMap } from '../constants';
+import { SerializedError } from '../serialized-error';
+import {
   ApiInterceptorConfig,
+  ErrorResponseDataModel,
   RequestType,
   RequestTypeWithData,
 } from '../types';
@@ -12,6 +19,29 @@ export abstract class CoreApi {
   });
 
   private interceptorsMap: { [p: string]: number } = {};
+
+  constructor() {
+    this.api.interceptors.response.use(
+      // Типизация возвращаемого значения производится в методах
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      (response: AxiosResponse) => response.data,
+      (error: AxiosError<ErrorResponseDataModel>) => {
+        const { response, code } = error;
+        const statusCode = response?.status;
+
+        if (statusCode === HttpStatusCodes.Unauthorized) {
+          return Promise.reject(error);
+        }
+
+        return Promise.reject(
+          new SerializedError({
+            ...(statusCode && { code: httpStatusCodesMap[statusCode] ?? code }),
+            message: response?.data.detail,
+          })
+        );
+      }
+    );
+  }
 
   get: RequestType = (...req) => this.api.get(...req);
 

@@ -1,3 +1,2 @@
 export { Test } from './test';
-export { useTest } from './hooks/use-test';
-export type { TestProps } from './types';
+export type { TestProps, TestValidatedType, TestAnswerType } from './types';
