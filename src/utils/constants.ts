@@ -2,6 +2,7 @@ import { UserProgressStatus } from 'api/course';
 
 export const SPINNER_DELAY = 300;
 export const DELAY_DEBOUNCE = 300;
+export const LAST_INDEX = -1;
 
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;

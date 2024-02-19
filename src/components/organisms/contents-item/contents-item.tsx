@@ -8,7 +8,7 @@ import { P } from 'components/atoms/typography';
 import { Accordion } from 'components/molecules/accordion';
 import { StyledLink } from 'components/molecules/styled-link';
 import { TextWithIcon } from 'components/molecules/text-with-icon';
-import { LessonProgress } from 'api/course';
+import { UserLessonProgress } from 'api/lessons';
 import styles from './contents-item.module.scss';
 import type { ContentsItemProps, LessonType } from './types';
 
@@ -27,7 +27,7 @@ function renderLesson(
 ) {
   const currentLessonRoute = `${routes.course.path}/${courseId}/${chapterId}/${lesson.id}`;
 
-  if (lesson.user_lesson_progress === LessonProgress.Finished) {
+  if (lesson.user_lesson_progress === UserLessonProgress.Finished) {
     return (
       <div
         className={classnames(styles.listItem, {
@@ -51,7 +51,7 @@ function renderLesson(
     );
   }
 
-  if (lesson.user_lesson_progress === LessonProgress.Started) {
+  if (lesson.user_lesson_progress === UserLessonProgress.InProgress) {
     return (
       <div
         className={classnames(styles.listItem, styles.active)}

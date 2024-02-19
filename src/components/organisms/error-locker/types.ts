@@ -8,7 +8,7 @@ export type ErrorLockerContentProps = {
   /** Текст кнопки */
   buttonText?: string;
   /** Функция-обработчик клика */
-  onClick: VoidFunction;
+  onClick?: VoidFunction;
 };
 
 export type ErrorLockerProps = ErrorLockerContentProps & {
