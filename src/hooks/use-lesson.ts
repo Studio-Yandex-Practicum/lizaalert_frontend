@@ -6,7 +6,6 @@ import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourse } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLesson,
@@ -40,8 +39,6 @@ export const useLesson = (): UseLesson => {
   const { courseId = '', chapterId = '', lessonId = '' } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const course = useAppSelector(selectCourse);
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
@@ -98,10 +95,8 @@ export const useLesson = (): UseLesson => {
   }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && course.id !== Number(courseId)) {
-      void dispatch(fetchCourseById(courseId));
-    }
-  }, [course, courseId]);
+    void dispatch(fetchCourseById(courseId));
+  }, [lessonProcess]);
 
   useEffect(() => {
     if (
@@ -115,7 +110,6 @@ export const useLesson = (): UseLesson => {
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
-      void dispatch(fetchCourseById(courseId));
       navigateToNextLesson();
     }
   }, [completeLessonProcess]);
