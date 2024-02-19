@@ -95,8 +95,10 @@ export const useLesson = (): UseLesson => {
   }, [lessonId]);
 
   useEffect(() => {
-    void dispatch(fetchCourseById(courseId));
-  }, [lessonProcess]);
+    if (courseId && lessonProcess === ProcessEnum.Succeeded) {
+      void dispatch(fetchCourseById(courseId));
+    }
+  }, [lessonProcess, courseId]);
 
   useEffect(() => {
     if (
