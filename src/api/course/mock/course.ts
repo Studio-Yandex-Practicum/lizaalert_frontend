@@ -95,6 +95,14 @@ const course: CourseModel = {
           lesson_type: LessonType.Quiz,
           user_lesson_progress: LessonProgress.Finished,
         },
+        {
+          id: 6,
+          order_number: 5,
+          duration: 1,
+          title: 'Домашняя работа',
+          lesson_type: LessonType.Homework,
+          user_lesson_progress: LessonProgress.Started,
+        },
       ],
     },
     {

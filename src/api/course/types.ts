@@ -3,6 +3,7 @@ export enum LessonType {
   Videolesson = 'Videolesson',
   Webinar = 'Webinar',
   Lesson = 'Lesson',
+  Homework = 'Homework',
 }
 
 export enum LessonProgress {
