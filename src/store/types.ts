@@ -7,6 +7,7 @@ import type { LessonState } from './lesson/types';
 import type { AchievementsState } from './achievements/types';
 import type { ProfileState } from './profile/types';
 import type { TestState } from './test/types';
+import type { HomeworkState } from './homework/types';
 
 export type AppState = {
   auth: AuthState;
@@ -14,6 +15,7 @@ export type AppState = {
   course: CourseState;
   coursesFilters: CoursesFiltersState;
   lesson: LessonState;
+  homework: HomeworkState;
   test: TestState;
   profile: ProfileState;
   achievements: AchievementsState;
