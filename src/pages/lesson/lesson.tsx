@@ -57,6 +57,7 @@ const Lesson: FC = () => {
   const isVideolesson = lessonType === LessonType.Videolesson;
   const isWebinar = lessonType === LessonType.Webinar;
   const isLesson = lessonType === LessonType.Lesson;
+  const isHomework = lessonType === LessonType.Homework;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
   const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
 
@@ -157,7 +158,7 @@ const Lesson: FC = () => {
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
                 {isWebinar && <PreviewWebinar date="" link="" />}
-                <Homework description={lesson.description} />
+                {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}
 
