@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, type FC, useState } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
-// import classnames from 'classnames';
 import { Markdown } from 'components/molecules/markdown';
-import { useAppDispatch, useAppSelector } from 'store';
-// import { fetchHomeworkByLessonId, updateHomework } from 'store/homework/thunk';
-import { useEvent } from 'hooks/use-event';
-// import { selectHomework } from 'store/homework/selectors';
 import { Button } from 'components/molecules/button';
-// import { saveAnswer } from 'store/homework/slice';
-// import { HomeworkStatus } from 'api/homework/types';
 import { Textarea } from 'components/molecules/textarea/textarea';
 import { useHomework } from 'hooks/use-homework';
+import { Typography } from 'components/atoms/typography';
+import { Loader } from 'components/molecules/loader';
+import {
+  HomeworkStatus,
+  HomeworkStatusText,
+  ProcessEnum,
+} from 'utils/constants';
+import { ErrorLocker } from '../error-locker';
 import type { HomeworkProps } from './types';
 import styles from './homework.module.scss';
 
@@ -19,38 +20,8 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
   /** лимит по количеству знаков в ответе */
   const textLengthLimit = 5000;
 
-  const dispatch = useAppDispatch();
-  /*
-  const { homework, currentText } = useAppSelector(selectHomework);
-  const [text, setText] = useState<string>('');
-  const isTextChanged = homework.text !== text;
-  console.log(homework, text);
-
-  const fetchHomework = useEvent(() => {
-    void dispatch(fetchHomeworkByLessonId(1));
-  });
-
-  useEffect(() => {
-    fetchHomework();
-
-    return () => {
-      dispatch(saveAnswer(text));
-    };
-  }, []);
-
-    const handleSubmit = () => {
-    void dispatch(updateHomework({ answer: { ...homework, text }, id: 1 }));
-  };
-*/
-  const {
-    currentAnswer,
-    homework,
-    homeworkProcess,
-    isLoading,
-    homeworkError,
-    handleAnswer,
-    buttonText,
-  } = useHomework();
+  const { homework, homeworkProcess, isLoading, homeworkError, handleAnswer } =
+    useHomework();
 
   type HomeworkFormData = {
     homeworkAnswer: string;
@@ -64,7 +35,6 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
     values: HomeworkFormData,
     { validateForm, setSubmitting }: FormikHelpers<HomeworkFormData>
   ) => {
-    console.log('submit');
     await validateForm(values);
     await handleAnswer(values.homeworkAnswer);
     setSubmitting(false);
@@ -82,39 +52,57 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
     onSubmit: handleSubmit,
   });
 
+  const isAnswerChanged = formik.values.homeworkAnswer !== homework.text;
+  const isEmptyAnswer = !formik.values.homeworkAnswer.length;
+
   useEffect(() => {
-    // setText(currentText);
-    void formik.setValues({ homeworkAnswer: currentAnswer });
-  }, [currentAnswer]);
+    void formik.setValues({ homeworkAnswer: homework.text });
+  }, [homework.text]);
 
   return (
     <>
       {description && <Markdown>{description}</Markdown>}
-      <form
-        name="homeworkDataForm"
-        onSubmit={formik.handleSubmit}
-        className={styles.form}
-      >
-        <Textarea
-          name="homeworkAnswer"
-          className={styles.answer}
-          placeholder="Ответ на домашнее задание"
-          rows={20}
-          maxLength={textLengthLimit}
-          value={formik.values.homeworkAnswer}
-          error={formik.errors.homeworkAnswer}
-          onChange={formik.handleChange}
-          displayLimit
-        />
-        <Button
-          type="submit"
-          className={styles.submitButton}
-          text={buttonText}
-          disabled={formik.isSubmitting}
-        />
 
-        {/* homework.status === HomeworkStatus.Draft && 'Работа на проверке' */}
-      </form>
+      {isLoading && <Loader />}
+
+      {homeworkError && <ErrorLocker />}
+
+      {homeworkProcess === ProcessEnum.Succeeded && (
+        <form
+          name="homeworkDataForm"
+          onSubmit={formik.handleSubmit}
+          className={styles.form}
+        >
+          <Textarea
+            name="homeworkAnswer"
+            className={styles.answer}
+            placeholder="Ответ на домашнее задание"
+            rows={20}
+            maxLength={textLengthLimit}
+            value={formik.values.homeworkAnswer}
+            error={formik.errors.homeworkAnswer}
+            onChange={formik.handleChange}
+            disabled={homework.status !== HomeworkStatus.Draft}
+            displayLimit
+          />
+          <Button
+            type="submit"
+            className={styles.submitButton}
+            text={isAnswerChanged ? 'Сохранить' : 'Отправить на проверку'}
+            disabled={
+              isEmptyAnswer ||
+              homework.status !== HomeworkStatus.Draft ||
+              formik.isSubmitting
+            }
+          />
+        </form>
+      )}
+
+      {homework.status !== HomeworkStatus.Draft && (
+        <Typography className={styles.status}>
+          {HomeworkStatusText[homework.status]}
+        </Typography>
+      )}
     </>
   );
 };
