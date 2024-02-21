@@ -1,0 +1,57 @@
+@use 'src/styles/variables' as vars;
+
+.container {
+  font-family: vars.$mainFont;
+  font-weight: 400;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.label {
+  width: 100%;
+  color: vars.$dark-secondary;
+}
+
+.labelText {
+  display: block;
+  box-sizing: border-box;
+  padding: 0 16px;
+  margin-bottom: 5px;
+}
+
+.wrapper {
+  display: block;
+  padding: 11px 16px;
+  border: 1.2px solid vars.$borders-divider-disabled-bg;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+}
+
+.textarea {
+  display: block;
+  min-height: 48px;
+  width: 100%;
+  border: none;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 400;
+  color: vars.$dark-primary;
+  font-size: vars.$font-size-m;
+  line-height: vars.$line-height-m;
+}
+
+.limit {
+  color: vars.$dark-secondary;
+  font-size: vars.$font-size-s;
+  line-height: vars.$line-height-s;
+}
+
+.error {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 32px;
+  margin-top: 3px;
+  padding-left: 16px;
+  color: vars.$warning;
+}
