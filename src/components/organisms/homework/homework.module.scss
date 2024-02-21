@@ -1,0 +1,15 @@
+@use 'src/styles/variables' as vars;
+
+.form {
+  margin-top: 16px;
+}
+.answer {
+  width: 100%;
+}
+.answer:focus {
+  outline: none;
+}
+.button {
+  width: 224px;
+  height: 48px;
+}
