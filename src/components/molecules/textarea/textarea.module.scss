@@ -1,5 +1,10 @@
 @use 'src/styles/variables' as vars;
 
+@mixin placeholder {
+  color: vars.$dark-secondary;
+  opacity: 1;
+}
+
 .container {
   font-family: vars.$mainFont;
   font-weight: 400;
@@ -25,10 +30,24 @@
   border: 1.2px solid vars.$borders-divider-disabled-bg;
   border-radius: vars.$border-radius;
   overflow: hidden;
+
+  &:focus-within {
+    border-color: vars.$color-primary;
+  }
+
+  &_warned {
+    border: 1.2px solid vars.$warning;
+    background-color: vars.$warning-bg;
+
+    textarea {
+      background-color: transparent;
+    }
+  }
 }
 
 .textarea {
   display: block;
+  resize: vertical;
   min-height: 48px;
   width: 100%;
   border: none;
@@ -39,6 +58,28 @@
   color: vars.$dark-primary;
   font-size: vars.$font-size-m;
   line-height: vars.$line-height-m;
+
+  &::-webkit-input-placeholder {
+    @include placeholder;
+  }
+
+  &::-moz-placeholder {
+    @include placeholder;
+  }
+
+  &::placeholder {
+    @include placeholder;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    background: vars.$bg-primary;
+    color: vars.$dark-secondary;
+    cursor: default;
+  }
 }
 
 .limit {

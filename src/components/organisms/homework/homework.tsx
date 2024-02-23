@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, type FC, useState } from 'react';
+import { useEffect, type FC } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import { Markdown } from 'components/molecules/markdown';
 import { Button } from 'components/molecules/button';
@@ -13,23 +12,19 @@ import {
   ProcessEnum,
 } from 'utils/constants';
 import { ErrorLocker } from '../error-locker';
-import type { HomeworkProps } from './types';
+import type { HomeworkProps, HomeworkFormData } from './types';
 import styles from './homework.module.scss';
+
+const textLengthLimit = 5000;
+const initialValues: HomeworkFormData = {
+  homeworkAnswer: '',
+};
 
 export const Homework: FC<HomeworkProps> = ({ description }) => {
   /** лимит по количеству знаков в ответе */
-  const textLengthLimit = 5000;
 
   const { homework, homeworkProcess, isLoading, homeworkError, handleAnswer } =
     useHomework();
-
-  type HomeworkFormData = {
-    homeworkAnswer: string;
-  };
-
-  const initialValues: HomeworkFormData = {
-    homeworkAnswer: '',
-  };
 
   const handleSubmit = async (
     values: HomeworkFormData,
@@ -54,6 +49,7 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
 
   const isAnswerChanged = formik.values.homeworkAnswer !== homework.text;
   const isEmptyAnswer = !formik.values.homeworkAnswer.length;
+  const isDraft = homework.status === HomeworkStatus.Draft;
 
   useEffect(() => {
     void formik.setValues({ homeworkAnswer: homework.text });
@@ -77,28 +73,25 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
             name="homeworkAnswer"
             className={styles.answer}
             placeholder="Ответ на домашнее задание"
-            rows={20}
+            rows={15}
             maxLength={textLengthLimit}
             value={formik.values.homeworkAnswer}
             error={formik.errors.homeworkAnswer}
             onChange={formik.handleChange}
-            disabled={homework.status !== HomeworkStatus.Draft}
+            isValid={!isAnswerChanged || !formik.errors.homeworkAnswer}
+            disabled={!isDraft}
             displayLimit
           />
           <Button
             type="submit"
             className={styles.submitButton}
             text={isAnswerChanged ? 'Сохранить' : 'Отправить на проверку'}
-            disabled={
-              isEmptyAnswer ||
-              homework.status !== HomeworkStatus.Draft ||
-              formik.isSubmitting
-            }
+            disabled={isEmptyAnswer || !isDraft || formik.isSubmitting}
           />
         </form>
       )}
 
-      {homework.status !== HomeworkStatus.Draft && (
+      {!isDraft && (
         <Typography className={styles.status}>
           {HomeworkStatusText[homework.status]}
         </Typography>

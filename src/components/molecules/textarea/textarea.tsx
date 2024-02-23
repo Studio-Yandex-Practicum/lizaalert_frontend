@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC } from 'react';
+import type { FC } from 'react';
 import classnames from 'classnames';
 import { Span } from 'components/atoms/typography';
-import { TextareaProps } from './types';
+import type { TextareaProps } from './types';
 import styles from './textarea.module.scss';
 
 export const Textarea: FC<TextareaProps> = ({
@@ -15,13 +14,17 @@ export const Textarea: FC<TextareaProps> = ({
   value,
   ...props
 }) => (
-  <div className={styles.container}>
+  <div className={classnames(styles.container, className)}>
     <label htmlFor={props.name} className={styles.label}>
       {labelName && <span className={styles.labelText}>{labelName}</span>}{' '}
     </label>
-    <div className={styles.wrapper}>
+    <div
+      className={classnames(styles.wrapper, {
+        [styles.wrapper_warned]: !isValid && !props.disabled,
+      })}
+    >
       <textarea
-        className={classnames(styles.textarea, className)}
+        className={styles.textarea}
         {...props}
         maxLength={maxLength}
         value={value}
@@ -32,8 +35,8 @@ export const Textarea: FC<TextareaProps> = ({
         </Span>
       )}
     </div>
-    <span className={styles.error}>
-      {!error && !props.disabled ? error : ''}
-    </span>
+    {!isValid && !props.disabled && (
+      <span className={styles.error}>{error}</span>
+    )}
   </div>
 );
