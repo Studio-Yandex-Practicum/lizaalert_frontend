@@ -168,3 +168,18 @@ export type LessonModel = {
   /** Объект с информацией о пред. уроке */
   prev_lesson: NextLessonModel;
 };
+
+export type WebinarModel = {
+  /** id урока */
+  id?: number;
+  /** Название урока */
+  lesson: string;
+  /** Описание вебинара */
+  description?: string;
+  /** Ссылка на вебинар */
+  link: string;
+  /** Номер когорты */
+  cohort: number;
+  /** Дата вебинара */
+  webinar_date: string;
+};

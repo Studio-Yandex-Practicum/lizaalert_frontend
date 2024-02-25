@@ -111,7 +111,7 @@ const Lesson: FC = () => {
   if (lessonError?.code === ErrorCodes.NotFound) {
     return <Navigate to={routes.notFound.path} replace />;
   }
-
+  console.log(lessonType);
   return (
     <>
       {lesson.breadcrumbs && (
