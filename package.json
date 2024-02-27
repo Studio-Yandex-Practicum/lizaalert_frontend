@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "webpack serve --env mode=development",
-    "start:mock": "webpack serve --env mode=development mock=true --https",
+    "start:mock": "webpack serve --env mode=development mock=true",
     "build": "webpack --env mode=production",
     "test": "jest ./",
     "format": "prettier --write src/**/*",

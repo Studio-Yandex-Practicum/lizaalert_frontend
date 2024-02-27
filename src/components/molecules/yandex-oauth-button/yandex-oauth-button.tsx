@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { type FC } from 'react';
 import classnames from 'classnames';
-import { Icon } from 'components/atoms/icon';
 import styles from './yandex-oauth-button.module.scss';
 import type { YandexOAuthButtonProps } from './types';
 
@@ -14,14 +14,19 @@ import type { YandexOAuthButtonProps } from './types';
 
 export const YandexOAuthButton: FC<YandexOAuthButtonProps> = ({
   className,
-  ...props
 }) => {
   const promise = new Promise((resolve, reject) => {
+    const meta = document.createElement('meta');
+    meta.httpEquiv = 'Content-Security-Policy';
+    meta.content =
+      "script-src 'self' 'unsafe-inline' https://passport.yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://yastatic.net; child-src https://passport.yandex.ru; frame-src https://passport.yandex.ru https://autofill.yandex.ru; connect-src https://passport.yandex.ru https://autofill.yandex.ru;";
+    document.head.appendChild(meta);
     const script = document.createElement('script');
     script.src =
       'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js';
     script.onload = () => resolve(script);
     script.onerror = () => reject(new Error(`Ошибка загрузки скрипта`));
+
     document.head.appendChild(script);
   });
 
@@ -31,39 +36,23 @@ export const YandexOAuthButton: FC<YandexOAuthButtonProps> = ({
         {
           client_id: 'b3be356844ef4136bb188934b323a609',
           response_type: 'token',
-          redirect_uri: 'https://localhost',
+          redirect_uri: 'http://localhost:3000',
         },
-        'https://localhost',
+        'http://localhost:3000',
         {
           view: 'button',
-          parentId: 'frame',
+          parentId: 'button',
           buttonView: 'main',
-          buttonTheme: 'dark',
-          buttonSize: 'm',
-          buttonBorderRadius: 0,
+          buttonTheme: 'light',
+          buttonSize: 'xs',
+          buttonBorderRadius: 50,
         }
       )
-        .then(({ status, handler }) => {
-          if (status === 'ok') {
-            handler();
-          }
-        })
+        .then(({ handler }) => handler())
         .then((data) => console.log('Сообщение с токеном', data))
         .catch((error) => console.log('Обработка ошибки', error));
     })
-    .catch((err) => console.log('Ошибка: ', err));
+    .catch((err) => console.log(err));
 
-  return (
-    <>
-      <button
-        {...props}
-        className={classnames(styles.button, className)}
-        type="button"
-      >
-        <Icon type="yandex" className={styles.icon} />
-        Войти c Яндекс ID
-      </button>
-      <iframe id="frame" title="frame" />
-    </>
-  );
+  return <div id="button" className={classnames(styles.button, className)} />;
 };
