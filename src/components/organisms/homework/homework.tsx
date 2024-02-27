@@ -1,18 +1,18 @@
-import { useEffect, type FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
+import { Typography } from 'components/atoms/typography';
 import { Markdown } from 'components/molecules/markdown';
 import { Button } from 'components/molecules/button';
 import { Textarea } from 'components/molecules/textarea/textarea';
-import { useHomework } from 'hooks/use-homework';
-import { Typography } from 'components/atoms/typography';
 import { Loader } from 'components/molecules/loader';
 import {
   HomeworkStatus,
   HomeworkStatusText,
   ProcessEnum,
 } from 'utils/constants';
+import { useHomework } from 'hooks/use-homework';
 import { ErrorLocker } from '../error-locker';
-import type { HomeworkProps, HomeworkFormData } from './types';
+import type { HomeworkFormData, HomeworkProps } from './types';
 import styles from './homework.module.scss';
 
 const textLengthLimit = 5000;
@@ -21,8 +21,6 @@ const initialValues: HomeworkFormData = {
 };
 
 export const Homework: FC<HomeworkProps> = ({ description }) => {
-  /** лимит по количеству знаков в ответе */
-
   const { homework, homeworkProcess, isLoading, homeworkError, handleAnswer } =
     useHomework();
 
@@ -71,7 +69,6 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
         >
           <Textarea
             name="homeworkAnswer"
-            className={styles.answer}
             placeholder="Ответ на домашнее задание"
             rows={15}
             maxLength={textLengthLimit}
