@@ -3,6 +3,7 @@ import {
   authorizationApi,
   LoginFormData,
   RegistrationFormData,
+  OauthTokenData,
 } from 'api/authorization';
 import { ApiInterceptorConfig, HttpStatusCodes, privateApi } from 'api/core';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'utils/constants';
@@ -22,6 +23,23 @@ export const fetchAuth = createAsyncThunk(
 
     privateApi.setAuthHeader(token.access);
     return !!token.access;
+  }
+);
+
+export const loginByOauth = createAsyncThunk(
+  'auth/token',
+  async (oauthToken: OauthTokenData) => {
+    const tokens = await authorizationApi.loginByYandex(oauthToken);
+
+    if (!tokens.access || !tokens.refresh) {
+      return new Error();
+    }
+
+    localStorage.setItem(ACCESS_TOKEN, tokens.access);
+    localStorage.setItem(REFRESH_TOKEN, tokens.refresh);
+
+    privateApi.setAuthHeader(tokens.access);
+    return tokens;
   }
 );
 

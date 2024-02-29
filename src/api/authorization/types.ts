@@ -25,3 +25,7 @@ export type RefreshTokenData = {
 export type VerifyTokenData = {
   token: string;
 };
+
+export type OauthTokenData = {
+  oauth_token: string;
+};

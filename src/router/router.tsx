@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { BaseLayout } from 'components/templates/base-layout';
 import { Courses } from 'pages/courses';
 import { Course } from 'pages/course';
+import { Auth } from 'pages/auth';
 import { CompleteCourse } from 'pages/complete-course';
 import { Lesson } from 'pages/lesson';
 import { Profile } from 'pages/profile';
@@ -40,6 +41,7 @@ export const Router: FC = () => (
       <Route element={<Authorization />}>
         <Route path={routes.register.path} element={<Register />} />
         <Route path={routes.login.path} element={<Login />} />
+        <Route path={routes.auth.path} element={<Auth />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
