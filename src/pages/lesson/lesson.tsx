@@ -11,6 +11,7 @@ import { NavigationButtons } from 'components/organisms/navigation-buttons';
 import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
+import { Homework } from 'components/organisms/homework';
 import {
   ErrorLocker,
   forbiddenErrorPropsConfig,
@@ -56,6 +57,7 @@ const Lesson: FC = () => {
   const isVideolesson = lessonType === LessonType.Videolesson;
   const isWebinar = lessonType === LessonType.Webinar;
   const isLesson = lessonType === LessonType.Lesson;
+  const isHomework = lessonType === LessonType.Homework;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
   const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
 
@@ -156,6 +158,7 @@ const Lesson: FC = () => {
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
                 {isWebinar && <PreviewWebinar date="" link="" />}
+                {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}
 
