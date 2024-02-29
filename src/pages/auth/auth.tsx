@@ -5,15 +5,14 @@ import { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'store';
 import { loginByOauth } from 'store/auth/thunk';
+import { extractOauthToken } from 'utils/extract-oauth-token';
 
 const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const authData = location.hash;
-  const tokenStart = authData.indexOf('=');
-  const tokenEnd = authData.indexOf('&');
-  const token = authData.slice(tokenStart + 1, tokenEnd);
+  const token = extractOauthToken(authData);
 
   const getJwt = async (
     oauth_token: OauthTokenData
