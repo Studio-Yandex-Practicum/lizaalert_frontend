@@ -177,9 +177,15 @@ export type WebinarModel = {
   /** Описание вебинара */
   description?: string;
   /** Ссылка на вебинар */
-  link: string;
+  link?: string;
+  /** Ссылка на видео вебинара */
+  recording_link?: string;
+  /** Описание записи вебинара */
+  recording_description?: string;
   /** Номер когорты */
   cohort: number;
   /** Дата вебинара */
   webinar_date: string;
+  /** Статус вебинара */
+  status?: string;
 };

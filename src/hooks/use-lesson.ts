@@ -5,7 +5,7 @@ import { SUBROUTES } from 'router/routes';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
-import { LessonModel, UserLessonProgress } from 'api/lessons';
+import { LessonModel, WebinarModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCompleteLessonProcess,
@@ -14,6 +14,8 @@ import {
   selectLessonProcess,
 } from 'store/lesson/selectors';
 import { completeLesson, fetchLessonById } from 'store/lesson/thunk';
+import { selectWebinar } from 'store/webinar/selectors';
+import { fetchWebinarById } from 'store/webinar/thunk';
 import { fetchCourseById } from 'store/course/thunk';
 import { useEvent } from 'hooks/use-event';
 import { resetLessonState } from 'store/lesson/slice';
@@ -22,10 +24,12 @@ type UseLesson = {
   courseId: string;
   lessonId: string;
   lesson: LessonModel;
+  webinar: WebinarModel;
   lessonProcess: ProcessEnum;
   isLoading: boolean;
   lessonError: Nullable<SerializedError>;
   fetchLesson: VoidFunction;
+  fetchWebinar: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
 };
@@ -41,6 +45,7 @@ export const useLesson = (): UseLesson => {
   const navigate = useNavigate();
 
   const lesson = useAppSelector(selectLesson);
+  const webinar = useAppSelector(selectWebinar);
   const lessonProcess = useAppSelector(selectLessonProcess);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
   const lessonError = useAppSelector(selectLessonError);
@@ -49,6 +54,12 @@ export const useLesson = (): UseLesson => {
   const fetchLesson = useEvent(() => {
     if (lessonId) {
       void dispatch(fetchLessonById(lessonId));
+    }
+  });
+
+  const fetchWebinar = useEvent(() => {
+    if (lessonId) {
+      void dispatch(fetchWebinarById(lessonId));
     }
   });
 
@@ -84,6 +95,8 @@ export const useLesson = (): UseLesson => {
   useEffect(() => {
     if (lessonId) {
       fetchLesson();
+      fetchWebinar();
+      console.log(webinar);
     }
 
     return () => {
@@ -121,10 +134,12 @@ export const useLesson = (): UseLesson => {
     courseId,
     lessonId,
     lesson,
+    webinar,
     lessonProcess,
     isLoading,
     lessonError,
     fetchLesson,
+    fetchWebinar,
     goToPrevLesson,
     goToNextLesson,
   };
