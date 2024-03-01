@@ -11,12 +11,15 @@ import { NavigationButtons } from 'components/organisms/navigation-buttons';
 import { PreviewWebinar } from 'components/organisms/preview-webinar';
 import { VideoLesson } from 'components/organisms/video-lesson';
 import { TestContent } from 'components/organisms/test-content';
-import { ErrorLocker } from 'components/organisms/error-locker';
+import { Homework } from 'components/organisms/homework';
+import {
+  ErrorLocker,
+  forbiddenErrorPropsConfig,
+} from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
-import { LessonType } from 'api/course';
-import { UserLessonProgress } from 'api/lessons';
-import { ERROR_403, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
+import { LessonType, UserLessonProgress } from 'api/lessons';
+import { LAST_INDEX, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
 import {
@@ -54,7 +57,9 @@ const Lesson: FC = () => {
   const isVideolesson = lessonType === LessonType.Videolesson;
   const isWebinar = lessonType === LessonType.Webinar;
   const isLesson = lessonType === LessonType.Lesson;
+  const isHomework = lessonType === LessonType.Homework;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
+  const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
 
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
@@ -103,6 +108,8 @@ const Lesson: FC = () => {
   const isNextButtonDisabled =
     isNotStarted || isLoadingProcess || isQuizDisabledCondition;
 
+  const handleForbiddenError = () => navigate(LAST_INDEX);
+
   if (lessonError?.code === ErrorCodes.NotFound) {
     return <Navigate to={routes.notFound.path} replace />;
   }
@@ -117,18 +124,12 @@ const Lesson: FC = () => {
         {(isLoading || lessonError) && (
           <Card className={styles.error} htmlTag="section">
             {isLoading && <Loader />}
-            {lessonError &&
-              (lessonError.code === ErrorCodes.Forbidden ? (
-                <ErrorLocker
-                  onClick={() => navigate(-1)}
-                  heading={ERROR_403}
-                  subheading="Доступ запрещен"
-                  content="У вас нет прав доступа к этой странице"
-                  buttonText="Назад"
-                />
-              ) : (
-                <ErrorLocker onClick={fetchLesson} />
-              ))}
+            {lessonError && (
+              <ErrorLocker
+                {...(isForbiddenError && forbiddenErrorPropsConfig)}
+                onClick={isForbiddenError ? handleForbiddenError : fetchLesson}
+              />
+            )}
           </Card>
         )}
 
@@ -157,6 +158,7 @@ const Lesson: FC = () => {
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
                 {isWebinar && <PreviewWebinar date="" link="" />}
+                {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}
 

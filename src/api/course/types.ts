@@ -1,16 +1,4 @@
-export enum LessonType {
-  Quiz = 'Quiz',
-  Videolesson = 'Videolesson',
-  Webinar = 'Webinar',
-  Lesson = 'Lesson',
-  Homework = 'Homework',
-}
-
-export enum LessonProgress {
-  NotStarted = 0,
-  Started = 1,
-  Finished = 2,
-}
+import { LessonType, UserLessonProgress } from 'api/lessons';
 
 export enum UserProgressStatus {
   Enrolled = 'enrolled',
@@ -50,7 +38,7 @@ export type LessonChapterModel = {
   /** Тип урока. */
   lesson_type: LessonType;
   /** Статус прогресса урока. */
-  user_lesson_progress: LessonProgress;
+  user_lesson_progress: UserLessonProgress;
 };
 
 export type ChapterModel = {

@@ -7,7 +7,6 @@ import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
 import { LessonModel, UserLessonProgress } from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
-import { selectCourse } from 'store/course/selectors';
 import {
   selectCompleteLessonProcess,
   selectLesson,
@@ -29,7 +28,6 @@ type UseLesson = {
   fetchLesson: VoidFunction;
   goToPrevLesson: VoidFunction;
   goToNextLesson: VoidFunction;
-  completeCourse: VoidFunction;
 };
 
 /**
@@ -41,8 +39,6 @@ export const useLesson = (): UseLesson => {
   const { courseId = '', chapterId = '', lessonId = '' } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const course = useAppSelector(selectCourse);
 
   const lesson = useAppSelector(selectLesson);
   const lessonProcess = useAppSelector(selectLessonProcess);
@@ -68,7 +64,7 @@ export const useLesson = (): UseLesson => {
 
     navigate(
       nextRoute ||
-        `${routes.course.path}/${lesson.course_id}/${chapterId}/${lessonId}/${SUBROUTES.complete}`
+        `${routes.course.path}/${lesson.course_id}/${SUBROUTES.complete}`
     );
   });
 
@@ -85,10 +81,6 @@ export const useLesson = (): UseLesson => {
     navigateToNextLesson();
   });
 
-  const completeCourse = useEvent(() => {
-    navigate(routes.courses.path);
-  });
-
   useEffect(() => {
     if (lessonId) {
       fetchLesson();
@@ -100,10 +92,10 @@ export const useLesson = (): UseLesson => {
   }, [lessonId]);
 
   useEffect(() => {
-    if (courseId && course.id !== +courseId) {
+    if (courseId && lessonProcess === ProcessEnum.Succeeded) {
       void dispatch(fetchCourseById(courseId));
     }
-  }, [course, courseId]);
+  }, [lessonProcess, courseId]);
 
   useEffect(() => {
     const isDataInconsistent =
@@ -121,7 +113,6 @@ export const useLesson = (): UseLesson => {
 
   useEffect(() => {
     if (courseId && completeLessonProcess === ProcessEnum.Succeeded) {
-      void dispatch(fetchCourseById(courseId));
       navigateToNextLesson();
     }
   }, [completeLessonProcess]);
@@ -136,6 +127,5 @@ export const useLesson = (): UseLesson => {
     fetchLesson,
     goToPrevLesson,
     goToNextLesson,
-    completeCourse,
   };
 };

@@ -1,6 +1,5 @@
-import { LessonType } from 'api/course/types';
 import type { LessonModel } from '../types';
-import { UserLessonProgress } from '../types';
+import { LessonType, UserLessonProgress } from '../types';
 
 const lessons: Record<string, Record<string, LessonModel>> = {
   1: {

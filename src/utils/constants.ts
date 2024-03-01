@@ -2,6 +2,7 @@ import { UserProgressStatus } from 'api/course';
 
 export const SPINNER_DELAY = 300;
 export const DELAY_DEBOUNCE = 300;
+export const LAST_INDEX = -1;
 
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
@@ -91,3 +92,22 @@ export enum TestAnswerIcons {
   IncorrectSelected = 'xSolid',
   IncorrectUnselected = 'xSmall',
 }
+
+/** В MIL-75 будет перенесена в api/homework/types  */
+export enum HomeworkStatus {
+  Draft = 0,
+  Submitted = 1,
+  InReview = 2,
+  Approved = 3,
+  Rejected = 4,
+  Canceled = 5,
+}
+
+export const HomeworkStatusText: Record<HomeworkStatus, string> = {
+  [HomeworkStatus.Draft]: 'Черновик',
+  [HomeworkStatus.Submitted]: 'Работа принята на проверку',
+  [HomeworkStatus.InReview]: 'Работа проверяется',
+  [HomeworkStatus.Approved]: 'Работа зачтена',
+  [HomeworkStatus.Rejected]: 'Работа не зачтена',
+  [HomeworkStatus.Canceled]: 'Работа возвращена на доработку',
+};
