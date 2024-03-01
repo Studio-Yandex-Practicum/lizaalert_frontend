@@ -1,10 +1,9 @@
-import { OauthTokenData } from 'api/authorization';
-import { AuthorizationModel } from 'api/authorization/types';
-import { routes } from 'config';
-import { FC, useEffect } from 'react';
+import { type FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'store';
+import { routes } from 'config';
+import { useAppDispatch, useAppSelector } from 'store';
 import { loginByOauth } from 'store/auth/thunk';
+import { selectIsAuth } from 'store/auth/selectors';
 import { extractOauthToken } from 'utils/extract-oauth-token';
 
 const Auth: FC = () => {
@@ -14,29 +13,19 @@ const Auth: FC = () => {
   const authData = location.hash;
   const token = extractOauthToken(authData);
 
-  const getJwt = async (
-    oauth_token: OauthTokenData
-  ): Promise<AuthorizationModel> => {
-    try {
-      const result = await dispatch(loginByOauth(oauth_token));
-      const tokens = await result.payload;
-      return tokens as AuthorizationModel;
-    } catch {
-      throw new Error();
-    }
-  };
+  const isAuth = useAppSelector(selectIsAuth);
 
   useEffect(() => {
-    getJwt({ oauth_token: token })
-      .then((res) => {
-        if (res.access && res.access) {
-          navigate(routes.courses.path);
-        }
-      })
-      .catch(() => {
-        throw new Error();
-      });
-  });
+    if (token) {
+      void dispatch(loginByOauth({ oauth_token: token }));
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(routes.courses.path);
+    }
+  }, [isAuth]);
 
   return <div />;
 };

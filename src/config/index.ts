@@ -27,4 +27,3 @@ export const BACKEND_API = `${BACKEND_ORIGIN}/api/v1`;
 
 /** Урлы яндекса */
 export const YANDEX_CLIENTID = getEnvVar('YANDEX_CLIENTID');
-export const YANDEX_REDIRECT_URI = getEnvVar('YANDEX_REDIRECT_URI');

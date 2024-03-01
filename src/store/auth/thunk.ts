@@ -31,15 +31,11 @@ export const loginByOauth = createAsyncThunk(
   async (oauthToken: OauthTokenData) => {
     const tokens = await authorizationApi.loginByYandex(oauthToken);
 
-    if (!tokens.access || !tokens.refresh) {
-      return new Error();
-    }
-
     localStorage.setItem(ACCESS_TOKEN, tokens.access);
     localStorage.setItem(REFRESH_TOKEN, tokens.refresh);
 
     privateApi.setAuthHeader(tokens.access);
-    return tokens;
+    return !!tokens.access;
   }
 );
 
