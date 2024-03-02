@@ -38,6 +38,7 @@ const Lesson: FC = () => {
     lesson,
     lessonError,
     lessonProcess,
+    webinar,
     isLoading,
     fetchLesson,
     goToPrevLesson,
@@ -111,7 +112,6 @@ const Lesson: FC = () => {
   if (lessonError?.code === ErrorCodes.NotFound) {
     return <Navigate to={routes.notFound.path} replace />;
   }
-  console.log(lessonType);
   return (
     <>
       {lesson.breadcrumbs && (
@@ -155,7 +155,12 @@ const Lesson: FC = () => {
                 )}
 
                 {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {isWebinar && <PreviewWebinar date="" link="" />}
+                {isWebinar && webinar.link && (
+                  <PreviewWebinar
+                    date={webinar.webinar_date}
+                    link={webinar.link}
+                  />
+                )}
               </Card>
             )}
 

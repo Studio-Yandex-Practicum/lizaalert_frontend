@@ -95,14 +95,18 @@ export const useLesson = (): UseLesson => {
   useEffect(() => {
     if (lessonId) {
       fetchLesson();
-      fetchWebinar();
-      console.log(webinar);
     }
 
     return () => {
       dispatch(resetLessonState());
     };
   }, [lessonId]);
+
+  useEffect(() => {
+    if (lesson.lesson_type === 'Webinar') {
+      fetchWebinar();
+    }
+  }, [lesson.lesson_type]);
 
   useEffect(() => {
     if (courseId && lessonProcess === ProcessEnum.Succeeded) {
