@@ -4,10 +4,9 @@ import { Heading } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
-import type { TestQuestionModel } from 'api/lessons';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
-import type { TestProps } from './types';
+import type { RenderQuestionsListArgs, TestProps } from './types';
 
 /**
  * Компонент-карточка теста с вопросами.
@@ -19,6 +18,7 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
     isTestValidationSucceeded,
     isSubmitButtonDisabled,
     testResultPercent,
+    testResult,
     test,
     handleSubmitTest,
     handleRetryTest,
@@ -44,7 +44,11 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
 
       <form onSubmit={handleSubmitTest} name="testForm" className={styles.form}>
         <ul className={styles.list}>
-          {renderQuestionsList(test.questions, isTestValidationSucceeded)}
+          {renderQuestionsList({
+            questions: test.questions,
+            testResult,
+            isSubmitted: isTestValidationSucceeded,
+          })}
         </ul>
 
         {isTestValidationSucceeded && (
@@ -77,10 +81,11 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
 };
 
 /** Отрисовка списка вопросов */
-function renderQuestionsList(
-  questions: TestQuestionModel[],
-  isSubmitted: boolean
-) {
+function renderQuestionsList({
+  questions,
+  testResult,
+  isSubmitted,
+}: RenderQuestionsListArgs) {
   return questions.map((question, index) => (
     <li className={styles.listItem} key={question.id}>
       <TestQuestion
@@ -88,6 +93,7 @@ function renderQuestionsList(
         type={question.question_type}
         index={index}
         isSubmitted={isSubmitted}
+        validatedAnswers={testResult[question.id]}
       />
     </li>
   ));

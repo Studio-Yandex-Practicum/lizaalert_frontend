@@ -23,7 +23,7 @@ const initialState: TestState = {
     questions: [],
   },
   answersOnValidate: [],
-  testResult: [],
+  testResult: {},
   process: ProcessEnum.Initial,
   processValidationTest: ProcessEnum.Initial,
   processCreationTest: ProcessEnum.Initial,
