@@ -25,6 +25,7 @@ export const TestQuestion: FC<TestQuestionProps> = ({
         content={answer}
         questionId={question.id}
         answerOptions={type}
+        isSelected={answer.selected}
       />
     </li>
   ));

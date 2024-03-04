@@ -55,9 +55,9 @@ export const useTest = () => {
   const handleRetryTest = () => {
     if (lessonId) {
       void dispatch(createTest(lessonId));
+      dispatch(updateAnswerReset());
+      dispatch(resetTestResult());
     }
-    dispatch(updateAnswerReset());
-    dispatch(resetTestResult());
   };
 
   const sendTestOnValidation = async (): Promise<void> => {

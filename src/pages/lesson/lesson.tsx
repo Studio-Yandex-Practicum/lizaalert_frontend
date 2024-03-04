@@ -27,8 +27,8 @@ import {
   selectLessonType,
 } from 'store/lesson/selectors';
 import {
+  selectProcessValidationTest,
   selectTestPassingScore,
-  selectTestResult,
   selectTestResultPercent,
 } from 'store/test/selectors';
 import { useLesson } from 'hooks/use-lesson';
@@ -49,9 +49,9 @@ const Lesson: FC = () => {
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
-  const quizResultData = useAppSelector(selectTestResult);
   const quizResultPercent = useAppSelector(selectTestResultPercent);
   const quizPassingScore = useAppSelector(selectTestPassingScore);
+  const processValidationTest = useAppSelector(selectProcessValidationTest);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -102,7 +102,8 @@ const Lesson: FC = () => {
     typeof quizPassingScore === 'number' &&
     quizResultPercent < quizPassingScore;
 
-  const isQuizNotCompleted = !quizResultData.length || hasValidQuizPassingScore;
+  const isQuizNotCompleted =
+    processValidationTest !== ProcessEnum.Succeeded || hasValidQuizPassingScore;
   const isQuizDisabledCondition = isQuiz && isInProgress && isQuizNotCompleted;
 
   const isNextButtonDisabled =
