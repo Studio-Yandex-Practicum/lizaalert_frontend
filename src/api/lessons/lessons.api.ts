@@ -42,6 +42,7 @@ class LessonsApi extends BaseApi {
   getWebinar = (id: string) =>
     this.createRequest<WebinarModel>({
       request: () => privateApi.get(`${SERVICE_URL}${id}/webinar`),
+      mock: () => import('./mock/webinar'),
     });
 }
 

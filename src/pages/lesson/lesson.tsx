@@ -18,7 +18,7 @@ import {
 } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
-import { LessonType, UserLessonProgress } from 'api/lessons';
+import { LessonType, UserLessonProgress, WebinarStatus } from 'api/lessons';
 import { LAST_INDEX, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
@@ -156,15 +156,17 @@ const Lesson: FC = () => {
                   />
                 )}
 
-                {isWebinar && webinar.status === 0 && webinar.link && (
-                  <PreviewWebinar
-                    date={webinar.webinar_date}
-                    link={webinar.link}
-                  />
-                )}
+                {isWebinar &&
+                  webinar.status === WebinarStatus.Planned &&
+                  webinar.link && (
+                    <PreviewWebinar
+                      date={webinar.webinar_date}
+                      link={webinar.link}
+                    />
+                  )}
 
                 {isWebinar &&
-                  webinar.status === 1 &&
+                  webinar.status === WebinarStatus.Completed &&
                   webinar.recording_link && (
                     <VideoLesson
                       source={webinar.recording_link}

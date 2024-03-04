@@ -8,6 +8,11 @@ export enum LessonType {
   Homework = 'Homework',
 }
 
+export enum WebinarStatus {
+  Planned = 0,
+  Completed = 1,
+}
+
 export enum UserLessonProgress {
   NotStarted,
   InProgress,
@@ -188,5 +193,5 @@ export type WebinarModel = {
   /** Дата вебинара */
   webinar_date: string;
   /** Статус вебинара */
-  status?: number;
+  status?: WebinarStatus;
 };

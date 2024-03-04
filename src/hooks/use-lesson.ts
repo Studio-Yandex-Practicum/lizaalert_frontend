@@ -19,6 +19,7 @@ import { fetchWebinarById } from 'store/webinar/thunk';
 import { fetchCourseById } from 'store/course/thunk';
 import { useEvent } from 'hooks/use-event';
 import { resetLessonState } from 'store/lesson/slice';
+import { LessonType } from '../api/lessons/types';
 
 type UseLesson = {
   courseId: string;
@@ -103,7 +104,7 @@ export const useLesson = (): UseLesson => {
   }, [lessonId]);
 
   useEffect(() => {
-    if (lesson.lesson_type === 'Webinar') {
+    if (lesson.lesson_type === LessonType.Webinar) {
       fetchWebinar();
     }
   }, [lesson.lesson_type]);

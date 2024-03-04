@@ -10,4 +10,4 @@ export type {
   TestResultListModel,
   TestResultModel,
 } from './types';
-export { LessonType, UserLessonProgress } from './types';
+export { LessonType, UserLessonProgress, WebinarStatus } from './types';
