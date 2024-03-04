@@ -12,13 +12,13 @@ export type CoursePreviewModel = {
   /** Количество уроков в курсе. */
   lessons_count: number;
   /** Дата начала курса. */
-  start_date: string;
+  start_date: Nullable<string>;
   /** Продолжительность курса в часах. */
   course_duration: Nullable<number>;
   /** Статус курса. */
   course_status: 'active' | 'inactive' | 'finished' | 'booked';
   /** URL к обложке курса. */
-  cover_path: string | null;
+  cover_path: Nullable<string>;
   /** Статус подписки пользователя на курс. */
   user_status?: UserProgressStatus;
 };
@@ -34,7 +34,7 @@ export type GetCoursesData = {
 
 export type CoursesModel = {
   /** Общее количество курсов в базе данных. */
-  count: number | null;
+  count: Nullable<number>;
   /** Список курсов. */
   results: CoursePreviewModel[];
 };

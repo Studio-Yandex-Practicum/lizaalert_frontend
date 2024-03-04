@@ -7,7 +7,7 @@ export type CourseOverviewProps = {
   /** Уровень (квалификация) курса. */
   level: string;
   /** Дата начала занятий. */
-  startDate: string;
+  startDate: Nullable<string>;
   /** URL обложки курса. */
   coverPath?: Nullable<string>;
   /** Количество уроков в курсе. */

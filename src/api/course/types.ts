@@ -69,7 +69,7 @@ export type CourseModel = {
   /** Список навыков, получаемых на курсе */
   knowledge: KnowledgeModel[];
   /** Дата начала прохождения курса. */
-  start_date: string;
+  start_date: Nullable<string>;
   /** URL к обложке курса. */
   cover_path: Nullable<string>;
   /** Количество уроков в курсе. */
@@ -84,4 +84,5 @@ export type CourseModel = {
 
 export type EnrollModel = {
   user_status: UserProgressStatus;
+  start_date: string;
 };
