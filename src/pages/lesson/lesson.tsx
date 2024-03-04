@@ -59,7 +59,6 @@ const Lesson: FC = () => {
   const isLesson = lessonType === LessonType.Lesson;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
   const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
-
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
   const breadcrumbs: BreadcrumbData[] = useMemo(() => {
@@ -112,6 +111,7 @@ const Lesson: FC = () => {
   if (lessonError?.code === ErrorCodes.NotFound) {
     return <Navigate to={routes.notFound.path} replace />;
   }
+
   return (
     <>
       {lesson.breadcrumbs && (
@@ -154,13 +154,21 @@ const Lesson: FC = () => {
                   />
                 )}
 
-                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {isWebinar && webinar.link && (
+                {isWebinar && webinar.status === 0 && webinar.link && (
                   <PreviewWebinar
                     date={webinar.webinar_date}
                     link={webinar.link}
                   />
                 )}
+
+                {isWebinar &&
+                  webinar.status === 1 &&
+                  webinar.recording_link && (
+                    <VideoLesson
+                      source={webinar.recording_link}
+                      description={webinar.recording_description}
+                    />
+                  )}
               </Card>
             )}
 

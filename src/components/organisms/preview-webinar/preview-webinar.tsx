@@ -16,6 +16,7 @@ export const PreviewWebinar: FC<PreviewWebinarProps> = ({ date, link }) => {
       {convertDate(date)}
     </span>
   );
+
   const webinarTime = (
     <time key={2} className={styles.accent}>
       {convertDate(date, { onlyTime: true })}

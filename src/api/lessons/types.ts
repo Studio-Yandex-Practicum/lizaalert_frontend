@@ -187,5 +187,5 @@ export type WebinarModel = {
   /** Дата вебинара */
   webinar_date: string;
   /** Статус вебинара */
-  status?: string;
+  status?: number;
 };
