@@ -162,6 +162,15 @@ const Lesson: FC = () => {
                     link={webinar.link}
                   />
                 )}
+
+                {isWebinar &&
+                  webinar.status === 1 &&
+                  webinar.recording_link && (
+                    <VideoLesson
+                      source={webinar.recording_link}
+                      description={webinar.recording_description}
+                    />
+                  )}
                 {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}
