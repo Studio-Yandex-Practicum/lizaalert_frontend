@@ -6,7 +6,7 @@ import { TestSuccessRate } from 'components/molecules/test-success-rate';
 import { TestQuestion } from 'components/organisms/test-question';
 import { useTest } from './hooks/use-test';
 import styles from './test.module.scss';
-import type { RenderQuestionsListArgs, TestProps } from './types';
+import type { TestProps } from './types';
 
 /**
  * Компонент-карточка теста с вопросами.
@@ -44,11 +44,17 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
 
       <form onSubmit={handleSubmitTest} name="testForm" className={styles.form}>
         <ul className={styles.list}>
-          {renderQuestionsList({
-            questions: test.questions,
-            testResult,
-            isSubmitted: isTestValidationSucceeded,
-          })}
+          {test.questions.map((question, index) => (
+            <li className={styles.listItem} key={question.id}>
+              <TestQuestion
+                question={question}
+                type={question.question_type}
+                index={index}
+                isSubmitted={isTestValidationSucceeded}
+                validatedAnswers={testResult[question.id]}
+              />
+            </li>
+          ))}
         </ul>
 
         {isTestValidationSucceeded && (
@@ -79,22 +85,3 @@ export const Test: FC<TestProps> = ({ onShowPreview }) => {
     </Card>
   );
 };
-
-/** Отрисовка списка вопросов */
-function renderQuestionsList({
-  questions,
-  testResult,
-  isSubmitted,
-}: RenderQuestionsListArgs) {
-  return questions.map((question, index) => (
-    <li className={styles.listItem} key={question.id}>
-      <TestQuestion
-        question={question}
-        type={question.question_type}
-        index={index}
-        isSubmitted={isSubmitted}
-        validatedAnswers={testResult[question.id]}
-      />
-    </li>
-  ));
-}
