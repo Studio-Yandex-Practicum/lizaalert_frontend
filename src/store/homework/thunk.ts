@@ -4,9 +4,8 @@ import { HomeworkAnswerData } from 'api/homework/types';
 
 export const fetchHomeworkByLessonId = createAsyncThunk(
   'homework/fetch',
-  async (id: number) => {
+  async (id: string) => {
     const homework = await homeworkApi.getHomework(id);
-    // console.log('homework thunk', homework);
     return homework;
   }
 );
@@ -14,6 +13,7 @@ export const fetchHomeworkByLessonId = createAsyncThunk(
 export const updateHomework = createAsyncThunk(
   'homework/update',
   async (data: HomeworkAnswerData) => {
-    await homeworkApi.updateHomework(data);
+    const homework = await homeworkApi.updateHomework(data);
+    return homework;
   }
 );

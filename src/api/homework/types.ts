@@ -7,12 +7,7 @@ export enum HomeworkStatus {
   Canceled = 5,
 }
 
-export type HomeworkDraft = {
-  status: HomeworkStatus.Draft;
-  text: string;
-};
-
-export type HomeworkAnswer = {
+export type Homework = {
   /** id домашней работы */
   id?: number;
   /** имя проверяющего */
@@ -24,14 +19,17 @@ export type HomeworkAnswer = {
   /** текст ответа домашней работы */
   text: string;
   /** id подписки */
-  subscription: 7;
+  subscription: number;
   /** Флаг, обязательно ли домашнее задание для прохождения дальнейшего курса. */
   required: boolean;
 };
 
-export type HomeworkModel = HomeworkDraft | HomeworkAnswer;
+export type HomeworkDraft = Pick<Homework, 'status' | 'text'>;
+
+export type HomeworkModel = HomeworkDraft | Homework;
 
 export type HomeworkAnswerData = {
-  id: number;
+  /** id урока */
+  id: string;
   answer: HomeworkModel;
 };

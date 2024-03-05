@@ -1,10 +1,10 @@
 import { BaseApi, privateApi } from '../core';
 import type { HomeworkModel, HomeworkAnswerData } from './types';
 
-const SERVICE_URL = (lessonId: number) => `lessons/${lessonId}/homework/`;
+const SERVICE_URL = (lessonId: string) => `lessons/${lessonId}/homework`;
 
 class HomeworkApi extends BaseApi {
-  getHomework = (id: number) =>
+  getHomework = (id: string) =>
     this.createRequest<HomeworkModel>({
       request: () => privateApi.get(`${SERVICE_URL(id)}/`),
       mock: () => import('./mock/homework'),
