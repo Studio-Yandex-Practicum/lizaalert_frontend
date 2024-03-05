@@ -9,8 +9,8 @@ export enum LessonType {
 }
 
 export enum WebinarStatus {
-  Planned = 0,
-  Completed = 1,
+  Planned,
+  Completed,
 }
 
 export enum UserLessonProgress {

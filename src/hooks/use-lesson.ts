@@ -5,7 +5,12 @@ import { SUBROUTES } from 'router/routes';
 import { LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { SerializedError } from 'api/core';
 import { getNextOrPrevRoute } from 'utils/get-next-or-prev-route';
-import { LessonModel, WebinarModel, UserLessonProgress } from 'api/lessons';
+import {
+  LessonModel,
+  LessonType,
+  WebinarModel,
+  UserLessonProgress,
+} from 'api/lessons';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   selectCompleteLessonProcess,
@@ -19,7 +24,6 @@ import { fetchWebinarById } from 'store/webinar/thunk';
 import { fetchCourseById } from 'store/course/thunk';
 import { useEvent } from 'hooks/use-event';
 import { resetLessonState } from 'store/lesson/slice';
-import { LessonType } from '../api/lessons/types';
 
 type UseLesson = {
   courseId: string;
