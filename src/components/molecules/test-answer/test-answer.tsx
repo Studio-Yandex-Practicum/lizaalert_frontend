@@ -14,6 +14,7 @@ export const TestAnswer: FC<TestAnswerProps> = ({
   content,
   questionId,
   answerOptions,
+  isSelected = false,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -32,6 +33,7 @@ export const TestAnswer: FC<TestAnswerProps> = ({
       value={content.text}
       labelText={content.text}
       onChange={updateCheckStatus}
+      checked={isSelected}
     />
   );
 };

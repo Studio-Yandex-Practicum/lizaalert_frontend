@@ -23,7 +23,7 @@ const initialState: TestState = {
     questions: [],
   },
   answersOnValidate: [],
-  testResult: [],
+  testResult: {},
   process: ProcessEnum.Initial,
   processValidationTest: ProcessEnum.Initial,
   processCreationTest: ProcessEnum.Initial,
@@ -36,27 +36,34 @@ export const testSlice = createSlice({
   initialState,
   reducers: {
     updateAnswer: (state, action: UpdateAnswerAction) => {
-      if (state.processCreationTest && state.test && state.test.questions) {
+      if (
+        state.processCreationTest === ProcessEnum.Succeeded &&
+        state.test.questions
+      ) {
         state.test.questions = state.test.questions.map((question) => {
-          if (question.id === action.payload?.questionId) {
-            return {
-              ...question,
-              content: question.content.map((answer) => {
-                if (answer.id === action.payload?.answerId) {
-                  return {
-                    ...answer,
-                    selected: !answer.selected,
-                  };
-                }
-                if (question.question_type === Controls.RADIO) {
-                  return { ...answer, selected: false };
-                }
-                return answer;
-              }),
-            };
+          if (question.id !== action.payload?.questionId) {
+            return question;
           }
-          return question;
+
+          return {
+            ...question,
+            content: question.content.map((answer) => {
+              if (answer.id === action.payload?.answerId) {
+                return {
+                  ...answer,
+                  selected: !answer.selected,
+                };
+              }
+
+              if (question.question_type === Controls.RADIO) {
+                return { ...answer, selected: false };
+              }
+
+              return answer;
+            }),
+          };
         });
+
         state.answersOnValidate = state.test.questions.map((question) => ({
           question_id: question.id,
           answer_id: question.content
@@ -66,7 +73,7 @@ export const testSlice = createSlice({
       }
     },
     updateAnswerReset: (state) => {
-      if (state.processCreationTest && state.test && state.test.questions) {
+      if (state.test.questions) {
         state.test.questions = state.test.questions.map((question) => ({
           ...question,
           content: question.content.map((answer) => ({
@@ -100,6 +107,7 @@ export const testSlice = createSlice({
           : [],
       };
     });
+
     builder.addCase(validateTest.pending, (state) => {
       state.processValidationTest = ProcessEnum.Requested;
       state.error = null;
