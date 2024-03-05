@@ -102,7 +102,7 @@ const course: CourseModel = {
           duration: 1,
           title: 'Домашняя работа',
           lesson_type: LessonType.Homework,
-          user_lesson_progress: LessonProgress.Started,
+          user_lesson_progress: UserLessonProgress.Finished,
         },
       ],
     },
