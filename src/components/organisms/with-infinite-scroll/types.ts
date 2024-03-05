@@ -1,5 +1,6 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { ProcessEnum } from 'utils/constants';
+import { SerializedError } from 'api/core';
 
 type BasePaginationState = {
   /** Следующая подгружаемая страница. */
@@ -29,7 +30,7 @@ export type WithInfiniteScrollConfig<T, State> = {
   /** Общее количество элементов, которое будет отображено. */
   total: number;
   /** Ошибка, которая может возникнуть при загрузке ленты. При ошибке прекращаются все дальнейшие запросы. */
-  error?: string | null;
+  error?: Nullable<SerializedError>;
   /** Процесс выполнения запроса. */
   process: ProcessEnum;
   /** То, что нужно отобразить из родителя. */

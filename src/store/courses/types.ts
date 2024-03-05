@@ -1,12 +1,17 @@
 import { SerializedError } from 'api/core';
 import type { CoursesModel } from 'api/courses';
-import type { CurrentLessonModel, UserProgressStatus } from 'api/course';
+import type {
+  CurrentLessonModel,
+  EnrollModel,
+  UserProgressStatus,
+} from 'api/course';
 import { ProcessEnum } from 'utils/constants';
 
 export type EnrollStatusType = {
   process: ProcessEnum;
   error: Nullable<SerializedError>;
   userStatus: UserProgressStatus;
+  startDate: Nullable<EnrollModel['start_date']>;
   currentLesson?: {
     process: ProcessEnum;
     error: Nullable<SerializedError>;

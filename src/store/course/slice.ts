@@ -16,7 +16,7 @@ const initialState: CourseState = {
     full_description: '',
     faq: [],
     knowledge: [],
-    start_date: '',
+    start_date: null,
     cover_path: null,
     lessons_count: 0,
     course_duration: 0,

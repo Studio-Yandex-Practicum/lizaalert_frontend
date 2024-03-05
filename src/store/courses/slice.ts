@@ -51,17 +51,19 @@ export const coursesSlice = createSlice({
         process: ProcessEnum.Requested,
         error: null,
         userStatus: UserProgressStatus.NotEnrolled,
+        startDate: null,
       };
     });
     builder.addCase(
       enrollCourseById.fulfilled,
       (state, { meta: { arg }, payload }) => {
-        const { user_status: userStatus } = payload;
+        const { user_status: userStatus, start_date: startDate } = payload;
         state.enrollStatus[arg] = {
           ...state.enrollStatus[arg],
           process: ProcessEnum.Succeeded,
           error: null,
           userStatus,
+          startDate,
         };
       }
     );
@@ -73,6 +75,7 @@ export const coursesSlice = createSlice({
           process: ProcessEnum.Failed,
           error,
           userStatus: UserProgressStatus.NotEnrolled,
+          startDate: null,
         };
       }
     );
