@@ -18,7 +18,7 @@ import {
 } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
-import { LessonType, UserLessonProgress } from 'api/lessons';
+import { LessonType, UserLessonProgress, WebinarStatus } from 'api/lessons';
 import { LAST_INDEX, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
@@ -39,6 +39,7 @@ const Lesson: FC = () => {
     lesson,
     lessonError,
     lessonProcess,
+    webinar,
     isLoading,
     fetchLesson,
     goToPrevLesson,
@@ -60,7 +61,6 @@ const Lesson: FC = () => {
   const isHomework = lessonType === LessonType.Homework;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
   const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
-
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
   const breadcrumbs: BreadcrumbData[] = useMemo(() => {
@@ -157,8 +157,23 @@ const Lesson: FC = () => {
                   />
                 )}
 
-                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {isWebinar && <PreviewWebinar date="" link="" />}
+                {isWebinar &&
+                  webinar.status === WebinarStatus.Planned &&
+                  webinar.link && (
+                    <PreviewWebinar
+                      date={webinar.webinar_date}
+                      link={webinar.link}
+                    />
+                  )}
+
+                {isWebinar &&
+                  webinar.status === WebinarStatus.Completed &&
+                  webinar.recording_link && (
+                    <VideoLesson
+                      source={webinar.recording_link}
+                      description={webinar.recording_description}
+                    />
+                  )}
                 {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}

@@ -4,6 +4,7 @@ import type {
   LessonModel,
   TestModel,
   TestResultModel,
+  WebinarModel,
 } from './types';
 
 const SERVICE_URL = '/lessons/';
@@ -36,6 +37,12 @@ class LessonsApi extends BaseApi {
       request: () =>
         privateApi.post(`${SERVICE_URL}${data.id}/quiz/answer/`, data.answers),
       mock: () => import('./mock/answers'),
+    });
+
+  getWebinar = (id: string) =>
+    this.createRequest<WebinarModel>({
+      request: () => privateApi.get(`${SERVICE_URL}${id}/webinar`),
+      mock: () => import('./mock/webinar'),
     });
 }
 
