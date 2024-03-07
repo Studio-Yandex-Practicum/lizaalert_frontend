@@ -30,7 +30,7 @@ export const useHomework = () => {
   const isLoading = LOADING_PROCESS_MAP[homeworkProcess];
 
   const handleAnswer = async (answer: string) => {
-    if (answer) {
+    if (!answer) {
       return;
     }
 
