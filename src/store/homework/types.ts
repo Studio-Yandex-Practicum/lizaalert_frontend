@@ -1,5 +1,5 @@
 import { SerializedError } from 'api/core';
-import { HomeworkModel } from 'api/homework';
+import type { HomeworkModel } from 'api/homework';
 import { ProcessEnum } from 'utils/constants';
 
 export type HomeworkState = {

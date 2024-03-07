@@ -1,8 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
 import { ProcessEnum } from 'utils/constants';
 import { HomeworkModel, HomeworkStatus } from 'api/homework/types';
 import { SerializedError } from 'api/core';
 import type { HomeworkState } from './types';
+import { fetchHomeworkByLessonId, updateHomework } from './thunk';
 
 const initialState: HomeworkState = {
   homework: {
@@ -22,7 +28,7 @@ const homeworkSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        ({ type }) => /^homework.*?\/fulfilled/.test(type as string),
+        isFulfilled(fetchHomeworkByLessonId, updateHomework),
         (state, { payload }) => {
           state.homework = payload as HomeworkModel;
           state.process = ProcessEnum.Succeeded;
@@ -30,14 +36,14 @@ const homeworkSlice = createSlice({
         }
       )
       .addMatcher(
-        ({ type }) => /^homework.*?\/pending/.test(type as string),
+        isPending(fetchHomeworkByLessonId, updateHomework),
         (state) => {
           state.process = ProcessEnum.Requested;
           state.error = null;
         }
       )
       .addMatcher(
-        ({ type }) => /^homework.*?\/rejected/.test(type as string),
+        isRejected(fetchHomeworkByLessonId, updateHomework),
         (state, { error }) => {
           state.process = ProcessEnum.Failed;
           state.error = error as SerializedError;

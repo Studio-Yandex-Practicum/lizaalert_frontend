@@ -31,20 +31,21 @@ export const useHomework = () => {
 
   const handleAnswer = async (answer: string) => {
     if (answer) {
-      const isAnswerChanged = homework.text !== answer;
-
-      void dispatch(
-        updateHomework({
-          id: lessonId,
-          answer: {
-            ...homework,
-            text: answer,
-            ...(isAnswerChanged ? {} : { status: HomeworkStatus.Submitted }),
-          },
-        })
-      );
+      return;
     }
-    return answer;
+
+    const isAnswerChanged = homework.text !== answer;
+
+    void dispatch(
+      updateHomework({
+        id: lessonId,
+        answer: {
+          ...homework,
+          text: answer,
+          ...(isAnswerChanged ? {} : { status: HomeworkStatus.Submitted }),
+        },
+      })
+    );
   };
 
   return {

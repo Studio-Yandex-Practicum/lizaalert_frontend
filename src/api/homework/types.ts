@@ -1,11 +1,20 @@
 export enum HomeworkStatus {
-  Draft = 0,
-  Submitted = 1,
-  InReview = 2,
-  Approved = 3,
-  Rejected = 4,
-  Canceled = 5,
+  Draft,
+  Submitted,
+  InReview,
+  Approved,
+  Rejected,
+  Canceled,
 }
+
+export const HomeworkStatusText: Record<HomeworkStatus, string> = {
+  [HomeworkStatus.Draft]: 'Черновик',
+  [HomeworkStatus.Submitted]: 'Работа принята на проверку',
+  [HomeworkStatus.InReview]: 'Работа проверяется',
+  [HomeworkStatus.Approved]: 'Работа зачтена',
+  [HomeworkStatus.Rejected]: 'Работа не зачтена',
+  [HomeworkStatus.Canceled]: 'Работа возвращена на доработку',
+};
 
 export type Homework = {
   /** id домашней работы */
