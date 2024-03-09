@@ -3,6 +3,7 @@ import { P } from 'components/atoms/typography';
 import { Button } from 'components/molecules/button';
 import { StyledLink } from 'components/molecules/styled-link';
 import { convertDate } from 'utils/convert-date';
+import { Markdown } from 'components/molecules/markdown';
 import styles from './preview-webinar.module.scss';
 import type { PreviewWebinarProps } from './types';
 
@@ -10,7 +11,11 @@ import type { PreviewWebinarProps } from './types';
  * Компонент-карточка превью вебинара.
  */
 
-export const PreviewWebinar: FC<PreviewWebinarProps> = ({ date, link }) => {
+export const PreviewWebinar: FC<PreviewWebinarProps> = ({
+  date,
+  link,
+  description,
+}) => {
   const webinarDate = (
     <span key={1} className={styles.accent}>
       {convertDate(date)}
@@ -28,7 +33,9 @@ export const PreviewWebinar: FC<PreviewWebinarProps> = ({ date, link }) => {
       <P textAlign="center">
         {['Вебинар стартует ', webinarDate, ' в ', webinarTime, ' МСК (GTM+3)']}
       </P>
-
+      {description && (
+        <Markdown className={styles.markdown}>{description}</Markdown>
+      )}
       <StyledLink href={link} isExternal>
         <Button className={styles.button} text="Подключиться" />
       </StyledLink>

@@ -163,6 +163,7 @@ const Lesson: FC = () => {
                     <PreviewWebinar
                       date={webinar.webinar_date}
                       link={webinar.link}
+                      description={webinar.description}
                     />
                   )}
 

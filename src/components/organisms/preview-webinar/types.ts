@@ -3,4 +3,6 @@ export type PreviewWebinarProps = {
   date: string;
   /** URL внешней ссылки на вебинар (открывается в новом окне). */
   link: string;
+  /** Описание вебинара */
+  description?: string;
 };
