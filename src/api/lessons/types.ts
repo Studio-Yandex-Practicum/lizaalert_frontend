@@ -8,6 +8,11 @@ export enum LessonType {
   Homework = 'Homework',
 }
 
+export enum WebinarStatus {
+  Planned,
+  Completed,
+}
+
 export enum UserLessonProgress {
   NotStarted,
   InProgress,
@@ -168,4 +173,25 @@ export type LessonModel = {
   next_lesson: NextLessonModel;
   /** Объект с информацией о пред. уроке */
   prev_lesson: NextLessonModel;
+};
+
+export type WebinarModel = {
+  /** id урока */
+  id?: number;
+  /** Название урока */
+  lesson: string;
+  /** Описание вебинара */
+  description?: string;
+  /** Ссылка на вебинар */
+  link?: string;
+  /** Ссылка на видео вебинара */
+  recording_link?: string;
+  /** Описание записи вебинара */
+  recording_description?: string;
+  /** Номер когорты */
+  cohort: number;
+  /** Дата вебинара */
+  webinar_date: string;
+  /** Статус вебинара */
+  status?: WebinarStatus;
 };

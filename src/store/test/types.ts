@@ -1,12 +1,12 @@
 import { SerializedError } from 'api/core';
 import { ProcessEnum } from 'utils/constants';
 import type { TestModel, TestOnValidationData } from 'api/lessons';
-import type { TestValidatedType } from 'components/organisms/test';
+import type { TestValidatedMapType } from 'utils/validate-answers';
 
 export type TestState = {
   test: TestModel;
   answersOnValidate: TestOnValidationData[];
-  testResult: TestValidatedType[];
+  testResult: TestValidatedMapType;
   testResultPercent: Nullable<number>;
   error: Nullable<SerializedError>;
   process: ProcessEnum;

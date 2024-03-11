@@ -18,7 +18,7 @@ import {
 } from 'components/organisms/error-locker';
 import { routes } from 'config';
 import { ErrorCodes } from 'api/core';
-import { LessonType, UserLessonProgress } from 'api/lessons';
+import { LessonType, UserLessonProgress, WebinarStatus } from 'api/lessons';
 import { LAST_INDEX, LOADING_PROCESS_MAP, ProcessEnum } from 'utils/constants';
 import { useAppSelector } from 'store';
 import { selectCourseContents } from 'store/course/selectors';
@@ -27,8 +27,8 @@ import {
   selectLessonType,
 } from 'store/lesson/selectors';
 import {
+  selectProcessValidationTest,
   selectTestPassingScore,
-  selectTestResult,
   selectTestResultPercent,
 } from 'store/test/selectors';
 import { useLesson } from 'hooks/use-lesson';
@@ -39,6 +39,7 @@ const Lesson: FC = () => {
     lesson,
     lessonError,
     lessonProcess,
+    webinar,
     isLoading,
     fetchLesson,
     goToPrevLesson,
@@ -49,9 +50,9 @@ const Lesson: FC = () => {
   const contents = useAppSelector(selectCourseContents);
   const lessonType = useAppSelector(selectLessonType);
   const completeLessonProcess = useAppSelector(selectCompleteLessonProcess);
-  const quizResultData = useAppSelector(selectTestResult);
   const quizResultPercent = useAppSelector(selectTestResultPercent);
   const quizPassingScore = useAppSelector(selectTestPassingScore);
+  const processValidationTest = useAppSelector(selectProcessValidationTest);
 
   const isQuiz = lessonType === LessonType.Quiz;
   const isVideolesson = lessonType === LessonType.Videolesson;
@@ -60,7 +61,6 @@ const Lesson: FC = () => {
   const isHomework = lessonType === LessonType.Homework;
   const isContentShown = lessonProcess === ProcessEnum.Succeeded;
   const isForbiddenError = lessonError?.code === ErrorCodes.Forbidden;
-
   const videoId = lesson.video_link && getYouTubeID(lesson.video_link);
 
   const breadcrumbs: BreadcrumbData[] = useMemo(() => {
@@ -102,7 +102,8 @@ const Lesson: FC = () => {
     typeof quizPassingScore === 'number' &&
     quizResultPercent < quizPassingScore;
 
-  const isQuizNotCompleted = !quizResultData.length || hasValidQuizPassingScore;
+  const isQuizNotCompleted =
+    processValidationTest !== ProcessEnum.Succeeded || hasValidQuizPassingScore;
   const isQuizDisabledCondition = isQuiz && isInProgress && isQuizNotCompleted;
 
   const isNextButtonDisabled =
@@ -156,8 +157,23 @@ const Lesson: FC = () => {
                   />
                 )}
 
-                {/* TODO https://github.com/Studio-Yandex-Practicum/lizaalert_frontend/issues/416 */}
-                {isWebinar && <PreviewWebinar date="" link="" />}
+                {isWebinar &&
+                  webinar.status === WebinarStatus.Planned &&
+                  webinar.link && (
+                    <PreviewWebinar
+                      date={webinar.webinar_date}
+                      link={webinar.link}
+                    />
+                  )}
+
+                {isWebinar &&
+                  webinar.status === WebinarStatus.Completed &&
+                  webinar.recording_link && (
+                    <VideoLesson
+                      source={webinar.recording_link}
+                      description={webinar.recording_description}
+                    />
+                  )}
                 {isHomework && <Homework description={lesson.description} />}
               </Card>
             )}

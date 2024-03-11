@@ -3,8 +3,6 @@ import classnames from 'classnames';
 import { Heading } from 'components/atoms/typography';
 import { TestAnswer } from 'components/molecules/test-answer';
 import { TestResults } from 'components/molecules/test-results';
-import { useAppSelector } from 'store';
-import { selectTestResult } from 'store/test/selectors';
 import styles from './test-question.module.scss';
 import type { TestQuestionProps } from './types';
 
@@ -17,10 +15,9 @@ export const TestQuestion: FC<TestQuestionProps> = ({
   index,
   type,
   isSubmitted = false,
+  validatedAnswers,
   className = '',
 }) => {
-  const testResult = useAppSelector(selectTestResult);
-
   // список ответов
   const answersList = question.content.map((answer) => (
     <li key={answer.id}>
@@ -28,14 +25,10 @@ export const TestQuestion: FC<TestQuestionProps> = ({
         content={answer}
         questionId={question.id}
         answerOptions={type}
+        isSelected={answer.selected}
       />
     </li>
   ));
-
-  const currentQuestionResult = testResult.find(
-    (result) => result.questionId === question.id
-  );
-  const validatedAnswers = currentQuestionResult?.validatedAnswers || {};
 
   // список с проверкой ответов теста
   const resultsList = question.content.map((answer) => (
