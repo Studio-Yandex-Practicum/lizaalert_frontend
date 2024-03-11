@@ -9,6 +9,7 @@ import {
   selectTest,
   selectTestPassingScore,
   selectTestProcess,
+  selectTestResult,
   selectTestResultPercent,
 } from 'store/test/selectors';
 import { resetTestResult, updateAnswerReset } from 'store/test/slice';
@@ -29,6 +30,7 @@ export const useTest = () => {
   const testProcess = useAppSelector(selectTestProcess);
   const testCreationProcess = useAppSelector(selectProcessCreationTest);
   const testValidationProcess = useAppSelector(selectProcessValidationTest);
+  const testResult = useAppSelector(selectTestResult);
   const testResultPercent = useAppSelector(selectTestResultPercent);
   const testPassingScore = useAppSelector(selectTestPassingScore);
   const isSuccess =
@@ -53,9 +55,9 @@ export const useTest = () => {
   const handleRetryTest = () => {
     if (lessonId) {
       void dispatch(createTest(lessonId));
+      dispatch(updateAnswerReset());
+      dispatch(resetTestResult());
     }
-    dispatch(updateAnswerReset());
-    dispatch(resetTestResult());
   };
 
   const sendTestOnValidation = async (): Promise<void> => {
@@ -86,5 +88,6 @@ export const useTest = () => {
     handleSubmitTest,
     handleRetryTest,
     testResultPercent,
+    testResult,
   };
 };

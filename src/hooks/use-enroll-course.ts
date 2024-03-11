@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'config';
-import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
 import { UserProgressStatus } from 'api/course';
+import { CourseStatusButtons, ProcessEnum } from 'utils/constants';
+import { convertDate } from 'utils/convert-date';
 import { useAppDispatch, useAppSelector } from 'store';
 import { selectIsAuth } from 'store/auth/selectors';
 import {
@@ -18,7 +19,7 @@ type UseEnrollCourseConfig = {
   /** Статус подписки на курс как есть */
   userStatus: UserProgressStatus;
   /** Дата начала курса. */
-  startDate: string;
+  startDate: Nullable<string>;
   /** Изменяемые данные статуса подписки на курс из стора */
   enrollStatus?: EnrollStatusType;
 };
@@ -27,6 +28,7 @@ type UseEnrollCourse = {
   isEnrolled: boolean;
   isButtonDisabled: boolean;
   buttonText: string;
+  currentStartDate: Nullable<string>;
   handleEnroll: VoidFunction;
   handleUnroll: VoidFunction;
 };
@@ -43,6 +45,7 @@ export const useEnrollCourse = ({
   const isAuth = useAppSelector(selectIsAuth);
   const currentUserStatus = enrollStatus?.userStatus || userStatus;
   const currentLesson = enrollStatus?.currentLesson;
+  const currentStartDate = enrollStatus?.startDate ?? startDate;
 
   const isEnrolled = currentUserStatus !== UserProgressStatus.NotEnrolled;
   const canStudy = currentUserStatus !== UserProgressStatus.Enrolled;
@@ -52,10 +55,10 @@ export const useEnrollCourse = ({
     currentLesson?.process === ProcessEnum.Requested;
 
   const buttonText = useMemo(() => {
-    const localStartDate = new Date(startDate).toLocaleDateString('ru-RU', {
-      day: 'numeric',
-      month: 'short',
+    const localStartDate = convertDate(currentStartDate, {
+      withShortMonth: true,
     });
+
     return currentUserStatus === UserProgressStatus.Enrolled
       ? `Начнется ${localStartDate || 'скоро'}`
       : CourseStatusButtons[currentUserStatus];
@@ -98,6 +101,7 @@ export const useEnrollCourse = ({
     isEnrolled,
     isButtonDisabled,
     buttonText,
+    currentStartDate,
     handleEnroll,
     handleUnroll,
   };

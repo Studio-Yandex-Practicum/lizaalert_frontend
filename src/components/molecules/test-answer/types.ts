@@ -19,4 +19,6 @@ export type TestAnswerProps = {
   questionId: number;
   /** Тип чекбокса: мультивыбор или радио. */
   answerOptions: TestAnswerOptionsType;
+  /** Флаг, определяющий выбран ли ответ. */
+  isSelected?: boolean;
 };

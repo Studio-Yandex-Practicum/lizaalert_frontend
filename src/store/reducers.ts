@@ -4,6 +4,7 @@ import courseReducer from './course/slice';
 import coursesFiltersReducer from './courses-filters/slice';
 import coursesReducer from './courses/slice';
 import lessonReducer from './lesson/slice';
+import webinarReducer from './webinar/slice';
 import profileReducer from './profile/slice';
 import testReducer from './test/slice';
 import achievementsReducer from './achievements/slice';
@@ -15,6 +16,7 @@ const appReducer = combineReducers<AppState>({
   test: testReducer,
   course: courseReducer,
   lesson: lessonReducer,
+  webinar: webinarReducer,
   profile: profileReducer,
   auth: authReducer,
   achievements: achievementsReducer,

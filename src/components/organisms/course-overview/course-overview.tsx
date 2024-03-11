@@ -28,6 +28,7 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
 }) => {
   const {
     buttonText,
+    currentStartDate,
     isEnrolled,
     isButtonDisabled,
     handleEnroll,
@@ -68,10 +69,12 @@ export const CourseOverview: FC<CourseOverviewProps> = ({
           </Li>
         )}
 
-        <Li className={styles.courseMetaItem}>
-          <TextWithIcon text="Старт занятий:" iconType="calendar" />
-          {convertDate(startDate)} г
-        </Li>
+        {currentStartDate && (
+          <Li className={styles.courseMetaItem}>
+            <TextWithIcon text="Старт занятий:" iconType="calendar" />
+            {convertDate(currentStartDate)} г
+          </Li>
+        )}
       </ul>
 
       <TextWithIcon

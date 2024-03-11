@@ -4,5 +4,6 @@ export type {
   ChapterModel,
   LessonChapterModel,
   CurrentLessonModel,
+  EnrollModel,
 } from './types';
 export { UserProgressStatus } from './types';
