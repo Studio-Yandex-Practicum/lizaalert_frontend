@@ -5,8 +5,8 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { ProcessEnum } from 'utils/constants';
-import { HomeworkModel, HomeworkStatus } from 'api/homework/types';
-import { ErrorCodes, SerializedError } from 'api/core';
+import { HomeworkStatus } from 'api/homework/types';
+import { ErrorCodes } from 'api/core';
 import type { HomeworkState } from './types';
 import { fetchHomeworkByLessonId, updateHomework } from './thunk';
 
@@ -30,7 +30,7 @@ const homeworkSlice = createSlice({
       .addMatcher(
         isFulfilled(fetchHomeworkByLessonId, updateHomework),
         (state, { payload }) => {
-          state.homework = payload as HomeworkModel;
+          state.homework = payload;
           state.process = ProcessEnum.Succeeded;
           state.error = null;
         }
@@ -51,7 +51,7 @@ const homeworkSlice = createSlice({
             state.error = null;
           } else {
             state.process = ProcessEnum.Failed;
-            state.error = error as SerializedError;
+            state.error = error;
           }
         }
       );
