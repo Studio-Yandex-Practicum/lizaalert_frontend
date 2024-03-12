@@ -48,6 +48,11 @@ export const defaultRoutes: Record<string, RouteType> = {
     path: '/login',
     icon: 'userSquare',
   },
+  auth: {
+    title: 'Авторизация',
+    path: '/auth',
+    icon: 'userSquare',
+  },
   notFound: {
     title: 'Страница не найдена',
     path: '/notFound',

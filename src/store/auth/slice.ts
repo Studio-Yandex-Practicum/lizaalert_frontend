@@ -5,7 +5,13 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 import { ProcessEnum } from 'utils/constants';
-import { checkAuth, fetchAuth, fetchRegistration, logout } from './thunk';
+import {
+  checkAuth,
+  fetchAuth,
+  fetchRegistration,
+  logout,
+  loginByOauth,
+} from './thunk';
 import type { AuthState } from './types';
 
 const initialState: AuthState = {
@@ -24,14 +30,14 @@ export const authSlice = createSlice({
       state.error = null;
     });
     builder.addMatcher(
-      isPending(checkAuth, fetchAuth, fetchRegistration, logout),
+      isPending(checkAuth, fetchAuth, fetchRegistration, logout, loginByOauth),
       (state) => {
         state.process = ProcessEnum.Requested;
         state.error = null;
       }
     );
     builder.addMatcher(
-      isFulfilled(checkAuth, fetchAuth, logout),
+      isFulfilled(checkAuth, fetchAuth, logout, loginByOauth),
       (state, { payload }) => {
         state.process = ProcessEnum.Succeeded;
         state.error = null;
@@ -39,7 +45,7 @@ export const authSlice = createSlice({
       }
     );
     builder.addMatcher(
-      isRejected(checkAuth, fetchAuth, fetchRegistration, logout),
+      isRejected(checkAuth, fetchAuth, fetchRegistration, logout, loginByOauth),
       (state, { error }) => {
         state.isAuth = false;
         state.process = ProcessEnum.Failed;

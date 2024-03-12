@@ -6,6 +6,7 @@ import type {
   RegistrationFormData,
   RegistrationModel,
   VerifyTokenData,
+  OauthTokenData,
 } from './types';
 
 const SERVICE_URL = '/auth/';
@@ -34,6 +35,12 @@ class AuthorizationApi extends BaseApi {
       request: () =>
         publicApi.post(`${SERVICE_URL}jwt/refresh/`, refreshTokenData),
       mock: () => import('./mock/login'),
+    });
+
+  loginByYandex = (oauthTokenData: OauthTokenData) =>
+    this.createRequest<AuthorizationModel>({
+      request: () =>
+        publicApi.post(`${SERVICE_URL}token/create/`, oauthTokenData),
     });
 }
 

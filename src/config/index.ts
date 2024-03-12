@@ -24,3 +24,6 @@ export const routes = isAdmin ? adminRoutes : defaultRoutes;
 /** Урлы бекенда */
 export const BACKEND_ORIGIN = getEnvVar('BACKEND_ORIGIN');
 export const BACKEND_API = `${BACKEND_ORIGIN}/api/v1`;
+
+/** Урлы яндекса */
+export const YANDEX_CLIENTID = getEnvVar('YANDEX_CLIENTID');
