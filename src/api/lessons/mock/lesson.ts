@@ -157,11 +157,44 @@ const lessons: Record<string, Record<string, LessonModel>> = {
       },
       user_lesson_progress: UserLessonProgress.InProgress,
       next_lesson: {
-        lesson_id: null,
-        chapter_id: null,
+        lesson_id: 6,
+        chapter_id: 1,
       },
       prev_lesson: {
         lesson_id: 4,
+        chapter_id: 1,
+      },
+    },
+    6: {
+      id: 6,
+      course_id: 1,
+      chapter_id: 1,
+      title: 'Домашняя работа',
+      description:
+        'Расскажите о своем опыте применения следовых кинологических расчётов',
+      video_link: null,
+      lesson_type: LessonType.Homework,
+      tags: "['кинолог','породы']",
+      duration: 1,
+      additional: false,
+      diploma: false,
+      breadcrumbs: {
+        chapter: {
+          id: 1,
+          title: 'Глава',
+        },
+        course: {
+          id: 1,
+          title: 'Курс',
+        },
+      },
+      user_lesson_progress: 1,
+      next_lesson: {
+        chapter_id: null,
+        lesson_id: null,
+      },
+      prev_lesson: {
+        lesson_id: 5,
         chapter_id: 1,
       },
     },

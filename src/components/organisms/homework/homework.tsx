@@ -5,12 +5,9 @@ import { Markdown } from 'components/molecules/markdown';
 import { Button } from 'components/molecules/button';
 import { Textarea } from 'components/molecules/textarea/textarea';
 import { Loader } from 'components/molecules/loader';
-import {
-  HomeworkStatus,
-  HomeworkStatusText,
-  ProcessEnum,
-} from 'utils/constants';
+import { ProcessEnum } from 'utils/constants';
 import { useHomework } from 'hooks/use-homework';
+import { HomeworkStatus, HomeworkStatusText } from 'api/homework/types';
 import { ErrorLocker } from '../error-locker';
 import type { HomeworkFormData, HomeworkProps } from './types';
 import styles from './homework.module.scss';
@@ -55,12 +52,17 @@ export const Homework: FC<HomeworkProps> = ({ description }) => {
 
   return (
     <>
-      {description && <Markdown>{description}</Markdown>}
-
+      {description && (
+        <Markdown className={styles.description}>{description}</Markdown>
+      )}
       {isLoading && <Loader />}
 
-      {homeworkError && <ErrorLocker />}
-
+      {homeworkError && (
+        <ErrorLocker
+          subheading={homeworkError?.code}
+          content={homeworkError?.message}
+        />
+      )}
       {homeworkProcess === ProcessEnum.Succeeded && (
         <form
           name="homeworkDataForm"
